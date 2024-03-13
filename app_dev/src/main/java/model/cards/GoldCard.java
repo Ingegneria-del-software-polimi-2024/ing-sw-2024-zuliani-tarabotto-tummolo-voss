@@ -1,4 +1,4 @@
-package model.deckFactory;
+package model.cards;
 
 public class GoldCard {
 
