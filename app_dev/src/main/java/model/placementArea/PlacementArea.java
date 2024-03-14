@@ -1,10 +1,12 @@
 package model.placementArea;
 
+import model.cards.Card;
 import model.cards.Corner;
 import model.cards.PlayableCard;
 import model.enums.Artifact;
 import model.enums.Element;
 
+import javax.swing.*;
 import java.util.HashMap;
 import java.util.List;
 
@@ -81,5 +83,23 @@ public class PlacementArea {
         //to be implemented
     }
 
+    public int getNumberArtifacts(Artifact artifact){return availableArtifacts.get(artifact);}
+
+    public int getNumberElements(Element element){return availableElements.get(element);}
+
+    public HashMap<Artifact, Integer> getAllArtifactsNumber(){
+        HashMap<Artifact, Integer> retCopy;
+        retCopy = availableArtifacts;
+        return retCopy;
+    }
+
+    public HashMap<Element, Integer> getAllElementsNumber(){
+        HashMap<Element, Integer> retCopy;
+        retCopy = availableElements;
+        return retCopy;
+    }
+    public List<Card> getNumberNearbyCards(){
+        //to be implemented
+    }
 
 }
