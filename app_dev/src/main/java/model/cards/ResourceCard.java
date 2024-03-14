@@ -6,12 +6,8 @@ public class ResourceCard {
     private Element element;
     private Points pointsPolicy;
 
-    public void setElement (Element element) {
-        this.element = element;
-    }
-
-    public void setPoints (Points pointsPolicy) {
-        this.pointsPolicy = pointsPolicy;
+    public ResourceCard (char id) {
+        // json parsing
     }
 
     public int countPoints () {

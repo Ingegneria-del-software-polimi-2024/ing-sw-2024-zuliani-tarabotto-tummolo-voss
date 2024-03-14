@@ -7,12 +7,13 @@ public class ResourcesPoints implements Points{
 
     private Element element;
     private Artifact artifact;
+    private PlacementArea placementArea;
 
-    public int count(PlacementArea placementArea) {
+    public int count() {
         if (element != null) {
-            return placementArea.availableElements.get(element) + 1;
+            return this.placementArea.getNumberElements(element) + 1;
         } else {
-            return placementArea.availableArtifacts.get(artifact) + 1;
+            return this.placementArea.getNumberArtifcats(artifact) + 1;
         }
     }
 }

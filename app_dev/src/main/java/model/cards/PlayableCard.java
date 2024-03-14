@@ -10,13 +10,4 @@ public abstract class PlayableCard {
         this.faceSide = !this.faceSide;
     }
 
-    public void setId (char id) {
-        this.id = id;
-    }
-    public void setFaceSide(boolean faceSide) {
-        this.faceSide = faceSide;
-    }
-    public void setCorners (Corner[] corners) {
-        this.corners = corners;
-    }
 }

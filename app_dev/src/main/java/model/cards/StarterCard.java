@@ -6,13 +6,7 @@ public class StarterCard {
     private List <Element> blockedElements;
     private Corner[] backFaceCorners;
 
-    public void setBlockedElements(List<Element> blockedElements) {
-        this.blockedElements = blockedElements;
-    }
-
-    public void setBackFaceCorners(Corner[] backFaceCorners) {
-        this.backFaceCorners = backFaceCorners;
-
-
+    public StarterCard (char id) {
+        //json parsing
     }
 }
