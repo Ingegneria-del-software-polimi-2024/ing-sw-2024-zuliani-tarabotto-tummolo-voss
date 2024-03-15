@@ -5,6 +5,8 @@ import model.cards.Corner;
 import model.cards.PlayableCard;
 import model.enums.Artifact;
 import model.enums.Element;
+import model.objective.DiagonalShapeObjective;
+import model.objective.Shape;
 
 import javax.swing.*;
 import java.util.HashMap;
@@ -79,7 +81,7 @@ public class PlacementArea {
 
     }
 
-    public void verifyObjective(ObjectiveCard){
+    public int verifyObjective(Shape shape, Element element){
         //to be implemented
     }
 

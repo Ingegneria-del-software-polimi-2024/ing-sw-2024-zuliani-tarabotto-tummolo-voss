@@ -15,7 +15,7 @@ public class ArtifactObjective  implements Objective{
             return 2*(placementArea.getNumberArtifacts(artifact)/2);
         }else{
             map = placementArea.getAllArtifactsNumber();
-            return map.values().stream().min((a, b)-> a<b? a : b).orElse(0);
+            return 3 * map.values().stream().min((a, b)-> a<b? a : b).orElse(0);
         }
     }
 
