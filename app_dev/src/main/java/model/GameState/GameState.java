@@ -26,7 +26,7 @@ public class GameState {
 
     GoldCards[2] openGold = new GoldCards();
 
-    ResourceCards[2] openResources() = new ResourceCards;
+    ResourceCards[2] openResources = new ResourceCards();
 
     private bool isLastTurn;
 
