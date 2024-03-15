@@ -1,4 +1,4 @@
-package main.model.deckFactory;
+package main.java.model.deckFactory;
 
 public class GoldCardsDeckGenerator {
 }

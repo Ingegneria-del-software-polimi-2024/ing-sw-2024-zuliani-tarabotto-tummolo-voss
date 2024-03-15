@@ -1,14 +1,20 @@
-package model.Points;
+package main.java.model.Points;
 
-import model.enums.Artifact;
-import model.enums.Element;
+import main.java.model.enums.Artifact;
+import main.java.model.enums.Element;
+import main.java.model.placemetArea.*;
 
-public class ResourcesPoints extends Points{
+public class ResourcesPoints implements Points{
 
-    Element element = Element.ANIMALS;
-    Artifact artifact = Artifact.INK;
-    public int Points(){
+    private Element element;
+    private Artifact artifact;
+    private PlacementArea placementArea;
 
-        return 0;
+    public int count() {
+        if (element != null) {
+            return this.placementArea.getNumberElements(element);
+        } else {
+            return this.placementArea.getNumberArtifacts(artifact);
+        }
     }
 }

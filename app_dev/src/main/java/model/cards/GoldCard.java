@@ -1,6 +1,6 @@
-package main.model.cards;
-import main.model.Points.Points;
-import main.model.enums.Element;
+package main.java.model.cards;
+import main.java.model.Points.Points;
+import main.java.model.enums.Element;
 
 import java.util.HashMap;
 

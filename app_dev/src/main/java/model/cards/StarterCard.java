@@ -1,6 +1,6 @@
-package main.model.cards;
+package main.java.model.cards;
 import java.util.List;
-import main.model.enums.Element;
+import main.java.model.enums.Element;
 
 public class StarterCard {
     private List <Element> blockedElements;

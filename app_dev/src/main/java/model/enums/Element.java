@@ -1,4 +1,4 @@
-package main.model.enums;
+package main.java.model.enums;
 
 public enum Element {
     MUSHROOMS,

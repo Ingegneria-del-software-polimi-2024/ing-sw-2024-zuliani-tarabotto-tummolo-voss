@@ -1,9 +1,11 @@
-package model.Points;
+package main.java.model.Points;
 
-public class CornersPoints extends Points{
 
-    public int Points(){
+import main.java.model.placemetArea.PlacementArea;
 
-        return 0;
+public class CornersPoints {
+    private PlacementArea placementArea;
+    public int count () {
+        return this.placementArea.getNumberNearbyCards();
     }
 }

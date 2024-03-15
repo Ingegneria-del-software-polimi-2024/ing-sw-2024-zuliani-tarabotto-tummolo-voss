@@ -1,8 +1,8 @@
-package main.model.placemetArea;
+package main.java.model.placemetArea;
 
-import main.model.cards.PlayableCard;
-import main.model.enums.Artifact;
-import main.model.enums.Element;
+import main.java.model.cards.PlayableCard;
+import main.java.model.enums.Artifact;
+import main.java.model.enums.Element;
 
 import java.util.HashMap;
 import java.util.List;

@@ -1,13 +1,13 @@
-package main.model;
+package main.java.model;
 
-import main.model.deckFactory.Deck;
-import main.model.deckFactory.DeckGenerator;
-import main.model.deckFactory.ResourceCardsDeckGenerator;
-import main.model.deckFactory.StarterCardsDeckGenerator;
-import main.model.model.deckFactory.Deck;
-import main.model.model.deckFactory.DeckGenerator;
-import main.model.model.deckFactory.ResourceCardsDeckGenerator;
-import main.model.model.deckFactory.StarterCardsDeckGenerator;
+import main.java.model.deckFactory.Deck;
+import main.java.model.deckFactory.DeckGenerator;
+import main.java.model.deckFactory.ResourceCardsDeckGenerator;
+import main.java.model.deckFactory.StarterCardsDeckGenerator;
+import main.java.model.model.deckFactory.Deck;
+import main.java.model.model.deckFactory.DeckGenerator;
+import main.java.model.model.deckFactory.ResourceCardsDeckGenerator;
+import main.java.model.model.deckFactory.StarterCardsDeckGenerator;
 
 public class Model {
     public static void main(String[] args){

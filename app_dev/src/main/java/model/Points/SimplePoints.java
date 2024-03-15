@@ -1,11 +1,13 @@
-package model.Points;
+package main.java.model.Points;
 
-public class SimplePoints extends Points {
+public class SimplePoints implements Points {
+    private int points;
 
-    private int Points;
+    public void setPoints(int points) {
+        this.points = points;
+    }
 
-    public int Points(){
-
-        return 0;
+    public int count() {
+        return this.points;
     }
 }

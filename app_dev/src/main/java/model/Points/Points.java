@@ -1,9 +1,6 @@
-package model.Points;
+package main.java.model.Points;
 
-abstract class Points {
-
-    public int countPoints(){
-
-        return 0;
-    }
+public interface Points {
+    int count();
 }
+
