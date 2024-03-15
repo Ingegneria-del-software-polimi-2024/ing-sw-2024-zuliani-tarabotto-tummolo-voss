@@ -1,4 +1,4 @@
-package model.deckFactory;
+package main.model.deckFactory;
 
 public class GoldenDeck extends Deck {
     @Override

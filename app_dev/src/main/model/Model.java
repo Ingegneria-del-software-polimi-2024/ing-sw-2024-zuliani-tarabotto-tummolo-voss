@@ -1,9 +1,13 @@
-package model;
+package main.model;
 
-import model.deckFactory.Deck;
-import model.deckFactory.DeckGenerator;
-import model.deckFactory.ResourceCardsDeckGenerator;
-import model.deckFactory.StarterCardsDeckGenerator;
+import main.model.deckFactory.Deck;
+import main.model.deckFactory.DeckGenerator;
+import main.model.deckFactory.ResourceCardsDeckGenerator;
+import main.model.deckFactory.StarterCardsDeckGenerator;
+import main.model.model.deckFactory.Deck;
+import main.model.model.deckFactory.DeckGenerator;
+import main.model.model.deckFactory.ResourceCardsDeckGenerator;
+import main.model.model.deckFactory.StarterCardsDeckGenerator;
 
 public class Model {
     public static void main(String[] args){
