@@ -1,4 +1,6 @@
-package main.java.model.Points;
+package model.Points;
+
+import sun.security.ec.point.Point;
 
 public class SimplePoints implements Points {
     private int points;

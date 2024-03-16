@@ -1,7 +1,8 @@
-package main.java.model.cards;
-import main.java.model.Points.Points;
-import main.java.model.enums.Element;
+package model.cards;
+import model.Points.Points;
+import model.enums.Element;
 
+import java.awt.*;
 import java.util.HashMap;
 
 public class GoldCard extends PlayableCard{

@@ -1,9 +1,14 @@
-package main.java.model.placemetArea;
+package model.placementArea;
 
-import main.java.model.cards.PlayableCard;
-import main.java.model.enums.Artifact;
-import main.java.model.enums.Element;
+import model.cards.Card;
+import model.cards.Corner;
+import model.cards.PlayableCard;
+import model.enums.Artifact;
+import model.enums.Element;
+import model.objective.DiagonalShapeObjective;
+import model.objective.Shape;
 
+import javax.swing.*;
 import java.util.HashMap;
 import java.util.List;
 
@@ -76,19 +81,27 @@ public class PlacementArea {
 
     }
 
-    public void verifyObjective(ObjectiveCard){
+    public int verifyObjective(Shape shape, Element element){
         //to be implemented
     }
 
-    public int getNumberElements (Element element) {
-        return availableElements.get(element).intValue();
+    public int getNumberArtifacts(Artifact artifact){return availableArtifacts.get(artifact);}
+
+    public int getNumberElements(Element element){return availableElements.get(element);}
+
+    public HashMap<Artifact, Integer> getAllArtifactsNumber(){
+        HashMap<Artifact, Integer> retCopy;
+        retCopy = availableArtifacts;
+        return retCopy;
     }
 
-    public int getNumberArtifacts (Artifact artifact) {
-        return availableArtifacts.get(artifact).intValue();
+    public HashMap<Element, Integer> getAllElementsNumber(){
+        HashMap<Element, Integer> retCopy;
+        retCopy = availableElements;
+        return retCopy;
+    }
+    public List<Card> getNumberNearbyCards(){
+        //to be implemented
     }
 
-    public int getNumberNearbyCards () {
-        ///////////////
-    }
 }
