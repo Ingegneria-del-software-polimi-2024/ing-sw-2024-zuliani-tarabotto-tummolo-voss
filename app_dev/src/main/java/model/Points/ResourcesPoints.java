@@ -11,9 +11,9 @@ public class ResourcesPoints implements Points{
 
     public int count() {
         if (element != null) {
-            return this.placementArea.getNumberElements(element) + 1;
+            return this.placementArea.getNumberElements(element);
         } else {
-            return this.placementArea.getNumberArtifcats(artifact) + 1;
+            return this.placementArea.getNumberArtifcats(artifact);
         }
     }
 }
