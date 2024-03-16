@@ -24,4 +24,13 @@ public class Coordinates {
         return xy.getX() == x && xy.getY() == y;
     }
 
+    //returns the coordinate which has highest y value or in alternative lower x (from top-left)
+    public Coordinates compare(Coordinates a){
+        if(y > a.getY()) return this;
+        else if (y == a.getY()) {
+            if(x < a.getX()) return this;
+            else return a;
+        }
+        else return a;
+    }
 }

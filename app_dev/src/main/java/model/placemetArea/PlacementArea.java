@@ -1,14 +1,13 @@
 package model.placementArea;
 
 import model.cards.Card;
-import model.cards.Corner;
 import model.cards.PlayableCard;
 import model.enums.Artifact;
 import model.enums.Element;
-import model.objective.DiagonalShapeObjective;
+import main.java.model.placemetArea.Coordinates;
 import model.objective.Shape;
 
-import javax.swing.*;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -81,20 +80,29 @@ public class PlacementArea {
 
     }
 
+    //work in progress, returns the NUMBER OF COMBINATION of the shape "shape"
     public int verifyObjective(Shape shape, Element element){
-        //to be implemented
+        for(Coordinates c : disposition.keySet().stream().sorted(Comparator.comparing((a) -> {return a;}))/*serve un metodo per ordinare la lista*/){
+            if(disposition.get(c).getElement().equals(element)){
+                //starts looking the contiguous cards for the pattern
+            }
+        }
     }
 
+//returns the number of artifacts "artifact" in the Placement Area
     public int getNumberArtifacts(Artifact artifact){return availableArtifacts.get(artifact);}
 
+//returns the numbers of elements "element" in the Placement Area
     public int getNumberElements(Element element){return availableElements.get(element);}
 
+//returns an Hashmap containing the couples (artifact, numberOfThatArtifacts)
     public HashMap<Artifact, Integer> getAllArtifactsNumber(){
         HashMap<Artifact, Integer> retCopy;
         retCopy = availableArtifacts;
         return retCopy;
     }
 
+//returns an Hashmap containing the couples (element, numberOfThatArtifacts)
     public HashMap<Element, Integer> getAllElementsNumber(){
         HashMap<Element, Integer> retCopy;
         retCopy = availableElements;

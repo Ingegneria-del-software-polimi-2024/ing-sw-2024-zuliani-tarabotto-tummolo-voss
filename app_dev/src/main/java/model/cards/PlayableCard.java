@@ -11,4 +11,5 @@ public abstract class PlayableCard {
     public Corner getCorner(int index){
         //to be implemented, returns the content of the corner at position "index", returns null if doesn't exist such corner
     }
+
 }

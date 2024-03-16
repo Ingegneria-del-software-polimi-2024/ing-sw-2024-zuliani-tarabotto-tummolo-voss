@@ -5,18 +5,7 @@ import model.placementArea.PlacementArea;
 
 public class LShapeObjective {
     private Element element;
+    private Shape shape;
 
-    public int countObjectivePoints(PlacementArea placementArea) {
-        switch (element){
-            case INSECTS:
-                return 3 * placementArea.verifyObjective(Shape.TopLeftL, element);
-            case ANIMALS:
-                return 3 * placementArea.verifyObjective(Shape.TopRightL, element);
-            case MUSHROOMS:
-                return 3 * placementArea.verifyObjective(Shape.BottomRightL, element);
-            case VEGETALS:
-                return 3 * placementArea.verifyObjective(Shape.BottomLeftL, element);
-        }
-        return 0;
-    }
+    public int countObjectivePoints(PlacementArea placementArea) {return 3 * placementArea.verifyObjective(shape, element);}
 }
