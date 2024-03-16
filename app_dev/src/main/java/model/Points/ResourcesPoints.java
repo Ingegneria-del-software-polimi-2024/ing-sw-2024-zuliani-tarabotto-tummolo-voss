@@ -3,12 +3,17 @@ package model.Points;
 import model.enums.Artifact;
 import model.enums.Element;
 
-public class ResourcesPoints extends Points{
+public class ResourcesPoints implements Points{
 
-    Element element = Element.ANIMALS;
-    Artifact artifact = Artifact.INK;
-    public int Points(){
+    private Element element;
+    private Artifact artifact;
+    private PlacementArea placementArea;
 
-        return 0;
+    public int count() {
+        if (element != null) {
+            return this.placementArea.getNumberElements(element) + 1;
+        } else {
+            return this.placementArea.getNumberArtifcats(artifact) + 1;
+        }
     }
 }

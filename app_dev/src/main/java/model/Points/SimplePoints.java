@@ -1,11 +1,15 @@
 package model.Points;
 
-public class SimplePoints extends Points {
+import sun.security.ec.point.Point;
 
-    private int Points;
+public class SimplePoints implements Points {
+    private int points;
 
-    public int Points(){
+    public void setPoints(int points) {
+        this.points = points;
+    }
 
-        return 0;
+    public int count() {
+        return this.points;
     }
 }

@@ -1,9 +1,8 @@
 package model.Points;
 
-public class CornersPoints extends Points{
-
-    public int Points(){
-
-        return 0;
+public class CornersPoints {
+    private PlacementArea placementArea;
+    public int count () {
+        return this.placementArea.getNumberNearbyCards();
     }
 }
