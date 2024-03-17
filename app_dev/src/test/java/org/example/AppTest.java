@@ -1,38 +1,13 @@
-package org.example;
+package test.java.org.example;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import main.java.model.deckFactory.Deck;
+import main.java.model.deckFactory.DeckGenerator;
+import main.java.model.enums.DeckType;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
-    }
+public class AppTest {
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
-    }
+    Deck gold = DeckGenerator.generate(DeckType.GOLD);
 
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
+    public AppTest() throws ClassNotFoundException {
     }
 }

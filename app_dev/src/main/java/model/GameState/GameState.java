@@ -1,6 +1,5 @@
-package model.GameState;
-
-import model.deckFactory.ResourcesDeck;
+package main.java.model.GameState;
+import main.java.model.*;
 
 public class GameState {
 

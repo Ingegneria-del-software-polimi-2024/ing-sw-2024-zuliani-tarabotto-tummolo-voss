@@ -2,7 +2,7 @@ package main.java.model.cards;
 import main.java.model.enums.Element;
 import main.java.model.Points.Points;
 
-public class ResourceCard {
+public class ResourceCard extends PlayableCard{
     private Element element;
     private Points pointsPolicy;
 

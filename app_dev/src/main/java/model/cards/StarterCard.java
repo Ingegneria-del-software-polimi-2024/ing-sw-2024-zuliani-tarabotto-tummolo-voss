@@ -2,7 +2,7 @@ package main.java.model.cards;
 import java.util.List;
 import main.java.model.enums.Element;
 
-public class StarterCard {
+public class StarterCard extends PlayableCard{
     private List <Element> blockedElements;
     private Corner[] backFaceCorners;
 

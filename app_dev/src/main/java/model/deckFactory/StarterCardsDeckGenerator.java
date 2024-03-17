@@ -1,7 +1,8 @@
 package main.java.model.deckFactory;
 
-public class StarterCardsDeckGenerator extends DeckGenerator {
-    @Override
+public class StarterCardsDeckGenerator{
+
+
     public Deck generateDeckBasedOnType() {
         return new StarterDeck();
     }

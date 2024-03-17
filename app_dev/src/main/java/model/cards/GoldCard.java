@@ -20,9 +20,9 @@ public class GoldCard extends PlayableCard{
         return this.pointsPolicy.count();
     };
 
-    public boolean checkIfPlaceable () {
+   /* public boolean checkIfPlaceable () {
         // checks if the card can be placed anywhere in the placementArea
-    }
+    }*/
 
 
 
