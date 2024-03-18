@@ -7,8 +7,10 @@ public class Corner {
     private Artifact artifact;
     private boolean isAvailable;
 
-    public Corner () {
-        //json parsing
+    public Corner (Element element, Artifact artifact, boolean isAvailable) {
+        this.element = element;
+        this.artifact = artifact;
+        this.isAvailable = isAvailable;
     }
 
     public boolean isEmpty() {
