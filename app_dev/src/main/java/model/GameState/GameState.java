@@ -61,6 +61,9 @@ public class GameState {
 
     public boolean isLastTurn(){
 
+        if(!isLastTurn){
+
+        }
     }
 
 

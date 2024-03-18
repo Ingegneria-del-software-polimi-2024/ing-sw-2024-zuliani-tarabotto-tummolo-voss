@@ -5,35 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/model/placemetArea/PlacementAreaTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/player/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Points/CornersPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Points/CornersPoints.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Points/Points.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Points/Points.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Points/ResourcesPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Points/ResourcesPoints.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Card.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/Corner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Corner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/GoldCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/GoldCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/ObjectiveCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/ObjectiveCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/PlayableCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/PlayableCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/ResourceCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/ResourceCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/StarterCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/StarterCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/Deck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/DeckGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/DeckGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/GoldCardsDeckGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/GoldCardsDeckGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/GoldenDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/GoldenDeck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/PlayableCard.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/ResourceCardsDeckGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/ResourceCardsDeckGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/ResourcesDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/ResourcesDeck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/StarterCardsDeckGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/StarterCardsDeckGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/StarterDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/StarterDeck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/enums/Artifact.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/enums/Artifact.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/enums/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/enums/Element.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/placemetArea/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/placemetArea/Coordinates.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/placemetArea/PlacementArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/placemetArea/PlacementArea.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
