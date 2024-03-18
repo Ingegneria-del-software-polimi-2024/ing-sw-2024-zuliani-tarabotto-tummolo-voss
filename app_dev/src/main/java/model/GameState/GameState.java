@@ -6,7 +6,7 @@ public class GameState {
 
     //Attributes
 
-    Player[] players = new Player();
+    Player[] players = new Player[];
 
     private String id;
 
@@ -22,11 +22,11 @@ public class GameState {
 
     private StartingDeck startingDeck;
 
-    ObjectiveCards[2] commonObjectives = new ObjectiveCards();
+    ObjectiveCards[] commonObjectives = new ObjectiveCards[2];
 
-    GoldCards[2] openGold = new GoldCards();
+    GoldCards[] openGold = new GoldCards[2];
 
-    ResourceCards[2] openResources = new ResourceCards();
+    ResourceCards[] openResources = new ResourceCards[2];
 
     private bool isLastTurn;
 
