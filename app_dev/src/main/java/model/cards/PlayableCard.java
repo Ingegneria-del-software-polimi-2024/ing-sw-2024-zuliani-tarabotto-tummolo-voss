@@ -14,4 +14,7 @@ public abstract class PlayableCard implements Card{
         return corners[index];
     }
 
+    public abstract int countPoints();
+
+
 }

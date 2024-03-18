@@ -25,7 +25,7 @@ public class PlacementArea {
     public void addCard(PlayableCard card, Coordinates xy) throws IllegalArgumentException{
         int i, j, count = 0;
         Coordinates coord;
-        PlayableCard placedCard;
+        PlayableCard placedCard = null;
 
         //we should throw an exception if there is already a card in those coordinates
         if(disposition.containsKey(xy)){
@@ -72,6 +72,7 @@ public class PlacementArea {
                     count -= 1;
                 }
             }
+
         }
 
     }
@@ -89,6 +90,6 @@ public class PlacementArea {
     }
 
     public int getNumberNearbyCards () {
-        ///////////////
+        ////
     }
 }

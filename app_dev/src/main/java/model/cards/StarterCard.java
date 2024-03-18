@@ -13,4 +13,6 @@ public class StarterCard extends PlayableCard{
     public Corner getBackFaceCorner(int index) {
         return backFaceCorners[index];
     }
+
+    public int countPoints() { return 0;}
 }
