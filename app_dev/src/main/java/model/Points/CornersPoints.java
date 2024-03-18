@@ -1,7 +1,7 @@
-package main.java.model.Points;
+package model.Points;
 
 
-import main.java.model.placemetArea.PlacementArea;
+import model.placemetArea.PlacementArea;
 
 public class CornersPoints {
     private PlacementArea placementArea;

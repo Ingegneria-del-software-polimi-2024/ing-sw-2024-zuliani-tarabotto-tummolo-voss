@@ -1,6 +1,8 @@
-package main.java.model.cards;
-import main.java.model.enums.Element;
-import main.java.model.Points.Points;
+package model.cards;
+
+
+import model.Points.Points;
+import model.enums.Element;
 
 public class ResourceCard {
     private Element element;

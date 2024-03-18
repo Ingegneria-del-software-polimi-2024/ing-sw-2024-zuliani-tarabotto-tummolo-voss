@@ -1,5 +1,6 @@
-package main.java.model.cards;
-import main.java.model.enums.*;
+package model.cards;
+import model.enums.Artifact;
+import model.enums.Element;
 
 
 public class Corner {

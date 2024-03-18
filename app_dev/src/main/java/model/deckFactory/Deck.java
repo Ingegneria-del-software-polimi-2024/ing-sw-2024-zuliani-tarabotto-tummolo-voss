@@ -1,4 +1,4 @@
-package main.java.model.deckFactory;
+package model.deckFactory;
 import model.cards.*;
 
 // Abstract class defining common deck properties and functionalities

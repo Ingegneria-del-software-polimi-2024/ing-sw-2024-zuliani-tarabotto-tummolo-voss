@@ -1,8 +1,7 @@
-package main.java.model.Points;
+package model.Points;
 
-import main.java.model.enums.Artifact;
-import main.java.model.enums.Element;
-import main.java.model.placemetArea.*;
+import model.enums.*;
+import model.placemetArea.*;
 
 public class ResourcesPoints implements Points{
 

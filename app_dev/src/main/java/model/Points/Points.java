@@ -1,4 +1,4 @@
-package main.java.model.Points;
+package model.Points;
 
 public interface Points {
     int count();

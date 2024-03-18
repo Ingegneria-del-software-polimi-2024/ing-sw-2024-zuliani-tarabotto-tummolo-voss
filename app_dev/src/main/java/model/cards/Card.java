@@ -1,4 +1,4 @@
-package main.java.model.cards;
+package model.cards;
 
 public interface Card {
 }

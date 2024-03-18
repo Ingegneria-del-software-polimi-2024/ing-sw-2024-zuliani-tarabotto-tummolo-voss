@@ -1,7 +1,6 @@
 package model.cards;
-import model.Points.Points;
 import model.enums.Element;
-
+import model.Points.*;
 import java.awt.*;
 import java.util.HashMap;
 

@@ -1,4 +1,4 @@
-package model.placementArea;
+package model.placemetArea;
 
 import model.cards.Card;
 import model.cards.PlayableCard;
@@ -26,6 +26,7 @@ public class PlacementArea {
 
     public List<Coordinates> freePositions(){return availablePlaces;} //returns the free positions
 
+//adds a playable card to the placementArea
     public void addCard(PlayableCard card, Coordinates xy) throws IllegalArgumentException{
         int i, j, count = 0;
         Coordinates coord;
@@ -108,7 +109,7 @@ public class PlacementArea {
         retCopy = availableElements;
         return retCopy;
     }
-    public List<Card> getNumberNearbyCards(){
+    public int getNumberNearbyCards(){
         //to be implemented
     }
 

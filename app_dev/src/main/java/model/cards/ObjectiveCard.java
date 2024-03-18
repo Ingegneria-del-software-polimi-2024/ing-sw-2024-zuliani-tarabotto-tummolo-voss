@@ -1,4 +1,6 @@
-package main.java.model.cards;
+package model.cards;
+
+import model.objective.Objective;
 
 public class ObjectiveCard {
     private char id;

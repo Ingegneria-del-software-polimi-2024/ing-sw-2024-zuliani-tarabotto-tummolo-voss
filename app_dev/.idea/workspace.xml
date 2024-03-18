@@ -5,13 +5,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/model/placemetArea/PlacementAreaTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ing_sw_proj.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Ing_sw_proj.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/player/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Points/CornersPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Points/CornersPoints.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Points/Points.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Points/Points.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Points/ResourcesPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Points/ResourcesPoints.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/Corner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Corner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/GoldCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/GoldCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/ObjectiveCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/ObjectiveCard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/PlayableCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/PlayableCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/DiagonalShapeObjective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/DiagonalShapeObjective.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/LShapeObjective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/LShapeObjective.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/Shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/Shape.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/ResourceCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/ResourceCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/StarterCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/StarterCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/Deck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/DeckGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/DeckGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/GoldCardsDeckGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/GoldCardsDeckGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/GoldenDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/GoldenDeck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/PlayableCard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/ResourceCardsDeckGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/ResourceCardsDeckGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/ResourcesDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/ResourcesDeck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/StarterCardsDeckGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/StarterCardsDeckGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/StarterDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/StarterDeck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/enums/Artifact.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/enums/Artifact.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/enums/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/enums/Element.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/placemetArea/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/placemetArea/Coordinates.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/placemetArea/PlacementArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/placemetArea/PlacementArea.java" afterDir="false" />
     </list>
@@ -24,6 +44,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="JUnit3 Test Class" />
       </list>
     </option>
   </component>
@@ -51,8 +72,11 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit3&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3&quot;: &quot;junit.framework.TestCase&quot;,
     &quot;git-widget-placeholder&quot;: &quot;ModelMerge&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;/Users/andre/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/nicol/OneDrive/Documenti/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -65,6 +89,12 @@
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="junit.framework.TestCase" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="model.placemetArea" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -92,6 +122,8 @@
       <workItem from="1710591737023" duration="384000" />
       <workItem from="1710593486100" duration="117000" />
       <workItem from="1710612986236" duration="6581000" />
+      <workItem from="1710778465872" duration="10124000" />
+      <workItem from="1710789533329" duration="279000" />
     </task>
     <servers />
   </component>
