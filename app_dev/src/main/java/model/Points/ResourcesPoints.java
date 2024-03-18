@@ -10,6 +10,11 @@ public class ResourcesPoints implements Points{
     private Artifact artifact;
     private PlacementArea placementArea;
 
+    public ResourcesPoints (Element element, Artifact artifact, PlacementArea placementArea) {
+        this.element = element;
+        this.artifact = artifact;
+        this.placementArea = placementArea;
+    }
     public int count() {
         if (element != null) {
             return this.placementArea.getNumberElements(element);

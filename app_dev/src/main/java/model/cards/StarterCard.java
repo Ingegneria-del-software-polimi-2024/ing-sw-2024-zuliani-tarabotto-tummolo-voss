@@ -9,4 +9,8 @@ public class StarterCard extends PlayableCard{
     public StarterCard (char id) {
         //json parsing
     }
+
+    public Corner getBackFaceCorner(int index) {
+        return backFaceCorners[index];
+    }
 }

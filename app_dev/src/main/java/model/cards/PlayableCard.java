@@ -10,4 +10,8 @@ public abstract class PlayableCard implements Card{
         this.faceSide = !this.faceSide;
     }
 
+    public Corner getCorner(int index) {
+        return corners[index];
+    }
+
 }
