@@ -1,6 +1,6 @@
 package model.player;
 
-import model.cards.ObjectiveCard;
+//import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
 import model.placementArea.*;
 
@@ -9,7 +9,7 @@ import java.util.List;
 public class Player {
     private String nickname;
     private List<PlayableCard> hand;
-    private ObjectiveCard secretObjective;
+    //private ObjectiveCard secretObjective;
     private PlacementArea placementArea;
     private int points;
 

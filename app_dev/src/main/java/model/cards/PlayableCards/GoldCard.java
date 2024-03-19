@@ -1,4 +1,5 @@
 package model.cards.PlayableCards;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import model.enums.Element;
@@ -11,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GoldCard extends PlayableCard{
-
+    @JsonProperty("element")
     private Element blockedElement;
     private Map<Element, Integer> placementConstraint;
     private Points points;
@@ -23,7 +24,7 @@ public class GoldCard extends PlayableCard{
         try {
             // Read the JSON file
             ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode rootNode = objectMapper.readTree(new File("src/main/resources/GoldenCards.json"));
+            JsonNode rootNode = objectMapper.readTree(new File("app_dev/src/main/resources/GoldenCards.json"));
 
             // Look for the object with the specified ID
             JsonNode targetNode = null;

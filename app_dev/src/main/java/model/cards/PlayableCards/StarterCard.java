@@ -39,7 +39,7 @@ public class StarterCard extends PlayableCard{
         try {
             // Read the JSON file
             ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode rootNode = objectMapper.readTree(new File("src/main/resources/StarterCards.json"));
+            JsonNode rootNode = objectMapper.readTree(new File("app_dev/src/main/resources/StarterCards.json"));
 
             // Look for the object with the specified ID
             JsonNode targetNode = null;

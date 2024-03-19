@@ -1,6 +1,7 @@
 package model.cards.PlayableCards;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,7 +13,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class ResourceCard extends PlayableCard {
-
+    @JsonProperty("element")
     private Element blockedElement;
     private Points points;
 
@@ -24,7 +25,7 @@ public class ResourceCard extends PlayableCard {
         try {
             // Read the JSON file
             ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode rootNode = objectMapper.readTree(new File("src/main/resources/ResourceCards.json"));
+            JsonNode rootNode = objectMapper.readTree(new File("app_dev/src/main/resources/ResourceCards.json"));
 
             // Look for the object with the specified ID
             JsonNode targetNode = null;

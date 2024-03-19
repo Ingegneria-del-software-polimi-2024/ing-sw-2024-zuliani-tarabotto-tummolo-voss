@@ -3,7 +3,7 @@ package model.placementArea;
 import model.cards.PlayableCards.PlayableCard;
 import model.enums.Artifact;
 import model.enums.Element;
-import model.objective.Shape;
+//import model.objective.Shape;
 
 import java.util.Comparator;
 import java.util.HashMap;
@@ -85,13 +85,13 @@ public class PlacementArea {
     }
 
     //work in progress, returns the NUMBER OF COMBINATION of the shape "shape"
-    public int verifyObjective(Shape shape, Element element){
-        for(Coordinates c : disposition.keySet().stream().sorted(Comparator.comparing((a) -> {return a;}))/*serve un metodo per ordinare la lista*/){
-            if(disposition.get(c).getBlockedElement().equals(element)){
+   // public int verifyObjective(Shape shape, Element element){
+     //   for(Coordinates c : disposition.keySet().stream().sorted(Comparator.comparing((a) -> {return a;}))/*serve un metodo per ordinare la lista*/){
+       //     if(disposition.get(c).getBlockedElement().equals(element)){
                 //starts looking the contiguous cards for the pattern
-            }
-        }
-    }
+        //    }
+       // }
+  //  }*/
 
 //returns the number of artifacts "artifact" in the Placement Area
     public int getNumberArtifacts(Artifact artifact){return availableArtifacts.get(artifact);}
