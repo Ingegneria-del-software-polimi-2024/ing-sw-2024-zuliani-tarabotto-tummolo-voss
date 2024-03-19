@@ -8,13 +8,12 @@ import model.placementArea.*;
 @JsonTypeName("ResourcePoints")
 public class ResourcePoints implements Points {
     private int points;
-    private PlacementArea placementArea;
     @Override
-    public int count() {
+    public int count(PlacementArea placementArea) {
         if (element != null) {
-            return this.placementArea.getNumberElements(element);
+            return placementArea.getNumberElements(element);
         } else {
-            return this.placementArea.getNumberArtifacts(artifact);
+            return placementArea.getNumberArtifacts(artifact);
         }
     }
 

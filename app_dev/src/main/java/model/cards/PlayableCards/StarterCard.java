@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import model.PointsStrategy.SimplePoints;
 import model.cards.PlayableCards.Corner;
 import model.enums.Element;
+import model.placementArea.PlacementArea;
 
 import java.io.File;
 import java.io.IOException;
@@ -82,6 +83,11 @@ public class StarterCard extends PlayableCard{
     @Override
     public Element getBlockedElement() {
         return null;
+    }
+
+    @Override
+    public int countPoints(PlacementArea placementArea) {
+        return 0;
     }
 
 
