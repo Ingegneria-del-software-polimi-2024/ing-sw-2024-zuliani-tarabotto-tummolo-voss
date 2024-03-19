@@ -18,9 +18,10 @@ public class Player {
     }
 
     //takes the card from the hand and places it in the placementArea
+    //updates the player's points score based on the card placed
     public void playCard(PlayableCard card, Coordinates coordinates){
         takeFromHand(card);
-        placementArea.addCard(coordinates, card);
+        this.points += placementArea.addCard(coordinates, card);
         return;
     }
     public void flipHand(){}

@@ -24,8 +24,9 @@ public class PlacementArea {
     private int numberNearbyCards;
     public List<Coordinates> freePositions(){return availablePlaces;} //returns the free positions
 
-//adds a playable card to the placementArea
-    public void addCard(Coordinates xy, PlayableCard card) throws IllegalArgumentException{
+    //adds a playable card to the placementArea
+    //returns the number of points granted by the playable card
+    public int addCard(Coordinates xy, PlayableCard card) throws IllegalArgumentException{
         int i, j, count = 0;
         Coordinates coord;
         PlayableCard placedCard;
@@ -81,6 +82,8 @@ public class PlacementArea {
                 }
             }
         }
+
+        return card.countPoints(this);
 
     }
 
