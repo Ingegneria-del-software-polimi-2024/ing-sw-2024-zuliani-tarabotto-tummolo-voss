@@ -1,19 +1,27 @@
 package model.deckFactory;
 
-public class GoldenDeck extends Deck {
+import com.fasterxml.jackson.core.JsonProcessingException;
+import model.cards.PlayableCards.GoldCard;
+
+import java.util.ArrayList;
+
+public class GoldenDeck extends Deck{
     @Override
-    void generate() {
-        //parsing json
-        int points = // ... logic
-                String element = // ... logic
-
-                //for
-
-                Card card = new GoldenCardBuilder()
-                .points(points)
-                .element(element)
-                .build();
+    public void generate() {
+        cards = new ArrayList<>();  // Initialize cards list
 
 
+
+        for (int i = 41; i <= 80; i++) {
+            try {
+                GoldCard card = GoldCard.parse(i);
+                addCard(card);
+            } catch (JsonProcessingException e) {
+
+                e.printStackTrace();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }

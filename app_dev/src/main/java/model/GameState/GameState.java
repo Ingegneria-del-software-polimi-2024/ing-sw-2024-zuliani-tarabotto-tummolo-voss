@@ -1,9 +1,7 @@
 package model.GameState;
 
-import model.cards.GoldCard;
 import model.cards.ObjectiveCard;
-import model.cards.PlayableCard;
-import model.cards.ResourceCard;
+import model.cards.PlayableCards.PlayableCard;
 import model.deckFactory.ResourcesDeck;
 import model.player.Player;
 import model.deckFactory.*;

@@ -1,8 +1,11 @@
-package model.deckFactory;
+package model.deckFactory.Generators;
+
+import model.deckFactory.Deck;
+
 
 public abstract class DeckGenerator {
 
-    public Deck generateDeck() {
+    public Deck generateDeck(){
         Deck deck = generateDeckBasedOnType();
         deck.generate();
         return deck;
@@ -11,5 +14,5 @@ public abstract class DeckGenerator {
     public abstract Deck generateDeckBasedOnType();
 
 
-}
 
+}
