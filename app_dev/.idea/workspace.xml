@@ -16,7 +16,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+
         <option value="JUnit3 Test Class" />
+
         <option value="Class" />
       </list>
     </option>
@@ -24,7 +26,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="prjct_sw" />
+        <entry key="$PROJECT_DIR$/.." value="Model_merge_16/03/24_at" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -43,6 +45,7 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Application.Model.executor&quot;: &quot;Run&quot;,
@@ -110,6 +113,7 @@
       </list>
     </recent_temporary>
   </component>
+
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -132,11 +136,6 @@
       <workItem from="1710590288398" duration="283000" />
       <workItem from="1710590753882" duration="413000" />
       <workItem from="1710591406444" duration="28000" />
-      <workItem from="1710591737023" duration="384000" />
-      <workItem from="1710593486100" duration="117000" />
-      <workItem from="1710612986236" duration="6581000" />
-      <workItem from="1710778465872" duration="10124000" />
-      <workItem from="1710789533329" duration="279000" />
     </task>
     <servers />
   </component>

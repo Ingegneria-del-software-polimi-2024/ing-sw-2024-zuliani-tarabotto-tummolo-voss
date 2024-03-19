@@ -36,14 +36,15 @@ public class GameState {
 
     private List<PlayableCard> openResources; //2 elements in the list
 
-    private boolean isLastTurn;
+    private boolean isLastTurn = false;
 
 
 
     //Methods
 
-    public Player getPlayer(){
+    public Player getPlayer(int indx){
 
+        return players.get(indx);
     }
 
     public String getId(){
@@ -52,17 +53,36 @@ public class GameState {
 
     public Player getTurnPlayer(){
 
+        return turnPlayer;
     }
 
     public void calculateCommonObj(){
 
     }
 
-    public boolean isLastTurn(){
+    public void isLastTurn(){
 
-        if(!isLastTurn){
+        int i;
 
+        for(i=0; i<4; i++){
+
+            if(players.get(i).getPoints() == 20 || players.get(i).getPoints() > 20){
+
+                setLastTurnTrue();
+            }
         }
+
+        if(GoldenDeck.isDeckFineshed() || ResourcesDeck.isDeckFinished){
+
+            setLastTurnTrue();
+        }
+
+        return isLastTurn;
+    }
+
+    public boolean getLastTurn(){
+
+        return isLastTurn;
     }
 
 
