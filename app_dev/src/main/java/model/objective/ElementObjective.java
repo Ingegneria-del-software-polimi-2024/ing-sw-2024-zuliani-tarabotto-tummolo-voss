@@ -1,7 +1,7 @@
 package model.objective;
 
 import model.enums.Element;
-import model.placementArea.PlacementArea;
+import model.placemetArea.PlacementArea;
 
 public class ElementObjective implements Objective{
     private Element element;
