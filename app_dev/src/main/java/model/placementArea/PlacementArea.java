@@ -1,4 +1,4 @@
-package model.placemetArea;
+package model.placementArea;
 
 import model.cards.PlayableCards.PlayableCard;
 import model.enums.Artifact;
@@ -21,7 +21,7 @@ public class PlacementArea {
     private HashMap<Artifact, Integer> availableArtifacts; //how many occurrences of that artifact you have, permits to rapidly check for points
     private HashMap<Element, Integer> availableElements; // as Artifacts but with elements
     private List<Coordinates> availablePlaces; //list of available places to put a card in, enable to search more rapidly where you can place cards
-
+    private int numberNearbyCards;
     public List<Coordinates> freePositions(){return availablePlaces;} //returns the free positions
 
 //adds a playable card to the placementArea
@@ -29,6 +29,7 @@ public class PlacementArea {
         int i, j, count = 0;
         Coordinates coord;
         PlayableCard placedCard;
+        numberNearbyCards = 0;
 
         //we should throw an exception if there is already a card in those coordinates
         if(disposition.containsKey(xy)){
@@ -44,6 +45,10 @@ public class PlacementArea {
                         coord = new Coordinates(i, j);
                         if(disposition.containsKey(coord)){
                             placedCard = disposition.get(coord);
+
+                            if (placedCard.getCorner(count) != null) {//updates the number of cards covered by the placed card
+                                numberNearbyCards ++;
+                            }
                             if(placedCard.getCorner(count) != null && !placedCard.getCorner(count).isEmpty()){
                                 if(placedCard.getCorner(count).getElement() != null) availableElements.put(placedCard.getCorner(count).getElement(), availableElements.get(placedCard.getCorner(count).getElement())-1);
                                 else availableArtifacts.put(placedCard.getCorner(count).getArtifact(), availableElements.get(placedCard.getCorner(count).getElement())-1);
@@ -108,7 +113,7 @@ public class PlacementArea {
         return retCopy;
     }
     public int getNumberNearbyCards(){
-        //to be implemented
+        return numberNearbyCards;
     }
 
 }
