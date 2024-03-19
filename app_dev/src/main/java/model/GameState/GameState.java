@@ -11,10 +11,8 @@ import java.util.List;
 
 public class GameState {
 
-    //Attributes
 
-    List<Player> players;
-
+    private List<Player> players;
     private String id;
 
     private ResourcesDeck resourceDeck;

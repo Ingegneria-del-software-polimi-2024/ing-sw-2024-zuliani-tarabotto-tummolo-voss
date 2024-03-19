@@ -4,12 +4,14 @@ import model.cards.Card;
 import java.util.Collections;
 import java.util.List;
 import model.enums.*;
+import model.placementArea.PlacementArea;
 
 public abstract class PlayableCard implements Card {
     private String type;//utile per parsing
     protected int id;
     protected boolean faceSide;
     protected List<Corner> corners;
+
     public void flipCard() {
         this.faceSide = !this.faceSide;
     }
@@ -40,6 +42,9 @@ public abstract class PlayableCard implements Card {
     }
 
     public abstract Element getBlockedElement ();
+
+    public abstract int countPoints(PlacementArea placementArea);
+
 
 
 }

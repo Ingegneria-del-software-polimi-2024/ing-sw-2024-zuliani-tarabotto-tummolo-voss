@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import model.enums.Element;
 import model.PointsStrategy.*;
+import model.placementArea.PlacementArea;
 
 import java.io.File;
 import java.io.IOException;
@@ -80,6 +81,11 @@ public class GoldCard extends PlayableCard{
 
     public Points getPoints () {
         return points;
+    }
+
+    @Override
+    public int countPoints (PlacementArea placementArea) {
+        return points.count(placementArea);
     }
 
 

@@ -1,6 +1,7 @@
 package model.PointsStrategy;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import model.placementArea.PlacementArea;
 
 @JsonTypeName("SimplePoints")
 
@@ -13,7 +14,7 @@ public class SimplePoints implements Points {
         return points;
     }
    @Override
-    public int count() {
+    public int count(PlacementArea placementArea) {
         return this.points;
     }
 

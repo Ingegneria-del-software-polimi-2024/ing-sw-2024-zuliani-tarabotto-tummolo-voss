@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import model.PointsStrategy.Points;
 import model.PointsStrategy.SimplePoints;
 import model.enums.Element;
+import model.placementArea.PlacementArea;
 
 import java.io.File;
 import java.io.IOException;
@@ -106,6 +107,10 @@ public class ResourceCard extends PlayableCard {
     }
     public Points getPoints() {
         return points;
+    }
+    @Override
+    public int countPoints(PlacementArea placementArea) {
+        return points.count(placementArea);
     }
 
 

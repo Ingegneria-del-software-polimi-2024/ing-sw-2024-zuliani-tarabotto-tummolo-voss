@@ -5,10 +5,9 @@ import model.placementArea.PlacementArea;
 @JsonTypeName("CornersPoints")
 public class CornersPoints implements Points {
     private int points;
-    private PlacementArea placementArea;
     @Override
-    public int count () {
-        return this.placementArea.getNumberNearbyCards();
+    public int count (PlacementArea placementArea) {
+        return this.points * placementArea.getNumberNearbyCards();
     }
     @Override
     public int getPoints() {
