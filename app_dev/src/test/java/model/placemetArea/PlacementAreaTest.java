@@ -1,4 +1,4 @@
-package model.placemetArea;
+package model.placementArea;
 
 import junit.framework.TestCase;
 

@@ -1,7 +1,7 @@
 package model.objective;
 
 import model.enums.Artifact;
-import model.placemetArea.*;
+import model.placementArea.*;
 
 import java.util.HashMap;
 

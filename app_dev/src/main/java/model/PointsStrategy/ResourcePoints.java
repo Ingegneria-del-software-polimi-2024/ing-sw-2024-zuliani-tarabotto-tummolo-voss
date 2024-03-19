@@ -3,7 +3,7 @@ package model.PointsStrategy;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import model.enums.*;
-import model.placemetArea.*;
+import model.placementArea.*;
 
 @JsonTypeName("ResourcePoints")
 public class ResourcePoints implements Points {

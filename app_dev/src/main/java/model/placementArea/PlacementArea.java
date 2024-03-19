@@ -25,7 +25,7 @@ public class PlacementArea {
     public List<Coordinates> freePositions(){return availablePlaces;} //returns the free positions
 
 //adds a playable card to the placementArea
-    public void addCard(PlayableCard card, Coordinates xy) throws IllegalArgumentException{
+    public void addCard(Coordinates xy, PlayableCard card) throws IllegalArgumentException{
         int i, j, count = 0;
         Coordinates coord;
         PlayableCard placedCard;
@@ -51,7 +51,7 @@ public class PlacementArea {
                             }
                             if(placedCard.getCorner(count) != null && !placedCard.getCorner(count).isEmpty()){
                                 if(placedCard.getCorner(count).getElement() != null) availableElements.put(placedCard.getCorner(count).getElement(), availableElements.get(placedCard.getCorner(count).getElement())-1);
-                                else availableArtifacts.put(placedCard.getCorner(count).getArtifact(), availableElements.get(placedCard.getCorner(count).getElement())-1);
+                                else availableArtifacts.put(placedCard.getCorner(count).getArtifact(), availableArtifacts.get(placedCard.getCorner(count).getArtifact())-1);
 
                             }
                         }
@@ -64,7 +64,7 @@ public class PlacementArea {
             for(count = 0; count < 4; count++){
                 if(card.getCorner(count) != null){
                     if(card.getCorner(count).getElement() != null) availableElements.put(card.getCorner(count).getElement(), availableElements.get(card.getCorner(count).getElement())+1);
-                    else availableArtifacts.put(card.getCorner(count).getArtifact(), availableArtifacts.get(card.getCorner(count).getArtifact())+1);
+                    else if(card.getCorner(count).getArtifact() != null) availableArtifacts.put(card.getCorner(count).getArtifact(), availableArtifacts.get(card.getCorner(count).getArtifact())+1);
                 }
             }
 
@@ -87,7 +87,7 @@ public class PlacementArea {
     //work in progress, returns the NUMBER OF COMBINATION of the shape "shape"
     public int verifyObjective(Shape shape, Element element){
         for(Coordinates c : disposition.keySet().stream().sorted(Comparator.comparing((a) -> {return a;}))/*serve un metodo per ordinare la lista*/){
-            if(disposition.get(c).getElement().equals(element)){
+            if(disposition.get(c).getBlockedElement().equals(element)){
                 //starts looking the contiguous cards for the pattern
             }
         }

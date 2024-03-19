@@ -1,7 +1,7 @@
 package model.objective;
 
-import model.placemetArea.Coordinates;
-import model.placemetArea.Coordinates;
+import model.placementArea.Coordinates;
+import model.placementArea.Coordinates;
 import model.enums.Element;
 
 import java.util.ArrayList;
