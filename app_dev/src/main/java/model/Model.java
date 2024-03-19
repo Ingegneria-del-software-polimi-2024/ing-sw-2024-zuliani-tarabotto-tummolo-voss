@@ -1,20 +1,14 @@
 package model;
 
-import model.deckFactory.Deck;
-import model.deckFactory.DeckGenerator;
-import model.deckFactory.ResourceCardsDeckGenerator;
-import model.deckFactory.StarterCardsDeckGenerator;
+import model.deckFactory.*;
+import model.deckFactory.Generators.DeckGenerator;
+import model.deckFactory.Generators.GoldCardsDeckGenerator;
+import model.deckFactory.Generators.ResourceCardsDeckGenerator;
+import model.deckFactory.Generators.StarterCardsDeckGenerator;
 
 public class Model {
-    public static void main(String[] args){
-
-        DeckGenerator goldenDeckGenerator = new GoldCardsDeckGenerator();
-        DeckGenerator resourcesDeckGenerator = new ResourceCardsDeckGenerator();
-        DeckGenerator starterDeckGenerator = new StarterCardsDeckGenerator();
-
-        Deck goldenDeck = goldenDeckGenerator.generateDeck();
-        Deck resourcesDeck = resourcesDeckGenerator.generateDeck();
-        Deck starterDeck = starterDeckGenerator.generateDeck();
-
+    public static void main(String[] args) throws Exception {
+        RunDeckCreation runDeckCreation = new RunDeckCreation();
+        runDeckCreation.RunDeckCreation();
     }
 }
