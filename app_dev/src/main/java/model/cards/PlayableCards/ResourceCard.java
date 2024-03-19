@@ -99,7 +99,7 @@ public class ResourceCard extends PlayableCard {
     }
 
 
-    @Override
+
     public Element getBlockedElement() {
         return blockedElement;
     }

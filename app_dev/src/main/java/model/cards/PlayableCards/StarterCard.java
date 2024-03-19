@@ -79,7 +79,6 @@ public class StarterCard extends PlayableCard{
         return null;
     }
 
-    @Override
     public Element getBlockedElement() {
         return null;
     }

@@ -66,12 +66,17 @@ public class GoldCard extends PlayableCard{
     }
 
 
-    @Override
-    public Element getBlockedElement() {
-        return blockedElement;
+
+
+    public Element getBlockedElement(){
+        return
     }
 
 
+
+    public Element getElement () {
+        return blockedElement;
+    }
 
     public Map<Element, Integer> getPlacementConstraint () {
         return Collections.unmodifiableMap(placementConstraint); // Return an unmodifiable map
