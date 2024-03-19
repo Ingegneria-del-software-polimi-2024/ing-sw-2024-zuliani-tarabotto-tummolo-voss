@@ -37,14 +37,15 @@ public class GameState {
 
     private List<PlayableCard> openResources; //2 elements in the list
 
-    private boolean isLastTurn;
+    private boolean isLastTurn = false;
 
 
 
     //Methods
 
-    public Player getPlayer(){
+    public Player getPlayer(int indx){
 
+        return players.get(indx);
     }
 
     public String getId(){
@@ -53,17 +54,21 @@ public class GameState {
 
     public Player getTurnPlayer(){
 
+        return turnPlayer;
     }
 
     public void calculateCommonObj(){
 
     }
 
-    public boolean isLastTurn(){
+    public void isLastTurn(){
 
-        if(!isLastTurn){
+        return isLastTurn;
+    }
 
-        }
+    public boolean getLastTurn(){
+
+        return isLastTurn;
     }
 
 

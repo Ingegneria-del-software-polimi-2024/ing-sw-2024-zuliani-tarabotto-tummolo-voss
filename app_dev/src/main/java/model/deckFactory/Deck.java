@@ -19,4 +19,8 @@ public abstract class Deck {
         // Implement logic to add the card to the cards array
         // (e.g., check for available space, resize the array if needed)
     }
+
+    public void isDeckFinished(){
+
+    }
 }

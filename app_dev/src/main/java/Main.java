@@ -18,7 +18,7 @@ public class Main {
         int inputCommand, x, y;
 
         Player player = new Player();
-        while (!state.isLastTurn()){
+        while (!state.getLastTurn()){
             player = state.getTurnPlayer();
             //reading for placing
             for(int i = 0; i <= 3; i++) {System.out.println(i+":" + player.getPlayingHand().get(i) + "\n");}
