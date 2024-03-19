@@ -1,0 +1,1696 @@
+{"GoldenCards":[
+    
+    {
+    "id": 41,
+    "faceSide": false,
+     "corners": [
+      
+
+      {
+        "id":1,
+        "element": null,
+        "artifact": null,
+        "isAvailable": true
+      },
+       {
+        "id":2,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      },
+
+      {
+        "id":3,
+        "element": null,  
+        "artifact": "feather",        
+        "isAvailable": true
+      }
+       
+    ],
+    "type": "GoldCard",  
+    "element": "mushrooms", 
+    "placementConstraint": {
+      "mushrooms": 2,  
+      "animals": 1,
+      "insects": 0,  
+      "vegetals": 0  
+    },
+    "points": {
+      "type": "ResourcePoints",
+      "element":null,
+      "artifact": "feather",
+      "points": 1
+    }
+  },
+
+
+
+    {
+    "id": 42,
+    "faceSide": false,
+     "corners": [
+      
+
+      {
+        "id":0,
+        "element": null,
+        "artifact": null,
+        "isAvailable": true
+      },
+       {
+        "id":1,
+        "element": null,  
+        "artifact": "ink",        
+        "isAvailable": true
+      },
+
+      {
+        "id":3,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      }
+       
+    ],
+    "type": "GoldCard",  
+    "element": "mushrooms", 
+    "placementConstraint": {
+      "mushrooms": 2,  
+      "animals": 0,
+      "insects": 0,  
+      "vegetals": 1  
+    },
+    "points": {
+      "type": "ResourcePoints",
+      "element":null,
+      "artifact": "ink",
+      "points": 1
+    }
+  },
+
+
+    {
+    "id": 43,
+    "faceSide": false,
+     "corners": [
+      
+
+      {
+        "id":0,
+        "element": null,
+        "artifact": "ink",
+        "isAvailable": true
+      },
+       {
+        "id":1,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      },
+
+      {
+        "id":2,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      }
+       
+    ],
+    "type": "GoldCard",  
+    "element": "mushrooms", 
+    "placementConstraint": {
+       "mushrooms": 2,  
+      "animals": 0,
+      "insects": 1,  
+      "vegetals": 0  
+    },
+    "points": {
+      "type": "ResourcePoints",
+      "element":null,
+      "artifact": "paper",
+      "points": 1
+    }
+  },
+
+   {
+    "id": 44,
+    "faceSide": false,
+     "corners": [
+      
+
+      {
+        "id":0,
+        "element": null,
+        "artifact": null,
+        "isAvailable": true
+      },
+       {
+        "id":1,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      },
+
+      {
+        "id":3,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      }
+       
+    ],
+    "type": "GoldCard",  
+    "element": "mushrooms", 
+    "placementConstraint": {
+      "mushrooms": 3,  
+      "animals": 1,
+      "insects": 0,  
+      "vegetals": 0
+    },
+    "points": {
+      "type": "CornersPoints",
+      "points": 2
+    }
+  },
+
+
+
+  {
+    "id": 45,
+    "faceSide": false,
+     "corners": [
+      
+
+      {
+        "id":0,
+        "element": null,
+        "artifact": null,
+        "isAvailable": true
+      },
+       {
+        "id":1,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      },
+
+      {
+        "id":2,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      }
+       
+    ],
+    "type": "GoldCard",  
+    "element": "mushrooms", 
+    "placementConstraint": {
+      "mushrooms": 3,  
+      "animals": 0,
+      "insects": 0,  
+      "vegetals": 1
+    },
+    "points": {
+      "type": "CornersPoints",
+      "points": 2
+    }
+  },
+
+
+
+  {
+    "id": 46,
+    "faceSide": false,
+     "corners": [
+      
+
+      {
+        "id":0,
+        "element": null,
+        "artifact": null,
+        "isAvailable": true
+      },
+       {
+        "id":2,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      },
+
+      {
+        "id":3,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      }
+       
+    ],
+    "type": "GoldCard",  
+    "element": "mushrooms", 
+    "placementConstraint": {
+      "mushrooms": 3,  
+      "animals": 0,
+      "insects": 1,  
+      "vegetals": 0
+    },
+    "points": {
+      "type": "CornersPoints",
+      "points": 2
+    }
+  },
+
+
+
+
+
+  {
+    "id": 47,
+    "faceSide": false,
+     "corners": [
+      
+
+      {
+        "id":0,
+        "element": null,
+        "artifact": null,
+        "isAvailable": true
+      },
+       {
+        "id":2,
+        "element": null,  
+        "artifact": "ink",        
+        "isAvailable": true
+      }
+    ],
+    "type": "GoldCard",  
+    "element": "mushrooms", 
+    "placementConstraint": {
+      "mushrooms": 3,  
+      "animals": 0,
+      "insects": 0,  
+      "vegetals": 0
+    },
+    "points": {
+      "type": "SimplePoints",
+      "points": 3
+    }
+  },
+
+
+  
+
+
+   {
+    "id": 48,
+    "faceSide": false,
+     "corners": [
+      
+
+      {
+        "id":0,
+        "element": null,
+        "artifact": "feather",
+        "isAvailable": true
+      },
+       {
+        "id":1,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      }
+    ],
+    "type": "GoldCard",  
+    "element": "mushrooms", 
+    "placementConstraint": {
+      "mushrooms": 3,  
+      "animals": 0,
+      "insects": 0,  
+      "vegetals": 0
+    },
+    "points": {
+      "type": "SimplePoints",
+      "points": 3
+    }
+  },
+
+
+
+    {
+    "id": 49,
+    "faceSide": false,
+     "corners": [
+      
+
+       {
+        "id":1,
+        "element": null,  
+        "artifact": "paper",        
+        "isAvailable": true
+      },
+       {
+        "id":3,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      }
+    ],
+    "type": "GoldCard",  
+    "element": "mushrooms", 
+    "placementConstraint": {
+      "mushrooms": 3,  
+      "animals": 0,
+      "insects": 0,  
+      "vegetals": 0
+    },
+    "points": {
+      "type": "SimplePoints",
+      "points": 3
+    }
+  },
+
+
+
+  {
+    "id": 50,
+    "faceSide": false,
+     "corners": [
+      
+
+       {
+        "id":0,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      },
+       {
+        "id":2,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      }
+    ],
+    "type": "GoldCard",  
+    "element": "mushrooms", 
+    "placementConstraint": {
+      "mushrooms": 5,  
+      "animals": 0,
+      "insects": 0,  
+      "vegetals": 0
+    },
+    "points": {
+      "type": "SimplePoints",
+      "points": 5
+    }
+  },
+
+
+
+  
+
+
+
+
+
+
+
+
+
+    {
+    "id": 51,
+    "faceSide": false,
+     "corners": [
+      
+
+      {
+        "id":0,
+        "element": null,
+        "artifact": "feather",
+        "isAvailable": true
+      },
+       {
+        "id":1,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      },
+
+      {
+        "id":2,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      }
+       
+    ],
+    "type": "GoldCard",  
+    "element": "vegetals", 
+    "placementConstraint": {
+      "mushrooms": 0,  
+      "animals": 0,
+      "insects": 1,  
+      "vegetals": 2  
+    },
+    "points": {
+      "type": "ResourcePoints",
+      "element":null,
+      "artifact": "feather",
+      "points": 1
+    }
+  },
+
+
+
+    {
+    "id": 52,
+    "faceSide": false,
+     "corners": [
+      
+
+      {
+        "id":0,
+        "element": null,
+        "artifact": null,
+        "isAvailable": true
+      },
+       {
+        "id":1,
+        "element": null,  
+        "artifact": "paper",        
+        "isAvailable": true
+      },
+
+      {
+        "id":3,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      }
+       
+    ],
+    "type": "GoldCard",  
+    "element": "vegetals", 
+    "placementConstraint": {
+      "mushrooms": 1,  
+      "animals": 0,
+      "insects": 0,  
+      "vegetals": 2  
+    },
+    "points": {
+      "type": "ResourcePoints",
+      "element":null,
+      "artifact": "paper",
+      "points": 1
+    }
+  },
+
+
+    {
+    "id": 53,
+    "faceSide": false,
+     "corners": [
+      
+
+      {
+        "id":0,
+        "element": null,
+        "artifact": null,
+        "isAvailable": true
+      },
+       {
+        "id":2,
+        "element": null,  
+        "artifact": "ink",        
+        "isAvailable": true
+      },
+
+      {
+        "id":3,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      }
+       
+    ],
+    "type": "GoldCard",  
+    "element": "vegetals", 
+    "placementConstraint": {
+       "mushrooms": 0,  
+      "animals": 1,
+      "insects": 0,  
+      "vegetals": 2
+    },
+    "points": {
+      "type": "ResourcePoints",
+      "element":null,
+      "artifact": "ink",
+      "points": 1
+    }
+  },
+
+   {
+    "id": 54,
+    "faceSide": false,
+     "corners": [
+      
+
+      {
+        "id":1,
+        "element": null,
+        "artifact": null,
+        "isAvailable": true
+      },
+       {
+        "id":2,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      },
+
+      {
+        "id":3,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      }
+       
+    ],
+    "type": "GoldCard",  
+    "element": "vegetals", 
+    "placementConstraint": {
+      "mushrooms": 0,  
+      "animals": 0,
+      "insects": 1,  
+      "vegetals": 3
+    },
+    "points": {
+      "type": "CornersPoints",
+      "points": 2
+    }
+  },
+
+
+
+  {
+    "id": 55,
+    "faceSide": false,
+     "corners": [
+      
+
+      {
+        "id":0,
+        "element": null,
+        "artifact": null,
+        "isAvailable": true
+      },
+       {
+        "id":1,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      },
+
+      {
+        "id":2,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      }
+       
+    ],
+    "type": "GoldCard",  
+    "element": "vegetals", 
+    "placementConstraint": {
+      "mushrooms": 0,  
+      "animals": 1,
+      "insects": 0,  
+      "vegetals": 3
+    },
+    "points": {
+      "type": "CornersPoints",
+      "points": 2
+    }
+  },
+
+
+
+  {
+    "id": 56,
+    "faceSide": false,
+     "corners": [
+      
+
+      {
+        "id":0,
+        "element": null,
+        "artifact": null,
+        "isAvailable": true
+      },
+       {
+        "id":2,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      },
+
+      {
+        "id":3,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      }
+       
+    ],
+    "type": "GoldCard",  
+    "element": "vegetals", 
+    "placementConstraint": {
+      "mushrooms": 1,  
+      "animals": 0,
+      "insects": 0,  
+      "vegetals": 3
+    },
+    "points": {
+      "type": "CornersPoints",
+      "points": 2
+    }
+  },
+
+
+
+
+
+  {
+    "id": 57,
+    "faceSide": false,
+     "corners": [
+      
+
+      {
+        "id":0,
+        "element": null,
+        "artifact": null,
+        "isAvailable": true
+      },
+       {
+        "id":2,
+        "element": null,  
+        "artifact": "feather",        
+        "isAvailable": true
+      }
+    ],
+    "type": "GoldCard",  
+    "element": "vegetals", 
+    "placementConstraint": {
+      "mushrooms": 0,  
+      "animals": 0,
+      "insects": 0,  
+      "vegetals": 3
+    },
+    "points": {
+      "type": "SimplePoints",
+      "points": 3
+    }
+  },
+
+
+  
+
+
+   {
+    "id": 58,
+    "faceSide": false,
+     "corners": [
+      
+
+      {
+        "id":0,
+        "element": null,
+        "artifact": "paper",
+        "isAvailable": true
+      },
+       {
+        "id":1,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      }
+    ],
+    "type": "GoldCard",  
+    "element": "vegetals", 
+    "placementConstraint": {
+      "mushrooms": 0,  
+      "animals": 0,
+      "insects": 0,  
+      "vegetals": 3
+    },
+    "points": {
+      "type": "SimplePoints",
+      "points": 3
+    }
+  },
+
+
+
+    {
+    "id": 59,
+    "faceSide": false,
+     "corners": [
+      
+
+       {
+        "id":1,
+        "element": null,  
+        "artifact": "ink",        
+        "isAvailable": true
+      },
+       {
+        "id":3,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      }
+    ],
+    "type": "GoldCard",  
+    "element": "vegetals", 
+    "placementConstraint": {
+      "mushrooms": 0,  
+      "animals": 0,
+      "insects": 0,  
+      "vegetals": 3
+    },
+    "points": {
+      "type": "SimplePoints",
+      "points": 3
+    }
+  },
+
+
+
+  {
+    "id": 60,
+    "faceSide": false,
+     "corners": [
+      
+
+       {
+        "id":0,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      },
+       {
+        "id":1,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      }
+    ],
+    "type": "GoldCard",  
+    "element": "vegetals", 
+    "placementConstraint": {
+      "mushrooms": 0,  
+      "animals": 0,
+      "insects": 0,  
+      "vegetals": 5
+    },
+    "points": {
+      "type": "SimplePoints",
+      "points": 5
+    }
+  },
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {
+    "id": 61,
+    "faceSide": false,
+     "corners": [
+      
+
+      {
+        "id":0,
+        "element": null,
+        "artifact": "ink",
+        "isAvailable": true
+      },
+       {
+        "id":1,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      },
+
+      {
+        "id":2,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      }
+       
+    ],
+    "type": "GoldCard",  
+    "element": "animals", 
+    "placementConstraint": {
+      "mushrooms": 0,  
+      "animals": 2,
+      "insects": 1,  
+      "vegetals": 0  
+    },
+    "points": {
+      "type": "ResourcePoints",
+      "element":null,
+      "artifact": "ink",
+      "points": 1
+    }
+  },
+
+
+
+    {
+    "id": 62,
+    "faceSide": false,
+     "corners": [
+      
+
+      {
+        "id":1,
+        "element": null,
+        "artifact": null,
+        "isAvailable": true
+      },
+       {
+        "id":2,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      },
+
+      {
+        "id":3,
+        "element": null,  
+        "artifact": "paper",        
+        "isAvailable": true
+      }
+       
+    ],
+    "type": "GoldCard",  
+    "element": "animals", 
+    "placementConstraint": {
+      "mushrooms": 0,  
+      "animals": 2,
+      "insects": 0,  
+      "vegetals": 1  
+    },
+    "points": {
+      "type": "ResourcePoints",
+      "element":null,
+      "artifact": "paper",
+      "points": 1
+    }
+  },
+
+
+    {
+    "id": 63,
+    "faceSide": false,
+     "corners": [
+      
+
+      {
+        "id":0,
+        "element": null,
+        "artifact": null,
+        "isAvailable": true
+      },
+       {
+        "id":2,
+        "element": null,  
+        "artifact": "feather",        
+        "isAvailable": true
+      },
+
+      {
+        "id":3,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      }
+       
+    ],
+    "type": "GoldCard",  
+    "element": "animals", 
+    "placementConstraint": {
+       "mushrooms": 1,  
+      "animals": 2,
+      "insects": 0,  
+      "vegetals": 0
+    },
+    "points": {
+      "type": "ResourcePoints",
+      "element":null,
+      "artifact": "feather",
+      "points": 1
+    }
+  },
+
+   {
+    "id": 64,
+    "faceSide": false,
+     "corners": [
+      
+
+      {
+        "id":0,
+        "element": null,
+        "artifact": null,
+        "isAvailable": true
+      },
+       {
+        "id":1,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      },
+
+      {
+        "id":3,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      }
+       
+    ],
+    "type": "GoldCard",  
+    "element": "animals", 
+    "placementConstraint": {
+      "mushrooms": 0,  
+      "animals": 3,
+      "insects": 1,  
+      "vegetals": 0
+    },
+    "points": {
+      "type": "CornersPoints",
+      "points": 2
+    }
+  },
+
+
+
+  {
+    "id": 65,
+    "faceSide": false,
+     "corners": [
+      
+
+      {
+        "id":0,
+        "element": null,
+        "artifact": null,
+        "isAvailable": true
+      },
+       {
+        "id":2,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      },
+
+      {
+        "id":3,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      }
+       
+    ],
+    "type": "GoldCard",  
+    "element": "animals", 
+    "placementConstraint": {
+      "mushrooms": 1,  
+      "animals": 3,
+      "insects": 0,  
+      "vegetals": 0
+    },
+    "points": {
+      "type": "CornersPoints",
+      "points": 2
+    }
+  },
+
+
+
+  {
+    "id": 66,
+    "faceSide": false,
+     "corners": [
+      
+
+      {
+        "id":1,
+        "element": null,
+        "artifact": null,
+        "isAvailable": true
+      },
+       {
+        "id":2,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      },
+
+      {
+        "id":3,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      }
+       
+    ],
+    "type": "GoldCard",  
+    "element": "animals", 
+    "placementConstraint": {
+      "mushrooms": 0,  
+      "animals": 3,
+      "insects": 0,  
+      "vegetals": 1
+    },
+    "points": {
+      "type": "CornersPoints",
+      "points": 2
+    }
+  },
+
+
+
+
+
+  {
+    "id": 67,
+    "faceSide": false,
+     "corners": [
+      
+
+      {
+        "id":0,
+        "element": null,
+        "artifact": null,
+        "isAvailable": true
+      },
+       {
+        "id":2,
+        "element": null,  
+        "artifact": "paper",        
+        "isAvailable": true
+      }
+    ],
+    "type": "GoldCard",  
+    "element": "animals", 
+    "placementConstraint": {
+      "mushrooms": 0,  
+      "animals": 3,
+      "insects": 0,  
+      "vegetals": 0
+    },
+    "points": {
+      "type": "SimplePoints",
+      "points": 3
+    }
+  },
+
+
+  
+
+
+   {
+    "id": 68,
+    "faceSide": false,
+     "corners": [
+      
+
+      {
+        "id":0,
+        "element": null,
+        "artifact": null,
+        "isAvailable": true
+      },
+       {
+        "id":1,
+        "element": null,  
+        "artifact": "ink",        
+        "isAvailable": true
+      }
+    ],
+    "type": "GoldCard",  
+    "element": "animals", 
+    "placementConstraint": {
+      "mushrooms": 0,  
+      "animals": 3,
+      "insects": 0,  
+      "vegetals": 0
+    },
+    "points": {
+      "type": "SimplePoints",
+      "points": 3
+    }
+  },
+
+
+
+    {
+    "id": 69,
+    "faceSide": false,
+     "corners": [
+      
+
+       {
+        "id":1,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      },
+       {
+        "id":3,
+        "element": null,  
+        "artifact": "feather",        
+        "isAvailable": true
+      }
+    ],
+    "type": "GoldCard",  
+    "element": "animals", 
+    "placementConstraint": {
+      "mushrooms": 0,  
+      "animals": 3,
+      "insects": 0,  
+      "vegetals": 0
+    },
+    "points": {
+      "type": "SimplePoints",
+      "points": 3
+    }
+  },
+
+
+
+  {
+    "id": 70,
+    "faceSide": false,
+     "corners": [
+      
+
+       {
+        "id":1,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      },
+       {
+        "id":3,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      }
+    ],
+    "type": "GoldCard",  
+    "element": "animals", 
+    "placementConstraint": {
+      "mushrooms": 0,  
+      "animals": 5,
+      "insects": 0,  
+      "vegetals": 0
+    },
+    "points": {
+      "type": "SimplePoints",
+      "points": 5
+    }
+  },
+
+
+
+
+
+
+
+    {
+    "id": 71,
+    "faceSide": false,
+     "corners": [
+      
+
+      {
+        "id":0,
+        "element": null,
+        "artifact": null,
+        "isAvailable": true
+      },
+       {
+        "id":1,
+        "element": null,  
+        "artifact": "feather",        
+        "isAvailable": true
+      },
+
+      {
+        "id":3,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      }
+       
+    ],
+    "type": "GoldCard",  
+    "element": "insects", 
+    "placementConstraint": {
+      "mushrooms": 0,  
+      "animals": 0,
+      "insects": 2,  
+      "vegetals": 1 
+    },
+    "points": {
+      "type": "ResourcePoints",
+      "element":null,
+      "artifact": "feather",
+      "points": 1
+    }
+  },
+
+
+
+    {
+    "id": 72,
+    "faceSide": false,
+     "corners": [
+      
+
+      {
+        "id":0,
+        "element": null,
+        "artifact": null,
+        "isAvailable": true
+      },
+       {
+        "id":2,
+        "element": null,  
+        "artifact": "paper",        
+        "isAvailable": true
+      },
+
+      {
+        "id":3,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      }
+       
+    ],
+    "type": "GoldCard",  
+    "element": "insects", 
+    "placementConstraint": {
+      "mushrooms": 0,  
+      "animals": 1,
+      "insects": 2,  
+      "vegetals": 0  
+    },
+    "points": {
+      "type": "ResourcePoints",
+      "element":null,
+      "artifact": "paper",
+      "points": 1
+    }
+  },
+
+
+    {
+    "id": 73,
+    "faceSide": false,
+     "corners": [
+      
+
+      {
+        "id":1,
+        "element": null,
+        "artifact": null,
+        "isAvailable": true
+      },
+       {
+        "id":2,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      },
+
+      {
+        "id":3,
+        "element": null,  
+        "artifact": "ink",        
+        "isAvailable": true
+      }
+       
+    ],
+    "type": "GoldCard",  
+    "element": "insects", 
+    "placementConstraint": {
+       "mushrooms": 1,  
+      "animals": 0,
+      "insects": 2,  
+      "vegetals": 0
+    },
+    "points": {
+      "type": "ResourcePoints",
+      "element":null,
+      "artifact": "ink",
+      "points": 1
+    }
+  },
+
+   {
+    "id": 74,
+    "faceSide": false,
+     "corners": [
+      
+
+      {
+        "id":0,
+        "element": null,
+        "artifact": null,
+        "isAvailable": true
+      },
+       {
+        "id":1,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      },
+
+      {
+        "id":3,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      }
+       
+    ],
+    "type": "GoldCard",  
+    "element": "insects", 
+    "placementConstraint": {
+      "mushrooms": 0,  
+      "animals": 1,
+      "insects": 3,  
+      "vegetals": 0
+    },
+    "points": {
+      "type": "CornersPoints",
+      "points": 2
+    }
+  },
+
+
+
+  {
+    "id": 75,
+    "faceSide": false,
+     "corners": [
+      
+
+      {
+        "id":0,
+        "element": null,
+        "artifact": null,
+        "isAvailable": true
+      },
+       {
+        "id":1,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      },
+
+      {
+        "id":2,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      }
+       
+    ],
+    "type": "GoldCard",  
+    "element": "insects", 
+    "placementConstraint": {
+      "mushrooms": 0,  
+      "animals": 0,
+      "insects": 3,  
+      "vegetals": 1
+    },
+    "points": {
+      "type": "CornersPoints",
+      "points": 2
+    }
+  },
+
+
+
+  {
+    "id": 76,
+    "faceSide": false,
+     "corners": [
+      
+
+      {
+        "id":0,
+        "element": null,
+        "artifact": null,
+        "isAvailable": true
+      },
+       {
+        "id":2,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      },
+
+      {
+        "id":3,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      }
+       
+    ],
+    "type": "GoldCard",  
+    "element": "insects", 
+    "placementConstraint": {
+      "mushrooms": 1,  
+      "animals": 0,
+      "insects": 3,  
+      "vegetals": 0
+    },
+    "points": {
+      "type": "CornersPoints",
+      "points": 2
+    }
+  },
+
+
+
+
+
+  {
+    "id": 77,
+    "faceSide": false,
+     "corners": [
+      
+
+      {
+        "id":0,
+        "element": null,
+        "artifact": "ink",
+        "isAvailable": true
+      },
+       {
+        "id":2,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      }
+    ],
+    "type": "GoldCard",  
+    "element": "insects", 
+    "placementConstraint": {
+      "mushrooms": 0,  
+      "animals": 0,
+      "insects": 3,  
+      "vegetals": 0
+    },
+    "points": {
+      "type": "SimplePoints",
+      "points": 3
+    }
+  },
+
+
+  
+
+
+   {
+    "id": 78,
+    "faceSide": false,
+     "corners": [
+      
+
+      {
+        "id":0,
+        "element": null,
+        "artifact": null,
+        "isAvailable": true
+      },
+       {
+        "id":1,
+        "element": null,  
+        "artifact": "paper",        
+        "isAvailable": true
+      }
+    ],
+    "type": "GoldCard",  
+    "element": "insects", 
+    "placementConstraint": {
+      "mushrooms": 0,  
+      "animals": 0,
+      "insects": 3,  
+      "vegetals": 0
+    },
+    "points": {
+      "type": "SimplePoints",
+      "points": 3
+    }
+  },
+
+
+
+    {
+    "id": 79,
+    "faceSide": false,
+     "corners": [
+      
+
+       {
+        "id":2,
+        "element": null,  
+        "artifact": "feather",        
+        "isAvailable": true
+      },
+       {
+        "id":3,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      }
+    ],
+    "type": "GoldCard",  
+    "element": "insects", 
+    "placementConstraint": {
+      "mushrooms": 0,  
+      "animals": 0,
+      "insects": 3,  
+      "vegetals": 0
+    },
+    "points": {
+      "type": "SimplePoints",
+      "points": 3
+    }
+  },
+
+
+
+  {
+    "id": 80,
+    "faceSide": false,
+     "corners": [
+      
+
+       {
+        "id":0,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      },
+       {
+        "id":1,
+        "element": null,  
+        "artifact": null,        
+        "isAvailable": true
+      }
+    ],
+    "type": "GoldCard",  
+    "element": "insects", 
+    "placementConstraint": {
+      "mushrooms": 0,  
+      "animals": 0,
+      "insects": 5,  
+      "vegetals": 0
+    },
+    "points": {
+      "type": "SimplePoints",
+      "points": 5
+    }
+  }
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+]
+
+
+}
