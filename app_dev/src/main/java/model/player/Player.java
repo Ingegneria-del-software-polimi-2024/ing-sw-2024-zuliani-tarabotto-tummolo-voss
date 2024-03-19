@@ -20,7 +20,7 @@ public class Player {
     //takes the card from the hand and places it in the placementArea
     public void playCard(PlayableCard card, Coordinates coordinates){
         takeFromHand(card);
-        placementArea.addCard(card, coordinates);
+        placementArea.addCard(coordinates, card);
         return;
     }
     public void flipHand(){}
