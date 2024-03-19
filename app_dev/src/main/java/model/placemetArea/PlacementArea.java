@@ -3,7 +3,6 @@ package model.placemetArea;
 import model.cards.PlayableCards.PlayableCard;
 import model.enums.Artifact;
 import model.enums.Element;
-import main.java.model.placemetArea.Coordinates;
 import model.objective.Shape;
 
 import java.util.Comparator;
