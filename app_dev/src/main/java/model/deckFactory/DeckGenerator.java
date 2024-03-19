@@ -4,6 +4,7 @@ import java.text.MessageFormat;
 
 public abstract class DeckGenerator {
 
+    //decides which generateDeckBasedOnType() method to call based on the deckType parameter
     public static Deck generate (DeckType deckType) throws ClassNotFoundException {
         switch (deckType) {
             case STARTER -> {

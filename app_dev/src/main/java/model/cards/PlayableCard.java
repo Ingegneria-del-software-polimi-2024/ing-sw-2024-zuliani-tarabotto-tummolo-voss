@@ -1,5 +1,9 @@
 package main.java.model.cards;
 
+import main.java.model.enums.Element;
+
+import java.util.List;
+
 public abstract class PlayableCard implements Card{
     private char id;
     private boolean faceSide;
@@ -15,6 +19,8 @@ public abstract class PlayableCard implements Card{
     }
 
     public abstract int countPoints();
+
+    public abstract List<Element> getLockedElement();
 
 
 }

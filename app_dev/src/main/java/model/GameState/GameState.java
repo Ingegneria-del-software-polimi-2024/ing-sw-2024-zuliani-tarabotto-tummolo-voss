@@ -1,5 +1,6 @@
 package main.java.model.GameState;
-import main.java.model.*;
+import main.java.model.cards.*;
+import main.java.model.deckFactory.*;
 
 public class GameState {
 
@@ -15,19 +16,19 @@ public class GameState {
 
     private ResourcesDeck resourcesDeck;
 
-    private GoldDeck goldDeck;
+    private GoldenDeck goldDeck;
 
     private ObjectiveDeck deckObjectives;
 
-    private StartingDeck startingDeck;
+    private StarterDeck startingDeck;
 
-    ObjectiveCards[2] commonObjectives = new ObjectiveCards();
+    ObjectiveCards[] commonObjectives = new ObjectiveCards[2];
 
-    GoldCards[2] openGold = new GoldCards();
+    GoldCard[] openGold = new GoldCard[2];
 
-    ResourceCards[2] openResources = new ResourceCards();
+    ResourceCard[] openResources = new ResourceCard[2];
 
-    private bool isLastTurn;
+    private boolean isLastTurn;
 
 
 

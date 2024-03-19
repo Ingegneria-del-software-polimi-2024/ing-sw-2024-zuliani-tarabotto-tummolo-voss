@@ -15,5 +15,4 @@ public class GoldenDeck extends Deck {
         return this;
     }
 
-    public void print() {System.out.println("i'm a golden deck");}
 }
