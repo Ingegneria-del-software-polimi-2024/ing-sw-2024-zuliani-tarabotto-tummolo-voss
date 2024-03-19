@@ -17,12 +17,12 @@ public class ResourcePoints implements Points {
             return this.placementArea.getNumberArtifacts(artifact);
         }
     }
+
+
     @JsonProperty("element")
     Element element;
     @JsonProperty("artifact")
     Artifact artifact;
-
-
 
 
     @Override

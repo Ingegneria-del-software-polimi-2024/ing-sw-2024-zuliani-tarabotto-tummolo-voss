@@ -1,4 +1,4 @@
-package model.placemetArea;
+package model.placementArea;
 
 /*
 the class coordinates facilitates the use of a cartesian plane as model for the Placement Area of the players

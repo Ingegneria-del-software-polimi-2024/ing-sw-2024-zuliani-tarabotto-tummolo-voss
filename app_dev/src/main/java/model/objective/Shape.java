@@ -1,13 +1,11 @@
 package model.objective;
 
-import main.java.model.placemetArea.Coordinates;
-import main.java.model.placemetArea.Coordinates;
+import main.java.model.placementArea.Coordinates;
 import main.java.model.enums.Element;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 //IMPORTANT
 // every shape has a set of coordinates, referred to a reference card, the reference card is the top/bottom right/left

@@ -12,11 +12,7 @@ import java.util.Map;
 
 public class GoldCard extends PlayableCard{
 
-
-
-
-
-    private String element;
+    private Element blockedElement;
     private Map<Element, Integer> placementConstraint;
     private Points points;
 
@@ -72,12 +68,14 @@ public class GoldCard extends PlayableCard{
 
 
 
+    public Element getBlockedElement(){
+        return
+    }
 
 
 
-
-    public String getElement () {
-        return element;
+    public Element getElement () {
+        return blockedElement;
     }
 
     public Map<Element, Integer> getPlacementConstraint () {

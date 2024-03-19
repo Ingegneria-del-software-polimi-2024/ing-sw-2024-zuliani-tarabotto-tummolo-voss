@@ -1,8 +1,7 @@
 package model.PointsStrategy;
-
-
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import model.placemetArea.PlacementArea;
+import model.placementArea.PlacementArea;
+
 @JsonTypeName("CornersPoints")
 public class CornersPoints implements Points {
     private int points;

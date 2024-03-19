@@ -31,7 +31,6 @@ public class Corner {
 
 
     public boolean isEmpty() {
-
             return isAvailable;
 
     }

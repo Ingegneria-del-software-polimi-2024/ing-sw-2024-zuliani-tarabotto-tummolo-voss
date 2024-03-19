@@ -13,12 +13,8 @@ import java.io.IOException;
 
 public class ResourceCard extends PlayableCard {
 
-
-
-
-    private Element element;
-
-
+    private Element blockedElement;
+    private Points points;
 
 
     public static ResourceCard parse(int id) throws JsonProcessingException {
@@ -102,14 +98,13 @@ public class ResourceCard extends PlayableCard {
         return null;
     }
 
+
+
+    public Element getBlockedElement() {
+        return blockedElement;
+    }
     public Points getPoints() {
         return points;
-    }
-
-    private Points points;
-
-    public Element getElement() {
-        return element;
     }
 
 

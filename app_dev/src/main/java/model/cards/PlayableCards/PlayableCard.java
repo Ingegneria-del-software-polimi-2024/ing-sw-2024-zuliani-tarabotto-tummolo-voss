@@ -1,12 +1,9 @@
 package model.cards.PlayableCards;
 
 import model.cards.Card;
-
-
-
-
 import java.util.Collections;
 import java.util.List;
+import model.enums.*;
 
 public abstract class PlayableCard implements Card {
     private String type;//utile per parsing
@@ -37,9 +34,12 @@ public abstract class PlayableCard implements Card {
     public String getType() {
         return type;
     }
+
     public int getId() {
         return id;
     }
+
+    public abstract Element getBlockedElement ();
 
 
 }
