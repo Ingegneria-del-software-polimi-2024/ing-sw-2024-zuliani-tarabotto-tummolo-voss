@@ -1,26 +1,37 @@
 package model.deckFactory;
 import model.cards.*;
 
+import java.util.Collections;
+import java.util.List;
+
 // Abstract class defining common deck properties and functionalities
 public abstract class Deck {
-    public Card[] cards; // Array to store cards
+
+    protected List<Card> cards; // List to store cards
 
     public abstract void generate();
 
     public void shuffle() {
-        // Default shuffling logic
+        Collections.shuffle(cards);
     }
 
-    public void extract() {
-        // Default card extraction logic
+    public Card extract() {
+        if (cards.isEmpty()) {
+            throw new IllegalStateException("Deck is empty!");
+        }
+        return cards.remove(0); // Extract and remove the first card (head/beginning of list)
     }
 
     public void addCard(Card card) {
-        // Implement logic to add the card to the cards array
-        // (e.g., check for available space, resize the array if needed)
+        cards.add(card); // Add card to the back (tail/end of list)
+    }
+
+    public int getSize() {
+        return cards.size();
     }
 
     public void isDeckFinished(){
 
     }
 }
+

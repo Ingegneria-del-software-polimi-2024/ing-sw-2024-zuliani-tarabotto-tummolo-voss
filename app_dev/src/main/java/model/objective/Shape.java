@@ -1,8 +1,8 @@
 package model.objective;
 
-import main.java.model.placemetArea.Coordinates;
-import main.java.model.placemetArea.Coordinates;
-import main.java.model.enums.Element;
+import model.placementArea.Coordinates;
+import model.placementArea.Coordinates;
+import model.enums.Element;
 
 import java.util.ArrayList;
 import java.util.HashMap;

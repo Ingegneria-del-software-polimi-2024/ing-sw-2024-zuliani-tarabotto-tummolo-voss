@@ -1,7 +1,7 @@
 package model.objective;
 
 import model.enums.Element;
-import model.placementArea.PlacementArea;
+import model.placementArea.*;
 
 public class LShapeObjective {
     private Element element;

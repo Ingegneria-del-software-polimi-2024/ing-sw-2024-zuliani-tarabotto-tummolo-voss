@@ -1,11 +1,11 @@
-import model.GameState.GameState;
-import model.placemetArea.Coordinates;
+/*import model.GameState.GameState;
+import model.placementArea.Coordinates;
 import model.player.Player;
 
 import java.io.*;
 
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
         GameState state = new GameState();
         //initialization of the gameState
         //...
@@ -53,4 +53,4 @@ public class Main {
         //last round following rules, to be impl.
 
     }
-}
+}*/

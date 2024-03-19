@@ -1,14 +1,15 @@
 package model.player;
 
-import model.cards.*;
-import model.placemetArea.*;
+//import model.cards.ObjectiveCard;
+import model.cards.PlayableCards.PlayableCard;
+import model.placementArea.*;
 
 import java.util.List;
 
 public class Player {
     private String nickname;
     private List<PlayableCard> hand;
-    private ObjectiveCard secretObjective;
+    //private ObjectiveCard secretObjective;
     private PlacementArea placementArea;
     private int points;
 
@@ -19,7 +20,7 @@ public class Player {
     //takes the card from the hand and places it in the placementArea
     public void playCard(PlayableCard card, Coordinates coordinates){
         takeFromHand(card);
-        placementArea.addCard(card, coordinates);
+        placementArea.addCard(coordinates, card);
         return;
     }
     public void flipHand(){}

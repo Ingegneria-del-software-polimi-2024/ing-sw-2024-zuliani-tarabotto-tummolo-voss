@@ -1,7 +1,7 @@
 package model.objective;
 
-import model.enums.Elements;
-import model.placementArea.PlacementArea;
+import model.enums.Element;
+import model.placementArea.*;
 
 public class DiagonalShapeObjective implements Objective{
     private Element element;

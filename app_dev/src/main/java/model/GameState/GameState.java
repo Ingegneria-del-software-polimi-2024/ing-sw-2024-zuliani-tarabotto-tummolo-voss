@@ -1,12 +1,11 @@
 package model.GameState;
 
-import model.cards.GoldCard;
 import model.cards.ObjectiveCard;
-import model.cards.PlayableCard;
-import model.cards.ResourceCard;
+import model.cards.PlayableCards.PlayableCard;
 import model.deckFactory.ResourcesDeck;
 import model.player.Player;
 import model.deckFactory.*;
+import model.cards.*;
 
 import java.util.List;
 
@@ -26,7 +25,7 @@ public class GameState {
 
     private GoldenDeck goldDeck;
 
-    private ObjectiveDeck deckObjectives;
+    //private ObjectiveDeck deckObjectives;
 
     private StarterDeck startingDeck;
 
