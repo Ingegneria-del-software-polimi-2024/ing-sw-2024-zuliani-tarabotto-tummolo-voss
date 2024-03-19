@@ -22,10 +22,11 @@ public class PlacementArea {
     private HashMap<Element, Integer> availableElements; // as Artifacts but with elements
     private List<Coordinates> availablePlaces; //list of available places to put a card in, enable to search more rapidly where you can place cards
 
+
     public List<Coordinates> freePositions(){return availablePlaces;} //returns the free positions
 
 //adds a playable card to the placementArea
-    public void addCard(PlayableCard card, Coordinates xy) throws IllegalArgumentException{
+    public void addCard(Coordinates xy, PlayableCard card) throws IllegalArgumentException{
         int i, j, count = 0;
         Coordinates coord;
         PlayableCard placedCard;
@@ -46,7 +47,7 @@ public class PlacementArea {
                             placedCard = disposition.get(coord);
                             if(placedCard.getCorner(count) != null && !placedCard.getCorner(count).isEmpty()){
                                 if(placedCard.getCorner(count).getElement() != null) availableElements.put(placedCard.getCorner(count).getElement(), availableElements.get(placedCard.getCorner(count).getElement())-1);
-                                else availableArtifacts.put(placedCard.getCorner(count).getArtifact(), availableElements.get(placedCard.getCorner(count).getElement())-1);
+                                else availableArtifacts.put(placedCard.getCorner(count).getArtifact(), availableArtifacts.get(placedCard.getCorner(count).getArtifact())-1);
 
                             }
                         }
@@ -59,7 +60,7 @@ public class PlacementArea {
             for(count = 0; count < 4; count++){
                 if(card.getCorner(count) != null){
                     if(card.getCorner(count).getElement() != null) availableElements.put(card.getCorner(count).getElement(), availableElements.get(card.getCorner(count).getElement())+1);
-                    else availableArtifacts.put(card.getCorner(count).getArtifact(), availableArtifacts.get(card.getCorner(count).getArtifact())+1);
+                    else if(card.getCorner(count).getArtifact()  != null) availableArtifacts.put(card.getCorner(count).getArtifact(), availableArtifacts.get(card.getCorner(count).getArtifact())+1);
                 }
             }
 
