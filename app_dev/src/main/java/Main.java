@@ -1,5 +1,5 @@
 import model.GameState.GameState;
-import model.placemetArea.Coordinates;
+import model.placementArea.Coordinates;
 import model.player.Player;
 
 import java.io.*;

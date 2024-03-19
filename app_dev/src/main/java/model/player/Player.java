@@ -2,7 +2,7 @@ package model.player;
 
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
-import model.placemetArea.*;
+import model.placementArea.*;
 
 import java.util.List;
 
