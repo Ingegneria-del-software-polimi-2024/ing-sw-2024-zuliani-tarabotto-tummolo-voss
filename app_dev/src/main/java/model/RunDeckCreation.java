@@ -25,7 +25,10 @@ public class RunDeckCreation {
         for (int i = 1; i <= resourcesDeck.getSize(); i++) {
             ResourceCard card = (ResourceCard) resourcesDeck.extract(); // Extract and print
             System.out.println(card.getId());
-            System.out.println(card.getCorner(2));; // Assuming card.toString() is implemented
+            //How to check if corner exist (in the function getCorner)
+            if((card.getCorner(2)) != null){
+                System.out.println(card.getCorner(2).getArtifact());
+            }
             resourcesDeck.addCard(card); // Add card back to the deck
         }
 
