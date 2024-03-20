@@ -1,6 +1,7 @@
 package model.GameState;
 
 import model.cards.ObjectiveCard;
+import model.cards.PlayableCards.GoldCard;
 import model.cards.PlayableCards.PlayableCard;
 import model.deckFactory.ResourcesDeck;
 import model.placementArea.Coordinates;
@@ -85,10 +86,23 @@ public class GameState {
         //takes away the first card of the deck and calls the following method
         turnPlayer.drawCard((PlayableCard) deck.extract());
     }
-    public void drawCard(List<PlayableCard> openCards, int index){
+
+    public void drawCard(PlayableCard card){
+        int index;
         //takes away the card from the ones face up
         turnPlayer.drawCard(card);
         //replaces the card taken with the first of the deck
+        if (openGold.contains(card)){
+            //if the card is contained in openGold it's replaced by the first card in goldDeck
+            index = openGold.indexOf(card);
+            openGold.remove(index);
+            openGold.set(index, (PlayableCard)goldDeck.extract());
+        } else {
+            //if the card is contained in openResources it's replaced by the first card in resourcesDeck
+            index = openResources.indexOf(card);
+            openResources.remove(index);
+            openResources.set(index, (PlayableCard)resourceDeck.extract());
+        }
     }
 
     //calls the playCard method contained in the Player class
