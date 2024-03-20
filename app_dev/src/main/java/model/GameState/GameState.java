@@ -47,24 +47,18 @@ public class GameState {
     public void calculateCommonObj(){
 
     }
-    public void isLastTurn(){
-
-        int i;
-
-        for(i=0; i<4; i++){
-
-            if(players.get(i).getPoints() == 20 || players.get(i).getPoints() > 20){
-
-                setLastTurnTrue();
+    public void setIsLastTurn(){
+        //checks if a player has reached 20 points or if both decks are empty -> sets isLastTurn to true
+        for(int i=0; i<4; i++){
+            if (players.get(i).getPoints() >= 20) {
+                isLastTurn = true;
+                break;
             }
         }
 
-        if(GoldenDeck.isDeckFineshed() || ResourcesDeck.isDeckFinished){
-
-            setLastTurnTrue();
+        if(goldDeck.getSize() == 0 && resourceDeck.getSize() == 0){
+            isLastTurn = true;
         }
-
-        return isLastTurn;
     }
 
     public boolean getLastTurn(){
@@ -82,27 +76,29 @@ public class GameState {
         return;
     }
 
-    public void drawCard(Deck deck){
+    public void drawCardGoldDeck(){
         //takes away the first card of the deck and calls the following method
-        turnPlayer.drawCard((PlayableCard) deck.extract());
+        turnPlayer.drawCard((PlayableCard) goldDeck.extract());
     }
 
-    public void drawCard(PlayableCard card){
-        int index;
-        //takes away the card from the ones face up
-        turnPlayer.drawCard(card);
-        //replaces the card taken with the first of the deck
-        if (openGold.contains(card)){
-            //if the card is contained in openGold it's replaced by the first card in goldDeck
-            index = openGold.indexOf(card);
-            openGold.remove(index);
-            openGold.set(index, (PlayableCard)goldDeck.extract());
-        } else {
-            //if the card is contained in openResources it's replaced by the first card in resourcesDeck
-            index = openResources.indexOf(card);
-            openResources.remove(index);
-            openResources.set(index, (PlayableCard)resourceDeck.extract());
-        }
+    public void drawCardResourcesDeck(){
+        //takes away the first card of the deck and calls the following method
+        turnPlayer.drawCard((PlayableCard) resourceDeck.extract());
+    }
+
+    public void drawCardOpenGold(int index){
+        //takes away the card at specified position from openGold
+        turnPlayer.drawCard(openGold.get(index));
+        //replaces the card taken with the first of the goldDeck
+        openGold.remove(index);
+        openGold.set(index, (PlayableCard)goldDeck.extract());
+    }
+
+    public void drawCardOpenResources(int index) {
+        //same as drawCardOpenGold
+        turnPlayer.drawCard(openResources.get(index));
+        openResources.remove(index);
+        openResources.set(index, (PlayableCard) resourceDeck.extract());
     }
 
     //calls the playCard method contained in the Player class

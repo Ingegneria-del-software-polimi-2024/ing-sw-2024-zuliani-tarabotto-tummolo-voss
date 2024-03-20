@@ -30,8 +30,9 @@ public abstract class Deck {
         return cards.size();
     }
 
+    /*
     public void isDeckFinished(){
 
-    }
+    }*/
 }
 
