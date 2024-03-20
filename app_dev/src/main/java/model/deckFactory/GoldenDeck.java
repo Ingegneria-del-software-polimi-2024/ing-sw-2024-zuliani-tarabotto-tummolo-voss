@@ -25,8 +25,8 @@ public class GoldenDeck extends Deck{
         }
     }
 
-    public int isDeckFinished(){
+    /*public int isDeckFinished(){
 
-        return remainingCards
-    }
+        return remainingCards;
+    }*/
 }
