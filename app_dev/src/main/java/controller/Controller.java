@@ -13,9 +13,19 @@ public class Controller {
 
     //main method to handle game flow
     public void gameLoop() {
-        while (! gameState.getLastTurn()) {
-            System.out.println(gameState.getTurnPlayer().getNickname());
+        //FIRST: every player must select a faceside for the starting card which is then placed
+        for (String player : nickNames) {
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Select a faceside for the starting card: ");
+            gameState.setSelectedCardFace(sc.nextBoolean());
+            gameState.playCard();
         }
+
+        //SECOND: every player draws three random cards: 1 goldCard and 2 resourceCard
+        gameState.initializePlayersHands();
+       /* while (! gameState.getLastTurn()) {
+            System.out.println(gameState.getTurnPlayer().getNickname());
+        }*/
     }
 
     //creates a new gameState and ask users for nicknames
@@ -37,7 +47,7 @@ public class Controller {
         gameState.initializeDecks();
         //Extract open cards
         gameState.initializeOpenCards();
-        //give three card to each player
-        gameState.initializePlayersHands();
+        //give each player a random starting card
+        gameState.initializePlayersStartCard();
     }
 }

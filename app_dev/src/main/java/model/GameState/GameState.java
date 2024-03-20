@@ -35,6 +35,7 @@ public class GameState {
     private boolean isLastTurn = false;
     private PlayableCard selectedHandCard;
     private Coordinates selectedCoordinates;
+    private boolean selectedCardFace;
 
 
     public GameState(ArrayList<String> nickNames, String id) {
@@ -88,6 +89,14 @@ public class GameState {
     public void initializePlayersHands() {
         for(Player p : players) {
             p.drawCard( goldDeck.extract());
+            p.drawCard( resourceDeck.extract());
+            p.drawCard( resourceDeck.extract());
+        }
+    }
+
+    public void initializePlayersStartCard() {
+        for(Player p : players) {
+            p.setStartCard(startingDeck.extract());
         }
     }
 
@@ -162,6 +171,10 @@ public class GameState {
 
     public void setSelectedCoordinates(Coordinates coordinates) {
         this.selectedCoordinates = coordinates;
+    }
+
+    public void setSelectedCardFace(boolean selectedCardFace) {
+        this.selectedCardFace = selectedCardFace;
     }
 
     //public void setLastTurnTrue() {isLastTurn = true;}

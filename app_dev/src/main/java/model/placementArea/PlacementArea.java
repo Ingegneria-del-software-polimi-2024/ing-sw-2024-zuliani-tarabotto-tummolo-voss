@@ -88,6 +88,28 @@ public class PlacementArea {
 
     }
 
+    //method specific for the player starting card
+    public void addCard(PlayableCard startCard, boolean faceSide) {
+        int i, j, count = 0;
+        Coordinates xy = new Coordinates(0,0);
+        Coordinates coord;
+        disposition.put(xy, startCard);
+
+        //update available positions
+        availablePlaces.remove(xy);
+
+        count = 3;
+        for(j = xy.getY()-1; j <= xy.getY()+1; j++) {
+            for (i = xy.getX() + 1; i >= xy.getX() - 1; i--) {
+                if (i != xy.getX() && j != xy.getY()) {
+                    coord = new Coordinates(i, j);
+                    if (!disposition.containsKey(coord) && startCard.getCorner(count) != null) availablePlaces.add(coord);
+                }
+                count -= 1;
+            }
+        }
+    }
+
     //work in progress, returns the NUMBER OF COMBINATION of the shape "shape"
    // public int verifyObjective(Shape shape, Element element){
      //   for(Coordinates c : disposition.keySet().stream().sorted(Comparator.comparing((a) -> {return a;}))/*serve un metodo per ordinare la lista*/){

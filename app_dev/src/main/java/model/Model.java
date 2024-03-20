@@ -13,6 +13,6 @@ public class Model {
         //runDeckCreation.RunDeckCreation();
         Controller controller = new Controller();
         controller.initializeGameState();
-        //controller.gameLoop();
+        controller.gameLoop();
     }
 }

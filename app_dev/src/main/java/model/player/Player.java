@@ -2,6 +2,7 @@ package model.player;
 
 //import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
+import model.deckFactory.PlayableDeck;
 import model.placementArea.*;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ public class Player {
     //private ObjectiveCard secretObjective;
     private PlacementArea placementArea;
     private int points;
+    private PlayableCard startCard;
 
     public Player() {
         //constructor
@@ -43,6 +45,13 @@ public class Player {
     }
     public int getPoints() {
         return points;
+    }
+
+    public void setStartCard(PlayableCard startCard) {
+        this.startCard = startCard;
+    }
+    public PlayableCard getStartCard() {
+        return this.startCard;
     }
 
     public List<PlayableCard> getPlayingHand(){return hand;}
