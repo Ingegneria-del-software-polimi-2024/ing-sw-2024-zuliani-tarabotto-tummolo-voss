@@ -6,13 +6,19 @@ import model.objective.Shape;
 
 import java.util.*;
 import java.util.stream.Collectors;
-
+/*
+the placement area iterator allows to iterate on the cards placed on the table in different order depending on the
+objective we are going to check
+ */
 public class PlacementAreaIterator implements Iterator<Coordinates> {
     private Coordinates currentPlace;
     private List<Coordinates> availableCoordinates;
     @Override
     public boolean hasNext() {
-        return false;
+        try{
+            availableCoordinates.get(availableCoordinates.indexOf(currentPlace)+1);
+            return true;
+        }catch(IndexOutOfBoundsException ex){return false;}
     }
 
     @Override
@@ -50,4 +56,6 @@ public class PlacementAreaIterator implements Iterator<Coordinates> {
                 availableCoordinates.sort((a, b) -> a.bottomRightFirst(b).equals(a)? 1 : -1);
         }
     }
+
+    public Coordinates current() {return currentPlace;}
 }

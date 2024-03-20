@@ -1,10 +1,13 @@
 package model.placementArea;
 
+import jdk.internal.foreign.layout.PaddingLayoutImpl;
+import model.cards.Card;
 import model.cards.PlayableCards.PlayableCard;
 import model.enums.Artifact;
 import model.enums.Element;
 import model.objective.Shape;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -28,7 +31,7 @@ public class PlacementArea {
     public void addCard(Coordinates xy, PlayableCard card) throws IllegalArgumentException{
         int i, j, count = 0;
         Coordinates coord;
-        PlayableCard placedCard;
+        PlayableCard cardOnTable;
         numberNearbyCards = 0;
 
         //we should throw an exception if there is already a card in those coordinates
@@ -44,14 +47,14 @@ public class PlacementArea {
                     if(i != xy.getX() && j != xy.getY()){
                         coord = new Coordinates(i, j);
                         if(disposition.containsKey(coord)){
-                            placedCard = disposition.get(coord);
+                            cardOnTable = disposition.get(coord);
 
-                            if (placedCard.getCorner(count) != null) {//updates the number of cards covered by the placed card
+                            if (cardOnTable.getCorner(count) != null) {//updates the number of cards covered by the placed card
                                 numberNearbyCards ++;
                             }
-                            if(placedCard.getCorner(count) != null && !placedCard.getCorner(count).isEmpty()){
-                                if(placedCard.getCorner(count).getElement() != null) availableElements.put(placedCard.getCorner(count).getElement(), availableElements.get(placedCard.getCorner(count).getElement())-1);
-                                else availableArtifacts.put(placedCard.getCorner(count).getArtifact(), availableArtifacts.get(placedCard.getCorner(count).getArtifact())-1);
+                            if(cardOnTable.getCorner(count) != null && !cardOnTable.getCorner(count).isEmpty()){
+                                if(cardOnTable.getCorner(count).getElement() != null) availableElements.put(cardOnTable.getCorner(count).getElement(), availableElements.get(cardOnTable.getCorner(count).getElement())-1);
+                                else availableArtifacts.put(cardOnTable.getCorner(count).getArtifact(), availableArtifacts.get(cardOnTable.getCorner(count).getArtifact())-1);
 
                             }
                         }
@@ -86,8 +89,15 @@ public class PlacementArea {
 
     //work in progress, returns the NUMBER OF COMBINATION of the shape "shape"
     public int verifyObjective(Shape shape, Element element){
-        PlacementAreaIterator it = new PlacementAreaIterator(disposition, shape);
-
+        ArrayList<PlayableCard> countedCards = new ArrayList<PlayableCard>();
+        PlacementAreaIterator coordinatesIterator = new PlacementAreaIterator(disposition, shape);
+        //iterate on the cards on the table (the way of iterating depends on the shape of the obj)
+        while(coordinatesIterator.hasNext()){
+            PlayableCard cardOnTable = disposition.get(coordinatesIterator.current());
+            //check if already counted that card for the same obj
+            if(!countedCards.contains(cardOnTable));
+                //we should check if the nearby cards satisfy the objective
+        }
         return 0;
     }
 
