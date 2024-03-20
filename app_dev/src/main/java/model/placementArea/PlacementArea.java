@@ -1,14 +1,12 @@
 package model.placementArea;
 
-import jdk.internal.foreign.layout.PaddingLayoutImpl;
-import model.cards.Card;
+
 import model.cards.PlayableCards.PlayableCard;
 import model.enums.Artifact;
 import model.enums.Element;
 import model.objective.Shape;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -89,16 +87,36 @@ public class PlacementArea {
 
     //work in progress, returns the NUMBER OF COMBINATION of the shape "shape"
     public int verifyObjective(Shape shape, Element element){
+        //declare and initialize
+        boolean found;
+        int counter = 0;
         ArrayList<PlayableCard> countedCards = new ArrayList<PlayableCard>();
         PlacementAreaIterator coordinatesIterator = new PlacementAreaIterator(disposition, shape);
+        Element complementarElement;
+        if(shape.equals(Shape.ASCENDINGDIAGONAL) || shape.equals(Shape.DESCENDINGDIAGONAL)) complementarElement = element;
+        else complementarElement = element.calculateComplementar();
         //iterate on the cards on the table (the way of iterating depends on the shape of the obj)
         while(coordinatesIterator.hasNext()){
             PlayableCard cardOnTable = disposition.get(coordinatesIterator.current());
-            //check if already counted that card for the same obj
-            if(!countedCards.contains(cardOnTable));
-                //we should check if the nearby cards satisfy the objective
+            //check if already counted that card for the same obj and if the element of the reference card matches
+            if(!countedCards.contains(cardOnTable) && disposition.get(coordinatesIterator.current()).getBlockedElement().equals(complementarElement)){
+                found = true;
+                //now check if the surroundings cards matches the shape and the element of the obj (and they're not already counted)
+                for(Coordinates offset : shape.getCoordinates()){
+                    if(!disposition.get(coordinatesIterator.current().sum(offset)).getBlockedElement().equals(element) && !countedCards.contains(disposition.get(coordinatesIterator.current().sum(offset)))){
+                        found = false;
+                        break;
+                    }
+                }
+                //if the previous cycle has found an objective satisfied, we can count and add all the previously checked cards to the countedCards list
+                if(found){
+                    counter += 1;
+                    for(Coordinates x : shape.getCoordinates()) countedCards.add(disposition.get(coordinatesIterator.current().sum(x)));
+                }
+                coordinatesIterator.next();
+            }
         }
-        return 0;
+        return counter;
     }
 
 //returns the number of artifacts "artifact" in the Placement Area

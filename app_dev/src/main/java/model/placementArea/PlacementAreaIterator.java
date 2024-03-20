@@ -27,6 +27,8 @@ public class PlacementAreaIterator implements Iterator<Coordinates> {
         return currentPlace;
     }
 
+    public Coordinates current() {return currentPlace;}
+
 //Constructor
     public PlacementAreaIterator(HashMap<Coordinates, PlayableCard> disp, Shape shape){
         switch (shape){
@@ -57,5 +59,4 @@ public class PlacementAreaIterator implements Iterator<Coordinates> {
         }
     }
 
-    public Coordinates current() {return currentPlace;}
 }
