@@ -34,12 +34,11 @@ public class GameState {
     //Methods
 
     public Player getPlayer(int indx){
-
         return players.get(indx);
     }
 
     public String getId(){
-
+        return id;
     }
     public Player getTurnPlayer(){
         return turnPlayer;
@@ -47,15 +46,15 @@ public class GameState {
     public void calculateCommonObj(){
 
     }
-    public void setIsLastTurn(){
-        //checks if a player has reached 20 points or if both decks are empty -> sets isLastTurn to true
+    public void setLastTurnTrue(){
+        //checks if a player has reached 20 points
         for(int i=0; i<4; i++){
             if (players.get(i).getPoints() >= 20) {
                 isLastTurn = true;
                 break;
             }
         }
-
+        //checks if both decks are empty
         if(goldDeck.getSize() == 0 && resourceDeck.getSize() == 0){
             isLastTurn = true;
         }
@@ -64,7 +63,6 @@ public class GameState {
     public boolean getLastTurn(){
         return isLastTurn;
     }
-
 
     public void countEndgamePoints(){
 
@@ -78,12 +76,15 @@ public class GameState {
 
     public void drawCardGoldDeck(){
         //takes away the first card of the deck and calls the following method
-        turnPlayer.drawCard((PlayableCard) goldDeck.extract());
+        if(goldDeck.getSize() > 0) turnPlayer.drawCard((PlayableCard) goldDeck.extract());
+        //method to check if both decks are empty
+        setLastTurnTrue();
     }
 
     public void drawCardResourcesDeck(){
         //takes away the first card of the deck and calls the following method
-        turnPlayer.drawCard((PlayableCard) resourceDeck.extract());
+        if(resourceDeck.getSize() > 0) turnPlayer.drawCard((PlayableCard) resourceDeck.extract());
+        setLastTurnTrue();
     }
 
     public void drawCardOpenGold(int index){
@@ -91,19 +92,23 @@ public class GameState {
         turnPlayer.drawCard(openGold.get(index));
         //replaces the card taken with the first of the goldDeck
         openGold.remove(index);
-        openGold.set(index, (PlayableCard)goldDeck.extract());
+        if(goldDeck.getSize() > 0) openGold.set(index, (PlayableCard)goldDeck.extract());
+        setLastTurnTrue();
     }
 
     public void drawCardOpenResources(int index) {
         //same as drawCardOpenGold
         turnPlayer.drawCard(openResources.get(index));
         openResources.remove(index);
-        openResources.set(index, (PlayableCard) resourceDeck.extract());
+        if(resourceDeck.getSize() > 0) openResources.set(index, (PlayableCard) resourceDeck.extract());
+        setLastTurnTrue();
     }
 
-    //calls the playCard method contained in the Player class
     public void playCard(){
+        //calls the playCard method contained in the Player class
         turnPlayer.playCard(selectedHandCard, selectedCoordinates);
+        //method to check if the player has reached 20 points
+        setLastTurnTrue();
     }
 
     public void setSelectedHandCard(PlayableCard card) {
@@ -114,7 +119,7 @@ public class GameState {
         this.selectedCoordinates = coordinates;
     }
 
-    public void setLastTurnTrue() {isLastTurn = true;}
+    //public void setLastTurnTrue() {isLastTurn = true;}
 
     //are all of these methods necessary? idk but rn i'll keep them
     public GoldenDeck getGoldDeck() {
