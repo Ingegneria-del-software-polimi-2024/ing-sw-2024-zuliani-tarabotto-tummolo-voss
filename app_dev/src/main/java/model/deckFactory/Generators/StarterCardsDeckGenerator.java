@@ -2,11 +2,12 @@ package model.deckFactory.Generators;
 
 import model.deckFactory.Deck;
 import model.deckFactory.Generators.DeckGenerator;
+import model.deckFactory.PlayableDeck;
 import model.deckFactory.StarterDeck;
 
-public class StarterCardsDeckGenerator extends DeckGenerator {
+public class StarterCardsDeckGenerator extends PlayableDeckGenerator {
     @Override
-    public Deck generateDeckBasedOnType(){
+    public PlayableDeck generateDeckBasedOnType(){
         return new StarterDeck();
     }
 }

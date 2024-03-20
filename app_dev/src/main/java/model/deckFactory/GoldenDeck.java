@@ -1,16 +1,17 @@
 package model.deckFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import model.cards.Card;
 import model.cards.PlayableCards.GoldCard;
+import model.cards.PlayableCards.PlayableCard;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
-public class GoldenDeck extends Deck{
+public class GoldenDeck extends PlayableDeck{
     @Override
     public void generate() {
         cards = new ArrayList<>();  // Initialize cards list
-
-
 
         for (int i = 41; i <= 80; i++) {
             try {
@@ -25,9 +26,11 @@ public class GoldenDeck extends Deck{
         }
     }
 
-    /*
-    public int isDeckFinished(){
-
-        return remainingCards
+    /*public PlayableCard extract() {
+        if (cards.isEmpty()) {
+            throw new IllegalStateException("Deck is empty!");
+        }
+        return cards.remove(0); // Extract and remove the first card (head/beginning of list)
     }*/
+
 }

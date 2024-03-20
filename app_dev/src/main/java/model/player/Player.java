@@ -4,6 +4,7 @@ package model.player;
 import model.cards.PlayableCards.PlayableCard;
 import model.placementArea.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
@@ -13,6 +14,11 @@ public class Player {
     private PlacementArea placementArea;
     private int points;
 
+    public Player() {
+        //constructor
+        this.hand = new ArrayList<>();
+        this.placementArea = new PlacementArea();
+    }
     public void drawCard(PlayableCard card){
         //takes a card and puts it in the hand
         hand.add(card);

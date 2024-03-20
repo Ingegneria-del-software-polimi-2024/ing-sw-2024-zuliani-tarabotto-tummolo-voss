@@ -3,10 +3,12 @@ package model.GameState;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.GoldCard;
 import model.cards.PlayableCards.PlayableCard;
+import model.cards.PlayableCards.ResourceCard;
 import model.deckFactory.Generators.DeckGenerator;
+import model.deckFactory.Generators.PlayableDeckGenerator;
 import model.deckFactory.Generators.GoldCardsDeckGenerator;
 import model.deckFactory.Generators.ResourceCardsDeckGenerator;
-import model.deckFactory.Generators.StarterCardsDeckGenerator;
+import model.deckFactory.Generators.*;
 import model.deckFactory.ResourcesDeck;
 import model.placementArea.Coordinates;
 import model.player.Player;
@@ -22,10 +24,10 @@ public class GameState {
     private List<Player> players;
     private String id;
     private Player turnPlayer;
-    private Deck goldDeck;
-    private Deck resourceDeck;
+    private PlayableDeck goldDeck;
+    private PlayableDeck resourceDeck;
     //private ObjectiveDeck deckObjectives;
-    private Deck startingDeck;
+    private PlayableDeck startingDeck;
     private List<ObjectiveCard> commonObjectives; //2 elements in the list
     //do we actually want Lists of PlayableCard or we prefer List<GoldCard> and List<ResourceCard>???
     private List<PlayableCard> openGold; //2 elements in the list
@@ -45,12 +47,6 @@ public class GameState {
         }
         this.turnPlayer = players.get(0);
         this.id = id;
-        //creates and shuffles decks
-        initializeDecks();
-        //Extract open cards
-        initializeOpenCards();
-        //give three card to each player
-        initializePlayersHands();
     }
     //Methods
 
@@ -69,9 +65,9 @@ public class GameState {
 
     public void initializeDecks(){
         //creates and shuffles decks
-        DeckGenerator resourcesDeckGenerator = new ResourceCardsDeckGenerator();
-        DeckGenerator goldenDeckGenerator = new GoldCardsDeckGenerator();
-        DeckGenerator starterDeckGenerator = new StarterCardsDeckGenerator();
+        PlayableDeckGenerator resourcesDeckGenerator = new ResourceCardsDeckGenerator();
+        PlayableDeckGenerator goldenDeckGenerator = new GoldCardsDeckGenerator();
+        PlayableDeckGenerator starterDeckGenerator = new StarterCardsDeckGenerator();
         resourceDeck =  resourcesDeckGenerator.generateDeck();
         goldDeck =  goldenDeckGenerator.generateDeck();
         startingDeck =  starterDeckGenerator.generateDeck();
@@ -83,15 +79,15 @@ public class GameState {
         //extract from goldDeck and resourceDeck the four open cards
         openResources = new ArrayList<PlayableCard>();
         openGold = new ArrayList<PlayableCard>();
-        openResources.add((PlayableCard) resourceDeck.extract());
-        openResources.add((PlayableCard) resourceDeck.extract());
-        openGold.add((PlayableCard) goldDeck.extract());
-        openGold.add((PlayableCard) goldDeck.extract());
+        openResources.add(resourceDeck.extract());
+        openResources.add(resourceDeck.extract());
+        openGold.add( goldDeck.extract());
+        openGold.add( goldDeck.extract());
     }
 
     public void initializePlayersHands() {
         for(Player p : players) {
-            p.drawCard(goldDeck.extract());
+            p.drawCard( goldDeck.extract());
         }
     }
 
@@ -125,14 +121,14 @@ public class GameState {
 
     public void drawCardGoldDeck(){
         //takes away the first card of the deck and calls the following method
-        if(goldDeck.getSize() > 0) turnPlayer.drawCard((PlayableCard) goldDeck.extract());
+        if(goldDeck.getSize() > 0) turnPlayer.drawCard( goldDeck.extract());
         //method to check if both decks are empty
         setLastTurnTrue();
     }
 
     public void drawCardResourcesDeck(){
         //takes away the first card of the deck and calls the following method
-        if(resourceDeck.getSize() > 0) turnPlayer.drawCard((PlayableCard) resourceDeck.extract());
+        if(resourceDeck.getSize() > 0) turnPlayer.drawCard( resourceDeck.extract());
         setLastTurnTrue();
     }
 
@@ -141,7 +137,7 @@ public class GameState {
         turnPlayer.drawCard(openGold.get(index));
         //replaces the card taken with the first of the goldDeck
         openGold.remove(index);
-        if(goldDeck.getSize() > 0) openGold.set(index, (PlayableCard)goldDeck.extract());
+        if(goldDeck.getSize() > 0) openGold.set(index, goldDeck.extract());
         setLastTurnTrue();
     }
 
@@ -149,7 +145,7 @@ public class GameState {
         //same as drawCardOpenGold
         turnPlayer.drawCard(openResources.get(index));
         openResources.remove(index);
-        if(resourceDeck.getSize() > 0) openResources.set(index, (PlayableCard) resourceDeck.extract());
+        if(resourceDeck.getSize() > 0) openResources.set(index,  resourceDeck.extract());
         setLastTurnTrue();
     }
 

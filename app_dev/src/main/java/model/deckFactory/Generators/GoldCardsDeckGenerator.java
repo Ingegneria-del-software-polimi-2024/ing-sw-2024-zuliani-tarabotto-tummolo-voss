@@ -3,10 +3,11 @@ package model.deckFactory.Generators;
 
 import model.deckFactory.Deck;
 import model.deckFactory.GoldenDeck;
+import model.deckFactory.PlayableDeck;
 
-public class GoldCardsDeckGenerator extends DeckGenerator {
+public class GoldCardsDeckGenerator extends PlayableDeckGenerator {
     @Override
-    public Deck generateDeckBasedOnType(){
+    public PlayableDeck generateDeckBasedOnType(){
         return new GoldenDeck();
     }
 }

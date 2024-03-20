@@ -5,9 +5,9 @@ import java.util.Collections;
 import java.util.List;
 
 // Abstract class defining common deck properties and functionalities
-public abstract class Deck {
+public interface Deck {
 
-    protected List<Card> cards; // List to store cards
+    /*protected List<Card> cards; // List to store cards
 
     public abstract void generate();
 
@@ -28,11 +28,9 @@ public abstract class Deck {
 
     public int getSize() {
         return cards.size();
-    }
-
-    /*
-    public void isDeckFinished(){
-
     }*/
+    public abstract void generate();
+    public abstract void shuffle();
+    public abstract int getSize();
 }
 

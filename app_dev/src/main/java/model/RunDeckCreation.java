@@ -7,7 +7,7 @@ import model.deckFactory.Generators.GoldCardsDeckGenerator;
 import model.deckFactory.Generators.ResourceCardsDeckGenerator;
 import model.deckFactory.Generators.StarterCardsDeckGenerator;
 
-public class RunDeckCreation {
+/*public class RunDeckCreation {
 
     public void RunDeckCreation() throws Exception {
 
@@ -37,4 +37,4 @@ public class RunDeckCreation {
         Deck goldenDeck = goldenDeckGenerator.generateDeck();
         Deck starterDeck = starterDeckGenerator.generateDeck();
     }
-}
+}*/

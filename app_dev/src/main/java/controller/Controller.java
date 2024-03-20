@@ -31,6 +31,13 @@ public class Controller {
             String name = scanner.next();
             nickNames.add(name);
         }
+        //creates a GameState
         gameState = new GameState(nickNames, id);
+        //creates and shuffles decks
+        gameState.initializeDecks();
+        //Extract open cards
+        gameState.initializeOpenCards();
+        //give three card to each player
+        gameState.initializePlayersHands();
     }
 }
