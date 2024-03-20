@@ -3,12 +3,17 @@ package model.GameState;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.GoldCard;
 import model.cards.PlayableCards.PlayableCard;
+import model.deckFactory.Generators.DeckGenerator;
+import model.deckFactory.Generators.GoldCardsDeckGenerator;
+import model.deckFactory.Generators.ResourceCardsDeckGenerator;
+import model.deckFactory.Generators.StarterCardsDeckGenerator;
 import model.deckFactory.ResourcesDeck;
 import model.placementArea.Coordinates;
 import model.player.Player;
 import model.deckFactory.*;
 import model.cards.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameState {
@@ -16,12 +21,11 @@ public class GameState {
 
     private List<Player> players;
     private String id;
-    private ResourcesDeck resourceDeck;
     private Player turnPlayer;
-    private ResourcesDeck resourcesDeck;
-    private GoldenDeck goldDeck;
+    private Deck goldDeck;
+    private Deck resourceDeck;
     //private ObjectiveDeck deckObjectives;
-    private StarterDeck startingDeck;
+    private Deck startingDeck;
     private List<ObjectiveCard> commonObjectives; //2 elements in the list
     //do we actually want Lists of PlayableCard or we prefer List<GoldCard> and List<ResourceCard>???
     private List<PlayableCard> openGold; //2 elements in the list
@@ -31,6 +35,23 @@ public class GameState {
     private Coordinates selectedCoordinates;
 
 
+    public GameState(ArrayList<String> nickNames, String id) {
+        //creates a new players list with the nicknames taken from input
+        players = new ArrayList<Player>();
+        for(String name : nickNames) {
+            Player p;
+            players.add(p = new Player());
+            p.setNickname(name);
+        }
+        this.turnPlayer = players.get(0);
+        this.id = id;
+        //creates and shuffles decks
+        initializeDecks();
+        //Extract open cards
+        initializeOpenCards();
+        //give three card to each player
+        initializePlayersHands();
+    }
     //Methods
 
     public Player getPlayer(int indx){
@@ -44,8 +65,36 @@ public class GameState {
         return turnPlayer;
     }
     public void calculateCommonObj(){
-
     }
+
+    public void initializeDecks(){
+        //creates and shuffles decks
+        DeckGenerator resourcesDeckGenerator = new ResourceCardsDeckGenerator();
+        DeckGenerator goldenDeckGenerator = new GoldCardsDeckGenerator();
+        DeckGenerator starterDeckGenerator = new StarterCardsDeckGenerator();
+        resourceDeck =  resourcesDeckGenerator.generateDeck();
+        goldDeck =  goldenDeckGenerator.generateDeck();
+        startingDeck =  starterDeckGenerator.generateDeck();
+        resourceDeck.shuffle();
+        goldDeck.shuffle();
+        startingDeck.shuffle();
+    }
+    public void initializeOpenCards() {
+        //extract from goldDeck and resourceDeck the four open cards
+        openResources = new ArrayList<PlayableCard>();
+        openGold = new ArrayList<PlayableCard>();
+        openResources.add((PlayableCard) resourceDeck.extract());
+        openResources.add((PlayableCard) resourceDeck.extract());
+        openGold.add((PlayableCard) goldDeck.extract());
+        openGold.add((PlayableCard) goldDeck.extract());
+    }
+
+    public void initializePlayersHands() {
+        for(Player p : players) {
+            p.drawCard(goldDeck.extract());
+        }
+    }
+
     public void setLastTurnTrue(){
         //checks if a player has reached 20 points
         for(int i=0; i<4; i++){
@@ -122,11 +171,11 @@ public class GameState {
     //public void setLastTurnTrue() {isLastTurn = true;}
 
     //are all of these methods necessary? idk but rn i'll keep them
-    public GoldenDeck getGoldDeck() {
+    public Deck getGoldDeck() {
         return goldDeck;
     }
 
-    public ResourcesDeck getResourceDeck() {
+    public Deck getResourceDeck() {
         return resourceDeck;
     }
 
