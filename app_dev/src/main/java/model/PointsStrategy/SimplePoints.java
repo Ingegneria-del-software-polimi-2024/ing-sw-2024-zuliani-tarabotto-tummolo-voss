@@ -6,14 +6,13 @@ import model.placementArea.PlacementArea;
 @JsonTypeName("SimplePoints")
 
 public class SimplePoints implements Points {
+
     private int points;
-
-
     @Override
     public int getPoints() {
         return points;
     }
-   @Override
+    @Override
     public int count(PlacementArea placementArea) {
         return this.points;
     }

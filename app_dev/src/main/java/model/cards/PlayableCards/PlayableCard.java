@@ -43,6 +43,7 @@ public abstract class PlayableCard implements Card {
 
     public abstract Element getBlockedElement ();
 
+    //calls a different count points method based on the points policy of the card
     public abstract int countPoints(PlacementArea placementArea);
 
 

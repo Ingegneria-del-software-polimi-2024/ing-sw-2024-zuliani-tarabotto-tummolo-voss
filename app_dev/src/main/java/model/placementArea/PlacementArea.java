@@ -47,7 +47,8 @@ public class PlacementArea {
                         if(disposition.containsKey(coord)){
                             placedCard = disposition.get(coord);
 
-                            if (placedCard.getCorner(count) != null) {//updates the number of cards covered by the placed card
+                            if (placedCard.getCorner(count) != null) {
+                                //increments the number of cards covered by the placed card
                                 numberNearbyCards ++;
                             }
                             if(placedCard.getCorner(count) != null && !placedCard.getCorner(count).isEmpty()){

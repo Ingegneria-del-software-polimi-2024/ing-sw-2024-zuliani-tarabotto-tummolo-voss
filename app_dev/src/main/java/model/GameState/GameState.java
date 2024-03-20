@@ -3,6 +3,7 @@ package model.GameState;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
 import model.deckFactory.ResourcesDeck;
+import model.placementArea.Coordinates;
 import model.player.Player;
 import model.deckFactory.*;
 import model.cards.*;
@@ -14,28 +15,19 @@ public class GameState {
 
     private List<Player> players;
     private String id;
-
     private ResourcesDeck resourceDeck;
-
     private Player turnPlayer;
-
     private ResourcesDeck resourcesDeck;
-
     private GoldenDeck goldDeck;
-
     //private ObjectiveDeck deckObjectives;
-
     private StarterDeck startingDeck;
-
     private List<ObjectiveCard> commonObjectives; //2 elements in the list
-
     //do we actually want Lists of PlayableCard or we prefer List<GoldCard> and List<ResourceCard>???
     private List<PlayableCard> openGold; //2 elements in the list
-
     private List<PlayableCard> openResources; //2 elements in the list
-
     private boolean isLastTurn = false;
-
+    private PlayableCard selectedHandCard;
+    private Coordinates selectedCoordinates;
 
 
     //Methods
@@ -48,16 +40,12 @@ public class GameState {
     public String getId(){
 
     }
-
     public Player getTurnPlayer(){
-
         return turnPlayer;
     }
-
     public void calculateCommonObj(){
 
     }
-
     public void isLastTurn(){
 
         int i;
@@ -79,7 +67,6 @@ public class GameState {
     }
 
     public boolean getLastTurn(){
-
         return isLastTurn;
     }
 
@@ -94,14 +81,27 @@ public class GameState {
         return;
     }
 
-    public void drawCard(Player player, Deck deck){
+    public void drawCard(Deck deck){
         //takes away the first card of the deck and calls the following method
-        player.drawCard(card);
+        turnPlayer.drawCard((PlayableCard) deck.extract());
     }
-    public void drawCard(Player player, List<PlayableCard> openCards, int index){
+    public void drawCard(List<PlayableCard> openCards, int index){
         //takes away the card from the ones face up
-        player.drawCard(card);
+        turnPlayer.drawCard(card);
         //replaces the card taken with the first of the deck
+    }
+
+    //calls the playCard method contained in the Player class
+    public void playCard(){
+        turnPlayer.playCard(selectedHandCard, selectedCoordinates);
+    }
+
+    public void setSelectedHandCard(PlayableCard card) {
+        this.selectedHandCard = card;
+    }
+
+    public void setSelectedCoordinates(Coordinates coordinates) {
+        this.selectedCoordinates = coordinates;
     }
 
     public void setLastTurnTrue() {isLastTurn = true;}

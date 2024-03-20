@@ -15,6 +15,7 @@ public class Player {
 
     public void drawCard(PlayableCard card){
         //takes a card and puts it in the hand
+        hand.add(card);
     }
 
     //takes the card from the hand and places it in the placementArea
