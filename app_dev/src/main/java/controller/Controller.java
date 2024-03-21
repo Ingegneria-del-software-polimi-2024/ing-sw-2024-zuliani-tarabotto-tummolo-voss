@@ -1,6 +1,7 @@
 package controller;
 
 import model.GameState.GameState;
+import view.CliView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.Scanner;
 public class Controller {
     private GameState gameState;
     private ArrayList<String> nickNames;
+    private CliView view;
 
 
     //main method to handle game flow
@@ -19,6 +21,7 @@ public class Controller {
             System.out.println(player + ", select a faceside for the starting card: ");
             gameState.setStartingCardFace(sc.nextBoolean());
             gameState.playStarterCard();
+            view.printStarterCard();
             gameState.nextPlayer();
         }
 
@@ -50,5 +53,8 @@ public class Controller {
         gameState.initializeOpenCards();
         //give each player a random starting card
         gameState.initializePlayersStartCard();
+        //initialize view
+        view = new CliView(gameState);
     }
+
 }
