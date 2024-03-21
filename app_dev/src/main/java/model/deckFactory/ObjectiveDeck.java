@@ -1,27 +1,21 @@
 package model.deckFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import model.cards.Card;
+import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.GoldCard;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
-public class GoldenDeck extends Deck{
-
-
-
-
+public class ObjectiveDeck  extends Deck{
     @Override
     public void generate() {
         cards = new ArrayList<>();  // Initialize cards list
 
 
 
-        for (int i = 41; i <= 80; i++) {
+        for (int i = 87; i <= 102; i++) {
             try {
-                GoldCard card = GoldCard.parse(i);
+                ObjectiveCard card = ObjectiveCard.parse(i);
                 addCard(card);
             } catch (JsonProcessingException e) {
 
@@ -32,13 +26,11 @@ public class GoldenDeck extends Deck{
         }
     }
 
-    public boolean checkDeck() {
-        return cards.isEmpty();
-    }
+
 
     // Static method to create a GoldenDeck instance and check if it's finished
 
-    public static boolean isDeckFinished(GoldenDeck deck) {
+    public static boolean isDeckFinished(ObjectiveDeck deck) {
         return deck.checkDeck();
     }
 

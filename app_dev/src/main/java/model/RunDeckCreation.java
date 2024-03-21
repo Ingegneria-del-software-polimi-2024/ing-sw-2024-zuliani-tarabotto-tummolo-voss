@@ -2,10 +2,7 @@ package model;
 
 import model.cards.PlayableCards.ResourceCard;
 import model.deckFactory.Deck;
-import model.deckFactory.Generators.DeckGenerator;
-import model.deckFactory.Generators.GoldCardsDeckGenerator;
-import model.deckFactory.Generators.ResourceCardsDeckGenerator;
-import model.deckFactory.Generators.StarterCardsDeckGenerator;
+import model.deckFactory.Generators.*;
 
 public class RunDeckCreation {
 
@@ -14,6 +11,8 @@ public class RunDeckCreation {
         DeckGenerator resourcesDeckGenerator = new ResourceCardsDeckGenerator();
         DeckGenerator goldenDeckGenerator = new GoldCardsDeckGenerator();
         DeckGenerator starterDeckGenerator = new StarterCardsDeckGenerator();
+        DeckGenerator objectiveDeckGenerator = new ObjectiveCardsDeckGenerator();
+        Deck objectiveDeck = objectiveDeckGenerator.generateDeck();
         Deck resourcesDeck = resourcesDeckGenerator.generateDeck();
 
 

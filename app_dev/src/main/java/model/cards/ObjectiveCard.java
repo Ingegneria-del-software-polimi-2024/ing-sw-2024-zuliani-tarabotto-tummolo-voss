@@ -11,9 +11,10 @@ import model.objective.*;
 import java.io.File;
 import java.io.IOException;
 
-public class ObjectiveCard {
+public class ObjectiveCard  implements Card {
     @JsonProperty("id")
     private char id;
+    @JsonProperty("objective")
     private Objective objective;
 
 
@@ -40,7 +41,7 @@ public class ObjectiveCard {
             // Extract the JSON string based on the ID
             if (targetNode != null) {
                 String jsonString = targetNode.toString();
-                //System.out.println("Extracted JSON based on ID " + targetId + ": " + jsonString);
+                System.out.println("Extracted JSON based on ID " + targetId + ": " + jsonString);
 
 
                 // Convert JSON to object

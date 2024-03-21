@@ -70,12 +70,12 @@ public class GameState {
             }
         }
 
-        if(GoldenDeck.isDeckFineshed() || ResourcesDeck.isDeckFinished){
+        if(GoldenDeck.isDeckFinished(goldDeck) || ResourcesDeck.isDeckFinished(resourceDeck)){
 
             setLastTurnTrue();
         }
 
-        return isLastTurn;
+        //return isLastTurn;
     }
 
     public boolean getLastTurn(){
