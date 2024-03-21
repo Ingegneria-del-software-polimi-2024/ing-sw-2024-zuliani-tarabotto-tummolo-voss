@@ -105,6 +105,15 @@ public class ResourceCard extends PlayableCard {
     public Element getBlockedElement() {
         return blockedElement;
     }
+
+    //ignore this function(needed in StarterCard class)
+    @Override
+    public Element[] getBlockedElements(){return null;}
+    //ignore this function(needed in StarterCard class)
+    @Override
+    public Element[] getBackFaceCorners() {
+        return null;
+    }
     public Points getPoints() {
         return points;
     }

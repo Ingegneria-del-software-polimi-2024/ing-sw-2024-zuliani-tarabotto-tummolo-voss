@@ -73,6 +73,15 @@ public class GoldCard extends PlayableCard{
         return blockedElement;
     }
 
+    //ignore this function(needed in StarterCard class)
+    @Override
+    public Element[] getBlockedElements(){return null;}
+    //ignore this function(needed in StarterCard class)
+    @Override
+    public Element[] getBackFaceCorners() {
+        return null;
+    }
+
 
 
     public Map<Element, Integer> getPlacementConstraint () {

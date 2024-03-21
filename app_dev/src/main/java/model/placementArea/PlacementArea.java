@@ -61,49 +61,69 @@ public class PlacementArea {
                     }
                 }
             }
+            //if front face side then we check for new resources in the corners of the card
+            //if back face side we add the only blocked element contained in the center of the card
+            if(card.getFaceSide()){
+                addResourcesOfNewCard(card);
+            } else {availableElements.put(card.getBlockedElement(), availableElements.get(card.getBlockedElement()) + 1);}
 
-            //add elements and objects of newly placed card
-            for(count = 0; count < 4; count++){
-                if(card.getCorner(count) != null){
-                    if(card.getCorner(count).getElement() != null) availableElements.put(card.getCorner(count).getElement(), availableElements.get(card.getCorner(count).getElement())+1);
-                    else if(card.getCorner(count).getArtifact() != null) availableArtifacts.put(card.getCorner(count).getArtifact(), availableArtifacts.get(card.getCorner(count).getArtifact())+1);
-                }
-            }
 
             //update available positions
-            availablePlaces.remove(xy);
-            count = 3;
-            for(j = xy.getY()-1; j <= xy.getY()+1; j++) {
-                for (i = xy.getX() + 1; i >= xy.getX() - 1; i--) {
-                    if (i != xy.getX() && j != xy.getY()) {
-                        coord = new Coordinates(i, j);
-                        if (!disposition.containsKey(coord) && card.getCorner(count) != null) availablePlaces.add(coord);
-                    }
-                    count -= 1;
-                }
-            }
+            updateAvailablePlaces(xy, card);
         }
-
-        return card.countPoints(this);
+        //we return the number of points given by the card if the card is facing up else we return 0(no points are given by the back of the card)
+        if(card.getFaceSide()){
+            return card.countPoints(this);
+        } else {return 0;}
 
     }
 
     //method specific for the player starting card
-    public void addCard(PlayableCard startCard, boolean faceSide) {
+    public void addCard(PlayableCard startCard) {
         int i, j, count = 0;
         Coordinates xy = new Coordinates(0,0);
         Coordinates coord;
+        //add card to disposition
         disposition.put(xy, startCard);
 
         //update available positions
-        availablePlaces.remove(xy);
+        updateAvailablePlaces(xy, startCard);
 
-        count = 3;
-        for(j = xy.getY()-1; j <= xy.getY()+1; j++) {
-            for (i = xy.getX() + 1; i >= xy.getX() - 1; i--) {
+        //if front face side we add the resources present in the corners and the blocked elements
+        //if back face side we add the elements present in each corner of the back side
+        if(startCard.getFaceSide()) {
+            addResourcesOfNewCard(startCard);
+            for (Element el : startCard.getBlockedElements()) {
+                availableElements.put(el, availableElements.get(el) + 1);
+            }
+        } else {
+            for(Element el : startCard.getBackFaceCorners()) {
+                availableElements.put(el, availableElements.get(el) + 1);
+            }
+        }
+
+    }
+
+    //when a new card is placed we call this method to update the number of available resources
+    public void addResourcesOfNewCard(PlayableCard card ) {
+        //add elements and objects of newly placed card
+        for(int count = 0; count < 4; count++){
+            if(card.getCorner(count) != null){
+                if(card.getCorner(count).getElement() != null) availableElements.put(card.getCorner(count).getElement(), availableElements.get(card.getCorner(count).getElement())+1);
+                else if(card.getCorner(count).getArtifact() != null) availableArtifacts.put(card.getCorner(count).getArtifact(), availableArtifacts.get(card.getCorner(count).getArtifact())+1);
+            }
+        }
+    }
+    //after placing a card we update the available places to put a new card
+    public void updateAvailablePlaces(Coordinates xy, PlayableCard card) {
+        //update available positions
+        availablePlaces.remove(xy);
+        int count = 3;
+        for(int j = xy.getY()-1; j <= xy.getY()+1; j++) {
+            for (int i = xy.getX() + 1; i >= xy.getX() - 1; i--) {
                 if (i != xy.getX() && j != xy.getY()) {
-                    coord = new Coordinates(i, j);
-                    if (!disposition.containsKey(coord) && startCard.getCorner(count) != null) availablePlaces.add(coord);
+                    Coordinates coord = new Coordinates(i, j);
+                    if (!disposition.containsKey(coord) && card.getCorner(count) != null) availablePlaces.add(coord);
                 }
                 count -= 1;
             }
@@ -125,6 +145,12 @@ public class PlacementArea {
 //returns the numbers of elements "element" in the Placement Area
     public int getNumberElements(Element element){return availableElements.get(element);}
 
+
+    //returns the number of corners covered by the last placed card
+    public int getNumberNearbyCards(){
+        return numberNearbyCards;
+    }
+
 //returns an Hashmap containing the couples (artifact, numberOfThatArtifacts)
     public HashMap<Artifact, Integer> getAllArtifactsNumber(){
         HashMap<Artifact, Integer> retCopy;
@@ -137,9 +163,6 @@ public class PlacementArea {
         HashMap<Element, Integer> retCopy;
         retCopy = availableElements;
         return retCopy;
-    }
-    public int getNumberNearbyCards(){
-        return numberNearbyCards;
     }
 
 }

@@ -18,16 +18,20 @@ public class StarterCard extends PlayableCard{
     @JsonProperty("blockedElements")
     private Element[] blockedElements;
 
+    @JsonProperty("backFaceCorners")
+    private Element[] backFaceCorners;
+
+    @Override
     public Element[] getBlockedElements() {
         return blockedElements;
     }
 
+    @Override
     public Element[] getBackFaceCorners() {
         return backFaceCorners;
     }
 
-    @JsonProperty("backFaceCorners")
-    private Element[] backFaceCorners;
+
 
 
 
@@ -80,6 +84,7 @@ public class StarterCard extends PlayableCard{
         return null;
     }
 
+    //ignore this function, needed in GoldCard and ResourcesCard classes
     @Override
     public Element getBlockedElement() {
         return null;
