@@ -12,6 +12,8 @@ public class RunDeckCreation {
         DeckGenerator goldenDeckGenerator = new GoldCardsDeckGenerator();
         DeckGenerator starterDeckGenerator = new StarterCardsDeckGenerator();
         DeckGenerator objectiveDeckGenerator = new ObjectiveCardsDeckGenerator();
+
+
         Deck objectiveDeck = objectiveDeckGenerator.generateDeck();
         Deck resourcesDeck = resourcesDeckGenerator.generateDeck();
 

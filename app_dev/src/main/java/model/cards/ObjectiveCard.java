@@ -48,6 +48,8 @@ public class ObjectiveCard  implements Card {
                 ObjectMapper mapper = new ObjectMapper();
                 mapper.registerSubtypes(LShapeObjective.class, ElementObjective.class, DiagonalShapeObjective.class, ArtifactObjective.class);
                 ObjectiveCard objectiveCard = mapper.readValue(jsonString, ObjectiveCard.class);
+                System.out.println(objectiveCard.getId());
+
 
                 return objectiveCard;
 
@@ -58,5 +60,9 @@ public class ObjectiveCard  implements Card {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public int getId() {
+        return id;
     }
 }
