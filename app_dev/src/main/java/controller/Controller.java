@@ -27,6 +27,12 @@ public class Controller {
 
         //SECOND: every player draws three random cards: 1 goldCard and 2 resourceCard
         gameState.initializePlayersHands();
+        for (String player : nickNames) {
+            gameState.setSelectedHandCard(gameState.getTurnPlayer().getPlayingHand().get(0));
+            gameState.setSelectedCardFace(true);
+            view.printPlayerHand();
+        }
+
        /* while (! gameState.getLastTurn()) {
             System.out.println(gameState.getTurnPlayer().getNickname());
         }*/

@@ -57,6 +57,9 @@ public abstract class PlayableCard implements Card {
     //calls a different count points method based on the points policy of the card
     public abstract int countPoints(PlacementArea placementArea);
 
+    //function to print card onto console
+    public abstract void printCard();
+
 
 
 }

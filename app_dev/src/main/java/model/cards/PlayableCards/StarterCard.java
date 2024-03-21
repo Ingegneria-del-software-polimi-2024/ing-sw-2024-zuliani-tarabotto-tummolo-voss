@@ -33,10 +33,6 @@ public class StarterCard extends PlayableCard{
 
 
 
-
-
-
-
     public static StarterCard parse(int id) throws JsonProcessingException {
 
         int targetId = id; // ID to search for
@@ -95,5 +91,21 @@ public class StarterCard extends PlayableCard{
         return 0;
     }
 
+    @Override
+    public void printCard() {
+        System.out.println("Card ID: " + getId());
+        if(getFaceSide()){
+            for (Corner c : getCorners()){System.out.println("Corner_" + getCorners().indexOf(c) + ": "+c.getElement());}
+            for (Element el : getBlockedElements()) {System.out.println("Blocked elements: " + el.toString());}
+
+        } else {
+            int i = 0;
+            for(Element el : getBackFaceCorners()){
+                System.out.println("Corner_" + i + ": " + el.toString());
+                i++;
+            }
+        }
+        System.out.println();
+    }
 
 }

@@ -9,5 +9,7 @@ import model.placementArea.PlacementArea;
 public interface Points {
     int count(PlacementArea placementArea);
     int getPoints();  //Is this still needed? these are the points that have to be multiplied by the hidden corners
+
+    String getPointsPolicy();
 }
 

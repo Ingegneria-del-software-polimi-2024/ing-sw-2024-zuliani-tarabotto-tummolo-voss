@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import model.placementArea.PlacementArea;
 
 @JsonTypeName("SimplePoints")
-
 public class SimplePoints implements Points {
 
     private int points;
@@ -17,5 +16,7 @@ public class SimplePoints implements Points {
         return this.points;
     }
 
+    @Override
+    public String getPointsPolicy() { return ("Points policy -> SimplePoints || points given: " + getPoints());}
 
 }

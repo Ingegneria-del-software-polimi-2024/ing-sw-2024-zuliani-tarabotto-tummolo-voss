@@ -97,5 +97,24 @@ public class GoldCard extends PlayableCard{
         return points.count(placementArea);
     }
 
+    @Override
+    public void printCard() {
+        System.out.println("Card ID: " + getId());
+        if(getFaceSide()){
+            for (Corner c : getCorners()) {printCorner(c);}
+
+            System.out.println(points.getPointsPolicy());
+
+            System.out.println();
+        } else {
+            System.out.println("Blocked element: " + getBlockedElement());
+        }
+    }
+    public void printCorner(Corner c) {
+        if (c.getElement() != null) System.out.println("Corner_" + c.getId() + ": " + c.getElement());
+        else if (c.getArtifact() != null) System.out.println("Corner_" + c.getId() + ": " + c.getArtifact());
+        else System.out.println("Corner_" + c.getId() + ": empty");
+    }
+
 
 }

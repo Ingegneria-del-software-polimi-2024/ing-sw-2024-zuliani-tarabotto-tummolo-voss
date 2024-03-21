@@ -14,7 +14,7 @@ public class CliView {
         this.gameState = gameState;
     }
     public void printStarterCard(){
-        PlayableCard card = gameState.getTurnPlayer().getStartCard();
+        /*PlayableCard card = gameState.getTurnPlayer().getStartCard();
         System.out.println("Card ID: " + card.getId());
         if(card.getFaceSide()){
             for (Corner c : card.getCorners()){System.out.println("Corner_" + card.getCorners().indexOf(c) + ": "+c.getElement());}
@@ -26,10 +26,11 @@ public class CliView {
                 System.out.println("Corner_" + i + ": " + el.toString());
                 i++;
             }
-        }
+        }*/
+        gameState.getTurnPlayer().getStartCard().printCard();
     }
 
-
+    /*
     public void printHandCard(PlayableCard card){
         System.out.println("Card ID: " + card.getId());
         if(card.getFaceSide()){
@@ -37,20 +38,24 @@ public class CliView {
             System.out.println("Points policy:");
             System.out.println();
         } else {
-            int i = 0;
-            for(Element el : card.getBackFaceCorners()){
-                System.out.println("Corner_" + i + ": " + el.toString());
-                i++;
-            }
+            System.out.println("Blocked element" + card.getBlockedElement());
         }
     }
+    */
 
+    /*
     public void printCorner(Corner c) {
         if (c.getElement() != null) System.out.println("Corner_" + c.getId() + ": " + c.getElement());
         else if (c.getArtifact() != null) System.out.println("Corner_" + c.getId() + ": " + c.getArtifact());
         else System.out.println("Corner_" + c.getId() + ": empty");
     }
-    //public void printPointsPolicy(PlayableCard card) {
-      //  switch (card.)
-    //}
+    */
+
+    public void printPlayerHand() {
+        System.out.println(" MANO DI " + gameState.getTurnPlayer().getNickname());
+        for (PlayableCard card : gameState.getTurnPlayer().getPlayingHand()) {
+            System.out.println();
+            card.printCard();
+        }
+    }
 }

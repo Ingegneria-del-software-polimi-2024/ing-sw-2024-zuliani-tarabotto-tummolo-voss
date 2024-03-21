@@ -13,4 +13,8 @@ public class CornersPoints implements Points {
     public int getPoints() {
         return points;
     }
+    @Override
+    public String getPointsPolicy() {
+        return ("Points policy -> CornersPoints || points given per corner covered: " + 2);
+    }
 }
