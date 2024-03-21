@@ -2,6 +2,7 @@ package model.placementArea;
 
 
 import model.cards.PlayableCards.PlayableCard;
+import model.cards.PlayableCards.StarterCard;
 import model.enums.Artifact;
 import model.enums.Element;
 import model.objective.Shape;
@@ -25,7 +26,7 @@ public class PlacementArea {
     public List<Coordinates> freePositions(){return availablePlaces;} //returns the free positions
     private int numberNearbyCards;
 
-    //adds a playable card to the placementArea
+//adds a playable card to the placementArea
     public void addCard(Coordinates xy, PlayableCard card) throws IllegalArgumentException{
         int i, j, count = 0;
         Coordinates coord;
@@ -62,12 +63,15 @@ public class PlacementArea {
             }
 
             //add elements and objects of newly placed card
-            for(count = 0; count < 4; count++){
-                if(card.getCorner(count) != null){
-                    if(card.getCorner(count).getElement() != null) availableElements.put(card.getCorner(count).getElement(), availableElements.get(card.getCorner(count).getElement())+1);
-                    else if(card.getCorner(count).getArtifact() != null) availableArtifacts.put(card.getCorner(count).getArtifact(), availableArtifacts.get(card.getCorner(count).getArtifact())+1);
+            for(count = 0; count < 4 && card.isFaceSide(); count++) {
+                if (card.getCorner(count) != null) {
+                    if (card.getCorner(count).getElement() != null)
+                        availableElements.put(card.getCorner(count).getElement(), availableElements.get(card.getCorner(count).getElement()) + 1);
+                    else if (card.getCorner(count).getArtifact() != null)
+                        availableArtifacts.put(card.getCorner(count).getArtifact(), availableArtifacts.get(card.getCorner(count).getArtifact()) + 1);
                 }
             }
+            if(!card.isFaceSide()) availableElements.put(card.getBlockedElement(), availableElements.get(card.getBlockedElement())+1);
 
             //update available positions
             availablePlaces.remove(xy);
@@ -76,7 +80,8 @@ public class PlacementArea {
                 for (i = xy.getX() + 1; i >= xy.getX() - 1; i--) {
                     if (i != xy.getX() && j != xy.getY()) {
                         coord = new Coordinates(i, j);
-                        if (!disposition.containsKey(coord) && card.getCorner(count) != null) availablePlaces.add(coord);
+                        if (!disposition.containsKey(coord) && card.getCorner(count) != null)
+                            availablePlaces.add(coord);
                     }
                     count -= 1;
                 }
@@ -85,7 +90,34 @@ public class PlacementArea {
 
     }
 
-    //work in progress, returns the NUMBER OF COMBINATION of the shape "shape"
+//adds the starter card in position (0,0)
+    public void addCard(StarterCard firstCard){
+        //add card to disposition
+        disposition.put(new Coordinates(0,0), firstCard);
+
+        //add free positions
+        int count = 0;
+        for(int j = 1; j >= -1; j--)
+            for (int i = -1; i <= 1; i++)
+                if(i != 0 && j != 0)
+                    if(firstCard.getCorner(count) != null)
+                        availablePlaces.add(new Coordinates(i,j));
+
+
+
+
+        //add elements to list
+
+        if(firstCard.isFaceSide())
+            for(Element e : firstCard.getBlockedElements())
+                availableElements.put(e, availableElements.get(e)+1);
+
+        for(count = 0; count <= 3; count++)
+            if(firstCard.getCorner(count) != null && firstCard.getCorner(count).getElement() != null)
+                    availableElements.put(firstCard.getCorner(count).getElement(), availableElements.get(firstCard.getCorner(count).getElement()));
+    }
+
+//returns the NUMBER OF COMBINATION of the shape "shape"
     public int verifyObjective(Shape shape, Element element){
         //declare and initialize
         boolean found;
