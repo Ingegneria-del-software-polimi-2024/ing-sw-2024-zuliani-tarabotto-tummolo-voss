@@ -13,12 +13,13 @@ public class Controller {
 
     //main method to handle game flow
     public void gameLoop() {
-        //FIRST: every player must select a faceside for the starting card which is then placed
+        //FIRST: every player must select a face side for the starting card which is then placed
         for (String player : nickNames) {
             Scanner sc = new Scanner(System.in);
-            System.out.println("Select a faceside for the starting card: ");
-            gameState.setSelectedCardFace(sc.nextBoolean());
-            gameState.playCard();
+            System.out.println(player + ", select a faceside for the starting card: ");
+            gameState.setStartingCardFace(sc.nextBoolean());
+            gameState.playStarterCard();
+            gameState.nextPlayer();
         }
 
         //SECOND: every player draws three random cards: 1 goldCard and 2 resourceCard

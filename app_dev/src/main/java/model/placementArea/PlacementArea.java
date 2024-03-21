@@ -5,6 +5,7 @@ import model.enums.Artifact;
 import model.enums.Element;
 //import model.objective.Shape;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +24,26 @@ public class PlacementArea {
     private List<Coordinates> availablePlaces; //list of available places to put a card in, enable to search more rapidly where you can place cards
     private int numberNearbyCards;
     public List<Coordinates> freePositions(){return availablePlaces;} //returns the free positions
+
+    public PlacementArea() {
+        disposition = new HashMap<>();
+        availableArtifacts = new HashMap<>();
+        availableElements = new HashMap<>();
+        availablePlaces = new ArrayList<>();
+        Coordinates oo;
+        availablePlaces.add(oo = new Coordinates(0,0));
+        initializeMaps();
+    }
+
+    //we initialize availableElements and availableArtifacts to 0
+    public void initializeMaps() {
+        for(Element el : Element.values()) {
+            availableElements.put(el, 0);
+        }
+        for(Artifact ar : Artifact.values()){
+            availableArtifacts.put(ar, 0);
+        }
+    }
 
     //adds a playable card to the placementArea
     //returns the number of points granted by the playable card
@@ -109,8 +130,8 @@ public class PlacementArea {
         //add elements and objects of newly placed card
         for(int count = 0; count < 4; count++){
             if(card.getCorner(count) != null){
-                if(card.getCorner(count).getElement() != null) availableElements.put(card.getCorner(count).getElement(), availableElements.get(card.getCorner(count).getElement())+1);
-                else if(card.getCorner(count).getArtifact() != null) availableArtifacts.put(card.getCorner(count).getArtifact(), availableArtifacts.get(card.getCorner(count).getArtifact())+1);
+                if(card.getCorner(count).getElement() != null) {availableElements.put(card.getCorner(count).getElement(), availableElements.get(card.getCorner(count).getElement())+1);}
+                else if(card.getCorner(count).getArtifact() != null) {availableArtifacts.put(card.getCorner(count).getArtifact(), availableArtifacts.get(card.getCorner(count).getArtifact())+1);}
             }
         }
     }

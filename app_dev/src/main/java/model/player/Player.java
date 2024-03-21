@@ -33,6 +33,10 @@ public class Player {
         this.points += placementArea.addCard(coordinates, card);
         return;
     }
+
+    public void playStarterCard(){
+        placementArea.addCard(startCard);
+    }
     public void flipHand(){}
     public void setNickname(String nickname) {
         this.nickname = nickname;

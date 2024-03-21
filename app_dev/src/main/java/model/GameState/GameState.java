@@ -35,7 +35,6 @@ public class GameState {
     private boolean isLastTurn = false;
     private PlayableCard selectedHandCard;
     private Coordinates selectedCoordinates;
-    private boolean selectedCardFace;
 
 
     public GameState(ArrayList<String> nickNames, String id) {
@@ -124,8 +123,9 @@ public class GameState {
 
     public void nextPlayer() {
         int currentPlayer = players.indexOf(turnPlayer);
-        turnPlayer = players.get(currentPlayer+1);
-        return;
+        if(currentPlayer == players.size() - 1) {
+            turnPlayer = players.get(0);
+        } else{turnPlayer = players.get(currentPlayer+1);}
     }
 
     public void drawCardGoldDeck(){
@@ -165,6 +165,10 @@ public class GameState {
         setLastTurnTrue();
     }
 
+    public void playStarterCard() {
+        turnPlayer.playStarterCard();
+    }
+
     public void setSelectedHandCard(PlayableCard card) {
         this.selectedHandCard = card;
     }
@@ -173,8 +177,14 @@ public class GameState {
         this.selectedCoordinates = coordinates;
     }
 
-    public void setSelectedCardFace(boolean selectedCardFace) {
-        this.selectedCardFace = selectedCardFace;
+    //sets the faceSide for the player's starting card
+    public void setStartingCardFace(boolean faceSide) {
+        turnPlayer.getStartCard().setFaceSide(faceSide);
+    }
+
+    //sets the faceSide for the card that the player has selected from his hand
+    public void setSelectedCardFace(boolean faceSide) {
+        this.selectedHandCard.setFaceSide(faceSide);
     }
 
     //public void setLastTurnTrue() {isLastTurn = true;}
