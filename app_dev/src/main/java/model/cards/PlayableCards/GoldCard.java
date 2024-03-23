@@ -97,18 +97,21 @@ public class GoldCard extends PlayableCard{
         return points.count(placementArea);
     }
 
+    //DA ELIMINARE SERVE PER TEST A CONSOLE
     @Override
     public void printCard() {
         System.out.println("Card ID: " + getId());
-        if(getFaceSide()){
-            for (Corner c : getCorners()) {printCorner(c);}
 
-            System.out.println(points.getPointsPolicy());
+        //Stampa il fronte della carta
+        System.out.println("FRONT FACE");
+        for (Corner c : getCorners()) {printCorner(c);}
+        System.out.println(points.getPointsPolicy());
+        System.out.println();
 
-            System.out.println();
-        } else {
-            System.out.println("Blocked element: " + getBlockedElement());
-        }
+        //stampa il retro della carta
+        System.out.println("BACK FACE");
+        System.out.println("Blocked element: " + getBlockedElement());
+
     }
     public void printCorner(Corner c) {
         if (c.getElement() != null) System.out.println("Corner_" + c.getId() + ": " + c.getElement());

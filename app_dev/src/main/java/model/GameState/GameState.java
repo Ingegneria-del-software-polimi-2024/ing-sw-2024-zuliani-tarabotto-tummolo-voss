@@ -14,6 +14,7 @@ import model.placementArea.Coordinates;
 import model.player.Player;
 import model.deckFactory.*;
 import model.cards.*;
+import view.CliView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +48,14 @@ public class GameState {
         }
         this.turnPlayer = players.get(0);
         this.id = id;
+
+
+        //creates and shuffles decks
+        initializeDecks();
+        //Extract open cards
+        initializeOpenCards();
+        //give each player a random starting card
+        initializePlayersStarterCard();
     }
     //Methods
 
@@ -93,9 +102,9 @@ public class GameState {
         }
     }
 
-    public void initializePlayersStartCard() {
+    public void initializePlayersStarterCard() {
         for(Player p : players) {
-            p.setStartCard(startingDeck.extract());
+            p.setStarterCard(startingDeck.extract());
         }
     }
 
@@ -179,7 +188,7 @@ public class GameState {
 
     //sets the faceSide for the player's starting card
     public void setStartingCardFace(boolean faceSide) {
-        turnPlayer.getStartCard().setFaceSide(faceSide);
+        turnPlayer.getStarterCard().setFaceSide(faceSide);
     }
 
     //sets the faceSide for the card that the player has selected from his hand

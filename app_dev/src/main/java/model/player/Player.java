@@ -2,6 +2,7 @@ package model.player;
 
 //import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
+import model.cards.PlayableCards.StarterCard;
 import model.deckFactory.PlayableDeck;
 import model.placementArea.*;
 
@@ -14,7 +15,7 @@ public class Player {
     //private ObjectiveCard secretObjective;
     private PlacementArea placementArea;
     private int points;
-    private PlayableCard startCard;
+    private PlayableCard starterCard;
 
     public Player() {
         //constructor
@@ -35,7 +36,7 @@ public class Player {
     }
 
     public void playStarterCard(){
-        placementArea.addCard(startCard);
+        placementArea.addCard(starterCard);
     }
     public void flipHand(){}
     public void setNickname(String nickname) {
@@ -51,11 +52,11 @@ public class Player {
         return points;
     }
 
-    public void setStartCard(PlayableCard startCard) {
-        this.startCard = startCard;
+    public void setStarterCard(PlayableCard starterCard) {
+        this.starterCard = starterCard;
     }
-    public PlayableCard getStartCard() {
-        return this.startCard;
+    public PlayableCard getStarterCard() {
+        return this.starterCard;
     }
 
     public List<PlayableCard> getPlayingHand(){return hand;}

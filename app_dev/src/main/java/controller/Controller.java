@@ -28,9 +28,8 @@ public class Controller {
         //SECOND: every player draws three random cards: 1 goldCard and 2 resourceCard
         gameState.initializePlayersHands();
         for (String player : nickNames) {
-            gameState.setSelectedHandCard(gameState.getTurnPlayer().getPlayingHand().get(0));
-            gameState.setSelectedCardFace(true);
             view.printPlayerHand();
+            gameState.nextPlayer();
         }
 
        /* while (! gameState.getLastTurn()) {
@@ -53,12 +52,6 @@ public class Controller {
         }
         //creates a GameState
         gameState = new GameState(nickNames, id);
-        //creates and shuffles decks
-        gameState.initializeDecks();
-        //Extract open cards
-        gameState.initializeOpenCards();
-        //give each player a random starting card
-        gameState.initializePlayersStartCard();
         //initialize view
         view = new CliView(gameState);
     }

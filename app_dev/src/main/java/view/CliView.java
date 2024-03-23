@@ -27,7 +27,7 @@ public class CliView {
                 i++;
             }
         }*/
-        gameState.getTurnPlayer().getStartCard().printCard();
+        gameState.getTurnPlayer().getStarterCard().printCard();
     }
 
     /*
