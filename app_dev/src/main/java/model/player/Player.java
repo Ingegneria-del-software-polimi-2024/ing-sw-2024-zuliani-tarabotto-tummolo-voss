@@ -1,19 +1,15 @@
 package model.player;
 
-import model.cards.ObjectiveCard;
+//import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
 import model.placementArea.*;
-
-
 
 import java.util.List;
 
 public class Player {
     private String nickname;
     private List<PlayableCard> hand;
-
-    private List<ObjectiveCard> secretObjective;
-
+    //private ObjectiveCard secretObjective;
     private PlacementArea placementArea;
     private int points;
 
@@ -49,37 +45,4 @@ public class Player {
         hand.remove(card);
         return card;
     }
-
-    public int pointsBeforeEnd(){
-
-        int i;
-
-        points = 0;
-
-        for(i=0; i< secretObjective.size(); i++){
-
-            points = points + secretObjective.get(i).countpoints(placementArea);
-        }
-
-        return points;
-    }
-
-    //calculates the total points of a single player's secreteObjective cards
-    public void calculateSecretObj(){
-
-        int i;
-
-        for(i=0; i< secretObjective.size(); i++){
-
-            points = points + secretObjective.get(i).countPoints(placementArea);
-        }
-    }
-
-    //calculates the points of a single commonObjective card
-    public void calculateSingleCommonObj(ObjectiveCard objectiveCard) {
-
-        points = points + objectiveCard.countPoints(placementArea);
-    }
-
-
 }

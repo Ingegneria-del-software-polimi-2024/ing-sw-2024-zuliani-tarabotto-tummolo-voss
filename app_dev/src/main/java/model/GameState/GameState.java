@@ -54,20 +54,28 @@ public class GameState {
         return turnPlayer;
     }
 
-    //update each player's final points by calling the methods in Player class
-    public void calculateFinalPoints(){
+    public void calculateCommonObj(){
 
-        int i, j;
+    }
 
-        for(i=0; i< players.size(); i++){
+    public void isLastTurn(){
 
-            players.get(i).calculateSecretObj();
+        int i;
 
-            for(j=0; j<2; j++){
+        for(i=0; i<4; i++){
 
-                players.get(i).calculateSingleCommonObj(commonObjectives.get(j));
+            if(players.get(i).getPoints() == 20 || players.get(i).getPoints() > 20){
+
+                setLastTurnTrue();
             }
         }
+
+        if(GoldenDeck.isDeckFinished(goldDeck) || ResourcesDeck.isDeckFinished(resourceDeck)){
+
+            setLastTurnTrue();
+        }
+
+        //return isLastTurn;
     }
 
     public boolean getLastTurn(){

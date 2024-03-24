@@ -7,7 +7,7 @@ import model.enums.*;
 import model.placementArea.PlacementArea;
 
 public abstract class PlayableCard implements Card {
-    private String type;//utile per parsing
+    private String type; //utile per parsing
     protected int id;
     protected boolean faceSide;
     protected List<Corner> corners;
@@ -16,6 +16,8 @@ public abstract class PlayableCard implements Card {
         this.faceSide = !this.faceSide;
     }
     public Corner getCorner(int index) {
+        //returns a void corner if the card is facedown
+        if(!isFaceSide()) return new Corner();
         // Iterate through the corners list and find the corner with the matching ID
         for (Corner corner : corners) {
             if (corner.getId() == index) {

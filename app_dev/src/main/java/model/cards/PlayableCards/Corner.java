@@ -34,4 +34,17 @@ public class Corner {
             return isAvailable;
 
     }
+
+    //constructor that creates a void corner
+    public Corner(){
+        element = null;
+        artifact = null;
+        isAvailable = true;
+    }
+
+    public Corner(Element el){
+        artifact = null;
+        element = el;
+        isAvailable = true;
+    }
 }
