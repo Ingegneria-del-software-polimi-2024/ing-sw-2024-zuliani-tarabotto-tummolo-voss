@@ -49,7 +49,7 @@ public class Player {
         hand.remove(card);
         return card;
     }
-
+//lol
     public int pointsBeforeEnd(){
 
         int i;
