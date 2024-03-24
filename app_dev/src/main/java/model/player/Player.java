@@ -1,6 +1,7 @@
 package model.player;
 
 //import model.cards.ObjectiveCard;
+import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
 import model.placementArea.*;
 
@@ -45,4 +46,22 @@ public class Player {
         hand.remove(card);
         return card;
     }
+
+    //calculates the total points of a single player's secreteObjective cards
+    public void calculateSecretObj(){
+
+        int i;
+
+        for(i=0; i< secretObjective.size(); i++){
+
+            points = points + secretObjective.get(i).countPoints(placementArea);
+        }
+    }
+
+    //calculates the points of a single commonObjective card
+    public void calculateSingleCommonObj(ObjectiveCard objectiveCard) {
+
+        points = points + objectiveCard.countPoints(placementArea);
+    }
 }
+

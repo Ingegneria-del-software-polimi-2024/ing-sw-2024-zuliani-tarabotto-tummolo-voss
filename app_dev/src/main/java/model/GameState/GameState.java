@@ -54,9 +54,22 @@ public class GameState {
         return turnPlayer;
     }
 
-    public void calculateCommonObj(){
+    //update each player's final points by calling the methods in Player class
+    public void calculateFinalPoints(){
 
+        int i, j;
+
+        for(i=0; i< players.size(); i++){
+
+            players.get(i).calculateSecretObj();
+
+            for(j=0; j<2; j++){
+
+                players.get(i).calculateSingleCommonObj(commonObjectives.get(j));
+            }
+        }
     }
+
 
     public void isLastTurn(){
 
