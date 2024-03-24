@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import model.PointsStrategy.Points;
 import model.PointsStrategy.SimplePoints;
+import model.deckFactory.GoldenDeck;
 import model.enums.Element;
 import model.placementArea.PlacementArea;
 
