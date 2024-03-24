@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import model.PointsStrategy.SimplePoints;
 import model.cards.PlayableCards.ResourceCard;
 import model.objective.*;
+import model.placementArea.PlacementArea;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,7 +19,9 @@ public class ObjectiveCard  implements Card {
     private Objective objective;
 
 
-
+    public int countPoints(PlacementArea placementArea){
+        return objective.countObjectivePoints(placementArea);
+    }
 
     public static ObjectiveCard parse(int id) throws JsonProcessingException {
 

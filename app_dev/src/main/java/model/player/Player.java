@@ -10,7 +10,7 @@ import java.util.List;
 public class Player {
     private String nickname;
     private List<PlayableCard> hand;
-    //private ObjectiveCard secretObjective;
+    private List<ObjectiveCard> secretObjective;
     private PlacementArea placementArea;
     private int points;
 
