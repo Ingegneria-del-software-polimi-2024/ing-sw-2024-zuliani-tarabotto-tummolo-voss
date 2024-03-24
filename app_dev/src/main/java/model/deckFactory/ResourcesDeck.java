@@ -21,10 +21,4 @@ public class ResourcesDeck extends Deck {
             }
         }
     }
-
-    // Static method to create a GoldenDeck instance and check if it's finished
-
-    public static boolean isDeckFinished(ResourcesDeck deck) {
-        return deck.checkDeck();
-    }
 }

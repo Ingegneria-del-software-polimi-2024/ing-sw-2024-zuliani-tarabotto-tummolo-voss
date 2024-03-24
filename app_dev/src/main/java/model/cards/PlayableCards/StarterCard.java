@@ -14,10 +14,9 @@ import java.util.List;
 
 public class StarterCard extends PlayableCard{
 
+    private String type;
     @JsonProperty("blockedElements")
     private Element[] blockedElements;
-    @JsonProperty("backFaceCorners")
-    private Element[] backFaceCorners;
 
     public Element[] getBlockedElements() {
         return blockedElements;
@@ -26,6 +25,13 @@ public class StarterCard extends PlayableCard{
     public Element[] getBackFaceCorners() {
         return backFaceCorners;
     }
+
+    @JsonProperty("backFaceCorners")
+    private Element[] backFaceCorners;
+
+
+
+
 
     public static StarterCard parse(int id) throws JsonProcessingException {
 
@@ -84,14 +90,5 @@ public class StarterCard extends PlayableCard{
         return 0;
     }
 
-    @Override
-    public Corner getCorner(int index) {
-        if(!isFaceSide()) return new Corner(backFaceCorners[index]);
-        for (Corner corner : corners) {
-            if (corner.getId() == index) {
-                return corner;
-            }
-        }
-        return null;
-    }
+
 }

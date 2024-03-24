@@ -4,19 +4,6 @@ public enum Element {
     mushrooms,
     animals,
     vegetals,
-    insects;
+    insects
 
-    public Element calculateComplementar() {
-        switch (this){
-            case animals:
-                return mushrooms;
-            case mushrooms:
-                return vegetals;
-            case insects:
-                return animals;
-            case vegetals:
-                return insects;
-        }
-        return null;
-    }
 }

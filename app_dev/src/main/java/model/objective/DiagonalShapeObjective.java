@@ -1,13 +1,10 @@
 package model.objective;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import model.enums.Element;
 import model.placementArea.*;
 
 public class DiagonalShapeObjective implements Objective{
-    @JsonProperty("element")
     private Element element;
-    @JsonProperty("shape")
     private Shape shape;
 
     @Override

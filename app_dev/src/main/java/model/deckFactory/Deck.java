@@ -29,10 +29,9 @@ public abstract class Deck {
     public int getSize() {
         return cards.size();
     }
-    public boolean checkDeck() {
-        return cards.isEmpty();
+
+    public void isDeckFinished(){
+
     }
-
-
 }
 

@@ -1,18 +1,11 @@
 package model.deckFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import model.cards.Card;
 import model.cards.PlayableCards.GoldCard;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class GoldenDeck extends Deck{
-
-
-
-
     @Override
     public void generate() {
         cards = new ArrayList<>();  // Initialize cards list
@@ -32,14 +25,8 @@ public class GoldenDeck extends Deck{
         }
     }
 
-    public boolean checkDeck() {
-        return cards.isEmpty();
+    public int isDeckFinished(){
+
+        return remainingCards
     }
-
-    // Static method to create a GoldenDeck instance and check if it's finished
-
-    public static boolean isDeckFinished(GoldenDeck deck) {
-        return deck.checkDeck();
-    }
-
 }
