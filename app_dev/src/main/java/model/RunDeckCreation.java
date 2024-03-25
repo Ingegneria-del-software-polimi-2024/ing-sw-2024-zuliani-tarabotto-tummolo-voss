@@ -4,7 +4,7 @@ import model.cards.PlayableCards.ResourceCard;
 import model.deckFactory.Deck;
 import model.deckFactory.Generators.*;
 
-public class RunDeckCreation {
+/*public class RunDeckCreation {
 
     public void RunDeckCreation() throws Exception {
 
@@ -38,4 +38,4 @@ public class RunDeckCreation {
         Deck goldenDeck = goldenDeckGenerator.generateDeck();
         Deck starterDeck = starterDeckGenerator.generateDeck();
     }
-}
+}*/

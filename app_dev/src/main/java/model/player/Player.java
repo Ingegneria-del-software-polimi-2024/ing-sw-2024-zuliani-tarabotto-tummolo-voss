@@ -3,8 +3,11 @@ package model.player;
 //import model.cards.ObjectiveCard;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
+import model.cards.PlayableCards.StarterCard;
+import model.deckFactory.PlayableDeck;
 import model.placementArea.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
@@ -13,16 +16,28 @@ public class Player {
     private List<ObjectiveCard> secretObjective;
     private PlacementArea placementArea;
     private int points;
+    private PlayableCard starterCard;
 
+    public Player() {
+        //constructor
+        this.hand = new ArrayList<>();
+        this.placementArea = new PlacementArea();
+    }
     public void drawCard(PlayableCard card){
         //takes a card and puts it in the hand
+        hand.add(card);
     }
 
     //takes the card from the hand and places it in the placementArea
+    //updates the player's points score based on the card placed
     public void playCard(PlayableCard card, Coordinates coordinates){
         takeFromHand(card);
-        placementArea.addCard(coordinates, card);
+        this.points += placementArea.addCard(coordinates, card);
         return;
+    }
+
+    public void playStarterCard(){
+        placementArea.addCard(starterCard);
     }
     public void flipHand(){}
     public void setNickname(String nickname) {
@@ -36,6 +51,13 @@ public class Player {
     }
     public int getPoints() {
         return points;
+    }
+
+    public void setStarterCard(PlayableCard starterCard) {
+        this.starterCard = starterCard;
+    }
+    public PlayableCard getStarterCard() {
+        return this.starterCard;
     }
 
     public List<PlayableCard> getPlayingHand(){return hand;}

@@ -31,9 +31,11 @@ public abstract class PlayableCard implements Card {
     public List<Corner> getCorners() {
         return Collections.unmodifiableList(corners);
     }
-    public boolean isFaceSide() {
+    public boolean getFaceSide() {
         return faceSide;
     }
+
+    public void setFaceSide(boolean faceSide) {this.faceSide = faceSide;}
 
     public String getType() {
         return type;
@@ -43,9 +45,22 @@ public abstract class PlayableCard implements Card {
         return id;
     }
 
+    //for gold and resource cards returns the element on the back of the cart
+    //returns null for start cards
     public abstract Element getBlockedElement ();
 
+    //for start card returns the array of blocked elements contained in the front face of the card
+    //returns null for gold and resource cards
+    public abstract Element[] getBlockedElements();
+
+    //only needed for starter card, ignore for gold and resource card
+    public abstract Element[] getBackFaceCorners();
+
+    //calls a different count points method based on the points policy of the card
     public abstract int countPoints(PlacementArea placementArea);
+
+    //function to print card onto console
+    public abstract void printCard();
 
 
 

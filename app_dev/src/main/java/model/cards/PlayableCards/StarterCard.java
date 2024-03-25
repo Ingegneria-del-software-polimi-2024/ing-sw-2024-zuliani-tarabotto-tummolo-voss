@@ -19,13 +19,20 @@ public class StarterCard extends PlayableCard{
     @JsonProperty("backFaceCorners")
     private Element[] backFaceCorners;
 
+    @JsonProperty("backFaceCorners")
+    private Element[] backFaceCorners;
+
+    @Override
     public Element[] getBlockedElements() {
         return blockedElements;
     }
 
+    @Override
     public Element[] getBackFaceCorners() {
         return backFaceCorners;
     }
+
+
 
     public static StarterCard parse(int id) throws JsonProcessingException {
 
@@ -74,6 +81,7 @@ public class StarterCard extends PlayableCard{
         return null;
     }
 
+    //ignore this function, needed in GoldCard and ResourcesCard classes
     @Override
     public Element getBlockedElement() {
         return null;
@@ -94,4 +102,24 @@ public class StarterCard extends PlayableCard{
         }
         return null;
     }
+    //DA ELIMINARE SERVE PER TEST A CONSOLE
+    @Override
+    public void printCard() {
+        System.out.println("Card ID: " + getId());
+        //stampa il fronte della carta
+        System.out.println("FRONT FACE");
+        for (Corner c : getCorners()){System.out.println("Corner_" + getCorners().indexOf(c) + ": "+c.getElement());}
+        for (Element el : getBlockedElements()) {System.out.println("Blocked elements: " + el.toString());}
+        System.out.println();
+        //stampa il retro della carta
+        System.out.println("BACK FACE");
+        int i = 0;
+        for(Element el : getBackFaceCorners()){
+            System.out.println("Corner_" + i + ": " + el.toString());
+            i++;
+        }
+
+        System.out.println();
+    }
+
 }

@@ -106,12 +106,46 @@ public class ResourceCard extends PlayableCard {
     public Element getBlockedElement() {
         return blockedElement;
     }
+
+    //ignore this function(needed in StarterCard class)
+    @Override
+    public Element[] getBlockedElements(){return null;}
+    //ignore this function(needed in StarterCard class)
+    @Override
+    public Element[] getBackFaceCorners() {
+        return null;
+    }
     public Points getPoints() {
         return points;
     }
     @Override
     public int countPoints(PlacementArea placementArea) {
         return points.count(placementArea);
+    }
+
+
+    //DA ELIMINARE SERVE SOLO PER TEST A CONSOLE !!!!!!!!!!!!!!!!!
+    @Override
+    public void printCard() {
+        System.out.println("Card ID: " + getId());
+
+        //stampa il fronte della carta
+        System.out.println("FRONT FACE");
+        for (Corner c : getCorners()) {
+            printCorner(c);
+        }
+        System.out.println(points.getPointsPolicy());
+        System.out.println();
+        //stampa il retro della carta
+        System.out.println("BACK FACE");
+        System.out.println("Blocked element: " + getBlockedElement());
+
+    }
+
+    public void printCorner(Corner c) {
+        if (c.getElement() != null) System.out.println("Corner_" + c.getId() + ": " + c.getElement());
+        else if (c.getArtifact() != null) System.out.println("Corner_" + c.getId() + ": " + c.getArtifact());
+        else System.out.println("Corner_" + c.getId() + ": empty");
     }
 
 

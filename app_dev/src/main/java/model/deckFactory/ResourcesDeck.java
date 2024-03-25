@@ -5,7 +5,7 @@ import model.cards.PlayableCards.ResourceCard;
 
 import java.util.ArrayList;
 
-public class ResourcesDeck extends Deck {
+public class ResourcesDeck extends PlayableDeck {
 
     @Override
     public void generate() {

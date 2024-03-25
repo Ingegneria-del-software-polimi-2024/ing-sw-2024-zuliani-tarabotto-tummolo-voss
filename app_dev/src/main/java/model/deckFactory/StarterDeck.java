@@ -5,7 +5,7 @@ import model.cards.PlayableCards.StarterCard;
 
 import java.util.ArrayList;
 
-public class StarterDeck extends Deck{
+public class StarterDeck extends PlayableDeck{
     @Override
     public void generate() {
         cards = new ArrayList<>();  // Initialize cards list
