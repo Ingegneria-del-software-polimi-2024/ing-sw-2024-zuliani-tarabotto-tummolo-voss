@@ -26,15 +26,15 @@ public class GoldenDeck extends PlayableDeck{
         }
     }
 
-    public boolean checkDeck() {
-        return cards.isEmpty();
-    }
+    //public boolean checkDeck() {
+        //return cards.isEmpty();
+    //}
 
     // Static method to create a GoldenDeck instance and check if it's finished
 
-    public static boolean isDeckFinished(GoldenDeck deck) {
-        return deck.checkDeck();
-    }
+    //public static boolean isDeckFinished(GoldenDeck deck) {
+        //return deck.checkDeck();
+   // }
     /*public PlayableCard extract() {
         if (cards.isEmpty()) {
             throw new IllegalStateException("Deck is empty!");

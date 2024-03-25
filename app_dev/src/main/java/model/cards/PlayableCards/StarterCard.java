@@ -20,7 +20,7 @@ public class StarterCard extends PlayableCard{
     private Element[] backFaceCorners;
 
     @JsonProperty("backFaceCorners")
-    private Element[] backFaceCorners;
+    //private Element[] backFaceCorners;
 
     @Override
     public Element[] getBlockedElements() {
@@ -94,7 +94,7 @@ public class StarterCard extends PlayableCard{
 
     @Override
     public Corner getCorner(int index) {
-        if(!isFaceSide()) return new Corner(backFaceCorners[index]);
+        if(!faceSide) return new Corner(backFaceCorners[index]);
         for (Corner corner : corners) {
             if (corner.getId() == index) {
                 return corner;

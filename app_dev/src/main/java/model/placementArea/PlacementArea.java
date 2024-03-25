@@ -233,8 +233,9 @@ public class PlacementArea {
                 if (i != xy.getX() && j != xy.getY()) {
                     Coordinates coord = new Coordinates(i, j);
                     if (!disposition.containsKey(coord) && card.getCorner(count) != null) availablePlaces.add(coord);
+                    count -= 1;
                 }
-                count -= 1;
+                System.out.println(count);
             }
         }
     }

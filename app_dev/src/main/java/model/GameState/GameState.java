@@ -27,7 +27,7 @@ public class GameState {
     private Player turnPlayer;
     private PlayableDeck goldDeck;
     private PlayableDeck resourceDeck;
-    //private ObjectiveDeck deckObjectives;
+    private ObjectiveDeck objectiveDeck;
     private PlayableDeck startingDeck;
     private List<ObjectiveCard> commonObjectives; //2 elements in the list
     //do we actually want Lists of PlayableCard or we prefer List<GoldCard> and List<ResourceCard>???
@@ -88,6 +88,8 @@ public class GameState {
 
 
     public void isLastTurn(){
+
+    }
     public void calculateCommonObj(){
     }
 
@@ -96,9 +98,12 @@ public class GameState {
         PlayableDeckGenerator resourcesDeckGenerator = new ResourceCardsDeckGenerator();
         PlayableDeckGenerator goldenDeckGenerator = new GoldCardsDeckGenerator();
         PlayableDeckGenerator starterDeckGenerator = new StarterCardsDeckGenerator();
+        ObjectiveCardsDeckGenerator objectiveCardsDeckGenerator = new ObjectiveCardsDeckGenerator();
+        objectiveDeck = objectiveCardsDeckGenerator.generateDeck();
         resourceDeck =  resourcesDeckGenerator.generateDeck();
         goldDeck =  goldenDeckGenerator.generateDeck();
         startingDeck =  starterDeckGenerator.generateDeck();
+        objectiveDeck.shuffle();
         resourceDeck.shuffle();
         goldDeck.shuffle();
         startingDeck.shuffle();

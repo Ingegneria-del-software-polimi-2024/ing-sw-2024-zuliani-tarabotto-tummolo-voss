@@ -17,7 +17,7 @@ public abstract class PlayableCard implements Card {
     }
     public Corner getCorner(int index) {
         //returns a void corner if the card is facedown
-        if(!isFaceSide()) return new Corner();
+        if(!getFaceSide()) return new Corner();
         // Iterate through the corners list and find the corner with the matching ID
         for (Corner corner : corners) {
             if (corner.getId() == index) {
