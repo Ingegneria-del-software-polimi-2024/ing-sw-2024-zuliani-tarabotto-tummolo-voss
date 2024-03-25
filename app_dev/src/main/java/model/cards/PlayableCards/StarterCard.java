@@ -94,7 +94,7 @@ public class StarterCard extends PlayableCard{
 
     @Override
     public Corner getCorner(int index) {
-        if(!faceSide) return new Corner(backFaceCorners[index]);
+        if(!getFaceSide()) return new Corner(backFaceCorners[index]);
         for (Corner corner : corners) {
             if (corner.getId() == index) {
                 return corner;
