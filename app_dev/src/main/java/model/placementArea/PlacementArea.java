@@ -235,7 +235,6 @@ public class PlacementArea {
                     if (!disposition.containsKey(coord) && card.getCorner(count) != null) availablePlaces.add(coord);
                     count -= 1;
                 }
-                System.out.println(count);
             }
         }
     }
@@ -263,5 +262,16 @@ public class PlacementArea {
 
 //returns the number of surrounding cards (whith respect to a card that has just been placed)
     public int getNumberNearbyCards(){return numberNearbyCards;}
+
+    public void printDisposition() {
+        for(Coordinates c : disposition.keySet()){
+            System.out.println("Card: " + disposition.get(c).getId() + " || Coordinates: (" + c.getX() + ";" + c.getY() + ")");
+        }
+    }
+    public void printAvailablePlaces() {
+        for(Coordinates c : availablePlaces ) {
+            System.out.println("(" + c.getX() + "; " + c.getY() + ")");
+        }
+    }
 
 }

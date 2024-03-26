@@ -72,11 +72,11 @@ public class StarterCard extends PlayableCard{
                 mapper.registerSubtypes(SimplePoints.class);
                 StarterCard starterCard = mapper.readValue(jsonString, StarterCard.class);
 
-                System.out.println(starterCard.getId());
+                //System.out.println(starterCard.getId());
                 Element[] backFaceCorners = starterCard.getBackFaceCorners();
-                for (Element element : backFaceCorners) {
+                /*for (Element element : backFaceCorners) {
                     System.out.println(element);
-                }
+                }*/
 
 
                 return starterCard;

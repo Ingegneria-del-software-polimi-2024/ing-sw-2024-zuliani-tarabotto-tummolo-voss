@@ -62,6 +62,10 @@ public class Player {
 
     public List<PlayableCard> getPlayingHand(){return hand;}
 
+    public PlacementArea getPlacementArea() {
+        return placementArea;
+    }
+
     //auxiliary method for the method playCard() removes and returns
     //card from the hand
     private PlayableCard takeFromHand(PlayableCard card){

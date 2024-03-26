@@ -90,8 +90,6 @@ public class GameState {
     public void isLastTurn(){
 
     }
-    public void calculateCommonObj(){
-    }
 
     public void initializeDecks(){
         //creates and shuffles decks
@@ -132,21 +130,16 @@ public class GameState {
         }
     }
 
+
+    //checks if any player reached 20 points or if both the gold and the resource decks are empty
     public void setLastTurnTrue(){
         //checks if a player has reached 20 points
-        for(int i=0; i<4; i++){
+        for(int i=0; i<players.size(); i++){
             if (players.get(i).getPoints() >= 20) {
                 isLastTurn = true;
                 break;
             }
         }
-
-        //Da rivedere controllo sulla fine dei deck
-        //if(GoldenDeck.isDeckFinished(goldDeck) || ResourcesDeck.isDeckFinished(resourceDeck)){
-
-        //    setLastTurnTrue();
-        //}
-
         //return isLastTurn;
         //checks if both decks are empty
         if(goldDeck.getSize() == 0 && resourceDeck.getSize() == 0){
@@ -187,7 +180,7 @@ public class GameState {
         turnPlayer.drawCard(openGold.get(index));
         //replaces the card taken with the first of the goldDeck
         openGold.remove(index);
-        if(goldDeck.getSize() > 0) openGold.set(index, goldDeck.extract());
+        if(goldDeck.getSize() > 0) openGold.add(index, goldDeck.extract());
         setLastTurnTrue();
     }
 
@@ -195,7 +188,7 @@ public class GameState {
         //same as drawCardOpenGold
         turnPlayer.drawCard(openResources.get(index));
         openResources.remove(index);
-        if(resourceDeck.getSize() > 0) openResources.set(index,  resourceDeck.extract());
+        if(resourceDeck.getSize() > 0) openResources.add(index,  resourceDeck.extract());
         setLastTurnTrue();
     }
 
@@ -204,6 +197,10 @@ public class GameState {
         turnPlayer.playCard(selectedHandCard, selectedCoordinates);
         //method to check if the player has reached 20 points
         setLastTurnTrue();
+    }
+
+    public void printPlayerDisposition(){
+        getTurnPlayer().getPlacementArea().printDisposition();
     }
 
     public void playStarterCard() {
@@ -226,6 +223,13 @@ public class GameState {
     //sets the faceSide for the card that the player has selected from his hand
     public void setSelectedCardFace(boolean faceSide) {
         this.selectedHandCard.setFaceSide(faceSide);
+    }
+
+    //returns the total points of turnPlayer
+    public int getPoints() {return turnPlayer.getPoints(); }
+
+    public PlayableCard getPlayerHandCard(int index) {
+        return turnPlayer.getPlayingHand().get(index);
     }
 
     //public void setLastTurnTrue() {isLastTurn = true;}

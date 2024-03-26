@@ -52,8 +52,9 @@ public class CliView {
     */
 
     public void printPlayerHand() {
-        System.out.println(" MANO DI " + gameState.getTurnPlayer().getNickname());
         for (PlayableCard card : gameState.getTurnPlayer().getPlayingHand()) {
+            System.out.println();
+            System.out.println("\u001B[35mCARD_" + (gameState.getTurnPlayer().getPlayingHand().indexOf(card)+1) + "\u001B[0m");
             System.out.println();
             card.printCard();
         }
