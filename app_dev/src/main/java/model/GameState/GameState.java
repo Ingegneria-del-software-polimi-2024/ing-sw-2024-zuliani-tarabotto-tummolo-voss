@@ -130,6 +130,8 @@ public class GameState {
         }
     }
 
+
+    //checks if any player reached 20 points or if both the gold and the resource decks are empty
     public void setLastTurnTrue(){
         //checks if a player has reached 20 points
         for(int i=0; i<players.size(); i++){
@@ -138,13 +140,6 @@ public class GameState {
                 break;
             }
         }
-
-        //Da rivedere controllo sulla fine dei deck
-        //if(GoldenDeck.isDeckFinished(goldDeck) || ResourcesDeck.isDeckFinished(resourceDeck)){
-
-        //    setLastTurnTrue();
-        //}
-
         //return isLastTurn;
         //checks if both decks are empty
         if(goldDeck.getSize() == 0 && resourceDeck.getSize() == 0){
