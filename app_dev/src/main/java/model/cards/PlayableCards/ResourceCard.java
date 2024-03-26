@@ -13,6 +13,7 @@ import model.placementArea.PlacementArea;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class ResourceCard extends PlayableCard {
     @JsonProperty("element")
@@ -24,10 +25,19 @@ public class ResourceCard extends PlayableCard {
 
         int targetId = id; // ID to search for
 
+
         try {
+
+            ClassLoader classLoader = ResourceCard.class.getClassLoader();
+            InputStream inputStream = classLoader.getResourceAsStream("ResourceCards.json");
+
+            if (inputStream == null) {
+                throw new IOException("Resource file not found: ResourceCards.json");
+            }
+
             // Read the JSON file
             ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode rootNode = objectMapper.readTree(new File("app_dev/src/main/resources/ResourceCards.json"));
+            JsonNode rootNode = objectMapper.readTree(inputStream);
 
             // Look for the object with the specified ID
             JsonNode targetNode = null;
@@ -95,9 +105,15 @@ public class ResourceCard extends PlayableCard {
             } else {
                 System.out.println("Object with ID " + targetId + " not found.");
             }
+
+
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
         return null;
     }
 
