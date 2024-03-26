@@ -19,6 +19,7 @@ public class Controller {
         //FIRST: every player must select a face side for the starting card which is then placed
         Scanner sc = new Scanner(System.in);
         for (String player : nickNames) {
+            System.out.println("YOUR STARTER CARD: \n");
             view.printStarterCard();
             System.out.println(player + ", select a face side for the starting card: ");
             gameState.setStartingCardFace(sc.nextBoolean());

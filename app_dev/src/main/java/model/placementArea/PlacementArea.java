@@ -32,8 +32,7 @@ public class PlacementArea {
         availableArtifacts = new HashMap<>();
         availableElements = new HashMap<>();
         availablePlaces = new ArrayList<>();
-        Coordinates oo;
-        availablePlaces.add(oo = new Coordinates(0,0));
+        availablePlaces.add(new Coordinates(0,0));
 
         //we initialize availableElements and availableArtifacts to 0
         for(Element el : Element.values()) {
@@ -129,7 +128,7 @@ public class PlacementArea {
     //method specific for the player starting card
     public void addCard(PlayableCard starterCard) {
         int i, j, count = 0;
-        Coordinates xy = new Coordinates(0,0);
+        Coordinates xy = availablePlaces.get(0); //new Coordinates(0,0);
         Coordinates coord;
         //add card to disposition
         disposition.put(xy, starterCard);
@@ -149,6 +148,7 @@ public class PlacementArea {
                 availableElements.put(el, availableElements.get(el) + 1);
             }
         }
+
 
     }
 

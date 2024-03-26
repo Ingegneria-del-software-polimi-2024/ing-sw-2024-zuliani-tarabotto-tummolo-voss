@@ -50,7 +50,7 @@ public class ObjectiveCard  implements Card {
                     break;
                 }
             }
-            System.out.println("Extracted JSON based on ID " + targetId + ": " );
+            //System.out.println("Extracted JSON based on ID " + targetId + ": " );
 
 
             // Extract the JSON string based on the ID
