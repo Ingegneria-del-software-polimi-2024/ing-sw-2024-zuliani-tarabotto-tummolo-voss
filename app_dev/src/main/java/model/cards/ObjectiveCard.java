@@ -4,11 +4,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import model.cards.PlayableCards.ResourceCard;
 import model.objective.*;
 import model.placementArea.PlacementArea;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class ObjectiveCard  implements Card {
     @JsonProperty("id")
@@ -25,10 +27,20 @@ public class ObjectiveCard  implements Card {
 
         int targetId = id; // ID to search for
 
+
+
+
         try {
+
+            ClassLoader classLoader = ResourceCard.class.getClassLoader();
+            InputStream inputStream = classLoader.getResourceAsStream("ObjectiveCards.json");
+
+            if (inputStream == null) {
+                throw new IOException("Resource file not found: ObjectiveCards.json");
+            }
             // Read the JSON file
             ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode rootNode = objectMapper.readTree(new File("app_dev/src/main/resources/ObjectiveCards.json"));
+            JsonNode rootNode = objectMapper.readTree(inputStream);
 
             // Look for the object with the specified ID
             JsonNode targetNode = null;
@@ -38,6 +50,8 @@ public class ObjectiveCard  implements Card {
                     break;
                 }
             }
+            System.out.println("Extracted JSON based on ID " + targetId + ": " );
+
 
             // Extract the JSON string based on the ID
             if (targetNode != null) {

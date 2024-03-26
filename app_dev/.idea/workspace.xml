@@ -5,9 +5,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/model/cards/ObjectiveCardTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/model/cards/PlayableCards/GoldCardTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/model/cards/PlayableCards/ResourceCardTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/model/cards/PlayableCards/StarterCardTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/test-classes/model/cards/ObjectiveCardTest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/test-classes/model/cards/PlayableCards/GoldCardTest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/test-classes/model/cards/PlayableCards/ResourceCardTest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/test-classes/model/cards/PlayableCards/StarterCardTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ing_sw_proj.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/ObjectiveCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/ObjectiveCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/player/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/PlayableCards/GoldCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/PlayableCards/GoldCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/PlayableCards/ResourceCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/PlayableCards/ResourceCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/PlayableCards/StarterCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/PlayableCards/StarterCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/placemetArea/PlacementAreaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/placemetArea/PlacementAreaTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/GameState/GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/GameState/GameState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/RunDeckCreation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/cards/ObjectiveCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/cards/ObjectiveCard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/GoldCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/GoldCard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/PlayableCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/PlayableCard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/ResourceCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/ResourceCard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/StarterCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/StarterCard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/deckFactory/Generators/ObjectiveCardsDeckGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/deckFactory/Generators/ObjectiveCardsDeckGenerator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/deckFactory/ObjectiveDeck.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/deckFactory/ObjectiveDeck.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/placementArea/PlacementArea.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/placementArea/PlacementArea.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/player/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/player/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/model/placemetArea/PlacementAreaTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/org/example/AppTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/org/example/AppTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +45,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JUnit3 Test Class" />
         <option value="Class" />
+        <option value="JUnit3 Test Class" />
       </list>
     </option>
   </component>
@@ -74,6 +102,8 @@
       <recent name="junit.framework.TestCase" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="model.cards" />
+      <recent name="model.cards.PlayableCards" />
       <recent name="model.placemetArea" />
     </key>
   </component>
@@ -91,15 +121,62 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RunDeckCreation" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="model.RunDeckCreation" />
+    <configuration name="GoldCardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Ing_sw_proj" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="model.*" />
+          <option name="PATTERN" value="model.cards.PlayableCards.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="model.cards.PlayableCards" />
+      <option name="MAIN_CLASS_NAME" value="model.cards.PlayableCards.GoldCardTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ObjectiveCardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Ing_sw_proj" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="model.cards.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="model.cards" />
+      <option name="MAIN_CLASS_NAME" value="model.cards.ObjectiveCardTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ResourceCardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Ing_sw_proj" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="model.cards.PlayableCards.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="model.cards.PlayableCards" />
+      <option name="MAIN_CLASS_NAME" value="model.cards.PlayableCards.ResourceCardTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StarterCardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Ing_sw_proj" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="model.cards.PlayableCards.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="model.cards.PlayableCards" />
+      <option name="MAIN_CLASS_NAME" value="model.cards.PlayableCards.StarterCardTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -107,7 +184,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Model" />
-        <item itemvalue="Application.RunDeckCreation" />
+        <item itemvalue="JUnit.ObjectiveCardTest" />
+        <item itemvalue="JUnit.StarterCardTest" />
+        <item itemvalue="JUnit.GoldCardTest" />
+        <item itemvalue="JUnit.ResourceCardTest" />
       </list>
     </recent_temporary>
   </component>
@@ -137,6 +217,7 @@
       <workItem from="1711298778079" duration="21000" />
       <workItem from="1711298849638" duration="70000" />
       <workItem from="1711298942923" duration="237000" />
+      <workItem from="1711403493015" duration="3603000" />
     </task>
     <servers />
   </component>

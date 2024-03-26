@@ -8,6 +8,7 @@ import model.placementArea.PlacementArea;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,9 +24,15 @@ public class GoldCard extends PlayableCard{
         int targetId = id; // ID to search for
 
         try {
+            ClassLoader classLoader = ResourceCard.class.getClassLoader();
+            InputStream inputStream = classLoader.getResourceAsStream("GoldenCards.json");
+
+            if (inputStream == null) {
+                throw new IOException("Resource file not found: GoldenCards.json");
+            }
             // Read the JSON file
             ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode rootNode = objectMapper.readTree(new File("app_dev/src/main/resources/GoldenCards.json"));
+            JsonNode rootNode = objectMapper.readTree(inputStream);
 
             // Look for the object with the specified ID
             JsonNode targetNode = null;

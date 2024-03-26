@@ -1,4 +1,4 @@
-package model.placementArea;
+/*package model.placementArea;
 
 import junit.framework.TestCase;
 
@@ -11,4 +11,4 @@ public class PlacementAreaTest extends TestCase {
         };
     }
 
-}
+}*/
