@@ -29,6 +29,7 @@ public class Controller {
         //SECOND: every player draws three random cards: 1 goldCard and 2 resourceCard
         gameState.initializePlayersHands();
 
+        //THIRD: loops until getLastTurn is true
         while (! gameState.getLastTurn()) {
             System.out.println("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
             System.out.println("\u001B[35mCURRENT PLAYER: \u001B[0m " + gameState.getTurnPlayer().getNickname().toString());
