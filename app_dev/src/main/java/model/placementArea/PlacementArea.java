@@ -121,34 +121,6 @@ public class PlacementArea {
 
     }
 
-    /*FUNZIONE DI ANDRE ---> DA TOGLIERE
-//adds the starter card in position (0,0)
-    public void addCard(StarterCard firstCard){
-        //add card to disposition
-        disposition.put(new Coordinates(0,0), firstCard);
-
-        //add free positions
-        int count = 0;
-        for(int j = 1; j >= -1; j--)
-            for (int i = -1; i <= 1; i++)
-                if(i != 0 && j != 0)
-                    if(firstCard.getCorner(count) != null)
-                        availablePlaces.add(new Coordinates(i,j));
-
-
-
-
-        //add elements to list
-
-        if(firstCard.isFaceSide())
-            for(Element e : firstCard.getBlockedElements())
-                availableElements.put(e, availableElements.get(e)+1);
-
-        for(count = 0; count <= 3; count++)
-            if(firstCard.getCorner(count) != null && firstCard.getCorner(count).getElement() != null)
-                    availableElements.put(firstCard.getCorner(count).getElement(), availableElements.get(firstCard.getCorner(count).getElement()));
-    }
-*/
 //returns the NUMBER OF COMBINATION of the shape "shape"
     public int verifyObjective(Shape shape, Element element){
         //declare and initialize
