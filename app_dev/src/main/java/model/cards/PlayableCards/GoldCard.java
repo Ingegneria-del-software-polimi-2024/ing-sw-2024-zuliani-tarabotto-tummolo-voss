@@ -50,8 +50,8 @@ public class GoldCard extends PlayableCard{
                 GoldCard goldenCard = mapper.readValue(jsonString, GoldCard.class);
 
                 // Access parsed properties of the GoldenCard object
-                System.out.println(goldenCard.getId());
-                System.out.println(goldenCard.getPlacementConstraint());
+                //System.out.println(goldenCard.getId());
+                //System.out.println(goldenCard.getPlacementConstraint());
 
 
                 return goldenCard;

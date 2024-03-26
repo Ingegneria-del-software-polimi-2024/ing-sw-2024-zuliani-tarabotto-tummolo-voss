@@ -42,14 +42,13 @@ public class ObjectiveCard  implements Card {
             // Extract the JSON string based on the ID
             if (targetNode != null) {
                 String jsonString = targetNode.toString();
-                System.out.println("Extracted JSON based on ID " + targetId + ": " + jsonString);
-
+                //System.out.println("Extracted JSON based on ID " + targetId + ": " + jsonString);
 
                 // Convert JSON to object
                 ObjectMapper mapper = new ObjectMapper();
                 mapper.registerSubtypes(LShapeObjective.class, ElementObjective.class, DiagonalShapeObjective.class, ArtifactObjective.class);
                 ObjectiveCard objectiveCard = mapper.readValue(jsonString, ObjectiveCard.class);
-                System.out.println(objectiveCard.getId());
+                //System.out.println(objectiveCard.getId());
 
 
                 return objectiveCard;

@@ -21,7 +21,10 @@ public abstract class PlayableDeck implements Deck{
         if (cards.isEmpty()) {
             throw new IllegalStateException("Deck is empty!");
         }
-        return cards.remove(0); // Extract and remove the first card (head/beginning of list)
+        PlayableCard extracted;
+        extracted = cards.get(0);
+        cards.remove(0);
+        return extracted; // Extract and remove the first card (head/beginning of list)
     }
 
     public void addCard(PlayableCard card) {
