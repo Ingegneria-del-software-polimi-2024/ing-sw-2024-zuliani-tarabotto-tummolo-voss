@@ -1,5 +1,7 @@
 package model.placementArea;
 
+import java.util.Collection;
+
 /*
 the class coordinates facilitates the use of a cartesian plane as model for the Placement Area of the players
 */
@@ -66,4 +68,12 @@ public class Coordinates {
         else return a;
     }
 
+
+    //returns the exact object of the collection equal to the coordinates if present, else returns null
+    public Coordinates areContainedIn(Collection<Coordinates> collection){
+        for(Coordinates c : collection)
+            if(this.equals(c))
+                return c;
+        return null;
+    }
 }

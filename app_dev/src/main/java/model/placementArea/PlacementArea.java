@@ -7,10 +7,7 @@ import model.enums.Artifact;
 import model.enums.Element;
 import model.objective.Shape;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 
 //!!!!!!!we will need to declare a constructor for the initialization of the game!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -57,6 +54,9 @@ public class PlacementArea {
         if(disposition.containsKey(xy)){
             throw new IllegalArgumentException();
         }else{
+            //update available positions and get the one we are using
+            xy = updateAvailablePlaces(xy, card);
+
             //add card to disposition
             disposition.put(xy, card);
 
@@ -64,17 +64,17 @@ public class PlacementArea {
             for(j = xy.getY()-1; j <= xy.getY()+1; j++){
                 for(i = xy.getX()+1; i >= xy.getX()-1; i--){
                     if(i != xy.getX() && j != xy.getY()){
-                        coord = new Coordinates(i, j);
-                        if(disposition.containsKey(coord)){
+                        //if there is a card at position (i,j)...
+                        coord = new Coordinates(i,j).areContainedIn(disposition.keySet());
+                        if(coord != null){
+                            //...I will get it
                             cardOnTable = disposition.get(coord);
-
-                            if (cardOnTable.getCorner(count) != null) {//updates the number of cards covered by the placed card
-                                numberNearbyCards ++;
-                            }
+                            //counting the number of nearby cards for objectives
+                            numberNearbyCards ++;
+                            //removing covered elements/artifacts
                             if(cardOnTable.getCorner(count) != null && !cardOnTable.getCorner(count).isEmpty()){
                                 if(cardOnTable.getCorner(count).getElement() != null) availableElements.put(cardOnTable.getCorner(count).getElement(), availableElements.get(cardOnTable.getCorner(count).getElement())-1);
                                 else availableArtifacts.put(cardOnTable.getCorner(count).getArtifact(), availableArtifacts.get(cardOnTable.getCorner(count).getArtifact())-1);
-
                             }
                         }
                         count += 1;
@@ -86,37 +86,6 @@ public class PlacementArea {
             if(card.getFaceSide()){
                 addResourcesOfNewCard(card);
             } else {availableElements.put(card.getBlockedElement(), availableElements.get(card.getBlockedElement()) + 1);}
-
-
-            /* FUNZIONE DI ANDRE  ---> DA TOGLIERE
-            //add elements and objects of newly placed card
-            for(count = 0; count < 4 && card.isFaceSide(); count++) {
-                if (card.getCorner(count) != null) {
-                    if (card.getCorner(count).getElement() != null)
-                        availableElements.put(card.getCorner(count).getElement(), availableElements.get(card.getCorner(count).getElement()) + 1);
-                    else if (card.getCorner(count).getArtifact() != null)
-                        availableArtifacts.put(card.getCorner(count).getArtifact(), availableArtifacts.get(card.getCorner(count).getArtifact()) + 1);
-                }
-            }
-            if(!card.isFaceSide()) availableElements.put(card.getBlockedElement(), availableElements.get(card.getBlockedElement())+1);
-
-            //update available positions
-            availablePlaces.remove(xy);
-            count = 3;
-            for(j = xy.getY()-1; j <= xy.getY()+1; j++) {
-                for (i = xy.getX() + 1; i >= xy.getX() - 1; i--) {
-                    if (i != xy.getX() && j != xy.getY()) {
-                        coord = new Coordinates(i, j);
-                        if (!disposition.containsKey(coord) && card.getCorner(count) != null)
-                            availablePlaces.add(coord);
-                    }
-                    count -= 1;
-                }
-            */
-
-            
-            //update available positions
-            updateAvailablePlaces(xy, card);
         }
         //we return the number of points given by the card if the card is facing up else we return 0(no points are given by the back of the card)
         if(card.getFaceSide()){
@@ -127,27 +96,27 @@ public class PlacementArea {
 
     //method specific for the player starting card
     public void addCard(PlayableCard starterCard) {
-        int i, j, count = 0;
-        Coordinates xy = availablePlaces.get(0); //new Coordinates(0,0);
+        Coordinates xy = new Coordinates(0,0);//availablePlaces.get(0); //
         Coordinates coord;
-        //add card to disposition
-        disposition.put(xy, starterCard);
-
         //update available positions
-        updateAvailablePlaces(xy, starterCard);
+        coord = updateAvailablePlaces(xy, starterCard);
+
+        //add card to disposition
+        disposition.put(coord, starterCard);
+
 
         //if front face side we add the resources present in the corners and the blocked elements
         //if back face side we add the elements present in each corner of the back side
         if(starterCard.getFaceSide()) {
             addResourcesOfNewCard(starterCard);
-            for (Element el : starterCard.getBlockedElements()) {
+            for (Element el : starterCard.getBlockedElements())
                 availableElements.put(el, availableElements.get(el) + 1);
-            }
-        } else {
-            for(Element el : starterCard.getBackFaceCorners()) {
+
+        } else
+            for(Element el : starterCard.getBackFaceCorners())
                 availableElements.put(el, availableElements.get(el) + 1);
-            }
-        }
+
+
 
 
     }
@@ -224,19 +193,32 @@ public class PlacementArea {
         }
     }
     //after placing a card we update the available places to put a new card
-    private void updateAvailablePlaces(Coordinates xy, PlayableCard card) {
-        //update available positions
-        availablePlaces.remove(xy);
+    //returns the coordinates removed from the list of those available
+    //in this way we avoid to over-create Coordinates type objects
+    private Coordinates updateAvailablePlaces(Coordinates xy, PlayableCard card) throws IllegalArgumentException {
+        Coordinates coord;
         int count = 3;
-        for(int j = xy.getY()-1; j <= xy.getY()+1; j++) {
+        //checking if nearby positions can be added to the availablePlaces list
+        for (int j = xy.getY() - 1; j <= xy.getY() + 1; j++) {
             for (int i = xy.getX() + 1; i >= xy.getX() - 1; i--) {
                 if (i != xy.getX() && j != xy.getY()) {
-                    Coordinates coord = new Coordinates(i, j);
-                    if (!disposition.containsKey(coord) && card.getCorner(count) != null) availablePlaces.add(coord);
+                    coord = new Coordinates(i, j);
+                    //if the placed card has a corner there, there is no card already placed there,
+                    // they are not already inside availablePlaces, the coordinates can be added to the list
+                    if (card.getCorner(count) != null && coord.areContainedIn(disposition.keySet()) == null && coord.areContainedIn(availablePlaces) == null)
+                        availablePlaces.add(new Coordinates(i, j));
                     count -= 1;
                 }
             }
         }
+
+        //removig the coordinates from the availablePlaces list and returning them to be used
+        coord = xy.areContainedIn(availablePlaces);
+        if (coord != null){
+            availablePlaces.remove(coord);
+            return coord;
+        }
+        throw new IllegalArgumentException();
     }
 
 
@@ -253,7 +235,7 @@ public class PlacementArea {
         return retCopy;
     }
 
-//returns an Hashmap containing the couples (element, numberOfThatArtifacts)
+//returns a Hashmap containing the couples (element, numberOfThatArtifacts)
     public HashMap<Element, Integer> getAllElementsNumber(){
         HashMap<Element, Integer> retCopy;
         retCopy = availableElements;
