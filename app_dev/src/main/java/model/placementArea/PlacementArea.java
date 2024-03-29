@@ -218,9 +218,22 @@ public class PlacementArea {
     public int getNumberNearbyCards(){return numberNearbyCards;}
 
     public void printDisposition() {
+        System.out.println("––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––");
+        //printing elements
+        System.out.println("elements: mushrooms "+this.getNumberElements(Element.mushrooms));
+        System.out.println("          animals "+this.getNumberElements(Element.animals));
+        System.out.println("          insects "+this.getNumberElements(Element.insects));
+        System.out.println("          vegetals "+this.getNumberElements(Element.vegetals));
+        //printing artifacts
+        System.out.println("objects: featjer "+this.getNumberArtifacts(Artifact.feather));
+        System.out.println("         ink "+this.getNumberArtifacts(Artifact.ink));
+        System.out.println("         paper "+this.getNumberArtifacts(Artifact.paper));
+        System.out.println("***\t\t***\t\t***\t\t***\t\t***\t\t***\t\t***\t\t***\t\t***");
         for(Coordinates c : disposition.keySet()){
             System.out.println("Card: " + disposition.get(c).getId() + " || Coordinates: (" + c.getX() + ";" + c.getY() + ")");
         }
+        System.out.println("––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––");
+
     }
     public void printAvailablePlaces() {
         for(Coordinates c : availablePlaces ) {
