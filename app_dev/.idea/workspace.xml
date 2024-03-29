@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/model/placementArea/PlacementAreaTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/PlayableCards/Corner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/PlayableCards/Corner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/PlayableDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/PlayableDeck.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/placementArea/PlacementArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/placementArea/PlacementArea.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -19,6 +20,7 @@
       <list>
         <option value="Class" />
         <option value="JUnit3 Test Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -44,36 +46,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Model.executor&quot;: &quot;Run&quot;,
-    &quot;Application.RunDeckCreation.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit3&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3&quot;: &quot;junit.framework.TestCase&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;ModelMerge&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_directory_selection&quot;: &quot;/Users/andre/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.excludes&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Model.executor": "Run",
+    "Application.RunDeckCreation.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3": "junit.framework.TestCase",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "ModelMerge",
+    "kotlin-language-version-configured": "true",
+    "last_directory_selection": "/Users/andre/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java",
+    "last_opened_file_path": "/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.excludes",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
       <recent name="junit.framework.TestCase" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="model.placementArea" />
       <recent name="model.cards" />
       <recent name="model.cards.PlayableCards" />
       <recent name="model.placemetArea" />
@@ -185,7 +190,7 @@
       <workItem from="1711403493015" duration="3603000" />
       <workItem from="1711480113029" duration="140000" />
       <workItem from="1711561724458" duration="243000" />
-      <workItem from="1711726317388" duration="3017000" />
+      <workItem from="1711726317388" duration="7013000" />
     </task>
     <servers />
   </component>

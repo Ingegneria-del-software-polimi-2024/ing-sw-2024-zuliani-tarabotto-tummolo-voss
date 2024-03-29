@@ -225,7 +225,7 @@ public class PlacementArea {
         System.out.println("          insects "+this.getNumberElements(Element.insects));
         System.out.println("          vegetals "+this.getNumberElements(Element.vegetals));
         //printing artifacts
-        System.out.println("objects: featjer "+this.getNumberArtifacts(Artifact.feather));
+        System.out.println("objects: feather "+this.getNumberArtifacts(Artifact.feather));
         System.out.println("         ink "+this.getNumberArtifacts(Artifact.ink));
         System.out.println("         paper "+this.getNumberArtifacts(Artifact.paper));
         System.out.println("***\t\t***\t\t***\t\t***\t\t***\t\t***\t\t***\t\t***\t\t***");

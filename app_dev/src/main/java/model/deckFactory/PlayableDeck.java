@@ -31,6 +31,12 @@ public abstract class PlayableDeck implements Deck{
         cards.add(card); // Add card to the back (tail/end of list)
     }
 
-
+    //just for test purposes
+    public PlayableCard getCard(int id){
+        for(PlayableCard c : cards)
+            if(c.getId() == id)
+                return c;
+        return null;
+    }
 
 }
