@@ -56,4 +56,12 @@ public class ObjectiveDeck  implements Deck{
         return extracted; // Extract and remove the first card (head/beginning of list)
     }
 
+    //only for test purposes
+    public ObjectiveCard getCard(int id){
+        for(ObjectiveCard c: cards){
+            if(c.getId()==id)
+                return c;
+        }
+        return null;
+    }
 }
