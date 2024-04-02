@@ -59,4 +59,5 @@ public class PlacementAreaIterator implements Iterator<Coordinates> {
         }
     }
 
+
 }

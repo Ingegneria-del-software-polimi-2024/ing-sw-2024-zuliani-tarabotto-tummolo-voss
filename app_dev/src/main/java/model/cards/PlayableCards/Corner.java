@@ -31,8 +31,7 @@ public class Corner {
 
 
     public boolean isEmpty() {
-            return isAvailable;
-
+            return element == null && artifact == null;
     }
 
     //constructor that creates a void corner

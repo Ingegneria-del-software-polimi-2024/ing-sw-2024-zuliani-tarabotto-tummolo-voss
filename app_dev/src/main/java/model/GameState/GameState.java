@@ -1,20 +1,14 @@
 package model.GameState;
 
 import model.cards.ObjectiveCard;
-import model.cards.PlayableCards.GoldCard;
 import model.cards.PlayableCards.PlayableCard;
-import model.cards.PlayableCards.ResourceCard;
-import model.deckFactory.Generators.DeckGenerator;
 import model.deckFactory.Generators.PlayableDeckGenerator;
 import model.deckFactory.Generators.GoldCardsDeckGenerator;
 import model.deckFactory.Generators.ResourceCardsDeckGenerator;
 import model.deckFactory.Generators.*;
-import model.deckFactory.ResourcesDeck;
 import model.placementArea.Coordinates;
 import model.player.Player;
 import model.deckFactory.*;
-import model.cards.*;
-import view.CliView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -239,9 +233,13 @@ public class GameState {
         return goldDeck;
     }
 
-    public Deck getResourceDeck() {
+    public PlayableDeck getResourceDeck() {
         return resourceDeck;
     }
+
+    public PlayableDeck getStarterDeck(){return startingDeck;}
+
+    public ObjectiveDeck getObjectiveDeck() {return objectiveDeck;}
 
     public List<PlayableCard> getOpenResources() {
         return openResources;
