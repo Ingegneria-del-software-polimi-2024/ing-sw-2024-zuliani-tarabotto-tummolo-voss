@@ -14,12 +14,7 @@ public class PlacementAreaIterator implements Iterator<Coordinates> {
     private Coordinates currentPlace;
     private List<Coordinates> availableCoordinates;
     @Override
-    public boolean hasNext() {
-        try{
-            availableCoordinates.get(availableCoordinates.indexOf(currentPlace)+1);
-            return true;
-        }catch(IndexOutOfBoundsException ex){return false;}
-    }
+    public boolean hasNext() {return availableCoordinates.indexOf(currentPlace) + 1 < availableCoordinates.size();}
 
     @Override
     public Coordinates next(){
@@ -31,32 +26,35 @@ public class PlacementAreaIterator implements Iterator<Coordinates> {
 
 //Constructor
     public PlacementAreaIterator(HashMap<Coordinates, PlayableCard> disp, Shape shape){
+        availableCoordinates = new ArrayList<Coordinates>(disp.keySet());
         switch (shape){
             case TOPRIGHTL:
-                currentPlace = disp.keySet().stream().reduce(new Coordinates(0,0), Coordinates::topRightFirst);
+                //currentPlace = disp.keySet().stream().reduce(new Coordinates(0,0), Coordinates::topRightFirst);
                 availableCoordinates = new ArrayList<Coordinates>(disp.keySet());
                 availableCoordinates.sort((a, b) -> a.topRightFirst(b).equals(a)? 1 : -1);
             case TOPLEFTL:
-                currentPlace = disp.keySet().stream().reduce(new Coordinates(0,0), Coordinates::topLeftFirst);
-                availableCoordinates = new ArrayList<Coordinates>(disp.keySet());
+                //currentPlace = disp.keySet().stream().reduce(new Coordinates(0,0), Coordinates::topLeftFirst);
+                //availableCoordinates = new ArrayList<Coordinates>(disp.keySet());
                 availableCoordinates.sort((a, b) -> a.topLeftFirst(b).equals(a)? 1 : -1);
             case BOTTOMLEFTL:
-                currentPlace = disp.keySet().stream().reduce(new Coordinates(0,0), Coordinates::bottomLeftFirst);
-                availableCoordinates = new ArrayList<Coordinates>(disp.keySet());
+                //currentPlace = disp.keySet().stream().reduce(new Coordinates(0,0), Coordinates::bottomLeftFirst);
+                //availableCoordinates = new ArrayList<Coordinates>(disp.keySet());
                 availableCoordinates.sort((a, b) -> a.bottomLeftFirst(b).equals(a)? 1 : -1);
             case BOTTOMRIGHTL:
-                currentPlace = disp.keySet().stream().reduce(new Coordinates(0,0), Coordinates::bottomRightFirst);
-                availableCoordinates = new ArrayList<Coordinates>(disp.keySet());
+                //currentPlace = disp.keySet().stream().reduce(new Coordinates(0,0), Coordinates::bottomRightFirst);
+                //availableCoordinates = new ArrayList<Coordinates>(disp.keySet());
                 availableCoordinates.sort((a, b) -> a.bottomRightFirst(b).equals(a)? 1 : -1);
             case ASCENDINGDIAGONAL:
-                currentPlace = disp.keySet().stream().reduce(new Coordinates(0,0), Coordinates::topRightFirst);
-                availableCoordinates = new ArrayList<Coordinates>(disp.keySet());
+                //currentPlace = disp.keySet().stream().reduce(new Coordinates(0,0), Coordinates::topRightFirst);
+                //availableCoordinates = new ArrayList<Coordinates>(disp.keySet());
+                //availableCoordinates.sort((a, b) -> a.topRightFirst(b).equals(a)? 1 : a.topRightFirst(b).equals(b)? -1 : 0);
                 availableCoordinates.sort((a, b) -> a.topRightFirst(b).equals(a)? 1 : -1);
             case DESCENDINGDIAGONAL:
-                currentPlace = disp.keySet().stream().reduce(new Coordinates(0,0), Coordinates::bottomRightFirst);
-                availableCoordinates = new ArrayList<Coordinates>(disp.keySet());
+                //currentPlace = disp.keySet().stream().reduce(new Coordinates(0,0), Coordinates::bottomRightFirst);
+                //availableCoordinates = new ArrayList<Coordinates>(disp.keySet());
                 availableCoordinates.sort((a, b) -> a.bottomRightFirst(b).equals(a)? 1 : -1);
         }
+        currentPlace = availableCoordinates.get(0);
     }
 
 

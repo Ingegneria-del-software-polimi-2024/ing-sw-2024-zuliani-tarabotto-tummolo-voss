@@ -6,8 +6,8 @@ import java.util.Collection;
 the class coordinates facilitates the use of a cartesian plane as model for the Placement Area of the players
 */
 public class Coordinates {
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
 
     public Coordinates(int a, int b){
         x = a;

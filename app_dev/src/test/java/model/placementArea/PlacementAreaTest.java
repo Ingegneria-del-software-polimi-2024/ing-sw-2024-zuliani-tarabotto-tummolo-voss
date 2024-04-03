@@ -1,8 +1,8 @@
 package model.placementArea;
 
-import com.sun.management.internal.GarbageCollectorExtImpl;
 import model.GameState.GameState;
 import model.cards.ObjectiveCard;
+import model.cards.PlayableCards.PlayableCard;
 import model.deckFactory.Deck;
 import model.deckFactory.ObjectiveDeck;
 import model.deckFactory.PlayableDeck;
@@ -13,12 +13,12 @@ import java.util.Scanner;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PlacementAreaTest {
-    private GameState gameState;
+    private static GameState gameState;
     static int ID = 81;
 
     //initializes the gamestate (please always specify one player), inserts the cards expressed from cli
     // in the placementArea of the palyer, the starterCard will be automatically added
-    public void initialize() {
+    public static void initialize() {
         String id = "test4Objectives";
         ArrayList<String> nickNames = new ArrayList<String>();
         Scanner scanner = new Scanner(System.in);
@@ -38,28 +38,35 @@ class PlacementAreaTest {
         int num = scanner.nextInt();
         ArrayList<Integer> cardList = new ArrayList<Integer>();
         for(int i = 0; i < num; i++){
-            System.out.println(i + "insert card id:");
+            System.out.println(i + " insert card id:");
             cardList.add(scanner.nextInt());
         }
-        gameState.getStarterDeck().getCard(ID).setFaceSide(false);
-        gameState.getTurnPlayer().getPlacementArea().addCard(gameState.getStarterDeck().getCard(ID));
+        PlayableCard cardToBePlaced = gameState.getStarterDeck().getCard(ID);
+        cardToBePlaced.setFaceSide(false);
+        gameState.getTurnPlayer().getPlacementArea().addCard(cardToBePlaced);
         putCards(cardList, gameState.getResourceDeck(), gameState.getTurnPlayer().getPlacementArea());
     }
 
-    public void putCards(ArrayList<Integer> cards, PlayableDeck deck, PlacementArea placementArea) {
+    public static void putCards(ArrayList<Integer> cards, PlayableDeck deck, PlacementArea placementArea) {
         Scanner sc = new Scanner(System.in);
         for (int i : cards) {
             //ask for coordinates
-            System.out.println("Insert coordinates for card number" + i + "\n");
+            System.out.println("current free coordinates:\n");
+            for (Coordinates c : gameState.getTurnPlayer().getPlacementArea().freePositions())
+                System.out.println(c.getX()+" "+c.getY());
+            System.out.println("Insert coordinates for card number " + i + "\n");
             Coordinates coord = new Coordinates(sc.nextInt(), sc.nextInt());
-            placementArea.addCard(deck.getCard(i));
+            gameState.setSelectedCoordinates(coord);
+            gameState.setSelectedHandCard(deck.getCard(i));
+            gameState.setSelectedCardFace(false);
+            gameState.playCard();
         }
     }
 
-    public int checkForObjectives(GameState state, ObjectiveCard obj){return obj.countPoints(state.getTurnPlayer().getPlacementArea());}
+    public static int checkForObjectives(GameState state, ObjectiveCard obj){return obj.countPoints(state.getTurnPlayer().getPlacementArea());}
 
     //insert 999 when asking "what objective id do you want to check? " if you want to stop
-    public int main(){
+    public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
         int id;
 
@@ -67,10 +74,9 @@ class PlacementAreaTest {
         do {
             System.out.println("what objective id do you want to check? ");
             id = scanner.nextInt();
-            if(gameState.getObjectiveDeck().getCard(id) == null) return 1;
+            if(gameState.getObjectiveDeck().getCard(id) == null) return;
             System.out.println(checkForObjectives(gameState, gameState.getObjectiveDeck().getCard(id)));
         }while (id != 999);
-        return 0;
     }
 
 }
