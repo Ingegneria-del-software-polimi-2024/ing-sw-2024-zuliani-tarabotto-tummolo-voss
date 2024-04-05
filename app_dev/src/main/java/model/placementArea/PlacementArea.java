@@ -124,6 +124,7 @@ public class PlacementArea {
 //returns the NUMBER OF COMBINATION of the shape "shape"
     public int verifyObjective(Shape shape, Element element){
         //declare and initialize
+        final Coordinates ORIGIN = new Coordinates(0,0);
         Coordinates tmpCoordinates;
         boolean found;
         int counter = 0;
@@ -133,20 +134,19 @@ public class PlacementArea {
 
         if(shape.equals(Shape.ASCENDINGDIAGONAL) || shape.equals(Shape.DESCENDINGDIAGONAL)) {
             complementarElement = element;
-
         }else complementarElement = element.calculateComplementar();
         //iterate on the cards on the table (the way of iterating depends on the shape of the obj)
 
         while(coordinatesIterator.hasNext()){
             PlayableCard cardOnTable = disposition.get(coordinatesIterator.current());
-            //check if already counted that card for the same obj and if the element of the reference card matches
-            if(!countedCards.contains(cardOnTable) && disposition.get(coordinatesIterator.current()).getBlockedElement().equals(complementarElement)){
 
+            //check if already counted that card for the same obj and if the element of the reference card matches
+            if(!countedCards.contains(cardOnTable) && !coordinatesIterator.current().equals(ORIGIN) && cardOnTable.getBlockedElement().equals(complementarElement)){
                 found = true;
                 //now check if the surroundings cards matches the shape and the element of the obj (and they're not already counted)
                 for(Coordinates offset : shape.getCoordinates()){
                     tmpCoordinates = coordinatesIterator.current().sum(offset).areContainedIn(disposition.keySet());
-                    if(tmpCoordinates.equals(new Coordinates(0,0)) || (tmpCoordinates != null && !disposition.get(tmpCoordinates).getBlockedElement().equals(element) && !countedCards.contains(tmpCoordinates))){
+                    if((tmpCoordinates != null && !disposition.get(tmpCoordinates).getBlockedElement().equals(element) && !countedCards.contains(tmpCoordinates)) || (tmpCoordinates != null && tmpCoordinates.equals(ORIGIN))){
                         found = false;
                         break;
                     }
