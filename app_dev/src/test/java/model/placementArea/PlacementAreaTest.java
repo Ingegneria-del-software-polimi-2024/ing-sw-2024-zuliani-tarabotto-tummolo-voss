@@ -57,7 +57,12 @@ class PlacementAreaTest {
             System.out.println("Insert coordinates for card number " + i + "\n");
             Coordinates coord = new Coordinates(sc.nextInt(), sc.nextInt());
             gameState.setSelectedCoordinates(coord);
-            gameState.setSelectedHandCard(deck.getCard(i));
+            PlayableCard x = deck.getCard(i);
+            if(x == null) {
+                System.out.println("errore");
+                return;
+            }
+            gameState.setSelectedHandCard(x);
             gameState.setSelectedCardFace(false);
             gameState.playCard();
         }

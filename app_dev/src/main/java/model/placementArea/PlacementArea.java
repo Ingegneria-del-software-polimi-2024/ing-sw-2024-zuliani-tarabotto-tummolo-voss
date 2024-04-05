@@ -65,7 +65,9 @@ public class PlacementArea {
                 for(i = xy.getX()+1; i >= xy.getX()-1; i--){
                     if(i != xy.getX() && j != xy.getY()){
                         //if there is a card at position (i,j)...
-                        coord = new Coordinates(i,j).areContainedIn(disposition.keySet());
+
+                        coord = new Coordinates(i, j).areContainedIn(disposition.keySet());
+
                         if(coord != null){
                             //...I will get it
                             cardOnTable = disposition.get(coord);
@@ -122,7 +124,7 @@ public class PlacementArea {
     }
 
 //returns the NUMBER OF COMBINATION of the shape "shape"
-    public int verifyObjective(Shape shape, Element element){
+    public int verifyObjective(Shape shape, Element element) throws RuntimeException{
         //declare and initialize
         final Coordinates ORIGIN = new Coordinates(0,0);
         Coordinates tmpCoordinates;
@@ -135,29 +137,37 @@ public class PlacementArea {
         if(shape.equals(Shape.ASCENDINGDIAGONAL) || shape.equals(Shape.DESCENDINGDIAGONAL)) {
             complementarElement = element;
         }else complementarElement = element.calculateComplementar();
-        //iterate on the cards on the table (the way of iterating depends on the shape of the obj)
 
+        //iterate on the cards on the table (the way of iterating depends on the shape of the obj)
         while(coordinatesIterator.hasNext()){
+
             PlayableCard cardOnTable = disposition.get(coordinatesIterator.current());
 
             //check if already counted that card for the same obj and if the element of the reference card matches
-            if(!countedCards.contains(cardOnTable) && !coordinatesIterator.current().equals(ORIGIN) && cardOnTable.getBlockedElement().equals(complementarElement)){
+            if(cardOnTable != null && !countedCards.contains(cardOnTable) && !coordinatesIterator.current().equals(ORIGIN) && cardOnTable.getBlockedElement().equals(complementarElement)){
                 found = true;
                 //now check if the surroundings cards matches the shape and the element of the obj (and they're not already counted)
                 for(Coordinates offset : shape.getCoordinates()){
+
                     tmpCoordinates = coordinatesIterator.current().sum(offset).areContainedIn(disposition.keySet());
-                    if((tmpCoordinates != null && !disposition.get(tmpCoordinates).getBlockedElement().equals(element) && !countedCards.contains(tmpCoordinates)) || (tmpCoordinates != null && tmpCoordinates.equals(ORIGIN))){
+
+                    if(tmpCoordinates == null || tmpCoordinates.equals(ORIGIN) || !disposition.get(tmpCoordinates).getBlockedElement().equals(element) || countedCards.contains(disposition.get(tmpCoordinates))){
                         found = false;
                         break;
                     }
 
                 }
+
                 //if the previous cycle has found an objective satisfied, we can count and add all the previously checked cards to the countedCards list
                 if(found){
                     counter += 1;
+
                     for(Coordinates x : shape.getCoordinates()){
+
                         tmpCoordinates = coordinatesIterator.current().sum(x).areContainedIn(disposition.keySet());
-                        countedCards.add(disposition.get(tmpCoordinates));
+                        if(tmpCoordinates!= null)
+                            countedCards.add(disposition.get(tmpCoordinates));
+                        else throw new RuntimeException();
                     }
                 }
 
@@ -198,6 +208,7 @@ public class PlacementArea {
 
         //removig the coordinates from the availablePlaces list and returning them to be used
         coord = xy.areContainedIn(availablePlaces);
+
         if (coord != null){
             availablePlaces.remove(coord);
             return coord;
