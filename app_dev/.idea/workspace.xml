@@ -5,34 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Exceptions/EmptyCardSourceException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/GameState/CommonTable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/ObjectiveCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/ObjectiveCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/ObjectiveDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/ObjectiveDeck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/ArtifactObjective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/ArtifactObjective.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/DiagonalShapeObjective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/DiagonalShapeObjective.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/ElementObjective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/ElementObjective.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/LShapeObjective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/LShapeObjective.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/Objective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/Objective.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/player/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/CliView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/CliView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ObjectiveCards.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ObjectiveCards.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ObjectiveCards.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ObjectiveCards.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/controller/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/Controller.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/model/GameState/GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/GameState/GameState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/cards/ObjectiveCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/cards/ObjectiveCard.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/deckFactory/ObjectiveDeck.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/deckFactory/ObjectiveDeck.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/deckFactory/PlayableDeck.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/deckFactory/PlayableDeck.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/objective/ArtifactObjective.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/objective/ArtifactObjective.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/objective/DiagonalShapeObjective.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/objective/DiagonalShapeObjective.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/objective/ElementObjective.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/objective/ElementObjective.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/objective/LShapeObjective.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/objective/LShapeObjective.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/objective/Objective.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/objective/Objective.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/placementArea/PlacementArea.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/placementArea/PlacementArea.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/model/player/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/player/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/CliView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/CliView.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +30,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="Model_merge_16/03/24_at" />
+        <entry key="$PROJECT_DIR$/.." value="ModelMerge" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -89,7 +68,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.excludes",
+    "settings.editor.selected.configurable": "editor.preferences.tabs",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>

@@ -1,12 +1,7 @@
 package model.GameState;
 
 import Exceptions.EmptyCardSourceException;
-import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
-import model.deckFactory.Generators.PlayableDeckGenerator;
-import model.deckFactory.Generators.GoldCardsDeckGenerator;
-import model.deckFactory.Generators.ResourceCardsDeckGenerator;
-import model.deckFactory.Generators.*;
 import model.placementArea.Coordinates;
 import model.player.Player;
 import model.deckFactory.*;
@@ -20,17 +15,10 @@ public class GameState {
     private List<Player> players;
     private String id;
     private Player turnPlayer;
-    private PlayableDeck goldDeck;
-    private PlayableDeck resourceDeck;
-    private ObjectiveDeck objectiveDeck;
-    private PlayableDeck startingDeck;
-    private List<ObjectiveCard> commonObjectives; //2 elements in the list
-    //do we actually want Lists of PlayableCard or we prefer List<GoldCard> and List<ResourceCard>???
-    private List<PlayableCard> openGold; //2 elements in the list
-    private List<PlayableCard> openResources; //2 elements in the list
     private boolean isLastTurn = false;
     private PlayableCard selectedHandCard;
     private Coordinates selectedCoordinates;
+    private CommonTable commonTable;
 
 
     public GameState(ArrayList<String> nickNames, String id) {
@@ -43,90 +31,19 @@ public class GameState {
         }
         this.turnPlayer = players.get(0);
         this.id = id;
-
-
-        //creates and shuffles decks
-        initializeDecks();
-        //Extract open cards
-        initializeOpenCards();
-        //give each player a random starting card
-        initializePlayersStarterCard();
-        //we draw two random objectiveCards
-        initializeCommonObjectives();
-    }
-    //Methods
-
-    public Player getPlayer(int indx){
-        return players.get(indx);
+        this.commonTable = new CommonTable(players);
     }
 
-    public String getId(){
-        return id;
-    }
-    public Player getTurnPlayer(){
-        return turnPlayer;
-    }
-
+    //////////////////// GENERAL TURN CONTROL METHODS ///////////////////////////////////////
     //update each player's final points by calling the methods in Player class
     public void calculateFinalPoints(){
-
         int i, j;
-
         for(i=0; i< players.size(); i++){
-
             players.get(i).calculateSecretObj();
-
             for(j=0; j<2; j++){
-
-                players.get(i).calculateSingleCommonObj(commonObjectives.get(j));
+                players.get(i).calculateSingleCommonObj(commonTable.getCommonObjectives().get(j));
             }
         }
-    }
-
-
-    private void initializeDecks(){
-        //creates and shuffles decks
-        PlayableDeckGenerator resourcesDeckGenerator = new ResourceCardsDeckGenerator();
-        PlayableDeckGenerator goldenDeckGenerator = new GoldCardsDeckGenerator();
-        PlayableDeckGenerator starterDeckGenerator = new StarterCardsDeckGenerator();
-        ObjectiveCardsDeckGenerator objectiveCardsDeckGenerator = new ObjectiveCardsDeckGenerator();
-        objectiveDeck = objectiveCardsDeckGenerator.generateDeck();
-        resourceDeck =  resourcesDeckGenerator.generateDeck();
-        goldDeck =  goldenDeckGenerator.generateDeck();
-        startingDeck =  starterDeckGenerator.generateDeck();
-        objectiveDeck.shuffle();
-        resourceDeck.shuffle();
-        goldDeck.shuffle();
-        startingDeck.shuffle();
-    }
-    private void initializeOpenCards() {
-        //extract from goldDeck and resourceDeck the four open cards
-        openResources = new ArrayList<PlayableCard>();
-        openGold = new ArrayList<PlayableCard>();
-        openResources.add(resourceDeck.extract());
-        openResources.add(resourceDeck.extract());
-        openGold.add( goldDeck.extract());
-        openGold.add( goldDeck.extract());
-    }
-
-    public void initializePlayersHands() {
-        for(Player p : players) {
-            p.drawCard( goldDeck.extract());
-            p.drawCard( resourceDeck.extract());
-            p.drawCard( resourceDeck.extract());
-        }
-    }
-
-    private void initializePlayersStarterCard() {
-        for(Player p : players) {
-            p.setStarterCard(startingDeck.extract());
-        }
-    }
-
-    private void initializeCommonObjectives() {
-        commonObjectives = new ArrayList<>();
-        commonObjectives.add(objectiveDeck.extract());
-        commonObjectives.add(objectiveDeck.extract());
     }
 
 
@@ -139,18 +56,11 @@ public class GameState {
                 break;
             }
         }
-        //return isLastTurn;
-        //checks if both decks are empty
-        if(goldDeck.getSize() == 0 && resourceDeck.getSize() == 0 && openGold.isEmpty() && openResources.isEmpty()){
-            isLastTurn = true;
-        }
+        //checks if both decks are empty and also openGold and openResources are empty
+        isLastTurn = commonTable.checkEmtpyDecks();
     }
 
-    public boolean getLastTurn(){
-        return isLastTurn;
-    }
-
-
+    //updates turnPlayer
     public void nextPlayer() {
         int currentPlayer = players.indexOf(turnPlayer);
         if(currentPlayer == players.size() - 1) {
@@ -158,69 +68,13 @@ public class GameState {
         } else{turnPlayer = players.get(currentPlayer+1);}
     }
 
-    public void drawCardGoldDeck() throws EmptyCardSourceException {
-        //takes away the first card of the deck and calls the following method
-        if(goldDeck.getSize() > 0){
-            turnPlayer.drawCard( goldDeck.extract());
-        } else {throw new EmptyCardSourceException("gold deck is empty");}
-        //method to check if both decks are empty
-        setLastTurnTrue();
-    }
 
-    public void drawCardResourcesDeck() throws EmptyCardSourceException{
-        //takes away the first card of the deck and calls the following method
-        if(resourceDeck.getSize() > 0){
-            turnPlayer.drawCard( resourceDeck.extract());
-        }else {throw new EmptyCardSourceException("resource deck is empty");}
-        setLastTurnTrue();
-    }
-
-    public void drawCardOpenGold(int index) throws EmptyCardSourceException {
-        if(openGold.get(index) != null) {
-            //takes away the card at specified position from openGold
-            turnPlayer.drawCard(openGold.get(index));
-            //replaces the card taken with the first of the goldDeck
-            openGold.remove(index);
-        }else {
-            throw new EmptyCardSourceException("OpenGold_"+ index + "is empty");
-        }
-        if(goldDeck.getSize() > 0) openGold.add(index, goldDeck.extract());
-        setLastTurnTrue();
-    }
-
-    public void drawCardOpenResources(int index) throws EmptyCardSourceException {
-        if(openResources.get(index) != null) {
-            //takes away the card at specified position from openGold
-            turnPlayer.drawCard(openResources.get(index));
-            //replaces the card taken with the first of the goldDeck
-            openResources.remove(index);
-        }else {
-            throw new EmptyCardSourceException("OpenResources_"+ index + "is empty");
-        }
-        if(resourceDeck.getSize() > 0) openResources.add(index,  resourceDeck.extract());
-        setLastTurnTrue();
-    }
-
+    ////////////////// CARDS PLACEMENT RELATED METHODS //////////////////////////////////////////////////////
     public void playCard(){
         //calls the playCard method contained in the Player class
         turnPlayer.playCard(selectedHandCard, selectedCoordinates);
         //method to check if the player has reached 20 points
         setLastTurnTrue();
-    }
-
-    //calls the PlacementArea method to print available places where the player can put the selected card
-    public void printPlayerAvailablePlaces() {turnPlayer.getPlacementArea().printAvailablePlaces();}
-
-    //calls the PlacementArea method to print the player's cards disposition
-    public void printPlayerDisposition(){
-        getTurnPlayer().getPlacementArea().printDisposition();
-    }
-
-    public void printCommonObjectives() {
-        System.out.println("COMMON OBJECTIVE 1:");
-        commonObjectives.get(0).printCard();
-        System.out.println("COMMON OBJECTIVE 2:");
-        commonObjectives.get(1).printCard();
     }
 
     public void playStarterCard() {
@@ -242,39 +96,64 @@ public class GameState {
 
     //sets the faceSide for the card that the player has selected from his hand
     public void setSelectedCardFace(boolean faceSide) {
-        this.selectedHandCard.setFaceSide(faceSide);
+        selectedHandCard.setFaceSide(faceSide);
     }
 
-    //returns the total points of turnPlayer
+
+////////////////////////////////INTERFACE METHODS///////////////////////////////////////
+    public void drawCardGoldDeck() throws EmptyCardSourceException {
+        commonTable.drawCardGoldDeck(turnPlayer);
+        setLastTurnTrue();
+    }
+
+    public void drawCardResourcesDeck() throws EmptyCardSourceException {
+        commonTable.drawCardResourcesDeck(turnPlayer);
+        setLastTurnTrue();
+    }
+
+    public void drawCardOpenGold(int index) throws EmptyCardSourceException {
+        commonTable.drawCardOpenGold(index, turnPlayer);
+        setLastTurnTrue();
+    }
+
+    public void drawCardOpenResources(int index) throws EmptyCardSourceException {
+        commonTable.drawCardOpenResources(index, turnPlayer);
+        setLastTurnTrue();
+    }
+
+
+
+/////////////// GETTER METHODS FOR COMMONTABLE ATTRIBUTES ////////////////////////
+    public PlayableDeck getGoldDeck() { return commonTable.getGoldDeck(); }
+    public PlayableDeck getResourceDeck() { return commonTable.getResourceDeck(); }
+    public PlayableDeck getStarterDeck(){return commonTable.getStarterDeck();}
+    public ObjectiveDeck getObjectiveDeck() {return commonTable.getObjectiveDeck();}
+    public List<PlayableCard> getOpenResources() { return commonTable.getOpenResources(); }
+    public List<PlayableCard> getOpenGold() { return commonTable.getOpenGold(); }
+    public Player getPlayer(int index){ return players.get(index); }
+    public String getId(){ return id; }
+    public Player getTurnPlayer(){ return turnPlayer; }
+    public boolean getLastTurn(){ return isLastTurn; }
     public int getPoints() {return turnPlayer.getPoints(); }
+    //returns turnPlayer's card at specified index in his hand
+    public PlayableCard getPlayerHandCard(int index) { return turnPlayer.getPlayingHand().get(index); }
 
-    public PlayableCard getPlayerHandCard(int index) {
-        return turnPlayer.getPlayingHand().get(index);
+
+/////////////////////// PRINTING METHODS FOR CONSOLE TESTING ////////////////////////////////////////////////////////////////
+
+    //calls the PlacementArea method to print available places where the player can put the selected card
+    public void printPlayerAvailablePlaces() {turnPlayer.getPlacementArea().printAvailablePlaces();}
+
+    //calls the PlacementArea method to print the player's cards disposition
+    public void printPlayerDisposition(){
+        turnPlayer.getPlacementArea().printDisposition();
     }
 
-    //public void setLastTurnTrue() {isLastTurn = true;}
-
-    //are all of these methods necessary? idk but rn i'll keep them
-    public Deck getGoldDeck() {
-        return goldDeck;
+    public void printCommonObjectives() {
+        System.out.println("COMMON OBJECTIVE 1:");
+        commonTable.getCommonObjectives().get(0).printCard();
+        System.out.println("COMMON OBJECTIVE 2:");
+        commonTable.getCommonObjectives().get(1).printCard();
     }
-
-    public PlayableDeck getResourceDeck() {
-        return resourceDeck;
-    }
-
-    public PlayableDeck getStarterDeck(){return startingDeck;}
-
-    public ObjectiveDeck getObjectiveDeck() {return objectiveDeck;}
-
-    public List<PlayableCard> getOpenResources() {
-        return openResources;
-    }
-
-    public List<PlayableCard> getOpenGold() {
-        return openGold;
-    }
-
-
 
 }

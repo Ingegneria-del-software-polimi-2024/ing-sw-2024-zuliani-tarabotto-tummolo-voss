@@ -33,7 +33,7 @@ public class Controller {
         }
 
         //SECOND: every player draws three random cards: 1 goldCard and 2 resourceCard
-        gameState.initializePlayersHands();
+        //gameState.initializePlayersHands();
 
         //THIRD: display the two commonObjectives cards and each player selects his secret objective between two given cards
         System.out.println("COMMON OBJECTIVES");
