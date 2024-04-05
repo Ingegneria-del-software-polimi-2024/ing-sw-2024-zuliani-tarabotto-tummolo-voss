@@ -1,5 +1,6 @@
 package model.GameState;
 
+import Exceptions.EmptyCardSourceException;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
 import model.deckFactory.Generators.PlayableDeckGenerator;
@@ -50,6 +51,8 @@ public class GameState {
         initializeOpenCards();
         //give each player a random starting card
         initializePlayersStarterCard();
+        //we draw two random objectiveCards
+        initializeCommonObjectives();
     }
     //Methods
 
@@ -81,11 +84,7 @@ public class GameState {
     }
 
 
-    public void isLastTurn(){
-
-    }
-
-    public void initializeDecks(){
+    private void initializeDecks(){
         //creates and shuffles decks
         PlayableDeckGenerator resourcesDeckGenerator = new ResourceCardsDeckGenerator();
         PlayableDeckGenerator goldenDeckGenerator = new GoldCardsDeckGenerator();
@@ -100,7 +99,7 @@ public class GameState {
         goldDeck.shuffle();
         startingDeck.shuffle();
     }
-    public void initializeOpenCards() {
+    private void initializeOpenCards() {
         //extract from goldDeck and resourceDeck the four open cards
         openResources = new ArrayList<PlayableCard>();
         openGold = new ArrayList<PlayableCard>();
@@ -118,10 +117,16 @@ public class GameState {
         }
     }
 
-    public void initializePlayersStarterCard() {
+    private void initializePlayersStarterCard() {
         for(Player p : players) {
             p.setStarterCard(startingDeck.extract());
         }
+    }
+
+    private void initializeCommonObjectives() {
+        commonObjectives = new ArrayList<>();
+        commonObjectives.add(objectiveDeck.extract());
+        commonObjectives.add(objectiveDeck.extract());
     }
 
 
@@ -136,7 +141,7 @@ public class GameState {
         }
         //return isLastTurn;
         //checks if both decks are empty
-        if(goldDeck.getSize() == 0 && resourceDeck.getSize() == 0){
+        if(goldDeck.getSize() == 0 && resourceDeck.getSize() == 0 && openGold.isEmpty() && openResources.isEmpty()){
             isLastTurn = true;
         }
     }
@@ -145,9 +150,6 @@ public class GameState {
         return isLastTurn;
     }
 
-    public void countEndgamePoints(){
-
-    }
 
     public void nextPlayer() {
         int currentPlayer = players.indexOf(turnPlayer);
@@ -156,32 +158,45 @@ public class GameState {
         } else{turnPlayer = players.get(currentPlayer+1);}
     }
 
-    public void drawCardGoldDeck(){
+    public void drawCardGoldDeck() throws EmptyCardSourceException {
         //takes away the first card of the deck and calls the following method
-        if(goldDeck.getSize() > 0) turnPlayer.drawCard( goldDeck.extract());
+        if(goldDeck.getSize() > 0){
+            turnPlayer.drawCard( goldDeck.extract());
+        } else {throw new EmptyCardSourceException("gold deck is empty");}
         //method to check if both decks are empty
         setLastTurnTrue();
     }
 
-    public void drawCardResourcesDeck(){
+    public void drawCardResourcesDeck() throws EmptyCardSourceException{
         //takes away the first card of the deck and calls the following method
-        if(resourceDeck.getSize() > 0) turnPlayer.drawCard( resourceDeck.extract());
+        if(resourceDeck.getSize() > 0){
+            turnPlayer.drawCard( resourceDeck.extract());
+        }else {throw new EmptyCardSourceException("resource deck is empty");}
         setLastTurnTrue();
     }
 
-    public void drawCardOpenGold(int index){
-        //takes away the card at specified position from openGold
-        turnPlayer.drawCard(openGold.get(index));
-        //replaces the card taken with the first of the goldDeck
-        openGold.remove(index);
+    public void drawCardOpenGold(int index) throws EmptyCardSourceException {
+        if(openGold.get(index) != null) {
+            //takes away the card at specified position from openGold
+            turnPlayer.drawCard(openGold.get(index));
+            //replaces the card taken with the first of the goldDeck
+            openGold.remove(index);
+        }else {
+            throw new EmptyCardSourceException("OpenGold_"+ index + "is empty");
+        }
         if(goldDeck.getSize() > 0) openGold.add(index, goldDeck.extract());
         setLastTurnTrue();
     }
 
-    public void drawCardOpenResources(int index) {
-        //same as drawCardOpenGold
-        turnPlayer.drawCard(openResources.get(index));
-        openResources.remove(index);
+    public void drawCardOpenResources(int index) throws EmptyCardSourceException {
+        if(openResources.get(index) != null) {
+            //takes away the card at specified position from openGold
+            turnPlayer.drawCard(openResources.get(index));
+            //replaces the card taken with the first of the goldDeck
+            openResources.remove(index);
+        }else {
+            throw new EmptyCardSourceException("OpenResources_"+ index + "is empty");
+        }
         if(resourceDeck.getSize() > 0) openResources.add(index,  resourceDeck.extract());
         setLastTurnTrue();
     }
@@ -193,8 +208,19 @@ public class GameState {
         setLastTurnTrue();
     }
 
+    //calls the PlacementArea method to print available places where the player can put the selected card
+    public void printPlayerAvailablePlaces() {turnPlayer.getPlacementArea().printAvailablePlaces();}
+
+    //calls the PlacementArea method to print the player's cards disposition
     public void printPlayerDisposition(){
         getTurnPlayer().getPlacementArea().printDisposition();
+    }
+
+    public void printCommonObjectives() {
+        System.out.println("COMMON OBJECTIVE 1:");
+        commonObjectives.get(0).printCard();
+        System.out.println("COMMON OBJECTIVE 2:");
+        commonObjectives.get(1).printCard();
     }
 
     public void playStarterCard() {
@@ -248,6 +274,7 @@ public class GameState {
     public List<PlayableCard> getOpenGold() {
         return openGold;
     }
+
 
 
 }

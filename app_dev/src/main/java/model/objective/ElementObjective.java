@@ -11,4 +11,9 @@ public class ElementObjective implements Objective{
 
     public int countObjectivePoints(PlacementArea placementArea){return 2*(placementArea.getNumberElements(element)/3);}
 
+    @Override
+    public void printObjective() {
+        System.out.println("type: ElementObjective");
+        System.out.println(this.element.toString());
+    }
 }

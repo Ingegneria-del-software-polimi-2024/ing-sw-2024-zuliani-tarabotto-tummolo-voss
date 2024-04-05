@@ -13,7 +13,7 @@ import java.util.List;
 public class Player {
     private String nickname;
     private List<PlayableCard> hand;
-    private List<ObjectiveCard> secretObjective;
+    private ObjectiveCard secretObjective;
     private PlacementArea placementArea;
     private int points;
     private PlayableCard starterCard;
@@ -66,6 +66,14 @@ public class Player {
         return placementArea;
     }
 
+    public void setSecretObjective(ObjectiveCard secretObjective) {
+        this.secretObjective = secretObjective;
+    }
+
+    public ObjectiveCard getSecretObjective() {
+        return secretObjective;
+    }
+
     //auxiliary method for the method playCard() removes and returns
     //card from the hand
     private PlayableCard takeFromHand(PlayableCard card){
@@ -74,19 +82,13 @@ public class Player {
     }
 
     //calculates the total points of a single player's secreteObjective cards
+    //WHY? SECRET OBJECTIVE IS JUST ONE CARD, WHY USE A LIST
     public void calculateSecretObj(){
-
-        int i;
-
-        for(i=0; i< secretObjective.size(); i++){
-
-            points = points + secretObjective.get(i).countPoints(placementArea);
-        }
+        points = points + secretObjective.countPoints(placementArea);
     }
 
     //calculates the points of a single commonObjective card
     public void calculateSingleCommonObj(ObjectiveCard objectiveCard) {
-
         points = points + objectiveCard.countPoints(placementArea);
     }
 }

@@ -26,4 +26,10 @@ public class ArtifactObjective  implements Objective{
         }
     }
 
+    @Override
+    public void printObjective() {
+        System.out.println("type: ArtifactObjective");
+        if (this.artifact != null) System.out.println(this.artifact.toString());
+        System.out.println("tris: " + this.tris);
+    }
 }

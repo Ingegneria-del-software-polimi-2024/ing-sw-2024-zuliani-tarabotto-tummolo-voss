@@ -41,7 +41,8 @@
     "id": 91,
     "objective": {
       "type": "LShapeObjective",
-      "shape": "BOTTOMRIGHTL"
+      "shape": "BOTTOMRIGHTL",
+      "element": "vegetals"
     }
   },
   {
@@ -49,7 +50,8 @@
     "id": 92,
     "objective": {
       "type": "LShapeObjective",
-      "shape": "BOTTOMLEFTL"
+      "shape": "BOTTOMLEFTL",
+      "element": "insects"
     }
   },
   {
@@ -57,7 +59,8 @@
     "id": 93,
     "objective": {
       "type": "LShapeObjective",
-      "shape": "TOPRIGHTL"
+      "shape": "TOPRIGHTL",
+      "element": "mushrooms"
     }
   },
   {
@@ -65,7 +68,8 @@
     "id": 94,
     "objective": {
       "type": "LShapeObjective",
-      "shape": "TOPLEFTL"
+      "shape": "TOPLEFTL",
+      "element": "animals"
     }
   },
   {
