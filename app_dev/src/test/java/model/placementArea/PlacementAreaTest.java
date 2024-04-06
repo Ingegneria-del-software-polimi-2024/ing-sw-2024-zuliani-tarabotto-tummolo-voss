@@ -80,7 +80,8 @@ class PlacementAreaTest {
             System.out.println("what objective id do you want to check? ");
             id = scanner.nextInt();
             if(gameState.getObjectiveDeck().getCard(id) == null) return;
-            System.out.println(checkForObjectives(gameState, gameState.getObjectiveDeck().getCard(id)));
+            ObjectiveCard obj = gameState.getObjectiveDeck().getCard(id);
+            System.out.println(checkForObjectives(gameState, obj));
         }while (id != 999);
     }
 

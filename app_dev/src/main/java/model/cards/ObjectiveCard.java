@@ -8,6 +8,7 @@ import model.cards.PlayableCards.ResourceCard;
 import model.objective.*;
 import model.placementArea.PlacementArea;
 
+import javax.swing.text.Element;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;

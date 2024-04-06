@@ -124,7 +124,7 @@ public class PlacementArea {
     }
 
 //returns the NUMBER OF COMBINATION of the shape "shape"
-    public int verifyObjective(Shape shape, Element element) throws RuntimeException{
+    public int verifyObjective(Shape shape, List<Element> element) throws RuntimeException{
         //declare and initialize
         final Coordinates ORIGIN = new Coordinates(0,0);
         Coordinates tmpCoordinates;
@@ -132,11 +132,6 @@ public class PlacementArea {
         int counter = 0;
         ArrayList<PlayableCard> countedCards = new ArrayList<PlayableCard>();
         PlacementAreaIterator coordinatesIterator = new PlacementAreaIterator(disposition, shape);
-        Element complementarElement;
-
-        if(shape.equals(Shape.ASCENDINGDIAGONAL) || shape.equals(Shape.DESCENDINGDIAGONAL)) {
-            complementarElement = element;
-        }else complementarElement = element.calculateComplementar();
 
         //iterate on the cards on the table (the way of iterating depends on the shape of the obj)
         while(coordinatesIterator.hasNext()){
@@ -144,14 +139,15 @@ public class PlacementArea {
             PlayableCard cardOnTable = disposition.get(coordinatesIterator.current());
 
             //check if already counted that card for the same obj and if the element of the reference card matches
-            if(cardOnTable != null && !countedCards.contains(cardOnTable) && !coordinatesIterator.current().equals(ORIGIN) && cardOnTable.getBlockedElement().equals(complementarElement)){
+            if(cardOnTable != null && !countedCards.contains(cardOnTable) && !coordinatesIterator.current().equals(ORIGIN) && cardOnTable.getBlockedElement().equals(element.get(0))){
                 found = true;
                 //now check if the surroundings cards matches the shape and the element of the obj (and they're not already counted)
+                int i = 0;
                 for(Coordinates offset : shape.getCoordinates()){
-
+                    i += 1;
                     tmpCoordinates = coordinatesIterator.current().sum(offset).areContainedIn(disposition.keySet());
 
-                    if(tmpCoordinates == null || tmpCoordinates.equals(ORIGIN) || !disposition.get(tmpCoordinates).getBlockedElement().equals(element) || countedCards.contains(disposition.get(tmpCoordinates))){
+                    if(tmpCoordinates == null || tmpCoordinates.equals(ORIGIN) || !disposition.get(tmpCoordinates).getBlockedElement().equals(element.get(i)) || countedCards.contains(disposition.get(tmpCoordinates))){
                         found = false;
                         break;
                     }
