@@ -10,7 +10,7 @@ import model.enums.Element;
 import model.placementArea.PlacementArea;
 import org.junit.jupiter.api.Test;
 
-class ResourceCardTest extends TestCase {
+public class ResourceCardTest extends TestCase {
 
     @Test
     public void testParse_ValidId() throws JsonProcessingException {

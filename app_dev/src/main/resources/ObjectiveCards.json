@@ -4,7 +4,8 @@
     "id": 87,
     "objective": {
       "type": "DiagonalShapeObjective",
-      "element": "mushrooms",
+      "elements": ["mushrooms", "mushrooms","mushrooms"],
+
       "shape": "ASCENDINGDIAGONAL"
     }
   },
@@ -14,7 +15,9 @@
     "id": 88,
     "objective": {
       "type": "DiagonalShapeObjective",
-      "element": "vegetals",
+      "elements": ["vegetals", "vegetals","vegetals"],
+
+
       "shape": "DESCENDINGDIAGONAL"
     }
   },
@@ -23,7 +26,10 @@
     "id": 89,
     "objective": {
       "type": "DiagonalShapeObjective",
-      "element": "animals",
+      "elements": ["animals", "animals","animals"],
+
+
+
       "shape": "ASCENDINGDIAGONAL"
     }
   },
@@ -32,7 +38,8 @@
     "id": 90,
     "objective": {
       "type": "DiagonalShapeObjective",
-      "element": "insects",
+      "elements": ["insects", "insects","insects"],
+
       "shape": "DESCENDINGDIAGONAL"
     }
   },
@@ -41,6 +48,8 @@
     "id": 91,
     "objective": {
       "type": "LShapeObjective",
+      "elements": ["vegetals", "mushrooms","mushrooms"],
+
       "shape": "BOTTOMRIGHTL"
     }
   },
@@ -49,6 +58,8 @@
     "id": 92,
     "objective": {
       "type": "LShapeObjective",
+      "elements": ["insects", "vegetals","vegetals"],
+
       "shape": "BOTTOMLEFTL"
     }
   },
@@ -57,6 +68,8 @@
     "id": 93,
     "objective": {
       "type": "LShapeObjective",
+      "elements": ["mushrooms", "animals","animals"],
+
       "shape": "TOPRIGHTL"
     }
   },
@@ -65,6 +78,11 @@
     "id": 94,
     "objective": {
       "type": "LShapeObjective",
+      "elements": ["animals", "insects","insects"],
+
+
+
+
       "shape": "TOPLEFTL"
     }
   },

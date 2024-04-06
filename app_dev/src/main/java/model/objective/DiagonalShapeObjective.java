@@ -4,9 +4,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import model.enums.Element;
 import model.placementArea.*;
 
+import java.util.List;
+
 public class DiagonalShapeObjective implements Objective{
-    @JsonProperty("element")
-    private Element element;
+    @JsonProperty("elements")
+    protected List<Element> element;
     @JsonProperty("shape")
     private Shape shape;
 
