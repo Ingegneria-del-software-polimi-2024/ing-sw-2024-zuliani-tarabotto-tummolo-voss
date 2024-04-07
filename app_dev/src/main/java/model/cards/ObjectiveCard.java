@@ -26,10 +26,6 @@ public class ObjectiveCard  implements Card {
 
     public static ObjectiveCard parse(int id) throws JsonProcessingException {
 
-        int targetId = id; // ID to search for
-
-
-
 
         try {
 
@@ -46,7 +42,7 @@ public class ObjectiveCard  implements Card {
             // Look for the object with the specified ID
             JsonNode targetNode = null;
             for (JsonNode node : rootNode.get("ObjectiveCards")) {
-                if (node.get("id").asInt() == targetId) {
+                if (node.get("id").asInt() == id) {
                     targetNode = node;
                     break;
                 }
@@ -70,7 +66,7 @@ public class ObjectiveCard  implements Card {
                 return objectiveCard;
 
             } else {
-                System.out.println("Object with ID " + targetId + " not found.");
+                System.out.println("Object with ID " + id + " not found.");
             }
         } catch (IOException e) {
             e.printStackTrace();

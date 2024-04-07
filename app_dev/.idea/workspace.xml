@@ -6,14 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Model.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/ObjectiveCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/ObjectiveCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/DiagonalShapeObjective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/DiagonalShapeObjective.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/LShapeObjective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/LShapeObjective.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/Objective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/Objective.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ObjectiveCards.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ObjectiveCards.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/model/cards/PlayableCards/ResourceCardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/cards/PlayableCards/ResourceCardTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ObjectiveCards.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ObjectiveCards.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/PlayableDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/PlayableDeck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/Shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/Shape.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/placementArea/PlacementAreaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/placementArea/PlacementAreaTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/cards/ObjectiveCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/cards/ObjectiveCard.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,30 +48,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Model.executor": "Run",
-    "Application.PlacementAreaTest.executor": "Run",
-    "Application.RunDeckCreation.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3": "junit.framework.TestCase",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "ModelMerge",
-    "kotlin-language-version-configured": "true",
-    "last_directory_selection": "/Users/andre/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java",
-    "last_opened_file_path": "/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.excludes",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Model.executor&quot;: &quot;Run&quot;,
+    &quot;Application.PlacementAreaTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.RunDeckCreation.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3&quot;: &quot;junit.framework.TestCase&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;ModelMerge&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;/Users/andre/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.excludes&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java" />
@@ -90,7 +87,7 @@
       <recent name="model.placemetArea" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Model">
+  <component name="RunManager" selected="Application.PlacementAreaTest">
     <configuration name="CoordinatesTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="model.placementArea.CoordinatesTest" />
       <module name="Ing_sw_proj" />
@@ -120,6 +117,7 @@
     <configuration name="PlacementAreaTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="model.placementArea.PlacementAreaTest" />
       <module name="Ing_sw_proj" />
+      <option name="VM_PARAMETERS" value="-ea" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="model.placementArea.*" />
@@ -160,10 +158,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.CoordinatesTest" />
+      <item itemvalue="Application.Model" />
+      <item itemvalue="Application.PlacementAreaTest" />
+      <item itemvalue="JUnit.ObjectiveCardTest" />
+      <item itemvalue="JUnit.StarterCardTest" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Model" />
         <item itemvalue="Application.PlacementAreaTest" />
+        <item itemvalue="Application.Model" />
         <item itemvalue="Application.CoordinatesTest" />
         <item itemvalue="JUnit.ObjectiveCardTest" />
         <item itemvalue="JUnit.StarterCardTest" />
@@ -209,6 +214,9 @@
       <workItem from="1712303911538" duration="3152000" />
       <workItem from="1712309381499" duration="15602000" />
       <workItem from="1712414103540" duration="6380000" />
+      <workItem from="1712422514937" duration="63000" />
+      <workItem from="1712424156384" duration="627000" />
+      <workItem from="1712479067778" duration="12644000" />
     </task>
     <servers />
   </component>
@@ -225,5 +233,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/app_dev$PlacementAreaTest.ic" NAME="PlacementAreaTest Coverage Results" MODIFIED="1712502932674" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>model.placementArea.*</FILTER>
+    </SUITE>
   </component>
 </project>

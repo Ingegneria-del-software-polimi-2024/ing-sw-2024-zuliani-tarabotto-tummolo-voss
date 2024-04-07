@@ -32,11 +32,11 @@ public abstract class PlayableDeck implements Deck{
     }
 
     //just for test purposes
-    public PlayableCard getCard(int id){
+    public PlayableCard getCard(int id) throws IllegalArgumentException{
         for(PlayableCard c : cards)
             if(c.getId() == id)
                 return c;
-        return null;
+        throw new IllegalArgumentException("WTFFFF, card "+id+" not found");
     }
 
 }
