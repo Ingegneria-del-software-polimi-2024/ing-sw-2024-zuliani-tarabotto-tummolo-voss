@@ -4,8 +4,8 @@ import Exceptions.EmptyCardSourceException;
 import model.GameState.GameState;
 import model.placementArea.Coordinates;
 import model.player.Player;
+import model.enums.Pawn;
 import view.CliView;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -22,13 +22,20 @@ public class Controller {
     public void gameLoop() throws EmptyCardSourceException {
         int cont = 0;
 
-        //FIRST: every player must select a face side for the starting card which is then placed
+        //FIRST: every player must select a face side for the starting card which is then placed ans also selects a pawn
         for (String player : nickNames) {
+            //selecting and placing starter card
             System.out.println("YOUR STARTER CARD: \n");
             view.printStarterCard();
             System.out.println(player + ", select a face side for the starting card: ");
             gameState.setStartingCardFace(sc.nextBoolean());
             gameState.playStarterCard();
+            //selecting pawn
+            System.out.println("SELECT A PAWN: ");
+            Pawn.printAvailablePawns();
+            Pawn pawn = Pawn.valueOf(sc.next());
+            gameState.setPlayerPawnColor(pawn);
+            pawn.setIsAvailable();
             gameState.nextPlayer();
         }
 

@@ -5,6 +5,7 @@ import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
 import model.cards.PlayableCards.StarterCard;
 import model.deckFactory.PlayableDeck;
+import model.enums.Pawn;
 import model.placementArea.*;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class Player {
     private PlacementArea placementArea;
     private int points;
     private PlayableCard starterCard;
+    private Pawn pawnColor;
 
     public Player() {
         //constructor
@@ -69,6 +71,8 @@ public class Player {
     public void setSecretObjective(ObjectiveCard secretObjective) {
         this.secretObjective = secretObjective;
     }
+
+    public void setPawnColor(Pawn pawnColor) { this.pawnColor = pawnColor; }
 
     public ObjectiveCard getSecretObjective() {
         return secretObjective;

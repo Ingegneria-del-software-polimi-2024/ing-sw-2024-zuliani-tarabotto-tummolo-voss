@@ -2,16 +2,14 @@ package model.GameState;
 
 import Exceptions.EmptyCardSourceException;
 import model.cards.PlayableCards.PlayableCard;
+import model.enums.Pawn;
 import model.placementArea.Coordinates;
 import model.player.Player;
 import model.deckFactory.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameState {
-
-
     private List<Player> players;
     private String id;
     private Player turnPlayer;
@@ -20,7 +18,7 @@ public class GameState {
     private Coordinates selectedCoordinates;
     private CommonTable commonTable;
 
-
+    /////// CONSTRUCTOR //////////////////////////////////////////////////////////////////
     public GameState(ArrayList<String> nickNames, String id) {
         //creates a new players list with the nicknames taken from input
         players = new ArrayList<Player>();
@@ -31,6 +29,7 @@ public class GameState {
         }
         this.turnPlayer = players.get(0);
         this.id = id;
+        // initialize commonTable
         this.commonTable = new CommonTable(players);
     }
 
@@ -45,7 +44,6 @@ public class GameState {
             }
         }
     }
-
 
     //checks if any player reached 20 points or if both the gold and the resource decks are empty
     public void setLastTurnTrue(){
@@ -121,6 +119,7 @@ public class GameState {
         setLastTurnTrue();
     }
 
+    public void setPlayerPawnColor(Pawn pawnColor) { turnPlayer.setPawnColor(pawnColor);}
 
 
 /////////////// GETTER METHODS FOR COMMONTABLE ATTRIBUTES ////////////////////////
