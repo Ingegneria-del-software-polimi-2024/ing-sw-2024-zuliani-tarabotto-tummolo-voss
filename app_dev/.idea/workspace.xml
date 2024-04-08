@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/model/GameState/GameStateTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/ObjectiveDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/ObjectiveDeck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/PlayableDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/PlayableDeck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/GameState/GameStateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/GameState/GameStateTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/model/placementArea/PlacementAreaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/placementArea/PlacementAreaTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/model/placementArea/PlacementAreaTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/model/placementArea/PlacementAreaTest.class" afterDir="false" />
     </list>
@@ -103,6 +105,10 @@
     <configuration name="GameStateTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="model.GameState.GameStateTest" />
       <module name="Ing_sw_proj" />
+      <selectedOptions>
+        <option name="environmentVariables" visible="false" />
+      </selectedOptions>
+      <option name="VM_PARAMETERS" value="-ea" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="model.GameState.*" />
@@ -215,7 +221,7 @@
       <workItem from="1712424156384" duration="627000" />
       <workItem from="1712479067778" duration="12644000" />
       <workItem from="1712514085644" duration="975000" />
-      <workItem from="1712583090166" duration="2190000" />
+      <workItem from="1712583090166" duration="3309000" />
     </task>
     <servers />
   </component>
@@ -232,17 +238,6 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/model/placementArea/PlacementAreaTest.java</url>
-          <line>103</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/app_dev$PlacementAreaTest.ic" NAME="PlacementAreaTest Coverage Results" MODIFIED="1712502932674" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PlacementAreaTest {
     private static GameState gameState;
+
     static int ID = 81;
 
     //initializes the gamestate (please always specify one player), inserts the cards expressed from cli
