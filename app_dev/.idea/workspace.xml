@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/ObjectiveDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/ObjectiveDeck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/PlayableDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/PlayableDeck.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/model/deckFactory/GoldenDeckTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/model/GameState/GameStateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/GameState/GameStateTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/model/placementArea/PlacementAreaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/placementArea/PlacementAreaTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/model/placementArea/PlacementAreaTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/model/placementArea/PlacementAreaTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,11 +78,11 @@
       <recent name="junit.framework.TestCase" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="model.deckFactory" />
       <recent name="model.GameState" />
       <recent name="model.placementArea" />
       <recent name="model.cards" />
       <recent name="model.cards.PlayableCards" />
-      <recent name="model.placemetArea" />
     </key>
   </component>
   <component name="RunManager" selected="Application.GameStateTest">
@@ -221,7 +218,7 @@
       <workItem from="1712424156384" duration="627000" />
       <workItem from="1712479067778" duration="12644000" />
       <workItem from="1712514085644" duration="975000" />
-      <workItem from="1712583090166" duration="3309000" />
+      <workItem from="1712583090166" duration="4244000" />
     </task>
     <servers />
   </component>

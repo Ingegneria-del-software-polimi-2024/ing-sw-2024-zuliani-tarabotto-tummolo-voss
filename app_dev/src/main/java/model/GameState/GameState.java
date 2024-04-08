@@ -229,7 +229,7 @@ public class GameState {
     //public void setLastTurnTrue() {isLastTurn = true;}
 
     //are all of these methods necessary? idk but rn i'll keep them
-    public Deck getGoldDeck() {
+    public PlayableDeck getGoldDeck() {
         return goldDeck;
     }
 
