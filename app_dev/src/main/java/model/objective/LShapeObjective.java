@@ -19,10 +19,17 @@ public class LShapeObjective implements Objective{
     @JsonProperty("shape")
     private Shape shape;
 
+
     public int countObjectivePoints(PlacementArea placementArea) {return 3 * placementArea.verifyObjective(shape, element);}
 
     public List<Element> getElement() {
         return element;
     }
-
+    //for console testing
+    @Override
+    public void printObjective() {
+        System.out.println("type: LShapeObjective");
+        System.out.println("element: " + this.element.toString());
+        System.out.println("shape: " + this.shape.toString());
+    }
 }

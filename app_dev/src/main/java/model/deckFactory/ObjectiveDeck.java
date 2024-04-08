@@ -65,4 +65,8 @@ public class ObjectiveDeck  implements Deck{
         }
         return null;
     }
+
+    public ObjectiveCard get(int i) {
+        return cards.get(i);
+    }
 }

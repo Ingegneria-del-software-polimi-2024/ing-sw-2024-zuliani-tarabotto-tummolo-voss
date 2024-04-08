@@ -11,5 +11,5 @@ import java.util.List;
 
 public interface Objective {
     public int countObjectivePoints(PlacementArea placementArea);
-
+    public void printObjective();
 }

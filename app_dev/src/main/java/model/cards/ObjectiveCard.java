@@ -77,4 +77,11 @@ public class ObjectiveCard  implements Card {
     public int getId() {
         return id;
     }
+
+    //TO BE REMOVED IN THE FUTURE: method called by the controller to print card's information on the console
+    public void printCard() {
+        System.out.println("Card ID: " + getId());
+        objective.printObjective();
+        System.out.println();
+    }
 }
