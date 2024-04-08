@@ -108,7 +108,7 @@ class PlacementAreaTest {
         int[] exp_a = {4};
 
         runTest(a, c_a, obj_a, exp_a, false);
-    /*
+
         //test objective 88 descDiag Veg
         int[] b = {16, 17, 18};
         int[] c_b = {-1,1, -2,2, -3,3};
@@ -164,7 +164,7 @@ class PlacementAreaTest {
         int[] exp_h = {3};
 
         runTest(h, c_h, obj_h, exp_h, false);
-*/
+
         int[] i = {41, 42, 43, 44};
         int[] c_i = {1,1, 1,-1, -1,1, -1,-1};
         int[] obj_i = {95};

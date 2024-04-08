@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/model/GameState/GameStateTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/ObjectiveCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/ObjectiveCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/PlayableDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/PlayableDeck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/Shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/Shape.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/model/placementArea/PlacementAreaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/placementArea/PlacementAreaTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/cards/ObjectiveCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/cards/ObjectiveCard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/model/placementArea/PlacementAreaTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/model/placementArea/PlacementAreaTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,19 +79,33 @@
       <recent name="junit.framework.TestCase" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="model.GameState" />
       <recent name="model.placementArea" />
       <recent name="model.cards" />
       <recent name="model.cards.PlayableCards" />
       <recent name="model.placemetArea" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.PlacementAreaTest">
+  <component name="RunManager" selected="Application.GameStateTest">
     <configuration name="CoordinatesTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="model.placementArea.CoordinatesTest" />
       <module name="Ing_sw_proj" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="model.placementArea.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GameStateTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="model.GameState.GameStateTest" />
+      <module name="Ing_sw_proj" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="model.GameState.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -143,35 +155,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StarterCardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Ing_sw_proj" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="model.cards.PlayableCards.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="model.cards.PlayableCards" />
-      <option name="MAIN_CLASS_NAME" value="model.cards.PlayableCards.StarterCardTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
+      <item itemvalue="Application.GameStateTest" />
       <item itemvalue="Application.CoordinatesTest" />
       <item itemvalue="Application.Model" />
       <item itemvalue="Application.PlacementAreaTest" />
       <item itemvalue="JUnit.ObjectiveCardTest" />
-      <item itemvalue="JUnit.StarterCardTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.GameStateTest" />
         <item itemvalue="Application.PlacementAreaTest" />
         <item itemvalue="Application.Model" />
         <item itemvalue="Application.CoordinatesTest" />
         <item itemvalue="JUnit.ObjectiveCardTest" />
-        <item itemvalue="JUnit.StarterCardTest" />
       </list>
     </recent_temporary>
   </component>
@@ -217,6 +214,8 @@
       <workItem from="1712422514937" duration="63000" />
       <workItem from="1712424156384" duration="627000" />
       <workItem from="1712479067778" duration="12644000" />
+      <workItem from="1712514085644" duration="975000" />
+      <workItem from="1712583090166" duration="2190000" />
     </task>
     <servers />
   </component>
@@ -233,6 +232,17 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/model/placementArea/PlacementAreaTest.java</url>
+          <line>103</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/app_dev$PlacementAreaTest.ic" NAME="PlacementAreaTest Coverage Results" MODIFIED="1712502932674" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
