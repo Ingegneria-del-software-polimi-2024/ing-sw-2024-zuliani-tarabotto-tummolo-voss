@@ -1,6 +1,7 @@
 package model.GameState;
 
 import Exceptions.EmptyCardSourceException;
+import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
 import model.enums.Pawn;
 import model.placementArea.Coordinates;
@@ -136,6 +137,8 @@ public class GameState {
     public int getPoints() {return turnPlayer.getPoints(); }
     //returns turnPlayer's card at specified index in his hand
     public PlayableCard getPlayerHandCard(int index) { return turnPlayer.getPlayingHand().get(index); }
+
+    public List<ObjectiveCard> getCommonObjectives(){return commonTable.getCommonObjectives();}
 
 
 /////////////////////// PRINTING METHODS FOR CONSOLE TESTING ////////////////////////////////////////////////////////////////

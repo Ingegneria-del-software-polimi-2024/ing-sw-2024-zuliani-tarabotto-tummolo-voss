@@ -222,7 +222,7 @@ public class PlacementArea {
 //returns a Hashmap containing the couples (artifact, numberOfThatArtifacts)
     public HashMap<Artifact, Integer> getAllArtifactsNumber(){
         HashMap<Artifact, Integer> retCopy;
-        retCopy = availableArtifacts;
+        retCopy = new HashMap<Artifact, Integer>(availableArtifacts);
         return retCopy;
     }
 
