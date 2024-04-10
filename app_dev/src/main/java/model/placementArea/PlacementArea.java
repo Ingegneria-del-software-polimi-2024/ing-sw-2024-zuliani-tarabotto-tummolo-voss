@@ -1,6 +1,7 @@
 package model.placementArea;
 
 
+import model.Errors.ConditionNotSatisfiedException;
 import model.cards.PlayableCards.PlayableCard;
 import model.cards.PlayableCards.StarterCard;
 import model.enums.Artifact;
@@ -51,49 +52,66 @@ public class PlacementArea {
         numberNearbyCards = 0;
 
         //we should throw an exception if there is already a card in those coordinates
-        if(disposition.containsKey(xy)){
+        if(disposition.containsKey(xy))
             throw new IllegalArgumentException();
-        }else{
-            //update available positions and get the one we are using
-            xy = updateAvailablePlaces(xy, card);
 
-            //add card to disposition
-            disposition.put(xy, card);
+        //we should throw an exception if the card can't be placed due to its restrictions
+        if(!canBePlaced(card))
+            throw new ConditionNotSatisfiedException();
 
-            //remove elements or objects in corners covered
-            for(j = xy.getY()-1; j <= xy.getY()+1; j++){
-                for(i = xy.getX()+1; i >= xy.getX()-1; i--){
-                    if(i != xy.getX() && j != xy.getY()){
-                        //if there is a card at position (i,j)...
+        //update available positions and get the one we are using
+        xy = updateAvailablePlaces(xy, card);
 
-                        coord = new Coordinates(i, j).areContainedIn(disposition.keySet());
+        //add card to disposition
+        disposition.put(xy, card);
 
-                        if(coord != null){
-                            //...I will get it
-                            cardOnTable = disposition.get(coord);
-                            //counting the number of nearby cards for objectives
-                            numberNearbyCards ++;
-                            //removing covered elements/artifacts
-                            if(cardOnTable.getCorner(count) != null && !cardOnTable.getCorner(count).isEmpty()){
-                                if(cardOnTable.getCorner(count).getElement() != null) availableElements.put(cardOnTable.getCorner(count).getElement(), availableElements.get(cardOnTable.getCorner(count).getElement())-1);
-                                else availableArtifacts.put(cardOnTable.getCorner(count).getArtifact(), availableArtifacts.get(cardOnTable.getCorner(count).getArtifact())-1);
-                            }
+        //remove elements or objects in corners covered
+        for(j = xy.getY()-1; j <= xy.getY()+1; j++) {
+            for (i = xy.getX() + 1; i >= xy.getX() - 1; i--) {
+                if (i != xy.getX() && j != xy.getY()) {
+                    //if there is a card at position (i,j)...
+
+                    coord = new Coordinates(i, j).areContainedIn(disposition.keySet());
+
+                    if (coord != null) {
+                        //...I will get it
+                        cardOnTable = disposition.get(coord);
+                        //counting the number of nearby cards for objectives
+                        numberNearbyCards++;
+                        //removing covered elements/artifacts
+                        if (cardOnTable.getCorner(count) != null && !cardOnTable.getCorner(count).isEmpty()) {
+                            if (cardOnTable.getCorner(count).getElement() != null)
+                                availableElements.put(cardOnTable.getCorner(count).getElement(), availableElements.get(cardOnTable.getCorner(count).getElement()) - 1);
+                            else
+                                availableArtifacts.put(cardOnTable.getCorner(count).getArtifact(), availableArtifacts.get(cardOnTable.getCorner(count).getArtifact()) - 1);
                         }
-                        count += 1;
                     }
+                    count += 1;
                 }
             }
-            //if front face side then we check for new resources in the corners of the card
-            //if back face side we add the only blocked element contained in the center of the card
-            if(card.getFaceSide()){
-                addResourcesOfNewCard(card);
-            } else {availableElements.put(card.getBlockedElement(), availableElements.get(card.getBlockedElement()) + 1);}
         }
+        //if front face side then we check for new resources in the corners of the card
+        //if back face side we add the only blocked element contained in the center of the card
+        if(card.getFaceSide()){
+            addResourcesOfNewCard(card);
+        } else {availableElements.put(card.getBlockedElement(), availableElements.get(card.getBlockedElement()) + 1);}
+
         //we return the number of points given by the card if the card is facing up else we return 0(no points are given by the back of the card)
         if(card.getFaceSide()){
             return card.countPoints(this);
         } else {return 0;}
 
+    }
+
+    private boolean canBePlaced(PlayableCard card) {
+        Map<Element, Integer> constraints = card.getPlacementConstraint();
+        //if there are no constraints the card can be placed
+        if(constraints == null) return true;
+        //if constraints are present...
+        for(Element e : constraints.keySet())
+            if(constraints.get(e) > availableElements.get(e))
+                return false;
+        return true;
     }
 
     //method specific for the player starting card

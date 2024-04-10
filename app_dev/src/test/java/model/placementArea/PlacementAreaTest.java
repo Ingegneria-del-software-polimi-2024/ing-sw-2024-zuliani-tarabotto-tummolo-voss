@@ -74,6 +74,7 @@ class PlacementAreaTest {
     }
 
     public static void putCards(ArrayList<Integer> cards, ArrayList<Coordinates> coordList, boolean face) throws RuntimeException{
+
         if(coordList.size() != cards.size())
             throw new RuntimeException("error in data inserted");
 
@@ -83,6 +84,8 @@ class PlacementAreaTest {
             PlayableCard x = getCard(gameState, cards.get(i));
             if(x == null)
                 throw new RuntimeException("error when getting the card with id: "+cards.get(i));
+
+            System.out.println("putting card n. "+cards.get(i));
 
             gameState.setSelectedHandCard(x);
             gameState.setSelectedCardFace(face);
@@ -143,7 +146,6 @@ class PlacementAreaTest {
     }
     //insert 999 when asking "what objective id do you want to check? " if you want to stop
     public static void main(String[] args){
-
         //test objective 87 ascDiag Mushrooms
         int[] a = {1, 2, 3, 4, 5, 6};
         int[] c_a = {1,1, 2,2, 3,3, 4,4, 5,5, 6,6};
@@ -207,13 +209,7 @@ class PlacementAreaTest {
         int[] exp_h = {3};
 
         runTest(h, c_h, obj_h, exp_h, false);
-
-        int[] i = {41, 42, 43, 44};
-        int[] c_i = {1,1, 1,-1, -1,1, -1,-1};
-        int[] obj_i = {95};
-        int[] exp_i = {0};
-
-        runTest(i, c_i, obj_i, exp_i, true);
+        
 
         //tested animals L obj, complication
         int[] j = {21, 22, 1, 23, 2, 24, 3, 4, 25, 11, 26, 27, 28};

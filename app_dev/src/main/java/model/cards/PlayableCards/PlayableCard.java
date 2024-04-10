@@ -2,7 +2,10 @@ package model.cards.PlayableCards;
 
 import model.cards.Card;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import model.enums.*;
 import model.placementArea.PlacementArea;
 
@@ -63,6 +66,9 @@ public abstract class PlayableCard implements Card {
     public abstract void printCard();
 
 
+    //IDK if we wanna keep this, this allows to get the placement constraints also for Resource Cards
+    // (and Starter Cards but not useful)
 
+    public Map<Element, Integer> getPlacementConstraint () {return null;}
 }
 
