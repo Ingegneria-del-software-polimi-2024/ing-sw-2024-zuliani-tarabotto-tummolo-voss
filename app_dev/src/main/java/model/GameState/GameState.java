@@ -18,6 +18,7 @@ public class GameState {
     private PlayableCard selectedHandCard;
     private Coordinates selectedCoordinates;
     private CommonTable commonTable;
+    private TurnState turnState;
 
     /////// CONSTRUCTOR //////////////////////////////////////////////////////////////////
     public GameState(ArrayList<String> nickNames, String id) {
@@ -122,6 +123,8 @@ public class GameState {
 
     public void setPlayerPawnColor(Pawn pawnColor) { turnPlayer.setPawnColor(pawnColor);}
 
+    public void nextState(){turnState.nextState();}
+    public void nextStage(){turnState.nextStage();}
 
 /////////////// GETTER METHODS FOR COMMONTABLE ATTRIBUTES ////////////////////////
     public PlayableDeck getGoldDeck() { return commonTable.getGoldDeck(); }
