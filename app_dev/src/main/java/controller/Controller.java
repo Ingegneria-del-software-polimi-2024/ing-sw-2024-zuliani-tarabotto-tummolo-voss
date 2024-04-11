@@ -23,6 +23,7 @@ public class Controller {
         int cont = 0;
 
         //FIRST: every player must select a face side for the starting card which is then placed ans also selects a pawn
+        //LOGIN SECTION
         for (String player : nickNames) {
             //selecting and placing starter card
             System.out.println("YOUR STARTER CARD: \n");
@@ -77,6 +78,7 @@ public class Controller {
             for(int i = 0; i < nickNames.size(); i++){
                 playTurn();
             }
+            gameState.calculateFinalPoints();
             printWinner();
         }
     }
