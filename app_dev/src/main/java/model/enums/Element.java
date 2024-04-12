@@ -1,5 +1,8 @@
 package model.enums;
 
+/**
+ * the elements that can be present on the corners of the cards
+ */
 public enum Element {
     mushrooms,
     animals,

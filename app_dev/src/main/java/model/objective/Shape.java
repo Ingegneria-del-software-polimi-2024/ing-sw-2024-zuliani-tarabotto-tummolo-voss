@@ -5,8 +5,9 @@ import model.placementArea.Coordinates;
 import java.util.Arrays;
 import java.util.List;
 
-/*
-shape has relative coordinates (coordinate (0,0) is omitted) to a precise card of the pattern, it will be given as parameter to the method of the placement area searching for specific patterns
+/**
+ * shape has relative coordinates (coordinate (0,0) is omitted) to a precise card of the pattern,
+ * it will be given as parameter to the method of the placement area searching for specific patterns
  */
 public enum Shape {
     TOPRIGHTL{
@@ -36,7 +37,10 @@ public enum Shape {
         public List<Coordinates> getCoordinates(){return Arrays.asList(COORDINATES);};
     };
 
-    //public abstract void countShapeRepetitions(PlacementArea placementArea); //è necessario??
+    /**
+     *
+     * @return the list of coordinates
+     */
     public abstract List<Coordinates> getCoordinates();
 }
 

@@ -11,7 +11,10 @@ import java.util.Arrays;
 import java.util.List;
 
 @JsonTypeName("LShapeObjective")
-
+/**
+ * objective in L shape composed of three cards identified by their relative coordinates
+ * referred to the card standing alone
+ */
 public class LShapeObjective implements Objective{
     @JsonProperty("elements")
     public List<Element> element;
@@ -19,9 +22,16 @@ public class LShapeObjective implements Objective{
     @JsonProperty("shape")
     private Shape shape;
 
-
+    /**
+     * @param placementArea the disposition to find objectives in
+     * @return the number of points rellated to this objective
+     */
     public int countObjectivePoints(PlacementArea placementArea) {return 3 * placementArea.verifyObjective(shape, element);}
 
+    /**
+     *
+     * @return a ordered list of elements that compose the objective
+     */
     public List<Element> getElement() {
         return element;
     }

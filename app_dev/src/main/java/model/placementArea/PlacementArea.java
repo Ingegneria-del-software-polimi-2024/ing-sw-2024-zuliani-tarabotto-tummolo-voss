@@ -10,13 +10,9 @@ import model.objective.Shape;
 
 import java.util.*;
 
-
-//!!!!!!!we will need to declare a constructor for the initialization of the game!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-/*
-the placement area for every player (where you put the card you are playing each turn)
-*/
-
+/**
+ *the placement area for every player (where you put the card you are playing each turn)
+ */
 public class PlacementArea {
     private HashMap<Coordinates, PlayableCard> disposition; //the disposition on the table, used for search of patterns
     private HashMap<Artifact, Integer> availableArtifacts; //how many occurrences of that artifact you have, permits to rapidly check for points
@@ -25,6 +21,9 @@ public class PlacementArea {
     public List<Coordinates> freePositions(){return availablePlaces;} //returns the free positions
     private int numberNearbyCards;
 
+    /**
+     *  class constructor
+     */
     public PlacementArea() {
         disposition = new HashMap<>();
         availableArtifacts = new HashMap<>();
@@ -41,10 +40,14 @@ public class PlacementArea {
         }
     }
 
-
-
-    //adds a playable card to the placementArea
-    //returns the number of points granted by the playable card
+    /**
+     * adds a playable card to the placementArea of turnPlayer
+     * returns the number of points granted by the playable card
+     * @param xy coordinates to add a card in
+     * @param card the card to add
+     * @return points earned when placing the card
+     * @throws IllegalArgumentException
+     */
     public int addCard(Coordinates xy, PlayableCard card) throws IllegalArgumentException{
         int i, j, count = 0;
         Coordinates coord;
@@ -103,6 +106,11 @@ public class PlacementArea {
 
     }
 
+    /**
+     *
+     * @param card the card being placed
+     * @return TRUE if the constraints limiting the card placement of the card @card are satisfied, else returns FALSE
+     */
     private boolean canBePlaced(PlayableCard card) {
         Map<Element, Integer> constraints = card.getPlacementConstraint();
         //if there are no constraints the card can be placed
@@ -114,7 +122,10 @@ public class PlacementArea {
         return true;
     }
 
-    //method specific for the player starting card
+    /**
+     * allows the turnPlayer to place the starting card
+     * @param starterCard the card to be placed
+     */
     public void addCard(PlayableCard starterCard) {
         Coordinates xy = new Coordinates(0,0);//availablePlaces.get(0); //
         Coordinates coord;
@@ -141,7 +152,13 @@ public class PlacementArea {
 
     }
 
-//returns the NUMBER OF COMBINATION of the shape "shape"
+    /**
+     * counts the occurrences of a shape objective
+     * @param shape the shape of the objective to be verified
+     * @param element the list containing the elements in order corresponding to the cards of the objective
+     * @return the occurrences of the shape "shape"
+     * @throws RuntimeException when the coordinates are found in PlacementArea the first time and then can't be found the second
+     */
     public int verifyObjective(Shape shape, List<Element> element) throws RuntimeException{
         //declare and initialize
         final Coordinates ORIGIN = new Coordinates(0,0);
@@ -172,7 +189,8 @@ public class PlacementArea {
 
                 }
 
-                //if the previous cycle has found an objective satisfied, we can count and add all the previously checked cards to the countedCards list
+                //if the previous cycle has found an objective satisfied, we can count and add all the previously
+                // checked cards to the countedCards list
                 if(found){
                     counter += 1;
 
@@ -190,7 +208,11 @@ public class PlacementArea {
         }
         return counter;
     }
-    //when a new card is placed we call this method to update the number of available resources
+
+    /**
+     * when a new card is placed we call this method to update the number of available resources
+     * @param card the card being placed
+     */
     private void addResourcesOfNewCard(PlayableCard card ) {
         //add elements and objects of newly placed card
         for(int count = 0; count < 4; count++){
@@ -200,9 +222,16 @@ public class PlacementArea {
             }
         }
     }
-    //after placing a card we update the available places to put a new card
-    //returns the coordinates removed from the list of those available
-    //in this way we avoid to over-create Coordinates type objects
+
+    /**
+     * after placing a card we update the available places to put a new card
+     * returns the coordinates removed from the list of those available
+     * in this way we avoid to over-create Coordinates type objects
+     * @param xy the position occupied by the newly placed card
+     * @param card the card being placed
+     * @return xy if the operation ended as expected
+     * @throws IllegalArgumentException if the coordinates xy are not contained in the availablePlaces list
+     */
     private Coordinates updateAvailablePlaces(Coordinates xy, PlayableCard card) throws IllegalArgumentException {
         Coordinates coord;
         int count = 3;
@@ -230,28 +259,44 @@ public class PlacementArea {
         throw new IllegalArgumentException();
     }
 
-
-//returns the number of artifacts "artifact" in the Placement Area
+    /**
+     *
+     * @param artifact the type of artifact to count
+     * @return the number of artifacts "artifact" in the Placement Are
+     */
     public int getNumberArtifacts(Artifact artifact){return availableArtifacts.get(artifact);}
 
-//returns the numbers of elements "element" in the Placement Area
+    /**
+     *
+     * @param element the type of element to count
+     * @return the numbers of elements "element" in the Placement Area
+     */
     public int getNumberElements(Element element){return availableElements.get(element);}
 
-//returns a Hashmap containing the couples (artifact, numberOfThatArtifacts)
+    /**
+     * returns the number of every artifact visible in the PlacementArea
+     * @return a Hashmap containing the couples (artifact, numberOfThatArtifacts)
+     */
     public HashMap<Artifact, Integer> getAllArtifactsNumber(){
         HashMap<Artifact, Integer> retCopy;
         retCopy = new HashMap<Artifact, Integer>(availableArtifacts);
         return retCopy;
     }
 
-//returns a Hashmap containing the couples (element, numberOfThatArtifacts)
+    /**
+     * returns the number of every element visible in the PlacementArea
+     * @return the Hashmap containing the couples (element, numberOfThatElements)
+     */
     public HashMap<Element, Integer> getAllElementsNumber(){
         HashMap<Element, Integer> retCopy;
         retCopy = availableElements;
         return retCopy;
     }
 
-//returns the number of surrounding cards (whith respect to a card that has just been placed)
+    /**
+     * counts the number of corners covered by the newly placed card
+     * @return the number of surrounding cards (whith respect to a card that has just been placed)
+     */
     public int getNumberNearbyCards(){return numberNearbyCards;}
 
     public void printDisposition() {

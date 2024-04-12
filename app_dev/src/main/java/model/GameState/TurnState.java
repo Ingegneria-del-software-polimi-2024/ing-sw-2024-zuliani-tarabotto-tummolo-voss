@@ -1,5 +1,14 @@
 package model.GameState;
 
+/**
+ * a finite state machine that keeps track of the states occuring during the turn of a player,
+ * the states are divided in:
+    * starter card selection stage
+    * colour selection stage
+    * card dealing stage
+    * normal stage (card selection, coordinates selection, drawing a card)
+    * objective calculation stage
+ */
 public enum TurnState {
     STARTER_CARD_SELECTION,
     COLOUR_SELECTION,
@@ -10,6 +19,11 @@ public enum TurnState {
     CARD_DRAWING,
     CALCULATE_OBJECTIVES;
 
+    /**
+     *
+     * @return next state inside the same stage
+     * @throws UnsupportedOperationException when the next state is in a different stage
+     */
     public TurnState nextState() throws UnsupportedOperationException{
         switch(this){
             case STARTER_CARD_SELECTION:
@@ -32,6 +46,11 @@ public enum TurnState {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     *
+     * @return the first state of the next stage
+     * @throws UnsupportedOperationException when trying to change stage not being in the final state of the present stage
+     */
     public TurnState nextStage() throws UnsupportedOperationException{
         switch(this){
             case STARTER_CARD_SELECTION:

@@ -6,25 +6,42 @@ import model.objective.Shape;
 
 import java.util.*;
 import java.util.stream.Collectors;
-/*
-the placement area iterator allows to iterate on the cards placed on the table in different order depending on the
-objective we are going to check
+
+/**
+ * the placement area iterator allows to iterate on the cards placed on the table in different order depending on the
+ * objective we are going to check
  */
 public class PlacementAreaIterator implements Iterator<Coordinates> {
     private Coordinates currentPlace;
     private List<Coordinates> availableCoordinates;
     @Override
+    /**
+     * @return TRUE if there are still elements to iterate on
+     */
     public boolean hasNext() {return availableCoordinates.indexOf(currentPlace) + 1 < availableCoordinates.size();}
 
+    /**
+     *
+     * @return next element to iterate on
+     */
     @Override
     public Coordinates next(){
         currentPlace = availableCoordinates.get(availableCoordinates.indexOf(currentPlace)+1);
         return currentPlace;
     }
 
+    /**
+     *
+     * @return the current place when iterating
+     */
     public Coordinates current() {return currentPlace;}
 
-//Constructor
+    /**
+     * class constructor
+     * @param disp the HashMap representing the PlacementArea
+     * @param shape the type of shape can be L or diagonal
+     *
+     */
     public PlacementAreaIterator(HashMap<Coordinates, PlayableCard> disp, Shape shape) {
         availableCoordinates = new ArrayList<Coordinates>(disp.keySet());
         switch(shape){

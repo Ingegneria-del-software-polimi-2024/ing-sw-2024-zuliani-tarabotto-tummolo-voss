@@ -1,5 +1,8 @@
 package model.enums;
 
+/**
+ * the pawn color belonging to a player
+ */
 public enum Pawn {
     red(),
     yellow(),
@@ -8,7 +11,16 @@ public enum Pawn {
     black();
 
     private boolean isAvailable = true;
+
+    /**
+     *
+     * @return FALSE if the colour has already been selected by a player, else TRUE
+     */
     public boolean getIsAvailable() {return isAvailable;}
+
+    /**
+     * sets isAvailable false
+     */
     public void setIsAvailable() {this.isAvailable = false;}
 
     public static void printAvailablePawns() {
