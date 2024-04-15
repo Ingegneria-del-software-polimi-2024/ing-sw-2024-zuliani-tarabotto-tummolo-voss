@@ -7,7 +7,6 @@ import model.player.Player;
 import model.enums.Pawn;
 import view.CliView;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Controller {
@@ -60,7 +59,7 @@ public class Controller {
         }
 
         //FOURTH: loops until getLastTurn is true
-        while (! gameState.getLastTurn()) {
+        while (gameState.getLastTurn()) {
             playTurn();
         }
 
@@ -96,7 +95,8 @@ public class Controller {
             nickNames.add(name);
         }
         //creates a GameState
-        gameState = new GameState(nickNames, id);
+        int i = 0;
+        gameState = new GameState(nickNames, id, i);
         initialPlayer = gameState.getTurnPlayer();
         //initialize view
         view = new CliView(gameState);

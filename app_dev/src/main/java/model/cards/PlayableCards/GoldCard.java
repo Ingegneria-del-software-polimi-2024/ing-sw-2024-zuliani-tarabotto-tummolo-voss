@@ -17,10 +17,16 @@ public class GoldCard extends PlayableCard{
     @JsonProperty("element")
     private Element blockedElement;
     private Map<Element, Integer> placementConstraint;
-    private Points points;
+    private Points pointsPolicy;
 
+
+    /**
+     * json parsing
+     * @param id
+     * @return GoldCard
+     * @throws Exception
+     */
     public  static GoldCard parse(int id)  throws Exception {
-
         int targetId = id; // ID to search for
 
         try {
@@ -56,13 +62,7 @@ public class GoldCard extends PlayableCard{
                 // Parse the JSON string into a GoldenCard object
                 GoldCard goldenCard = mapper.readValue(jsonString, GoldCard.class);
 
-                // Access parsed properties of the GoldenCard object
-                //System.out.println(goldenCard.getId());
-                //System.out.println(goldenCard.getPlacementConstraint());
-
-
                 return goldenCard;
-
 
             }else {
                 System.out.println("Object with ID " + targetId + " not found.");
@@ -76,46 +76,45 @@ public class GoldCard extends PlayableCard{
 
 
     @Override
-    public Element getBlockedElement() {
-        return blockedElement;
-    }
-
-    //ignore this function(needed in StarterCard class)
-    @Override
-    public Element[] getBlockedElements(){return null;}
-    //ignore this function(needed in StarterCard class)
-    @Override
-    public Element[] getBackFaceCorners() {
-        return null;
-    }
-
-
-
-    public Map<Element, Integer> getPlacementConstraint () {
-        return Collections.unmodifiableMap(placementConstraint); // Return an unmodifiable map
-    }
-
-    public Points getPoints () {
-        return points;
-    }
-
-    @Override
     public int countPoints (PlacementArea placementArea) {
-        return points.count(placementArea);
+        return pointsPolicy.count(placementArea);
     }
 
-    //DA ELIMINARE SERVE PER TEST A CONSOLE
+
+
+    //////////////// GETTER METHODS ////////////////////////////////
+    @Override
+    public Element getBlockedElement() { return blockedElement; }
+    public Points getPoints () { return pointsPolicy; }
+    public Map<Element, Integer> getPlacementConstraint () { return Collections.unmodifiableMap(placementConstraint);}
+
+    /**
+     * IGNORE THIS METHOD(needed for code implementation)
+     * @return null
+     */
+    @Override
+    public Element[] getBackFaceCorners() { return null; }
+    /**
+     * IGNORE THIS METHOD(needed for code implementation)
+     * @return null
+     */
+    @Override
+    public Element[] getBlockedElements(){ return null; }
+
+
+
+    ///////////////////// FOR TESTING PURPOSES ONLY METHODS //////////////////////////////
     @Override
     public void printCard() {
         System.out.println("Card ID: " + getId());
 
-        //Stampa il fronte della carta
+        //prints the front face of the card
         System.out.println("FRONT FACE");
         for (Corner c : getCorners()) {printCorner(c);}
-        System.out.println(points.getPointsPolicy());
+        System.out.println(pointsPolicy.getPointsPolicy());
         System.out.println();
 
-        //stampa il retro della carta
+        //prints the back face of the card
         System.out.println("BACK FACE");
         System.out.println("Blocked element: " + getBlockedElement());
 
@@ -125,6 +124,5 @@ public class GoldCard extends PlayableCard{
         else if (c.getArtifact() != null) System.out.println("Corner_" + c.getId() + ": " + c.getArtifact());
         else System.out.println("Corner_" + c.getId() + ": empty");
     }
-
 
 }

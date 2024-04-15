@@ -272,6 +272,10 @@ public class PlacementArea {
         System.out.println("––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––");
 
     }
+
+    public HashMap<Coordinates, PlayableCard> getDisposition() { return disposition;}
+
+
     public void printAvailablePlaces() {
         for(Coordinates c : availablePlaces ) {
             System.out.println("(" + c.getX() + "; " + c.getY() + ")");

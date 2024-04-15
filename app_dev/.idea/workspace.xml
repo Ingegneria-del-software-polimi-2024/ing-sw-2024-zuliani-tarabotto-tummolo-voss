@@ -5,9 +5,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/controller/ControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/controller/expectedOutput" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/controller/input_file" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/CommonTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/CommonTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/ObjectiveCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/ObjectiveCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/PlayableCards/Corner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/PlayableCards/Corner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/PlayableCards/GoldCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/PlayableCards/GoldCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/PlayableCards/PlayableCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/PlayableCards/PlayableCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/PlayableCards/ResourceCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/PlayableCards/ResourceCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/PlayableCards/StarterCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/PlayableCards/StarterCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/Deck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/Generators/DeckGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/Generators/DeckGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/Generators/ObjectiveCardsDeckGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/Generators/ObjectiveCardsDeckGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/Generators/PlayableDeckGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/Generators/PlayableDeckGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/GoldenDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/GoldenDeck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/ObjectiveDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/ObjectiveDeck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/PlayableDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/PlayableDeck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/ResourcesDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/ResourcesDeck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/deckFactory/StarterDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/deckFactory/StarterDeck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/placementArea/PlacementArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/placementArea/PlacementArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/player/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/controller/ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/controller/ControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/GameState/CommonTable.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/GameState/CommonTable.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/GameState/GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/GameState/GameState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/GoldCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/GoldCard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/ResourceCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/ResourceCard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/StarterCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/StarterCard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/deckFactory/Generators/ObjectiveCardsDeckGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/deckFactory/Generators/ObjectiveCardsDeckGenerator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/deckFactory/Generators/PlayableDeckGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/deckFactory/Generators/PlayableDeckGenerator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/deckFactory/ObjectiveDeck.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/deckFactory/ObjectiveDeck.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/deckFactory/PlayableDeck.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/deckFactory/PlayableDeck.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/placementArea/PlacementArea.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/placementArea/PlacementArea.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/player/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/player/Player.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,8 +83,11 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.ControllerTest.executor": "Debug",
     "Application.Model.executor": "Run",
     "Application.RunDeckCreation.executor": "Run",
+    "JUnit.ControllerTest.gameLoop.executor": "Run",
+    "JUnit.ControllerTest.main.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
@@ -65,7 +104,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "editor.preferences.tabs",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.excludes",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -85,14 +124,13 @@
       <recent name="model.placemetArea" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.GameServer">
-    <configuration name="GameServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="model.GameServer" />
+  <component name="RunManager" selected="JUnit.ControllerTest.main">
+    <configuration name="ControllerTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="controller.ControllerTest" />
       <module name="Ing_sw_proj" />
-      <option name="VM_PARAMETERS" value="-ea" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="model.placementArea.*" />
+          <option name="PATTERN" value="controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -113,17 +151,34 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GoldCardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ControllerTest.gameLoop" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Ing_sw_proj" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="model.cards.PlayableCards.*" />
+          <option name="PATTERN" value="controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="model.cards.PlayableCards" />
-      <option name="MAIN_CLASS_NAME" value="model.cards.PlayableCards.GoldCardTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="controller" />
+      <option name="MAIN_CLASS_NAME" value="controller.ControllerTest" />
+      <option name="METHOD_NAME" value="gameLoop" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ControllerTest.main" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Ing_sw_proj" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="controller" />
+      <option name="MAIN_CLASS_NAME" value="controller.ControllerTest" />
+      <option name="METHOD_NAME" value="main" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -143,35 +198,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StarterCardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Ing_sw_proj" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="model.cards.PlayableCards.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="model.cards.PlayableCards" />
-      <option name="MAIN_CLASS_NAME" value="model.cards.PlayableCards.StarterCardTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
-      <item itemvalue="Application.GameServer" />
+      <item itemvalue="Application.ControllerTest" />
       <item itemvalue="Application.Model" />
-      <item itemvalue="JUnit.GoldCardTest" />
-      <item itemvalue="JUnit.StarterCardTest" />
+      <item itemvalue="JUnit.ControllerTest.gameLoop" />
+      <item itemvalue="JUnit.ControllerTest.main" />
       <item itemvalue="JUnit.ObjectiveCardTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ObjectiveCardTest" />
-        <item itemvalue="JUnit.StarterCardTest" />
-        <item itemvalue="JUnit.GoldCardTest" />
+        <item itemvalue="JUnit.ControllerTest.main" />
+        <item itemvalue="JUnit.ControllerTest.gameLoop" />
+        <item itemvalue="Application.ControllerTest" />
         <item itemvalue="Application.Model" />
-        <item itemvalue="Application.GameServer" />
+        <item itemvalue="JUnit.ObjectiveCardTest" />
       </list>
     </recent_temporary>
   </component>

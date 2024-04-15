@@ -6,10 +6,12 @@ import model.deckFactory.ObjectiveDeck;
 
 public class ObjectiveCardsDeckGenerator implements DeckGenerator {
 
-    //public Deck generateDeckBasedOnType(){
-        //return new ObjectiveDeck();
-    //}
 
+    /**
+     * creates a new ObjectiveDeck
+     * and calls the generate() method which initializes the cards via json parsing
+     * @return
+     */
     public ObjectiveDeck generateDeck() {
         ObjectiveDeck deck = new ObjectiveDeck();
         deck.generate();

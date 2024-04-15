@@ -8,37 +8,40 @@ import java.util.List;
 public abstract class PlayableDeck implements Deck{
     protected List<PlayableCard> cards;
 
+
     @Override
     public void shuffle() {
         Collections.shuffle(cards);
     }
+
+    /**
+     * the first card in the deck gets removed and returned
+     * @return extracted
+     */
+    public PlayableCard extract() {
+        PlayableCard extracted;
+        extracted = cards.get(0);
+        cards.remove(0);
+        return extracted;
+    }
+
+    /**
+     * adds card to the back (tail/end) of cards list
+     * @param card
+     */
+    public void addCard(PlayableCard card) {
+        cards.add(card);
+    }
+
+
+
+    ////////////// GETTER METHODS ////////////////////////
+
+    public List<PlayableCard> getCards() { return cards; }
     @Override
     public int getSize() {
         return cards.size();
     }
 
-    public PlayableCard extract() {
-        if (cards.isEmpty()) {
-            throw new IllegalStateException("Deck is empty!");
-        }
-        PlayableCard extracted;
-        extracted = cards.get(0);
-        cards.remove(0);
-        return extracted; // Extract and remove the first card (head/beginning of list)
-    }
-
-    public void addCard(PlayableCard card) {
-        cards.add(card); // Add card to the back (tail/end of list)
-    }
-
-    //just for test purposes
-    public PlayableCard getCard(int id) throws IllegalArgumentException{
-        for(int i=0; i<cards.size(); i++) {
-            PlayableCard c = cards.get(i);
-            if (c.getId() == id)
-                return c;
-        }
-        throw new IllegalArgumentException("WTFFFF, card "+id+" not found");
-    }
 
 }
