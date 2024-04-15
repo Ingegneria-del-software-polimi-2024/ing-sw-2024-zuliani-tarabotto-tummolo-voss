@@ -10,8 +10,16 @@ import model.enums.Element;
 import model.placementArea.PlacementArea;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Test class for the {@link ResourceCard} class.
+ */
 public class ResourceCardTest extends TestCase {
 
+    /**
+     * Tests that the {@link ResourceCard#parse(int)} method successfully parses a valid resource card ID.
+     *
+     * @throws JsonProcessingException if an unexpected error occurs during parsing.
+     */
     @Test
     public void testParse_ValidId() throws JsonProcessingException {
         // Given a valid resource card ID
@@ -25,10 +33,15 @@ public class ResourceCardTest extends TestCase {
         assertTrue(resourceCard.getId() == 1); // ID should be positive
     }
 
+    /**
+     * Tests that the {@link ResourceCard#parse(int)} method returns null for an invalid resource card ID.
+     *
+     * @throws JsonProcessingException if an unexpected error occurs during parsing.
+     */
     @Test
     public void testParse_InvalidId() throws JsonProcessingException {
         // Given an invalid resource card ID
-        int id = -1;
+        int id = 55;
 
         // When the parse method is called
         ResourceCard resourceCard = ResourceCard.parse(id);
@@ -37,6 +50,11 @@ public class ResourceCardTest extends TestCase {
         assertNull(resourceCard);
     }
 
+    /**
+     * Tests that the {@link ResourceCard#getPoints()} method returns a SimplePoints object.
+     *
+     * @throws JsonProcessingException if an unexpected error occurs during retrieval.
+     */
     @Test
     public void testGetPoints_SimplePoints() throws JsonProcessingException {
         // Given a resource card with SimplePoints strategy
@@ -49,6 +67,12 @@ public class ResourceCardTest extends TestCase {
         assertTrue(points instanceof SimplePoints);
     }
 
+    /**
+     * Tests that the {@link ResourceCard#countPoints(PlacementArea)} method calls the points strategy's count method
+     * with the placement area.
+     *
+     * @throws JsonProcessingException if an unexpected error occurs during point counting.
+     */
     @Test
     public void testCountPoints() throws JsonProcessingException {
         // Given a resource card with a placement area
@@ -64,6 +88,11 @@ public class ResourceCardTest extends TestCase {
         assertTrue(points >= 0);
     }
 
+    /**
+     * Tests that the {@link ResourceCard#getBlockedElement()} method retrieves the blocked element correctly.
+     *
+     * @throws JsonProcessingException if an unexpected error occurs during retrieval.
+     */
     @Test
     public void testGetBlockedElement() throws JsonProcessingException {
         // Given a resource card with a blocked element

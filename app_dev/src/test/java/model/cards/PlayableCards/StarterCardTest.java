@@ -14,7 +14,16 @@ import model.enums.Element;
 import model.placementArea.PlacementArea;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Test class for the {@link StarterCard} class.
+ */
 public class StarterCardTest extends TestCase {
+
+    /**
+     * Tests that the {@link StarterCard#parse(int)} method successfully parses a valid starter card ID.
+     *
+     * @throws JsonProcessingException if an unexpected error occurs during parsing.
+     */
     @Test
     public void testParse_ValidId() throws JsonProcessingException {
         // Given a valid starter card ID
@@ -25,13 +34,18 @@ public class StarterCardTest extends TestCase {
 
         // Then the starter card should be parsed correctly
         assertNotNull(starterCard);
-        assertTrue(starterCard.getId() > 0); // ID should be positive
+        assertTrue(starterCard.getId() == 81);
     }
 
+    /**
+     * Tests that the {@link StarterCard#parse(int)} method returns null for an invalid starter card ID.
+     *
+     * @throws JsonProcessingException if an unexpected error occurs during parsing.
+     */
     @Test
     public void testParse_InvalidId() throws JsonProcessingException {
         // Given an invalid starter card ID
-        int id = -1;
+        int id = 8;
 
         // When the parse method is called
         StarterCard starterCard = StarterCard.parse(id);
@@ -40,6 +54,11 @@ public class StarterCardTest extends TestCase {
         assertNull(starterCard);
     }
 
+    /**
+     * Tests that the {@link StarterCard#getBlockedElements()} method retrieves the blocked elements correctly.
+     *
+     * @throws JsonProcessingException if an unexpected error occurs during retrieval.
+     */
     @Test
     public void testGetBlockedElements() throws JsonProcessingException {
         // Given a starter card with blocked elements
@@ -52,6 +71,11 @@ public class StarterCardTest extends TestCase {
         assertNotNull(blockedElements);
     }
 
+    /**
+     * Tests that the {@link StarterCard#getBackFaceCorners()} method retrieves the back face corners correctly.
+     *
+     * @throws JsonProcessingException if an unexpected error occurs during retrieval.
+     */
     @Test
     public void testGetBackFaceCorners() throws JsonProcessingException {
         // Given a starter card with back face corners
@@ -64,6 +88,12 @@ public class StarterCardTest extends TestCase {
         assertNotNull(backFaceCorners);
     }
 
+    /**
+     * Tests that the {@link StarterCard#getCorner(int)} method retrieves the corner from the face side
+     * for a valid index.
+     *
+     * @throws JsonProcessingException if an unexpected error occurs during retrieval.
+     */
     @Test
     public void testGetCorner_FaceSide() throws JsonProcessingException {
         // Given a starter card with a corner on the face side
@@ -81,6 +111,12 @@ public class StarterCardTest extends TestCase {
         assertNotNull(corner);
     }
 
+    /**
+     * Tests that the {@link StarterCard#getCorner(int)} method retrieves the corner from the back face
+     * for a valid index.
+     *
+     * @throws JsonProcessingException if an unexpected error occurs during retrieval.
+     */
     @Test
     public void testGetCorner_BackSide() throws JsonProcessingException {
         // Given a starter card with back face corners
@@ -98,6 +134,4 @@ public class StarterCardTest extends TestCase {
         assertNotNull(corner);
         assertEquals(starterCard.getBackFaceCorners()[index], corner.getElement()); // Check the element matches
     }
-
-
 }

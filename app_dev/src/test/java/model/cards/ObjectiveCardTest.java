@@ -12,36 +12,45 @@ import org.junit.jupiter.api.Test;
 
 
 
+/**
+ * Test class for the {@link ObjectiveCard} class.
+ */
 public class ObjectiveCardTest extends TestCase {
 
+    /**
+     * Tests that the {@link ObjectiveCard#parse(int)} method successfully parses a valid objective card ID.
+     *
+     * @throws JsonProcessingException if an unexpected error occurs during parsing.
+     */
+    @Test
+    public void testParse_ValidId() throws JsonProcessingException {
+        // Given a valid objective card ID
+        int id = 87; // Assuming the ID 1 exists in the ObjectiveCards.json file
 
+        // When the parse method is called
+        ObjectiveCard objectiveCard = ObjectiveCard.parse(id);
 
-        @Test
-        public void testParse_ValidId() throws JsonProcessingException {
-            // Given a valid objective card ID
-            int id = 87; // Assuming the ID 1 exists in the ObjectiveCards.json file
+        // Then the objective card should be parsed correctly
+        assertNotNull(objectiveCard);
+        assertTrue(objectiveCard.getId() == 87);
+    }
 
-            // When the parse method is called
-            ObjectiveCard objectiveCard = ObjectiveCard.parse(id);
+    /**
+     * Tests that the {@link ObjectiveCard#parse(int)} method returns null for an invalid objective card ID.
+     *
+     * @throws JsonProcessingException if an unexpected error occurs during parsing.
+     */
+    @Test
+    public void testParse_InvalidId() throws JsonProcessingException {
+        // Given an invalid objective card ID
+        int id = 18;
 
-            // Then the objective card should be parsed correctly
-            assertNotNull(objectiveCard);
-            assertTrue(objectiveCard.getId() > 0); // ID should be positive
-        }
+        // When the parse method is called
+        ObjectiveCard objectiveCard = ObjectiveCard.parse(id);
 
-        @Test
-        public void testParse_InvalidId() throws JsonProcessingException {
-            // Given an invalid objective card ID
-            int id = -1;
-
-            // When the parse method is called
-            ObjectiveCard objectiveCard = ObjectiveCard.parse(id);
-
-            // Then the method should return null
-            assertNull(objectiveCard);
-        }
-
-
+        // Then the method should return null
+        assertNull(objectiveCard);
+    }
 
 
 }
