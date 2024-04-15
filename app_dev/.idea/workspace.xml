@@ -155,11 +155,11 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.PlacementAreaTest" />
       <item itemvalue="Application.Model" />
+      <item itemvalue="Application.PlacementAreaTest" />
       <item itemvalue="JUnit.GoldCardTest" />
-      <item itemvalue="JUnit.StarterCardTest" />
       <item itemvalue="JUnit.ObjectiveCardTest" />
+      <item itemvalue="JUnit.StarterCardTest" />
     </list>
     <recent_temporary>
       <list>
