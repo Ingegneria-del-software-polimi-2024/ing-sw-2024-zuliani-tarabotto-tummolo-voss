@@ -193,7 +193,7 @@ public class CommonTable {
 
 
 
-    //FOR TESTING PURPOSES ONLY //////////////////////////////////////////////////////////////
+    ///////////////////////FOR TESTING PURPOSES ONLY //////////////////////////////////////////////////////////////
     public void definedDeckInitialization(List<Player> players) {
         //creates and shuffles decks
         long seed = 12345;
@@ -249,5 +249,5 @@ public class CommonTable {
         list.getCards().clear();
         list.getCards().addAll(copy);
     }
-    //*******************************************************************************************
+
 }
