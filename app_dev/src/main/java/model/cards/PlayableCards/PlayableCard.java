@@ -43,8 +43,6 @@ public abstract class PlayableCard implements Card {
         return null;
     }
 
-    //IDK if we wanna keep this, this allows to get the placement constraints also for Resource Cards
-    // (and Starter Cards but not useful)
     public Map<Element, Integer> getPlacementConstraint () {return null;}
     public String getType() { return type; }
     public int getId() { return id; }
