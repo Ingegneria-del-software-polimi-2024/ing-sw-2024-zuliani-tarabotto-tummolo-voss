@@ -30,22 +30,23 @@ public class ObjectiveDeck  implements Deck{
         }
     }
 
-    // Static method to create a GoldenDeck instance and check if it's finished
-
-    //public static boolean isDeckFinished(ObjectiveDeck deck) {
-    //    return deck.checkDeck();
-    //}
-
+    /**
+     * adds card to the back (tail/end) of cards list
+     * @param card
+     */
     public void addCard(ObjectiveCard card) {
         cards.add(card);
     }
 
-    public int getSize() {
-        return cards.size();
-    }
+    @Override
     public void shuffle() {
         Collections.shuffle(cards);
     }
+
+    /**
+     * the first card in the deck gets removed and returned
+     * @return extracted
+     */
     public ObjectiveCard extract() {
         if (cards.isEmpty()) {
             throw new IllegalStateException("Deck is empty!");
@@ -56,17 +57,15 @@ public class ObjectiveDeck  implements Deck{
         return extracted; // Extract and remove the first card (head/beginning of list)
     }
 
-    //only for test purposes
-    public ObjectiveCard getCard(int id){
-        for(int i=0; i < cards.size(); i++){
-            ObjectiveCard c = cards.get(i);
-            if(c.getId()==id)
-                return c;
-        }
-        return null;
-    }
 
+
+    ///////////////////// GETTER METHODS ////////////////////////////////////////////
+    @Override
+    public int getSize() {
+        return cards.size();
+    }
     public ObjectiveCard get(int i) {
         return cards.get(i);
     }
+    public ArrayList<ObjectiveCard> getCards(){ return cards;}
 }

@@ -2,22 +2,53 @@ package controller;
 
 import Exceptions.EmptyCardSourceException;
 import model.GameState.GameState;
+import model.enums.Pawn;
 import model.placementArea.Coordinates;
 import model.player.Player;
-import model.enums.Pawn;
+import org.junit.jupiter.api.Test;
 import view.CliView;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Controller {
+class ControllerTest {
     private GameState gameState;
     private ArrayList<String> nickNames;
     private CliView view;
-    private Scanner sc = new Scanner(System.in);
+    private Scanner sc = new Scanner(new File("/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/input_file"));
     private Player initialPlayer;
 
 
+    ControllerTest() throws FileNotFoundException {
+    }
+@Test
+    public void main() throws EmptyCardSourceException, FileNotFoundException {
+        ControllerTest controller = new ControllerTest();
+        controller.initializeGameState();
+        controller.gameLoop();
+    }
+
+    //creates a new gameState and ask users for nicknames
+    public void initializeGameState() {
+        String id = "gameState_0";
+        nickNames = new ArrayList<String>();
+        int numPlayers = Integer.parseInt(sc.next());
+        nickNames.add(sc.next());
+        nickNames.add(sc.next());
+        //creates a GameState
+        int i = 0;
+        gameState = new GameState(nickNames, id, i);
+        initialPlayer = gameState.getTurnPlayer();
+
+    }
+
+
     //main method to handle game flow
+
     public void gameLoop() throws EmptyCardSourceException {
         int cont = 0;
 
@@ -25,44 +56,32 @@ public class Controller {
         //LOGIN SECTION
         for (String player : nickNames) {
             //selecting and placing starter card
-            System.out.println("YOUR STARTER CARD: \n");
-            view.printStarterCard();
-            System.out.println(player + ", select a face side for the starting card: ");
             gameState.setStartingCardFace(sc.nextBoolean());
             gameState.playStarterCard();
             //selecting pawn
-            System.out.println("SELECT A PAWN: ");
-            Pawn.printAvailablePawns();
             Pawn pawn = Pawn.valueOf(sc.next());
             gameState.setPlayerPawnColor(pawn);
             pawn.setIsAvailable();
             gameState.nextPlayer();
         }
 
-        //SECOND: every player draws three random cards: 1 goldCard and 2 resourceCard
-        //gameState.initializePlayersHands();
-
         //THIRD: display the two commonObjectives cards and each player selects his secret objective between two given cards
-        System.out.println("COMMON OBJECTIVES");
-        gameState.printCommonObjectives();
         for (String player: nickNames) {
-            System.out.println("CHOOSE A SECRET OBJECTIVE: (0/1)\n");
-            gameState.getObjectiveDeck().get(0).printCard();
-            gameState.getObjectiveDeck().get(1).printCard();
             //set the player secret objective
-            gameState.getTurnPlayer().setSecretObjective(gameState.getObjectiveDeck().get(sc.nextInt()));
+            gameState.getTurnPlayer().setSecretObjective(gameState.getObjectiveDeck().get(Integer.parseInt(sc.next())));
             //remove the two extracted objectives
             gameState.getObjectiveDeck().extract();
             gameState.getObjectiveDeck().extract();
-            System.out.println("YOUR SECRET OBJECTIVE");
-            gameState.getTurnPlayer().getSecretObjective().printCard();
+            gameState.nextPlayer();
         }
 
         //FOURTH: loops until getLastTurn is true
-        while (gameState.getLastTurn()) {
+        while (!gameState.getLastTurn()) {
+            System.out.println("giro");
             playTurn();
         }
 
+        System.out.println("penultimo giro");
         //FIFTH: we continue playing until the initial player is reached and then we play the final round
         while (gameState.getTurnPlayer() != initialPlayer) {
             cont ++;
@@ -72,35 +91,26 @@ public class Controller {
         //if we already played an entire round we end the game, else we play another additional round
         if(cont == nickNames.size() -1 ){
             gameState.calculateFinalPoints();
-            printWinner();
+            System.out.println("fine partita al penultimo giro");
+
+
         }else{
             for(int i = 0; i < nickNames.size(); i++){
                 playTurn();
             }
             gameState.calculateFinalPoints();
-            printWinner();
         }
+
+        printWinner();
+        fileWriting();
+
+        File f1 = new File("/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/output");
+        File f2 = new File("/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/expectedOutput");
+        assert !f1.equals(f2);
+
     }
 
-    //creates a new gameState and ask users for nicknames
-    public void initializeGameState() {
-        String id = "gameState_0";
-        nickNames = new ArrayList<String>();
-        System.out.print("Enter number of players: ");
-        int numPlayers = sc.nextInt();
 
-        for (int i = 0; i < numPlayers; i++){
-            System.out.print("Enter player_" + (i+1) + " nickname: ");
-            String name = sc.next();
-            nickNames.add(name);
-        }
-        //creates a GameState
-        int i = 0;
-        gameState = new GameState(nickNames, id, i);
-        initialPlayer = gameState.getTurnPlayer();
-        //initialize view
-        view = new CliView(gameState);
-    }
 
     private void callDrawFunction(int i) throws EmptyCardSourceException {
         try{
@@ -134,18 +144,9 @@ public class Controller {
     }
 
     private void playTurn() throws EmptyCardSourceException {
-        System.out.println("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
-        System.out.println("\u001B[35mCURRENT PLAYER: \u001B[0m " + gameState.getTurnPlayer().getNickname().toString());
-        System.out.println("\u001B[35mPLAYER DISPOSITION: \u001B[0m ");
-        gameState.printPlayerDisposition();
-        System.out.println();
-
-        //NB: spostare printPlayerHand
-        view.printPlayerHand();
 
         //ASK PLAYER TO SELECT A CARD FROM HAND
-        System.out.println("CHOOSE A CARD FROM YOUR HAND: ( 1 for C_1, 2 for C_2, 3 for C_3)");
-        switch(sc.nextInt()){
+        switch(this.sc.nextInt()){
             case 1:
                 gameState.setSelectedHandCard(gameState.getPlayerHandCard(0));
                 break;
@@ -157,29 +158,13 @@ public class Controller {
                 break;
         }
 
-        System.out.println("CHOOSE A FACE SIDE FOR THE SELECTED CARD: ");
         gameState.setSelectedCardFace(sc.nextBoolean());
-
-        //PRINT ALL AVAILABLE POSITIONS
-        System.out.println("YOU CAN PLACE THE CARD IN ONE OF THESE POSITIONS: (enter coordinates)");
-        gameState.printPlayerAvailablePlaces();
-        Coordinates c = new Coordinates(sc.nextInt(), sc.nextInt());
+        Coordinates c = new Coordinates(Integer.parseInt(sc.next()), Integer.parseInt(sc.next()));
         gameState.setSelectedCoordinates(c);
 
         gameState.playCard();
-        gameState.printPlayerDisposition();
-
-        System.out.println("DRAW A CARD: 1 -> gold deck");
-        System.out.println("             2 -> resource deck");
-        System.out.println("             3 -> open gold 1");
-        System.out.println("             4 -> open gold 2");
-        System.out.println("             5 -> open resource 1");
-        System.out.println("             6 -> open resource 2");
-
         callDrawFunction(sc.nextInt());
-
-        view.printPlayerHand();
-        System.out.println("YOUR POINTS: " + gameState.getPoints());
+        gameState.setLastTurnTrue();
         gameState.nextPlayer();
     }
 
@@ -187,9 +172,45 @@ public class Controller {
         Player winner = gameState.getPlayer(0);
         for (int i = 1; i < nickNames.size(); i++) {
             if (gameState.getPlayer(i).getPoints() > winner.getPoints()){
-                System.out.println(winner.getNickname().toUpperCase() + " YOU WIN!!!!");
+                winner = gameState.getPlayer(i);
             }
         }
+        System.out.println(winner.getNickname().toUpperCase() + " YOU WIN!!!!");
     }
 
+    private void  fileWriting() {
+        //we find the winner
+        Player winner = gameState.getPlayer(0);
+        for (int i = 1; i < nickNames.size(); i++) {
+            if (gameState.getPlayer(i).getPoints() > winner.getPoints()){
+                winner = gameState.getPlayer(i);
+            }
+        }
+
+
+        //we write the output file
+        String filename = "/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/output"; // Specify the file name
+
+        try {
+            // Create a FileWriter object
+            FileWriter writer = new FileWriter(filename);
+
+            // Write content to the file
+            writer.write("winner: " +  winner.getNickname() + "\n");
+            for (int i = 0; i < nickNames.size(); i++) {
+                writer.write(gameState.getPlayer(i).getNickname()+ ": " + gameState.getPlayer(i).getPoints() + " points\n");
+                for(Coordinates c : gameState.getPlayer(i).getPlacementArea().getDisposition().keySet()){
+                    writer.write("Card: " + gameState.getPlayer(i).getPlacementArea().getDisposition().get(c).getId() + ", (" + c.getX() + ";" + c.getY() + ")\n");
+                }
+            }
+
+            // Close the FileWriter
+            writer.close();
+
+            System.out.println("Content has been written to " + filename);
+        } catch (IOException e) {
+            System.out.println("An error occurred while writing to the file.");
+            e.printStackTrace();
+        }
+    }
 }

@@ -5,38 +5,24 @@ import java.util.Collections;
 import java.util.List;
 
 // Abstract class defining common deck properties and functionalities
+
+/**
+ * Interface defining common deck functionalities
+ */
 public interface Deck {
-
-    /*protected List<Card> cards; // List to store cards
-
+    /**
+     * a new deck is created by using json parsing to build the related cards from a specific file
+     */
     public abstract void generate();
 
-    public void shuffle() {
-        Collections.shuffle(cards);
-    }
-
-    public Card extract() {
-        if (cards.isEmpty()) {
-            throw new IllegalStateException("Deck is empty!");
-        }
-        return cards.remove(0); // Extract and remove the first card (head/beginning of list)
-    }
-
-    public void addCard(Card card) {
-        cards.add(card); // Add card to the back (tail/end of list)
-    }
-
-    public int getSize() {
-        return cards.size();
-    }
-    public boolean checkDeck() {
-        return cards.isEmpty();
-    }
-
-
-    }*/
-    public abstract void generate();
+    /**
+     * the cards in the deck are randomly shuffled
+     */
     public abstract void shuffle();
+
+    /**
+     * returns the number of cards in the deck
+     */
     public abstract int getSize();
 }
 

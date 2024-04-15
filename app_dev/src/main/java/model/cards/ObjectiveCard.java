@@ -20,12 +20,14 @@ public class ObjectiveCard  implements Card {
     private Objective objective;
 
 
-    public int countPoints(PlacementArea placementArea){
-        return objective.countObjectivePoints(placementArea);
-    }
 
+    /**
+     * json parsing
+     * @param id
+     * @return
+     * @throws JsonProcessingException
+     */
     public static ObjectiveCard parse(int id) throws JsonProcessingException {
-
 
         try {
 
@@ -47,21 +49,15 @@ public class ObjectiveCard  implements Card {
                     break;
                 }
             }
-            //System.out.println("Extracted JSON based on ID " + targetId + ": " );
-
 
             // Extract the JSON string based on the ID
             if (targetNode != null) {
                 String jsonString = targetNode.toString();
-                //System.out.println("Extracted JSON based on ID " + targetId + ": " + jsonString);
 
                 // Convert JSON to object
                 ObjectMapper mapper = new ObjectMapper();
                 mapper.registerSubtypes(LShapeObjective.class, ElementObjective.class, DiagonalShapeObjective.class, ArtifactObjective.class);
                 ObjectiveCard objectiveCard = mapper.readValue(jsonString, ObjectiveCard.class);
-                //System.out.println(objectiveCard.getId());
-
-
 
                 return objectiveCard;
 
@@ -74,11 +70,21 @@ public class ObjectiveCard  implements Card {
         return null;
     }
 
-    public int getId() {
-        return id;
+
+    /**
+     * based on the card's pointsPolicy the number of points granted by it is returned
+     * @param placementArea
+     * @return int
+     */
+    public int countPoints(PlacementArea placementArea){
+        return objective.countObjectivePoints(placementArea);
     }
 
-    //TO BE REMOVED IN THE FUTURE: method called by the controller to print card's information on the console
+
+    ////////////////////// GETTER METHODS //////////////////////////////////////////////
+    public int getId() { return id; }
+
+    /////////////////////// TESTING RELATED METHODS ONLY ///////////////////////////////
     public void printCard() {
         System.out.println("Card ID: " + getId());
         objective.printObjective();

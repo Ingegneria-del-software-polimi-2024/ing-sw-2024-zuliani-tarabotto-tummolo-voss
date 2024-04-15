@@ -20,12 +20,4 @@ public class StarterDeck extends PlayableDeck{
             }
         }
     }
-
-
-
-    // Static method to create a GoldenDeck instance and check if it's finished
-
-   // public static boolean isDeckFinished(StarterDeck deck) {
-        //return deck.checkDeck();
-    //}
 }

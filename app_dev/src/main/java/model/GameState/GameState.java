@@ -10,8 +10,11 @@ import model.deckFactory.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ */
 public class GameState {
-    private List<Player> players;
+    private ArrayList<Player> players;
     private String id;
     private Player turnPlayer;
     private boolean isLastTurn = false;
@@ -19,8 +22,15 @@ public class GameState {
     private Coordinates selectedCoordinates;
     private CommonTable commonTable;
     private TurnState turnState;
+    private final int MAX_POINTS = 20;
 
-    /////// CONSTRUCTOR //////////////////////////////////////////////////////////////////
+
+    /**
+     * class constructor: creates a new Player for each name contained in nickNames,
+     *                    creates a new CommonTable and calls the method to initialize it
+     * @param nickNames ArrayList of Strings
+     * @param id the unique id for gameState
+     */
     public GameState(ArrayList<String> nickNames, String id) {
         //creates a new players list with the nicknames taken from input
         players = new ArrayList<Player>();
@@ -31,12 +41,18 @@ public class GameState {
         }
         this.turnPlayer = players.get(0);
         this.id = id;
-        // initialize commonTable
-        this.commonTable = new CommonTable(players);
+        this.commonTable = new CommonTable();
+        //function that calls every initializing method contained in commonTable
+        commonTable.initialize(players);
     }
 
+
+
+
     //////////////////// GENERAL TURN CONTROL METHODS ///////////////////////////////////////
-    //update each player's final points by calling the methods in Player class
+    /**
+     * this method is called at the end of the game and it checks for each Player if they completed any Objective(both secret and commoon)
+     */
     public void calculateFinalPoints(){
         int i, j;
         for(i=0; i< players.size(); i++){
@@ -47,20 +63,24 @@ public class GameState {
         }
     }
 
-    //checks if any player reached 20 points or if both the gold and the resource decks are empty
+    /**
+     * checks if any player reached 20 points or if both the gold and the resource decks are empty
+     */
     public void setLastTurnTrue(){
         //checks if a player has reached 20 points
-        for(int i=0; i<players.size(); i++){
-            if (players.get(i).getPoints() >= 20) {
+        for (Player player : players) {
+            if (player.getPoints() >= MAX_POINTS) {
                 isLastTurn = true;
                 break;
             }
         }
         //checks if both decks are empty and also openGold and openResources are empty
-        isLastTurn = commonTable.checkEmtpyDecks();
+        if(!isLastTurn) {isLastTurn = commonTable.checkEmptyDecks();}
     }
 
-    //updates turnPlayer
+    /**
+     * updates currentPlayer
+     */
     public void nextPlayer() {
         int currentPlayer = players.indexOf(turnPlayer);
         if(currentPlayer == players.size() - 1) {
@@ -68,65 +88,117 @@ public class GameState {
         } else{turnPlayer = players.get(currentPlayer+1);}
     }
 
+    /**
+     * INTERFACE METHOD
+     * based on Player input, the method sets the selected pawn color for the player
+     * @param pawnColor Pawn selected by the Player
+     */
+    public void setPlayerPawnColor(Pawn pawnColor) { turnPlayer.setPawnColor(pawnColor);}
+
+
 
     ////////////////// CARDS PLACEMENT RELATED METHODS //////////////////////////////////////////////////////
+    /**
+     * INTERFACE METHOD
+     * calls playCard method contained in Player class
+     */
     public void playCard(){
-        //calls the playCard method contained in the Player class
         turnPlayer.playCard(selectedHandCard, selectedCoordinates);
-        //method to check if the player has reached 20 points
+        //we check if the player reached 20 points
         setLastTurnTrue();
     }
 
+    /**
+     * INTERFACE METHOD
+     * calls playCard method contained in Player class
+     */
     public void playStarterCard() {
         turnPlayer.playStarterCard();
     }
 
+    /**
+     * based on Player input, the method sets the card that will be placed on the player's PlacementArea
+     * @param card PlayableCard selected by the Player
+     */
     public void setSelectedHandCard(PlayableCard card) {
         this.selectedHandCard = card;
     }
 
+    /**
+     * based on Player input, the method sets the coordinates where the this.selectedHandCard will be placed
+     * @param coordinates Coordinates selected by the Player
+     */
     public void setSelectedCoordinates(Coordinates coordinates) {
         this.selectedCoordinates = coordinates;
     }
 
-    //sets the faceSide for the player's starting card
+    /**
+     * INTERFACE METHOD
+     * based on Player input, the method sets the faceSide that will be visible for the starting card when placed
+     * @param faceSide FaceSide selected by the Player
+     */
     public void setStartingCardFace(boolean faceSide) {
         turnPlayer.getStarterCard().setFaceSide(faceSide);
     }
 
-    //sets the faceSide for the card that the player has selected from his hand
+
+    /**
+     * INTERFACE METHOD
+     * based on Player input, the method sets the faceSide for the card that the player has selected from his hand
+     * @param faceSide FaceSide selected by the Player
+     */
     public void setSelectedCardFace(boolean faceSide) {
         selectedHandCard.setFaceSide(faceSide);
     }
 
 
-////////////////////////////////INTERFACE METHODS///////////////////////////////////////
+
+    ////////////////////////////////METHODS RELATED TO DRAWING FROM DECKS///////////////////////////////////////
+    /**
+     * INTERFACE METHOD
+     * draws a card from goldDeck
+     * @throws EmptyCardSourceException
+     */
     public void drawCardGoldDeck() throws EmptyCardSourceException {
         commonTable.drawCardGoldDeck(turnPlayer);
         setLastTurnTrue();
     }
 
+    /**
+     * INTERFACE METHOD
+     * draws a card from resourcesDeck
+     * @throws EmptyCardSourceException
+     */
     public void drawCardResourcesDeck() throws EmptyCardSourceException {
         commonTable.drawCardResourcesDeck(turnPlayer);
         setLastTurnTrue();
     }
 
+    /**
+     * INTERFACE METHOD
+     * draws a card from openGold at index 0 or 1
+     * @throws EmptyCardSourceException
+     */
     public void drawCardOpenGold(int index) throws EmptyCardSourceException {
         commonTable.drawCardOpenGold(index, turnPlayer);
         setLastTurnTrue();
     }
 
+    /**
+     * INTERFACE METHOD
+     * draws a card from openResources at index 0 or 1
+     * @throws EmptyCardSourceException
+     */
     public void drawCardOpenResources(int index) throws EmptyCardSourceException {
         commonTable.drawCardOpenResources(index, turnPlayer);
         setLastTurnTrue();
     }
 
-    public void setPlayerPawnColor(Pawn pawnColor) { turnPlayer.setPawnColor(pawnColor);}
 
     public void nextState(){turnState.nextState();}
     public void nextStage(){turnState.nextStage();}
 
-/////////////// GETTER METHODS FOR COMMONTABLE ATTRIBUTES ////////////////////////
+    /////////////// GETTER METHODS FOR COMMONTABLE ATTRIBUTES ////////////////////////
     public PlayableDeck getGoldDeck() { return commonTable.getGoldDeck(); }
     public PlayableDeck getResourceDeck() { return commonTable.getResourceDeck(); }
     public PlayableDeck getStarterDeck(){return commonTable.getStarterDeck();}
@@ -140,12 +212,13 @@ public class GameState {
     public int getPoints() {return turnPlayer.getPoints(); }
     //returns turnPlayer's card at specified index in his hand
     public PlayableCard getPlayerHandCard(int index) { return turnPlayer.getPlayingHand().get(index); }
-
     public List<ObjectiveCard> getCommonObjectives(){return commonTable.getCommonObjectives();}
+    public CommonTable getCommonTable(){return commonTable;}
 
 
-/////////////////////// PRINTING METHODS FOR CONSOLE TESTING ////////////////////////////////////////////////////////////////
 
+
+    /////////////////////// METHODS RELATED TO TESTING ONLY ////////////////////////////////////////////////////////////////
     //calls the PlacementArea method to print available places where the player can put the selected card
     public void printPlayerAvailablePlaces() {turnPlayer.getPlacementArea().printAvailablePlaces();}
 
@@ -161,4 +234,24 @@ public class GameState {
         commonTable.getCommonObjectives().get(1).printCard();
     }
 
+    /**
+     * this is a variation of the default constructor, ONLY USED FOR THE CONTROLLER TESTS
+     * @param nickNames
+     * @param id
+     * @param i
+     */
+    public GameState(ArrayList<String> nickNames, String id, int i) {
+        players = new ArrayList<Player>();
+        for(String name : nickNames) {
+            Player p;
+            players.add(p = new Player());
+            p.setNickname(name);
+        }
+        this.turnPlayer = players.get(0);
+        this.id = id;
+        // initialize commonTable
+        this.commonTable = new CommonTable();
+        //function that calls every initializing method contained in commonTable
+        commonTable.definedDeckInitialization(players);
+    }
 }

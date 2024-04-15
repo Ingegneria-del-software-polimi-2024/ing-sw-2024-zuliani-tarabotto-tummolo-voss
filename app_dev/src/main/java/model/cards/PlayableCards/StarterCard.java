@@ -19,29 +19,26 @@ public class StarterCard extends PlayableCard{
     private Element[] blockedElements;
     @JsonProperty("backFaceCorners")
     private Element[] backFaceCorners;
-
     @JsonProperty("backFaceCorners")
-    //private Element[] backFaceCorners;
-
     @Override
     public Element[] getBlockedElements() {
         return blockedElements;
     }
-
     @Override
     public Element[] getBackFaceCorners() {
         return backFaceCorners;
     }
 
 
-
+    /**
+     * json parsing
+     * @param id
+     * @return
+     * @throws JsonProcessingException
+     */
     public static StarterCard parse(int id) throws JsonProcessingException {
-
         int targetId = id; // ID to search for
-
         try {
-
-
             ClassLoader classLoader = ResourceCard.class.getClassLoader();
             InputStream inputStream = classLoader.getResourceAsStream("StarterCards.json");
 
@@ -64,20 +61,12 @@ public class StarterCard extends PlayableCard{
             // Extract the JSON string based on the ID
             if (targetNode != null) {
                 String jsonString = targetNode.toString();
-                //System.out.println("Extracted JSON based on ID " + targetId + ": " + jsonString);
-
 
                 // Convert JSON to object
                 ObjectMapper mapper = new ObjectMapper();
                 mapper.registerSubtypes(SimplePoints.class);
                 StarterCard starterCard = mapper.readValue(jsonString, StarterCard.class);
-
-                //System.out.println(starterCard.getId());
                 Element[] backFaceCorners = starterCard.getBackFaceCorners();
-                /*for (Element element : backFaceCorners) {
-                    System.out.println(element);
-                }*/
-
 
                 return starterCard;
 
@@ -90,17 +79,16 @@ public class StarterCard extends PlayableCard{
         return null;
     }
 
-    //ignore this function, needed in GoldCard and ResourcesCard classes
-    @Override
-    public Element getBlockedElement() {
-        return null;
-    }
 
     @Override
     public int countPoints(PlacementArea placementArea) {
+        //always returns 0 because StarterCard don't give any points
         return 0;
     }
 
+
+
+    ///////////////////// GETTER METHODS ///////////////////////////////////////////////////
     @Override
     public Corner getCorner(int index) {
         if(!getFaceSide()) return new Corner(backFaceCorners[index]);
@@ -111,7 +99,19 @@ public class StarterCard extends PlayableCard{
         }
         return null;
     }
-    //DA ELIMINARE SERVE PER TEST A CONSOLE
+
+    /**
+     * IGNORE THIS METHOD(needed for code implementation)
+     * @return null
+     */
+    @Override
+    public Element getBlockedElement() {
+        return null;
+    }
+
+
+
+    ///////////////////// TESTING RELATED METHODS ONLY /////////////////////////////////////
     @Override
     public void printCard() {
         System.out.println("Card ID: " + getId());
