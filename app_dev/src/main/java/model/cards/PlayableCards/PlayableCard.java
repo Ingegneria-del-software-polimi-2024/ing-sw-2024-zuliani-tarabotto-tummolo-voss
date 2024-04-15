@@ -10,7 +10,7 @@ import model.enums.*;
 import model.placementArea.PlacementArea;
 
 public abstract class PlayableCard implements Card {
-    private String type; //utile per parsing
+    private String type;
     protected int id;
     protected boolean faceSide;
     protected List<Corner> corners;

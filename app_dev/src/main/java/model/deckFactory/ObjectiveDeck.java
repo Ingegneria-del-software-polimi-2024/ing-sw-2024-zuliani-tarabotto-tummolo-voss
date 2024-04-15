@@ -68,4 +68,16 @@ public class ObjectiveDeck  implements Deck{
         return cards.get(i);
     }
     public ArrayList<ObjectiveCard> getCards(){ return cards;}
+
+
+    ////////////////// TEST RELATED METHODS ONLY ///////////////////
+    //only for test purposes
+    public ObjectiveCard getCard(int id){
+        for(int i=0; i < cards.size(); i++){
+            ObjectiveCard c = cards.get(i);
+            if(c.getId()==id)
+                return c;
+        }
+        return null;
+    }
 }

@@ -36,7 +36,6 @@ public abstract class PlayableDeck implements Deck{
 
 
     ////////////// GETTER METHODS ////////////////////////
-
     public List<PlayableCard> getCards() { return cards; }
     @Override
     public int getSize() {
@@ -44,4 +43,13 @@ public abstract class PlayableDeck implements Deck{
     }
 
 
+    ////////////// TEST RELATED METHODS ONLY//////////////////
+    public PlayableCard getCard(int id) throws IllegalArgumentException{
+        for(int i=0; i<cards.size(); i++) {
+            PlayableCard c = cards.get(i);
+            if (c.getId() == id)
+                return c;
+        }
+        throw new IllegalArgumentException("WTFFFF, card "+id+" not found");
+    }
 }

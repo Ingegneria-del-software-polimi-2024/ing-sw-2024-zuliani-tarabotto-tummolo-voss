@@ -95,8 +95,7 @@ public class Controller {
             nickNames.add(name);
         }
         //creates a GameState
-        int i = 0;
-        gameState = new GameState(nickNames, id, i);
+        gameState = new GameState(nickNames, id);
         initialPlayer = gameState.getTurnPlayer();
         //initialize view
         view = new CliView(gameState);

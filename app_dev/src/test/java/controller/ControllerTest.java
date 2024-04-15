@@ -1,6 +1,7 @@
 package controller;
 
 import Exceptions.EmptyCardSourceException;
+import junit.framework.Assert;
 import model.GameState.GameState;
 import model.enums.Pawn;
 import model.placementArea.Coordinates;
@@ -8,10 +9,9 @@ import model.player.Player;
 import org.junit.jupiter.api.Test;
 import view.CliView;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -26,7 +26,7 @@ class ControllerTest {
     ControllerTest() throws FileNotFoundException {
     }
 @Test
-    public void main() throws EmptyCardSourceException, FileNotFoundException {
+    public void main() throws EmptyCardSourceException, IOException {
         ControllerTest controller = new ControllerTest();
         controller.initializeGameState();
         controller.gameLoop();
@@ -49,7 +49,7 @@ class ControllerTest {
 
     //main method to handle game flow
 
-    public void gameLoop() throws EmptyCardSourceException {
+    public void gameLoop() throws EmptyCardSourceException, IOException {
         int cont = 0;
 
         //FIRST: every player must select a face side for the starting card which is then placed ans also selects a pawn
@@ -104,14 +104,16 @@ class ControllerTest {
         printWinner();
         fileWriting();
 
-        File f1 = new File("/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/output");
-        File f2 = new File("/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/expectedOutput");
-        assert !f1.equals(f2);
+        String filePath1 = "/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/output";
+        String filePath2 = "/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/expectedOutput";
+        File f1 = new File(filePath1);
+        File f2 = new File(filePath2);
+        assert filesCompareByLine(f1.toPath(), f2.toPath()) == -1;
 
     }
 
 
-
+;
     private void callDrawFunction(int i) throws EmptyCardSourceException {
         try{
             switch (i) {
@@ -211,6 +213,28 @@ class ControllerTest {
         } catch (IOException e) {
             System.out.println("An error occurred while writing to the file.");
             e.printStackTrace();
+        }
+    }
+
+    public static long filesCompareByLine(Path path1, Path path2) throws IOException {
+        try (BufferedReader bf1 = Files.newBufferedReader(path1);
+             BufferedReader bf2 = Files.newBufferedReader(path2)) {
+
+            long lineNumber = 1;
+            String line1 = "", line2 = "";
+            while ((line1 = bf1.readLine()) != null) {
+                line2 = bf2.readLine();
+                if (line2 == null || !line1.equals(line2)) {
+                    return lineNumber;
+                }
+                lineNumber++;
+            }
+            if (bf2.readLine() == null) {
+                return -1;
+            }
+            else {
+                return lineNumber;
+            }
         }
     }
 }

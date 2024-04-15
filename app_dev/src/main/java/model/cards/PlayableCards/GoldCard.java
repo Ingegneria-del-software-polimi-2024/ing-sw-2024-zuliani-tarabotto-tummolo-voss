@@ -17,7 +17,7 @@ public class GoldCard extends PlayableCard{
     @JsonProperty("element")
     private Element blockedElement;
     private Map<Element, Integer> placementConstraint;
-    private Points pointsPolicy;
+    private Points points;
 
 
     /**
@@ -77,7 +77,7 @@ public class GoldCard extends PlayableCard{
 
     @Override
     public int countPoints (PlacementArea placementArea) {
-        return pointsPolicy.count(placementArea);
+        return points.count(placementArea);
     }
 
 
@@ -85,7 +85,7 @@ public class GoldCard extends PlayableCard{
     //////////////// GETTER METHODS ////////////////////////////////
     @Override
     public Element getBlockedElement() { return blockedElement; }
-    public Points getPoints () { return pointsPolicy; }
+    public Points getPoints () { return points; }
     public Map<Element, Integer> getPlacementConstraint () { return Collections.unmodifiableMap(placementConstraint);}
 
     /**
@@ -111,7 +111,7 @@ public class GoldCard extends PlayableCard{
         //prints the front face of the card
         System.out.println("FRONT FACE");
         for (Corner c : getCorners()) {printCorner(c);}
-        System.out.println(pointsPolicy.getPointsPolicy());
+        System.out.println(points.getPointsPolicy());
         System.out.println();
 
         //prints the back face of the card
