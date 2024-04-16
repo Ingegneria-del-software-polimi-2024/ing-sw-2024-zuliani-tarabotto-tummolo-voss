@@ -22,7 +22,7 @@ public class AddCardTest {
     //initializes the gamestate (please always specify one player), inserts the cards expressed from cli
     // in the placementArea of the palyer, the starterCard will be automatically added
     public static void initialize(ArrayList<Integer> cardList, ArrayList<Coordinates> coord, boolean face, int starterCard, boolean faceStarterCard) {
-        String id = "test4Objectives";
+        String id = "test4Cards";
         ArrayList<String> nickNames = new ArrayList<String>();
         int numPlayers = 1;
         String name = "ciao";
@@ -49,14 +49,17 @@ public class AddCardTest {
 
         //check if the card is contatined in the hand of the player or in the open resoruces/gold
         for(PlayableCard c : state.getOpenGold())
-            if(c.getId() == id)
+            if(c.getId() == id) {
                 return c;
+            }
         for(PlayableCard c : state.getOpenResources())
-            if(c.getId()==id)
+            if(c.getId()==id) {
                 return c;
+            }
         for(PlayableCard c : state.getTurnPlayer().getPlayingHand())
-            if(c.getId()==id)
+            if(c.getId()==id) {
                 return c;
+            }
         if(state.getTurnPlayer().getStarterCard().getId() == id)
             return state.getTurnPlayer().getStarterCard();
         if (0 <= id && id <= 40)
@@ -72,6 +75,7 @@ public class AddCardTest {
         }catch(IllegalArgumentException e){
             throw new RuntimeException("couldn't find the deck");
         }
+
     }
 
     public static void putCards(ArrayList<Integer> cards, ArrayList<Coordinates> coordList, boolean face) throws RuntimeException{
@@ -129,9 +133,11 @@ public class AddCardTest {
 
         //addCard test
 
-        int cardPoint = gameState.getTurnPlayer().getPlacementArea().addCard(testCoord, getCard(gameState, testCardID));
+        PlayableCard c = getCard(gameState, testCardID);
+        c.setFaceSide(face);
+        int cardPoint = gameState.getTurnPlayer().getPlacementArea().addCard(testCoord, c);
 
-        assertEquals(expectedResults, cardPoint);
+        assert (expectedResults == cardPoint): "Errore";
 
         System.out.println("testing card n. "+testCardID);
         System.out.println("points: "+ gameState.getTurnPlayer().getPoints());
