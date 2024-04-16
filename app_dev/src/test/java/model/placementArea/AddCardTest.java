@@ -111,7 +111,7 @@ public class AddCardTest {
 
     //public static int checkForObjectives(GameState state, ObjectiveCard obj){return obj.countPoints(state.getTurnPlayer().getPlacementArea());}
 
-    public static void runTest(int[] cards, int[] coordinates, int expectedResults, boolean face, int starterCard, boolean faceStarterCard, Coordinates testCoord, int testCardID){
+    public static void runTest(int[] cards, int[] coordinates, int expectedResults, boolean face, int starterCard, boolean faceStarterCard, Coordinates testCoord, int testCardID, int expAnimals, int expInsects, int expMushrooms, int expVegetals){
         ArrayList<Coordinates> coord_a = new ArrayList<Coordinates>();
         ArrayList<Integer> cardList_a = new ArrayList<Integer>();
 
@@ -135,9 +135,22 @@ public class AddCardTest {
 
         PlayableCard c = getCard(gameState, testCardID);
         c.setFaceSide(face);
+
         int cardPoint = gameState.getTurnPlayer().getPlacementArea().addCard(testCoord, c);
 
+        int animals = PlacementArea.getNumberElements(Element.animals);
+        int insects = PlacementArea.getNumberElements(Element.insects);
+        int mushrooms = PlacementArea.getNumberElements(Element.mushrooms);
+        int vegetals = PlacementArea.getNumberElements(Element.vegetals);
+
+        int avaiblePosition = PlacementArea.getNAvaiblePositions();
+
         assert (expectedResults == cardPoint): "Errore";
+        assert (expInsects == insects): "Errore";
+        assert (expAnimals == animals): "Errore";
+        assert (expMushrooms == mushrooms): "Errore";
+        assert (expVegetals == vegetals): "Errore";
+
 
         System.out.println("testing card n. "+testCardID);
         System.out.println("points: "+ gameState.getTurnPlayer().getPoints());
