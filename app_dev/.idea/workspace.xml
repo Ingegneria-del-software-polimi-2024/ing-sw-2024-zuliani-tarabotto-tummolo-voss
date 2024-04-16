@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/placementArea/PlacementArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/placementArea/PlacementArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/placementArea/PlacementAreaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/placementArea/PlacementAreaTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +87,7 @@
       <recent name="model.placemetArea" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ObjectiveCardTest">
+  <component name="RunManager" selected="Application.PlacementAreaTest">
     <configuration name="PlacementAreaTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="model.placementArea.PlacementAreaTest" />
       <module name="Ing_sw_proj" />
@@ -170,11 +171,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.PlacementAreaTest" />
         <item itemvalue="JUnit.ObjectiveCardTest" />
         <item itemvalue="JUnit.ResourceCardTest" />
         <item itemvalue="JUnit.GoldCardTest" />
         <item itemvalue="JUnit.ControllerTest" />
-        <item itemvalue="Application.PlacementAreaTest" />
       </list>
     </recent_temporary>
   </component>
@@ -212,7 +213,8 @@
       <workItem from="1712937266663" duration="6168000" />
       <workItem from="1713104642876" duration="53000" />
       <workItem from="1713215367843" duration="3943000" />
-      <workItem from="1713273245113" duration="407000" />
+      <workItem from="1713273245113" duration="739000" />
+      <workItem from="1713276201903" duration="2951000" />
     </task>
     <servers />
   </component>
