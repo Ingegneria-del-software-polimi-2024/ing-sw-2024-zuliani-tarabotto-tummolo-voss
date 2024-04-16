@@ -553,7 +553,7 @@
 
       {
     "id": 18,
-    "faceSide": false,
+    "faceSide": true,
     "corners": [
       {
         "id":0,
