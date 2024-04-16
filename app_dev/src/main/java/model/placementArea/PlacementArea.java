@@ -18,8 +18,14 @@ public class PlacementArea {
     private HashMap<Artifact, Integer> availableArtifacts; //how many occurrences of that artifact you have, permits to rapidly check for points
     private HashMap<Element, Integer> availableElements; // as Artifacts but with elements
     private List<Coordinates> availablePlaces; //list of available places to put a card in, enable to search more rapidly where you can place cards
-    public List<Coordinates> freePositions(){return availablePlaces;} //returns the free positions
     private int numberNearbyCards;
+
+
+     /**
+     * @return the free positions in which you can add a card
+     */
+    public List<Coordinates> freePositions(){return availablePlaces;} //returns the free positions
+
 
     /**
      *  class constructor
@@ -263,7 +269,7 @@ public class PlacementArea {
 
 
     ///////////////// GETTER METHODS ////////////////////////////////////////////////////////////
-    public HashMap<Coordinates, PlayableCard> getDisposition() { return disposition;}
+
 
     /**
      *
@@ -331,4 +337,8 @@ public class PlacementArea {
         }
         System.out.println("––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––");
     }
+    public HashMap<Coordinates, PlayableCard> getDisposition() { return disposition;}
+    public HashMap<Artifact, Integer> getAvailableArtifacts() {return availableArtifacts;}
+    public HashMap<Element, Integer> getAvailableElements() {return availableElements;}
+    public List<Coordinates> getAvailablePlaces() {return availablePlaces;}
 }
