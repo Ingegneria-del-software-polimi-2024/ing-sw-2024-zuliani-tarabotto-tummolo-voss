@@ -4,25 +4,29 @@ import model.GameState.GameState;
 import model.cards.Card;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
+import model.cards.PlayableCards.StarterCard;
 import model.deckFactory.Deck;
+import model.deckFactory.Generators.*;
 import model.deckFactory.ObjectiveDeck;
 import model.deckFactory.PlayableDeck;
+import model.deckFactory.ResourcesDeck;
 import model.enums.Artifact;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class PlacementAreaTest {
-    private static GameState gameState;
+    //private static GameState gameState;
 
     static int ID = 81;
 
     //initializes the gamestate (please always specify one player), inserts the cards expressed from cli
     // in the placementArea of the palyer, the starterCard will be automatically added
-    public static void initialize(ArrayList<Integer> cardList, ArrayList<Coordinates> coord, boolean face) {
-        String id = "test4Objectives";
+    public static void initialize(PlacementArea area, ArrayList<Integer> cardList, ArrayList<Coordinates> coord, boolean face, Deck[] deckList) {
+        /*String id = "test4Objectives";
         ArrayList<String> nickNames = new ArrayList<String>();
         int numPlayers = 1;
         String name = "ciao";
@@ -33,21 +37,25 @@ class PlacementAreaTest {
 
 
         //creates a GameState
-        gameState = new GameState(nickNames, id);
+        gameState = new GameState(nickNames, id);*/
 
-        PlayableCard cardToBePlaced = getCard(gameState, ID);
+        PlayableCard cardToBePlaced = (PlayableCard) getCard(deckList, ID);
         cardToBePlaced.setFaceSide(false);
-        gameState.getTurnPlayer().getPlacementArea().addCard(cardToBePlaced);
+        area.addCard(cardToBePlaced);
         System.out.println("starter card placed");
 
-        putCards(cardList, coord, face);
+        putCards(cardList, coord, face, area, deckList);
     }
 
-    private static PlayableCard getCard(GameState state, int id) throws RuntimeException{
-        PlayableDeck deck;
+    private static Card getCard(Deck[] deckList, int id) throws RuntimeException{
+        if(87<=id && id<=102) {
+            ObjectiveDeck deck = (ObjectiveDeck) deckList[3];
+            return deck.getCard(id);
+        }
+        PlayableDeck deck = null;
 
         //check if the card is contatined in the hand of the player or in the open resoruces/gold
-        for(PlayableCard c : state.getOpenGold())
+        /*for(PlayableCard c : state.getOpenGold())
             if(c.getId() == id)
                 return c;
         for(PlayableCard c : state.getOpenResources())
@@ -65,6 +73,16 @@ class PlacementAreaTest {
         else if (81 <= id && id <= 85)
             deck = state.getStarterDeck();
         else
+            throw new RuntimeException("couldn't find the deck");*/
+
+        if(0<=id && id<= 40){
+            deck =(PlayableDeck) deckList[0];
+        }else if(41<=id && id <=80){
+            deck =(PlayableDeck)  deckList[1];
+        }else if(81<=id && id<=86){
+            deck =(PlayableDeck)  deckList[2];
+        }
+        if (deck == null)
             throw new RuntimeException("couldn't find the deck");
         try {
             return deck.getCard(id);
@@ -73,14 +91,18 @@ class PlacementAreaTest {
         }
     }
 
-    public static void putCards(ArrayList<Integer> cards, ArrayList<Coordinates> coordList, boolean face) throws RuntimeException{
+    public static void putCards(ArrayList<Integer> cards, ArrayList<Coordinates> coordList, boolean face, PlacementArea area, Deck[] deckList) throws RuntimeException{
 
         if(coordList.size() != cards.size())
             throw new RuntimeException("error in data inserted");
 
         for (int i=0; i< cards.size(); i++) {
             Coordinates coord = coordList.get(i);
-            gameState.setSelectedCoordinates(coord);
+            PlayableCard x = (PlayableCard) getCard(deckList, cards.get(i));
+            System.out.println("putting card n. "+cards.get(i));
+            x.setFaceSide(face);
+            area.addCard(coord, x);
+            /*gameState.setSelectedCoordinates(coord);
             PlayableCard x = getCard(gameState, cards.get(i));
             if(x == null)
                 throw new RuntimeException("error when getting the card with id: "+cards.get(i));
@@ -89,20 +111,21 @@ class PlacementAreaTest {
 
             gameState.setSelectedHandCard(x);
             gameState.setSelectedCardFace(face);
-            gameState.playCard();
-            System.out.println("points: "+ gameState.getTurnPlayer().getPoints());
+            gameState.playCard();*/
+
+            //System.out.println("points: "+ gameState.getTurnPlayer().getPoints());
             System.out.println("inserted card "+i);
             System.out.println("artifacts:");
-            System.out.println("            feather: "+gameState.getTurnPlayer().getPlacementArea().getNumberArtifacts(Artifact.feather));
-            System.out.println("            ink: "+gameState.getTurnPlayer().getPlacementArea().getNumberArtifacts(Artifact.ink));
-            System.out.println("            paper: "+gameState.getTurnPlayer().getPlacementArea().getNumberArtifacts(Artifact.paper));
+            System.out.println("            feather: "+area.getNumberArtifacts(Artifact.feather));
+            System.out.println("            ink: "+area.getNumberArtifacts(Artifact.ink));
+            System.out.println("            paper: "+area.getNumberArtifacts(Artifact.paper));
 
         }
     }
 
-    public static int checkForObjectives(GameState state, ObjectiveCard obj){return obj.countPoints(state.getTurnPlayer().getPlacementArea());}
+    public static int checkForObjectives(PlacementArea area, ObjectiveCard obj){return obj.countPoints(area);}
 
-    public static void runTest(int[] cards, int[] coordinates, int[] objectives, int[] expectedResults, boolean face){
+    /*public static void runTest(int[] cards, int[] coordinates, int[] objectives, int[] expectedResults, boolean face){
         ArrayList<Coordinates> coord_a = new ArrayList<Coordinates>();
         ArrayList<Integer> cardList_a = new ArrayList<Integer>();
 
@@ -143,7 +166,7 @@ class PlacementAreaTest {
             assert n == expectedResults[i] : "error while counting points";
             System.out.println("Obj "+i+" done: "+n);
         }
-    }
+    }*/
     //insert 999 when asking "what objective id do you want to check? " if you want to stop
     public static void main(String[] args){
         //test objective 87 ascDiag Mushrooms
@@ -253,4 +276,90 @@ class PlacementAreaTest {
 
     }
 
+    public static void runTest(int[] cards, int[] coordinates, int[] objectives, int[] expectedResults, boolean face){
+
+        PlacementArea area = new PlacementArea();
+        GoldCardsDeckGenerator gdGenerator = new GoldCardsDeckGenerator();
+        ObjectiveCardsDeckGenerator objGenerator = new ObjectiveCardsDeckGenerator();
+        ResourceCardsDeckGenerator rcGenerator = new ResourceCardsDeckGenerator();
+        StarterCardsDeckGenerator stGenerator = new StarterCardsDeckGenerator();
+
+        ObjectiveDeck objDeck = objGenerator.generateDeck();
+        PlayableDeck resDeck = rcGenerator.generateDeck();
+        PlayableDeck gldDeck = gdGenerator.generateDeck();
+        PlayableDeck strDeck = stGenerator.generateDeck();
+
+        Deck[] deckList = {resDeck, gldDeck, strDeck, objDeck};
+
+        ArrayList<Coordinates> coord_a = new ArrayList<Coordinates>();
+        ArrayList<Integer> cardList_a = new ArrayList<Integer>();
+
+        for(int i = 0; i < cards.length; i++)
+            cardList_a.add(cards[i]);
+
+        for(Integer c : cardList_a)
+            System.out.println(c);
+
+        for(int i = 0; i < 2*cards.length; i++)
+            if(i%2 == 0)
+                coord_a.add(new Coordinates(coordinates[i], coordinates[i+1]));
+
+        for (Coordinates c : coord_a)
+            System.out.println(c.getX()+ " "+c.getY());
+
+        initialize(area, cardList_a, coord_a, face, deckList);
+
+        for(int i = 0; i < objectives.length; i++) {
+            ObjectiveCard obj = null;
+            obj = objDeck.getCard(objectives[i]);
+            if(obj == null){
+                System.out.println("can't find the objective");
+                return;
+            }
+        int n = checkForObjectives(area, obj);
+        System.out.println("counted: "+n);
+        System.out.println("exp: "+expectedResults[i]);
+        assert(n == expectedResults[i]): "error while counting points";
+        System.out.println("Obj "+i+" done: "+n);
+
+        /*int id;
+
+
+        for(int i = 0; i < cards.length; i++)
+            cardList_a.add(cards[i]);
+
+        for(Integer c : cardList_a)
+            System.out.println(c);
+
+        for(int i = 0; i < 2*cards.length; i++)
+            if(i%2 == 0)
+                coord_a.add(new Coordinates(coordinates[i], coordinates[i+1]));
+
+        for (Coordinates c : coord_a)
+            System.out.println(c.getX()+ " "+c.getY());
+
+        initialize(cardList_a, coord_a, face);
+
+        for(int i = 0; i < objectives.length; i++) {
+            ObjectiveCard obj = null;
+            for(ObjectiveCard o: gameState.getCommonObjectives())
+                if(o.getId() == objectives[i]) {
+                    obj = o;
+                    break;
+                }
+            if(obj == null)
+                obj = gameState.getObjectiveDeck().getCard(objectives[i]);
+            if(obj == null){
+                System.out.println("can't find the objective");
+                return;
+            }
+            int n = checkForObjectives(gameState, obj);
+            System.out.println("counted: "+n);
+            System.out.println("exp: "+expectedResults[i]);
+            assert(n == expectedResults[i]): "error while counting points";
+            System.out.println("Obj "+i+" done: "+n);
+
+         */
+        }
+    }
 }

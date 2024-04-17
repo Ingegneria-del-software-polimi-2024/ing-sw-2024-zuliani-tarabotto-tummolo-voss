@@ -24,6 +24,7 @@
       <change beforePath="$PROJECT_DIR$/target/classes/model/placementArea/PlacementArea.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/placementArea/PlacementArea.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/controller/ControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/controller/ControllerTest.class" afterDir="false" />
     </list>
+    <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -119,6 +120,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+  <component name="RunManager" selected="Application.PlacementAreaTest">
     <configuration name="PlacementAreaTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="model.placementArea.PlacementAreaTest" />
       <module name="Ing_sw_proj" />
@@ -156,6 +158,22 @@
       </method>
     </configuration>
     <configuration name="ControllerTest.main" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GoldCardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Ing_sw_proj" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="model.cards.PlayableCards.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="model.cards.PlayableCards" />
+      <option name="MAIN_CLASS_NAME" value="model.cards.PlayableCards.GoldCardTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ObjectiveCardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Ing_sw_proj" />
       <extension name="coverage">
         <pattern>
@@ -171,7 +189,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StarterCardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ResourceCardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Ing_sw_proj" />
       <extension name="coverage">
         <pattern>
@@ -180,7 +198,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="model.cards.PlayableCards" />
-      <option name="MAIN_CLASS_NAME" value="model.cards.PlayableCards.StarterCardTest" />
+      <option name="MAIN_CLASS_NAME" value="model.cards.PlayableCards.ResourceCardTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -201,6 +219,18 @@
         <item itemvalue="JUnit.StarterCardTest" />
         <item itemvalue="Application.CoordinatesTest" />
         <item itemvalue="Application.PlacementAreaTest" />
+      <item itemvalue="JUnit.GoldCardTest" />
+      <item itemvalue="JUnit.ResourceCardTest" />
+      <item itemvalue="JUnit.ControllerTest" />
+      <item itemvalue="JUnit.ObjectiveCardTest" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.PlacementAreaTest" />
+        <item itemvalue="JUnit.ObjectiveCardTest" />
+        <item itemvalue="JUnit.ResourceCardTest" />
+        <item itemvalue="JUnit.GoldCardTest" />
+        <item itemvalue="JUnit.ControllerTest" />
       </list>
     </recent_temporary>
   </component>
@@ -237,6 +267,9 @@
       <workItem from="1712927707640" duration="29000" />
       <workItem from="1712937266663" duration="6168000" />
       <workItem from="1713104642876" duration="53000" />
+      <workItem from="1713215367843" duration="3943000" />
+      <workItem from="1713273245113" duration="739000" />
+      <workItem from="1713276201903" duration="3501000" />
     </task>
     <servers />
   </component>
