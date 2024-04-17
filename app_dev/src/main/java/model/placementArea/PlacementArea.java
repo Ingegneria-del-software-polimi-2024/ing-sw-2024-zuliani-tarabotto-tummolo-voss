@@ -115,6 +115,7 @@ public class PlacementArea {
         Map<Element, Integer> constraints = card.getPlacementConstraint();
         //if there are no constraints the card can be placed
         if(constraints == null) return true;
+        if(!card.getFaceSide()) return true;
         //if constraints are present...
         for(Element e : constraints.keySet())
             if(constraints.get(e) > availableElements.get(e))

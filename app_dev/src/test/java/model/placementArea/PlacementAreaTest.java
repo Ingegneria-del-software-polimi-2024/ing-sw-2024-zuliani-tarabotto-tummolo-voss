@@ -140,7 +140,7 @@ class PlacementAreaTest {
             int n = checkForObjectives(gameState, obj);
             System.out.println("counted: "+n);
             System.out.println("exp: "+expectedResults[i]);
-            assert(n == expectedResults[i]): "error while counting points";
+            assert n == expectedResults[i] : "error while counting points";
             System.out.println("Obj "+i+" done: "+n);
         }
     }

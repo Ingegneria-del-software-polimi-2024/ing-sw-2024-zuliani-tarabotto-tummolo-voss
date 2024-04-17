@@ -19,7 +19,7 @@ class ControllerTest {
     private GameState gameState;
     private ArrayList<String> nickNames;
     private CliView view;
-    private Scanner sc = new Scanner(new File("/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/input_file"));
+    private Scanner sc = new Scanner(new File("/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/final"));
     private Player initialPlayer;
 
 
@@ -77,11 +77,11 @@ class ControllerTest {
 
         //FOURTH: loops until getLastTurn is true
         while (!gameState.getLastTurn()) {
-            System.out.println("giro");
+            System.out.println("round");
             playTurn();
         }
 
-        System.out.println("penultimo giro");
+        System.out.println("penultimo round");
         //FIFTH: we continue playing until the initial player is reached and then we play the final round
         while (gameState.getTurnPlayer() != initialPlayer) {
             cont ++;
@@ -91,7 +91,7 @@ class ControllerTest {
         //if we already played an entire round we end the game, else we play another additional round
         if(cont == nickNames.size() -1 ){
             gameState.calculateFinalPoints();
-            System.out.println("fine partita al penultimo giro");
+            System.out.println("fine partita al penultimo round");
 
 
         }else{
@@ -172,7 +172,8 @@ class ControllerTest {
 
     private void printWinner() {
         Player winner = gameState.getPlayer(0);
-        for (int i = 1; i < nickNames.size(); i++) {
+        for (int i = 0; i < nickNames.size(); i++) {
+            System.out.println(gameState.getPlayer(i).getNickname() + ", points: " + gameState.getPlayer(i).getPoints());
             if (gameState.getPlayer(i).getPoints() > winner.getPoints()){
                 winner = gameState.getPlayer(i);
             }

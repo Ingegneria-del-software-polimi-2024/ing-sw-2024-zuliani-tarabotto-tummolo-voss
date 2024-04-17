@@ -56,10 +56,11 @@ public class Controller {
             gameState.getObjectiveDeck().extract();
             System.out.println("YOUR SECRET OBJECTIVE");
             gameState.getTurnPlayer().getSecretObjective().printCard();
+            gameState.nextPlayer();
         }
 
         //FOURTH: loops until getLastTurn is true
-        while (gameState.getLastTurn()) {
+        while (!gameState.getLastTurn()) {
             playTurn();
         }
 
@@ -70,7 +71,7 @@ public class Controller {
         }
 
         //if we already played an entire round we end the game, else we play another additional round
-        if(cont == nickNames.size() -1 ){
+        if(cont == nickNames.size() - 1 ){
             gameState.calculateFinalPoints();
             printWinner();
         }else{
@@ -80,6 +81,8 @@ public class Controller {
             gameState.calculateFinalPoints();
             printWinner();
         }
+        gameState.calculateFinalPoints();
+        printWinner();
     }
 
     //creates a new gameState and ask users for nicknames
@@ -94,8 +97,9 @@ public class Controller {
             String name = sc.next();
             nickNames.add(name);
         }
+        int i = 0;
         //creates a GameState
-        gameState = new GameState(nickNames, id);
+        gameState = new GameState(nickNames, id, i);
         initialPlayer = gameState.getTurnPlayer();
         //initialize view
         view = new CliView(gameState);
@@ -184,11 +188,14 @@ public class Controller {
 
     private void printWinner() {
         Player winner = gameState.getPlayer(0);
-        for (int i = 1; i < nickNames.size(); i++) {
+        for (int i = 0; i < nickNames.size(); i++) {
+            System.out.println(gameState.getPlayer(i).getNickname() + gameState.getPlayer(i).getPoints());
             if (gameState.getPlayer(i).getPoints() > winner.getPoints()){
-                System.out.println(winner.getNickname().toUpperCase() + " YOU WIN!!!!");
+                winner = gameState.getPlayer(i);
             }
         }
+        System.out.println(winner.getNickname().toUpperCase() + " YOU WIN!!!!");
+
     }
 
 }

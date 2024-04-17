@@ -13,7 +13,6 @@ class CoordinatesTest {
         assert a.equals(b) == false;
         assert a.equals(c) == true;
         assert b.equals(c) == false;
-        return;
     }
 
 }

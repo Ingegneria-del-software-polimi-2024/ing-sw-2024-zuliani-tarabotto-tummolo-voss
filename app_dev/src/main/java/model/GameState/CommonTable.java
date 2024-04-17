@@ -215,6 +215,11 @@ public class CommonTable {
         deterministicShuffle(startingDeck, permutation2);
         deterministicShuffle(objectiveDeck, permutation3);
 
+        /*for(PlayableCard card : goldDeck.getCards()){
+            System.out.println(card.getId());
+        }*/
+
+        //for(PlayableCard c : goldDeck.getCards()){System.out.println(c.getId());}
         //Extract open cards
         initializeOpenCards();
         //give each player a random starting card

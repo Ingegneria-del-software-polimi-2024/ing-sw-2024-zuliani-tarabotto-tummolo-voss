@@ -22,7 +22,7 @@ public class GameState {
     private Coordinates selectedCoordinates;
     private CommonTable commonTable;
     private TurnState turnState;
-    private final int MAX_POINTS = 20;
+    private final int MAX_POINTS = 10;
 
 
     /**
@@ -205,6 +205,11 @@ public class GameState {
     public ObjectiveDeck getObjectiveDeck() {return commonTable.getObjectiveDeck();}
     public List<PlayableCard> getOpenResources() { return commonTable.getOpenResources(); }
     public List<PlayableCard> getOpenGold() { return commonTable.getOpenGold(); }
+    public List<ObjectiveCard> getCommonObjectives(){return commonTable.getCommonObjectives();}
+    public CommonTable getCommonTable(){return commonTable;}
+
+
+    //////////////////////// GETTER METHODS FOR GAMESTATE ATTRIBUTES ///////////////////////////
     public Player getPlayer(int index){ return players.get(index); }
     public String getId(){ return id; }
     public Player getTurnPlayer(){ return turnPlayer; }
@@ -212,8 +217,6 @@ public class GameState {
     public int getPoints() {return turnPlayer.getPoints(); }
     //returns turnPlayer's card at specified index in his hand
     public PlayableCard getPlayerHandCard(int index) { return turnPlayer.getPlayingHand().get(index); }
-    public List<ObjectiveCard> getCommonObjectives(){return commonTable.getCommonObjectives();}
-    public CommonTable getCommonTable(){return commonTable;}
 
 
 
