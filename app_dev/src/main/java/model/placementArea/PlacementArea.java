@@ -154,9 +154,6 @@ public class PlacementArea {
             for(Element el : starterCard.getBackFaceCorners())
                 availableElements.put(el, availableElements.get(el) + 1);
 
-
-
-
     }
 
     /**
