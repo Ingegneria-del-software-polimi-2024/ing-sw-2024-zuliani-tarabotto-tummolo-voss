@@ -274,14 +274,14 @@ public class PlacementArea {
      * @param artifact the type of artifact to count
      * @return the number of artifacts "artifact" in the Placement Are
      */
-    public int getNumberArtifacts(Artifact artifact){return availableArtifacts.get(artifact);}
+     int getNumberArtifacts(Artifact artifact){return availableArtifacts.get(artifact);}
 
     /**
      *
      * @param element the type of element to count
      * @return the numbers of elements "element" in the Placement Area
      */
-    public int getNumberElements(Element element){return availableElements.get(element);}
+     int getNumberElements(Element element){return availableElements.get(element);}
 
     /**
      * returns the number of every artifact visible in the PlacementArea
@@ -335,7 +335,7 @@ public class PlacementArea {
         }
         System.out.println("––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––");
     }
-    public HashMap<Coordinates, PlayableCard> getDisposition() { return disposition;}
+    HashMap<Coordinates, PlayableCard> getDisposition() { return disposition;}
     public HashMap<Artifact, Integer> getAvailableArtifacts() {return availableArtifacts;}
     public HashMap<Element, Integer> getAvailableElements() {return availableElements;}
     public List<Coordinates> getAvailablePlaces() {return availablePlaces;}
