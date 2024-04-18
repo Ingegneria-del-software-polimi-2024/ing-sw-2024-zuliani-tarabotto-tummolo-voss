@@ -26,18 +26,6 @@ class PlacementAreaTest {
     //initializes the gamestate (please always specify one player), inserts the cards expressed from cli
     // in the placementArea of the palyer, the starterCard will be automatically added
     public static void initialize(PlacementArea area, ArrayList<Integer> cardList, ArrayList<Coordinates> coord, boolean face, Deck[] deckList) {
-        /*String id = "test4Objectives";
-        ArrayList<String> nickNames = new ArrayList<String>();
-        int numPlayers = 1;
-        String name = "ciao";
-        PlayableDeck deck;
-
-        for (int i = 0; i < numPlayers; i++)
-            nickNames.add(name);
-
-
-        //creates a GameState
-        gameState = new GameState(nickNames, id);*/
 
         PlayableCard cardToBePlaced = (PlayableCard) getCard(deckList, ID);
         cardToBePlaced.setFaceSide(false);
@@ -53,27 +41,6 @@ class PlacementAreaTest {
             return deck.getCard(id);
         }
         PlayableDeck deck = null;
-
-        //check if the card is contatined in the hand of the player or in the open resoruces/gold
-        /*for(PlayableCard c : state.getOpenGold())
-            if(c.getId() == id)
-                return c;
-        for(PlayableCard c : state.getOpenResources())
-            if(c.getId()==id)
-                return c;
-        for(PlayableCard c : state.getTurnPlayer().getPlayingHand())
-            if(c.getId()==id)
-                return c;
-        if(state.getTurnPlayer().getStarterCard().getId() == id)
-            return state.getTurnPlayer().getStarterCard();
-        if (0 <= id && id <= 40)
-            deck = state.getResourceDeck();
-        else if (40 < id && id < 81)
-            deck = state.getGoldDeck();
-        else if (81 <= id && id <= 85)
-            deck = state.getStarterDeck();
-        else
-            throw new RuntimeException("couldn't find the deck");*/
 
         if(0<=id && id<= 40){
             deck =(PlayableDeck) deckList[0];
@@ -102,16 +69,6 @@ class PlacementAreaTest {
             System.out.println("putting card n. "+cards.get(i));
             x.setFaceSide(face);
             area.addCard(coord, x);
-            /*gameState.setSelectedCoordinates(coord);
-            PlayableCard x = getCard(gameState, cards.get(i));
-            if(x == null)
-                throw new RuntimeException("error when getting the card with id: "+cards.get(i));
-
-            System.out.println("putting card n. "+cards.get(i));
-
-            gameState.setSelectedHandCard(x);
-            gameState.setSelectedCardFace(face);
-            gameState.playCard();*/
 
             //System.out.println("points: "+ gameState.getTurnPlayer().getPoints());
             System.out.println("inserted card "+i);
@@ -125,48 +82,7 @@ class PlacementAreaTest {
 
     public static int checkForObjectives(PlacementArea area, ObjectiveCard obj){return obj.countPoints(area);}
 
-    /*public static void runTest(int[] cards, int[] coordinates, int[] objectives, int[] expectedResults, boolean face){
-        ArrayList<Coordinates> coord_a = new ArrayList<Coordinates>();
-        ArrayList<Integer> cardList_a = new ArrayList<Integer>();
-
-        int id;
-
-
-        for(int i = 0; i < cards.length; i++)
-            cardList_a.add(cards[i]);
-
-        for(Integer c : cardList_a)
-            System.out.println(c);
-
-        for(int i = 0; i < 2*cards.length; i++)
-            if(i%2 == 0)
-                coord_a.add(new Coordinates(coordinates[i], coordinates[i+1]));
-
-        for (Coordinates c : coord_a)
-            System.out.println(c.getX()+ " "+c.getY());
-
-        initialize(cardList_a, coord_a, face);
-
-        for(int i = 0; i < objectives.length; i++) {
-            ObjectiveCard obj = null;
-            for(ObjectiveCard o: gameState.getCommonObjectives())
-                if(o.getId() == objectives[i]) {
-                    obj = o;
-                    break;
-                }
-            if(obj == null)
-                obj = gameState.getObjectiveDeck().getCard(objectives[i]);
-            if(obj == null){
-                System.out.println("can't find the objective");
-                return;
-            }
-            int n = checkForObjectives(gameState, obj);
-            System.out.println("counted: "+n);
-            System.out.println("exp: "+expectedResults[i]);
-            assert n == expectedResults[i] : "error while counting points";
-            System.out.println("Obj "+i+" done: "+n);
-        }
-    }*/
+    
     //insert 999 when asking "what objective id do you want to check? " if you want to stop
     public static void main(String[] args){
         //test objective 87 ascDiag Mushrooms
