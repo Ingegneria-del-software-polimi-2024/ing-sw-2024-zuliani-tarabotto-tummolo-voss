@@ -310,11 +310,10 @@ class AddCardTest {
         HashMap<Coordinates, PlayableCard> disposition = area.getDisposition();
         int numberNearbyCards = area.getNumberNearbyCards();
 
-        /*for (Map.Entry<Coordinates, PlayableCard> entry : disposition.entrySet()) {
-            Coordinates position = entry.getKey();
-            PlayableCard card = entry.getValue();
-            System.out.println("Position: " + position + ", Card: " + card);
-        }*/
+        for (Coordinates c: disposition.keySet()){
+            System.out.println("X: " + c.getX() + ", Y: " + c.getY());
+            disposition.get(c).getId();
+        }
 
         // Iterate through the list and print each element
         for (Coordinates position : availablePosition) {
@@ -414,7 +413,7 @@ class AddCardTest {
 
         Deck[] deckList = {resDeck, gldDeck, strDeck, objDeck};
 
-        //test a constrains 1
+        //test a particolar position
 
         int[] cards_a = {4, 11, 21};
         int[] coordinates_a = {1,1, 1,-1, 2,0};
@@ -465,7 +464,7 @@ class AddCardTest {
                 expAnimals_a, expInsects_a, expMushrooms_a, expVegetals_a, expFeather_a, expInk_a, expPaper_a, expAvailablePosition_a, expDisposition_a, expNumberNearbyCards_a);
 
 
-        //test b constrains 2
+        //test b artifacts
 
         int[] cards_b = {25, 36};
         int[] coordinates_b = {1,1, 2,-2};
@@ -513,7 +512,7 @@ class AddCardTest {
                 expAnimals_b, expInsects_b, expMushrooms_b, expVegetals_b, expFeather_b, expInk_b, expPaper_b, expAvailablePosition_b, expDisposition_b, expNumberNearbyCards_b);
 
 
-        //test c contrains 1
+        //test c constrains 1
 
         int[] cards_c = {33, 24, 72};
         int[] coordinates_c = {1,1, 1,-1, 2,-2};
@@ -532,11 +531,11 @@ class AddCardTest {
         int expPaper_c = 1;
 
         List<Coordinates> expAvailablePosition_c = new ArrayList<>();
-        Coordinates coord11 = new Coordinates(-1, 1);
-        Coordinates coord12 = new Coordinates(-1, -1);
+        Coordinates coord11 = new Coordinates(0, 2);
+        Coordinates coord12 = new Coordinates(2, 0);
         Coordinates coord13 = new Coordinates(2, -2);
-        Coordinates coord14 = new Coordinates(2, 0);
-        Coordinates coord15 = new Coordinates(2, -2);
+        Coordinates coord14 = new Coordinates(-1, 1);
+        Coordinates coord15 = new Coordinates(-1, -1);
         expAvailablePosition_a.add(coord11);
         expAvailablePosition_a.add(coord12);
         expAvailablePosition_a.add(coord13);
@@ -546,14 +545,17 @@ class AddCardTest {
         HashMap<Coordinates, PlayableCard> expDisposition_c = new HashMap<>();
         Coordinates coord_8 = new Coordinates(0, 0);
         PlayableCard card_8 = (PlayableCard) getCard(deckList, 81);
-        Coordinates coord_9 = new Coordinates(1, 1);
-        PlayableCard card_9 = (PlayableCard) getCard(deckList,25);
-        Coordinates coord_10 = new Coordinates(2, -2);
-        PlayableCard card_10= (PlayableCard) getCard(deckList, 36);
+        Coordinates coord_9 = new Coordinates(1, -1);
+        PlayableCard card_9 = (PlayableCard) getCard(deckList,33);
+        Coordinates coord_10 = new Coordinates(1, -1);
+        PlayableCard card_10= (PlayableCard) getCard(deckList, 24);
+        Coordinates coord_11 = new Coordinates(2, -2);
+        PlayableCard card_11= (PlayableCard) getCard(deckList, 72);
 
         expDisposition_a.put(coord_8, card_8);
         expDisposition_a.put(coord_9, card_9);
         expDisposition_a.put(coord_10, card_10);
+        expDisposition_a.put(coord_11, card_11);
 
         int expNumberNearbyCards_c = 2;
 
@@ -562,25 +564,57 @@ class AddCardTest {
 
 
 
-        //test d constrains 1
+        //test d constrains 2
 
-        int[] cards_d = {1, 2, 3};
-        int[] coordinates_d = {1, 2, 3};
-        int expectedResults_d = 42;
+        int[] cards_d = {33, 24, 72, 74};
+        int[] coordinates_d = {1,1, 1,-1, 2,-2, -1,1};
+        int expectedResults_d = 2;
         boolean face_d = true;
-        int starterCard_d = 5;
-        boolean faceStarterCard_d = false;
-        Coordinates testCoord_d = new Coordinates(3, 4);
-        int testPointCardID_d = 7;
-        int expAnimals_d = 10;
-        int expInsects_d = 5;
-        int expMushrooms_d = 2;
-        int expVegetals_d = 3;
-        int expFeather_d = 1;
+        int starterCard_d = 81;
+        boolean faceStarterCard_d = true;
+        Coordinates testCoord_d = new Coordinates(-1, 1); // Replace with desired coordinates
+        int testPointCardID_d = 74;
+        int expAnimals_d = 1;
+        int expInsects_d = 4;
+        int expMushrooms_d = 0;
+        int expVegetals_d = 0;
+        int expFeather_d = 0;
         int expInk_d = 0;
-        int expPaper_d = 4;
+        int expPaper_d = 1;
+
         List<Coordinates> expAvailablePosition_d = new ArrayList<>();
+        Coordinates coord11 = new Coordinates(0, 2);
+        Coordinates coord12 = new Coordinates(2, 0);
+        Coordinates coord13 = new Coordinates(2, -2);
+        Coordinates coord14 = new Coordinates(-1, 1);
+        Coordinates coord15 = new Coordinates(-2, 2);
+        Coordinates coord15 = new Coordinates(-1, -1);
+        expAvailablePosition_a.add(coord11);
+        expAvailablePosition_a.add(coord12);
+        expAvailablePosition_a.add(coord13);
+        expAvailablePosition_a.add(coord14);
+        expAvailablePosition_a.add(coord15);
+        expAvailablePosition_a.add(coord15);
+
         HashMap<Coordinates, PlayableCard> expDisposition_d = new HashMap<>();
+        Coordinates coord_8 = new Coordinates(0, 0);
+        PlayableCard card_8 = (PlayableCard) getCard(deckList, 81);
+        Coordinates coord_9 = new Coordinates(1, -1);
+        PlayableCard card_9 = (PlayableCard) getCard(deckList,33);
+        Coordinates coord_10 = new Coordinates(1, -1);
+        PlayableCard card_10= (PlayableCard) getCard(deckList, 24);
+        Coordinates coord_11 = new Coordinates(2, -2);
+        PlayableCard card_11= (PlayableCard) getCard(deckList, 72);
+        Coordinates coord_12 = new Coordinates(-1, -1);
+        PlayableCard card_12= (PlayableCard) getCard(deckList, 74);
+
+        expDisposition_a.put(coord_8, card_8);
+        expDisposition_a.put(coord_9, card_9);
+        expDisposition_a.put(coord_10, card_10);
+        expDisposition_a.put(coord_11, card_11);
+        expDisposition_a.put(coord_11, card_11);
+        expDisposition_a.put(coord_11, card_11);
+
         int expNumberNearbyCards_d = 2;
 
         runTest(cards_d, coordinates_d, expectedResults_d, face_d, starterCard_d, faceStarterCard_d, testCoord_d, testPointCardID_d,
@@ -588,33 +622,65 @@ class AddCardTest {
 
 
 
-        //test e
+        //test e contrains 3
 
-        int[] cards_e = {1, 2, 3}; ;
-        int[] coordinates_e = {1, 2, 3}; ;
-        int expectedResults_e = 42;
+        int[] cards_e = {33, 24, 72, 74, 79};
+        int[] coordinates_e = {1,1, 1,-1, 2,-2, -1,1, -2,2};
+        int expectedResults_e = 3;
         boolean face_e = true;
-        int starterCard_e = 5;
-        boolean faceStarterCard_e = false;
-        Coordinates testCoord_e = new Coordinates(3, 4);
-        int testPointCardID_e = 7;
-        int expAnimals_e = 10;
-        int expInsects_e = 5;
-        int expMushrooms_e = 2;
-        int expVegetals_e = 3;
-        int expFeather_e = 1;
+        int starterCard_e = 81;
+        boolean faceStarterCard_e = true;
+        Coordinates testCoord_e = new Coordinates(2, -2); // Replace with desired coordinates
+        int testPointCardID_e = 72;
+        int expAnimals_e = 1;
+        int expInsects_e = 4;
+        int expMushrooms_e = 0;
+        int expVegetals_e = 0;
+        int expFeather_e = 0;
         int expInk_e = 0;
-        int expPaper_e = 4;
+        int expPaper_e = 1;
+
         List<Coordinates> expAvailablePosition_e = new ArrayList<>();
+         Coordinates coord11 = new Coordinates(0, 2);
+         Coordinates coord12 = new Coordinates(2, 0);
+         Coordinates coord13 = new Coordinates(2, -2);
+         Coordinates coord14 = new Coordinates(-1, 1);
+         Coordinates coord15 = new Coordinates(-3, 3);
+         Coordinates coord15 = new Coordinates(-1, -1);
+         expAvailablePosition_a.add(coord11);
+         expAvailablePosition_a.add(coord12);
+         expAvailablePosition_a.add(coord13);
+         expAvailablePosition_a.add(coord14);
+
         HashMap<Coordinates, PlayableCard> expDisposition_e = new HashMap<>();
+        Coordinates coord_8 = new Coordinates(0, 0);
+        PlayableCard card_8 = (PlayableCard) getCard(deckList, 81);
+        Coordinates coord_9 = new Coordinates(1, -1);
+        PlayableCard card_9 = (PlayableCard) getCard(deckList,33);
+        Coordinates coord_10 = new Coordinates(1, -1);
+        PlayableCard card_10= (PlayableCard) getCard(deckList, 24);
+        Coordinates coord_11 = new Coordinates(2, -2);
+        PlayableCard card_11= (PlayableCard) getCard(deckList, 72);
+        Coordinates coord_12 = new Coordinates(-1, 1);
+        PlayableCard card_12= (PlayableCard) getCard(deckList, 74);
+        Coordinates coord_12 = new Coordinates(-2, -12);
+        PlayableCard card_12= (PlayableCard) getCard(deckList, 79);
+
+        expDisposition_a.put(coord_8, card_8);
+        expDisposition_a.put(coord_9, card_9);
+        expDisposition_a.put(coord_10, card_10);
+        expDisposition_a.put(coord_11, card_11);
+        expDisposition_a.put(coord_11, card_11);
+        expDisposition_a.put(coord_11, card_11);
+        expDisposition_a.put(coord_11, card_11);
+
         int expNumberNearbyCards_e = 2;
 
         runTest(cards_e, coordinates_e, expectedResults_e, face_e, starterCard_e, faceStarterCard_e, testCoord_e, testPointCardID_e,
                 expAnimals_e, expInsects_e, expMushrooms_e, expVegetals_e, expFeather_e, expInk_e, expPaper_e, expAvailablePosition_e, expDisposition_e, expNumberNearbyCards_e);
 
 
-
-        //test f
+        //test f commond points
 
         int[] cards_f = {1, 2, 3};
         int[] coordinates_f = {1, 2, 3};
