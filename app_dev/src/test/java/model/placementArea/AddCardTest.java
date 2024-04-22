@@ -583,12 +583,12 @@ class AddCardTest {
         int expPaper_d = 1;
 
         List<Coordinates> expAvailablePosition_d = new ArrayList<>();
-        Coordinates coord11 = new Coordinates(0, 2);
-        Coordinates coord12 = new Coordinates(2, 0);
-        Coordinates coord13 = new Coordinates(2, -2);
-        Coordinates coord14 = new Coordinates(-1, 1);
-        Coordinates coord15 = new Coordinates(-2, 2);
-        Coordinates coord15 = new Coordinates(-1, -1);
+        coord11 = new Coordinates(0, 2);
+        coord12 = new Coordinates(2, 0);
+        coord13 = new Coordinates(2, -2);
+        coord14 = new Coordinates(-1, 1);
+        coord15 = new Coordinates(-2, 2);
+        coord15 = new Coordinates(-1, -1);
         expAvailablePosition_a.add(coord11);
         expAvailablePosition_a.add(coord12);
         expAvailablePosition_a.add(coord13);
@@ -597,14 +597,14 @@ class AddCardTest {
         expAvailablePosition_a.add(coord15);
 
         HashMap<Coordinates, PlayableCard> expDisposition_d = new HashMap<>();
-        Coordinates coord_8 = new Coordinates(0, 0);
-        PlayableCard card_8 = (PlayableCard) getCard(deckList, 81);
-        Coordinates coord_9 = new Coordinates(1, -1);
-        PlayableCard card_9 = (PlayableCard) getCard(deckList,33);
-        Coordinates coord_10 = new Coordinates(1, -1);
-        PlayableCard card_10= (PlayableCard) getCard(deckList, 24);
-        Coordinates coord_11 = new Coordinates(2, -2);
-        PlayableCard card_11= (PlayableCard) getCard(deckList, 72);
+        coord_8 = new Coordinates(0, 0);
+        card_8 = (PlayableCard) getCard(deckList, 81);
+        coord_9 = new Coordinates(1, -1);
+        card_9 = (PlayableCard) getCard(deckList,33);
+        coord_10 = new Coordinates(1, -1);
+        card_10= (PlayableCard) getCard(deckList, 24);
+        coord_11 = new Coordinates(2, -2);
+        card_11= (PlayableCard) getCard(deckList, 72);
         Coordinates coord_12 = new Coordinates(-1, -1);
         PlayableCard card_12= (PlayableCard) getCard(deckList, 74);
 
@@ -641,30 +641,30 @@ class AddCardTest {
         int expPaper_e = 1;
 
         List<Coordinates> expAvailablePosition_e = new ArrayList<>();
-         Coordinates coord11 = new Coordinates(0, 2);
-         Coordinates coord12 = new Coordinates(2, 0);
-         Coordinates coord13 = new Coordinates(2, -2);
-         Coordinates coord14 = new Coordinates(-1, 1);
-         Coordinates coord15 = new Coordinates(-3, 3);
-         Coordinates coord15 = new Coordinates(-1, -1);
+         coord11 = new Coordinates(0, 2);
+         coord12 = new Coordinates(2, 0);
+         coord13 = new Coordinates(2, -2);
+         coord14 = new Coordinates(-1, 1);
+         coord15 = new Coordinates(-3, 3);
+         coord15 = new Coordinates(-1, -1);
          expAvailablePosition_a.add(coord11);
          expAvailablePosition_a.add(coord12);
          expAvailablePosition_a.add(coord13);
          expAvailablePosition_a.add(coord14);
 
         HashMap<Coordinates, PlayableCard> expDisposition_e = new HashMap<>();
-        Coordinates coord_8 = new Coordinates(0, 0);
-        PlayableCard card_8 = (PlayableCard) getCard(deckList, 81);
-        Coordinates coord_9 = new Coordinates(1, -1);
-        PlayableCard card_9 = (PlayableCard) getCard(deckList,33);
-        Coordinates coord_10 = new Coordinates(1, -1);
-        PlayableCard card_10= (PlayableCard) getCard(deckList, 24);
-        Coordinates coord_11 = new Coordinates(2, -2);
-        PlayableCard card_11= (PlayableCard) getCard(deckList, 72);
-        Coordinates coord_12 = new Coordinates(-1, 1);
-        PlayableCard card_12= (PlayableCard) getCard(deckList, 74);
-        Coordinates coord_12 = new Coordinates(-2, -12);
-        PlayableCard card_12= (PlayableCard) getCard(deckList, 79);
+        coord_8 = new Coordinates(0, 0);
+        card_8 = (PlayableCard) getCard(deckList, 81);
+        coord_9 = new Coordinates(1, -1);
+        card_9 = (PlayableCard) getCard(deckList,33);
+        coord_10 = new Coordinates(1, -1);
+        card_10= (PlayableCard) getCard(deckList, 24);
+        coord_11 = new Coordinates(2, -2);
+        card_11= (PlayableCard) getCard(deckList, 72);
+        coord_12 = new Coordinates(-1, 1);
+        card_12= (PlayableCard) getCard(deckList, 74);
+        coord_12 = new Coordinates(-2, -12);
+        card_12= (PlayableCard) getCard(deckList, 79);
 
         expDisposition_a.put(coord_8, card_8);
         expDisposition_a.put(coord_9, card_9);
