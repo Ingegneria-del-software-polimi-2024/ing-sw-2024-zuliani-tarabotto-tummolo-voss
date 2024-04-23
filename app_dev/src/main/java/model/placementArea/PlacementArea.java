@@ -335,6 +335,8 @@ public class PlacementArea {
         }
         System.out.println("––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––");
     }
+
+    //TODO this MUST BE SET PROTECTED
     public HashMap<Coordinates, PlayableCard> getDisposition() { return disposition;}
     public HashMap<Artifact, Integer> getAvailableArtifacts() {return availableArtifacts;}
     public HashMap<Element, Integer> getAvailableElements() {return availableElements;}
