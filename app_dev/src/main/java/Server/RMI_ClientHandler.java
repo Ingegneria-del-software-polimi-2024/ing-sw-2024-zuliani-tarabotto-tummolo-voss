@@ -8,7 +8,7 @@ public class RMI_ClientHandler implements ServerInterface {
     private ServerAPI_COME api;
 
     //Go
-    public void enqueueMethod(/*parameters*/) throws RemoteException{}
+    public void enqueueMessage(/*parameters*/) throws RemoteException{}
 
     public void addNewPlayer(/*parameters*/) throws RemoteException{}
 

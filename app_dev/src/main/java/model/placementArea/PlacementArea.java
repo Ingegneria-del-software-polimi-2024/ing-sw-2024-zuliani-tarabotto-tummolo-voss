@@ -2,6 +2,7 @@ package model.placementArea;
 
 
 import model.Errors.ConditionNotSatisfiedException;
+import model.cards.Card;
 import model.cards.PlayableCards.PlayableCard;
 import model.cards.PlayableCards.StarterCard;
 import model.enums.Artifact;
@@ -20,6 +21,8 @@ public class PlacementArea {
     private List<Coordinates> availablePlaces; //list of available places to put a card in, enable to search more rapidly where you can place cards
     private int numberNearbyCards;
 
+    private ArrayList<PlayableCard> cardsByPlacementOrder;
+
 
      /**
      * @return the free positions in which you can add a card
@@ -35,6 +38,7 @@ public class PlacementArea {
         availableArtifacts = new HashMap<>();
         availableElements = new HashMap<>();
         availablePlaces = new ArrayList<>();
+        cardsByPlacementOrder = new ArrayList<PlayableCard>();
         availablePlaces.add(new Coordinates(0,0));
 
         //we initialize availableElements and availableArtifacts to 0
@@ -73,6 +77,9 @@ public class PlacementArea {
 
         //add card to disposition
         disposition.put(xy, card);
+
+        //add card to the list ordered by placement time
+        cardsByPlacementOrder.add(card);
 
         //remove elements or objects in corners covered
         for(j = xy.getY()-1; j <= xy.getY()+1; j++) {
@@ -141,6 +148,8 @@ public class PlacementArea {
 
         //add card to disposition
         disposition.put(coord, starterCard);
+        //add card to the list ordered by placement time
+        cardsByPlacementOrder.add(starterCard);
 
 
         //if front face side we add the resources present in the corners and the blocked elements
@@ -268,6 +277,13 @@ public class PlacementArea {
 
     ///////////////// GETTER METHODS ////////////////////////////////////////////////////////////
 
+    /**
+     *
+     * @return an array list of playable cards ordered by their placement order
+     */
+    public List<PlayableCard> getCardsByPlacementOrder() {
+        return (List<PlayableCard>) cardsByPlacementOrder.clone();
+    }
 
     /**
      *

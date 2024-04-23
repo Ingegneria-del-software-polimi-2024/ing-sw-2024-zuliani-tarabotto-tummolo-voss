@@ -7,5 +7,5 @@ public class ClientAPI_GO {
 
     public void addNewPlayer(){}
 
-    public void enqueueMethod(){}
+    public void enqueueMessage(){}
 }

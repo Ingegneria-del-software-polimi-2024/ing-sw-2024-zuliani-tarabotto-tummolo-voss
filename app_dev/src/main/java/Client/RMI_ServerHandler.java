@@ -8,7 +8,7 @@ public class RMI_ServerHandler implements ClientInterface {
     private ClientAPI_COME api;
     private ServerInterface server;
     @Override
-    public void enqueueMethod() {}
+    public void enqueueMessage() {}
 
     @Override
     public void addNewPlayer() {}

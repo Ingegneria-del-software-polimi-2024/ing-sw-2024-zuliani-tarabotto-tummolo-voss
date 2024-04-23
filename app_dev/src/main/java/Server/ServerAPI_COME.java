@@ -1,23 +1,38 @@
 package Server;
 
+import SharedWebInterfaces.Messages.GeneralMessage;
 import SharedWebInterfaces.ServerInterface;
-import model.GameState.GameState;
+import SharedWebInterfaces.ToDoList.MessageQueue;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class ServerAPI_COME {
-    private List<Runnable> actionList;
+
+    private MessageQueue toDoQueue;
     private HashMap<String, ServerInterface> players;
     //private Controller controller;
 
+    /**
+     * class constructor
+     */
+    public ServerAPI_COME() {
+        toDoQueue = new MessageQueue();
+        players = new HashMap<String, ServerInterface>();
+    }
+
     //client called
-    public void enqueueMethod(){}
+
+
+     public void enqueueMessage(GeneralMessage message){
+        toDoQueue.enqueueMessage(message);
+     }
     
     public void addNewPlayer(){}
 
     //controller called
     public void performNextMethod(){}
+
+
 
 
 }

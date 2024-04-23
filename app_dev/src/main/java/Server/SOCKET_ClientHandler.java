@@ -11,7 +11,7 @@ public class SOCKET_ClientHandler implements ServerInterface {
     private String clientID;
 
     @Override
-    public void enqueueMethod() throws RemoteException {}
+    public void enqueueMessage() throws RemoteException {}
 
     @Override
     public void addNewPlayer() throws RemoteException {}
