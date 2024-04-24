@@ -5,19 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/ControllerInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/GeneralMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/ToDoList/MessageQueue.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/ClientViewInterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/GeneralAPI_Interface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessageFromClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessageFromServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/ClientAPI_COME.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/ClientAPI_COME.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Client/ClientAPI_GO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/ClientAPI_GO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Client/RMI_ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/RMI_ServerHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Client/SOCKET_ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/SOCKET_ServerHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Server/RMI_ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/RMI_ClientHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Server/SOCKET_ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/SOCKET_ClientHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Server/ServerAPI_COME.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ServerAPI_COME.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/ClientInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/ClientInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/ServerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/ServerInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/placementArea/PlacementArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/placementArea/PlacementArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/ServerAPI_GO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ServerAPI_GO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/ClientInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/ServerHandlerInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/ControllerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/ServerControllerInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/GeneralMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/GeneralMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/ServerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/ClientHandlerInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/ToDoList/MessageQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessageQueue.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,8 +34,8 @@
       <list>
         <option value="JUnit3 Test Class" />
         <option value="JUnit5 Test Class" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>

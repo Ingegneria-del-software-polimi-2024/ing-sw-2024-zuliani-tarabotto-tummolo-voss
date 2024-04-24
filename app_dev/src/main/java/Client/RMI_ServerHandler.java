@@ -1,18 +1,23 @@
 package Client;
 
-import SharedWebInterfaces.ClientInterface;
-import SharedWebInterfaces.ServerInterface;
+import SharedWebInterfaces.Messages.MessageFromServer;
+import SharedWebInterfaces.ServerHandlerInterface;
+import SharedWebInterfaces.Messages.MessageFromClient;
+import SharedWebInterfaces.ClientHandlerInterface;
 
-public class RMI_ServerHandler implements ClientInterface {
+import java.rmi.RemoteException;
+
+public class RMI_ServerHandler implements ServerHandlerInterface {
 
     private ClientAPI_COME api;
-    private ServerInterface server;
+    private ClientHandlerInterface server;
     @Override
-    public void enqueueMessage() {}
+    public void sendToServer(MessageFromClient message) throws RemoteException{server.sendToServer(message);}
+
 
     @Override
-    public void addNewPlayer() {}
+    public void addNewPlayer() throws RemoteException{}
 
     @Override
-    public void notifyChanges() {}
+    public void notifyChanges(MessageFromServer message) throws RemoteException{api.notifyChanges(message);}
 }

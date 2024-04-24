@@ -1,15 +1,15 @@
 package Server;
 
-import SharedWebInterfaces.Messages.GeneralMessage;
-import SharedWebInterfaces.ServerInterface;
-import SharedWebInterfaces.ToDoList.MessageQueue;
+import SharedWebInterfaces.Messages.MessageFromClient;
+import SharedWebInterfaces.ClientHandlerInterface;
+import SharedWebInterfaces.Messages.MessageQueue;
 
 import java.util.HashMap;
 
 public class ServerAPI_COME {
 
     private MessageQueue toDoQueue;
-    private HashMap<String, ServerInterface> players;
+    private HashMap<String, ClientHandlerInterface> players;
     //private Controller controller;
 
     /**
@@ -17,13 +17,16 @@ public class ServerAPI_COME {
      */
     public ServerAPI_COME() {
         toDoQueue = new MessageQueue();
-        players = new HashMap<String, ServerInterface>();
+        players = new HashMap<String, ClientHandlerInterface>();
     }
 
     //client called
 
-
-     public void enqueueMessage(GeneralMessage message){
+    /**
+     * enqueues the incoming message in the toDoQueue
+     * @param message is the message coming from the client
+     */
+     public void sendToServer(MessageFromClient message){
         toDoQueue.enqueueMessage(message);
      }
     

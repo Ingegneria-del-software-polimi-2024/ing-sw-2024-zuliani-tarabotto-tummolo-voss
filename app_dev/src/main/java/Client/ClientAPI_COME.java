@@ -1,14 +1,14 @@
 package Client;
 
-import java.util.List;
+import SharedWebInterfaces.Messages.ClientViewInterface;
+import SharedWebInterfaces.Messages.MessageFromServer;
+import SharedWebInterfaces.Messages.MessageQueue;
 
 public class ClientAPI_COME {
-    private List<Runnable> actionList;
-    //private ViewAPI view;
+    private MessageQueue toDoQueue;
+    private ClientViewInterface view;
 
-    //GO
-    public void notifyChanges(){};
+    public void notifyChanges(MessageFromServer message){toDoQueue.enqueueMessage(message);}
 
-    //COME
-    public void performChanges(){};
+    public void performChanges(){toDoQueue.executeNextMessage(view);};
 }
