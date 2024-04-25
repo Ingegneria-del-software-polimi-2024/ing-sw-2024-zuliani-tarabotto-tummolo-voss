@@ -10,6 +10,7 @@ package model.GameState;
     * objective calculation stage
  */
 public enum TurnState {
+    GAME_INITIALIZATION,
     STARTER_CARD_SELECTION,
     COLOUR_SELECTION,
     CARD_DEALING,

@@ -1,8 +1,11 @@
 package Server;
 
 
+import model.GameState.TurnState;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
+import model.deckFactory.ObjectiveDeck;
+import model.deckFactory.PlayableDeck;
 import model.enums.Pawn;
 import model.placementArea.Coordinates;
 
@@ -13,10 +16,39 @@ import java.util.List;
 public class ModelListener {
 
     //////////////////////// GAME SETUP NOTIFICATIONS ///////////////////////////////////////////////////
+
     /**
-     * this notification confirms the nickname and tells the player which pawn color he has been given
+     * notification about current state of GameState
+     * @param state
      */
-    public void notifyChanges(String turnPlayer,String nickname, Pawn pawnColor) {
+    public void notifyChanges(TurnState state){
+
+    }
+
+    /**
+     * notification with data about the order of the cards in decks
+     * @param goldDeck
+     * @param resourceDeck
+     * @param starterDeck
+     * @param objectiveDeck
+     * @param players
+     * @param GameId
+     * @param initialPlayer
+     */
+    //TODO: add notification about each player's pawn color
+    public void notifyChanges(PlayableDeck goldDeck, PlayableDeck  resourceDeck,
+                              PlayableDeck  starterDeck, ObjectiveDeck objectiveDeck,
+                              ArrayList<String> players, String GameId, String initialPlayer){
+
+    }
+
+
+    /**
+     * the player is notified with the starterCard that he has been given
+     * @param starterCard
+     * @param player
+     */
+    public void notifyChanges(PlayableCard starterCard, String player){
 
     }
 
@@ -26,28 +58,14 @@ public class ModelListener {
     public void notifyChanges(ArrayList<PlayableCard> hand, String player) {
 
     }
-
     /**
-     * notification with data about common table when initialized
-     * @param goldDeck
-     * @param resourceDeck
+     * notification about the two commonObjectives
      * @param commonObjectives
-     * @param openGold
-     * @param openResource
      */
-    public void notifyChanges(ArrayList<PlayableCard> goldDeck, ArrayList<PlayableCard> resourceDeck,
-                              ArrayList<ObjectiveCard> commonObjectives, ArrayList<PlayableCard> openGold,
-                              ArrayList<PlayableCard> openResource){
+    public void notifyChanges(ArrayList<ObjectiveCard> commonObjectives){
 
     }
 
-
-    /**
-     * after each player chooses how the place the starter card, a notification is sent to all clients
-     * @param starter
-     * @param player
-     */
-    public void notifyChanges(PlayableCard starter, String player){}
 
     /**
      * after each player chooses his secretObjective, a notification is sent to all clients

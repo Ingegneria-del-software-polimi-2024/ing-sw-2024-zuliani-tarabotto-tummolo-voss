@@ -85,6 +85,8 @@ public class Controller {
         printWinner();
     }
 
+
+
     //creates a new gameState and ask users for nicknames
     public void initializeGameState() {
         String id = "gameState_0";
@@ -104,6 +106,8 @@ public class Controller {
         //initialize view
         view = new CliView(gameState);
     }
+
+
 
     private void callDrawFunction(int i) throws EmptyCardSourceException {
         try{

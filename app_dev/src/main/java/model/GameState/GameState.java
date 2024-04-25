@@ -17,6 +17,7 @@ import java.util.List;
  *
  */
 public class GameState {
+
     private ArrayList<Player> players;
     private String id;
     private Player turnPlayer;
@@ -35,9 +36,9 @@ public class GameState {
      * @param nickNames ArrayList of Strings
      * @param id the unique id for gameState
      */
-    public GameState(ArrayList<String> nickNames, String id, ServerAPI_GO serverAPIGo) {
+    //TODO: randomly give each player a pawn color
+    public GameState(ArrayList<String> nickNames, String id) {
         //creates a new players list with the nicknames taken from input
-        serverAPIGo = serverAPIGo;
         players = new ArrayList<Player>();
         for(String name : nickNames) {
             Player p;
@@ -49,6 +50,17 @@ public class GameState {
         this.commonTable = new CommonTable();
         //function that calls every initializing method contained in commonTable
         commonTable.initialize(players);
+
+        //NOTIFICATION: decks order, nicknames, gameId and initialPlayer
+        modelListener.notifyChanges(commonTable.getGoldDeck(), commonTable.getResourceDeck(),
+                                    commonTable.getStarterDeck(), commonTable.getObjectiveDeck(),
+                                    nickNames, id, turnPlayer.getNickname());
+
+        //NOTIFICATION: about each player's starterCard
+        for(Player p : players){
+            modelListener.notifyChanges(p.getStarterCard(), p.getNickname());
+        }
+
     }
 
 
@@ -102,7 +114,14 @@ public class GameState {
         turnPlayer.setPawnColor(pawnColor);
     }
 
-
+    /**
+     * when the state of gameState is modified, a notification is sent in broadcast to all clients
+     * @param state
+     */
+    public void setTurnState(TurnState state) {
+        this.turnState = state;
+        modelListener.notifyChanges(state);
+    }
 
     ////////////////// CARDS PLACEMENT RELATED METHODS //////////////////////////////////////////////////////
     /**
@@ -119,8 +138,16 @@ public class GameState {
      * INTERFACE METHOD
      * calls playCard method contained in Player class
      */
-    public void playStarterCard() {
-        turnPlayer.playStarterCard();
+    //TODO: update method invocation in Controller and Controller Test
+    public void playStarterCard(String player) {
+        for(Player p : players){
+            if(p.getNickname().equals(player)){
+                p.playStarterCard();
+                //NOTIFICATION ABOUT THE STARTER CARD
+                modelListener.notifyChanges(p.getStarterCard(), player);
+            }
+        }
+        //turnPlayer.playStarterCard();
     }
 
     /**
@@ -143,9 +170,14 @@ public class GameState {
      * INTERFACE METHOD
      * based on Player input, the method sets the faceSide that will be visible for the starting card when placed
      * @param faceSide FaceSide selected by the Player
+     * @param player
      */
-    public void setStartingCardFace(boolean faceSide) {
-        turnPlayer.getStarterCard().setFaceSide(faceSide);
+    //TODO: modify method invocation in Controller and ControllerTest
+    public void setStartingCardFace(boolean faceSide, String player) {
+        for(Player p : players){
+            if(p.getNickname().equals(player)) p.getStarterCard().setFaceSide(faceSide);
+        }
+        //turnPlayer.getStarterCard().setFaceSide(faceSide);
     }
 
 
@@ -224,6 +256,7 @@ public class GameState {
     public int getPoints() {return turnPlayer.getPoints(); }
     //returns turnPlayer's card at specified index in his hand
     public PlayableCard getPlayerHandCard(int index) { return turnPlayer.getPlayingHand().get(index); }
+    public ArrayList<Player> getPlayers() { return players; }
 
 
 
