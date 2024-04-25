@@ -1,6 +1,9 @@
 package model.GameState;
 
+import Client.ClientAPI_COME;
 import Exceptions.EmptyCardSourceException;
+import Server.ModelListener;
+import Server.ServerAPI_GO;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
 import model.enums.Pawn;
@@ -23,6 +26,7 @@ public class GameState {
     private CommonTable commonTable;
     private TurnState turnState;
     private final int MAX_POINTS = 10;
+    private ModelListener modelListener;
 
 
     /**
@@ -31,8 +35,9 @@ public class GameState {
      * @param nickNames ArrayList of Strings
      * @param id the unique id for gameState
      */
-    public GameState(ArrayList<String> nickNames, String id) {
+    public GameState(ArrayList<String> nickNames, String id, ServerAPI_GO serverAPIGo) {
         //creates a new players list with the nicknames taken from input
+        serverAPIGo = serverAPIGo;
         players = new ArrayList<Player>();
         for(String name : nickNames) {
             Player p;
@@ -93,7 +98,9 @@ public class GameState {
      * based on Player input, the method sets the selected pawn color for the player
      * @param pawnColor Pawn selected by the Player
      */
-    public void setPlayerPawnColor(Pawn pawnColor) { turnPlayer.setPawnColor(pawnColor);}
+    public void setPlayerPawnColor(Pawn pawnColor) {
+        turnPlayer.setPawnColor(pawnColor);
+    }
 
 
 
