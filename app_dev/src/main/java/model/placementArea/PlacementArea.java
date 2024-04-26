@@ -124,7 +124,7 @@ public class PlacementArea {
      * @param card the card being placed
      * @return TRUE if the constraints limiting the card placement of the card @card are satisfied, else returns FALSE
      */
-    private boolean canBePlaced(PlayableCard card) {
+    public boolean canBePlaced(PlayableCard card) {
         Map<Element, Integer> constraints = card.getPlacementConstraint();
         //if there are no constraints the card can be placed
         if(constraints == null) return true;

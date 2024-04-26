@@ -6,6 +6,8 @@ import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
 import model.deckFactory.ObjectiveDeck;
 import model.deckFactory.PlayableDeck;
+import model.enums.Artifact;
+import model.enums.Element;
 import model.enums.Pawn;
 import model.placementArea.Coordinates;
 
@@ -59,10 +61,11 @@ public class ModelListener {
 
     }
     /**
-     * notification about the two commonObjectives
-     * @param commonObjectives
+     * notification about the two secretObjectives for each player
+     * @param commonObjective1
+     * @param commonObjective2
      */
-    public void notifyChanges(ArrayList<ObjectiveCard> commonObjectives){
+    public void notifyChanges(ObjectiveCard commonObjective1, ObjectiveCard commonObjective2, String player){
 
     }
 
@@ -79,21 +82,23 @@ public class ModelListener {
     ////////////////////////////// ROUND NOTIFICATIONS ///////////////////////////////////////////////////////////////
 
     /**
-     * after ui selects a card from hand, the model's selectedHandCard attribute changes(also the face attribute in card),
-     * the model notifies the view with the available places where the selected card can be placed
+     * At the beginning of the turn of turnPlayer, the model notifies the player about which cards
+     * of his hand can be placed(due to placementConstraint) and also where the cards can be placed
      * @param availablePlaces
      * @param player
      */
-    public void notifyChanges(List<Coordinates> availablePlaces, String player){
+    public void notifyChanges(String player, List<Coordinates> availablePlaces, Boolean[] canBePlaced){
 
     }
 
     /**
-     * after a position to place the card is also selected, the model updates the view's disposition
+     * after position, coordinates and faceSide for placing the card are chosen, the player is notified with his updated disposition
+     * , points and available resources
      * @param disposition
      * @param player
      */
-    public void notifyChanges(HashMap<Coordinates, PlayableCard> disposition, String player) {
+    public void notifyChanges(String player, HashMap<Coordinates, PlayableCard> disposition, int points,
+                              HashMap<Artifact, Integer> availableArtifacts, HashMap<Element, Integer> availableElements) {
 
     }
 
@@ -101,11 +106,8 @@ public class ModelListener {
      * after the player decided where to draw the next card from, the involved card source gets updated based on cardDrawnFrom
      * @param hand
      * @param player
-     * @param nextTurnPlayer
-     * @param playerPoints
-     * @param cardDrawnFrom
      */
-    public void notifyChanges(ArrayList<PlayableCard> hand, String player, String nextTurnPlayer, int playerPoints, String cardDrawnFrom) {
+    public void notifyChanges(String player, List<PlayableCard> hand) {
 
     }
 }

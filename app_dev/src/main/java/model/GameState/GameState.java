@@ -11,6 +11,7 @@ import model.placementArea.Coordinates;
 import model.player.Player;
 import model.deckFactory.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -28,6 +29,7 @@ public class GameState {
     private TurnState turnState;
     private final int MAX_POINTS = 10;
     private ModelListener modelListener;
+    private ArrayList<ObjectiveCard> objectiveBuffer;
 
 
     /**
@@ -62,8 +64,6 @@ public class GameState {
         }
 
     }
-
-
 
 
     //////////////////// GENERAL TURN CONTROL METHODS ///////////////////////////////////////
@@ -120,8 +120,49 @@ public class GameState {
      */
     public void setTurnState(TurnState state) {
         this.turnState = state;
+        //NOTIFICATION: ABOUT THE CHANGED STATE OF GAMESTATE
         modelListener.notifyChanges(state);
     }
+
+    public void distributeSecretOjectives() {
+        for(Player p: players){
+            objectiveBuffer.add(getObjectiveDeck().extract());
+            objectiveBuffer.add(getObjectiveDeck().extract());
+            //NOTIFICATION: about the two objectives the player has to choose between
+            modelListener.notifyChanges(objectiveBuffer.get(0), objectiveBuffer.get(1), p.getNickname());
+        }
+    }
+
+    public void setPlayerSecretObjective(String cardId, String player){
+        for(Player p : players){
+            if(p.getNickname().equals(player)){
+                for(ObjectiveCard c : objectiveBuffer){
+                    if(String.valueOf(c.getId()).equals(cardId)){
+                        p.setSecretObjective(c);
+                        //NOTIFICATION: about which secretObjective the player chose
+                        modelListener.notifyChanges( c, player);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * checks for each card in the turnPlayer hand if it can be placed.
+     * information about whether a card is placeable and where it can be placed are then sent to the turnPlayer
+     */
+    public void playingTurn(){
+        Boolean[] canBePlaced = new Boolean[3];
+        for(int i = 0; i < 3; i++){
+            if(turnPlayer.getPlacementArea().canBePlaced(turnPlayer.getPlayingHand().get(i))){
+                canBePlaced[i] = true;
+            } else { canBePlaced[i] = false;}
+        }
+        //NOTIFICATION: about which cards the player can place and where on the placementArea
+        modelListener.notifyChanges(turnPlayer.getNickname(), turnPlayer.getPlacementArea().getAvailablePlaces(), canBePlaced);
+    }
+
 
     ////////////////// CARDS PLACEMENT RELATED METHODS //////////////////////////////////////////////////////
     /**
@@ -132,6 +173,10 @@ public class GameState {
         turnPlayer.playCard(selectedHandCard, selectedCoordinates);
         //we check if the player reached 20 points
         setLastTurnTrue();
+        //NOTIFICATION: the player disposition, points, available resources are updated
+        modelListener.notifyChanges(turnPlayer.getNickname(), turnPlayer.getPlacementArea().getDisposition(),
+                                    turnPlayer.getPoints(), turnPlayer.getPlacementArea().getAllArtifactsNumber(),
+                                    turnPlayer.getPlacementArea().getAllElementsNumber());
     }
 
     /**
@@ -201,6 +246,7 @@ public class GameState {
     public void drawCardGoldDeck() throws EmptyCardSourceException {
         commonTable.drawCardGoldDeck(turnPlayer);
         setLastTurnTrue();
+        modelListener.notifyChanges(turnPlayer.getNickname(), turnPlayer.getPlayingHand());
     }
 
     /**
@@ -211,6 +257,7 @@ public class GameState {
     public void drawCardResourcesDeck() throws EmptyCardSourceException {
         commonTable.drawCardResourcesDeck(turnPlayer);
         setLastTurnTrue();
+        modelListener.notifyChanges(turnPlayer.getNickname(), turnPlayer.getPlayingHand());
     }
 
     /**
@@ -221,6 +268,7 @@ public class GameState {
     public void drawCardOpenGold(int index) throws EmptyCardSourceException {
         commonTable.drawCardOpenGold(index, turnPlayer);
         setLastTurnTrue();
+        modelListener.notifyChanges(turnPlayer.getNickname(), turnPlayer.getPlayingHand());
     }
 
     /**
@@ -231,6 +279,7 @@ public class GameState {
     public void drawCardOpenResources(int index) throws EmptyCardSourceException {
         commonTable.drawCardOpenResources(index, turnPlayer);
         setLastTurnTrue();
+        modelListener.notifyChanges(turnPlayer.getNickname(), turnPlayer.getPlayingHand());
     }
 
 
