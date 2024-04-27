@@ -1,8 +1,8 @@
 package Server;
 
-import SharedWebInterfaces.Messages.MessageFromClient;
+import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import SharedWebInterfaces.ClientHandlerInterface;
-import SharedWebInterfaces.Messages.MessageFromServer;
+import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
 import SharedWebInterfaces.ServerHandlerInterface;
 
 import java.rmi.RemoteException;

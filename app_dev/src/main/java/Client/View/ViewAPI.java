@@ -1,5 +1,6 @@
 package Client.View;
 
+import SharedWebInterfaces.Messages.ViewAPI_Interface;
 import model.PointsStrategy.Points;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.awt.Point;
  *   - methods called after user input to modify the view or the model
  *   - methods used by the server interface to modify the view
  */
-public class ViewAPI {
+public class ViewAPI implements ViewAPI_Interface {
     private ArrayList<CardApi> hand;
     private HashMap<Point, CardApi> placementArea;
     private int[] goldDeck;
@@ -20,6 +21,7 @@ public class ViewAPI {
     private int[] commonObjectives;
     private String pawn;
     private int playerPoints;
+    private String state;
 
     public void setInitialData (int[] goldDeck, int[] resourceDeck, int[] commonObjectives, int[] serverHand) {
         this.commonObjectives = commonObjectives;
@@ -51,8 +53,9 @@ public class ViewAPI {
         this.playerPoints = points;
     }
 
-
-
-
+    @Override
+    public void setState(String state) {
+        this.state = state;
+    }
 
 }

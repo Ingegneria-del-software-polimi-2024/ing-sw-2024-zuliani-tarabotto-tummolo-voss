@@ -53,11 +53,12 @@ public class ModelController implements ServerControllerInterface {
      * @param face
      * @param player
      */
+    //TODO: change method invocation in Controller and ControllerTest(causing error)
     @Override
     public void playStarterCard(boolean face, String player){
         gameState.setStartingCardFace(face, player);
         gameState.playStarterCard(player);
-        //IF THIS FUNCTION WAS CALLED A NUMBER OF TIMES EQUALS TO THE NUMBER OF PLAYERS THEN THE STATE OF THE GAME IS CHANGED
+        //IF THIS FUNCTION GETS CALLED A NUMBER OF TIMES EQUALS TO THE NUMBER OF PLAYERS THEN THE STATE OF THE GAME IS CHANGED
         if(cont == playersNicknames.size() - 1){
             distributeSecretObjectives();
             cont = 0;
@@ -92,6 +93,13 @@ public class ModelController implements ServerControllerInterface {
         }
     }
 
+    /**
+     * all GameState attributes regarding the placement of a card are set and the card is placed
+     * @param cardId
+     * @param x
+     * @param y
+     * @param faceSide
+     */
     @Override
     public void playCard(int cardId, int x , int y, Boolean faceSide){
         for(PlayableCard c : gameState.getTurnPlayer().getPlayingHand()){
@@ -168,5 +176,5 @@ public class ModelController implements ServerControllerInterface {
         gameState.setTurnState(TurnState.PLACING_CARD_SELECTION);
         gameState.playingTurn();
     }
-    
+
 }

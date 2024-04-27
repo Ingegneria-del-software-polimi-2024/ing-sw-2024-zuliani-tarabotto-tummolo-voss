@@ -1,8 +1,7 @@
 package Client;
 
 
-import SharedWebInterfaces.Messages.ClientViewInterface;
-import SharedWebInterfaces.Messages.MessageFromServer;
+import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
 import SharedWebInterfaces.Messages.MessageQueue;
 
 public class ClientAPI_COME {

@@ -1,6 +1,7 @@
 package Server;
 
 
+import SharedWebInterfaces.Messages.MessagesFromServer.*;
 import model.GameState.TurnState;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
@@ -17,15 +18,22 @@ import java.util.List;
 
 public class ModelListener {
 
+    private ServerAPI_GO serverAPI;
+
+    public ModelListener(ServerAPI_GO serverAPI){
+        this.serverAPI = serverAPI;
+    }
+
     //////////////////////// GAME SETUP NOTIFICATIONS ///////////////////////////////////////////////////
 
     /**
      * notification about current state of GameState
      * @param state
      */
-    public void notifyChanges(TurnState state){
-
+    public void notifyChanges(String state){
+        serverAPI.broadcastNotifyChanges( new StateMessage( state ));
     }
+
 
     /**
      * notification with data about the order of the cards in decks
@@ -34,15 +42,34 @@ public class ModelListener {
      * @param starterDeck
      * @param objectiveDeck
      * @param players
-     * @param GameId
-     * @param initialPlayer
+     * @param gameId
      */
     //TODO: add notification about each player's pawn color
     public void notifyChanges(PlayableDeck goldDeck, PlayableDeck  resourceDeck,
                               PlayableDeck  starterDeck, ObjectiveDeck objectiveDeck,
-                              ArrayList<String> players, String GameId, String initialPlayer){
+                              ArrayList<String> players, String gameId){
+
+        int[] goldDeckInt = goldDeck.getCards().stream()
+                .mapToInt(PlayableCard::getId)
+                .toArray();
+
+        int[] resourceDeckInt = resourceDeck.getCards().stream()
+                .mapToInt(PlayableCard::getId)
+                .toArray();
+
+        int[] starterDeckInt = starterDeck.getCards().stream()
+                .mapToInt(PlayableCard::getId)
+                .toArray();
+
+        int[] objectiveDeckInt = objectiveDeck.getCards().stream()
+                .mapToInt(ObjectiveCard::getId)
+                .toArray();
+
+        serverAPI.broadcastNotifyChanges( new initializationMessage( goldDeckInt, resourceDeckInt, starterDeckInt,
+                                                                     objectiveDeckInt, (String[]) players.toArray(), gameId));
 
     }
+
 
 
     /**
@@ -51,22 +78,17 @@ public class ModelListener {
      * @param player
      */
     public void notifyChanges(PlayableCard starterCard, String player){
-
+        serverAPI.notifyChanges( new StarterCardMessage(starterCard.getId()), player );
     }
 
-    /**
-     * notification with the data about the hand of player
-     */
-    public void notifyChanges(ArrayList<PlayableCard> hand, String player) {
 
-    }
     /**
      * notification about the two secretObjectives for each player
-     * @param commonObjective1
-     * @param commonObjective2
+     * @param secretObjective1
+     * @param secretObjective2
      */
-    public void notifyChanges(ObjectiveCard commonObjective1, ObjectiveCard commonObjective2, String player){
-
+    public void notifyChanges(ObjectiveCard secretObjective1, ObjectiveCard secretObjective2, String player){
+        serverAPI.notifyChanges( new secretObjectivesMessage(secretObjective1.getId(), secretObjective2.getId()), player);
     }
 
 
@@ -76,7 +98,7 @@ public class ModelListener {
      * @param player
      */
     public void notifyChanges(ObjectiveCard secretObjective, String player){
-
+        serverAPI.broadcastNotifyChanges( new ConfirmSecretObjectiveMessage(secretObjective.getId(), player));
     }
 
     ////////////////////////////// ROUND NOTIFICATIONS ///////////////////////////////////////////////////////////////

@@ -56,7 +56,7 @@ public class GameState {
         //NOTIFICATION: decks order, nicknames, gameId and initialPlayer
         modelListener.notifyChanges(commonTable.getGoldDeck(), commonTable.getResourceDeck(),
                                     commonTable.getStarterDeck(), commonTable.getObjectiveDeck(),
-                                    nickNames, id, turnPlayer.getNickname());
+                                    nickNames, id);
 
         //NOTIFICATION: about each player's starterCard
         for(Player p : players){
@@ -121,7 +121,7 @@ public class GameState {
     public void setTurnState(TurnState state) {
         this.turnState = state;
         //NOTIFICATION: ABOUT THE CHANGED STATE OF GAMESTATE
-        modelListener.notifyChanges(state);
+        modelListener.notifyChanges(state.toString());
     }
 
     public void distributeSecretOjectives() {

@@ -1,8 +1,8 @@
 package Client;
 
-import SharedWebInterfaces.Messages.MessageFromClient;
+import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import SharedWebInterfaces.ClientHandlerInterface;
-import SharedWebInterfaces.Messages.MessageFromServer;
+import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

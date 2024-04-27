@@ -1,6 +1,6 @@
 package Server;
 
-import SharedWebInterfaces.Messages.MessageFromClient;
+import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import SharedWebInterfaces.ClientHandlerInterface;
 import SharedWebInterfaces.Messages.MessageQueue;
 
