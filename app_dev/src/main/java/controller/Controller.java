@@ -28,8 +28,11 @@ public class Controller {
             System.out.println("YOUR STARTER CARD: \n");
             view.printStarterCard();
             System.out.println(player + ", select a face side for the starting card: ");
-            gameState.setStartingCardFace(sc.nextBoolean());
-            gameState.playStarterCard();
+            //commented out the following 'cause of my autism, just wanted to silence the error
+            //TODO just decomment or delete these
+            //gameState.setStartingCardFace(sc.nextBoolean());
+            //gameState.playStarterCard();
+
             //selecting pawn
             System.out.println("SELECT A PAWN: ");
             Pawn.printAvailablePawns();

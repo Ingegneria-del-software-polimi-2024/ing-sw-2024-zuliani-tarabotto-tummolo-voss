@@ -1,7 +1,7 @@
 package SharedWebInterfaces.Messages.MessagesFromServer;
 
 import SharedWebInterfaces.Messages.GeneralAPI_Interface;
-import SharedWebInterfaces.Messages.ViewAPI_Interface;
+import SharedWebInterfaces.ViewAPI_Interface;
 
 public class initializationMessage implements MessageFromServer{
 
@@ -21,10 +21,6 @@ public class initializationMessage implements MessageFromServer{
         this.objectiveDeck = objectiveDeck;
         this.players = players;
         this.gameId = gameId;
-    }
-    @Override
-    public void execute(GeneralAPI_Interface api) {
-
     }
 
     @Override

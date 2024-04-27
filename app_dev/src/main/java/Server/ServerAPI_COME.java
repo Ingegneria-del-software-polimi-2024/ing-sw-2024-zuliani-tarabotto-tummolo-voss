@@ -2,13 +2,12 @@ package Server;
 
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import SharedWebInterfaces.ClientHandlerInterface;
-import SharedWebInterfaces.Messages.MessageQueue;
 
 import java.util.HashMap;
 
 public class ServerAPI_COME {
 
-    private MessageQueue toDoQueue;
+    private ServerMessageQueue toDoQueue;
     private HashMap<String, ClientHandlerInterface> players;
     //private Controller controller;
 
@@ -16,7 +15,7 @@ public class ServerAPI_COME {
      * class constructor
      */
     public ServerAPI_COME() {
-        toDoQueue = new MessageQueue();
+        toDoQueue = new ServerMessageQueue();
         players = new HashMap<String, ClientHandlerInterface>();
     }
 

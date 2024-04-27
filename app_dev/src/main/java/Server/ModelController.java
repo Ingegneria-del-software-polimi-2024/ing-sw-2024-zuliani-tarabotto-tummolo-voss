@@ -1,14 +1,12 @@
 package Server;
 import Exceptions.EmptyCardSourceException;
-import SharedWebInterfaces.Messages.ServerControllerInterface;
+import SharedWebInterfaces.ServerControllerInterface;
 import model.GameState.GameState;
 import model.GameState.TurnState;
 import model.cards.PlayableCards.PlayableCard;
 import model.placementArea.Coordinates;
-import model.player.Player;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 
 /*
@@ -29,7 +27,11 @@ public class ModelController implements ServerControllerInterface {
     private String initialPlayer;
     private boolean lastRound = false;
 
-
+    /**
+     * class constructor
+     * @param playersNicknames nicknames of the players
+     * @param gameId id of the game
+     */
     public ModelController(ArrayList<String> playersNicknames, String gameId){
         this.playersNicknames = playersNicknames;
         this.gameId = gameId;
@@ -50,8 +52,8 @@ public class ModelController implements ServerControllerInterface {
     /**
      * the controller places the starter card for the player with the specified face.
      * A counter checks if all players placed their cards and then updates the State of the game
-     * @param face
-     * @param player
+     * @param face the face of the starter card
+     * @param player the nickname of the player
      */
     //TODO: change method invocation in Controller and ControllerTest(causing error)
     @Override
@@ -80,8 +82,8 @@ public class ModelController implements ServerControllerInterface {
     /**
      * sets the desired card as secretObjective for the player.
      * A counter checks if all players chose their secretObjective
-     * @param cardId
-     * @param player
+     * @param cardId the id of the selected card
+     * @param player nickname of the player
      */
     @Override
     public void chooseSecretObjective(String cardId, String player) {
@@ -91,14 +93,15 @@ public class ModelController implements ServerControllerInterface {
             //Now the first round will be played
             gameState.playingTurn();
         }
+        cont++;
     }
 
     /**
      * all GameState attributes regarding the placement of a card are set and the card is placed
-     * @param cardId
-     * @param x
-     * @param y
-     * @param faceSide
+     * @param cardId the id of the card we want to play
+     * @param x the x value of the coordinates
+     * @param y the y value of the coordinates
+     * @param faceSide the side we want to play the card
      */
     @Override
     public void playCard(int cardId, int x , int y, Boolean faceSide){

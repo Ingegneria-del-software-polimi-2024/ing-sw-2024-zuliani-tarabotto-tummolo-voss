@@ -2,6 +2,7 @@ package Client;
 
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import SharedWebInterfaces.ClientHandlerInterface;
+import SharedWebInterfaces.Messages.MessagesFromServer.InterruptConnectionMessage;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
 
 import java.io.IOException;
@@ -32,6 +33,13 @@ public class SOCKET_ServerHandler implements ClientHandlerInterface {
     @Override
     public void notifyChanges(MessageFromServer message) throws RemoteException {api.notifyChanges(message);}
 
+    private void gameListeningLoop() throws IOException, ClassNotFoundException{
+        MessageFromServer incomingMessage;
+        do{
+            incomingMessage = (MessageFromServer) in.readObject();
+            notifyChanges(incomingMessage);
+        }while(incomingMessage instanceof InterruptConnectionMessage);
+    }
     public SOCKET_ServerHandler(String add, int port) {
         try {
             //opnening the connection
@@ -42,12 +50,25 @@ public class SOCKET_ServerHandler implements ClientHandlerInterface {
             //let the client cook
             //...
 
-            out.close();
-            in.close();
-            socket.close();
+            //the following methods must be called in the runSocket() method
+            //out.close();
+            //in.close();
+            //socket.close();
         } catch (IOException e) {
             //TODO handle correctly the exception
             throw new RuntimeException(e);
         }
+    }
+
+    public void runSocket() {
+        try {
+            gameListeningLoop();
+            out.close();
+            in.close();
+            socket.close();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

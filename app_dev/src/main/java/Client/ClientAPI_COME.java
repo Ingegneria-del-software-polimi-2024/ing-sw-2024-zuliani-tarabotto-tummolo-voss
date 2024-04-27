@@ -1,12 +1,12 @@
 package Client;
 
 
+import Client.View.ViewAPI;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
-import SharedWebInterfaces.Messages.MessageQueue;
 
 public class ClientAPI_COME {
-    private MessageQueue toDoQueue;
-    private ClientViewInterface view;
+    private ClientMessageQueue toDoQueue;
+    private ViewAPI view;
 
 
     public void notifyChanges(MessageFromServer message){toDoQueue.enqueueMessage(message);}
