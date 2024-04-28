@@ -1,9 +1,7 @@
 package model.GameState;
 
-import Client.ClientAPI_COME;
-import Exceptions.EmptyCardSourceException;
+import model.Exceptions.EmptyCardSourceException;
 import Server.ModelListener;
-import Server.ServerAPI_GO;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
 import model.enums.Pawn;
@@ -11,7 +9,6 @@ import model.placementArea.Coordinates;
 import model.player.Player;
 import model.deckFactory.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**

@@ -1,5 +1,5 @@
 package Server;
-import Exceptions.EmptyCardSourceException;
+import model.Exceptions.EmptyCardSourceException;
 import SharedWebInterfaces.ServerControllerInterface;
 import model.GameState.GameState;
 import model.GameState.TurnState;

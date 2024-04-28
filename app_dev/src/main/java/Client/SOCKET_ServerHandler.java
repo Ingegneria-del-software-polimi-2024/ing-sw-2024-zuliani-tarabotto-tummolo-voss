@@ -17,7 +17,12 @@ public class SOCKET_ServerHandler implements ClientHandlerInterface {
     private Socket socket;
     private ObjectInputStream in;
     private ObjectOutputStream out;
-    @Override
+
+    /**
+     * sends to the server the message from client
+     * @param message message coming from client
+     * @throws RemoteException when an error in the connection occurs
+     */
     public void sendToServer(MessageFromClient message) throws RemoteException {
         try {
             out.writeObject(message);
@@ -27,12 +32,20 @@ public class SOCKET_ServerHandler implements ClientHandlerInterface {
         }
     }
 
-    @Override
     public void addNewPlayer() throws RemoteException {}
 
-    @Override
+    /**
+     * receives and enqueues the message coming from the server
+     * @param message the message from the server containing the updates for the view
+     * @throws RemoteException
+     */
     public void notifyChanges(MessageFromServer message) throws RemoteException {api.notifyChanges(message);}
 
+    /**
+     * a loop that keeps the socket in listening status
+     * @throws IOException when an error in the communication occurs
+     * @throws ClassNotFoundException when an error in the communication occurs
+     */
     private void gameListeningLoop() throws IOException, ClassNotFoundException{
         MessageFromServer incomingMessage;
         do{
@@ -60,6 +73,9 @@ public class SOCKET_ServerHandler implements ClientHandlerInterface {
         }
     }
 
+    /**
+     * a method run by a single thread that keeps listening to the client handler
+     */
     public void runSocket() {
         try {
             gameListeningLoop();
