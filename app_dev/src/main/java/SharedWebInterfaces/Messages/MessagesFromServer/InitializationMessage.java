@@ -3,7 +3,7 @@ package SharedWebInterfaces.Messages.MessagesFromServer;
 import SharedWebInterfaces.Messages.GeneralAPI_Interface;
 import SharedWebInterfaces.Messages.ViewAPI_Interface;
 
-public class initializationMessage implements MessageFromServer{
+public class InitializationMessage implements MessageFromServer{
 
     private int[] goldDeck;
     private int[] resourceDeck;
@@ -12,7 +12,7 @@ public class initializationMessage implements MessageFromServer{
     private String[] players;
     private String gameId;
 
-    public initializationMessage(int[] goldDeck, int[] resourceDeck, int[] starterDeck, int[] objectiveDeck,
+    public InitializationMessage(int[] goldDeck, int[] resourceDeck, int[] starterDeck, int[] objectiveDeck,
                                  String[] players, String gameId) {
 
         this.goldDeck = goldDeck;

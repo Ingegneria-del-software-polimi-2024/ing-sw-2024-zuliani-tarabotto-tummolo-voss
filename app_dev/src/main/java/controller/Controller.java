@@ -28,8 +28,8 @@ public class Controller {
             System.out.println("YOUR STARTER CARD: \n");
             view.printStarterCard();
             System.out.println(player + ", select a face side for the starting card: ");
-            gameState.setStartingCardFace(sc.nextBoolean());
-            gameState.playStarterCard();
+            gameState.setStartingCardFace(sc.nextBoolean(), player);
+            gameState.playStarterCard(player);
             //selecting pawn
             System.out.println("SELECT A PAWN: ");
             Pawn.printAvailablePawns();

@@ -3,13 +3,16 @@ package SharedWebInterfaces.Messages.MessagesFromServer;
 import SharedWebInterfaces.Messages.GeneralAPI_Interface;
 import SharedWebInterfaces.Messages.ViewAPI_Interface;
 
-public class secretObjectivesMessage implements MessageFromServer{
-    private int obj1;
-    private int obj2;
-    public secretObjectivesMessage(int obj1, int obj2){
-        this.obj1 = obj1;
-        this.obj2 = obj2;
+import java.util.HashMap;
+
+public class EndGameMessage implements MessageFromServer{
+
+    private HashMap<String, Integer> finalPoints;
+
+    public EndGameMessage(HashMap<String, Integer> finalPoints) {
+        this.finalPoints = finalPoints;
     }
+
     @Override
     public void execute(GeneralAPI_Interface api) {
 
@@ -17,6 +20,6 @@ public class secretObjectivesMessage implements MessageFromServer{
 
     @Override
     public void execute(ViewAPI_Interface view) {
-        view.chooseSecretObjective(obj1, obj2);
+        view.endGame(finalPoints);
     }
 }

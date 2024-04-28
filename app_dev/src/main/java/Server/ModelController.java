@@ -41,8 +41,8 @@ public class ModelController implements ServerControllerInterface {
      */
     @Override
     public void initializeGameState(){
-        gameState.setTurnState(TurnState.GAME_INITIALIZATION);
         gameState = new GameState(playersNicknames, gameId);
+        gameState.setTurnState(TurnState.GAME_INITIALIZATION);
         initialPlayer = gameState.getTurnPlayer().getNickname();
         gameState.setTurnState(TurnState.STARTER_CARD_SELECTION);
     }
@@ -157,6 +157,7 @@ public class ModelController implements ServerControllerInterface {
             playNewTurn();
         }else if(roundCounter == playersNicknames.size() - 1 && !lastRound){
             gameState.calculateFinalPoints();
+            gameState.setTurnState(TurnState.CALCULATE_OBJECTIVES);
         }else{
             if(!lastRound){
                 cont = 0;

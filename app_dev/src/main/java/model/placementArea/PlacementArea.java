@@ -2,9 +2,7 @@ package model.placementArea;
 
 
 import model.Errors.ConditionNotSatisfiedException;
-import model.cards.Card;
 import model.cards.PlayableCards.PlayableCard;
-import model.cards.PlayableCards.StarterCard;
 import model.enums.Artifact;
 import model.enums.Element;
 import model.objective.Shape;
@@ -356,5 +354,5 @@ public class PlacementArea {
     public HashMap<Coordinates, PlayableCard> getDisposition() { return disposition;}
     public HashMap<Artifact, Integer> getAvailableArtifacts() {return availableArtifacts;}
     public HashMap<Element, Integer> getAvailableElements() {return availableElements;}
-    public List<Coordinates> getAvailablePlaces() {return availablePlaces;}
+    public ArrayList<Coordinates> getAvailablePlaces() {return availablePlaces;}
 }
