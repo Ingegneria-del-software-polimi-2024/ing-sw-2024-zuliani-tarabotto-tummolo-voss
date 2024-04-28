@@ -56,8 +56,8 @@ class ControllerTest {
         //LOGIN SECTION
         for (String player : nickNames) {
             //selecting and placing starter card
-            gameState.setStartingCardFace(sc.nextBoolean());
-            gameState.playStarterCard();
+            gameState.setStartingCardFace(sc.nextBoolean(), player);
+            gameState.playStarterCard(player);
             //selecting pawn
             Pawn pawn = Pawn.valueOf(sc.next());
             gameState.setPlayerPawnColor(pawn);

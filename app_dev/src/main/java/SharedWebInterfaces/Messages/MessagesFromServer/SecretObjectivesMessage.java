@@ -1,16 +1,15 @@
 package SharedWebInterfaces.Messages.MessagesFromServer;
 
 import SharedWebInterfaces.Messages.GeneralAPI_Interface;
-import SharedWebInterfaces.ViewAPI_Interface;
+import SharedWebInterfaces.Messages.ViewAPI_Interface;
 
-public class secretObjectivesMessage implements MessageFromServer{
+public class SecretObjectivesMessage implements MessageFromServer{
     private int obj1;
     private int obj2;
-    public secretObjectivesMessage(int obj1, int obj2){
+    public SecretObjectivesMessage(int obj1, int obj2){
         this.obj1 = obj1;
         this.obj2 = obj2;
     }
-
 
     @Override
     public void execute(ViewAPI_Interface view) {

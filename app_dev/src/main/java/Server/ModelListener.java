@@ -2,14 +2,12 @@ package Server;
 
 
 import SharedWebInterfaces.Messages.MessagesFromServer.*;
-import model.GameState.TurnState;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
 import model.deckFactory.ObjectiveDeck;
 import model.deckFactory.PlayableDeck;
 import model.enums.Artifact;
 import model.enums.Element;
-import model.enums.Pawn;
 import model.placementArea.Coordinates;
 
 import java.util.ArrayList;
@@ -65,7 +63,7 @@ public class ModelListener {
                 .mapToInt(ObjectiveCard::getId)
                 .toArray();
 
-        serverAPI.broadcastNotifyChanges( new initializationMessage( goldDeckInt, resourceDeckInt, starterDeckInt,
+        serverAPI.broadcastNotifyChanges( new InitializationMessage( goldDeckInt, resourceDeckInt, starterDeckInt,
                                                                      objectiveDeckInt, (String[]) players.toArray(), gameId));
 
     }
@@ -82,13 +80,14 @@ public class ModelListener {
     }
 
 
+
     /**
      * notification about the two secretObjectives for each player
      * @param secretObjective1
      * @param secretObjective2
      */
     public void notifyChanges(ObjectiveCard secretObjective1, ObjectiveCard secretObjective2, String player){
-        serverAPI.notifyChanges( new secretObjectivesMessage(secretObjective1.getId(), secretObjective2.getId()), player);
+        serverAPI.notifyChanges( new SecretObjectivesMessage(secretObjective1.getId(), secretObjective2.getId()), player);
     }
 
 
@@ -109,27 +108,49 @@ public class ModelListener {
      * @param availablePlaces
      * @param player
      */
-    public void notifyChanges(String player, List<Coordinates> availablePlaces, Boolean[] canBePlaced){
-
+    public void notifyChanges(String player, ArrayList<Coordinates> availablePlaces, boolean[] canBePlaced){
+        serverAPI.notifyChanges( new PlaceableCardsMessage(availablePlaces, canBePlaced), player);
     }
 
     /**
      * after position, coordinates and faceSide for placing the card are chosen, the player is notified with his updated disposition
      * , points and available resources
-     * @param disposition
      * @param player
+     * @param lastPlacedGard
+     * @param coordinates
+     * @param faceSide
+     * @param points
+     * @param availableArtifacts
+     * @param availableElements
      */
-    public void notifyChanges(String player, HashMap<Coordinates, PlayableCard> disposition, int points,
+    public void notifyChanges(String player, PlayableCard lastPlacedGard,
+                              Coordinates coordinates, boolean faceSide, int points,
                               HashMap<Artifact, Integer> availableArtifacts, HashMap<Element, Integer> availableElements) {
+        serverAPI.broadcastNotifyChanges(new UpdateDispositionMessage(player, lastPlacedGard.getId(), coordinates,
+                faceSide, points, availableArtifacts, availableElements));
 
     }
 
     /**
      * after the player decided where to draw the next card from, the involved card source gets updated based on cardDrawnFrom
-     * @param hand
+     * @param hand1
      * @param player
+     * @param cardSource
      */
-    public void notifyChanges(String player, List<PlayableCard> hand) {
+    public void notifyChanges(String player, List<PlayableCard> hand1, int cardSource) {
+        int[] hand = new int[3];
+        hand[0] = hand1.get(0).getId();
+        hand[1] = hand1.get(1).getId();
+        hand[2] = hand1.get(2).getId();
+        serverAPI.broadcastNotifyChanges( new DrawCardMessage(player, hand, cardSource));
+    }
 
+    /**
+     * at the end of the game each player is notified with the final points of every player,
+     * the view is responsible of displaying the winner
+     * @param finalPoints
+     */
+    public void notifyChanges(HashMap<String, Integer> finalPoints){
+        serverAPI.broadcastNotifyChanges(new EndGameMessage(finalPoints));
     }
 }

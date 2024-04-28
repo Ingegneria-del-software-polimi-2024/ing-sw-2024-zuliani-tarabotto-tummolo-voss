@@ -1,7 +1,7 @@
 package SharedWebInterfaces.Messages.MessagesFromServer;
 
 import SharedWebInterfaces.Messages.GeneralAPI_Interface;
-import SharedWebInterfaces.ViewAPI_Interface;
+import SharedWebInterfaces.Messages.ViewAPI_Interface;
 
 public class ConfirmSecretObjectiveMessage implements MessageFromServer{
     private int secretObjective;
@@ -12,8 +12,11 @@ public class ConfirmSecretObjectiveMessage implements MessageFromServer{
         this.secretObjective = secretObjective;
         this.player = player;
     }
+
+
     @Override
     public void execute(ViewAPI_Interface view) {
         view.setSecretObjective(secretObjective, player);
     }
+
 }
