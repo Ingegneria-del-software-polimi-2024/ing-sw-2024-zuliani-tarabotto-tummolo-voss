@@ -1,7 +1,6 @@
 package SharedWebInterfaces.Messages.MessagesFromServer;
 
-import SharedWebInterfaces.Messages.GeneralAPI_Interface;
-import SharedWebInterfaces.Messages.ViewAPI_Interface;
+import SharedWebInterfaces.ViewAPI_Interface;
 
 public class SecretObjectivesMessage implements MessageFromServer{
     private int obj1;

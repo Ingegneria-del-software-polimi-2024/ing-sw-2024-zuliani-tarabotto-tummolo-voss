@@ -1,6 +1,6 @@
 package SharedWebInterfaces.Messages.MessagesFromServer;
 
-import SharedWebInterfaces.Messages.ViewAPI_Interface;
+import SharedWebInterfaces.ViewAPI_Interface;
 
 public interface MessageFromServer{
     public void execute(ViewAPI_Interface view);

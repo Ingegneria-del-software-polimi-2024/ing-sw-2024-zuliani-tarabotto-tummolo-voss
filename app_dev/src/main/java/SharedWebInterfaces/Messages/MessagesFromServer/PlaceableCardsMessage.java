@@ -1,10 +1,8 @@
 package SharedWebInterfaces.Messages.MessagesFromServer;
 
-import SharedWebInterfaces.Messages.GeneralAPI_Interface;
-import SharedWebInterfaces.Messages.ViewAPI_Interface;
+import SharedWebInterfaces.ViewAPI_Interface;
 import model.placementArea.Coordinates;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class PlaceableCardsMessage implements MessageFromServer{
