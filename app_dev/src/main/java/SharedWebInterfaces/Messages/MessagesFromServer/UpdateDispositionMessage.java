@@ -29,10 +29,6 @@ public class UpdateDispositionMessage implements MessageFromServer{
         this.availableElements = availableElements;
     }
 
-    @Override
-    public void execute(GeneralAPI_Interface api) {
-
-    }
 
     @Override
     public void execute(ViewAPI_Interface view) {

@@ -1,7 +1,7 @@
 package SharedWebInterfaces.Messages.MessagesFromServer;
 
 import SharedWebInterfaces.Messages.GeneralAPI_Interface;
-import SharedWebInterfaces.ViewAPI_Interface;
+import SharedWebInterfaces.Messages.ViewAPI_Interface;
 
 public class StarterCardMessage implements MessageFromServer{
     private int starterCard;

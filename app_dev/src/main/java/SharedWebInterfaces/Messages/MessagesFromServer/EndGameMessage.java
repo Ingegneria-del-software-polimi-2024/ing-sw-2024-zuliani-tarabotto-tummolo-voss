@@ -14,11 +14,6 @@ public class EndGameMessage implements MessageFromServer{
     }
 
     @Override
-    public void execute(GeneralAPI_Interface api) {
-
-    }
-
-    @Override
     public void execute(ViewAPI_Interface view) {
         view.endGame(finalPoints);
     }

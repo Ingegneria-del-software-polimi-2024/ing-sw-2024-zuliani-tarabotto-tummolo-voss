@@ -16,10 +16,6 @@ public class PlaceableCardsMessage implements MessageFromServer{
         this.availablePlaces = availablePlaces;
         this.canBePlaced = canBePlaced;
     }
-    @Override
-    public void execute(GeneralAPI_Interface api) {
-
-    }
 
     @Override
     public void execute(ViewAPI_Interface view) {

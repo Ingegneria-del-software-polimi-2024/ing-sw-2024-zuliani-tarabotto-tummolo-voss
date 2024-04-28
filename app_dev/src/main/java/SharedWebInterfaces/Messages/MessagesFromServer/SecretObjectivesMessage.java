@@ -1,7 +1,7 @@
 package SharedWebInterfaces.Messages.MessagesFromServer;
 
 import SharedWebInterfaces.Messages.GeneralAPI_Interface;
-import SharedWebInterfaces.ViewAPI_Interface;
+import SharedWebInterfaces.Messages.ViewAPI_Interface;
 
 public class SecretObjectivesMessage implements MessageFromServer{
     private int obj1;
@@ -10,7 +10,6 @@ public class SecretObjectivesMessage implements MessageFromServer{
         this.obj1 = obj1;
         this.obj2 = obj2;
     }
-
 
     @Override
     public void execute(ViewAPI_Interface view) {

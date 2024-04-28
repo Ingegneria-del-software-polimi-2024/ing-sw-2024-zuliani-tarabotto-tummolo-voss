@@ -1,6 +1,5 @@
 package SharedWebInterfaces.Messages.MessagesFromServer;
 
-import SharedWebInterfaces.Messages.GeneralAPI_Interface;
 import SharedWebInterfaces.Messages.ViewAPI_Interface;
 
 public class DrawCardMessage implements MessageFromServer{
@@ -14,15 +13,10 @@ public class DrawCardMessage implements MessageFromServer{
         this.cardSource = cardSource;
     }
 
-
     @Override
-    public void execute(GeneralAPI_Interface api) {
-
-    }
-
-    @Override
-    public void execute(ViewAPI_Interface view) {
+    public void execute(ViewAPI_Interface view)  {
         view.updateHand(player, hand);
         view.updateCardSource(cardSource);
     }
+
 }

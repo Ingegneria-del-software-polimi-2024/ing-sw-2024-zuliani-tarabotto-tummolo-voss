@@ -1,7 +1,7 @@
 package SharedWebInterfaces.Messages.MessagesFromServer;
 
 import SharedWebInterfaces.Messages.GeneralAPI_Interface;
-import SharedWebInterfaces.ViewAPI_Interface;
+import SharedWebInterfaces.Messages.ViewAPI_Interface;
 
 public class InitializationMessage implements MessageFromServer{
 
@@ -32,4 +32,5 @@ public class InitializationMessage implements MessageFromServer{
         view.setPlayers(players);
         view.setGameId(gameId);
     }
+
 }
