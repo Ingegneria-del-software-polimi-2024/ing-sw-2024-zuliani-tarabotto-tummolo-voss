@@ -1,4 +1,6 @@
-package SharedWebInterfaces.Messages;
+package SharedWebInterfaces;
+
+import SharedWebInterfaces.Messages.GeneralAPI_Interface;
 
 import java.util.ArrayList;
 

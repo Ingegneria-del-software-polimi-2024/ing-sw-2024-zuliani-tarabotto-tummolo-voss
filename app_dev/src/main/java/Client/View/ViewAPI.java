@@ -1,7 +1,6 @@
 package Client.View;
 
-import SharedWebInterfaces.Messages.ViewAPI_Interface;
-import model.PointsStrategy.Points;
+import SharedWebInterfaces.ViewAPI_Interface;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,11 +16,16 @@ public class ViewAPI implements ViewAPI_Interface {
     private HashMap<Point, CardApi> placementArea;
     private int[] goldDeck;
     private int[] resourceDeck;
+    private int[] starterDeck;
+    private int[] objectiveDeck;
     private int secretObjective;
     private int[] commonObjectives;
     private String pawn;
     private int playerPoints;
     private String state;
+
+    //suggestion: use a hashmap to map player's names to points
+    //private HashMap<String, Integer> players;
 
     public void setInitialData (int[] goldDeck, int[] resourceDeck, int[] commonObjectives, int[] serverHand) {
         this.commonObjectives = commonObjectives;
@@ -57,5 +61,14 @@ public class ViewAPI implements ViewAPI_Interface {
     public void setState(String state) {
         this.state = state;
     }
+
+    public void setGoldDeck(int[] deck){goldDeck = deck;}
+    public void setResourceDeck(int[] deck){resourceDeck = deck;}
+    public void setStarterDeck(int[] deck){starterDeck = deck;}
+    public void setObjectiveDeck(int[] deck){objectiveDeck = deck;}
+    public void setPlayers(String[] players){}
+    public void setStarterCard(int starterCard){}
+    public void chooseSecretObjective(int obj1, int obj2){}
+    public void setSecretObjective(int secretObjective, String player){this.secretObjective = secretObjective;}
 
 }
