@@ -4,6 +4,7 @@ import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import SharedWebInterfaces.ClientHandlerInterface;
 import SharedWebInterfaces.Messages.MessagesFromServer.InterruptConnectionMessage;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
+import SharedWebInterfaces.ServerHandlerInterface;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -11,7 +12,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.rmi.RemoteException;
 
-public class SOCKET_ServerHandler implements ClientHandlerInterface {
+public class SOCKET_ServerHandler implements ServerHandlerInterface {
 
     private ClientAPI_COME api;
     private Socket socket;

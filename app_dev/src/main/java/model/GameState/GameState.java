@@ -1,5 +1,6 @@
 package model.GameState;
 
+import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import model.Exceptions.EmptyCardSourceException;
 import Server.ModelListener;
 import model.cards.ObjectiveCard;
@@ -9,6 +10,7 @@ import model.placementArea.Coordinates;
 import model.player.Player;
 import model.deckFactory.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -163,6 +165,7 @@ public class GameState {
         modelListener.notifyChanges(turnPlayer.getNickname(), turnPlayer.getPlacementArea().getAvailablePlaces(), canBePlaced);
     }
 
+    public boolean checkMessage(MessageFromClient message){return turnState.controlMessage(message);}
 
     ////////////////// CARDS PLACEMENT RELATED METHODS //////////////////////////////////////////////////////
     /**

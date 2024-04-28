@@ -1,4 +1,5 @@
 package Server;
+import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import model.Exceptions.EmptyCardSourceException;
 import SharedWebInterfaces.ServerControllerInterface;
 import model.GameState.GameState;
@@ -181,4 +182,5 @@ public class ModelController implements ServerControllerInterface {
         gameState.playingTurn();
     }
 
+    public boolean checkMessage(MessageFromClient message){return gameState.checkMessage(message);}
 }

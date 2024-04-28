@@ -21,7 +21,9 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface {
     public void sendToServer(MessageFromClient message) throws RemoteException {api.sendToServer(message);}
 
     @Override
-    public void addNewPlayer() throws RemoteException {}
+    public void addNewPlayer(String nickname, String lookupTableName, int clientPort, String clientHost) throws RemoteException {
+        //TODO implement!!!!
+    }
 
     @Override
     public void notifyChanges(MessageFromServer message) throws RemoteException {

@@ -13,19 +13,46 @@ import SharedWebInterfaces.Messages.MessagesFromClient.SelectStarterCardMesage;
     * objective calculation stage
  */
 public enum TurnState {
-    GAME_INITIALIZATION,
+    GAME_INITIALIZATION{
+
+    },
     STARTER_CARD_SELECTION{
         public boolean controlMessage(MessageFromClient msg){
             return (msg instanceof SelectStarterCardMesage);
         }
     },
-    OBJECTIVE_SELECTION,
+    OBJECTIVE_SELECTION{
+        //TODO change instanceof type
+        public boolean controlMessage(MessageFromClient msg){
+            return (msg instanceof SelectStarterCardMesage);
+        }
+    },
     COLOUR_SELECTION,//TODO: ELIMINATE
-    CARD_DEALING,
-    PLACING_CARD_SELECTION,
+    CARD_DEALING{
+        //TODO change instanceof type
+        public boolean controlMessage(MessageFromClient msg){
+            return (msg instanceof SelectStarterCardMesage);
+        }
+    },
+    PLACING_CARD_SELECTION{
+        //TODO change instanceof type
+        public boolean controlMessage(MessageFromClient msg){
+            return (msg instanceof SelectStarterCardMesage);
+        }
+    },
     PLACING_POSITION_SELECTION, //TODO: ELIMINATE
-    CARD_DRAWING,
-    CALCULATE_OBJECTIVES;
+    CARD_DRAWING{
+        //TODO change instanceof type
+        public boolean controlMessage(MessageFromClient msg){
+            return (msg instanceof SelectStarterCardMesage);
+        }
+    },
+    CALCULATE_OBJECTIVES{
+        //TODO change instanceof type
+        public boolean controlMessage(MessageFromClient msg){
+            return (msg instanceof SelectStarterCardMesage);
+        }
+    };
 
     /**
      * @throws UnsupportedOperationException when the next state is in a different stage
@@ -75,4 +102,6 @@ public enum TurnState {
         }
         throw new UnsupportedOperationException();
     }
+
+    public boolean controlMessage(MessageFromClient message){return false;}
 }
