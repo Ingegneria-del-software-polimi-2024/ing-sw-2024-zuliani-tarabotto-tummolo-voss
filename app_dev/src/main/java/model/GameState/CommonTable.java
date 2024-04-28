@@ -1,6 +1,6 @@
 package model.GameState;
 
-import Exceptions.EmptyCardSourceException;
+import model.Exceptions.EmptyCardSourceException;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
 import model.deckFactory.Generators.*;
@@ -9,7 +9,6 @@ import model.deckFactory.PlayableDeck;
 import model.player.Player;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class CommonTable {

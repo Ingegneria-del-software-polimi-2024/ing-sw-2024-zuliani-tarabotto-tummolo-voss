@@ -1,5 +1,8 @@
 package model.GameState;
 
+import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
+import SharedWebInterfaces.Messages.MessagesFromClient.SelectStarterCardMesage;
+
 /**
  * a finite state machine that keeps track of the states occuring during the turn of a player,
  * the states are divided in:
@@ -11,7 +14,11 @@ package model.GameState;
  */
 public enum TurnState {
     GAME_INITIALIZATION,
-    STARTER_CARD_SELECTION,
+    STARTER_CARD_SELECTION{
+        public boolean controlMessage(MessageFromClient msg){
+            return (msg instanceof SelectStarterCardMesage);
+        }
+    },
     OBJECTIVE_SELECTION,
     COLOUR_SELECTION,//TODO: ELIMINATE
     CARD_DEALING,
@@ -21,54 +28,50 @@ public enum TurnState {
     CALCULATE_OBJECTIVES;
 
     /**
-     *
-     * @return next state inside the same stage
      * @throws UnsupportedOperationException when the next state is in a different stage
      */
-    public TurnState nextState() throws UnsupportedOperationException{
+    public void nextState() throws UnsupportedOperationException{
         switch(this){
             case STARTER_CARD_SELECTION:
-                return STARTER_CARD_SELECTION;
+                return;
             case COLOUR_SELECTION:
-                return COLOUR_SELECTION;
+                return;
             case CARD_DEALING:
-                return CARD_DEALING;
+                return;
             case OBJECTIVE_SELECTION:
-                return OBJECTIVE_SELECTION;
+                return;
             case PLACING_CARD_SELECTION:
-                return PLACING_POSITION_SELECTION;
+                return;
             case PLACING_POSITION_SELECTION:
-                return CARD_DRAWING;
+                return;
             case CARD_DRAWING:
-                return PLACING_CARD_SELECTION;
+                return;
             case CALCULATE_OBJECTIVES:
-                return CALCULATE_OBJECTIVES;
+                return;
         }
         throw new UnsupportedOperationException();
     }
 
     /**
-     *
-     * @return the first state of the next stage
      * @throws UnsupportedOperationException when trying to change stage not being in the final state of the present stage
      */
-    public TurnState nextStage() throws UnsupportedOperationException{
+    public void nextStage() throws UnsupportedOperationException{
         switch(this){
             case STARTER_CARD_SELECTION:
-                return COLOUR_SELECTION;
+                return;
             case COLOUR_SELECTION:
-                return CARD_DEALING;
+                return;
             case CARD_DEALING:
-                return OBJECTIVE_SELECTION;
+                return;
             case OBJECTIVE_SELECTION:
-                return PLACING_CARD_SELECTION;
+                return;
             case PLACING_CARD_SELECTION:
             case PLACING_POSITION_SELECTION:
                 throw new UnsupportedOperationException();
             case CARD_DRAWING:
-                return CALCULATE_OBJECTIVES;
+                return;
             case CALCULATE_OBJECTIVES:
-                return STARTER_CARD_SELECTION;
+                return;
         }
         throw new UnsupportedOperationException();
     }

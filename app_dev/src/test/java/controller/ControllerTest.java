@@ -1,8 +1,7 @@
 package controller;
 
 
-import junit.framework.Assert;
-import Exceptions.EmptyCardSourceException;
+import model.Exceptions.EmptyCardSourceException;
 import model.GameState.GameState;
 import model.enums.Pawn;
 import model.placementArea.Coordinates;

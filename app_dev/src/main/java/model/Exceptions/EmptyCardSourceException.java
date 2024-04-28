@@ -1,4 +1,4 @@
-package Exceptions;
+package model.Exceptions;
 
 public class EmptyCardSourceException extends Exception{
     public EmptyCardSourceException(String s)

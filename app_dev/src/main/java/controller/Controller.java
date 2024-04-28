@@ -1,6 +1,6 @@
 package controller;
 
-import Exceptions.EmptyCardSourceException;
+import model.Exceptions.EmptyCardSourceException;
 import model.GameState.GameState;
 import model.placementArea.Coordinates;
 import model.player.Player;
