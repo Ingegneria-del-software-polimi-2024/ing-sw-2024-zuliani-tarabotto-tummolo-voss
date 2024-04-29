@@ -4,18 +4,18 @@ import SharedWebInterfaces.ViewAPI_Interface;
 
 public class DrawCardMessage implements MessageFromServer{
     private String player;
-    private int[] hand;
+    private int lastDrawnCard;
     private int cardSource;
 
-    public DrawCardMessage(String player, int[] hand, int cardSource) {
+    public DrawCardMessage(String player, int lastDrawnCard, int cardSource) {
         this.player = player;
-        this.hand = hand;
+        this.lastDrawnCard = lastDrawnCard;
         this.cardSource = cardSource;
     }
 
     @Override
     public void execute(ViewAPI_Interface view)  {
-        view.updateHand(player, hand);
+        view.updateHand(player, lastDrawnCard);
         view.updateCardSource(cardSource);
     }
 

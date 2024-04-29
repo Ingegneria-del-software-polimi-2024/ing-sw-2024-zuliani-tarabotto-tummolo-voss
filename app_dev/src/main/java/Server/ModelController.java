@@ -50,13 +50,16 @@ public class ModelController implements ServerControllerInterface {
         gameState.setTurnState(TurnState.STARTER_CARD_SELECTION);
     }
 
+    public void turnStarterCard(){
+        //TODO
+    }
+
     /**
      * the controller places the starter card for the player with the specified face.
      * A counter checks if all players placed their cards and then updates the State of the game
      * @param face the face of the starter card
      * @param player the nickname of the player
      */
-    //TODO: change method invocation in Controller and ControllerTest(causing error)
     @Override
     public void playStarterCard(boolean face, String player){
         gameState.setStartingCardFace(face, player);
@@ -80,6 +83,7 @@ public class ModelController implements ServerControllerInterface {
     }
 
 
+
     /**
      * sets the desired card as secretObjective for the player.
      * A counter checks if all players chose their secretObjective
@@ -95,6 +99,13 @@ public class ModelController implements ServerControllerInterface {
             gameState.playingTurn();
         }
         cont++;
+    }
+
+    /**
+     * to change the faceSide of a card
+     */
+    public void turnCard(int cardId){
+        //TODO
     }
 
     /**
@@ -116,6 +127,11 @@ public class ModelController implements ServerControllerInterface {
         gameState.setTurnState(TurnState.CARD_DRAWING);
     }
 
+    /**
+     * we draw a card from the specified card source
+     * Also since this is the last performed action in a turn, we check if this is the last turn of the game
+     * @param cardSource
+     */
     @Override
     public void drawCard(int cardSource){
         try{
@@ -177,6 +193,9 @@ public class ModelController implements ServerControllerInterface {
         }
     }
 
+    /**
+     * we communicate GameState that another turn will be played
+     */
     private void playNewTurn(){
         gameState.setTurnState(TurnState.PLACING_CARD_SELECTION);
         gameState.playingTurn();

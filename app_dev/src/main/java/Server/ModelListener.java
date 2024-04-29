@@ -133,16 +133,13 @@ public class ModelListener {
 
     /**
      * after the player decided where to draw the next card from, the involved card source gets updated based on cardDrawnFrom
-     * @param hand1
+     * @param lastDrawnCard
      * @param player
      * @param cardSource
      */
-    public void notifyChanges(String player, List<PlayableCard> hand1, int cardSource) {
-        int[] hand = new int[3];
-        hand[0] = hand1.get(0).getId();
-        hand[1] = hand1.get(1).getId();
-        hand[2] = hand1.get(2).getId();
-        serverAPI.broadcastNotifyChanges( new DrawCardMessage(player, hand, cardSource));
+    public void notifyChanges(String player, PlayableCard lastDrawnCard, int cardSource) {
+
+        serverAPI.broadcastNotifyChanges( new DrawCardMessage(player, lastDrawnCard.getId(), cardSource));
     }
 
     /**

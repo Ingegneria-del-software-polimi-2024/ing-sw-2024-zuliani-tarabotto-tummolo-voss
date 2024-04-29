@@ -354,5 +354,6 @@ public class PlacementArea {
     public HashMap<Coordinates, PlayableCard> getDisposition() { return disposition;}
     public HashMap<Artifact, Integer> getAvailableArtifacts() {return availableArtifacts;}
     public HashMap<Element, Integer> getAvailableElements() {return availableElements;}
-    public ArrayList<Coordinates> getAvailablePlaces() {return availablePlaces;}
+    //TODO: convert all List to ArrayList
+    public ArrayList<Coordinates> getAvailablePlaces() {return (ArrayList<Coordinates>) availablePlaces;}
 }

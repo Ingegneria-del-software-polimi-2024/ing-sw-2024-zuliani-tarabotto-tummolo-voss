@@ -28,7 +28,7 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
     void setPoints(int points);
     void updateArtifacts(HashMap<Artifact, Integer> artifacts);
     void updateElements(HashMap<Element, Integer> elements);
-    void updateHand(String player, int[] hand);
+    void updateHand(String player,  int lastDrawnCard);
     void updateCardSource( int cardSource);
 
     void endGame( HashMap<String, Integer> finalPoints);
