@@ -15,7 +15,8 @@ public class ServerAPI_COME {
     /**
      * class constructor
      */
-    public ServerAPI_COME() {
+    public ServerAPI_COME(ModelController controller) {
+        this.controller = controller;
         toDoQueue = new ServerMessageQueue();
         players = new HashMap<String, ClientHandlerInterface>();
         //TODO how to initialize the controller?

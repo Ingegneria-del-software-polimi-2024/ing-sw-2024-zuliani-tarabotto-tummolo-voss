@@ -34,17 +34,18 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface {
         }
     }
 
-    public SOCKET_ClientHandler(ServerSocket server){
+    public void listenForNewConnections(int port){
         try{
             //create new socket
-            serverSocket = server;
+            serverSocket = new ServerSocket(port);
             //if started
             //wait for a client
             clientSocket = serverSocket.accept();
             //Listens for a connection to be made to this socket and accepts it.
             // The method blocks until a connection is made.
 
-            //TODO here a new clientHandler to wait for new possible connections should be instantiated
+            Thread t = new Thread(()->(new SOCKET_ClientHandler()).listenForNewConnections(port));
+            t.start();
 
             //when a client is accepted
             in = new ObjectInputStream(clientSocket.getInputStream());
@@ -54,15 +55,27 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface {
             //...
             //let the socket cook
             //...
-
-            out.close();
-            in.close();
-            clientSocket.close();
+            listenForCommands();
+            closeConnection();
 
         } catch (IOException e) {
             //TODO handle better the exception
             throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
+    private void listenForCommands() throws IOException, ClassNotFoundException {
+        //TODO change in a conditional while and NOT while(true)
+        while (true){
+            MessageFromClient msg = (MessageFromClient) in.readObject();
+            api.sendToServer(msg);
+        }
+    }
+    private void closeConnection() throws IOException {
+        out.close();
+        in.close();
+        clientSocket.close();
+    }
 }
