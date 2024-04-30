@@ -2,6 +2,7 @@ package Server;
 
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import SharedWebInterfaces.ClientHandlerInterface;
+import SharedWebInterfaces.Messages.MessagesFromClient.NewConnectionMessage;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
 
 import java.io.*;
@@ -9,13 +10,15 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.rmi.RemoteException;
 
-public class SOCKET_ClientHandler implements ClientHandlerInterface {
+public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
     private ServerAPI_COME api;
     private Socket clientSocket;
     private ServerSocket serverSocket;
     private ObjectInputStream in;
     private ObjectOutputStream out;
     private String clientID;
+
+    private Lobby_RECEIVE_CONTROLLER lobby; //todo interface with ServerAPI_COME
 
     @Override
     public void sendToServer(MessageFromClient message) throws RemoteException {api.sendToServer(message);}
@@ -29,6 +32,8 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface {
     public void notifyChanges(MessageFromServer message) throws RemoteException {
         try {
             out.writeObject(message);
+            //TODO out.flush(); va messo o no????
+            out.reset();
         } catch (IOException e) {
             throw new RemoteException();
         }
@@ -43,8 +48,8 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface {
             clientSocket = serverSocket.accept();
             //Listens for a connection to be made to this socket and accepts it.
             // The method blocks until a connection is made.
-
-            Thread t = new Thread(()->(new SOCKET_ClientHandler()).listenForNewConnections(port));
+            SOCKET_ClientHandler x = new SOCKET_ClientHandler();
+            Thread t = new Thread(()->x.listenForNewConnections(port));
             t.start();
 
             //when a client is accepted
@@ -77,5 +82,31 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface {
         out.close();
         in.close();
         clientSocket.close();
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    public SOCKET_ClientHandler(Socket clientSocket, Lobby_RECEIVE_CONTROLLER lobby) {
+        this.lobby = lobby;
+        this.clientSocket = clientSocket;
+        try{
+            in = new ObjectInputStream(clientSocket.getInputStream());
+            out = new ObjectOutputStream(clientSocket.getOutputStream());
+
+        }catch (IOException e){
+            e.printStackTrace();;
+        }
+    }
+
+    public void run(){
+        try{
+            NewConnectionMessage msg = (NewConnectionMessage) in.readObject();
+            lobby.handleRoomCreationMessage(msg);
+
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

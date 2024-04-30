@@ -1,15 +1,17 @@
 package Server;
 
-import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import SharedWebInterfaces.ClientHandlerInterface;
+import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
+import SharedWebInterfaces.Messages.MessagesFromClient.NewConnectionMessage;
+import model.lobby.Lobby_SEND;
 
 import java.util.HashMap;
 
-public class ServerAPI_COME {
+public class Lobby_RECEIVE_CONTROLLER {
 
     private ServerMessageQueue toDoQueue;
-    private HashMap<String, ClientHandlerInterface> players;
-    private ModelController controller;
+
+    private Lobby_SEND lobby;
     //client called
     /**
      * enqueues the incoming message in the toDoQueue
@@ -18,7 +20,7 @@ public class ServerAPI_COME {
      public void sendToServer(MessageFromClient message){
         toDoQueue.enqueueMessage(message);
      }
-    
+
     public void addNewPlayer(String nickName, ClientHandlerInterface handler){
          if(players.get(nickName) != null)
              throw new RuntimeException();
@@ -48,10 +50,22 @@ public class ServerAPI_COME {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public ServerAPI_COME() {
-        toDoQueue = new ServerMessageQueue();
-        players = new HashMap<String, ClientHandlerInterface>();
-        //TODO how to initialize the controller?
+    public Lobby_RECEIVE_CONTROLLER() {
+
+        lobby = new Lobby_SEND();
+
+        FirstSocketManager socketManager = FirstSocketManager.getInstance(this, lobby);
+        Thread NewSocketConnections = new Thread(socketManager);
+        NewSocketConnections.start();
+
+        //TODO rmi connection
+
+
+    }
+
+    public void handleRoomCreationMessage(NewConnectionMessage msg){
+         //handles the messages, parses it and...
+        msg.execute(lobby);
     }
 
 

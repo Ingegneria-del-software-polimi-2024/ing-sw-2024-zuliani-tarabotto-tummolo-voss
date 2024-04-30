@@ -4,7 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="" />
+    <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Server/FirstSocketManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Server/Lobby_RECEIVE_CONTROLLER.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromClient/NewConnectionMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/ACK_RoomChoice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/lobby/Lobby_SEND.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MockModel/LobbyModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MockModel/Room.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/SOCKET_ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/SOCKET_ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/ServerAPI_COME.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ServerAPI_COME.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/LobbyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/LobbyController.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,8 +27,8 @@
       <list>
         <option value="JUnit3 Test Class" />
         <option value="JUnit5 Test Class" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -83,6 +95,10 @@
       <recent name="model.cards" />
       <recent name="model.cards.PlayableCards" />
       <recent name="model.placemetArea" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="Server" />
+      <recent name="model.lobby" />
     </key>
   </component>
   <component name="RunManager" selected="JUnit.PlacementAreaTest.testObjectiveCounts">
@@ -227,6 +243,8 @@
       <workItem from="1713787616063" duration="1501000" />
       <workItem from="1714130257713" duration="177000" />
       <workItem from="1714237208127" duration="5083000" />
+      <workItem from="1714411375467" duration="3188000" />
+      <workItem from="1714478032501" duration="10116000" />
     </task>
     <servers />
   </component>
