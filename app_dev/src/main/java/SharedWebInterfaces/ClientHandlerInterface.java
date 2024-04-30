@@ -1,5 +1,6 @@
 package SharedWebInterfaces;
 
+import Server.ServerAPI_COME;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
 
@@ -20,4 +21,6 @@ public interface ClientHandlerInterface extends Remote {
 
     //Come
     public void notifyChanges(MessageFromServer message) throws RemoteException;
+
+    public void setReceiver(ServerAPI_COME receiver) throws RemoteException;
 }

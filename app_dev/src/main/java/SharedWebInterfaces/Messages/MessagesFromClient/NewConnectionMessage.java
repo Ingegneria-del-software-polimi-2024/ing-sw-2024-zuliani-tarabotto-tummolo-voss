@@ -1,15 +1,28 @@
 package SharedWebInterfaces.Messages.MessagesFromClient;
 
-import Server.Lobby_RECEIVE_CONTROLLER;
+import MockModel.Lobby;
+import SharedWebInterfaces.ClientHandlerInterface;
 import SharedWebInterfaces.Messages.MessagesFromServer.ACK_RoomChoice;
-import model.lobby.Lobby_SEND;
 
-public class NewConnectionMessage {//todo implements MessageFromClient...
+import java.io.Serializable;
+import java.rmi.RemoteException;
+
+public class NewConnectionMessage implements Serializable {//todo implements MessageFromClient...
 
     private String username;
-    private String RoomName;
+    private String roomName;
+    private int expectedPlayers;
 
-    public void execute(Lobby_SEND lobby){
-        lobby.sendMessageToUser(username, new ACK_RoomChoice(username));
+    public void execute(Lobby lobby, ClientHandlerInterface handler) throws RemoteException {
+        lobby.addConnection(username, handler);
+        lobby.enterRoom(username, roomName, expectedPlayers);
+        //For debug purpose only
+        System.out.println(username+" has entered the room "+roomName);
+    }
+
+    public NewConnectionMessage(String username, String roomName, int expectedPlayers) {
+        this.expectedPlayers = expectedPlayers;
+        this.username = username;
+        this.roomName = roomName;
     }
 }

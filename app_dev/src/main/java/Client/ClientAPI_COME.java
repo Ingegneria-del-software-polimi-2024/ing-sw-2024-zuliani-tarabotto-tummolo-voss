@@ -5,7 +5,7 @@ import Client.View.ViewAPI;
 import SharedWebInterfaces.Messages.MessagesFromServer.InterruptConnectionMessage;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
 
-public class ClientAPI_COME {
+public class ClientAPI_COME implements Runnable{
     private ClientMessageQueue toDoQueue;
     private ViewAPI view;
 
@@ -20,7 +20,8 @@ public class ClientAPI_COME {
      */
     public void performChanges(){toDoQueue.executeNextMessage(view);};
 
-    public void loop(){
+    @Override
+    public void run() {
         MessageFromServer message;
         do{
             message = toDoQueue.getNextMessage();

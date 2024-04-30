@@ -34,5 +34,11 @@ public class ServerAPI_GO {
         }
     }
 
+    public void setHandler(String name, ClientHandlerInterface handler){
+        players.put(name, handler);
+    }
 
+    public ServerAPI_GO() {
+        players = new HashMap<String, ClientHandlerInterface>();
+    }
 }

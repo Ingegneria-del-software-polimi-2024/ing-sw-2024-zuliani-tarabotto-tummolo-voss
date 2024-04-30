@@ -49,6 +49,11 @@ public class RMI_ClientHandler implements ClientHandlerInterface {
      */
     public void notifyChanges(MessageFromServer message) throws RemoteException{client.notifyChanges(message);}
 
+    @Override
+    public void setReceiver(ServerAPI_COME receiver) throws RemoteException {
+        //todo
+    }
+
     /**
      * class constructor
      * @param port the port for the connection

@@ -1,8 +1,11 @@
 package Server;
 
+import MockModel.Lobby;
+import MockModel.WelcomeMessage;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import SharedWebInterfaces.ClientHandlerInterface;
 import SharedWebInterfaces.Messages.MessagesFromClient.NewConnectionMessage;
+import SharedWebInterfaces.Messages.MessagesFromServer.ACK_RoomChoice;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
 
 import java.io.*;
@@ -18,7 +21,7 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
     private ObjectOutputStream out;
     private String clientID;
 
-    private Lobby_RECEIVE_CONTROLLER lobby; //todo interface with ServerAPI_COME
+    private Lobby lobby; //todo interface with ServerAPI_COME
 
     @Override
     public void sendToServer(MessageFromClient message) throws RemoteException {api.sendToServer(message);}
@@ -39,7 +42,7 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
         }
     }
 
-    public void listenForNewConnections(int port){
+    /*public void listenForNewConnections(int port){
         try{
             //create new socket
             serverSocket = new ServerSocket(port);
@@ -69,7 +72,7 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
     private void listenForCommands() throws IOException, ClassNotFoundException {
         //TODO change in a conditional while and NOT while(true)
@@ -88,25 +91,48 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    public SOCKET_ClientHandler(Socket clientSocket, Lobby_RECEIVE_CONTROLLER lobby) {
+    public SOCKET_ClientHandler(Socket clientSocket, Lobby lobby) {
         this.lobby = lobby;
         this.clientSocket = clientSocket;
         try{
             in = new ObjectInputStream(clientSocket.getInputStream());
             out = new ObjectOutputStream(clientSocket.getOutputStream());
-
         }catch (IOException e){
-            e.printStackTrace();;
+            e.printStackTrace();
         }
     }
 
     public void run(){
         try{
+            out.writeObject(new WelcomeMessage(lobby.getGameNames()));
+            out.flush();
+            out.reset();
             NewConnectionMessage msg = (NewConnectionMessage) in.readObject();
-            lobby.handleRoomCreationMessage(msg);
+            if(msg instanceof NewConnectionMessage){//at the moment useless but useful when waiting for a common message
+                msg.execute(lobby, this);
+            }else
+                throw new RuntimeException();
+
+            String playerName = lobby.getPlayerName(this);
+
+            if(playerName == null)
+                throw new RuntimeException();
+
+            String gameName = lobby.isInRoom(playerName);
+
+            if (gameName == null)
+                throw new RuntimeException();
+
+            out.writeObject(new ACK_RoomChoice(playerName,gameName));
+            out.flush();
+            out.reset();
 
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void setReceiver(ServerAPI_COME receiver) throws RemoteException{
+        this.api = receiver;
     }
 }

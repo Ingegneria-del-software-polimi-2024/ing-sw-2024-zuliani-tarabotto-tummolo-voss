@@ -6,9 +6,10 @@ import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import java.rmi.RemoteException;
 
 public class ClientAPI_GO {
-    private ServerHandlerInterface client;
+    private ServerHandlerInterface handler;
 
     public void addNewPlayer(){}
+
 
     /**
      * notifies the server handler of the message the client wants to send
@@ -16,10 +17,14 @@ public class ClientAPI_GO {
      */
     public void sendToServer(MessageFromClient message){
         try {
-            client.sendToServer(message);
+            handler.sendToServer(message);
         } catch (RemoteException e) {
             //TODO handle correctly the exception, this is where indeed it is most important to handle correctly the exc.
             throw new RuntimeException(e);
         }
+    }
+
+    public ClientAPI_GO(ServerHandlerInterface client) {
+        this.handler = client;
     }
 }

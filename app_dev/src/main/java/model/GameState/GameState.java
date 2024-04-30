@@ -265,7 +265,8 @@ public class GameState {
         int i = 2;
         commonTable.drawCardResourcesDeck(turnPlayer);
         setLastTurnTrue();
-        modelListener.notifyChanges(turnPlayer.getNickname(), turnPlayer.getPlayingHand()get(-1), i);
+        //modelListener.notifyChanges(turnPlayer.getNickname(), turnPlayer.getPlayingHand()get(-1), i);
+        //todo fix
     }
 
     /**
@@ -278,7 +279,8 @@ public class GameState {
         if(index == 0){ i = 3;} else { i = 4;}
         commonTable.drawCardOpenGold(index, turnPlayer);
         setLastTurnTrue();
-        modelListener.notifyChanges(turnPlayer.getNickname(), turnPlayer.getPlayingHand()get(-1), i);
+        //modelListener.notifyChanges(turnPlayer.getNickname(), turnPlayer.getPlayingHand()get(-1), i);
+        //todo fix
     }
 
     /**
@@ -291,7 +293,8 @@ public class GameState {
         if(index == 0){ i = 5;} else { i = 6;}
         commonTable.drawCardOpenResources(index, turnPlayer);
         setLastTurnTrue();
-        modelListener.notifyChanges(turnPlayer.getNickname(), turnPlayer.getPlayingHand()get(-1), i);
+        //modelListener.notifyChanges(turnPlayer.getNickname(), turnPlayer.getPlayingHand()get(-1), i);
+        //todo fix
     }
 
 
