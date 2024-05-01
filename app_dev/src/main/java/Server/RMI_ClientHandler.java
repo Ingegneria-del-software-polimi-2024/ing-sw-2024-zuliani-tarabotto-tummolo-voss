@@ -5,6 +5,7 @@ import SharedWebInterfaces.Messages.MessagesFromClient.AddNewPlayerMessage;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import SharedWebInterfaces.ClientHandlerInterface;
 import SharedWebInterfaces.Messages.MessagesFromLobby.MessageFromLobby;
+import SharedWebInterfaces.Messages.MessagesFromLobby.WelcomeMessage;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
 import SharedWebInterfaces.ServerHandlerInterface;
 
@@ -63,17 +64,19 @@ public class RMI_ClientHandler implements ClientHandlerInterface {
 
     /**
      * class constructor
-     * @param port the port for the connection
-     * @param name the name for the lookup in the registry
+     * @param clientPort the port for the connection
      * @throws RemoteException when an error occurs in the binding
      * @throws AlreadyBoundException when trying to bind two sides already bound
      */
-    public RMI_ClientHandler(int port, String name, Lobby lobby) throws RemoteException, AlreadyBoundException {
+    public RMI_ClientHandler(int clientPort, String ClientHost, String clientRegistry, String clientName, Lobby lobby, int serverPort) throws RemoteException, NotBoundException, AlreadyBoundException {
         this.lobby = lobby;
-        //writing the current class on the register
-        UnicastRemoteObject.exportObject(this, port);
-        Registry registry = LocateRegistry.createRegistry(port);
-        registry.bind(name, this);
+        UnicastRemoteObject.exportObject(this, 0);
+        Registry serverRegistry = LocateRegistry.createRegistry(serverPort);
+        String registryName = clientName+"Server";
+        serverRegistry.bind("", this);
+        Registry registry = LocateRegistry.getRegistry(clientRegistry, clientPort);
+        client = (ServerHandlerInterface) registry.lookup(clientName);
+        System.out.println("Client is bound with lobby");
     }
 
     public void setApi(ServerAPI_COME come){

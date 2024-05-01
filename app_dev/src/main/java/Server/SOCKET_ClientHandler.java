@@ -28,11 +28,6 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
     public void sendToServer(MessageFromClient message) throws RemoteException {api.sendToServer(message);}
 
     @Override
-    public void addNewPlayer(String nickname, String lookupTableName, int clientPort, String clientHost) throws RemoteException {
-        //TODO implement!!!!
-    }
-
-    @Override
     public void notifyChanges(MessageFromServer message) throws RemoteException {
         try {
             out.writeObject(message);
@@ -118,6 +113,7 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+        //here should go the while listening for other messages
     }
 
     public void setReceiver(ServerAPI_COME receiver) throws RemoteException{
@@ -128,5 +124,10 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
         out.writeObject(msg);
         out.flush();
         out.reset();
+    }
+
+    @Override
+    public void addNewPlayer(String nickname, String lookupTableName, int clientPort, String clientHost) throws RemoteException {
+        //TODO implement!!!!
     }
 }

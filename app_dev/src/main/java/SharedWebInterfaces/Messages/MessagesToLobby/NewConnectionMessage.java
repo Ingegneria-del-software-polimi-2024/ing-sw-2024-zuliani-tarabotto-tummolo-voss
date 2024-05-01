@@ -27,6 +27,11 @@ public class NewConnectionMessage implements Serializable, MessageToLobby {//tod
 
     }
 
+    @Override
+    public String getSender() {
+        return username;
+    }
+
     public NewConnectionMessage(String username, String roomName, int expectedPlayers) {
         this.expectedPlayers = expectedPlayers;
         this.username = username;

@@ -7,4 +7,5 @@ import java.io.IOException;
 
 public interface MessageToLobby {
     public void execute(Lobby lobby) throws IOException;
+    public String getSender();
 }
