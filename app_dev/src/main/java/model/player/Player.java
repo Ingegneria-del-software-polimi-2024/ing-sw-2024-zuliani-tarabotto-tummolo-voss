@@ -99,6 +99,7 @@ public class Player {
     public List<PlayableCard> getPlayingHand(){return hand;}
     public PlacementArea getPlacementArea() { return placementArea; }
     public ObjectiveCard getSecretObjective() { return secretObjective; }
+    public Pawn getPawnColor(){return pawnColor;}
 
 }
 

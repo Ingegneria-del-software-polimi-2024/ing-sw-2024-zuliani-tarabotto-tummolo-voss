@@ -1,12 +1,13 @@
 package SharedWebInterfaces.Messages.MessagesFromServer;
 
 import SharedWebInterfaces.ViewAPI_Interface;
+import model.GameState.TurnState;
 
 public class StateMessage implements MessageFromServer{
 
-    private String state;
+    private TurnState state;
 
-    public StateMessage(String state) {
+    public StateMessage(TurnState state) {
         this.state = state;
     }
 

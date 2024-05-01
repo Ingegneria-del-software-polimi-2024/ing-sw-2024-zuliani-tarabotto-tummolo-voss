@@ -355,5 +355,5 @@ public class PlacementArea {
     public HashMap<Artifact, Integer> getAvailableArtifacts() {return availableArtifacts;}
     public HashMap<Element, Integer> getAvailableElements() {return availableElements;}
     //TODO: convert all List to ArrayList
-    public ArrayList<Coordinates> getAvailablePlaces() {return (ArrayList<Coordinates>) availablePlaces;}
+    public List<Coordinates> getAvailablePlaces() {return availablePlaces;}
 }

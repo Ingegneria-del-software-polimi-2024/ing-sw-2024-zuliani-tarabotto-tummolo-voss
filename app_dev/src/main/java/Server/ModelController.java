@@ -50,9 +50,6 @@ public class ModelController implements ServerControllerInterface {
         gameState.setTurnState(TurnState.STARTER_CARD_SELECTION);
     }
 
-    public void turnStarterCard(){
-        //TODO
-    }
 
     /**
      * the controller places the starter card for the player with the specified face.
@@ -62,7 +59,7 @@ public class ModelController implements ServerControllerInterface {
      */
     @Override
     public void playStarterCard(boolean face, String player){
-        gameState.setStartingCardFace(face, player);
+        gameState.setStartingCardFace(face,player);
         gameState.playStarterCard(player);
         //IF THIS FUNCTION GETS CALLED A NUMBER OF TIMES EQUALS TO THE NUMBER OF PLAYERS THEN THE STATE OF THE GAME IS CHANGED
         if(cont == playersNicknames.size() - 1){
@@ -72,6 +69,7 @@ public class ModelController implements ServerControllerInterface {
         }
         cont++;
     }
+
 
     /**
      * when the state is changed to OBJECTIVE_SELECTION the UI is able to see the commonObjectives and
@@ -97,16 +95,11 @@ public class ModelController implements ServerControllerInterface {
             gameState.setTurnState(TurnState.PLACING_CARD_SELECTION);
             //Now the first round will be played
             gameState.playingTurn();
+            return;
         }
         cont++;
     }
 
-    /**
-     * to change the faceSide of a card
-     */
-    public void turnCard(int cardId){
-        //TODO
-    }
 
     /**
      * all GameState attributes regarding the placement of a card are set and the card is placed
@@ -127,6 +120,7 @@ public class ModelController implements ServerControllerInterface {
         gameState.setTurnState(TurnState.CARD_DRAWING);
     }
 
+    
     /**
      * we draw a card from the specified card source
      * Also since this is the last performed action in a turn, we check if this is the last turn of the game
