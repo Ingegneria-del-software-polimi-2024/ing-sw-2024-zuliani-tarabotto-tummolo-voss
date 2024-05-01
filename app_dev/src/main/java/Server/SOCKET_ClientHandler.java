@@ -1,11 +1,12 @@
 package Server;
 
 import MockModel.Lobby;
-import MockModel.WelcomeMessage;
+import SharedWebInterfaces.Messages.MessagesFromLobby.MessageFromLobby;
+import SharedWebInterfaces.Messages.MessagesFromLobby.WelcomeMessage;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import SharedWebInterfaces.ClientHandlerInterface;
-import SharedWebInterfaces.Messages.MessagesFromClient.NewConnectionMessage;
-import SharedWebInterfaces.Messages.MessagesFromServer.ACK_RoomChoice;
+import SharedWebInterfaces.Messages.MessagesToLobby.MessageToLobby;
+import SharedWebInterfaces.Messages.MessagesToLobby.NewConnectionMessage;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
 
 import java.io.*;
@@ -107,25 +108,12 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
             out.writeObject(new WelcomeMessage(lobby.getGameNames()));
             out.flush();
             out.reset();
-            NewConnectionMessage msg = (NewConnectionMessage) in.readObject();
+            MessageToLobby msg = (MessageToLobby) in.readObject();
             if(msg instanceof NewConnectionMessage){//at the moment useless but useful when waiting for a common message
-                msg.execute(lobby, this);
+                ((NewConnectionMessage) msg).setHandler(this);
+                lobby.enqueueMessage(msg);
             }else
                 throw new RuntimeException();
-
-            String playerName = lobby.getPlayerName(this);
-
-            if(playerName == null)
-                throw new RuntimeException();
-
-            String gameName = lobby.isInRoom(playerName);
-
-            if (gameName == null)
-                throw new RuntimeException();
-
-            out.writeObject(new ACK_RoomChoice(playerName,gameName));
-            out.flush();
-            out.reset();
 
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
@@ -134,5 +122,11 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
 
     public void setReceiver(ServerAPI_COME receiver) throws RemoteException{
         this.api = receiver;
+    }
+
+    public void sendToClient(MessageFromLobby msg) throws IOException {
+        out.writeObject(msg);
+        out.flush();
+        out.reset();
     }
 }

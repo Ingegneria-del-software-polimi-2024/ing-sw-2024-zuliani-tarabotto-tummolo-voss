@@ -1,5 +1,6 @@
 package Client;
 
+import SharedWebInterfaces.Messages.MessagesFromLobby.MessageFromLobby;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
 import SharedWebInterfaces.ServerHandlerInterface;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
@@ -25,6 +26,11 @@ public class RMI_ServerHandler implements ServerHandlerInterface {
 
     @Override
     public void notifyChanges(MessageFromServer message) throws RemoteException{api.notifyChanges(message);}
+
+    @Override
+    public void receiveFromLobby(MessageFromLobby msg) {
+        //todo implementtt
+    }
 
     public RMI_ServerHandler(String nickname, String serverHost, int serverPort, String lookupTableServer, String lookupTableClient, String clientHost, int clientPort, ClientAPI_COME come) throws RemoteException, AlreadyBoundException, NotBoundException {
         api = come;

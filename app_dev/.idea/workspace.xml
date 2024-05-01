@@ -5,32 +5,44 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/MockModel/Lobby.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/MockModel/MockClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/MockModel/Room.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/MockModel/WelcomeMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Server/First_RMI_Manager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/MockModel/LobbyTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/MockModel/LobbyMessageQueue.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/ControllerInterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromLobby/MessageFromLobby.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesToLobby/MessageToLobby.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesToLobby/NewConnectionMessage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/ClientAPI_COME.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/ClientAPI_COME.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/ClientAPI_GO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/ClientAPI_GO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/FirstSocketManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/FirstSocketManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Lobby_RECEIVE_CONTROLLER.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/RMI_ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/RMI_ServerHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/SOCKET_ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/SOCKET_ServerHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MockModel/Lobby.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MockModel/Lobby.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MockModel/MockClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MockModel/MockClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MockModel/WelcomeMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromLobby/WelcomeMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/First_RMI_Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/First_RMI_Manager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Server/RMI_ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/RMI_ClientHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Server/SOCKET_ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/SOCKET_ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/ServerAPI_GO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ServerAPI_GO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/ClientHandlerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/ClientHandlerInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromClient/NewConnectionMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromClient/NewConnectionMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/ACK_RoomChoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/ACK_RoomChoice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/lobby/Lobby_SEND.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Exceptions/EmptyCardSourceException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controller/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/GameState/CommonTable.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/GameState/CommonTable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/GameState/GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/GameState/GameState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/GameState/TurnState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/GameState/TurnState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/placementArea/PlacementArea.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/placementArea/PlacementArea.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/model/placementArea/AddCardTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/model/placementArea/AddCardTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromClient/AddNewPlayerMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromClient/AddNewPlayerMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromClient/MessageFromClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromClient/MessageFromClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromClient/NewConnectionMessage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromClient/SelectStarterCardMesage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromClient/SelectStarterCardMesage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/ACK_RoomChoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromLobby/ACK_RoomChoice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/ServerControllerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/ServerControllerInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/ServerHandlerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/ServerHandlerInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/MockModel/LobbyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MockModel/LobbyTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/MockModel/Lobby.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/MockModel/Lobby.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/MockModel/MockClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/MockModel/MockClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/MockModel/WelcomeMessage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Server/RMI_ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Server/RMI_ClientHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Server/SOCKET_ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Server/SOCKET_ClientHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Server/ServerAPI_COME.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Server/ServerAPI_COME.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Server/ServerMessageQueue.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Server/ServerMessageQueue.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/ClientHandlerInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/ClientHandlerInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/Messages/MessagesFromClient/AddNewPlayerMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/Messages/MessagesFromClient/AddNewPlayerMessage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/Messages/MessagesFromClient/MessageFromClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/Messages/MessagesFromClient/MessageFromClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/Messages/MessagesFromClient/NewConnectionMessage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/Messages/MessagesFromClient/SelectStarterCardMesage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/Messages/MessagesFromClient/SelectStarterCardMesage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/Messages/MessagesFromServer/ACK_RoomChoice.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/ServerControllerInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/ServerControllerInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/MockModel/LobbyTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/MockModel/LobbyTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,9 +53,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JUnit3 Test Class" />
+        <option value="JUnit5 Test Class" />
         <option value="Interface" />
         <option value="Class" />
-        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -69,34 +81,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Model.executor": "Run",
-    "Application.PlacementAreaTest.executor": "Run",
-    "Application.RunDeckCreation.executor": "Run",
-    "JUnit.ControllerTest.executor": "Run",
-    "JUnit.ControllerTest.main.executor": "Debug",
-    "JUnit.ObjectiveCardTest.executor": "Run",
-    "JUnit.StarterCardTest.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3": "junit.framework.TestCase",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "AndreaSocketLobby",
-    "kotlin-language-version-configured": "true",
-    "last_directory_selection": "/Users/andre/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java",
-    "last_opened_file_path": "/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Model.executor&quot;: &quot;Run&quot;,
+    &quot;Application.PlacementAreaTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.RunDeckCreation.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ControllerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ControllerTest.main.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.ObjectiveCardTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.StarterCardTest.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3&quot;: &quot;junit.framework.TestCase&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;AndreaSocketLobby&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;/Users/andre/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java" />
@@ -123,7 +135,7 @@
       <module name="Ing_sw_proj" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="MockModel.*" />
+          <option name="PATTERN" value="SharedWebInterfaces.Messages.MessagesFromLobby.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -136,7 +148,7 @@
       <module name="Ing_sw_proj" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="MockModel.*" />
+          <option name="PATTERN" value="SharedWebInterfaces.Messages.MessagesFromLobby.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -258,6 +270,7 @@
       <workItem from="1714411375467" duration="3188000" />
       <workItem from="1714478032501" duration="10116000" />
       <workItem from="1714506778640" duration="9044000" />
+      <workItem from="1714578581406" duration="7957000" />
     </task>
     <servers />
   </component>

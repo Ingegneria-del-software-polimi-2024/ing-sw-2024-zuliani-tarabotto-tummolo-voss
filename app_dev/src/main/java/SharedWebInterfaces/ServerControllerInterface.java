@@ -4,7 +4,7 @@ import SharedWebInterfaces.Messages.GeneralAPI_Interface;
 
 import java.util.ArrayList;
 
-public interface ServerControllerInterface extends GeneralAPI_Interface {
+public interface ServerControllerInterface extends GeneralAPI_Interface, ControllerInterface {
     public void playCard(int id, int x, int y, Boolean faceSide);
 
 

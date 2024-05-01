@@ -1,8 +1,8 @@
 package MockModel;
 
-import Server.SOCKET_ClientHandler;
-import SharedWebInterfaces.Messages.MessagesFromClient.NewConnectionMessage;
-import SharedWebInterfaces.Messages.MessagesFromServer.ACK_RoomChoice;
+import SharedWebInterfaces.Messages.MessagesFromLobby.WelcomeMessage;
+import SharedWebInterfaces.Messages.MessagesToLobby.NewConnectionMessage;
+import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_RoomChoice;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -33,9 +33,13 @@ public class MockClient {
         String gameName = scIn.next();
         System.out.println("Inserire il numero di giocatori: ");
         int n = scIn.nextInt();
+        System.out.println("Creating object with: "+username+" "+gameName+" "+n);
         out.writeObject(new NewConnectionMessage(username, gameName, n));
+
         out.flush();
         out.reset();
+
+        System.out.println("object sent");
 
         ACK_RoomChoice ack = (ACK_RoomChoice) in.readObject();
         System.out.println(ack.getUser()+" correttamente inserito nella stanza: "+ack.getGame());

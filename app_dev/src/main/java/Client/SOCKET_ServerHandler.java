@@ -2,6 +2,7 @@ package Client;
 
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import SharedWebInterfaces.ClientHandlerInterface;
+import SharedWebInterfaces.Messages.MessagesFromLobby.MessageFromLobby;
 import SharedWebInterfaces.Messages.MessagesFromServer.InterruptConnectionMessage;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
 import SharedWebInterfaces.ServerHandlerInterface;
@@ -41,6 +42,11 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface {
      * @throws RemoteException
      */
     public void notifyChanges(MessageFromServer message) throws RemoteException {api.notifyChanges(message);}
+
+    @Override
+    public void receiveFromLobby(MessageFromLobby msg) {
+        //todo implement everythingggggg!!!!
+    }
 
     /**
      * a loop that keeps the socket in listening status

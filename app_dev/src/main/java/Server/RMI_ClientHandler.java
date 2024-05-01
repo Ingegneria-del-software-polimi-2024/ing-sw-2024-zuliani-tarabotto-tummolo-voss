@@ -1,11 +1,14 @@
 package Server;
 
+import MockModel.Lobby;
 import SharedWebInterfaces.Messages.MessagesFromClient.AddNewPlayerMessage;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import SharedWebInterfaces.ClientHandlerInterface;
+import SharedWebInterfaces.Messages.MessagesFromLobby.MessageFromLobby;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
 import SharedWebInterfaces.ServerHandlerInterface;
 
+import java.io.IOException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -16,6 +19,7 @@ import java.rmi.server.UnicastRemoteObject;
 public class RMI_ClientHandler implements ClientHandlerInterface {
     private ServerAPI_COME api;
     private ServerHandlerInterface client;
+    private Lobby lobby;
 
     //Go
 
@@ -54,19 +58,25 @@ public class RMI_ClientHandler implements ClientHandlerInterface {
         //todo
     }
 
+    @Override
+    public void sendToClient(MessageFromLobby msg) throws IOException {}
+
     /**
      * class constructor
      * @param port the port for the connection
      * @param name the name for the lookup in the registry
-     * @param api_come the api for the incoming messages on the server
      * @throws RemoteException when an error occurs in the binding
      * @throws AlreadyBoundException when trying to bind two sides already bound
      */
-    public RMI_ClientHandler(int port, String name, ServerAPI_COME api_come) throws RemoteException, AlreadyBoundException {
+    public RMI_ClientHandler(int port, String name, Lobby lobby) throws RemoteException, AlreadyBoundException {
+        this.lobby = lobby;
         //writing the current class on the register
         UnicastRemoteObject.exportObject(this, port);
         Registry registry = LocateRegistry.createRegistry(port);
         registry.bind(name, this);
-        api = api_come;
+    }
+
+    public void setApi(ServerAPI_COME come){
+        api = come;
     }
 }

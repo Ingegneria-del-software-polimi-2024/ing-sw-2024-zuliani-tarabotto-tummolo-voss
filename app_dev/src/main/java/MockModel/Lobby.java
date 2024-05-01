@@ -2,26 +2,38 @@ package MockModel;
 
 import Server.FirstSocketManager;
 import Server.First_RMI_Manager;
+import Server.ServerMessageQueue;
 import SharedWebInterfaces.ClientHandlerInterface;
+import SharedWebInterfaces.ControllerInterface;
+import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
+import SharedWebInterfaces.Messages.MessagesFromLobby.MessageFromLobby;
+import SharedWebInterfaces.Messages.MessagesToLobby.MessageToLobby;
+import SharedWebInterfaces.Messages.MessagesToLobby.NewConnectionMessage;
+import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
 
+import java.io.IOException;
+import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Lobby {//TODO all the methods here must be sinchronized!! :)
+public class Lobby implements ControllerInterface {//TODO all the methods here must be sinchronized!! :)
     private int port;
     private ArrayList<Room> rooms;
     private HashMap<String, ClientHandlerInterface> players;
     private FirstSocketManager socketManager;
     private First_RMI_Manager rmiManager;
-    public Lobby(int port){
+
+    private LobbyMessageQueue queue;
+
+    public Lobby(int port) throws RemoteException, AlreadyBoundException {
         rooms = new ArrayList<Room>();
         players = new HashMap<String, ClientHandlerInterface>();
         socketManager = FirstSocketManager.getInstance(this, port);
         Thread listenForNewConnection = new Thread(socketManager);
         listenForNewConnection.start();
-        rmiManager = new First_RMI_Manager();
-
+        rmiManager = new First_RMI_Manager(this, port);
+        queue = new LobbyMessageQueue();
     }
 
     public void addConnection(String name, ClientHandlerInterface handlerInterface){
@@ -79,5 +91,24 @@ public class Lobby {//TODO all the methods here must be sinchronized!! :)
                 return r.getName();
         }
         return null;
+    }
+    public void enqueueMessage(MessageToLobby msg){
+        queue.enqueueMessage(msg);
+    }
+    public void start() throws IOException {
+        System.out.println("started dequeueing messages...");
+        while(true){
+            MessageToLobby msg = queue.getNextMessage();
+            if(msg != null){//todo more appropriate control
+                System.out.println("Found a new msg");
+                System.out.println("msg is instance of NewConnectionMSG: "+ (msg instanceof NewConnectionMessage));
+                System.out.println("Type of the message is: "+msg.getClass());
+                msg.execute(this);
+
+            }
+        }
+    }
+    public void sendToPlayer(String playerName, MessageFromLobby msg) throws IOException {
+        players.get(playerName).sendToClient(msg);
     }
 }

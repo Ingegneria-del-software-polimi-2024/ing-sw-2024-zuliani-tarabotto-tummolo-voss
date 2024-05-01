@@ -2,6 +2,7 @@ package SharedWebInterfaces;
 
 import Client.ClientAPI_COME;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
+import SharedWebInterfaces.Messages.MessagesFromLobby.MessageFromLobby;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
 
 import java.rmi.Remote;
@@ -22,4 +23,5 @@ public interface ServerHandlerInterface extends Remote {
 
     //GO
     public void notifyChanges(MessageFromServer message)throws RemoteException;
+    public void receiveFromLobby(MessageFromLobby msg);
 }
