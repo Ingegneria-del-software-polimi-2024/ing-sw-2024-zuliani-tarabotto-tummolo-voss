@@ -4,6 +4,7 @@ import Server.ServerAPI_COME;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import SharedWebInterfaces.Messages.MessagesFromLobby.MessageFromLobby;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
+import SharedWebInterfaces.Messages.MessagesToLobby.MessageToLobby;
 
 import java.io.IOException;
 import java.rmi.Remote;
@@ -26,5 +27,6 @@ public interface ClientHandlerInterface extends Remote {
 
     public void setReceiver(ServerAPI_COME receiver) throws RemoteException;
 
-    public void sendToClient(MessageFromLobby msg) throws IOException;
+    public void sendToClient(MessageFromLobby msg) throws RemoteException;
+    public void deliverToLobby(MessageToLobby msg) throws RemoteException;
 }

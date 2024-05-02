@@ -5,14 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/MockModel/RMI_CLIENT_START.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/MockModel/RMI_ManagerInterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/MockModel/RMI_MockClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/MockModel/RMI_MockHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesToLobby/NewRMI_Connection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Client/RMI_ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/RMI_ServerHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MockModel/Lobby.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MockModel/Lobby.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MockModel/MockClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MockModel/SOCKET_MockClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Server/First_RMI_Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/First_RMI_Manager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Server/RMI_ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/RMI_ClientHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Server/SOCKET_ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/SOCKET_ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/ClientHandlerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/ClientHandlerInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromLobby/WelcomeMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromLobby/WelcomeMessage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesToLobby/MessageToLobby.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesToLobby/MessageToLobby.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesToLobby/NewConnectionMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesToLobby/NewConnectionMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/ServerHandlerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/ServerHandlerInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/RMI_ServerHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/RMI_ServerHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/SOCKET_ServerHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/SOCKET_ServerHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/MockModel/Lobby.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/MockModel/Lobby.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/MockModel/MockClient.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Server/First_RMI_Manager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Server/First_RMI_Manager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Server/RMI_ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Server/RMI_ClientHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Server/SOCKET_ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Server/SOCKET_ClientHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/ClientHandlerInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/ClientHandlerInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/Messages/MessagesFromLobby/WelcomeMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/Messages/MessagesFromLobby/WelcomeMessage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/Messages/MessagesToLobby/MessageToLobby.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/Messages/MessagesToLobby/MessageToLobby.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/Messages/MessagesToLobby/NewConnectionMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/Messages/MessagesToLobby/NewConnectionMessage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/ServerHandlerInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/ServerHandlerInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/MockModel/LobbyTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/MockModel/LobbyTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,34 +72,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Model.executor&quot;: &quot;Run&quot;,
-    &quot;Application.PlacementAreaTest.executor&quot;: &quot;Run&quot;,
-    &quot;Application.RunDeckCreation.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ControllerTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ControllerTest.main.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.ObjectiveCardTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.StarterCardTest.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3&quot;: &quot;junit.framework.TestCase&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;AndreaSocketLobby&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_directory_selection&quot;: &quot;/Users/andre/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Model.executor": "Run",
+    "Application.PlacementAreaTest.executor": "Run",
+    "Application.RunDeckCreation.executor": "Run",
+    "JUnit.ControllerTest.executor": "Run",
+    "JUnit.ControllerTest.main.executor": "Debug",
+    "JUnit.ObjectiveCardTest.executor": "Run",
+    "JUnit.StarterCardTest.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3": "junit.framework.TestCase",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "AndreaSocketLobby",
+    "kotlin-language-version-configured": "true",
+    "last_directory_selection": "/Users/andre/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java",
+    "last_opened_file_path": "/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java" />
@@ -99,7 +121,7 @@
       <recent name="model.lobby" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.MockClient">
+  <component name="RunManager" selected="Application.LobbyTest">
     <configuration name="LobbyTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MockModel.LobbyTest" />
       <module name="Ing_sw_proj" />
@@ -113,12 +135,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MockClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="MockModel.MockClient" />
+    <configuration name="RMI_CLIENT_START" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MockModel.RMI_CLIENT_START" />
       <module name="Ing_sw_proj" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="SharedWebInterfaces.Messages.MessagesFromLobby.*" />
+          <option name="PATTERN" value="MockModel.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -126,17 +148,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GoldCardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SOCKET_MockClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MockModel.SOCKET_MockClient" />
       <module name="Ing_sw_proj" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="model.cards.PlayableCards.*" />
+          <option name="PATTERN" value="SharedWebInterfaces.Messages.MessagesFromLobby.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="model.cards.PlayableCards" />
-      <option name="MAIN_CLASS_NAME" value="model.cards.PlayableCards.GoldCardTest" />
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -174,19 +194,19 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.RMI_CLIENT_START" />
+      <item itemvalue="Application.SOCKET_MockClient" />
       <item itemvalue="Application.LobbyTest" />
-      <item itemvalue="Application.MockClient" />
-      <item itemvalue="JUnit.GoldCardTest" />
       <item itemvalue="JUnit.PlacementAreaTest.testEverything" />
       <item itemvalue="JUnit.PlacementAreaTest.testObjectiveCounts" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MockClient" />
+        <item itemvalue="Application.SOCKET_MockClient" />
+        <item itemvalue="Application.RMI_CLIENT_START" />
         <item itemvalue="Application.LobbyTest" />
         <item itemvalue="JUnit.PlacementAreaTest.testObjectiveCounts" />
         <item itemvalue="JUnit.PlacementAreaTest.testEverything" />
-        <item itemvalue="JUnit.GoldCardTest" />
       </list>
     </recent_temporary>
   </component>
@@ -240,7 +260,7 @@
       <workItem from="1714411375467" duration="3188000" />
       <workItem from="1714478032501" duration="10116000" />
       <workItem from="1714506778640" duration="9044000" />
-      <workItem from="1714578581406" duration="12169000" />
+      <workItem from="1714578581406" duration="23159000" />
     </task>
     <servers />
   </component>

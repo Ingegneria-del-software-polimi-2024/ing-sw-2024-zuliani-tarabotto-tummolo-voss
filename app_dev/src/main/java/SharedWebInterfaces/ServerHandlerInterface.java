@@ -23,5 +23,5 @@ public interface ServerHandlerInterface extends Remote {
 
     //GO
     public void notifyChanges(MessageFromServer message)throws RemoteException;
-    public void receiveFromLobby(MessageFromLobby msg);
+    public void receiveFromLobby(MessageFromLobby msg)throws RemoteException;
 }

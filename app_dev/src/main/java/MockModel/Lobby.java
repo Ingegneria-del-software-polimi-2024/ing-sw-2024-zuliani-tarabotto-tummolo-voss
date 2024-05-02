@@ -13,6 +13,7 @@ import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
 
 import java.io.IOException;
 import java.rmi.AlreadyBoundException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,7 +33,7 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
         socketManager = FirstSocketManager.getInstance(this, port);
         Thread listenForNewConnection = new Thread(socketManager);
         listenForNewConnection.start();
-        rmiManager = new First_RMI_Manager(this, port);
+        rmiManager = new First_RMI_Manager(this, port+3); //the ports must be different!!!
         queue = new LobbyMessageQueue();
     }
 
@@ -94,6 +95,7 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
     }
     public void enqueueMessage(MessageToLobby msg){
         queue.enqueueMessage(msg);
+        System.out.println("Enqueued the following message: "+msg.getClass());
     }
     public void start() throws IOException {
         System.out.println("started dequeueing messages...");
@@ -110,5 +112,9 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
     }
     public void sendToPlayer(String playerName, MessageFromLobby msg) throws IOException {
         players.get(playerName).sendToClient(msg);
+    }
+
+    public void newRMI_Connection(String registry, String host, int port) throws AlreadyBoundException, NotBoundException, IOException {
+        rmiManager.newHandler(registry, host, port, getGameNames());
     }
 }

@@ -106,7 +106,7 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
             MessageToLobby msg = (MessageToLobby) in.readObject();
             if(msg instanceof NewConnectionMessage){//at the moment useless but useful when waiting for a common message
                 ((NewConnectionMessage) msg).setHandler(this);
-                lobby.enqueueMessage(msg);
+                deliverToLobby(msg);
             }else
                 throw new RuntimeException();
 
@@ -120,14 +120,24 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
         this.api = receiver;
     }
 
-    public void sendToClient(MessageFromLobby msg) throws IOException {
-        out.writeObject(msg);
-        out.flush();
-        out.reset();
+    public void sendToClient(MessageFromLobby msg) throws RemoteException {
+        try {
+            out.writeObject(msg);
+            out.flush();
+            out.reset();
+        }catch (IOException e){
+            throw new RemoteException();
+        }
+    }
+
+    @Override
+    public void deliverToLobby(MessageToLobby msg) throws RemoteException {
+        lobby.enqueueMessage(msg);
     }
 
     @Override
     public void addNewPlayer(String nickname, String lookupTableName, int clientPort, String clientHost) throws RemoteException {
         //TODO implement!!!!
     }
+
 }

@@ -7,6 +7,8 @@ import SharedWebInterfaces.ClientHandlerInterface;
 import SharedWebInterfaces.Messages.MessagesFromLobby.MessageFromLobby;
 import SharedWebInterfaces.Messages.MessagesFromLobby.WelcomeMessage;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
+import SharedWebInterfaces.Messages.MessagesToLobby.MessageToLobby;
+import SharedWebInterfaces.Messages.MessagesToLobby.NewConnectionMessage;
 import SharedWebInterfaces.ServerHandlerInterface;
 
 import java.io.IOException;
@@ -60,7 +62,9 @@ public class RMI_ClientHandler implements ClientHandlerInterface {
     }
 
     @Override
-    public void sendToClient(MessageFromLobby msg) throws IOException {}
+    public void sendToClient(MessageFromLobby msg) throws RemoteException {
+        client.receiveFromLobby(msg);
+    }
 
     /**
      * class constructor
@@ -68,17 +72,23 @@ public class RMI_ClientHandler implements ClientHandlerInterface {
      * @throws RemoteException when an error occurs in the binding
      * @throws AlreadyBoundException when trying to bind two sides already bound
      */
-    public RMI_ClientHandler(int clientPort, String ClientHost, String clientRegistry, String clientName, Lobby lobby, int serverPort) throws RemoteException, NotBoundException, AlreadyBoundException {
+    public RMI_ClientHandler(int clientPort, String clientHost, String clientRegistry, String registryName, Lobby lobby, int serverPort) throws RemoteException, NotBoundException, AlreadyBoundException {
         this.lobby = lobby;
         UnicastRemoteObject.exportObject(this, 0);
-        Registry serverRegistry = LocateRegistry.createRegistry(serverPort);
-        String registryName = clientName+"Server";
-        serverRegistry.bind("", this);
-        Registry registry = LocateRegistry.getRegistry(clientRegistry, clientPort);
-        client = (ServerHandlerInterface) registry.lookup(clientName);
-        System.out.println("Client is bound with lobby");
-    }
+        Registry serverRegistry = LocateRegistry.getRegistry(serverPort);
+        serverRegistry.bind(registryName, this);
+        System.out.println("Handler Published: registry "+registryName+" port "+serverPort);
 
+        Registry registry = LocateRegistry.getRegistry(clientHost, clientPort);
+        client = (ServerHandlerInterface) registry.lookup(clientRegistry);
+
+        System.out.println("Client is bound with its handler on port "+clientPort+" registry "+clientRegistry);
+    }
+    public void deliverToLobby(MessageToLobby msg) throws RemoteException{
+        if(msg instanceof NewConnectionMessage)
+            ((NewConnectionMessage) msg).setHandler(this);
+        lobby.enqueueMessage(msg);
+    }
     public void setApi(ServerAPI_COME come){
         api = come;
     }

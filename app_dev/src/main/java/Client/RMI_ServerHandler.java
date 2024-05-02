@@ -34,7 +34,7 @@ public class RMI_ServerHandler implements ServerHandlerInterface {
 
     public RMI_ServerHandler(int port, String host, String clientName) throws RemoteException, AlreadyBoundException, NotBoundException {
 
-        /*api = come;
+        /*//api = come;
         //writing in the table the present object in order for the object to find it
         UnicastRemoteObject.exportObject(this, 0);
         Registry registry = LocateRegistry.createRegistry(clientPort);

@@ -11,7 +11,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class MockClient {
+public class SOCKET_MockClient {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
         Scanner scIn = new Scanner(System.in);
