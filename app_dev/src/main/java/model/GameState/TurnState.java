@@ -19,7 +19,7 @@ import javax.swing.text.View;
 public enum TurnState {
     GAME_INITIALIZATION{
         @Override
-        void display(ViewAPI view, UI ui){
+        public void display(ViewAPI view, UI ui){
             ui.initializationDisplay(view);
         }
 
@@ -29,7 +29,7 @@ public enum TurnState {
             return (msg instanceof SelectStarterCardMesage);
         }
         @Override
-        void display(ViewAPI view, UI ui){
+        public void display(ViewAPI view, UI ui){
             ui.starterSelectionDisplay(view);
         }
     },
@@ -40,7 +40,7 @@ public enum TurnState {
         }
 
         @Override
-        void display(ViewAPI view, UI ui){
+        public void display(ViewAPI view, UI ui){
             ui.objectiveSelectionDisplay(view);
         }
     },
@@ -51,7 +51,7 @@ public enum TurnState {
         }
 
         @Override
-        void display(ViewAPI view, UI ui){
+        public void display(ViewAPI view, UI ui){
             ui.placingCardDisplay(view);
         }
     },
@@ -62,7 +62,7 @@ public enum TurnState {
         }
 
         @Override
-        void display(ViewAPI view, UI ui){
+        public void display(ViewAPI view, UI ui){
             ui.cardDrawingDisplay(view);
         }
     },
@@ -73,7 +73,7 @@ public enum TurnState {
         }
 
         @Override
-        void display(ViewAPI view, UI ui){
+        public void display(ViewAPI view, UI ui){
             ui.calculateObjectivesDisplay(view);
         }
     };
@@ -118,5 +118,5 @@ public enum TurnState {
 
     public boolean controlMessage(MessageFromClient message){return false;}
 
-    abstract void display(ViewAPI view, UI ui);
+    public void display(ViewAPI view, UI ui){}
 }

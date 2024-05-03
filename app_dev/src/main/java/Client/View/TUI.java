@@ -32,6 +32,23 @@ public class TUI implements UI{
     }
 
     private void printHand(){
+    }
+    private void printDisposition(){
 
     }
+    private void printPlayableCard(){
+
+    }
+    private void printObjectiveCard(){}
+
+    private void printInformation(){}
+    /*
+
+    |
+    |
+    |
+    |
+
+
+     */
 }

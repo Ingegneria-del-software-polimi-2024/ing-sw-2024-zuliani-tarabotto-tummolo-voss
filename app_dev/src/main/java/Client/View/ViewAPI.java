@@ -1,5 +1,6 @@
 package Client.View;
 
+import SharedWebInterfaces.ServerControllerInterface;
 import SharedWebInterfaces.ViewAPI_Interface;
 import model.GameState.TurnState;
 import model.cards.Card;
@@ -30,7 +31,6 @@ public class ViewAPI implements ViewAPI_Interface {
     private List<ObjectiveCard> chooseSecretObjectives;
     private List<PlayableCard> openGold;
     private List<PlayableCard> openResource;
-    private int playerPoints;
     private TurnState state;
     private String[] players;
     private String gameId;
@@ -40,23 +40,49 @@ public class ViewAPI implements ViewAPI_Interface {
     private String pawnColor;
     private List<Coordinates> availablePlaces;
     private boolean[] canBePlaced;
-    private HashMap<Coordinates, PlayableCard> disposition;
+    private HashMap< String, HashMap< Coordinates, PlayableCard> > dispositions;
+    //the points of all players are store here
+    private HashMap< String , Integer> points;
     private boolean myTurn;
+    private UI ui;
+    private ServerControllerInterface controller;
 
-    public ViewAPI() {
+    public ViewAPI(UI ui, ServerControllerInterface controller) {
         for(Element el : Element.values()) {
             availableElements.put(el, 0);
         }
         for(Artifact ar : Artifact.values()){
             availableArtifacts.put(ar, 0);
         }
+        this.ui = ui;
+        this.controller = controller;
     }
 
-    /////////// FROM CLIENT ACTIONS ////////////////////////////////////////////////////////////////////////////////////
+    /////////// from CLIENT to SERVER  ACTIONS ////////////////////////////////////////////////////////////////////////////////////
 
-    /////////// FROM SERVER ACTIONS ////////////////////////////////////////////////////////////////////////////////////
+    //all this methods call the methods contained in ModelController in order to modify the model
+    public void playStarterCard(){
+        controller.playStarterCard(starterCard.getFaceSide(), playerId);
+    }
+
+    public void chooseSecretObjective(String chosenObjective){
+        controller.chooseSecretObjective(chosenObjective, playerId);
+    }
+
+    public void playCard(PlayableCard c, int x, int y) {
+        controller.playCard(c.getId(), x, y, c.getFaceSide());
+    }
+
+    public void drawCard(int cardSource){
+        controller.drawCard(cardSource);
+    }
+
+    /////////// from SERVER to CLIENT ACTIONS ////////////////////////////////////////////////////////////////////////////////////
     @Override
-    public void setState(TurnState state) { this.state = state;}
+    public void setState(TurnState state) {
+        this.state = state;
+        this.state.display(this, ui);
+    }
 
     @Override
     public void setGoldDeck(List<PlayableCard> deck){goldDeck = deck;}
@@ -66,7 +92,18 @@ public class ViewAPI implements ViewAPI_Interface {
 
 
     @Override
-    public void setPlayers(String[] players){ this.players = players;}
+    public void setPlayers(String[] players){
+        this.players = players;
+
+        //after we receive the array containing the unique nicknames of the players, we initialize
+        //the two hashmaps containing information about all players
+        this.dispositions = new HashMap<>();
+        this.points = new HashMap<>();
+        for(String p : players){
+            dispositions.put(p, new HashMap<>());
+            points.put(p, 0);
+        }
+    }
 
     @Override
     public void setGameId(String gameId) { this.gameId = gameId;}
@@ -100,8 +137,9 @@ public class ViewAPI implements ViewAPI_Interface {
 
     //the player's points are updated
     @Override
-    public void setPoints(int points) {
-        this.playerPoints = points;
+    public void setPoints(String player, int points) {
+        //
+        this.points.put(player, points);
     }
 
     @Override
@@ -153,26 +191,30 @@ public class ViewAPI implements ViewAPI_Interface {
     public void endGame(HashMap<String, Integer> finalPoints) {
 
     }
+
     @Override
     public void setPawnColor(String pawnColor) {
         this.pawnColor = pawnColor;
     }
+
     @Override
     public void setCommonObjectives(ObjectiveCard commonObjective1, ObjectiveCard commonObjective2){
         commonObjectives.add(commonObjective1);
         commonObjectives.add(commonObjective2);
     }
+
     @Override
     public void setOpenGold(List<PlayableCard> openGold){
         this.openGold = openGold;
     }
+
     @Override
     public void setOpenResource(List<PlayableCard> openResource){
         this.openResource = openResource;
     }
 
     @Override
-    public void setAvailablePlaces(List<Coordinates> coordinates){
+    public void setAvailablePlaces(List<Coordinates> availablePlaces){
         this.availablePlaces = availablePlaces;
     }
 
@@ -181,8 +223,8 @@ public class ViewAPI implements ViewAPI_Interface {
         this.canBePlaced = canBePlaced;
     }
     @Override
-    public void setDisposition(HashMap<Coordinates, PlayableCard> disposition){
-        this.disposition = disposition;
+    public void setDisposition(String player, HashMap<Coordinates, PlayableCard> disposition){
+        this.dispositions.put(player, disposition);
     }
 
     @Override

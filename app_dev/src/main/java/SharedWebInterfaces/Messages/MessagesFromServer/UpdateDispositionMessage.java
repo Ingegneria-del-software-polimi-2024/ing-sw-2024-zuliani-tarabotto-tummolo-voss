@@ -28,8 +28,8 @@ public class UpdateDispositionMessage implements MessageFromServer{
 
     @Override
     public void execute(ViewAPI_Interface view) {
-        view.setDisposition(disposition);
-        view.setPoints(points);
+        view.setDisposition(player, disposition);
+        view.setPoints(player, points);
         view.updateArtifacts(availableArtifacts);
         view.updateElements(availableElements);
     }
