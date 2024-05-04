@@ -1,6 +1,7 @@
 package controller;
 
 
+import Client.UI.TUI.dispositionPrinter;
 import junit.framework.Assert;
 import Exceptions.EmptyCardSourceException;
 import model.GameState.GameState;
@@ -16,18 +17,20 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 class ControllerTest {
     private GameState gameState;
     private ArrayList<String> nickNames;
     private CliView view;
     private Scanner sc = new Scanner(new File("/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/final"));
     private Player initialPlayer;
-
-    
+    private dispositionPrinter printer = new dispositionPrinter();
 
     ControllerTest() throws FileNotFoundException {
     }
-@Test
+
+
+    @Test
     public void main() throws EmptyCardSourceException, IOException {
         ControllerTest controller = new ControllerTest();
         controller.initializeGameState();
@@ -110,6 +113,7 @@ class ControllerTest {
         String filePath2 = "/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/expectedOutput";
         File f1 = new File(filePath1);
         File f2 = new File(filePath2);
+        printer.mapDisposition(gameState.getTurnPlayer().getPlacementArea().getDisposition());
         assert filesCompareByLine(f1.toPath(), f2.toPath()) == -1;
 
     }
