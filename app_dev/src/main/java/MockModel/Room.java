@@ -15,6 +15,7 @@ public class Room {
     private GameState game;//Maybe controller??
     private ServerAPI_COME receive;
     private ServerAPI_GO send;
+    private boolean full;
 
 
     public void joinRoom(String name, ClientHandlerInterface handler) throws RemoteException {
@@ -33,6 +34,7 @@ public class Room {
         players = new ArrayList<String>();
         receive = new ServerAPI_COME();
         send = new ServerAPI_GO();
+        full = false;
     }
 
     public ArrayList<String> getPlayers() {
@@ -48,4 +50,5 @@ public class Room {
     public boolean contains(String player){
         return players.contains(player);
     }
+    public boolean isFull(){return full;}
 }
