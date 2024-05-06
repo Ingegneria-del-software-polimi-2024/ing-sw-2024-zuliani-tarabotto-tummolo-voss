@@ -15,6 +15,7 @@ public class ResourcesDeck extends PlayableDeck {
             try {
                 ResourceCard card = ResourceCard.parse(i);
                 addCard(card);
+                card.buildBackCorners();
             } catch (JsonProcessingException e) {
 
                 e.printStackTrace();

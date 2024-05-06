@@ -87,6 +87,8 @@ public class PlacementArea {
                         cardOnTable = disposition.get(coord);
                         //counting the number of nearby cards for objectives
                         numberNearbyCards++;
+                        //if the corner is covered by another card we set isAvailable = false
+                        if(cardOnTable.getCorner(count) != null){ cardOnTable.getCorner(count).setIsAvailable();}
                         //removing covered elements/artifacts
                         if (cardOnTable.getCorner(count) != null && !cardOnTable.getCorner(count).isEmpty()) {
                             if (cardOnTable.getCorner(count).getElement() != null)

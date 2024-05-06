@@ -24,7 +24,7 @@ class ControllerTest {
     private CliView view;
     private Scanner sc = new Scanner(new File("/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/final"));
     private Player initialPlayer;
-    private dispositionPrinter printer = new dispositionPrinter();
+    private dispositionPrinter printer;
 
     ControllerTest() throws FileNotFoundException {
     }
@@ -113,7 +113,10 @@ class ControllerTest {
         String filePath2 = "/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/expectedOutput";
         File f1 = new File(filePath1);
         File f2 = new File(filePath2);
-        printer.mapDisposition(gameState.getTurnPlayer().getPlacementArea().getDisposition());
+        printer = new dispositionPrinter(gameState.getTurnPlayer().getPlacementArea().getDisposition());
+        printer.print();
+        printer = new dispositionPrinter(gameState.getPlayer(1).getPlacementArea().getDisposition());
+        printer.print();
         assert filesCompareByLine(f1.toPath(), f2.toPath()) == -1;
 
     }

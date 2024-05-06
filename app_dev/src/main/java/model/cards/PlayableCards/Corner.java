@@ -40,7 +40,13 @@ public class Corner {
 
     ///////////// GETTER METHODS /////////////////////////
     public int getId() { return id; }
+    public void setId(int index) {this.id = index;}
     public Element getElement() { return element; }
     public Artifact getArtifact() { return artifact; }
-
+    public boolean getIsAvailable(){
+        return isAvailable;
+    }
+    public void setIsAvailable() {
+        this.isAvailable = false;
+    }
 }
