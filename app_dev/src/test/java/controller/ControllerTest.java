@@ -114,8 +114,12 @@ class ControllerTest {
         File f1 = new File(filePath1);
         File f2 = new File(filePath2);
         printer = new dispositionPrinter(gameState.getTurnPlayer().getPlacementArea().getDisposition());
+        printer.mapDisposition();
+        printer.addAvailablePlaces(gameState.getTurnPlayer().getPlacementArea().getAvailablePlaces());
         printer.print();
         printer = new dispositionPrinter(gameState.getPlayer(1).getPlacementArea().getDisposition());
+        printer.mapDisposition();
+        printer.addAvailablePlaces(gameState.getPlayer(1).getPlacementArea().getAvailablePlaces());
         printer.print();
         assert filesCompareByLine(f1.toPath(), f2.toPath()) == -1;
 

@@ -19,7 +19,7 @@ public class PlacementArea {
     private HashMap<Element, Integer> availableElements; // as Artifacts but with elements
     private List<Coordinates> availablePlaces; //list of available places to put a card in, enable to search more rapidly where you can place cards
     private int numberNearbyCards;
-
+    private List<Coordinates> unAvailablePlaces;
 
      /**
      * @return the free positions in which you can add a card
@@ -35,6 +35,7 @@ public class PlacementArea {
         availableArtifacts = new HashMap<>();
         availableElements = new HashMap<>();
         availablePlaces = new ArrayList<>();
+        unAvailablePlaces = new ArrayList<>();
         availablePlaces.add(new Coordinates(0,0));
 
         //we initialize availableElements and availableArtifacts to 0
@@ -248,7 +249,12 @@ public class PlacementArea {
                     coord = new Coordinates(i, j);
                     //if the placed card has a corner there, there is no card already placed there,
                     // they are not already inside availablePlaces, the coordinates can be added to the list
-                    if (card.getCorner(count) != null && coord.areContainedIn(disposition.keySet()) == null && coord.areContainedIn(availablePlaces) == null)
+                    if(card.getCorner(count) == null){ //if a card has a null corner then that position will automatically be unavailable
+                        unAvailablePlaces.add(new Coordinates(i, j));
+                        //if the position was previously added to the available ones, we now remove it and put it in unavailable
+                        if(coord.areContainedIn(availablePlaces) != null) availablePlaces.remove(coord.areContainedIn(availablePlaces));
+                    }
+                    else if (card.getCorner(count) != null && coord.areContainedIn(disposition.keySet()) == null && coord.areContainedIn(availablePlaces) == null && coord.areContainedIn(unAvailablePlaces) == null)
                         availablePlaces.add(new Coordinates(i, j));
                     count -= 1;
                 }
