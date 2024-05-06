@@ -1,7 +1,7 @@
 package SharedWebInterfaces.Messages.MessagesToLobby;
 
 
-import MockModel.Lobby;
+import Server.Web.Lobby.Lobby;
 
 import java.io.IOException;
 import java.rmi.AlreadyBoundException;

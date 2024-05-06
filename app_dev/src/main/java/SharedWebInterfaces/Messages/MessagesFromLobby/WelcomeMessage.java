@@ -1,9 +1,12 @@
 package SharedWebInterfaces.Messages.MessagesFromLobby;
 
+import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
+import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class WelcomeMessage implements Serializable, MessageFromLobby {
+public class WelcomeMessage implements Serializable, MessageFromServer {
     private final ArrayList<String> listOfGames;
     private final String registryName;
 
@@ -20,8 +23,6 @@ public class WelcomeMessage implements Serializable, MessageFromLobby {
 
     public String getRegistryName() {return registryName;}
 
-    @Override
-    public void execute() {}
 
     public WelcomeMessage(ArrayList<String> listOfGames, String registryName){
         this.listOfGames = listOfGames;
@@ -37,5 +38,10 @@ public class WelcomeMessage implements Serializable, MessageFromLobby {
             ret = ret+"\n"+s;
         }
         return ret;
+    }
+
+    @Override
+    public void execute(ViewAPI_Interface view) {
+
     }
 }

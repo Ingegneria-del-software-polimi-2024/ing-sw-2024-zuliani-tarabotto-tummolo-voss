@@ -1,6 +1,6 @@
 package SharedWebInterfaces.Messages.MessagesFromServer;
 
-import SharedWebInterfaces.ViewAPI_Interface;
+import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
 
 import java.util.HashMap;
 

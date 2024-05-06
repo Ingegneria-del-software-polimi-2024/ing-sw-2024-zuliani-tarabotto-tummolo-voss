@@ -1,6 +1,7 @@
 package Server;
 
 
+import Server.Web.Game.ServerAPI_GO;
 import SharedWebInterfaces.Messages.MessagesFromServer.*;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
@@ -12,7 +13,6 @@ import model.placementArea.Coordinates;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class ModelListener {
 

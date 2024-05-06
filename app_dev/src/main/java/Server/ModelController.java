@@ -1,7 +1,7 @@
 package Server;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import model.Exceptions.EmptyCardSourceException;
-import SharedWebInterfaces.ServerControllerInterface;
+import SharedWebInterfaces.SharedInterfaces.ServerControllerInterface;
 import model.GameState.GameState;
 import model.GameState.TurnState;
 import model.cards.PlayableCards.PlayableCard;

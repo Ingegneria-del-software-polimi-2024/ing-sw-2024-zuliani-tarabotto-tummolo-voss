@@ -1,12 +1,11 @@
 package SharedWebInterfaces.Messages.MessagesFromLobby;
 
-import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
-import SharedWebInterfaces.ViewAPI_Interface;
+import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
 
 import java.io.Serializable;
 
-public class ACK_RoomChoice implements Serializable, MessageFromLobby {//Todo implements messagefromserver
+public class ACK_RoomChoice implements Serializable, MessageFromServer {//Todo implements messagefromserver
 
     private String user;
     public String game;
@@ -24,7 +23,7 @@ public class ACK_RoomChoice implements Serializable, MessageFromLobby {//Todo im
     }
 
     @Override
-    public void execute() {
+    public void execute(ViewAPI_Interface view) {
 
     }
 }

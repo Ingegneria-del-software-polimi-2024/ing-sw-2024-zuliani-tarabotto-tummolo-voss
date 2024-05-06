@@ -1,7 +1,7 @@
 package SharedWebInterfaces.Messages.MessagesFromClient;
 
-import SharedWebInterfaces.ControllerInterface;
-import SharedWebInterfaces.ServerControllerInterface;
+import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
+import SharedWebInterfaces.SharedInterfaces.ServerControllerInterface;
 
 public class SelectStarterCardMesage implements MessageFromClient{
     public void execute(ServerControllerInterface controller) {

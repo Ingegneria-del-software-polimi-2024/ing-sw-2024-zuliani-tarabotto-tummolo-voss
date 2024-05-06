@@ -1,9 +1,7 @@
 package controller;
 
-import Server.RMI_ClientHandler;
-import Server.SOCKET_ClientHandler;
-import Server.ServerMessageQueue;
-import SharedWebInterfaces.ClientHandlerInterface;
+import Server.Web.Game.ServerMessageQueue;
+import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
 
 import java.util.ArrayList;
 

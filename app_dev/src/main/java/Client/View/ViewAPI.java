@@ -1,14 +1,12 @@
 package Client.View;
 
-import SharedWebInterfaces.ViewAPI_Interface;
-import model.cards.Card;
+import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
 import model.enums.Artifact;
 import model.enums.Element;
 import model.placementArea.Coordinates;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.awt.Point;
 
 /**
  * ViewAPI Class contains:

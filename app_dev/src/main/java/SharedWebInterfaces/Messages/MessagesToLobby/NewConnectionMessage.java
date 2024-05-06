@@ -1,7 +1,7 @@
 package SharedWebInterfaces.Messages.MessagesToLobby;
 
-import MockModel.Lobby;
-import SharedWebInterfaces.ClientHandlerInterface;
+import Server.Web.Lobby.Lobby;
+import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
 import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_RoomChoice;
 
 import java.io.IOException;

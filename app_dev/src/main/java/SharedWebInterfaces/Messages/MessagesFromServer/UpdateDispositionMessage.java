@@ -1,6 +1,6 @@
 package SharedWebInterfaces.Messages.MessagesFromServer;
 
-import SharedWebInterfaces.ViewAPI_Interface;
+import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
 import model.enums.Artifact;
 import model.enums.Element;
 import model.placementArea.Coordinates;

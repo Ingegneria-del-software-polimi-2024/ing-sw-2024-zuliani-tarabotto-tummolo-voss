@@ -1,8 +1,8 @@
 package SharedWebInterfaces.Messages.MessagesFromClient;
 
-import SharedWebInterfaces.ClientHandlerInterface;
-import SharedWebInterfaces.ControllerInterface;
-import SharedWebInterfaces.ServerControllerInterface;
+import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
+import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
+import SharedWebInterfaces.SharedInterfaces.ServerControllerInterface;
 
 public class AddNewPlayerMessage implements MessageFromClient{
     String nickname;

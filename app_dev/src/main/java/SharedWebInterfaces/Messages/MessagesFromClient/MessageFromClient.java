@@ -1,8 +1,8 @@
 package SharedWebInterfaces.Messages.MessagesFromClient;
 
-import SharedWebInterfaces.ControllerInterface;
-import SharedWebInterfaces.ServerControllerInterface;
+import SharedWebInterfaces.Messages.Message;
+import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
 
-public interface MessageFromClient{
+public interface MessageFromClient extends Message {
     public void execute(ControllerInterface controller);
 }

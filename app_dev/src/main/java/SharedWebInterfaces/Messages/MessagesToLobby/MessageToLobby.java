@@ -1,14 +1,13 @@
 package SharedWebInterfaces.Messages.MessagesToLobby;
 
 
-import MockModel.Lobby;
+import Server.Web.Lobby.Lobby;
+import SharedWebInterfaces.Messages.Message;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.rmi.AlreadyBoundException;
-import java.rmi.NotBoundException;
 
-public interface MessageToLobby extends Serializable {
+public interface MessageToLobby extends Serializable, Message{
     public void execute(Lobby lobby) throws IOException;
     public String getSender();
 }
