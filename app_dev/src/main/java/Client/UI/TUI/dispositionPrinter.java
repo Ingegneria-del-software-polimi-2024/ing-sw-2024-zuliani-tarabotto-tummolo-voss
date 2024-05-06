@@ -152,7 +152,8 @@ public class dispositionPrinter {
                 //colonna piu a sinisra -> nella colonna più a sinistra non ci saranno mai carte ma eventualmente solo availablePlaces
                 if (mat[j][0] == 0) {
                     if(mat[j][1] == 0) line = "\u2551               ";//15
-                    else line = "\u2551            ";//12
+                    else if(mat[j][1] == -1) line = "\u2551               ";//15
+                    else line ="\u2551            ";
                 } else if (mat[j][0] == -1) {
                     if(row == 2){
                         line = "\u2551   " + buildCoordinates(0,j) + "  ";
@@ -175,8 +176,8 @@ public class dispositionPrinter {
                         else if(mat[j][col - 1] == 0 && mat[j][col + 1] > 0) line += "         ";//9
                         else if(mat[j][col - 1] > 0 && mat[j][col + 1] == 0) line += "            ";//12
 
-                        else if(mat[j][col - 1] == -1 && mat[j][col + 1] == -1) line += "         ";//12
-                        //else if(mat[j][col - 1] == -1 && mat[j][col + 1] > 0) line += "            ";//9
+                        else if(mat[j][col - 1] == -1 && mat[j][col + 1] == -1) line += "         ";//9
+                        else if(mat[j][col - 1] == -1 && mat[j][col + 1] > 0) line += "         ";//9
                         //else if(mat[j][col - 1] == -1 && mat[j][col + 1] == 0) line += "               ";//12
                         //else if(mat[j][col - 1] > 0 && mat[j][col + 1] == -1) line += "               ";//12
                         //else if(mat[j][col - 1] == 0 && mat[j][col + 1] == -1) line += "               ";//12
@@ -202,7 +203,7 @@ public class dispositionPrinter {
                 }
                 else if (mat[j][mat[0].length-1] == -1 ) {
                     if(mat[j][mat[0].length-2] == 0){line += "   " + buildCoordinates(mat[0].length-1,j) + "    \u2551";} //15 spazi con coordinate
-                    else if (mat[j][mat[0].length-2] > 0){line += " " + buildCoordinates(mat[0].length-1,j) + " \u2551";} //12 spazi con coordinate
+                    else if (mat[j][mat[0].length-2] > 0){line += "   " + buildCoordinates(mat[0].length-1,j) + "  \u2551";} //12 spazi con coordinate
                 }
 
                 System.out.println(line);
