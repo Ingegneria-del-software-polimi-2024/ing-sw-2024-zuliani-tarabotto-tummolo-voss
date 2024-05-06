@@ -52,14 +52,11 @@ public class ModelListener {
                               ArrayList<String> players, String gameId,
                               ObjectiveCard commonObjective1, ObjectiveCard commonObjective2){
 
-        ArrayList<PlayableCard> goldDeckCopy = new ArrayList<>();
-        List<PlayableCard> resourceDeckCopy = new ArrayList<>();
-        goldDeckCopy.addAll(goldDeck.getCards());
-        resourceDeckCopy.addAll(resourceDeck.getCards());
 
-        serverAPI.broadcastNotifyChanges( new InitializationMessage( goldDeckCopy, resourceDeckCopy, openGold, openResource,
-                (String[]) players.toArray(), gameId,
-                commonObjective1, commonObjective2));
+
+        serverAPI.broadcastNotifyChanges( new InitializationMessage( goldDeck.getCards(), resourceDeck.getCards(), openGold, openResource,
+                                        (String[]) players.toArray(), gameId,
+                                        commonObjective1, commonObjective2));
 
     }
 
