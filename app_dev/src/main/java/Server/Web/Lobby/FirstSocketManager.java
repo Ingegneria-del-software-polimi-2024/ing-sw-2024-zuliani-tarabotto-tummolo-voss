@@ -5,15 +5,16 @@ import Server.Web.Game.SOCKET_ClientHandler;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.rmi.RemoteException;
 
 public class FirstSocketManager implements Runnable {
     private Lobby lobby;
     private static FirstSocketManager instance;
     private int port;
-    public FirstSocketManager(Lobby l, int port) {
+    private FirstSocketManager(Lobby l, int port) {
         this.lobby = l;
         this.port = port;
-    }//todo private WTFFF
+    }
 
     public static FirstSocketManager getInstance(Lobby l, int port){
         if(instance == null) {
@@ -37,7 +38,7 @@ public class FirstSocketManager implements Runnable {
                 t.start();
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            //TODO what should I do here?
         }
     }
 }

@@ -69,17 +69,21 @@ public class RMI_ClientHandler implements ClientHandlerInterface {
      * @throws RemoteException when an error occurs in the binding
      * @throws AlreadyBoundException when trying to bind two sides already bound
      */
-    public RMI_ClientHandler(int clientPort, String clientHost, String clientRegistry, String registryName, Lobby lobby, int serverPort) throws RemoteException, NotBoundException, AlreadyBoundException {
-        this.lobby = lobby;
-        UnicastRemoteObject.exportObject(this, 0);
-        Registry serverRegistry = LocateRegistry.getRegistry(serverPort);
-        serverRegistry.bind(registryName, this);
-        System.out.println("Handler Published: registry "+registryName+" port "+serverPort);
+    public RMI_ClientHandler(int clientPort, String clientHost, String clientRegistry, String registryName, Lobby lobby, int serverPort) throws RemoteException{
+        try {
+            this.lobby = lobby;
+            UnicastRemoteObject.exportObject(this, 0);
+            Registry serverRegistry = LocateRegistry.getRegistry(serverPort);
+            serverRegistry.bind(registryName, this);
+            System.out.println("Handler Published: registry " + registryName + " port " + serverPort);
 
-        Registry registry = LocateRegistry.getRegistry(clientHost, clientPort);
-        client = (ServerHandlerInterface) registry.lookup(clientRegistry);
+            Registry registry = LocateRegistry.getRegistry(clientHost, clientPort);
+            client = (ServerHandlerInterface) registry.lookup(clientRegistry);
 
-        System.out.println("Client is bound with its handler on port "+clientPort+" registry "+clientRegistry);
+            System.out.println("Client is bound with its handler on port " + clientPort + " registry " + clientRegistry);
+        }catch (NotBoundException | AlreadyBoundException e){
+            throw new RemoteException();
+        }
     }
     public void deliverToLobby(MessageToLobby msg) throws RemoteException{
         if(msg instanceof NewConnectionMessage)

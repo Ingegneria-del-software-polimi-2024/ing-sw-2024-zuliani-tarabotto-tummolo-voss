@@ -18,24 +18,28 @@ public class First_RMI_Manager implements RMI_ManagerInterface {
     private Lobby lobby;
     private int serverPort;
     private int connectionsNumber;
-    public First_RMI_Manager(Lobby lobby, int serverPort) throws RemoteException, AlreadyBoundException {
-        this.lobby = lobby;
-        this.serverPort = serverPort;
-        this.connectionsNumber = 0;
-        UnicastRemoteObject.exportObject(this, 0);
-        Registry registry = LocateRegistry.createRegistry(serverPort);
-        registry.bind("Lobby", this);
-        System.out.println("RMI interface ready to pair");
+    public First_RMI_Manager(Lobby lobby, int serverPort) throws RemoteException{
+        try {
+            this.lobby = lobby;
+            this.serverPort = serverPort;
+            this.connectionsNumber = 0;
+            UnicastRemoteObject.exportObject(this, 0);
+            Registry registry = LocateRegistry.createRegistry(serverPort);
+            registry.bind("Lobby", this);
+            System.out.println("RMI interface ready to pair");
+        }catch (AlreadyBoundException e){
+            throw new RemoteException();
+        }
     }
 
     public void deliverToLobby(MessageToLobby msg){
         lobby.enqueueMessage(msg);
     }
 
-    public void newHandler(String clientRegistry, String clientHost, int clientPort, ArrayList<String> games) throws AlreadyBoundException, NotBoundException, IOException {
+    public void newHandler(String clientRegistry, String clientHost, int clientPort, ArrayList<String> games) throws RemoteException {
         RMI_ClientHandler rmiClientHandler = new RMI_ClientHandler(clientPort, clientHost, clientRegistry, registryName(connectionsNumber), lobby, serverPort);
         rmiClientHandler.sendToClient(new WelcomeMessage(games, registryName(connectionsNumber)));
-        connectionsNumber+=1;
+        connectionsNumber += 1;
     }
 
     private String registryName(int number){

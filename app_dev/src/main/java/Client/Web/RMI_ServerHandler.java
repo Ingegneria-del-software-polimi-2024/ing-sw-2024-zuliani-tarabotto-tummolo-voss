@@ -28,21 +28,4 @@ public class RMI_ServerHandler implements ServerHandlerInterface {
         //todo implementtt
     }
 
-    public RMI_ServerHandler(int port, String host, String clientName) throws RemoteException, AlreadyBoundException, NotBoundException {
-
-        /*//api = come;
-        //writing in the table the present object in order for the object to find it
-        UnicastRemoteObject.exportObject(this, 0);
-        Registry registry = LocateRegistry.createRegistry(clientPort);
-        registry.bind(lookupTableClient, this);
-
-        //get the reference to client handler object on the server
-        Registry registry1 = LocateRegistry.getRegistry(serverHost, serverPort);
-        server = (ClientHandlerInterface) registry1.lookup(lookupTableServer);
-
-        server.addNewPlayer(nickname, lookupTableClient, clientPort, clientHost);
-        */
-
-    }
-
 }

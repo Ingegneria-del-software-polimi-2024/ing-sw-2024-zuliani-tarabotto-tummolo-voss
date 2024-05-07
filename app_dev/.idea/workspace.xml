@@ -5,87 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/Message.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/WebExceptions/MsgNotDeliveredException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/ClientAPI_COME.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/Web/ClientAPI_COME.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/ClientAPI_GO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/Web/ClientAPI_GO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/ClientMessageQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/Web/ClientMessageQueue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/RMI_ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/Web/RMI_ServerHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/SOCKET_ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/Web/SOCKET_ServerHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/View/ViewAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/View/ViewAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MockModel/Lobby.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/Lobby.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MockModel/LobbyMessageQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/LobbyMessageQueue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MockModel/RMI_CLIENT_START.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MockClient/RMI_CLIENT_START.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MockModel/RMI_ManagerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/SharedInterfaces/RMI_ManagerInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MockModel/RMI_MockClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MockClient/RMI_MockClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MockModel/RMI_MockHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MockClient/RMI_MockHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MockModel/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/Room.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MockModel/SOCKET_MockClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MockClient/SOCKET_MockClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/FirstSocketManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/FirstSocketManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/First_RMI_Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/First_RMI_Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/ModelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ModelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/ModelListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ModelListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/RMI_ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Game/RMI_ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/SOCKET_ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Game/SOCKET_ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/ServerAPI_COME.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Game/ServerAPI_COME.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/ServerAPI_GO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Game/ServerAPI_GO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/ServerMessageQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Game/ServerMessageQueue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/ClientHandlerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/SharedInterfaces/ClientHandlerInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/ControllerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/SharedInterfaces/ControllerInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/GeneralAPI_Interface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/SharedInterfaces/GeneralAPI_Interface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromClient/AddNewPlayerMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromClient/AddNewPlayerMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromClient/MessageFromClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromClient/MessageFromClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromClient/SelectStarterCardMesage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromClient/SelectStarterCardMesage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromLobby/ACK_RoomChoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromLobby/ACK_RoomChoice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromLobby/MessageFromLobby.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromLobby/WelcomeMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromLobby/WelcomeMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/ConfirmSecretObjectiveMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/ConfirmSecretObjectiveMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/DrawCardMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/DrawCardMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/EndGameMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/EndGameMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/InitializationMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/InitializationMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/InterruptConnectionMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/InterruptConnectionMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/MessageFromServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/MessageFromServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/PlaceableCardsMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/PlaceableCardsMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/SecretObjectivesMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/SecretObjectivesMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/StarterCardMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/StarterCardMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/StateMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/StateMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/UpdateDispositionMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/UpdateDispositionMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesToLobby/MessageToLobby.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesToLobby/MessageToLobby.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesToLobby/NewConnectionMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesToLobby/NewConnectionMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesToLobby/NewRMI_Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesToLobby/NewRMI_Connection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/ServerControllerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/SharedInterfaces/ServerControllerInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/ServerHandlerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/SharedInterfaces/ServerHandlerInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/ViewAPI_Interface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/SharedInterfaces/ViewAPI_Interface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/LobbyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/LobbyController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/MockModel/LobbyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MockClient/LobbyTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/ClientAPI_COME.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/ClientAPI_GO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/ClientMessageQueue.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/RMI_ServerHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/SOCKET_ServerHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/MockModel/Lobby.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/MockModel/LobbyMessageQueue.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/MockModel/RMI_CLIENT_START.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/MockModel/RMI_ManagerInterface.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/MockModel/RMI_MockClient.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/MockModel/RMI_MockHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/MockModel/Room.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/MockModel/SOCKET_MockClient.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Server/FirstSocketManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Server/First_RMI_Manager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Server/ModelListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Server/ModelListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Server/RMI_ClientHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Server/SOCKET_ClientHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Server/ServerAPI_COME.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Server/ServerAPI_GO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Server/ServerMessageQueue.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/ClientHandlerInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/ClientHandlerInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/Web/RMI_ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/Web/RMI_ServerHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Game/RMI_ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Game/RMI_ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Game/SOCKET_ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Game/SOCKET_ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/FirstSocketManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/FirstSocketManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/First_RMI_Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/First_RMI_Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/ClientHandlerInterface.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/Messages/MessagesToLobby/MessageToLobby.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/Messages/MessagesToLobby/MessageToLobby.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/Messages/MessagesToLobby/NewConnectionMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/Messages/MessagesToLobby/NewConnectionMessage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/Messages/MessagesToLobby/NewRMI_Connection.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/Messages/MessagesToLobby/NewRMI_Connection.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/controller/LobbyController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/LobbyController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/MockModel/LobbyTest.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,7 +102,7 @@
       <recent name="model.lobby" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.LobbyTest">
+  <component name="RunManager" selected="Application.SOCKET_MockClient">
     <configuration name="LobbyTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MockClient.LobbyTest" />
       <module name="Ing_sw_proj" />
@@ -254,9 +183,9 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.LobbyTest" />
         <item itemvalue="Application.SOCKET_MockClient" />
         <item itemvalue="Application.RMI_CLIENT_START" />
+        <item itemvalue="Application.LobbyTest" />
         <item itemvalue="JUnit.PlacementAreaTest.testObjectiveCounts" />
         <item itemvalue="JUnit.PlacementAreaTest.testEverything" />
       </list>
@@ -314,7 +243,7 @@
       <workItem from="1714506778640" duration="9044000" />
       <workItem from="1714578581406" duration="25540000" />
       <workItem from="1714745696918" duration="572000" />
-      <workItem from="1715005438035" duration="2648000" />
+      <workItem from="1715005438035" duration="5606000" />
     </task>
     <servers />
   </component>

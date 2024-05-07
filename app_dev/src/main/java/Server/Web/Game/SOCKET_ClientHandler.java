@@ -7,7 +7,6 @@ import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
 import SharedWebInterfaces.Messages.MessagesToLobby.MessageToLobby;
 import SharedWebInterfaces.Messages.MessagesToLobby.NewConnectionMessage;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
-import SharedWebInterfaces.WebExceptions.MsgNotDeliveredException;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -31,7 +30,7 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
     public void notifyChanges(MessageFromServer message) throws RemoteException {
         try {
             out.writeObject(message);
-            //TODO out.flush(); va messo o no????
+            out.flush();
             out.reset();
         } catch (IOException e) {
             throw new RemoteException();
@@ -111,7 +110,7 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
                 throw new RuntimeException();//TODO no exception but behaving good
 
         } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException();
+            //TODO what should I do here?
         }
         //here should go the while listening for other messages
     }
