@@ -4,6 +4,7 @@ import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import SharedWebInterfaces.Messages.MessagesFromServer.InterruptConnectionMessage;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
 import SharedWebInterfaces.SharedInterfaces.ServerHandlerInterface;
+import SharedWebInterfaces.WebExceptions.StartConnectionFailedException;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -11,7 +12,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.rmi.RemoteException;
 
-public class SOCKET_ServerHandler implements ServerHandlerInterface {
+public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
 
     private ClientAPI_COME api;
     private Socket socket;
@@ -26,8 +27,9 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface {
     public void sendToServer(MessageFromClient message) throws RemoteException {
         try {
             out.writeObject(message);
+            out.flush();
+            out.reset();
         } catch (IOException e) {
-            //TODO handle correctly the exception
             throw new RemoteException();
         }
     }
@@ -43,7 +45,7 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface {
 
     @Override
     public void receiveFromLobby(MessageFromServer msg) {
-        //todo implement everythingggggg!!!!
+        api.notifyChanges(msg);
     }
 
     /**
@@ -58,30 +60,27 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface {
             notifyChanges(incomingMessage);
         }while(incomingMessage instanceof InterruptConnectionMessage);
     }
-    public SOCKET_ServerHandler(String add, int port) {
+    public SOCKET_ServerHandler(String add, int port, ClientAPI_COME come) throws StartConnectionFailedException {
+        api = come;
         try {
             //opnening the connection
             socket = new Socket(add, port);
-            //if the connection is established
+            out =  new ObjectOutputStream(socket.getOutputStream());
+            in = new ObjectInputStream(socket.getInputStream());
 
-            //...
-            //let the client cook
-            //...
-
-            //the following methods must be called in the runSocket() method
-            //out.close();
-            //in.close();
-            //socket.close();
         } catch (IOException e) {
-            //TODO handle correctly the exception
-            throw new RuntimeException(e);
+            throw new StartConnectionFailedException();
         }
     }
 
+    //TODO just always remember to call this
+    public void attachAPI(ClientAPI_COME api){
+        this.api = api;
+    }
     /**
      * a method run by a single thread that keeps listening to the client handler
      */
-    public void runSocket() {
+    public void run() {
         try {
             gameListeningLoop();
             out.close();

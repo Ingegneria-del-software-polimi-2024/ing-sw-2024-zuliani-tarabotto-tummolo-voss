@@ -2,6 +2,7 @@ package Client.Web;
 
 import SharedWebInterfaces.SharedInterfaces.ServerHandlerInterface;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
+import SharedWebInterfaces.WebExceptions.StartConnectionFailedException;
 
 import java.rmi.RemoteException;
 
@@ -24,7 +25,14 @@ public class ClientAPI_GO {
         }
     }
 
-    public ClientAPI_GO(ServerHandlerInterface client) {
-        this.handler = client;
+    public void newRMI_Connection(String host, int port, ClientAPI_COME come) throws StartConnectionFailedException {
+        handler = new RMI_ServerHandler(host, port, come);
     }
+    public void newSocketConnection(String host, int port, ClientAPI_COME come) throws StartConnectionFailedException {
+        handler = new SOCKET_ServerHandler(host, port, come);
+        SOCKET_ServerHandler listener = (SOCKET_ServerHandler) handler;
+        Thread listenForMessages = new Thread(listener);
+        listenForMessages.start();
+    }
+
 }

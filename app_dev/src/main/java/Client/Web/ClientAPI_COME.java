@@ -31,4 +31,7 @@ public class ClientAPI_COME implements Runnable{
                 message.execute(view);
         }while(!(message instanceof InterruptConnectionMessage));
     }
+    public void enqueue(MessageFromServer msg){
+        toDoQueue.enqueueMessage(msg);
+    }
 }
