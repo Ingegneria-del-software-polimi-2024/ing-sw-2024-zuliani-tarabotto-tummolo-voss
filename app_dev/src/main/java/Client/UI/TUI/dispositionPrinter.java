@@ -149,62 +149,82 @@ public class dispositionPrinter {
             //itero tre volte su ogni riga
             for(int row = 0; row < 3; row++) {
 
-                //colonna piu a sinisra -> nella colonna più a sinistra non ci saranno mai carte ma eventualmente solo availablePlaces
+                ////////////////////////////////// PRIMA COLONNA ////////////////////////////////////////////////
+                //nella collonna più a sinistra ci possono essere solo 0 o -1
+                //caso in cui ho uno 0
                 if (mat[j][0] == 0) {
-                    if(mat[j][1] == 0) line = "\u2551               ";//15
-                    else if(mat[j][1] == -1) line = "\u2551               ";//15
-                    else line ="\u2551            ";
+                    if(mat[j][1] <= 0) line = "\u2551               ";//15
+                    else line ="\u2551            ";//12
+
+                //caso in cui ho un -1
                 } else if (mat[j][0] == -1) {
-                    if(row == 2){
-                        line = "\u2551   " + buildCoordinates(0,j) + "  ";
+
+                    //quando row != 2 stampo solamente degli spazi
+                    if( row != 2){
+                        if(mat[j][1] == 0) line = "\u2551               ";//15
+                        else if (mat[j][1] > 0) line ="\u2551            ";//12
+
+                    } else if (row == 2) {
+
+                        if(mat[j][1] == 0) line = "\u2551    " + buildCoordinates(0,j) + "    ";//15
+                        else if (mat[j][1] > 0) line = "\u2551  " + buildCoordinates(0,j) + "   ";//12
                     }
-                    else{ line = "\u2551            ";}//15
-
                 }
+                ///////////////////////////////////////////////////////////////////////////////////////////
 
-                //colonne centrali
+
+                ////////////////////////////////////// COLONNE CENTRALI /////////////////////////////////////////////////////////
+                //COLONNE CENTRALI
                 for(int col = 1; col < mat[0].length -1; col++){
+
                     if( (mat[j][col] > 0) && (mat[j + 1][col] == mat[j][col])) {
                         line += cb.buildLine(row, getCardFromDisposition(col - 1, j -1));
                     }
                     else if (mat[j][col] > 0 && mat[j + 1][col] != mat[j][col]) {
                         line += cb.buildLine(row + 3, getCardFromDisposition(col  - 1 , j - 2));
                     }
-                    else if(mat[j][col] == 0 || (row!=2 && mat[j][col] == -1)){
-                        if(mat[j][col - 1] == 0 && mat[j][col + 1] == 0) line += "            ";//12
-                        else if(mat[j][col - 1] > 0 && mat[j][col + 1] > 0) line += "         ";//9
-                        else if(mat[j][col - 1] == 0 && mat[j][col + 1] > 0) line += "         ";//9
-                        else if(mat[j][col - 1] > 0 && mat[j][col + 1] == 0) line += "            ";//12
-
-                        else if(mat[j][col - 1] == -1 && mat[j][col + 1] == -1) line += "         ";//9
-                        else if(mat[j][col - 1] == -1 && mat[j][col + 1] > 0) line += "         ";//9
-                        //else if(mat[j][col - 1] == -1 && mat[j][col + 1] == 0) line += "               ";//12
-                        //else if(mat[j][col - 1] > 0 && mat[j][col + 1] == -1) line += "               ";//12
-                        //else if(mat[j][col - 1] == 0 && mat[j][col + 1] == -1) line += "               ";//12
-
-                        else if(mat[j][col - 1] <= 0) line += "            ";//12
-                        else if( mat[j][col + 1] <= 0) line += "         ";//9
+                    else if(mat[j][col] == 0){
+                        if(mat[j][col - 1] <= 0 && mat[j][col + 1] <= 0) line += "            ";//12  OK
+                        else if(mat[j][col - 1] > 0 && mat[j][col + 1] > 0) line += "         ";//9   OK
+                        else if(mat[j][col - 1] <= 0 && mat[j][col + 1] > 0) line += "         ";//9  OK
+                        else if(mat[j][col - 1] > 0 && mat[j][col + 1] <= 0) line += "            ";//12  OK
                     }
                     else if(mat[j][col] == -1){
-                        if(mat[j][col - 1] == 0 && mat[j][col + 1] == 0){line += "  " + buildCoordinates(col,j) + "   ";} //12 spazi con in mezzo le coordinate
-                        else if(mat[j][col - 1] > 0 && mat[j][col + 1] > 0) {line += " " + buildCoordinates(col,j) + " ";} //9 spazi con in mezzo le coordinate
-                        else if(mat[j][col - 1] == 0 && mat[j][col + 1] > 0) {line += " " + buildCoordinates(col,j) + " ";}//9 spazi con in mezzo le coordinate
-                        else if(mat[j][col - 1] > 0 && mat[j][col + 1] == 0){line += "  " + buildCoordinates(col,j) + "   ";} //12 spazi con in mezzo le coordinate
-                        //else if(mat[j][col - 1] == 0){line += "  " + buildCoordinates(col,j) + "   ";} //12 spazi con in mezzo le coordinate
-                        //else if( mat[j][col + 1] == 0){line += " " + buildCoordinates(col,j) + " ";} //9spazi con in mezzo le coordinate
+
+                        if(row != 2){
+                            //tutti i casi
+                            if(mat[j][col - 1] == 0 && mat[j][col + 1] == 0){line += "            ";} //12 OK
+                            else if(mat[j][col - 1] > 0 && mat[j][col + 1] > 0) {line += "         ";} //9 OK
+                            else if(mat[j][col - 1] == 0 && mat[j][col + 1] > 0) {line += "         ";}//9 OK
+                            else if(mat[j][col - 1] > 0 && mat[j][col + 1] == 0){line += "            ";} //12 OK
+
+                        } else if (row == 2) {
+                            //tutti i casi
+                            if(mat[j][col - 1] == 0 && mat[j][col + 1] == 0){line += "  " + buildCoordinates(col,j) + "   ";} //12 OK
+                            else if(mat[j][col - 1] > 0 && mat[j][col + 1] > 0) {line += " " + buildCoordinates(col,j) + " ";} //9 spazi con in mezzo le coordinate
+                            else if(mat[j][col - 1] == 0 && mat[j][col + 1] > 0) {line += " " + buildCoordinates(col,j) + " ";}//9 spazi con in mezzo le coordinate
+                            else if(mat[j][col - 1] > 0 && mat[j][col + 1] == 0){line += "  " + buildCoordinates(col,j) + "   ";} //12 spazi con in mezzo le coordinate
+                        }
                     }
                 }
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                //colonna piu a destra -> nella colonna più a destra non ci saranno mai carte ma eventualmente solo availablePlaces
 
-                if (mat[j][mat[0].length-1] == 0 || row!=2) {
-                    if(mat[j][mat[0].length-2] == 0) line += "            \u2551";//12
-                    else if (mat[j][mat[0].length-2] > 0) line += "            \u2551";//12
+                ///////////////////////////////////////////////// ULTIMA COLONNA  ///////////////////////////////////////////////////////////////////////////////////////////
+                //nella COLONNA PIU' A DESTRA CI POSSONO ESSERE SOLO 0 O -1
+
+                if (mat[j][mat[0].length-1] == 0) {
+                    line += "            \u2551";//12 OK
                 }
                 else if (mat[j][mat[0].length-1] == -1 ) {
-                    if(mat[j][mat[0].length-2] == 0){line += "   " + buildCoordinates(mat[0].length-1,j) + "    \u2551";} //15 spazi con coordinate
-                    else if (mat[j][mat[0].length-2] > 0){line += "   " + buildCoordinates(mat[0].length-1,j) + "  \u2551";} //12 spazi con coordinate
+                    if(row != 2){
+                        line += "            \u2551";//12 OK
+                    }else if (row == 2){
+                        line += "  " + buildCoordinates(0,j) + "   \u2551";//12
+                    }
+
                 }
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                 System.out.println(line);
             }
@@ -212,11 +232,12 @@ public class dispositionPrinter {
             j++;
         }
 
-        //ULTIMA STRISCIA
-
+        //ULTIMA STRISCIA //////////////////////////////////////////////////////////////////////////////////////////////////////
+        // /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //itero tre volte su ogni riga
         for(int row = 0; row < 3; row++) {
-            //colonna piu a sinisra -> essendo questa l'ultima striscia non ci sarà mai il segnalino -1
+
+            //colonna piu a sinisra -> essendo questa l'ultima striscia ci saranno sempre e solo zeri
             if (mat[j][0] == 0) {
                 if(mat[j][1] == 0) line = "\u2551               ";//15
                 else if (mat[j][1] > 0) line = "\u2551            ";//12
@@ -225,18 +246,16 @@ public class dispositionPrinter {
             //colonne centrali
             for(int col = 1; col < mat[0].length -1; col++){
                 if(mat[j][col] == 0){
-                    if(mat[j][col - 1] == 0 && mat[j][col + 1] == 0) line += "            ";//12
-                    else if(mat[j][col - 1] > 0 && mat[j][col + 1] > 0) line += "         ";//9
-                    else if(mat[j][col - 1] == 0 && mat[j][col + 1] > 0) line += "         ";//9
-                    else if(mat[j][col - 1] > 0 && mat[j][col + 1] == 0) line += "            ";//12
-                    else if(mat[j][col - 1] == 0) line += "            ";//12
-                    else if( mat[j][col + 1] == 0) line += "         ";//9
+                    if(mat[j][col - 1] == 0 && mat[j][col + 1] == 0) line += "            ";//12  OK
+                    else if(mat[j][col - 1] > 0 && mat[j][col + 1] > 0) line += "         ";//9  OK
+                    else if(mat[j][col - 1] == 0 && mat[j][col + 1] > 0) line += "         ";//9  OK
+                    else if(mat[j][col - 1] > 0 && mat[j][col + 1] == 0) line += "            ";//12  OK
                 }
             }
 
+            //colonna di destra ( CONTROLLO INUTILE MA LO LASCIO PER CHIAREZZA )
             if (mat[j][mat[0].length-1] == 0) {
-                if(mat[j][mat[0].length-2] == 0) line += "            \u2551";//12
-                else if (mat[j][mat[0].length-2] > 0) line += "            \u2551";//12
+                line += "            \u2551";//12  OK
             }
 
             System.out.println(line);
@@ -249,99 +268,6 @@ public class dispositionPrinter {
         }
         line += "\u255D";
         System.out.println(line);
-
-
-        /*while(j < mat.length - 1){
-            //itero tre volte su ogni riga
-            for(int row = 0; row < 3; row++) {
-                //colonna piu a sinisra
-                if (mat[j][0] > 0 && mat[j + 1][0] == mat[j][0]) {
-                    line = cb.buildLine(row, getCardFromDisposition(0, j));
-                }
-                else if (mat[j][0] > 0 && mat[j + 1][0] != mat[j][0]) {
-                    line = cb.buildLine(row + 3, getCardFromDisposition(0, j - 1));
-                }
-                else if (mat[j][0] == 0) {
-                    if(mat[j][1] == 0) line = "               ";//15
-                    else if (mat[j][1] > 0) line = "            ";//12
-                }
-
-                //colonne centrali
-                for(int col = 1; col < mat[0].length -1; col++){
-                    if( (mat[j][col] > 0) && (mat[j + 1][col] == mat[j][col])) {
-                        line += cb.buildLine(row, getCardFromDisposition(col, j));
-                    }
-                    else if (mat[j][col] > 0 && mat[j + 1][col] != mat[j][col]) {
-                        line += cb.buildLine(row + 3, getCardFromDisposition(col, j - 1));
-                    }
-                    else if(mat[j][col] == 0){
-                        if(mat[j][col - 1] == 0 && mat[j][col + 1] == 0) line += "            ";//12
-                        else if(mat[j][col - 1] > 0 && mat[j][col + 1] > 0) line += "         ";//9
-                        else if(mat[j][col - 1] == 0 && mat[j][col + 1] > 0) line += "         ";//9
-                        else if(mat[j][col - 1] > 0 && mat[j][col + 1] == 0) line += "            ";//12
-                        else if(mat[j][col - 1] == 0) line += "            ";//12
-                        else if( mat[j][col + 1] == 0) line += "         ";//9
-                    }
-                }
-
-                //colonna piu a destra
-                if (mat[j][mat[0].length - 1] > 0 && mat[j + 1][mat[0].length - 1] == mat[j][mat[0].length - 1]) {
-                    line += cb.buildLine(row, getCardFromDisposition(mat[0].length - 1, j));
-                }
-                else if (mat[j][mat[0].length-1] > 0 && mat[j + 1][mat[0].length-1] != mat[j][mat[0].length -1]) {
-                    line += cb.buildLine(row + 3, getCardFromDisposition(mat[0].length-1, j - 1));
-                }
-                else if (mat[j][mat[0].length-1] == 0) {
-                    if(mat[j][mat[0].length-2] == 0) line += "               ";//15
-                    else if (mat[j][mat[0].length-2] > 0) line += "            ";//12
-                }
-
-                System.out.println(line);
-            }
-            line ="";
-            j++;
-        }
-
-        //ULTIMA STRISCIA
-        //itero tre volte su ogni riga
-        for(int row = 0; row < 3; row++) {
-            //colonna piu a sinisra
-            if (mat[j][0] > 0) {
-                line = cb.buildLine(row + 3, getCardFromDisposition(0, j - 1));
-            }
-            else if (mat[j][0] == 0) {
-                if(mat[j][1] == 0) line = "               ";//15
-                else if (mat[j][1] > 0) line = "            ";//12
-            }
-
-            //colonne centrali
-            for(int col = 1; col < mat[0].length -1; col++){
-                if( mat[j][col] > 0) {
-                    line += cb.buildLine(row + 3, getCardFromDisposition(col, j - 1));
-                }
-
-                else if(mat[j][col] == 0){
-                    if(mat[j][col - 1] == 0 && mat[j][col + 1] == 0) line += "            ";//12
-                    else if(mat[j][col - 1] > 0 && mat[j][col + 1] > 0) line += "         ";//9
-                    else if(mat[j][col - 1] == 0 && mat[j][col + 1] > 0) line += "         ";//9
-                    else if(mat[j][col - 1] > 0 && mat[j][col + 1] == 0) line += "            ";//12
-                    else if(mat[j][col - 1] == 0) line += "            ";//12
-                    else if( mat[j][col + 1] == 0) line += "         ";//9
-                }
-            }
-
-            //colonna piu a destra
-            if (mat[j][mat[0].length - 1] > 0 && mat[j + 1][mat[0].length - 1] == mat[j][mat[0].length - 1]) {
-                line += cb.buildLine(row + 3, getCardFromDisposition(mat[0].length - 1, j - 1));
-            }
-
-            else if (mat[j][mat[0].length-1] == 0) {
-                if(mat[j][mat[0].length-2] == 0) line += "               ";//15
-                else if (mat[j][mat[0].length-2] > 0) line += "            ";//12
-            }
-
-            System.out.println(line);
-        }*/
 
     }
 
