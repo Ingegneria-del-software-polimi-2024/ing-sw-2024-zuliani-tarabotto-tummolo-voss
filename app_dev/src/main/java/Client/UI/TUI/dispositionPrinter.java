@@ -105,15 +105,6 @@ public class dispositionPrinter {
                     }
                 }
             }
-            /*
-            for(int i = 0; i < dispositionMap.length; i++){
-                for(int j = 0; j < dispositionMap[0].length; j++){
-                    if(dispositionMap[i][j] > 0){
-                        mat[i][j] = dispositionMap[i][j];
-                        mat[i + 1][j] = dispositionMap[i][j];
-                    }
-                }
-            }*/
 
         }
 
