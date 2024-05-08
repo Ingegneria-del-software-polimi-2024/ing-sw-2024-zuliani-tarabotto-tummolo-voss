@@ -1,20 +1,20 @@
 package Client.View;
 
 import Client.UI.UI;
+import Client.Web.ClientAPI_GO;
+import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.ChooseSecreteObjMessage;
+import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.DrawCardMessage;
+import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.PlayCardMessage;
+import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.PlayStarterCardMessage;
 import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
-import SharedWebInterfaces.SharedInterfaces.ServerControllerInterface;
 import model.GameState.TurnState;
-import model.cards.Card;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
 import model.enums.Artifact;
 import model.enums.Element;
-import model.objective.Objective;
 import model.placementArea.Coordinates;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.awt.Point;
 import java.util.List;
 
 /**
@@ -37,18 +37,21 @@ public class ViewAPI implements ViewAPI_Interface {
     private String gameId;
     private HashMap<Artifact, Integer> availableArtifacts;
     private HashMap<Element, Integer> availableElements;
-    private String playerId;// the id of THIS client
+    //the id of THIS player
+    private String playerId;
     private String pawnColor;
     private List<Coordinates> availablePlaces;
+    //an array of 3 booleans indicating which of the cards in the player's hand can be placed(due to placementConstraint)
     private boolean[] canBePlaced;
+    //the disposition of all players' are stored here
     private HashMap< String, HashMap< Coordinates, PlayableCard> > dispositions;
     //the points of all players are store here
     private HashMap< String , Integer> points;
     private boolean myTurn;
     private UI ui;
-    private ServerControllerInterface controller;
+    private ClientAPI_GO clientAPIGo;
 
-    public ViewAPI(UI ui, ServerControllerInterface controller) {
+    public ViewAPI(UI ui, ClientAPI_GO clientAPIGo) {
         for(Element el : Element.values()) {
             availableElements.put(el, 0);
         }
@@ -56,33 +59,35 @@ public class ViewAPI implements ViewAPI_Interface {
             availableArtifacts.put(ar, 0);
         }
         this.ui = ui;
-        this.controller = controller;
+        this.clientAPIGo = clientAPIGo;
     }
 
     /////////// from CLIENT to SERVER  ACTIONS ////////////////////////////////////////////////////////////////////////////////////
-
-    //all this methods call the methods contained in ModelController in order to modify the model
+    //all this methods create a new MessageFromClient object containing an execute() method with the call to a specific method of ModelController
     public void playStarterCard(){
-        controller.playStarterCard(starterCard.getFaceSide(), playerId);
+        clientAPIGo.sendToServer( new PlayStarterCardMessage( starterCard.getFaceSide(), playerId));
     }
 
     public void chooseSecretObjective(String chosenObjective){
-        controller.chooseSecretObjective(chosenObjective, playerId);
+        clientAPIGo.sendToServer(new ChooseSecreteObjMessage(chosenObjective, playerId));
     }
 
     public void playCard(PlayableCard c, int x, int y) {
-        controller.playCard(c.getId(), x, y, c.getFaceSide());
+        clientAPIGo.sendToServer( new PlayCardMessage(c.getId(), x, y, c.getFaceSide()));
     }
 
     public void drawCard(int cardSource){
-        controller.drawCard(cardSource);
+        clientAPIGo.sendToServer( new DrawCardMessage(cardSource));
     }
+
+
+
 
     /////////// from SERVER to CLIENT ACTIONS ////////////////////////////////////////////////////////////////////////////////////
     @Override
     public void setState(TurnState state) {
         this.state = state;
-        this.state.display(this, ui);
+        this.state.display( ui);
     }
 
     @Override
@@ -236,5 +241,15 @@ public class ViewAPI implements ViewAPI_Interface {
     @Override
     public boolean getMyTurn() {
         return myTurn;
+    }
+
+    ////////////////////////////////// GETTER METHODS //////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * returns the disposition of THIS player
+     * @return
+     */
+    public HashMap<Coordinates, PlayableCard> getDisposition(){
+        return dispositions.get(playerId);
     }
 }

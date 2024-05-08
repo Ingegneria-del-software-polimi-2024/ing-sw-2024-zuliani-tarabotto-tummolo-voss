@@ -3,7 +3,7 @@ package model.GameState;
 import Client.UI.UI;
 import Client.View.ViewAPI;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
-import SharedWebInterfaces.Messages.MessagesFromClient.SelectStarterCardMesage;
+import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.SelectStarterCardMessage;
 
 /**
  * a finite state machine that keeps track of the states occuring during the turn of a player,
@@ -17,62 +17,62 @@ import SharedWebInterfaces.Messages.MessagesFromClient.SelectStarterCardMesage;
 public enum TurnState {
     GAME_INITIALIZATION{
         @Override
-        public void display(ViewAPI view, UI ui){
-            ui.initializationDisplay(view);
+        public void display(UI ui){
+            ui.displayInitialization();
         }
 
     },
     STARTER_CARD_SELECTION{
         public boolean controlMessage(MessageFromClient msg){
-            return (msg instanceof SelectStarterCardMesage);
+            return (msg instanceof SelectStarterCardMessage);
         }
         @Override
-        public void display(ViewAPI view, UI ui){
-            ui.starterSelectionDisplay(view);
+        public void display(UI ui){
+            ui.displayStarterCardSelection();
         }
     },
     OBJECTIVE_SELECTION{
         //TODO change instanceof type
         public boolean controlMessage(MessageFromClient msg){
-            return (msg instanceof SelectStarterCardMesage);
+            return (msg instanceof SelectStarterCardMessage);
         }
 
         @Override
-        public void display(ViewAPI view, UI ui){
-            ui.objectiveSelectionDisplay(view);
+        public void display(UI ui){
+            ui.displayObjectiveSelection();
         }
     },
     PLACING_CARD_SELECTION{
         //TODO change instanceof type
         public boolean controlMessage(MessageFromClient msg){
-            return (msg instanceof SelectStarterCardMesage);
+            return (msg instanceof SelectStarterCardMessage);
         }
 
         @Override
-        public void display(ViewAPI view, UI ui){
-            ui.placingCardDisplay(view);
+        public void display(UI ui){
+            ui.displayPlacingCard();
         }
     },
     CARD_DRAWING{
         //TODO change instanceof type
         public boolean controlMessage(MessageFromClient msg){
-            return (msg instanceof SelectStarterCardMesage);
+            return (msg instanceof SelectStarterCardMessage);
         }
 
         @Override
-        public void display(ViewAPI view, UI ui){
-            ui.cardDrawingDisplay(view);
+        public void display(UI ui){
+            ui.displayCardDrawing();
         }
     },
     CALCULATE_OBJECTIVES{
         //TODO change instanceof type
         public boolean controlMessage(MessageFromClient msg){
-            return (msg instanceof SelectStarterCardMesage);
+            return (msg instanceof SelectStarterCardMessage);
         }
 
         @Override
-        public void display(ViewAPI view, UI ui){
-            ui.calculateObjectivesDisplay(view);
+        public void display( UI ui){
+            ui.displayCalculateObjectives();
         }
     };
 
@@ -116,5 +116,5 @@ public enum TurnState {
 
     public boolean controlMessage(MessageFromClient message){return false;}
 
-    public void display(ViewAPI view, UI ui){}
+    public void display( UI ui){}
 }

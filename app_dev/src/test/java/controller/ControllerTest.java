@@ -2,8 +2,7 @@ package controller;
 
 
 import model.Exceptions.EmptyCardSourceException;
-import Client.UI.TUI.dispositionPrinter;
-import junit.framework.Assert;
+import Client.UI.TUI.DispositionPrinter;
 import model.GameState.GameState;
 import model.enums.Pawn;
 import model.placementArea.Coordinates;
@@ -24,7 +23,7 @@ class ControllerTest {
     private CliView view;
     private Scanner sc = new Scanner(new File("/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/final"));
     private Player initialPlayer;
-    private dispositionPrinter printer;
+    private DispositionPrinter dispositionPrinter = new DispositionPrinter();
 
     ControllerTest() throws FileNotFoundException {
     }
@@ -113,14 +112,14 @@ class ControllerTest {
         String filePath2 = "/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/expectedOutput";
         File f1 = new File(filePath1);
         File f2 = new File(filePath2);
-        printer = new dispositionPrinter(gameState.getTurnPlayer().getPlacementArea().getDisposition());
-        printer.mapDisposition();
-        printer.addAvailablePlaces(gameState.getTurnPlayer().getPlacementArea().getAvailablePlaces());
-        printer.print();
-        printer = new dispositionPrinter(gameState.getPlayer(1).getPlacementArea().getDisposition());
-        printer.mapDisposition();
-        printer.addAvailablePlaces(gameState.getPlayer(1).getPlacementArea().getAvailablePlaces());
-        printer.print();
+
+        dispositionPrinter.print(gameState.getTurnPlayer().getPlacementArea().getDisposition());
+        dispositionPrinter.print(gameState.getTurnPlayer().getPlacementArea().getDisposition(), gameState.getTurnPlayer().getPlacementArea().getAvailablePlaces());
+
+
+        dispositionPrinter.print(gameState.getPlayer(1).getPlacementArea().getDisposition());
+        dispositionPrinter.print(gameState.getPlayer(1).getPlacementArea().getDisposition(), gameState.getPlayer(1).getPlacementArea().getAvailablePlaces());
+
         assert filesCompareByLine(f1.toPath(), f2.toPath()) == -1;
 
     }
