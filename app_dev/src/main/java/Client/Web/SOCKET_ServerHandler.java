@@ -34,7 +34,7 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
         }
     }
 
-    public void addNewPlayer() throws RemoteException {}
+//    public void addNewPlayer() throws RemoteException {}
 
     /**
      * receives and enqueues the message coming from the server
@@ -73,7 +73,7 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
         }
     }
 
-    //TODO just always remember to call this
+    //TODO just ALWAYS remember to call this
     public void attachAPI(ClientAPI_COME api){
         this.api = api;
     }

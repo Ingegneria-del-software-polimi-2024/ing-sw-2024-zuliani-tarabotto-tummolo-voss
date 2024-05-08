@@ -30,19 +30,19 @@ public class RMI_ClientHandler implements ClientHandlerInterface {
      */
     public void sendToServer(MessageFromClient message) throws RemoteException{api.sendToServer(message);}
 
-    public void addNewPlayer(String nickname, String lookupTableName, int clientPort, String clientHost) throws RemoteException{
-        //searching in the register for the required connection
-        Registry registry = LocateRegistry.getRegistry(clientHost, clientPort);
-        try {
-            client = (ServerHandlerInterface) registry.lookup(lookupTableName);
-        } catch (NotBoundException e) {
-            throw new RemoteException();
-        }
-        //memorizing in the hashmap of ServerAPI_COME
-        api.addNewPlayer(nickname, this);
-        //signaling controller to memorize in the hashmap of ServerAPI_GO
-        api.sendToServer(new AddNewPlayerMessage(nickname, this));
-    }
+//    public void addNewPlayer(String nickname, String lookupTableName, int clientPort, String clientHost) throws RemoteException{
+//        //searching in the register for the required connection
+//        Registry registry = LocateRegistry.getRegistry(clientHost, clientPort);
+//        try {
+//            client = (ServerHandlerInterface) registry.lookup(lookupTableName);
+//        } catch (NotBoundException e) {
+//            throw new RemoteException();
+//        }
+//        //memorizing in the hashmap of ServerAPI_COME
+//        api.addNewPlayer(nickname, this);
+//        //signaling controller to memorize in the hashmap of ServerAPI_GO
+//        api.sendToServer(new AddNewPlayerMessage(nickname, this));
+//    }
 
     //Come
 
@@ -55,7 +55,7 @@ public class RMI_ClientHandler implements ClientHandlerInterface {
 
     @Override
     public void setReceiver(ServerAPI_COME receiver) throws RemoteException {
-        //todo
+        api = receiver;
     }
 
     @Override
@@ -89,8 +89,5 @@ public class RMI_ClientHandler implements ClientHandlerInterface {
         if(msg instanceof NewConnectionMessage)
             ((NewConnectionMessage) msg).setHandler(this);
         lobby.enqueueMessage(msg);
-    }
-    public void setApi(ServerAPI_COME come){
-        api = come;
     }
 }

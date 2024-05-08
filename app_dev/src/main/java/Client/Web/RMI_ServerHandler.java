@@ -32,8 +32,8 @@ public class RMI_ServerHandler implements ServerHandlerInterface {
 
     public void sendToServer(MessageFromClient message) throws RemoteException{server.sendToServer(message);}
 
-    @Override
-    public void addNewPlayer() throws RemoteException{}
+//    @Override
+//    public void addNewPlayer() throws RemoteException{}
 
     @Override
     public void notifyChanges(MessageFromServer message) throws RemoteException{api.notifyChanges(message);}

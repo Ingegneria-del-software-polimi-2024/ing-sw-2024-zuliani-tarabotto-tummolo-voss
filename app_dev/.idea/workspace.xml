@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/Web/RMI_ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/Web/RMI_ServerHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Game/RMI_ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Game/RMI_ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Game/SOCKET_ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Game/SOCKET_ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/FirstSocketManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/FirstSocketManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/First_RMI_Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/First_RMI_Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/ClientHandlerInterface.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/Messages/MessagesToLobby/MessageToLobby.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/Messages/MessagesToLobby/MessageToLobby.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/Messages/MessagesToLobby/NewConnectionMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/Messages/MessagesToLobby/NewConnectionMessage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controller/LobbyController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/LobbyController.class" afterDir="false" />
-    </list>
+    <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,8 +15,8 @@
       <list>
         <option value="JUnit3 Test Class" />
         <option value="JUnit5 Test Class" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -244,6 +233,7 @@
       <workItem from="1714578581406" duration="25540000" />
       <workItem from="1714745696918" duration="572000" />
       <workItem from="1715005438035" duration="5606000" />
+      <workItem from="1715080802012" duration="8849000" />
     </task>
     <servers />
   </component>

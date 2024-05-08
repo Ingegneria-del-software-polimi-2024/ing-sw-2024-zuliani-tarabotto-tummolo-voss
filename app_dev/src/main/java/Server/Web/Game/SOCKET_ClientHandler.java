@@ -134,9 +134,9 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
         lobby.enqueueMessage(msg);
     }
 
-    @Override
-    public void addNewPlayer(String nickname, String lookupTableName, int clientPort, String clientHost) throws RemoteException {
-        //TODO implement!!!!
-    }
+//    @Override
+//    public void addNewPlayer(String nickname, String lookupTableName, int clientPort, String clientHost) throws RemoteException {
+//        //TODO implement!!!!
+//    }
 
 }

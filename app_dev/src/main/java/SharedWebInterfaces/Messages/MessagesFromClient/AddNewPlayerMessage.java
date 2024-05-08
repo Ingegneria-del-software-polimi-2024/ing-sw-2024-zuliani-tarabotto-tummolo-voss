@@ -9,7 +9,7 @@ public class AddNewPlayerMessage implements MessageFromClient{
     ClientHandlerInterface handler;
     public void execute(ServerControllerInterface controller) {
         System.out.println("WTFF");
-        //TODO solve this shit
+        //TODO solve this
     }
     public AddNewPlayerMessage(String nickname, ClientHandlerInterface handler){
         this.nickname = nickname;

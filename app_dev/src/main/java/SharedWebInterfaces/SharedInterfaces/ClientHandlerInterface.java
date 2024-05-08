@@ -18,7 +18,7 @@ public interface ClientHandlerInterface extends Remote {
     //Go
     public void sendToServer(MessageFromClient message) throws RemoteException;
 
-    public void addNewPlayer(String nickname, String lookupTableName, int clientPort, String clientHost) throws RemoteException;
+//    public void addNewPlayer(String nickname, String lookupTableName, int clientPort, String clientHost) throws RemoteException;
 
     //Come
     public void notifyChanges(MessageFromServer message) throws RemoteException;

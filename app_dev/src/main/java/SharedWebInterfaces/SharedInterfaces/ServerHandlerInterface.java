@@ -17,7 +17,7 @@ public interface ServerHandlerInterface extends Remote {
     //COME
     public void sendToServer(MessageFromClient message)throws RemoteException;
 
-    public void addNewPlayer()throws RemoteException;
+//    public void addNewPlayer()throws RemoteException;
 
     //GO
     public void notifyChanges(MessageFromServer message)throws RemoteException;
