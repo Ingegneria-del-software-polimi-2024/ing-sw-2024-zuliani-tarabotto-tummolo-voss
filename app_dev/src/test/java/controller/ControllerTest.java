@@ -4,7 +4,6 @@ package controller;
 import model.Exceptions.EmptyCardSourceException;
 import Client.UI.TUI.dispositionPrinter;
 import junit.framework.Assert;
-import Exceptions.EmptyCardSourceException;
 import model.GameState.GameState;
 import model.enums.Pawn;
 import model.placementArea.Coordinates;

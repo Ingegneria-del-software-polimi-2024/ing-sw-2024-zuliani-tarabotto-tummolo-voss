@@ -1,11 +1,9 @@
 package model.GameState;
 
-import Client.View.UI;
+import Client.UI.UI;
 import Client.View.ViewAPI;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import SharedWebInterfaces.Messages.MessagesFromClient.SelectStarterCardMesage;
-
-import javax.swing.text.View;
 
 /**
  * a finite state machine that keeps track of the states occuring during the turn of a player,
