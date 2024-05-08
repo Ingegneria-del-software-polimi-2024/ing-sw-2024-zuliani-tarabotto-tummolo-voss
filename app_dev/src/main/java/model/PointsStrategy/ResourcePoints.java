@@ -47,4 +47,9 @@ public class ResourcePoints implements Points {
 
     @Override
     public String getPointsPolicy() { return ("Points policy -> ResourcePoints || Artifact requested: " + getArtifacts() + " || points given per Artifact: " + getPoints());}
+
+    @Override
+    public Artifact getArtifact(){
+        return this.artifact;
+    }
 }

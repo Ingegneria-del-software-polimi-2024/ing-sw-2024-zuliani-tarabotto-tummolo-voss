@@ -9,6 +9,7 @@ import model.placementArea.PlacementArea;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +19,7 @@ public class GoldCard extends PlayableCard{
     private Element blockedElement;
     private Map<Element, Integer> placementConstraint;
     private Points points;
+
 
 
     /**
@@ -71,6 +73,7 @@ public class GoldCard extends PlayableCard{
                 IOException e) {
             e.printStackTrace();
         }
+
         return null;
     }
 
@@ -85,6 +88,7 @@ public class GoldCard extends PlayableCard{
     //////////////// GETTER METHODS ////////////////////////////////
     @Override
     public Element getBlockedElement() { return blockedElement; }
+    @Override
     public Points getPoints () { return points; }
     public Map<Element, Integer> getPlacementConstraint () { return Collections.unmodifiableMap(placementConstraint);}
 
@@ -124,5 +128,7 @@ public class GoldCard extends PlayableCard{
         else if (c.getArtifact() != null) System.out.println("Corner_" + c.getId() + ": " + c.getArtifact());
         else System.out.println("Corner_" + c.getId() + ": empty");
     }
+
+
 
 }

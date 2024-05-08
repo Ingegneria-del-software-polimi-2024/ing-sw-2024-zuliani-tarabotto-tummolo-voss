@@ -21,6 +21,7 @@ public class PlacementArea {
 
     private ArrayList<PlayableCard> cardsByPlacementOrder;
 
+    private List<Coordinates> unAvailablePlaces;
 
      /**
      * @return the free positions in which you can add a card
@@ -37,6 +38,7 @@ public class PlacementArea {
         availableElements = new HashMap<>();
         availablePlaces = new ArrayList<>();
         cardsByPlacementOrder = new ArrayList<PlayableCard>();
+        unAvailablePlaces = new ArrayList<>();
         availablePlaces.add(new Coordinates(0,0));
 
         //we initialize availableElements and availableArtifacts to 0
@@ -92,6 +94,8 @@ public class PlacementArea {
                         cardOnTable = disposition.get(coord);
                         //counting the number of nearby cards for objectives
                         numberNearbyCards++;
+                        //if the corner is covered by another card we set isAvailable = false
+                        if(cardOnTable.getCorner(count) != null){ cardOnTable.getCorner(count).setIsAvailable();}
                         //removing covered elements/artifacts
                         if (cardOnTable.getCorner(count) != null && !cardOnTable.getCorner(count).isEmpty()) {
                             if (cardOnTable.getCorner(count).getElement() != null)
@@ -253,7 +257,12 @@ public class PlacementArea {
                     coord = new Coordinates(i, j);
                     //if the placed card has a corner there, there is no card already placed there,
                     // they are not already inside availablePlaces, the coordinates can be added to the list
-                    if (card.getCorner(count) != null && coord.areContainedIn(disposition.keySet()) == null && coord.areContainedIn(availablePlaces) == null)
+                    if(card.getCorner(count) == null){ //if a card has a null corner then that position will automatically be unavailable
+                        unAvailablePlaces.add(new Coordinates(i, j));
+                        //if the position was previously added to the available ones, we now remove it and put it in unavailable
+                        if(coord.areContainedIn(availablePlaces) != null) availablePlaces.remove(coord.areContainedIn(availablePlaces));
+                    }
+                    else if (card.getCorner(count) != null && coord.areContainedIn(disposition.keySet()) == null && coord.areContainedIn(availablePlaces) == null && coord.areContainedIn(unAvailablePlaces) == null)
                         availablePlaces.add(new Coordinates(i, j));
                     count -= 1;
                 }

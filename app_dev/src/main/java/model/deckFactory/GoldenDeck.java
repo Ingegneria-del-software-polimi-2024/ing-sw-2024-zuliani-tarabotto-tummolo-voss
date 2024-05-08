@@ -17,6 +17,7 @@ public class GoldenDeck extends PlayableDeck{
             try {
                 GoldCard card = GoldCard.parse(i);
                 addCard(card);
+                card.buildBackCorners();
             } catch (JsonProcessingException e) {
 
                 e.printStackTrace();
