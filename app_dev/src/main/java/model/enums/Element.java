@@ -6,9 +6,9 @@ import org.fusesource.jansi.Ansi;
  * the elements that can be present on the corners of the cards
  */
 public enum Element {
-    mushrooms(Ansi.ansi().fgRed().a("F").reset().toString(), 1),
-    vegetals(Ansi.ansi().fgGreen().a("P").reset().toString(), 71),
-    animals(Ansi.ansi().fgCyan().a("A").reset().toString(), 33),
+    mushrooms(Ansi.ansi().fgRed().a("F").reset().toString(), 196),
+    vegetals(Ansi.ansi().fgGreen().a("P").reset().toString(), 46),
+    animals(Ansi.ansi().fgCyan().a("A").reset().toString(), 45),
     insects(Ansi.ansi().fgMagenta().a("I").reset().toString(), 129);
 
 
