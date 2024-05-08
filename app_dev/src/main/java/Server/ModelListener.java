@@ -3,16 +3,21 @@ package Server;
 
 import Server.Web.Game.ServerAPI_GO;
 import SharedWebInterfaces.Messages.MessagesFromServer.*;
+import model.GameState.TurnState;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
 import model.deckFactory.ObjectiveDeck;
 import model.deckFactory.PlayableDeck;
 import model.enums.Artifact;
 import model.enums.Element;
+import model.enums.Pawn;
 import model.placementArea.Coordinates;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ModelListener {
 
@@ -28,7 +33,7 @@ public class ModelListener {
      * notification about current state of GameState
      * @param state
      */
-    public void notifyChanges(String state){
+    public void notifyChanges(TurnState state){
         serverAPI.broadcastNotifyChanges( new StateMessage( state ));
     }
 
@@ -37,49 +42,44 @@ public class ModelListener {
      * notification with data about the order of the cards in decks
      * @param goldDeck
      * @param resourceDeck
-     * @param starterDeck
-     * @param objectiveDeck
+     * @param openGold
+     * @param openResource
      * @param players
      * @param gameId
+     * @param commonObjective1
+     * @param commonObjective2
      */
-    //TODO: add notification about each player's pawn color
-    public void notifyChanges(PlayableDeck goldDeck, PlayableDeck  resourceDeck,
-                              PlayableDeck  starterDeck, ObjectiveDeck objectiveDeck,
-                              ArrayList<String> players, String gameId){
+    public void notifyChanges(PlayableDeck goldDeck, PlayableDeck  resourceDeck, List<PlayableCard> openGold, List<PlayableCard> openResource,
+                              ArrayList<String> players, String gameId,
+                              ObjectiveCard commonObjective1, ObjectiveCard commonObjective2){
 
-        int[] goldDeckInt = goldDeck.getCards().stream()
-                .mapToInt(PlayableCard::getId)
-                .toArray();
 
-        int[] resourceDeckInt = resourceDeck.getCards().stream()
-                .mapToInt(PlayableCard::getId)
-                .toArray();
 
-        int[] starterDeckInt = starterDeck.getCards().stream()
-                .mapToInt(PlayableCard::getId)
-                .toArray();
-
-        int[] objectiveDeckInt = objectiveDeck.getCards().stream()
-                .mapToInt(ObjectiveCard::getId)
-                .toArray();
-
-        serverAPI.broadcastNotifyChanges( new InitializationMessage( goldDeckInt, resourceDeckInt, starterDeckInt,
-                                                                     objectiveDeckInt, (String[]) players.toArray(), gameId));
+        serverAPI.broadcastNotifyChanges( new InitializationMessage( goldDeck.getCards(), resourceDeck.getCards(), openGold, openResource,
+                                        (String[]) players.toArray(), gameId,
+                                        commonObjective1, commonObjective2));
 
     }
 
 
 
     /**
-     * the player is notified with the starterCard that he has been given
+     * the player is notified with the starterCard that he has been given and the PAWNCOLOR
      * @param starterCard
      * @param player
      */
-    public void notifyChanges(PlayableCard starterCard, String player){
-        serverAPI.notifyChanges( new StarterCardMessage(starterCard.getId()), player );
+    public void notifyChanges(PlayableCard starterCard, String player, Pawn pawnColor){
+        serverAPI.notifyChanges( new StarterCardMessage(starterCard, pawnColor.toString()), player );
     }
 
-
+    /**
+     * the player is notified with his hand of cards
+     * @param hand
+     * @param player
+     */
+    public void notifyChanges(List<PlayableCard> hand , String player){
+        serverAPI.notifyChanges( new UpdateHandMessage(hand), player);
+    }
 
     /**
      * notification about the two secretObjectives for each player
@@ -87,19 +87,21 @@ public class ModelListener {
      * @param secretObjective2
      */
     public void notifyChanges(ObjectiveCard secretObjective1, ObjectiveCard secretObjective2, String player){
-        serverAPI.notifyChanges( new SecretObjectivesMessage(secretObjective1.getId(), secretObjective2.getId()), player);
+        serverAPI.notifyChanges( new SecretObjectivesMessage(secretObjective1, secretObjective2), player);
     }
 
 
     /**
-     * after each player chooses his secretObjective, a notification is sent to all clients
+     * after each player chooses his secretObjective, a notification is sent
      * @param secretObjective
      * @param player
      */
     public void notifyChanges(ObjectiveCard secretObjective, String player){
-        serverAPI.broadcastNotifyChanges( new ConfirmSecretObjectiveMessage(secretObjective.getId(), player));
+
+        serverAPI.notifyChanges( new ConfirmSecretObjectiveMessage(secretObjective), player);
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////// ROUND NOTIFICATIONS ///////////////////////////////////////////////////////////////
 
     /**
@@ -108,38 +110,33 @@ public class ModelListener {
      * @param availablePlaces
      * @param player
      */
-    public void notifyChanges(String player, ArrayList<Coordinates> availablePlaces, boolean[] canBePlaced){
+    public void notifyChanges(String player, List<Coordinates> availablePlaces, boolean[] canBePlaced){
         serverAPI.notifyChanges( new PlaceableCardsMessage(availablePlaces, canBePlaced), player);
     }
 
+
     /**
-     * after position, coordinates and faceSide for placing the card are chosen, the player is notified with his updated disposition
-     * , points and available resources
+     * after placing the card each player is notified with his update disposition, points, elements and artifacts
      * @param player
-     * @param lastPlacedGard
-     * @param coordinates
-     * @param faceSide
+     * @param disposition
      * @param points
      * @param availableArtifacts
      * @param availableElements
      */
-    public void notifyChanges(String player, PlayableCard lastPlacedGard,
-                              Coordinates coordinates, boolean faceSide, int points,
+    public void notifyChanges(String player, HashMap<Coordinates, PlayableCard> disposition, int points,
                               HashMap<Artifact, Integer> availableArtifacts, HashMap<Element, Integer> availableElements) {
-        serverAPI.broadcastNotifyChanges(new UpdateDispositionMessage(player, lastPlacedGard.getId(), coordinates,
-                faceSide, points, availableArtifacts, availableElements));
+        serverAPI.broadcastNotifyChanges(new UpdateDispositionMessage(player, disposition,
+                points, availableArtifacts, availableElements));
 
     }
 
     /**
-     * after the player decided where to draw the next card from, the involved card source gets updated based on cardDrawnFrom
-     * @param lastDrawnCard
-     * @param player
+     * after the player decided where to draw the next card from, the involved card source gets updated based on cardSource
+     * @param deck
      * @param cardSource
      */
-    public void notifyChanges(String player, PlayableCard lastDrawnCard, int cardSource) {
-
-        serverAPI.broadcastNotifyChanges( new DrawCardMessage(player, lastDrawnCard.getId(), cardSource));
+    public void notifyChanges(List<PlayableCard> deck, int cardSource) {
+        serverAPI.broadcastNotifyChanges( new DrawCardMessage(deck, cardSource));
     }
 
     /**

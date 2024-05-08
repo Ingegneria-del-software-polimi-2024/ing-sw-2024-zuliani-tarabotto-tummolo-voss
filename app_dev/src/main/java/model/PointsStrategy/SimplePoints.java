@@ -1,6 +1,7 @@
 package model.PointsStrategy;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import model.enums.Artifact;
 import model.placementArea.PlacementArea;
 
 /**
@@ -33,4 +34,8 @@ public class SimplePoints implements Points {
     @Override
     public String getPointsPolicy() { return ("Points policy -> SimplePoints || points given: " + getPoints());}
 
+    @Override
+    public Artifact getArtifact(){
+        return null;
+    }
 }

@@ -14,6 +14,7 @@ public class StarterDeck extends PlayableDeck{
             try {
                 StarterCard card = StarterCard.parse(i);
                 addCard(card);
+                card.buildBackCorners();
             } catch (JsonProcessingException e) {
 
                 e.printStackTrace();

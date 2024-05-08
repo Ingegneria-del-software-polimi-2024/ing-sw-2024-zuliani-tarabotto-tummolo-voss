@@ -2,11 +2,12 @@ package model.deckFactory;
 
 import model.cards.PlayableCards.PlayableCard;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public abstract class PlayableDeck implements Deck{
-    protected List<PlayableCard> cards;
+    protected ArrayList<PlayableCard> cards;
 
 
     @Override
@@ -32,7 +33,6 @@ public abstract class PlayableDeck implements Deck{
     public void addCard(PlayableCard card) {
         cards.add(card);
     }
-
 
 
     ////////////// GETTER METHODS ////////////////////////

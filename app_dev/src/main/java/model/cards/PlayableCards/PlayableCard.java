@@ -1,10 +1,9 @@
 package model.cards.PlayableCards;
 
+import model.PointsStrategy.Points;
 import model.cards.Card;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
 
 import model.enums.*;
 import model.placementArea.PlacementArea;
@@ -14,6 +13,8 @@ public abstract class PlayableCard implements Card {
     protected int id;
     protected boolean faceSide;
     protected List<Corner> corners;
+    protected Points points;
+    protected List<Corner> backCorners;//necessary for TUI
 
 
     /**
@@ -32,7 +33,15 @@ public abstract class PlayableCard implements Card {
     //////////////// GETTER METHODS ///////////////////////////
     public Corner getCorner(int index) {
         //returns a void corner if the card is facedown
-        if(!getFaceSide()) return new Corner();
+        //NECESSARY FOR TUI PRINTING
+        if(!getFaceSide()){
+            for (Corner corner : backCorners) {
+                if (corner.getId() == index) {
+                    return corner;
+                }
+            }
+            //return new Corner();
+        } //return new Corner();
         // Iterate through the corners list and find the corner with the matching ID
         for (Corner corner : corners) {
             if (corner.getId() == index) {
@@ -69,6 +78,25 @@ public abstract class PlayableCard implements Card {
     public boolean getFaceSide() {
         return faceSide;
     }
+
+    public Points getPoints(){
+        return points;
+    }
+
+    /**
+     * this function is only auxiliary for the TUI
+     */
+    public void buildBackCorners(){
+        backCorners = new ArrayList<>();
+        for(int i = 0; i<4; i++){
+            backCorners.add(new Corner());
+        }
+        backCorners.get(0).setId(0);
+        backCorners.get(1).setId(1);
+        backCorners.get(2).setId(2);
+        backCorners.get(3).setId(3);
+    }
+
 
 
 

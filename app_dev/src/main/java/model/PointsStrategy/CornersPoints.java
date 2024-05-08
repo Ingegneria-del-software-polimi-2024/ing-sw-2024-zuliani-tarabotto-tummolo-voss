@@ -1,5 +1,6 @@
 package model.PointsStrategy;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import model.enums.Artifact;
 import model.placementArea.PlacementArea;
 
 /**
@@ -29,5 +30,9 @@ public class CornersPoints implements Points {
     @Override
     public String getPointsPolicy() {
         return ("Points policy -> CornersPoints || points given per corner covered: " + 2);
+    }
+    @Override
+    public Artifact getArtifact(){
+        return null;
     }
 }

@@ -20,7 +20,7 @@ import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PlacementAreaTest extends TestCase {
+public class PlacementAreaTest extends TestCase {
     //private static GameState gameState;
 
     static int ID = 81;

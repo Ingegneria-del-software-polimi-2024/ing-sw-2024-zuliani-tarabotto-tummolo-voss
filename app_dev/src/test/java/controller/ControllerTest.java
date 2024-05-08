@@ -2,6 +2,8 @@ package controller;
 
 
 import model.Exceptions.EmptyCardSourceException;
+import Client.UI.TUI.dispositionPrinter;
+import junit.framework.Assert;
 import model.GameState.GameState;
 import model.enums.Pawn;
 import model.placementArea.Coordinates;
@@ -15,17 +17,20 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 class ControllerTest {
     private GameState gameState;
     private ArrayList<String> nickNames;
     private CliView view;
     private Scanner sc = new Scanner(new File("/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/final"));
     private Player initialPlayer;
-
+    private dispositionPrinter printer;
 
     ControllerTest() throws FileNotFoundException {
     }
-@Test
+
+
+    @Test
     public void main() throws EmptyCardSourceException, IOException {
         ControllerTest controller = new ControllerTest();
         controller.initializeGameState();
@@ -60,8 +65,8 @@ class ControllerTest {
             gameState.playStarterCard(player);
             //selecting pawn
             Pawn pawn = Pawn.valueOf(sc.next());
-            gameState.setPlayerPawnColor(pawn);
             pawn.setIsAvailable();
+            gameState.setPlayerPawnColor(pawn);
             gameState.nextPlayer();
         }
 
@@ -108,6 +113,14 @@ class ControllerTest {
         String filePath2 = "/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/expectedOutput";
         File f1 = new File(filePath1);
         File f2 = new File(filePath2);
+        printer = new dispositionPrinter(gameState.getTurnPlayer().getPlacementArea().getDisposition());
+        printer.mapDisposition();
+        printer.addAvailablePlaces(gameState.getTurnPlayer().getPlacementArea().getAvailablePlaces());
+        printer.print();
+        printer = new dispositionPrinter(gameState.getPlayer(1).getPlacementArea().getDisposition());
+        printer.mapDisposition();
+        printer.addAvailablePlaces(gameState.getPlayer(1).getPlacementArea().getAvailablePlaces());
+        printer.print();
         assert filesCompareByLine(f1.toPath(), f2.toPath()) == -1;
 
     }

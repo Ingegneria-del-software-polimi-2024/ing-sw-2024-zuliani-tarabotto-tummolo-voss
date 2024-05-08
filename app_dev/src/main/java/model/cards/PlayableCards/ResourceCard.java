@@ -14,11 +14,14 @@ import model.placementArea.PlacementArea;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 public class ResourceCard extends PlayableCard {
     @JsonProperty("element")
     private Element blockedElement;
     private Points points;
+
+
 
     /**
      * json parsing
@@ -69,6 +72,7 @@ public class ResourceCard extends PlayableCard {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return null;
     }
 

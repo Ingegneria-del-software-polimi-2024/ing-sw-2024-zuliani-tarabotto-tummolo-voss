@@ -1,11 +1,12 @@
 package SharedWebInterfaces.Messages.MessagesFromServer;
 
 import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
+import model.cards.ObjectiveCard;
 
 public class SecretObjectivesMessage implements MessageFromServer{
-    private int obj1;
-    private int obj2;
-    public SecretObjectivesMessage(int obj1, int obj2){
+    private ObjectiveCard obj1;
+    private ObjectiveCard obj2;
+    public SecretObjectivesMessage(ObjectiveCard obj1, ObjectiveCard obj2){
         this.obj1 = obj1;
         this.obj2 = obj2;
     }
