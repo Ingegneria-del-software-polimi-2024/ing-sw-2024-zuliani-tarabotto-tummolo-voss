@@ -1,7 +1,6 @@
 package Client.UI.TUI;
 import model.cards.PlayableCards.PlayableCard;
 import model.placementArea.Coordinates;
-import org.fusesource.jansi.AnsiConsole;
 
 
 import java.util.HashMap;
@@ -9,10 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 import static org.fusesource.jansi.Ansi.*;
-import static org.fusesource.jansi.Ansi.Color.*;
 
 
-public class dispositionPrinter {
+public class DispositionPrinter {
 
     private int[][] dispositionMap;
     private int[][] mat;
@@ -30,25 +28,31 @@ public class dispositionPrinter {
     int matYCenter = 0;
 
 
-    public dispositionPrinter(HashMap<Coordinates, PlayableCard> disposition){
-        this.disposition = disposition;
-    }
 
 
     //main function
-    public void print(){
-        //mapDisposition();
-        //firstLineBuilder();
-        generalLineBuilder();
-        System.out.println(ansi().fg(129).a(
 
-                " ██████╗ ██████╗ ██████╗ ███████╗██╗  ██╗    ███╗   ██╗ █████╗ ████████╗██╗   ██╗██████╗  █████╗ ██╗     ██╗███████╗\n" +
-                "██╔════╝██╔═══██╗██╔══██╗██╔════╝╚██╗██╔╝    ████╗  ██║██╔══██╗╚══██╔══╝██║   ██║██╔══██╗██╔══██╗██║     ██║██╔════╝\n" +
-                "██║     ██║   ██║██║  ██║█████╗   ╚███╔╝     ██╔██╗ ██║███████║   ██║   ██║   ██║██████╔╝███████║██║     ██║███████╗\n" +
-                "██║     ██║   ██║██║  ██║██╔══╝   ██╔██╗     ██║╚██╗██║██╔══██║   ██║   ██║   ██║██╔══██╗██╔══██║██║     ██║╚════██║\n" +
-                "╚██████╗╚██████╔╝██████╔╝███████╗██╔╝ ██╗    ██║ ╚████║██║  ██║   ██║   ╚██████╔╝██║  ██║██║  ██║███████╗██║███████║\n" +
-                " ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝    ╚═╝  ╚═══╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝╚══════╝\n" +
-                "                                                                                                                    ").reset());
+    /**
+     * prints the player's disposition without the indication of availablePlaces
+     * @param disposition
+     */
+    public void print(HashMap<Coordinates, PlayableCard> disposition){
+        this.disposition = disposition;
+        mapDisposition();
+        generalLineBuilder();
+
+    }
+
+    /**
+     * prints the player's disposition with the coordinates of the availablePlaces
+     * @param disposition
+     * @param availablePlaces
+     */
+    public void print(HashMap<Coordinates, PlayableCard> disposition, List<Coordinates> availablePlaces){
+        this.disposition = disposition;
+        mapDisposition();
+        addAvailablePlaces(availablePlaces);
+        generalLineBuilder();
 
     }
 
