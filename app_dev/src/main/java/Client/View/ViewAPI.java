@@ -1,8 +1,7 @@
 package Client.View;
 
 import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
-import SharedWebInterfaces.ServerControllerInterface;
-import SharedWebInterfaces.ViewAPI_Interface;
+import SharedWebInterfaces.SharedInterfaces.ServerControllerInterface;
 import model.GameState.TurnState;
 import model.cards.Card;
 import model.cards.ObjectiveCard;

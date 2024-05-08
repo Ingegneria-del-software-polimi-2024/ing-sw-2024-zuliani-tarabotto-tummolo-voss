@@ -1,7 +1,6 @@
 package SharedWebInterfaces.Messages.MessagesFromServer;
 
 import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
-import SharedWebInterfaces.ViewAPI_Interface;
 import model.cards.ObjectiveCard;
 
 public class SecretObjectivesMessage implements MessageFromServer{

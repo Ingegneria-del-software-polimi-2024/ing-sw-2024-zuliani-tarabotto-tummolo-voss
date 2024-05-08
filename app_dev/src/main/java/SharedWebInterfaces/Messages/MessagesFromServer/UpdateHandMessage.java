@@ -1,6 +1,7 @@
 package SharedWebInterfaces.Messages.MessagesFromServer;
 
-import SharedWebInterfaces.ViewAPI_Interface;
+
+import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
 import model.cards.PlayableCards.PlayableCard;
 
 import java.util.List;

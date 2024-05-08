@@ -1,6 +1,6 @@
 package SharedWebInterfaces.SharedInterfaces;
 
-import SharedWebInterfaces.Messages.GeneralAPI_Interface;
+
 import model.GameState.TurnState;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
