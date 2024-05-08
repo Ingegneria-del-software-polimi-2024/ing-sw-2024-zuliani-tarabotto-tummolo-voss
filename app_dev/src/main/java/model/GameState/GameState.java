@@ -2,7 +2,7 @@ package model.GameState;
 
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import model.Exceptions.EmptyCardSourceException;
-import Server.ModelListener;
+//import Server.ModelListener;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
 import model.enums.Pawn;
@@ -27,7 +27,7 @@ public class GameState {
     private CommonTable commonTable;
     private TurnState turnState;
     private final int MAX_POINTS = 10;
-    private ModelListener modelListener;
+    //private ModelListener modelListener;
     private ArrayList<ObjectiveCard> objectiveBuffer;
 
 

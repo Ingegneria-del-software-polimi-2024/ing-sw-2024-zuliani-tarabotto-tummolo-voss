@@ -59,8 +59,6 @@ public class CardBuilder {
 
         }else if(card.getCorner(1) == null){line += String.valueOf(ansi().fg(color).a("\u2550\u2550\u2557").reset());}
 
-        //System.out.println(line);
-
         return line;
     }
 
@@ -74,8 +72,11 @@ public class CardBuilder {
         //LEFT CORNER
         line = leftCornersBuilder(0, card);
 
+
         //CENTER
-        line += pointsBuilder(card);
+        if(card instanceof StarterCard && card.getFaceSide()) line += buildStarterBackSecondRow(card);
+        else if(card.getFaceSide()) line += pointsBuilder(card);
+        else line += "         ";
 
         //RIGHT CORNER
         line += rightCornersBuilder(1, card);
@@ -98,7 +99,9 @@ public class CardBuilder {
         } else if(card.getCorner(0) == null){line = String.valueOf(ansi().fg(color).a("\u2551  ").reset());}
 
         //CENTER
-        line += "         ";
+        if(card instanceof StarterCard && card.getFaceSide()) line += buildStarterBackThirdRow(card);
+        else if(card.getFaceSide()) line += "         ";
+        else line += "   " + backFaceSymbolBuilder(card.getBlockedElement(), 0) + "   ";
 
         //RIGHT CORNER
         if(card.getCorner(1) != null && card.getCorner(1).getIsAvailable()){
@@ -110,12 +113,6 @@ public class CardBuilder {
         return line;
     }
 
-    /*public String buildFourthRow(PlayableCard card){
-        String line = new String();
-        line = "\u2551             \u2551";
-        System.out.println(line);
-        return line;
-    }*/
 
     public String buildFourthRow(PlayableCard card){
         int color;
@@ -131,7 +128,9 @@ public class CardBuilder {
         } else if(card.getCorner(2) == null){line = String.valueOf(ansi().fg(color).a("\u2551  ").reset());}
 
         //CENTER
-        line += "         ";
+        if(card instanceof StarterCard && card.getFaceSide()) line += buildStarterBackFourthRow(card);
+        else if(card.getFaceSide()) line += "         ";
+        else line += "   " + backFaceSymbolBuilder(card.getBlockedElement(), 1) + "   ";
 
         //RIGHT CORNER
         if(card.getCorner(3) != null && card.getCorner(3).getIsAvailable()){
@@ -139,7 +138,6 @@ public class CardBuilder {
 
         }else if(card.getCorner(3) == null){line += String.valueOf(ansi().fg(color).a("  \u2551").reset());}
 
-        //System.out.println(line);
         return line;
     }
 
@@ -154,12 +152,12 @@ public class CardBuilder {
         line = leftCornersBuilder(2, card);
 
         //CENTER
-        line += constraintBuilder(card);
+        if(card.getFaceSide()) line += constraintBuilder(card);
+        else line += "         ";
 
         //RIGHT CORNER
         line += rightCornersBuilder(3, card);
 
-        //System.out.println(line);
 
         return line;
     }
@@ -186,7 +184,6 @@ public class CardBuilder {
 
         }else if(card.getCorner(3) == null){line += String.valueOf(ansi().fg(color).a("\u2550\u2550\u255D").reset());}
 
-        //System.out.println(line);
 
         return line;
     }
@@ -262,5 +259,36 @@ public class CardBuilder {
 
         } else if(card.getCorner(corner) == null){line = "  " + String.valueOf(ansi().fg(color).a("\u2551").reset());}
         return line;
+    }
+
+    private String backFaceSymbolBuilder(Element element, int row){
+        return element.getBackFaceSymbol(row);
+    }
+
+    private String buildStarterBackSecondRow(PlayableCard card){
+        String line = new String();
+        if(card.getBlockedElements().length == 3){
+            return "    " + card.getBlockedElements()[0].getStringValue() + "    ";
+        }
+        return "         ";
+    }
+
+    private String buildStarterBackThirdRow(PlayableCard card){
+        String line = new String();
+        if(card.getBlockedElements().length == 3){
+            return "    " + card.getBlockedElements()[1].getStringValue() + "    ";
+        }
+        return "    " + card.getBlockedElements()[0].getStringValue() + "    ";
+    }
+
+    private String buildStarterBackFourthRow(PlayableCard card){
+        String line = new String();
+        if(card.getBlockedElements().length == 3){
+            return "    " + card.getBlockedElements()[2].getStringValue() + "    ";
+        }
+        else if(card.getBlockedElements().length == 2){
+            return "    " + card.getBlockedElements()[1].getStringValue() + "    ";
+        }
+        return "         ";
     }
 }
