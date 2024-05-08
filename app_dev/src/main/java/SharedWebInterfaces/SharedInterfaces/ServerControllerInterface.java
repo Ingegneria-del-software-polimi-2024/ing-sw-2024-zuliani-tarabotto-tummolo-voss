@@ -6,10 +6,12 @@ public interface ServerControllerInterface extends GeneralAPI_Interface, Control
 
     public void initializeGameState();
 
+
     public void playStarterCard(boolean face, String player);
 
     public void chooseSecretObjective(String cardId, String player);
 
     public void drawCard(int cardSource);
+
 
 }

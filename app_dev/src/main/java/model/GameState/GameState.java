@@ -37,7 +37,6 @@ public class GameState {
      * @param nickNames ArrayList of Strings
      * @param id the unique id for gameState
      */
-    //TODO: randomly give each player a pawn color
     public GameState(ArrayList<String> nickNames, String id) {
         //creates a new players list with the nicknames taken from input
         players = new ArrayList<Player>();
@@ -45,6 +44,8 @@ public class GameState {
             Player p;
             players.add(p = new Player());
             p.setNickname(name);
+            ///// here we set the player's pawn color to a random one still available
+            p.setPawnColor(Pawn.randomPick());
         }
         this.turnPlayer = players.get(0);
         this.id = id;
@@ -52,14 +53,16 @@ public class GameState {
         //function that calls every initializing method contained in commonTable
         commonTable.initialize(players);
 
-        //NOTIFICATION: decks order, nicknames, gameId and initialPlayer
-        modelListener.notifyChanges(commonTable.getGoldDeck(), commonTable.getResourceDeck(),
-                                    commonTable.getStarterDeck(), commonTable.getObjectiveDeck(),
-                                    nickNames, id);
+        //NOTIFICATION: decks order, open cards, commonObjectives, nicknames, gameId and initialPlayer
+        //we don't send the objective and starter deck because it would be useless
+        modelListener.notifyChanges(commonTable.getGoldDeck(), commonTable.getResourceDeck(), commonTable.getOpenGold(),
+                commonTable.getOpenResources(), nickNames, id,
+                commonTable.getCommonObjectives().get(0), commonTable.getCommonObjectives().get(1));
 
-        //NOTIFICATION: about each player's starterCard
+        //NOTIFICATION: about each player's starterCard and his hand
         for(Player p : players){
-            modelListener.notifyChanges(p.getStarterCard(), p.getNickname());
+            modelListener.notifyChanges(p.getStarterCard(), p.getNickname(), p.getPawnColor());
+            modelListener.notifyChanges(p.getPlayingHand(),p.getNickname());
         }
 
     }
@@ -123,7 +126,7 @@ public class GameState {
     public void setTurnState(TurnState state) {
         this.turnState = state;
         //NOTIFICATION: ABOUT THE CHANGED STATE OF GAMESTATE
-        modelListener.notifyChanges(state.toString());
+        modelListener.notifyChanges(state);
     }
 
     public void distributeSecretOjectives() {
@@ -177,8 +180,7 @@ public class GameState {
         //we check if the player reached 20 points
         setLastTurnTrue();
         //NOTIFICATION: the player disposition, points, available resources are updated
-        modelListener.notifyChanges(turnPlayer.getNickname(), turnPlayer.getPlacementArea().getDisposition().get(this.selectedCoordinates),
-                                    this.selectedCoordinates, this.selectedHandCard.getFaceSide(),
+        modelListener.notifyChanges(turnPlayer.getNickname(), turnPlayer.getPlacementArea().getDisposition(),
                                     turnPlayer.getPoints(), turnPlayer.getPlacementArea().getAllArtifactsNumber(),
                                     turnPlayer.getPlacementArea().getAllElementsNumber());
     }
@@ -187,15 +189,14 @@ public class GameState {
      * INTERFACE METHOD
      * calls playCard method contained in Player class
      */
-    //TODO: update method invocation in Controller and Controller Test
     public void playStarterCard(String player) {
         for(Player p : players){
             if(p.getNickname().equals(player)){
                 p.playStarterCard();
                 //NOTIFICATION ABOUT THE STARTER CARD
-                modelListener.notifyChanges(player, p.getStarterCard(), new Coordinates(0,0),
-                        p.getStarterCard().getFaceSide(), p.getPoints(), p.getPlacementArea().getAvailableArtifacts(),
-                        p.getPlacementArea().getAvailableElements());
+                modelListener.notifyChanges(turnPlayer.getNickname(), turnPlayer.getPlacementArea().getDisposition(),
+                        turnPlayer.getPoints(), turnPlayer.getPlacementArea().getAllArtifactsNumber(),
+                        turnPlayer.getPlacementArea().getAllElementsNumber());
             }
         }
         //turnPlayer.playStarterCard();
@@ -223,7 +224,6 @@ public class GameState {
      * @param faceSide FaceSide selected by the Player
      * @param player
      */
-    //TODO: modify method invocation in Controller and ControllerTest
     public void setStartingCardFace(boolean faceSide, String player) {
         for(Player p : players){
             if(p.getNickname().equals(player)) p.getStarterCard().setFaceSide(faceSide);
@@ -253,7 +253,7 @@ public class GameState {
         int i = 1;
         commonTable.drawCardGoldDeck(turnPlayer);
         setLastTurnTrue();
-        modelListener.notifyChanges(turnPlayer.getNickname(), turnPlayer.getPlayingHand().get(-1), i);
+        modelListener.notifyChanges(getGoldDeck().getCards(), i);
     }
 
     /**
@@ -265,8 +265,7 @@ public class GameState {
         int i = 2;
         commonTable.drawCardResourcesDeck(turnPlayer);
         setLastTurnTrue();
-        //modelListener.notifyChanges(turnPlayer.getNickname(), turnPlayer.getPlayingHand()get(-1), i);
-        //todo fix
+        modelListener.notifyChanges(getResourceDeck().getCards(), i);
     }
 
     /**
@@ -279,8 +278,7 @@ public class GameState {
         if(index == 0){ i = 3;} else { i = 4;}
         commonTable.drawCardOpenGold(index, turnPlayer);
         setLastTurnTrue();
-        //modelListener.notifyChanges(turnPlayer.getNickname(), turnPlayer.getPlayingHand()get(-1), i);
-        //todo fix
+        modelListener.notifyChanges(getOpenGold(), i);
     }
 
     /**
@@ -293,8 +291,7 @@ public class GameState {
         if(index == 0){ i = 5;} else { i = 6;}
         commonTable.drawCardOpenResources(index, turnPlayer);
         setLastTurnTrue();
-        //modelListener.notifyChanges(turnPlayer.getNickname(), turnPlayer.getPlayingHand()get(-1), i);
-        //todo fix
+        modelListener.notifyChanges(getOpenResources(), i);
     }
 
 

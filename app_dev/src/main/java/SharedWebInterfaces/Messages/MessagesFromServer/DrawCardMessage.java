@@ -1,22 +1,24 @@
 package SharedWebInterfaces.Messages.MessagesFromServer;
 
 import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
+import SharedWebInterfaces.ViewAPI_Interface;
+import model.cards.PlayableCards.PlayableCard;
+
+import java.util.List;
 
 public class DrawCardMessage implements MessageFromServer{
-    private String player;
-    private int lastDrawnCard;
+
+    private List<PlayableCard> deck;
     private int cardSource;
 
-    public DrawCardMessage(String player, int lastDrawnCard, int cardSource) {
-        this.player = player;
-        this.lastDrawnCard = lastDrawnCard;
+    public DrawCardMessage(List<PlayableCard> deck, int cardSource) {
+        this.deck = deck;
         this.cardSource = cardSource;
     }
 
     @Override
     public void execute(ViewAPI_Interface view)  {
-        view.updateHand(player, lastDrawnCard);
-        view.updateCardSource(cardSource);
+        view.updateCardSource(deck, cardSource);
     }
 
 }
