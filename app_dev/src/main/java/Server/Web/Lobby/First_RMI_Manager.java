@@ -37,7 +37,8 @@ public class First_RMI_Manager implements RMI_ManagerInterface {
     }
 
     public void newHandler(String clientRegistry, String clientHost, int clientPort, ArrayList<String> games) throws RemoteException {
-        RMI_ClientHandler rmiClientHandler = new RMI_ClientHandler(clientPort, clientHost, clientRegistry, registryName(connectionsNumber), lobby, serverPort);
+        RMI_ClientHandler rmiClientHandler =
+                new RMI_ClientHandler(clientPort, clientHost, clientRegistry, registryName(connectionsNumber), lobby, serverPort);
         rmiClientHandler.sendToClient(new WelcomeMessage(games, registryName(connectionsNumber)));
         connectionsNumber += 1;
     }

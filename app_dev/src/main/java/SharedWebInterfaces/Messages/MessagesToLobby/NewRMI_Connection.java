@@ -14,12 +14,8 @@ public class NewRMI_Connection implements MessageToLobby {
     private int port; //is this actually necessary
 
     @Override
-    public void execute(Lobby lobby) throws IOException{
-        try {
-            lobby.newRMI_Connection(registryName, host, port);
-        } catch (AlreadyBoundException | NotBoundException | IOException e) {
-            throw new RuntimeException(e);
-        }
+    public void execute(Lobby lobby){
+        lobby.newRMI_Connection(registryName, host, port);
     }
 
     @Override

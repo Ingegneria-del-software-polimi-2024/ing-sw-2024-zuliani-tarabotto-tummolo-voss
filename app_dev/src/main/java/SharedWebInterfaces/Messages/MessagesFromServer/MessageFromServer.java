@@ -3,7 +3,9 @@ package SharedWebInterfaces.Messages.MessagesFromServer;
 import SharedWebInterfaces.Messages.Message;
 import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
 
-public interface MessageFromServer extends Message {
-    public void execute(ViewAPI_Interface view);
+import java.io.Serializable;
+
+public interface MessageFromServer extends Serializable, Message {
+    public abstract void execute(ViewAPI_Interface view);
 
 }

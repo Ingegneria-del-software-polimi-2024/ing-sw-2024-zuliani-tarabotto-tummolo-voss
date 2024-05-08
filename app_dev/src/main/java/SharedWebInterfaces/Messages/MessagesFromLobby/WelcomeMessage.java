@@ -6,7 +6,7 @@ import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class WelcomeMessage implements Serializable, MessageFromServer {
+public class WelcomeMessage implements MessageFromServer {
     private final ArrayList<String> listOfGames;
     private final String registryName;
 

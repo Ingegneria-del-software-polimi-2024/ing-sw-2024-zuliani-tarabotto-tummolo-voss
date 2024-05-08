@@ -4,7 +4,7 @@ import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
 import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
 import SharedWebInterfaces.SharedInterfaces.ServerControllerInterface;
 
-public class AddNewPlayerMessage implements MessageFromClient{
+public class AddNewPlayerMessage extends MessageFromClient {
     String nickname;
     ClientHandlerInterface handler;
     public void execute(ServerControllerInterface controller) {

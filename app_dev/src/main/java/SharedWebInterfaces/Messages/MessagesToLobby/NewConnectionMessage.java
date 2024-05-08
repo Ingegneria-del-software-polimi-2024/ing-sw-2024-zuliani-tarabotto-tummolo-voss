@@ -3,6 +3,7 @@ package SharedWebInterfaces.Messages.MessagesToLobby;
 import Server.Web.Lobby.Lobby;
 import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
 import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_RoomChoice;
+import SharedWebInterfaces.WebExceptions.MsgNotDeliveredException;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -15,15 +16,20 @@ public class NewConnectionMessage implements Serializable, MessageToLobby {//tod
 
     private ClientHandlerInterface handler;
 
-    public void execute(Lobby lobby) throws IOException {
+    public void execute(Lobby lobby){
         lobby.addConnection(username, handler);
+        //For debug purpose only
         System.out.println("Added Connection");
         lobby.enterRoom(username, roomName, expectedPlayers);
         //For debug purpose only
         System.out.println(username+" has entered the room "+roomName);
 
         //sending an ACK to the player
-        lobby.sendToPlayer(username, new ACK_RoomChoice(username,roomName));
+        try {
+            lobby.sendToPlayer(username, new ACK_RoomChoice(username,roomName));
+        } catch (MsgNotDeliveredException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 

@@ -5,7 +5,7 @@ import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
 
 import java.io.Serializable;
 
-public class ACK_RoomChoice implements Serializable, MessageFromServer {//Todo implements messagefromserver
+public class ACK_RoomChoice implements MessageFromServer {
 
     private String user;
     public String game;

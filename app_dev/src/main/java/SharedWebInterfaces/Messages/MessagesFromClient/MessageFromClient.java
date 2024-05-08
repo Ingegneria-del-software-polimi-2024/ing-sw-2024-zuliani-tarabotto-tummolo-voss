@@ -3,6 +3,8 @@ package SharedWebInterfaces.Messages.MessagesFromClient;
 import SharedWebInterfaces.Messages.Message;
 import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
 
-public interface MessageFromClient extends Message {
-    public void execute(ControllerInterface controller);
+import java.io.Serializable;
+
+public interface MessageFromClient extends Message, Serializable {
+    public abstract void execute(ControllerInterface controller);
 }

@@ -10,6 +10,6 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public interface RMI_ManagerInterface extends Remote {
-    public void newHandler(String clientRegistry, String clientHost, int clientPort, ArrayList<String> games) throws AlreadyBoundException, NotBoundException, IOException;
+    public void newHandler(String clientRegistry, String clientHost, int clientPort, ArrayList<String> games) throws RemoteException;
     public void deliverToLobby(MessageToLobby msg) throws RemoteException;
 }

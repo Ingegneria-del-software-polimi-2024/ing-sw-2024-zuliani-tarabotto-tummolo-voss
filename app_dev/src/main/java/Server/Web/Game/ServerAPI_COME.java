@@ -41,7 +41,7 @@ public class ServerAPI_COME {
                  else
                      //if that message doesn't have sense
                      toDoQueue.enqueueMessage(message);
-                    //TODO it would be interesting if we implemented a kind of "waiting time varible" that increases until a value when the message is destroyed
+                    //it would be interesting if we implemented a kind of "waiting time varible" that increases until a value when the message is destroyed
 
          }
     }

@@ -23,19 +23,13 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
 
     private Lobby lobby; //todo interface with ServerAPI_COME
 
+    private final int MAX_RETRY = 3;
+
     @Override
     public void sendToServer(MessageFromClient message) throws RemoteException {api.sendToServer(message);}
 
     @Override
-    public void notifyChanges(MessageFromServer message) throws RemoteException {
-        try {
-            out.writeObject(message);
-            out.flush();
-            out.reset();
-        } catch (IOException e) {
-            throw new RemoteException();
-        }
-    }
+    public void notifyChanges(MessageFromServer message) throws RemoteException {snd(message);}
 
     /*public void listenForNewConnections(int port){
         try{
@@ -62,7 +56,6 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
             closeConnection();
 
         } catch (IOException e) {
-            //TODO handle better the exception
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
@@ -86,57 +79,64 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    public SOCKET_ClientHandler(Socket clientSocket, Lobby lobby) {
+    public SOCKET_ClientHandler(Socket clientSocket, Lobby lobby) throws IOException {
         this.lobby = lobby;
         this.clientSocket = clientSocket;
-        try{
-            in = new ObjectInputStream(clientSocket.getInputStream());
-            out = new ObjectOutputStream(clientSocket.getOutputStream());
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+        in = new ObjectInputStream(clientSocket.getInputStream());
+        out = new ObjectOutputStream(clientSocket.getOutputStream());
     }
 
     public void run(){
         try{
-            out.writeObject(new WelcomeMessage(lobby.getGameNames()));
-            out.flush();
-            out.reset();
-            MessageToLobby msg = (MessageToLobby) in.readObject();
-            if(msg instanceof NewConnectionMessage){//at the moment useless but useful when waiting for a common message
-                ((NewConnectionMessage) msg).setHandler(this);
-                deliverToLobby(msg);
-            }else
-                throw new RuntimeException();//TODO no exception but behaving good
+            snd(new WelcomeMessage(lobby.getGameNames()));
+            MessageToLobby msg = null;
+
+            do {
+                msg = (MessageToLobby) in.readObject();
+            }while (! (msg instanceof NewConnectionMessage));
+
+            ((NewConnectionMessage) msg).setHandler(this);
+            deliverToLobby(msg);
 
         } catch (IOException | ClassNotFoundException e) {
-            //TODO what should I do here?
+            throw new RuntimeException();
         }
-        //here should go the while listening for other messages
+
+        //TODO insert the listening loop for game messages
     }
 
     public void setReceiver(ServerAPI_COME receiver) throws RemoteException{
         this.api = receiver;
     }
 
-    public void sendToClient(MessageFromServer msg) throws RemoteException {
-        try {
-            out.writeObject(msg);
-            out.flush();
-            out.reset();
-        }catch (IOException e){
-            throw new RemoteException();
-        }
-    }
+    public void sendToClient(MessageFromServer msg) throws RemoteException {snd(msg);}
 
     @Override
     public void deliverToLobby(MessageToLobby msg) throws RemoteException {
         lobby.enqueueMessage(msg);
     }
 
+    /**
+     * This method tries to send the message MAX_RETRY times before signaling the exception to the caller
+     * @param msg
+     */
+    private void snd(MessageFromServer msg) throws RemoteException {
+        int retryCount = 0;
+        while (retryCount < MAX_RETRY) {
+            try {
+                out.writeObject(msg);
+                out.flush();
+                out.reset();
+                return;
+            } catch (IOException e) {
+                retryCount++;
+            }
+        }
+        throw new RemoteException();
+    }
+
 //    @Override
 //    public void addNewPlayer(String nickname, String lookupTableName, int clientPort, String clientHost) throws RemoteException {
-//        //TODO implement!!!!
 //    }
 
 }

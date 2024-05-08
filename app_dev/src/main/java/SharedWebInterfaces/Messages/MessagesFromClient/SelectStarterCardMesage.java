@@ -3,7 +3,7 @@ package SharedWebInterfaces.Messages.MessagesFromClient;
 import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
 import SharedWebInterfaces.SharedInterfaces.ServerControllerInterface;
 
-public class SelectStarterCardMesage implements MessageFromClient{
+public class SelectStarterCardMesage extends MessageFromClient {
     public void execute(ServerControllerInterface controller) {
         //good method
         System.out.println("HI");

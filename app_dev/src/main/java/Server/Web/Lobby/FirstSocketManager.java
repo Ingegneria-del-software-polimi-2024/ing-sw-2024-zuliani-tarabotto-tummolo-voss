@@ -1,6 +1,7 @@
 package Server.Web.Lobby;
 
 import Server.Web.Game.SOCKET_ClientHandler;
+import SharedWebInterfaces.WebExceptions.StartConnectionFailedException;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -37,8 +38,8 @@ public class FirstSocketManager implements Runnable {
                 Thread t = new Thread(csh);
                 t.start();
             }
-        } catch (IOException e) {
-            //TODO what should I do here?
+        } catch (IOException | RuntimeException e) {
+            throw new RuntimeException();
         }
     }
 }
