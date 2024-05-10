@@ -9,10 +9,12 @@ public class TUI implements UI {
 
     private ViewAPI view;
     private DispositionPrinter dispositionPrinter;
+    private LoginPrinter loginPrinter;
 
     public TUI(ViewAPI view) {
         this.view = view;
         dispositionPrinter = new DispositionPrinter();
+        loginPrinter = new LoginPrinter();
     }
 
 
@@ -53,6 +55,6 @@ public class TUI implements UI {
 
     @Override
     public void displayLogin() {
-
+        loginPrinter.print();
     }
 }

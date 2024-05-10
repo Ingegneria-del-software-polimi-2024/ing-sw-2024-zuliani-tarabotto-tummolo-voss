@@ -1,5 +1,6 @@
 package model.GameState;
 
+import Server.ModelListener;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import model.Exceptions.EmptyCardSourceException;
 //import Server.ModelListener;
@@ -27,7 +28,7 @@ public class GameState {
     private CommonTable commonTable;
     private TurnState turnState;
     private final int MAX_POINTS = 10;
-    //private ModelListener modelListener;
+    private ModelListener modelListener;
     private ArrayList<ObjectiveCard> objectiveBuffer;
 
 
@@ -37,7 +38,9 @@ public class GameState {
      * @param nickNames ArrayList of Strings
      * @param id the unique id for gameState
      */
-    public GameState(ArrayList<String> nickNames, String id) {
+    public GameState(ArrayList<String> nickNames, String id, ModelListener modelListener) {
+        System.out.println("gamestate created");
+        this.modelListener = modelListener;
         //creates a new players list with the nicknames taken from input
         players = new ArrayList<Player>();
         for(String name : nickNames) {
@@ -126,7 +129,7 @@ public class GameState {
     public void setTurnState(TurnState state) {
         this.turnState = state;
         //NOTIFICATION: ABOUT THE CHANGED STATE OF GAMESTATE
-        //modelListener.notifyChanges(state);
+        modelListener.notifyChanges(state);
     }
 
     public void distributeSecretOjectives() {

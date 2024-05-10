@@ -9,6 +9,11 @@ public class ClientAPI_COME implements Runnable{
     private ClientMessageQueue toDoQueue;
     private ViewAPI view;
 
+    public ClientAPI_COME(ViewAPI view){
+        this.view = new ViewAPI();
+        toDoQueue = new ClientMessageQueue();
+    }
+
     /**
      * receives and enqueues the message specified from the Server
      * @param message the message from the server

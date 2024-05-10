@@ -1,5 +1,6 @@
 package MockClient;
 
+import Client.Web.ClientAPI_COME;
 import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import SharedWebInterfaces.Messages.MessagesFromLobby.WelcomeMessage;
@@ -19,6 +20,7 @@ public class RMI_MockHandler implements ServerHandlerInterface {
     private RMI_ManagerInterface server;
     private RMI_MockClient api;
     private ClientHandlerInterface serverGame;
+    private  ClientAPI_COME client;
 
     @Override
     public void sendToServer(MessageFromClient message) throws RemoteException {
@@ -30,6 +32,7 @@ public class RMI_MockHandler implements ServerHandlerInterface {
 
     @Override
     public void notifyChanges(MessageFromServer message) throws RemoteException {
+        client.notifyChanges(message);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -48,8 +51,12 @@ public class RMI_MockHandler implements ServerHandlerInterface {
         api.enQmsg(msg);
     }
 
-    public RMI_MockHandler(RMI_MockClient api) throws RemoteException, AlreadyBoundException, NotBoundException {
+    public RMI_MockHandler(RMI_MockClient api, ClientAPI_COME client) throws RemoteException, AlreadyBoundException, NotBoundException {
         this.api = api;
+        this.client = client;
+        Thread thread = new Thread(client);
+        thread.start(); // This starts the thread
+        //client.run();
         UnicastRemoteObject.exportObject(this, 0);
         Registry registry = LocateRegistry.createRegistry(2345);
         registry.bind("ciaoBello", this);

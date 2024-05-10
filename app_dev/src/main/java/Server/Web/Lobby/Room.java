@@ -1,9 +1,12 @@
 package Server.Web.Lobby;
 
+import Server.ModelController;
 import Server.Web.Game.ServerAPI_COME;
 import Server.Web.Game.ServerAPI_GO;
 import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
 import model.GameState.GameState;
+import model.GameState.TurnState;
+import model.Model;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -13,6 +16,7 @@ public class Room {
     private int expectedPlayers;
     private ArrayList<String> players;
     private GameState game;//Maybe controller??
+    private ModelController modelController;
     private ServerAPI_COME receive;
     private ServerAPI_GO send;
     private boolean full;
@@ -50,6 +54,12 @@ public class Room {
     }
     private void startGame(){
         //starts a thread starting the controller execution...
+        //game = new GameState(players, "3");
+        //game.setTurnState(TurnState.GAME_INITIALIZATION);
+        modelController = new ModelController(players, name, send);
+        Thread thread1 = new Thread(() -> modelController.initializeGameState());
+        thread1.start();
+        System.out.println("game can now start");
     }
     public boolean contains(String player){
         return players.contains(player);

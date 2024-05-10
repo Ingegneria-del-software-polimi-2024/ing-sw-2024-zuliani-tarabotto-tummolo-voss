@@ -1,5 +1,7 @@
 package MockClient;
 
+import Client.View.ViewAPI;
+import Client.Web.ClientAPI_COME;
 import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_RoomChoice;
 import SharedWebInterfaces.Messages.MessagesFromLobby.WelcomeMessage;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
@@ -15,13 +17,17 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class RMI_MockClient implements Runnable{
     private ConcurrentLinkedQueue<MessageFromServer> todo;
     private RMI_MockHandler handler;
+    private ViewAPI view;
+
 
     public void run(){
         Scanner scIn = new Scanner(System.in);
         while(true){
             MessageFromServer msg = todo.poll();
             if(msg instanceof WelcomeMessage){
+                view = new ViewAPI();
                 System.out.println(msg.toString());
+                //view.displayLogin();
                 System.out.println("inserire username");
                 String userName = scIn.next();
                 System.out.println("inserire la partita in cui entrare");
@@ -48,6 +54,6 @@ public class RMI_MockClient implements Runnable{
 
     public RMI_MockClient() throws AlreadyBoundException, RemoteException, NotBoundException {
         this.todo = new ConcurrentLinkedQueue<MessageFromServer>();
-        this.handler = new RMI_MockHandler(this);
+        this.handler = new RMI_MockHandler(this, new ClientAPI_COME(view));
     }
 }

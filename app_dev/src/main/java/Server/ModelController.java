@@ -1,4 +1,5 @@
 package Server;
+import Server.Web.Game.ServerAPI_GO;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import model.Exceptions.EmptyCardSourceException;
 import SharedWebInterfaces.SharedInterfaces.ServerControllerInterface;
@@ -27,15 +28,18 @@ public class ModelController implements ServerControllerInterface {
     private int roundCounter = 0;
     private String initialPlayer;
     private boolean lastRound = false;
+    private ServerAPI_GO send;
 
     /**
      * class constructor
      * @param playersNicknames nicknames of the players
      * @param gameId id of the game
      */
-    public ModelController(ArrayList<String> playersNicknames, String gameId){
+    public ModelController(ArrayList<String> playersNicknames, String gameId, ServerAPI_GO send){
+        System.out.println("model controller created");
         this.playersNicknames = playersNicknames;
         this.gameId = gameId;
+        this.send = send;
     }
 
     /**
@@ -44,10 +48,11 @@ public class ModelController implements ServerControllerInterface {
      */
     @Override
     public void initializeGameState(){
-        gameState = new GameState(playersNicknames, gameId);
+
+        gameState = new GameState(playersNicknames, gameId, new ModelListener(send));
         gameState.setTurnState(TurnState.GAME_INITIALIZATION);
         initialPlayer = gameState.getTurnPlayer().getNickname();
-        gameState.setTurnState(TurnState.STARTER_CARD_SELECTION);
+        //gameState.setTurnState(TurnState.STARTER_CARD_SELECTION);
     }
 
 

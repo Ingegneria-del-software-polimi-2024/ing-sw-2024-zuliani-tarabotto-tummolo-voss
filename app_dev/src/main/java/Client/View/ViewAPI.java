@@ -1,5 +1,6 @@
 package Client.View;
 
+import Client.UI.TUI.TUI;
 import Client.UI.UI;
 import Client.Web.ClientAPI_GO;
 import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.ChooseSecreteObjMessage;
@@ -51,15 +52,23 @@ public class ViewAPI implements ViewAPI_Interface {
     private UI ui;
     private ClientAPI_GO clientAPIGo;
 
-    public ViewAPI(UI ui, ClientAPI_GO clientAPIGo) {
+    public ViewAPI() {//TODO: clientAPI_GO deve essere passato come parametro
+        /*
         for(Element el : Element.values()) {
             availableElements.put(el, 0);
         }
         for(Artifact ar : Artifact.values()){
             availableArtifacts.put(ar, 0);
         }
-        this.ui = ui;
-        this.clientAPIGo = clientAPIGo;
+*/
+        this.ui = new TUI(this);
+        this.clientAPIGo = new ClientAPI_GO();
+    }
+
+
+    //////////////////////// INTERFACE METHODS //////////////////////////////////////////////////////////////////////////////////////
+    public void displayLogin(){
+        ui.displayLogin();
     }
 
     /////////// from CLIENT to SERVER  ACTIONS ////////////////////////////////////////////////////////////////////////////////////
@@ -87,7 +96,10 @@ public class ViewAPI implements ViewAPI_Interface {
     @Override
     public void setState(TurnState state) {
         this.state = state;
-        this.state.display( ui);
+        //this.state.display( ui);
+        displayLogin();
+        System.out.println("received notification from model");
+        System.out.println("sium");
     }
 
     @Override

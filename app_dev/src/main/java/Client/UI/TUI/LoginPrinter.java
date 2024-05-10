@@ -10,7 +10,7 @@ public class LoginPrinter {
         printTitle();
     }
 
-    private void printTitle(){
+    private static void printTitle(){
         System.out.println(ansi().fg(221).a(
 
         " ██████╗ ██████╗ ██████╗ ███████╗██╗  ██╗    ███╗   ██╗ █████╗ ████████╗██╗   ██╗██████╗  █████╗ ██╗     ██╗███████╗\n" +
@@ -23,13 +23,14 @@ public class LoginPrinter {
     }
 
 
-/*
 
+/*
         private static final String[] GAME_ROOMS = {"Room 1", "Room 2", "Room 3"};
         private static int selectedRoomIndex = 0;
 
         public static void main(String[] args) {
             Scanner scanner = new Scanner(System.in);
+            printTitle();
 
             while (true) {
                 // Print game rooms with selection
