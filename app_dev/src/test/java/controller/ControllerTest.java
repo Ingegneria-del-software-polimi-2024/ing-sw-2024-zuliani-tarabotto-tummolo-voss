@@ -1,12 +1,14 @@
 package controller;
 
 
+import Client.UI.TUI.*;
 import model.Exceptions.EmptyCardSourceException;
-import Client.UI.TUI.DispositionPrinter;
 import model.GameState.GameState;
+import model.cards.ObjectiveCard;
 import model.enums.Pawn;
 import model.placementArea.Coordinates;
 import model.player.Player;
+import org.fusesource.jansi.AnsiConsole;
 import org.junit.jupiter.api.Test;
 import view.CliView;
 
@@ -15,6 +17,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import static org.fusesource.jansi.Ansi.ansi;
 
 
 class ControllerTest {
@@ -47,6 +51,11 @@ class ControllerTest {
         int i = 0;
         gameState = new GameState(nickNames, id, i);
         initialPlayer = gameState.getTurnPlayer();
+        /*
+        ObjectivesPrinter p1 = new ObjectivesPrinter();
+        for(ObjectiveCard c : gameState.getObjectiveDeck().getCards()){
+            p1.print(c);
+        }*/
 
     }
 
@@ -113,12 +122,24 @@ class ControllerTest {
         File f1 = new File(filePath1);
         File f2 = new File(filePath2);
 
+        LoginPrinter title = new LoginPrinter();
         dispositionPrinter.print(gameState.getTurnPlayer().getPlacementArea().getDisposition());
         dispositionPrinter.print(gameState.getTurnPlayer().getPlacementArea().getDisposition(), gameState.getTurnPlayer().getPlacementArea().getAvailablePlaces());
 
 
+        title.print();
         dispositionPrinter.print(gameState.getPlayer(1).getPlacementArea().getDisposition());
         dispositionPrinter.print(gameState.getPlayer(1).getPlacementArea().getDisposition(), gameState.getPlayer(1).getPlacementArea().getAvailablePlaces());
+
+        HandPrinter p = new HandPrinter();
+        p.print(gameState.getTurnPlayer().getPlayingHand());
+        p.print(gameState.getPlayer(1).getPlayingHand());
+        ObjectivesPrinter p1 = new ObjectivesPrinter();
+        p1.printObjectivesBoard(gameState.getCommonObjectives().get(0),gameState.getCommonObjectives().get(0),gameState.getTurnPlayer().getSecretObjective());
+        p1.print(gameState.getTurnPlayer().getSecretObjective());
+
+        DrawCardPrinter bo = new DrawCardPrinter();
+        bo.print(gameState.getGoldDeck().getCards().get(0), gameState.getResourceDeck().getCards().get(0), gameState.getOpenGold(), gameState.getOpenResources());
 
         assert filesCompareByLine(f1.toPath(), f2.toPath()) == -1;
 

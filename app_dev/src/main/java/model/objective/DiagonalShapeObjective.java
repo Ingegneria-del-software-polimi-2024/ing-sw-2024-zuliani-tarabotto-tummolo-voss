@@ -1,6 +1,7 @@
 package model.objective;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import model.enums.Artifact;
 import model.enums.Element;
 import model.placementArea.*;
 
@@ -24,10 +25,27 @@ public class DiagonalShapeObjective implements Objective{
     @Override
     public int countObjectivePoints(PlacementArea placementArea) {return 2 * placementArea.verifyObjective(shape, element);}
 
+
     @Override
     public void printObjective() {
         System.out.println("type: DiagonalShapeObjective");
         System.out.println(this.element.toString());
         System.out.println(this.shape.toString());
     }
+
+    @Override
+    public Element getElement() {
+        return element.get(0);
+    }
+
+    @Override
+    public Artifact getArtifact() {
+        return null;
+    }
+
+    @Override
+    public Shape getShape() {
+        return shape;
+    }
 }
+

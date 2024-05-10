@@ -2,6 +2,7 @@ package model.objective;
 
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import model.enums.Artifact;
 import model.enums.Element;
 import model.placementArea.PlacementArea;
 
@@ -17,4 +18,8 @@ public interface Objective {
      */
     public int countObjectivePoints(PlacementArea placementArea);
     public void printObjective();
+
+    public Element getElement();
+    public Artifact getArtifact();
+    public Shape getShape();
 }

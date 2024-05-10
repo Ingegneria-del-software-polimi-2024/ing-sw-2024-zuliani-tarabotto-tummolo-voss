@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import model.cards.PlayableCards.Corner;
+import model.enums.Artifact;
 import model.enums.Element;
 import model.placementArea.*;
 
@@ -32,9 +33,9 @@ public class LShapeObjective implements Objective{
      *
      * @return a ordered list of elements that compose the objective
      */
-    public List<Element> getElement() {
+    /*public List<Element> getElement() {
         return element;
-    }
+    }*/
     //for console testing
     @Override
     public void printObjective() {
@@ -42,4 +43,20 @@ public class LShapeObjective implements Objective{
         System.out.println("element: " + this.element.toString());
         System.out.println("shape: " + this.shape.toString());
     }
+
+    @Override
+    public Element getElement() {
+        return element.get(1);
+    }
+
+    @Override
+    public Artifact getArtifact() {
+        return null;
+    }
+
+    @Override
+    public Shape getShape() {
+        return shape;
+    }
+
 }

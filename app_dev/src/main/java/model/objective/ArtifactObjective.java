@@ -3,6 +3,7 @@ package model.objective;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import model.enums.Artifact;
+import model.enums.Element;
 import model.placementArea.*;
 
 import java.util.HashMap;
@@ -42,4 +43,20 @@ public class ArtifactObjective  implements Objective{
         if (this.artifact != null) System.out.println(this.artifact.toString());
         System.out.println("tris: " + this.tris);
     }
+
+    @Override
+    public Element getElement() {
+        return null;
+    }
+
+    @Override
+    public Artifact getArtifact() {
+        return artifact;
+    }
+
+    @Override
+    public Shape getShape() {
+        return null;
+    }
+
 }

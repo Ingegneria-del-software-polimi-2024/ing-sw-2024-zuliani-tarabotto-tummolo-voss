@@ -13,6 +13,7 @@ public enum Shape {
     TOPRIGHTL{
         private final Coordinates[] COORDINATES = {/*new Coordinates(0, 0),*/ new Coordinates(-1, -1), new Coordinates(-1, -3)};
         public List<Coordinates> getCoordinates(){return Arrays.asList(COORDINATES);};
+
     },
     TOPLEFTL{
         private final Coordinates[] COORDINATES = {/*new Coordinates(0, 0),*/ new Coordinates(+1, -1), new Coordinates(+1, -3)};

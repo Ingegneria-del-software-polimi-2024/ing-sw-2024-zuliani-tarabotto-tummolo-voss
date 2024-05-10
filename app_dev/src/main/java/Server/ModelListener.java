@@ -3,6 +3,7 @@ package Server;
 
 import Server.Web.Game.ServerAPI_GO;
 import SharedWebInterfaces.Messages.MessagesFromServer.*;
+import SharedWebInterfaces.WebExceptions.MsgNotDeliveredException;
 import model.GameState.TurnState;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
@@ -34,7 +35,11 @@ public class ModelListener {
      * @param state
      */
     public void notifyChanges(TurnState state){
-        serverAPI.broadcastNotifyChanges( new StateMessage( state ));
+        try{
+            serverAPI.broadcastNotifyChanges( new StateMessage( state ));
+        } catch(MsgNotDeliveredException msg) {
+            throw new RuntimeException(msg);
+        }
     }
 
 
@@ -54,10 +59,13 @@ public class ModelListener {
                               ObjectiveCard commonObjective1, ObjectiveCard commonObjective2){
 
 
-
-        serverAPI.broadcastNotifyChanges( new InitializationMessage( goldDeck.getCards(), resourceDeck.getCards(), openGold, openResource,
-                                        (String[]) players.toArray(), gameId,
-                                        commonObjective1, commonObjective2));
+        try{
+            serverAPI.broadcastNotifyChanges( new InitializationMessage( goldDeck.getCards(), resourceDeck.getCards(), openGold, openResource,
+                    (String[]) players.toArray(), gameId,
+                    commonObjective1, commonObjective2));
+        }catch (MsgNotDeliveredException msg){
+            throw new RuntimeException(msg);
+        }
 
     }
 
@@ -69,7 +77,11 @@ public class ModelListener {
      * @param player
      */
     public void notifyChanges(PlayableCard starterCard, String player, Pawn pawnColor){
-        serverAPI.notifyChanges( new StarterCardMessage(starterCard, pawnColor.toString()), player );
+        try{
+            serverAPI.notifyChanges( new StarterCardMessage(starterCard, pawnColor.toString()), player );
+        }catch (MsgNotDeliveredException msg){
+            throw new RuntimeException(msg);
+        }
     }
 
     /**
@@ -78,7 +90,12 @@ public class ModelListener {
      * @param player
      */
     public void notifyChanges(List<PlayableCard> hand , String player){
-        serverAPI.notifyChanges( new UpdateHandMessage(hand), player);
+
+        try{
+            serverAPI.notifyChanges( new UpdateHandMessage(hand), player);
+        }catch (MsgNotDeliveredException msg){
+            throw new RuntimeException(msg);
+        }
     }
 
     /**
@@ -87,7 +104,12 @@ public class ModelListener {
      * @param secretObjective2
      */
     public void notifyChanges(ObjectiveCard secretObjective1, ObjectiveCard secretObjective2, String player){
-        serverAPI.notifyChanges( new SecretObjectivesMessage(secretObjective1, secretObjective2), player);
+
+        try{
+            serverAPI.notifyChanges( new SecretObjectivesMessage(secretObjective1, secretObjective2), player);
+        }catch (MsgNotDeliveredException msg){
+            throw new RuntimeException(msg);
+        }
     }
 
 
@@ -98,7 +120,11 @@ public class ModelListener {
      */
     public void notifyChanges(ObjectiveCard secretObjective, String player){
 
-        serverAPI.notifyChanges( new ConfirmSecretObjectiveMessage(secretObjective), player);
+        try{
+            serverAPI.notifyChanges( new ConfirmSecretObjectiveMessage(secretObjective), player);
+        }catch (MsgNotDeliveredException msg){
+            throw new RuntimeException(msg);
+        }
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -111,7 +137,11 @@ public class ModelListener {
      * @param player
      */
     public void notifyChanges(String player, List<Coordinates> availablePlaces, boolean[] canBePlaced){
-        serverAPI.notifyChanges( new PlaceableCardsMessage(availablePlaces, canBePlaced), player);
+        try{
+            serverAPI.notifyChanges( new PlaceableCardsMessage(availablePlaces, canBePlaced), player);
+        }catch (MsgNotDeliveredException msg){
+            throw new RuntimeException(msg);
+        }
     }
 
 
@@ -125,8 +155,14 @@ public class ModelListener {
      */
     public void notifyChanges(String player, HashMap<Coordinates, PlayableCard> disposition, int points,
                               HashMap<Artifact, Integer> availableArtifacts, HashMap<Element, Integer> availableElements) {
-        serverAPI.broadcastNotifyChanges(new UpdateDispositionMessage(player, disposition,
-                points, availableArtifacts, availableElements));
+
+
+        try{
+            serverAPI.broadcastNotifyChanges(new UpdateDispositionMessage(player, disposition,
+                    points, availableArtifacts, availableElements));
+        }catch (MsgNotDeliveredException msg){
+            throw new RuntimeException(msg);
+        }
 
     }
 
@@ -136,7 +172,12 @@ public class ModelListener {
      * @param cardSource
      */
     public void notifyChanges(List<PlayableCard> deck, int cardSource) {
-        serverAPI.broadcastNotifyChanges( new DrawCardMessage(deck, cardSource));
+
+        try{
+            serverAPI.broadcastNotifyChanges( new DrawCardMessage(deck, cardSource));
+        }catch (MsgNotDeliveredException msg){
+            throw new RuntimeException(msg);
+        }
     }
 
     /**
@@ -145,6 +186,11 @@ public class ModelListener {
      * @param finalPoints
      */
     public void notifyChanges(HashMap<String, Integer> finalPoints){
-        serverAPI.broadcastNotifyChanges(new EndGameMessage(finalPoints));
+
+        try{
+            serverAPI.broadcastNotifyChanges(new EndGameMessage(finalPoints));
+        }catch (MsgNotDeliveredException msg){
+            throw new RuntimeException(msg);
+        }
     }
 }

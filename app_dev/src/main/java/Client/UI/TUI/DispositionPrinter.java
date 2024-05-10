@@ -26,6 +26,8 @@ public class DispositionPrinter {
     int yDim = 0;
     int matXCenter = 0;
     int matYCenter = 0;
+    int minCol = 0;
+    int maxCol = 0;
 
 
 
@@ -69,12 +71,12 @@ public class DispositionPrinter {
         }
 
         // stampiamo mat
-        for (int m = 0; m < yDim + 3; m++) {
+        /*for (int m = 0; m < yDim + 3; m++) {
             for (int n = 0; n < xDim + 2; n++) {
                 System.out.print(mat[m][n] + " ");
             }
             System.out.println();
-        }
+        }*/
     }
 
     //here we build the auxiliary matrix that will be used to print the disposition
@@ -105,6 +107,9 @@ public class DispositionPrinter {
             }
         }
 
+
+        minCol = mat[0].length - 1;
+        maxCol = 0;
         //POPOLIAMO LA MAPPA FACENDO UNA CONVERSIONE DELLE COORDINATE DAL SISTEMA DI DISPOSITION A QUELLO DI DISPOSITIONMAP
         for(Coordinates c : disposition.keySet()){
             dispositionMap[convertY(c.getY())][convertX(c.getX())] = disposition.get(c).getId();
@@ -115,19 +120,24 @@ public class DispositionPrinter {
                     if(dispositionMap[i - 1][j - 1] > 0){
                         mat[i][j] = dispositionMap[i - 1][j - 1];
                         mat[i + 1][j] = dispositionMap[i -1][j -1];
+
+                        if(j < minCol) minCol = j;
+
+                        if(j > maxCol) maxCol = j;
                     }
                 }
             }
 
         }
-
+        minCol -- ;
+        maxCol ++;
         // stampiamo mat
-        for (int i = 0; i < yDim + 3; i++) {
+        /*for (int i = 0; i < yDim + 3; i++) {
             for (int j = 0; j < xDim + 2; j++) {
                 System.out.print(mat[i][j] + " ");
             }
             System.out.println();
-        }
+        }*/
 
 
     }
@@ -140,7 +150,8 @@ public class DispositionPrinter {
 
         //parte superiore della cornice
         line = "\u2554";
-        int matLength = (15*mat[0].length) - (3*(mat[0].length - 1));
+        int numCol = maxCol - minCol;
+        int matLength = (15*(numCol + 1)) - (3*(numCol));
         for(int i = 0; i < matLength; i++){
             line += "\u2550";
         }
@@ -156,22 +167,22 @@ public class DispositionPrinter {
                 ////////////////////////////////// PRIMA COLONNA ////////////////////////////////////////////////
                 //nella collonna più a sinistra ci possono essere solo 0 o -1
                 //caso in cui ho uno 0
-                if (mat[j][0] == 0) {
-                    if(mat[j][1] <= 0) line = "\u2551               ";//15
+                if (mat[j][minCol] == 0) {
+                    if(mat[j][minCol + 1] <= 0) line = "\u2551               ";//15
                     else line ="\u2551            ";//12
 
                 //caso in cui ho un -1
-                } else if (mat[j][0] == -1) {
+                } else if (mat[j][minCol] == -1) {
 
                     //quando row != 2 stampo solamente degli spazi
                     if( row != 2){
-                        if(mat[j][1] == 0) line = "\u2551               ";//15
-                        else if (mat[j][1] > 0) line ="\u2551            ";//12
+                        if(mat[j][minCol + 1] == 0) line = "\u2551               ";//15
+                        else if (mat[j][minCol + 1] > 0) line ="\u2551            ";//12
 
                     } else if (row == 2) {
 
-                        if(mat[j][1] == 0) line = "\u2551    " + buildCoordinates(0,j) + "    ";//15
-                        else if (mat[j][1] > 0) line = "\u2551  " + buildCoordinates(0,j) + "   ";//12
+                        if(mat[j][minCol + 1] == 0) line = "\u2551    " + buildCoordinates(0,j) + "    ";//15
+                        else if (mat[j][minCol + 1] > 0) line = "\u2551  " + buildCoordinates(0,j) + "   ";//12
                     }
                 }
                 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -179,7 +190,7 @@ public class DispositionPrinter {
 
                 ////////////////////////////////////// COLONNE CENTRALI /////////////////////////////////////////////////////////
                 //COLONNE CENTRALI
-                for(int col = 1; col < mat[0].length -1; col++){
+                for(int col = minCol + 1; col < maxCol; col++){
 
                     if( (mat[j][col] > 0) && (mat[j + 1][col] == mat[j][col])) {
                         line += cb.buildLine(row, getCardFromDisposition(col - 1, j -1));
@@ -217,10 +228,10 @@ public class DispositionPrinter {
                 ///////////////////////////////////////////////// ULTIMA COLONNA  ///////////////////////////////////////////////////////////////////////////////////////////
                 //nella COLONNA PIU' A DESTRA CI POSSONO ESSERE SOLO 0 O -1
 
-                if (mat[j][mat[0].length-1] == 0) {
+                if (mat[j][maxCol] == 0) {
                     line += "            \u2551";//12 OK
                 }
-                else if (mat[j][mat[0].length-1] == -1 ) {
+                else if (mat[j][maxCol] == -1 ) {
                     if(row != 2){
                         line += "            \u2551";//12 OK
                     }else if (row == 2){
@@ -242,13 +253,13 @@ public class DispositionPrinter {
         for(int row = 0; row < 3; row++) {
 
             //colonna piu a sinisra -> essendo questa l'ultima striscia ci saranno sempre e solo zeri
-            if (mat[j][0] == 0) {
-                if(mat[j][1] == 0) line = "\u2551               ";//15
-                else if (mat[j][1] > 0) line = "\u2551            ";//12
+            if (mat[j][minCol] == 0) {
+                if(mat[j][minCol + 1] == 0) line = "\u2551               ";//15
+                else if (mat[j][minCol + 1] > 0) line = "\u2551            ";//12
             }
 
             //colonne centrali
-            for(int col = 1; col < mat[0].length -1; col++){
+            for(int col = minCol + 1; col < maxCol; col++){
                 if(mat[j][col] == 0){
                     if(mat[j][col - 1] == 0 && mat[j][col + 1] == 0) line += "            ";//12  OK
                     else if(mat[j][col - 1] > 0 && mat[j][col + 1] > 0) line += "         ";//9  OK
@@ -258,7 +269,7 @@ public class DispositionPrinter {
             }
 
             //colonna di destra ( CONTROLLO INUTILE MA LO LASCIO PER CHIAREZZA )
-            if (mat[j][mat[0].length-1] == 0) {
+            if (mat[j][maxCol] == 0) {
                 line += "            \u2551";//12  OK
             }
 

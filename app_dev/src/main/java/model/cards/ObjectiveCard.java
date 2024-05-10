@@ -80,6 +80,10 @@ public class ObjectiveCard  implements Card {
         return objective.countObjectivePoints(placementArea);
     }
 
+    public Objective getObjective(){
+        return objective;
+    }
+
 
     ////////////////////// GETTER METHODS //////////////////////////////////////////////
     public int getId() { return id; }

@@ -2,6 +2,7 @@ package model.objective;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import model.enums.Artifact;
 import model.enums.Element;
 import model.placementArea.PlacementArea;
 @JsonTypeName("ElementObjective")
@@ -23,4 +24,20 @@ public class ElementObjective implements Objective{
         System.out.println("type: ElementObjective");
         System.out.println(this.element.toString());
     }
+
+    @Override
+    public Element getElement() {
+        return element;
+    }
+
+    @Override
+    public Artifact getArtifact() {
+        return null;
+    }
+
+    @Override
+    public Shape getShape() {
+        return null;
+    }
+
 }
