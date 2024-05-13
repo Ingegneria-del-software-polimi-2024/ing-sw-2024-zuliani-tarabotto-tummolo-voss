@@ -20,6 +20,8 @@ public class NewConnectionMessage implements Serializable, MessageToLobby {//tod
         lobby.addConnection(username, handler);
         //For debug purpose only
         System.out.println("Added Connection");
+
+        //we could move the following lines in a different message if needed
         lobby.enterRoom(username, roomName, expectedPlayers);
         //For debug purpose only
         System.out.println(username+" has entered the room "+roomName);
