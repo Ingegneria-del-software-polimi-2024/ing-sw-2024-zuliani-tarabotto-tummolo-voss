@@ -95,7 +95,7 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
         ArrayList<String> retVal = new ArrayList<String>();
 
         for(Room r : rooms){
-            if(r.isFull())
+            if(!r.isFull())
                 retVal.add(r.getName());
         }
         return retVal;
