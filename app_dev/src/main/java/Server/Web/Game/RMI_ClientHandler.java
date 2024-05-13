@@ -3,6 +3,8 @@ package Server.Web.Game;
 import Server.Web.Lobby.Lobby;
 import SharedWebInterfaces.Messages.MessagesFromClient.AddNewPlayerMessage;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
+import SharedWebInterfaces.Messages.MessagesFromLobby.AvailableGames;
+import SharedWebInterfaces.Messages.MessagesToLobby.RequestAvailableGames;
 import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
 import SharedWebInterfaces.Messages.MessagesToLobby.MessageToLobby;
@@ -89,6 +91,9 @@ public class RMI_ClientHandler implements ClientHandlerInterface {
     public void deliverToLobby(MessageToLobby msg) throws RemoteException{
         if(msg instanceof NewConnectionMessage)
             ((NewConnectionMessage) msg).setHandler(this);
+        //send the available games when requested
+        else if (msg instanceof RequestAvailableGames)
+            sendToClient(new AvailableGames(lobby.getGameNames()));
         lobby.enqueueMessage(msg);
     }
 }

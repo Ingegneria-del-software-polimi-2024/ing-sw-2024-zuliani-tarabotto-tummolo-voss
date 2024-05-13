@@ -1,8 +1,10 @@
 package Server.Web.Game;
 
 import Server.Web.Lobby.Lobby;
+import SharedWebInterfaces.Messages.MessagesFromLobby.AvailableGames;
 import SharedWebInterfaces.Messages.MessagesFromLobby.WelcomeMessage;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
+import SharedWebInterfaces.Messages.MessagesToLobby.RequestAvailableGames;
 import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
 import SharedWebInterfaces.Messages.MessagesToLobby.MessageToLobby;
 import SharedWebInterfaces.Messages.MessagesToLobby.NewConnectionMessage;
@@ -93,6 +95,8 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
 
             do {
                 msg = (MessageToLobby) in.readObject();
+                if(msg instanceof RequestAvailableGames)
+                    sendToClient(new AvailableGames(lobby.getGameNames()));
             }while (! (msg instanceof NewConnectionMessage));
 
             ((NewConnectionMessage) msg).setHandler(this);
