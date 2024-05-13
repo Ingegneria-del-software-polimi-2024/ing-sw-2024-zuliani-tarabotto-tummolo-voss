@@ -12,6 +12,10 @@ public class EndGameMessage implements MessageFromServer{
         this.finalPoints = finalPoints;
     }
 
+    /**
+     * Notifies the receiver of the end of the game
+     * @param view the view interface of the receiver
+     */
     @Override
     public void execute(ViewAPI_Interface view) {
         view.endGame(finalPoints);

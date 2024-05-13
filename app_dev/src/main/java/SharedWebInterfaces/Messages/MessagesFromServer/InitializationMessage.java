@@ -32,6 +32,10 @@ public class InitializationMessage implements MessageFromServer{
 
     }
 
+    /**
+     * Set the initial state of the game for the receiver
+     * @param view the view interface of the receiver
+     */
     @Override
     public void execute(ViewAPI_Interface view) {
         view.setGoldDeck(goldDeck);

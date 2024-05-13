@@ -9,6 +9,11 @@ public class TurnPlayerMessage implements MessageFromServer{
     public TurnPlayerMessage(String turnPlayer){
         this.turnPlayer = turnPlayer;
     }
+
+    /**
+     * Changes the turn player of the receiver
+     * @param view the view interface of the receiver
+     */
     @Override
     public void execute(ViewAPI_Interface view) {
         view.setTurnPlayer(turnPlayer);

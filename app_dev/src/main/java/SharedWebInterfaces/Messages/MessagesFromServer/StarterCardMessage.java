@@ -11,6 +11,11 @@ public class StarterCardMessage implements MessageFromServer{
         this.starterCard = starterCard;
         this.pawnColor = pawnColor;
     }
+
+    /**
+     * Sets the starter card and the pawn color of the receiver
+     * @param view the view interface of the receiver
+     */
     @Override
     public void execute(ViewAPI_Interface view) {
         view.setStarterCard(starterCard);
