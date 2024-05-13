@@ -1,9 +1,10 @@
 package SharedWebInterfaces.Messages.MessagesFromClient.toModelController;
 
+import Server.ModelController;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import SharedWebInterfaces.SharedInterfaces.ServerControllerInterface;
 
 public interface MessageFromViewToModelController extends MessageFromClient {
 
-    public void execute(ServerControllerInterface controller);
+    void execute(ModelController controller);
 }

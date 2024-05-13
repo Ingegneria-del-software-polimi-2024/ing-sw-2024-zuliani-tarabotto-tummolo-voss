@@ -62,7 +62,7 @@ public class ModelListener {
 
         try{
             serverAPI.broadcastNotifyChanges( new InitializationMessage( goldDeck.getCards(), resourceDeck.getCards(), openGold, openResource,
-                    (String[]) players.toArray(), gameId,
+                     players, gameId,
                     commonObjective1, commonObjective2));
         }catch (MsgNotDeliveredException msg){
             throw new RuntimeException(msg);
@@ -120,7 +120,6 @@ public class ModelListener {
      * @param player
      */
     public void notifyChanges(ObjectiveCard secretObjective, String player){
-
         try{
             serverAPI.notifyChanges( new ConfirmSecretObjectiveMessage(secretObjective), player);
         }catch (MsgNotDeliveredException msg){
@@ -136,6 +135,7 @@ public class ModelListener {
      * of his hand can be placed(due to placementConstraint) and also where the cards can be placed
      * @param availablePlaces
      * @param player
+     * @param canBePlaced
      */
     public void notifyChanges(String player, List<Coordinates> availablePlaces, boolean[] canBePlaced){
         try{

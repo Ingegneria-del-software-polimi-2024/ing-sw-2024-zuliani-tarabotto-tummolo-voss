@@ -3,8 +3,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import model.enums.Artifact;
 import model.enums.Element;
 
+import java.io.Serializable;
 
-public class Corner {
+
+public class Corner implements Serializable {
     private int id;
     private Element element;
     private Artifact artifact;

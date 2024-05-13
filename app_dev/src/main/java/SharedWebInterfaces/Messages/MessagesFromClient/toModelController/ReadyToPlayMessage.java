@@ -1,19 +1,22 @@
 package SharedWebInterfaces.Messages.MessagesFromClient.toModelController;
 
 import Server.ModelController;
-import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.MessageFromViewToModelController;
+import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
 import SharedWebInterfaces.SharedInterfaces.ServerControllerInterface;
 
-public class SelectStarterCardMessage implements MessageFromViewToModelController {
+public class ReadyToPlayMessage implements  MessageFromClient {
+
+
     @Override
     public void execute(ModelController controller) {
-        //good method
-        System.out.println("HI");
+        System.out.println("giusto");
+        controller.setPlayerReady();
     }
+
 
     @Override
     public void execute(ControllerInterface controller) {
-
+        System.out.println("sbagliato");
     }
 }

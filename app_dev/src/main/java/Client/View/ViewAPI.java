@@ -3,10 +3,7 @@ package Client.View;
 import Client.UI.TUI.TUI;
 import Client.UI.UI;
 import Client.Web.ClientAPI_GO;
-import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.ChooseSecreteObjMessage;
-import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.DrawCardMessage;
-import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.PlayCardMessage;
-import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.PlayStarterCardMessage;
+import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.*;
 import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
 import model.GameState.TurnState;
 import model.cards.ObjectiveCard;
@@ -15,6 +12,7 @@ import model.enums.Artifact;
 import model.enums.Element;
 import model.placementArea.Coordinates;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,12 +27,14 @@ public class ViewAPI implements ViewAPI_Interface {
     private List<PlayableCard> goldDeck;
     private List<PlayableCard> resourceDeck;
     private ObjectiveCard secretObjective;
+
+
     private List<ObjectiveCard> commonObjectives;
     private List<ObjectiveCard> chooseSecretObjectives;
     private List<PlayableCard> openGold;
     private List<PlayableCard> openResource;
     private TurnState state;
-    private String[] players;
+    private List<String> players;
     private String gameId;
     private HashMap<Artifact, Integer> availableArtifacts;
     private HashMap<Element, Integer> availableElements;
@@ -53,23 +53,29 @@ public class ViewAPI implements ViewAPI_Interface {
     private ClientAPI_GO clientAPIGo;
 
     public ViewAPI() {//TODO: clientAPI_GO deve essere passato come parametro
-        /*
+
+        availableElements = new HashMap<>();
+        availableArtifacts = new HashMap<>();
+        //we initialize both hashmap to zero
         for(Element el : Element.values()) {
             availableElements.put(el, 0);
         }
         for(Artifact ar : Artifact.values()){
             availableArtifacts.put(ar, 0);
         }
-*/
+
         this.ui = new TUI(this);
-        this.clientAPIGo = new ClientAPI_GO();
+        this.commonObjectives = new ArrayList<>();
+        this.chooseSecretObjectives = new ArrayList<>();
     }
 
+    public void setClientAPIGo(ClientAPI_GO clientAPI_GO){
+        clientAPIGo = clientAPI_GO;
+        System.out.println("helo");
+    }
 
     //////////////////////// INTERFACE METHODS //////////////////////////////////////////////////////////////////////////////////////
-    public void displayLogin(){
-        ui.displayLogin();
-    }
+
 
     /////////// from CLIENT to SERVER  ACTIONS ////////////////////////////////////////////////////////////////////////////////////
     //all this methods create a new MessageFromClient object containing an execute() method with the call to a specific method of ModelController
@@ -89,6 +95,10 @@ public class ViewAPI implements ViewAPI_Interface {
         clientAPIGo.sendToServer( new DrawCardMessage(cardSource));
     }
 
+    @Override
+    public void readyToPlay(){
+        clientAPIGo.sendToServer( new ReadyToPlayMessage());
+    }
 
 
 
@@ -96,10 +106,8 @@ public class ViewAPI implements ViewAPI_Interface {
     @Override
     public void setState(TurnState state) {
         this.state = state;
-        //this.state.display( ui);
-        displayLogin();
-        System.out.println("received notification from model");
-        System.out.println("sium");
+        System.out.println(state.toString());
+        this.state.display( ui);
     }
 
     @Override
@@ -110,7 +118,7 @@ public class ViewAPI implements ViewAPI_Interface {
 
 
     @Override
-    public void setPlayers(String[] players){
+    public void setPlayers(List<String> players){
         this.players = players;
 
         //after we receive the array containing the unique nicknames of the players, we initialize
@@ -130,6 +138,7 @@ public class ViewAPI implements ViewAPI_Interface {
     @Override
     public void setStarterCard(PlayableCard starterCard){
         //placeable is set to false because for starterCard it doesn't matter
+        System.out.println(starterCard.getId());
         this.starterCard = starterCard;
     }
 
@@ -140,7 +149,7 @@ public class ViewAPI implements ViewAPI_Interface {
 
     //the player is given the two ObjectiveCard cards from which he can choose his secretObjective
     @Override
-    public void chooseSecretObjective(ObjectiveCard obj1, ObjectiveCard obj2){
+    public void setSecretObjectives(ObjectiveCard obj1, ObjectiveCard obj2){
         chooseSecretObjectives.add(0, obj1);
         chooseSecretObjectives.add(1, obj2);
     }
@@ -148,9 +157,17 @@ public class ViewAPI implements ViewAPI_Interface {
     //the player chooses his secretObjective
     @Override
     public void setSecretObjective(ObjectiveCard secretObjective){
-        this.secretObjective = secretObjective;
+        //this.secretObjective = secretObjective;
+        chooseSecretObjective(String.valueOf(secretObjective.getId()));
     }
 
+
+    //TODO: rendere più chiara la scelta di secretObjective, confirmSecretObjective potrebbe essere eliminato
+
+    @Override
+    public void confirmSecretObjective(ObjectiveCard secretObjective){
+        this.secretObjective = secretObjective;
+    }
 
 
     //the player's points are updated
@@ -250,10 +267,15 @@ public class ViewAPI implements ViewAPI_Interface {
         myTurn = bool;
     }
 
+    public void setPlayerId(String playerId){
+        this.playerId = playerId;
+    }
+
     @Override
     public boolean getMyTurn() {
         return myTurn;
     }
+
 
     ////////////////////////////////// GETTER METHODS //////////////////////////////////////////////////////////////////////////////
 
@@ -262,6 +284,24 @@ public class ViewAPI implements ViewAPI_Interface {
      * @return
      */
     public HashMap<Coordinates, PlayableCard> getDisposition(){
-        return dispositions.get(playerId);
+        return dispositions.get(this.playerId);
     }
+
+    public PlayableCard getStarterCard(){
+        return this.starterCard;
+    }
+
+    public List<PlayableCard> getHand(){return hand;}
+
+    public List<ObjectiveCard> getCommonObjectives() {
+        return commonObjectives;
+    }
+
+    public List<ObjectiveCard> getChooseSecretObjectives() {
+        return chooseSecretObjectives;
+    }
+    public List<Coordinates> getAvailablePlaces(){
+        return availablePlaces;
+    }
+
 }

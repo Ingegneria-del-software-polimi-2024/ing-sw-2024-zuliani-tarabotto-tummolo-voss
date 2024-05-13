@@ -11,7 +11,7 @@ public class InitializationMessage implements MessageFromServer{
 
     private List<PlayableCard> goldDeck;
     private List<PlayableCard> resourceDeck;
-    private String[] players;
+    private List<String> players;
     private String gameId;
     private ObjectiveCard commonObjective1;
     private ObjectiveCard commonObjective2;
@@ -19,7 +19,7 @@ public class InitializationMessage implements MessageFromServer{
     private List<PlayableCard> openResouce;
 
     public InitializationMessage(List<PlayableCard> goldDeck, List<PlayableCard> resourceDeck, List<PlayableCard> openGold, List<PlayableCard> openResouce,
-                                 String[] players, String gameId, ObjectiveCard commonObjective1, ObjectiveCard commonObjective2) {
+                                 List<String> players, String gameId, ObjectiveCard commonObjective1, ObjectiveCard commonObjective2) {
 
         this.goldDeck = goldDeck;
         this.resourceDeck = resourceDeck;

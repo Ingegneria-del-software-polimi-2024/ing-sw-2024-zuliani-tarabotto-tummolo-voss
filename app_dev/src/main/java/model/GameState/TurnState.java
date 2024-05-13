@@ -22,6 +22,8 @@ public enum TurnState {
         }
 
     },
+
+
     STARTER_CARD_SELECTION{
         public boolean controlMessage(MessageFromClient msg){
             return (msg instanceof SelectStarterCardMessage);
@@ -31,6 +33,8 @@ public enum TurnState {
             ui.displayStarterCardSelection();
         }
     },
+
+
     OBJECTIVE_SELECTION{
         //TODO change instanceof type
         public boolean controlMessage(MessageFromClient msg){
@@ -42,6 +46,8 @@ public enum TurnState {
             ui.displayObjectiveSelection();
         }
     },
+
+
     PLACING_CARD_SELECTION{
         //TODO change instanceof type
         public boolean controlMessage(MessageFromClient msg){
@@ -53,6 +59,8 @@ public enum TurnState {
             ui.displayPlacingCard();
         }
     },
+
+
     CARD_DRAWING{
         //TODO change instanceof type
         public boolean controlMessage(MessageFromClient msg){
@@ -64,6 +72,8 @@ public enum TurnState {
             ui.displayCardDrawing();
         }
     },
+
+
     CALCULATE_OBJECTIVES{
         //TODO change instanceof type
         public boolean controlMessage(MessageFromClient msg){
@@ -75,6 +85,8 @@ public enum TurnState {
             ui.displayCalculateObjectives();
         }
     };
+
+
 
     /**
      * @throws UnsupportedOperationException when the next state is in a different stage

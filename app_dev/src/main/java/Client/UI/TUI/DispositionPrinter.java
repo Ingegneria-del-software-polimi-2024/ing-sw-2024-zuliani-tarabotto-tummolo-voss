@@ -64,6 +64,7 @@ public class DispositionPrinter {
         int matYDim = dispositionMap.length + 1;
         matXCenter = (matXDim + 1)/2;
         matYCenter = matYDim/2 ;
+        //mettiamo un segnalino -1 nelle coordinate in cui ho un posto available
         for(Coordinates c : availablePlaces){
             i = matYCenter - c.getY();
             j = matXCenter + c.getX();
@@ -113,21 +114,17 @@ public class DispositionPrinter {
         //POPOLIAMO LA MAPPA FACENDO UNA CONVERSIONE DELLE COORDINATE DAL SISTEMA DI DISPOSITION A QUELLO DI DISPOSITIONMAP
         for(Coordinates c : disposition.keySet()){
             dispositionMap[convertY(c.getY())][convertX(c.getX())] = disposition.get(c).getId();
-
-            //popoliamo mat
-            for(int i = 1; i < dispositionMap.length + 1; i++){
-                for(int j = 1; j < dispositionMap[0].length + 1; j++){
-                    if(dispositionMap[i - 1][j - 1] > 0){
-                        mat[i][j] = dispositionMap[i - 1][j - 1];
-                        mat[i + 1][j] = dispositionMap[i -1][j -1];
-
-                        if(j < minCol) minCol = j;
-
-                        if(j > maxCol) maxCol = j;
-                    }
+        }
+        //popoliamo mat
+        for(int i = 1; i < dispositionMap.length + 1; i++){
+            for(int j = 1; j < dispositionMap[0].length + 1; j++){
+                if(dispositionMap[i - 1][j - 1] > 0){
+                    mat[i][j] = dispositionMap[i - 1][j - 1];
+                    mat[i + 1][j] = dispositionMap[i -1][j -1];
+                    if(j < minCol) minCol = j;
+                    if(j > maxCol) maxCol = j;
                 }
             }
-
         }
         minCol -- ;
         maxCol ++;

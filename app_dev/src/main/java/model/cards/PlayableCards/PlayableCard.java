@@ -3,6 +3,7 @@ package model.cards.PlayableCards;
 import model.PointsStrategy.Points;
 import model.cards.Card;
 
+import java.io.Serializable;
 import java.util.*;
 
 import model.enums.*;

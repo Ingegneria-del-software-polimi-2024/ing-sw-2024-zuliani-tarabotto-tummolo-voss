@@ -1,5 +1,6 @@
 package SharedWebInterfaces.Messages.MessagesFromClient.toModelController;
 
+import Server.ModelController;
 import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.MessageFromViewToModelController;
 import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
 import SharedWebInterfaces.SharedInterfaces.ServerControllerInterface;
@@ -14,7 +15,7 @@ public class PlayStarterCardMessage implements MessageFromViewToModelController 
     }
 
     @Override
-    public void execute(ServerControllerInterface controller) {
+    public void execute(ModelController controller) {
         controller.playStarterCard(starterCardFace, playerId);
     }
 

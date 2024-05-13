@@ -29,7 +29,7 @@ public class GameState {
     private TurnState turnState;
     private final int MAX_POINTS = 10;
     private ModelListener modelListener;
-    private ArrayList<ObjectiveCard> objectiveBuffer;
+    private List<ObjectiveCard> objectiveBuffer;
 
 
     /**
@@ -53,12 +53,13 @@ public class GameState {
         this.turnPlayer = players.get(0);
         this.id = id;
         this.commonTable = new CommonTable();
+        this.objectiveBuffer = new ArrayList<>();
         //function that calls every initializing method contained in commonTable
         commonTable.initialize(players);
 
         //NOTIFICATION: decks order, open cards, commonObjectives, nicknames, gameId and initialPlayer
         //we don't send the objective and starter deck because it would be useless
-        /*modelListener.notifyChanges(commonTable.getGoldDeck(), commonTable.getResourceDeck(), commonTable.getOpenGold(),
+        modelListener.notifyChanges(commonTable.getGoldDeck(), commonTable.getResourceDeck(), commonTable.getOpenGold(),
                 commonTable.getOpenResources(), nickNames, id,
                 commonTable.getCommonObjectives().get(0), commonTable.getCommonObjectives().get(1));
 
@@ -66,7 +67,7 @@ public class GameState {
         for(Player p : players){
             modelListener.notifyChanges(p.getStarterCard(), p.getNickname(), p.getPawnColor());
             modelListener.notifyChanges(p.getPlayingHand(),p.getNickname());
-        }*/
+        }
 
     }
 
@@ -85,7 +86,8 @@ public class GameState {
             }
             finalPoints.put(players.get(i).getNickname(),players.get(i).getPoints() );
         }
-        //modelListener.notifyChanges(finalPoints);
+        //NOTIFICATION:
+        modelListener.notifyChanges(finalPoints);
     }
 
     /**
@@ -137,7 +139,7 @@ public class GameState {
             objectiveBuffer.add(getObjectiveDeck().extract());
             objectiveBuffer.add(getObjectiveDeck().extract());
             //NOTIFICATION: about the two objectives the player has to choose between
-            //modelListener.notifyChanges(objectiveBuffer.get(-2), objectiveBuffer.get(-1), p.getNickname());
+            modelListener.notifyChanges(objectiveBuffer.get(objectiveBuffer.size()-2), objectiveBuffer.get(objectiveBuffer.size()-1), p.getNickname());
         }
     }
 
@@ -148,8 +150,8 @@ public class GameState {
                     if(String.valueOf(c.getId()).equals(cardId)){
                         p.setSecretObjective(c);
                         //NOTIFICATION: about which secretObjective the player chose
-                        //modelListener.notifyChanges( c, player);
-                        break;
+                        modelListener.notifyChanges( c, player);
+                        return;
                     }
                 }
             }
@@ -168,7 +170,7 @@ public class GameState {
             } else { canBePlaced[i] = false;}
         }
         //NOTIFICATION: about which cards the player can place and where on the placementArea
-        //modelListener.notifyChanges(turnPlayer.getNickname(), turnPlayer.getPlacementArea().getAvailablePlaces(), canBePlaced);
+        modelListener.notifyChanges(turnPlayer.getNickname(), turnPlayer.getPlacementArea().getAvailablePlaces(), canBePlaced);
     }
 
     public boolean checkMessage(MessageFromClient message){return turnState.controlMessage(message);}
@@ -183,11 +185,11 @@ public class GameState {
         //we check if the player reached 20 points
         setLastTurnTrue();
         //NOTIFICATION: the player disposition, points, available resources are updated
-        /*modelListener.notifyChanges(turnPlayer.getNickname(), turnPlayer.getPlacementArea().getDisposition(),
+        modelListener.notifyChanges(turnPlayer.getNickname(), turnPlayer.getPlacementArea().getDisposition(),
                                     turnPlayer.getPoints(), turnPlayer.getPlacementArea().getAllArtifactsNumber(),
                                     turnPlayer.getPlacementArea().getAllElementsNumber());
 
-         */
+
     }
 
     /**
@@ -199,11 +201,11 @@ public class GameState {
             if(p.getNickname().equals(player)){
                 p.playStarterCard();
                 //NOTIFICATION ABOUT THE STARTER CARD
-                /*modelListener.notifyChanges(turnPlayer.getNickname(), turnPlayer.getPlacementArea().getDisposition(),
-                        turnPlayer.getPoints(), turnPlayer.getPlacementArea().getAllArtifactsNumber(),
-                        turnPlayer.getPlacementArea().getAllElementsNumber());
+                modelListener.notifyChanges(p.getNickname(), p.getPlacementArea().getDisposition(),
+                        p.getPoints(), p.getPlacementArea().getAllArtifactsNumber(),
+                        p.getPlacementArea().getAllElementsNumber());
 
-                 */
+
             }
         }
         //turnPlayer.playStarterCard();

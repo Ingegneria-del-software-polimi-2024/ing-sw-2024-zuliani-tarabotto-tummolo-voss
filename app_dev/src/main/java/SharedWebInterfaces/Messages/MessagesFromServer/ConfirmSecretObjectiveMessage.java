@@ -14,7 +14,7 @@ public class ConfirmSecretObjectiveMessage implements MessageFromServer{
 
     @Override
     public void execute(ViewAPI_Interface view) {
-        view.setSecretObjective(secretObjective);
+        view.confirmSecretObjective(secretObjective);
     }
 
 }

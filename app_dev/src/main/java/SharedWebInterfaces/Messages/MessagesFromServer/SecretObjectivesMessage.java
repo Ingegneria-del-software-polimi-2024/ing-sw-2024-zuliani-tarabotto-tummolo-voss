@@ -13,6 +13,6 @@ public class SecretObjectivesMessage implements MessageFromServer{
 
     @Override
     public void execute(ViewAPI_Interface view) {
-        view.chooseSecretObjective(obj1, obj2);
+        view.setSecretObjectives(obj1, obj2);
     }
 }

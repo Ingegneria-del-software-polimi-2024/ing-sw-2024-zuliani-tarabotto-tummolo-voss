@@ -29,6 +29,7 @@ public class ModelController implements ServerControllerInterface {
     private String initialPlayer;
     private boolean lastRound = false;
     private ServerAPI_GO send;
+    private int readyPlayers;
 
     /**
      * class constructor
@@ -40,6 +41,7 @@ public class ModelController implements ServerControllerInterface {
         this.playersNicknames = playersNicknames;
         this.gameId = gameId;
         this.send = send;
+        this.readyPlayers = 0;
     }
 
     /**
@@ -52,7 +54,21 @@ public class ModelController implements ServerControllerInterface {
         gameState = new GameState(playersNicknames, gameId, new ModelListener(send));
         gameState.setTurnState(TurnState.GAME_INITIALIZATION);
         initialPlayer = gameState.getTurnPlayer().getNickname();
-        //gameState.setTurnState(TurnState.STARTER_CARD_SELECTION);
+    }
+
+
+    /**
+     * each player once connected and inside a game sends a message(ReadyToPlayMessage) that calls this method:
+     * after all players sent this message the game finally starts with the starterCards distribution
+     */
+    @Override
+    public void setPlayerReady(){
+        readyPlayers ++;
+        System.out.println("starter selection");
+        System.out.println(readyPlayers + playersNicknames.size());
+        if(readyPlayers == playersNicknames.size()){
+            gameState.setTurnState(TurnState.STARTER_CARD_SELECTION);
+        }
     }
 
 
@@ -81,8 +97,8 @@ public class ModelController implements ServerControllerInterface {
      * the player can choose between the two secretObjective cards that he is given
      */
     private void distributeSecretObjectives(){
-        gameState.setTurnState(TurnState.OBJECTIVE_SELECTION);
         gameState.distributeSecretOjectives();
+        gameState.setTurnState(TurnState.OBJECTIVE_SELECTION);
     }
 
 
@@ -96,10 +112,12 @@ public class ModelController implements ServerControllerInterface {
     @Override
     public void chooseSecretObjective(String cardId, String player) {
         gameState.setPlayerSecretObjective(cardId, player);
+
         if(cont == playersNicknames.size() - 1){
-            gameState.setTurnState(TurnState.PLACING_CARD_SELECTION);
+
             //Now the first round will be played
             gameState.playingTurn();
+            gameState.setTurnState(TurnState.PLACING_CARD_SELECTION);
             return;
         }
         cont++;
@@ -201,4 +219,6 @@ public class ModelController implements ServerControllerInterface {
     }
 
     public boolean checkMessage(MessageFromClient message){return gameState.checkMessage(message);}
+
+
 }

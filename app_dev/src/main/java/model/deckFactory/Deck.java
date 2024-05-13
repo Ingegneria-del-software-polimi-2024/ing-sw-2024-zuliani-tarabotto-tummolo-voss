@@ -1,6 +1,7 @@
 package model.deckFactory;
 import model.cards.*;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
 /**
  * Interface defining common deck functionalities
  */
-public interface Deck {
+public interface Deck extends Serializable {
     /**
      * a new deck is created by using json parsing to build the related cards from a specific file
      */

@@ -11,6 +11,7 @@ public class ServerAPI_GO {
     private HashMap<String, ClientHandlerInterface> players;
 
     public void notifyChanges(MessageFromServer message, String player) throws MsgNotDeliveredException {
+        System.out.println("fi");
         try {
             players.get(player).notifyChanges(message);
         } catch (RemoteException e) {
@@ -38,6 +39,6 @@ public class ServerAPI_GO {
     }
 
     public ServerAPI_GO() {
-        players = new HashMap<String, ClientHandlerInterface>();
+        players = new HashMap<>();
     }
 }

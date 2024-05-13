@@ -2,6 +2,7 @@ package MockClient;
 
 import Client.View.ViewAPI;
 import Client.Web.ClientAPI_COME;
+import Client.Web.ClientAPI_GO;
 import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_RoomChoice;
 import SharedWebInterfaces.Messages.MessagesFromLobby.WelcomeMessage;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
@@ -18,6 +19,7 @@ public class RMI_MockClient implements Runnable{
     private ConcurrentLinkedQueue<MessageFromServer> todo;
     private RMI_MockHandler handler;
     private ViewAPI view;
+    private ClientAPI_GO goAPI;
 
 
     public void run(){
@@ -25,11 +27,13 @@ public class RMI_MockClient implements Runnable{
         while(true){
             MessageFromServer msg = todo.poll();
             if(msg instanceof WelcomeMessage){
-                view = new ViewAPI();
+
                 System.out.println(msg.toString());
                 //view.displayLogin();
                 System.out.println("inserire username");
                 String userName = scIn.next();
+                //we notify the view about the nickName of its player
+                this.view.setPlayerId(userName);
                 System.out.println("inserire la partita in cui entrare");
                 String game = scIn.next();
                 System.out.println("inserire il numero di giocatori");
@@ -54,6 +58,12 @@ public class RMI_MockClient implements Runnable{
 
     public RMI_MockClient() throws AlreadyBoundException, RemoteException, NotBoundException {
         this.todo = new ConcurrentLinkedQueue<MessageFromServer>();
+        this.view = new ViewAPI();
+        //handler is created and a reference to ClientAPI_COME is passed to it
         this.handler = new RMI_MockHandler(this, new ClientAPI_COME(view));
+        //ClientAPI_GO has a reference to the handler
+        this.goAPI = new ClientAPI_GO(handler);
+        //we now tell the view its ClientAPI_GO interface
+        this.view.setClientAPIGo(this.goAPI);
     }
 }

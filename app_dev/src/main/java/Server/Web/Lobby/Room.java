@@ -26,21 +26,20 @@ public class Room {
         if(expectedPlayers == players.size())
             throw new RuntimeException("Too many players, can't join the room");//TODO handle or change the except
         players.add(name);
-        try {
+        /*try {
             handler.setReceiver(receive);
         }catch (RemoteException e){
             throw new RuntimeException("Can't join the room due to a comunication error");
-        }
+        }*/
         send.setHandler(name, handler);
         if(expectedPlayers == players.size())
-            startGame();
+            startGame(handler);
     }
 
     public Room(String name, int expectedPlayers){
         this.expectedPlayers = expectedPlayers;
         this.name = name;
         players = new ArrayList<String>();
-        receive = new ServerAPI_COME();
         send = new ServerAPI_GO();
         full = false;
     }
@@ -52,13 +51,22 @@ public class Room {
     public String getName() {
         return name;
     }
-    private void startGame(){
+    private void startGame(ClientHandlerInterface handler){
         //starts a thread starting the controller execution...
         //game = new GameState(players, "3");
         //game.setTurnState(TurnState.GAME_INITIALIZATION);
         modelController = new ModelController(players, name, send);
-        Thread thread1 = new Thread(() -> modelController.initializeGameState());
+        receive = new ServerAPI_COME(modelController);
+        try {
+            handler.setReceiver(receive);
+        }catch (RemoteException e){
+            throw new RuntimeException("Can't join the room due to a comunication error");
+        }
+        Thread thread1 = new Thread(() -> receive.loop());
         thread1.start();
+        //Thread thread2 = new Thread(() -> modelController.initializeGameState());
+        modelController.initializeGameState();
+        //thread2.start();
         System.out.println("game can now start");
     }
     public boolean contains(String player){

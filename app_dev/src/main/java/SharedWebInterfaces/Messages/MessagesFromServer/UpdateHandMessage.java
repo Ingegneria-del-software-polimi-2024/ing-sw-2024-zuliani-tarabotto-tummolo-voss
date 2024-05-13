@@ -14,6 +14,6 @@ public class UpdateHandMessage implements MessageFromServer{
     }
     @Override
     public void execute(ViewAPI_Interface view) {
-
+        view.setHand(hand);
     }
 }

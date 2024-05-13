@@ -3,6 +3,7 @@ package Server.Web.Game;
 import Server.ModelController;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
+import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
 
 import java.util.HashMap;
 
@@ -34,24 +35,25 @@ public class ServerAPI_COME {
          while (true) {
              message = toDoQueue.getNextMessage();
              //if you find a message in the waiting list
-             if (message != null)
-                 if(controller.checkMessage(message))
-                     //if that message has sense execute it
-                     message.execute(controller);
-                 else
-                     //if that message doesn't have sense
-                     toDoQueue.enqueueMessage(message);
-                    //it would be interesting if we implemented a kind of "waiting time varible" that increases until a value when the message is destroyed
-
+             if (message != null) {
+                 //if(controller.checkMessage(message))
+                 //if that message has sense execute it
+                 message.execute(controller);
+                 //else
+                 //if that message doesn't have sense
+                 //    toDoQueue.enqueueMessage(message);
+                 //it would be interesting if we implemented a kind of "waiting time varible" that increases until a value when the message is destroyed
+             }
          }
     }
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public ServerAPI_COME() {
+    public ServerAPI_COME(ModelController controller) {
         toDoQueue = new ServerMessageQueue();
         players = new HashMap<String, ClientHandlerInterface>();
+        this.controller = controller;
         //TODO how to initialize the controller?
     }
 

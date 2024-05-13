@@ -100,6 +100,7 @@ public class CardBuilder {
 
         //CENTER
         if(card instanceof StarterCard && card.getFaceSide()) line += buildStarterBackThirdRow(card);
+        else if(card instanceof StarterCard && !card.getFaceSide()) line += "         ";
         else if(card.getFaceSide()) line += "         ";
         else line += "   " + backFaceSymbolBuilder(card.getBlockedElement(), 0) + "   ";
 
@@ -129,6 +130,7 @@ public class CardBuilder {
 
         //CENTER
         if(card instanceof StarterCard && card.getFaceSide()) line += buildStarterBackFourthRow(card);
+        else if(card instanceof StarterCard && !card.getFaceSide()) line += "         ";
         else if(card.getFaceSide()) line += "         ";
         else line += "   " + backFaceSymbolBuilder(card.getBlockedElement(), 1) + "   ";
 

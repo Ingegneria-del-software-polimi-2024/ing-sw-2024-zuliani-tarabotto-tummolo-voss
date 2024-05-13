@@ -8,10 +8,11 @@ import model.deckFactory.PlayableDeck;
 import model.enums.Pawn;
 import model.placementArea.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player {
+public class Player implements Serializable {
     private String nickname;
     private List<PlayableCard> hand;
     private ObjectiveCard secretObjective;

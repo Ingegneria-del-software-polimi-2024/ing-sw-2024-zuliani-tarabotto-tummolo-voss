@@ -28,7 +28,8 @@ public class RMI_ClientHandler implements ClientHandlerInterface {
      * @param message the message coming from the client
      * @throws RemoteException when the message is not correctly delivered
      */
-    public void sendToServer(MessageFromClient message) throws RemoteException{api.sendToServer(message);}
+    public void sendToServer(MessageFromClient message) throws RemoteException{
+        api.sendToServer(message);}
 
 //    public void addNewPlayer(String nickname, String lookupTableName, int clientPort, String clientHost) throws RemoteException{
 //        //searching in the register for the required connection

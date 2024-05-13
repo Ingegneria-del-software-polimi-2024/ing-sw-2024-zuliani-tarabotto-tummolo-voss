@@ -5,11 +5,13 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import model.enums.Artifact;
 import model.placementArea.PlacementArea;
 
+import java.io.Serializable;
+
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 /**
  * Interface of the strategy pattern that allows to count points
  */
-public interface Points {
+public interface Points extends Serializable {
     /**
      * counts the points
      * @param placementArea the disposition of placed card belonging to the player

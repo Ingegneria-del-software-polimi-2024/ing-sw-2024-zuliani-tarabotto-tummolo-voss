@@ -1,11 +1,12 @@
 package model.placementArea;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 /**
  * the class coordinates facilitates the use of a cartesian plane as model for the Placement Area of the players
  */
-public class Coordinates {
+public class Coordinates implements Serializable {
     private final int x;
     private final int y;
 

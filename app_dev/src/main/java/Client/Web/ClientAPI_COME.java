@@ -10,7 +10,7 @@ public class ClientAPI_COME implements Runnable{
     private ViewAPI view;
 
     public ClientAPI_COME(ViewAPI view){
-        this.view = new ViewAPI();
+        this.view = view;
         toDoQueue = new ClientMessageQueue();
     }
 
@@ -30,10 +30,11 @@ public class ClientAPI_COME implements Runnable{
         MessageFromServer message;
         do{
             message = toDoQueue.getNextMessage();
-            if(message!=null && !(message instanceof InterruptConnectionMessage))
+            if(message!=null && !(message instanceof InterruptConnectionMessage)) {
                 //view.controlMessage(message);//TODO implement the control
                 //IMPORTANT: I may choose to execute the InterruptConnectionMessage in order to end everything
                 message.execute(view);
+            }
         }while(!(message instanceof InterruptConnectionMessage));
     }
     public void enqueue(MessageFromServer msg){

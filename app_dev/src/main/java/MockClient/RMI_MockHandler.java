@@ -24,6 +24,7 @@ public class RMI_MockHandler implements ServerHandlerInterface {
 
     @Override
     public void sendToServer(MessageFromClient message) throws RemoteException {
+        serverGame.sendToServer(message);
     }
 
 //    @Override

@@ -9,6 +9,10 @@ import java.rmi.RemoteException;
 public class ClientAPI_GO {
     private ServerHandlerInterface handler;
 
+    public ClientAPI_GO(ServerHandlerInterface handler){
+        this.handler = handler;
+    }
+
     public void addNewPlayer(){}
 
 

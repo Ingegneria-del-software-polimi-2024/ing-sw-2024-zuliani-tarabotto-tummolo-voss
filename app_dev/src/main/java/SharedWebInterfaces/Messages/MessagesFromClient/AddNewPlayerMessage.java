@@ -1,5 +1,6 @@
 package SharedWebInterfaces.Messages.MessagesFromClient;
 
+import Server.ModelController;
 import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
 import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
 import SharedWebInterfaces.SharedInterfaces.ServerControllerInterface;
@@ -21,4 +22,6 @@ public class AddNewPlayerMessage implements MessageFromClient {
         System.out.println("IDK");
         return;
     }
+    @Override
+    public void execute(ModelController controller){}
 }

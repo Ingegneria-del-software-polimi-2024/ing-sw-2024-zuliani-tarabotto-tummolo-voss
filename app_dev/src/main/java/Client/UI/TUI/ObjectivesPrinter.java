@@ -53,4 +53,20 @@ public class ObjectivesPrinter {
         System.out.println("\u2551                                                                   \u2551");
         System.out.println("\u255A\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255D");
     }
+
+    public void printCommonObjectives(ObjectiveCard c1, ObjectiveCard c2){
+        System.out.println("\u2554\u2550\u2550\u2550"+ ansi().fg(color).bold().a(" OBJECTIVES ").reset() + "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557");
+        System.out.println("\u2551                                                                   \u2551");
+
+        System.out.println("\u2551          OBJ:1                OBJ:2             \u2551");
+
+        for(int i = 0; i < 6; i++){
+            System.out.println("\u2551     " + printRow(c1, i) + "      " + printRow(c2, i)  + "     \u2551");
+        }
+
+
+        System.out.println("\u2551                                                                   \u2551");
+        System.out.println("\u2551                                                                   \u2551");
+        System.out.println("\u255A\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255D");
+    }
 }

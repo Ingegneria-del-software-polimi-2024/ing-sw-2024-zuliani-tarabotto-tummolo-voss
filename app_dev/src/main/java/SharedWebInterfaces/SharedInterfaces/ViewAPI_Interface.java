@@ -7,6 +7,7 @@ import model.cards.PlayableCards.PlayableCard;
 import model.deckFactory.ObjectiveDeck;
 import model.enums.Artifact;
 import model.enums.Element;
+import model.objective.Objective;
 import model.placementArea.Coordinates;
 
 import java.util.ArrayList;
@@ -15,17 +16,18 @@ import java.util.List;
 
 public interface ViewAPI_Interface extends GeneralAPI_Interface {
 
+    void readyToPlay();
     void setState(TurnState state);
     void setGoldDeck(List<PlayableCard> deck);
     void setResourceDeck(List<PlayableCard>deck);
-    void setPlayers(String[] players);
+    void setPlayers(List<String> players);
     void setGameId(String gameId);
     void setOpenGold(List<PlayableCard> openGold);
     void setOpenResource(List<PlayableCard> openResource);
     void setStarterCard(PlayableCard starterCard);
     void setHand(List<PlayableCard> hand);
 
-    void chooseSecretObjective(ObjectiveCard obj1, ObjectiveCard obj2);
+    void setSecretObjectives(ObjectiveCard obj1, ObjectiveCard obj2);
     // se player == client allora il secret objective del client è settato, sennò viene aggiornato quello del client corrispondente a player
     void setSecretObjective(ObjectiveCard secretObjective);
     void setCommonObjectives(ObjectiveCard commonObjective1, ObjectiveCard commonObjective2);
@@ -44,4 +46,6 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
 
     void setMyTurn(boolean bool);
     boolean getMyTurn();
+
+    public void confirmSecretObjective(ObjectiveCard card);
 }

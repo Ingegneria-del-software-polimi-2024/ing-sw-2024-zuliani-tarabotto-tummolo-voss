@@ -20,5 +20,6 @@ public class PlaceableCardsMessage implements MessageFromServer{
     public void execute(ViewAPI_Interface view) {
         view.setAvailablePlaces(availablePlaces);
         view.setCanBePlaced(canBePlaced);
+        view.setMyTurn(true);
     }
 }

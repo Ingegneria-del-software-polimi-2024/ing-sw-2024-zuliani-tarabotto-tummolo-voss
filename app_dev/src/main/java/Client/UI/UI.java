@@ -22,7 +22,4 @@ public interface UI {
     //whatever -> probably the end
     void displayCalculateObjectives();
 
-    void displayLobby();
-
-    void displayLogin();
 }

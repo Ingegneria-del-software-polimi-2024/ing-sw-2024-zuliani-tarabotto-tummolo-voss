@@ -42,4 +42,19 @@ public class HandPrinter {
         }
     }
 
+
+
+    public void printStarterCard(PlayableCard card){
+        System.out.println("FRONT:");
+        card.setFaceSide(true);
+        for(int i = 0; i < 6; i++){
+            System.out.println(cb.buildLine(i, card));
+        }
+        System.out.println("BACK");
+        card.setFaceSide(false);
+        for(int i = 0; i < 6; i++){
+            System.out.println(cb.buildLine(i, card));
+        }
+    }
+
 }
