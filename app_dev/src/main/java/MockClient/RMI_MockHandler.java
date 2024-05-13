@@ -21,6 +21,7 @@ public class RMI_MockHandler implements ServerHandlerInterface {
     private RMI_MockClient api;
     private ClientHandlerInterface serverGame;
     private  ClientAPI_COME client;
+    private int port;
 
     @Override
     public void sendToServer(MessageFromClient message) throws RemoteException {
@@ -52,14 +53,15 @@ public class RMI_MockHandler implements ServerHandlerInterface {
         api.enQmsg(msg);
     }
 
-    public RMI_MockHandler(RMI_MockClient api, ClientAPI_COME client) throws RemoteException, AlreadyBoundException, NotBoundException {
+    public RMI_MockHandler(RMI_MockClient api, ClientAPI_COME client, int port) throws RemoteException, AlreadyBoundException, NotBoundException {
         this.api = api;
         this.client = client;
+        this.port = port;
         Thread thread = new Thread(client);
         thread.start(); // This starts the thread
         //client.run();
         UnicastRemoteObject.exportObject(this, 0);
-        Registry registry = LocateRegistry.createRegistry(2345);
+        Registry registry = LocateRegistry.createRegistry(port);
         registry.bind("ciaoBello", this);
         System.out.println("Client published");
 

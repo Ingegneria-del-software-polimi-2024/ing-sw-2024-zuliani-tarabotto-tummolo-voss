@@ -20,6 +20,7 @@ public class RMI_MockClient implements Runnable{
     private RMI_MockHandler handler;
     private ViewAPI view;
     private ClientAPI_GO goAPI;
+    private int port;
 
 
     public void run(){
@@ -34,7 +35,7 @@ public class RMI_MockClient implements Runnable{
                 String userName = scIn.next();
                 //we notify the view about the nickName of its player
                 this.view.setPlayerId(userName);
-                System.out.println("inserire la partita in cui entrare");
+                System.out.println("inserire la partita in cui entrare:");
                 String game = scIn.next();
                 System.out.println("inserire il numero di giocatori");
                 int players = scIn.nextInt();
@@ -49,18 +50,19 @@ public class RMI_MockClient implements Runnable{
         }
     }
     public void startConnection() throws RemoteException {
-        handler.sendToLobby(new NewRMI_Connection("ciaoBello", "localHost", 2345));
+        handler.sendToLobby(new NewRMI_Connection("ciaoBello", "localHost", port));
     }
 
     public void enQmsg(MessageFromServer msg){
         todo.add(msg);
     }
 
-    public RMI_MockClient() throws AlreadyBoundException, RemoteException, NotBoundException {
+    public RMI_MockClient(int port) throws AlreadyBoundException, RemoteException, NotBoundException {
+        this.port = port;
         this.todo = new ConcurrentLinkedQueue<MessageFromServer>();
         this.view = new ViewAPI();
         //handler is created and a reference to ClientAPI_COME is passed to it
-        this.handler = new RMI_MockHandler(this, new ClientAPI_COME(view));
+        this.handler = new RMI_MockHandler(this, new ClientAPI_COME(view), port);
         //ClientAPI_GO has a reference to the handler
         this.goAPI = new ClientAPI_GO(handler);
         //we now tell the view its ClientAPI_GO interface

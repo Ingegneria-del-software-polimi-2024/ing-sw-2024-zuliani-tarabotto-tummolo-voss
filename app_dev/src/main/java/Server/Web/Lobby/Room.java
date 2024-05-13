@@ -10,6 +10,7 @@ import model.Model;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Room {
     private String name;
@@ -20,6 +21,7 @@ public class Room {
     private ServerAPI_COME receive;
     private ServerAPI_GO send;
     private boolean full;
+    private HashMap<String, ClientHandlerInterface> playersInterfaces;
 
 
     public void joinRoom(String name, ClientHandlerInterface handler){
@@ -32,11 +34,13 @@ public class Room {
             throw new RuntimeException("Can't join the room due to a comunication error");
         }*/
         send.setHandler(name, handler);
+        playersInterfaces.put(name, handler);
         if(expectedPlayers == players.size())
             startGame(handler);
     }
 
     public Room(String name, int expectedPlayers){
+        this.playersInterfaces = new HashMap<>();
         this.expectedPlayers = expectedPlayers;
         this.name = name;
         players = new ArrayList<String>();
@@ -58,15 +62,16 @@ public class Room {
         modelController = new ModelController(players, name, send);
         receive = new ServerAPI_COME(modelController);
         try {
-            handler.setReceiver(receive);
+            for(String p : playersInterfaces.keySet()){
+                playersInterfaces.get(p).setReceiver(receive);
+            }
+            //handler.setReceiver(receive);
         }catch (RemoteException e){
             throw new RuntimeException("Can't join the room due to a comunication error");
         }
         Thread thread1 = new Thread(() -> receive.loop());
         thread1.start();
-        //Thread thread2 = new Thread(() -> modelController.initializeGameState());
         modelController.initializeGameState();
-        //thread2.start();
         System.out.println("game can now start");
     }
     public boolean contains(String player){

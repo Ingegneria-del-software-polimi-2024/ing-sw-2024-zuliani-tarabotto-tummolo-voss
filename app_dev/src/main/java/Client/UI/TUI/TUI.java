@@ -131,6 +131,8 @@ public class TUI implements UI {
             drawCardPrinter.print(view.getGoldDeck().get(0), view.getResourceDeck().get(0), view.getOpenGold(), view.getOpenResource());
             System.out.print(ansi().fg(color).a("~> Draw a card: (1/2/3/4/5/6)\n").reset());
             view.drawCard(sc.nextInt());
+            //my turn is finished and i set it to false
+            view.setMyTurn(false);
         }else{
             System.out.print(ansi().fg(color).a("~> " + view.getTurnPlayer() + "is drawing a card\n").reset());
             dispositionPrinter.print(view.getDisposition());
