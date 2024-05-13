@@ -115,8 +115,8 @@ public class TUI implements UI {
             int y = sc .nextInt();
 
             view.playCard(c, x, y);
-            printPlayerInformation();
         }else{
+            System.out.print(ansi().fg(color).a("~> " + view.getTurnPlayer() + "is placing a card\n").reset());
             dispositionPrinter.print(view.getDisposition());
             handPrinter.print(view.getHand());
             printPlayerInformation();
@@ -128,13 +128,11 @@ public class TUI implements UI {
         //TODO: ERASE SCREEN
 
         if(view.getMyTurn()){
-            dispositionPrinter.print(view.getDisposition(), view.getAvailablePlaces());
-            handPrinter.print(view.getHand());
-            printPlayerInformation();
             drawCardPrinter.print(view.getGoldDeck().get(0), view.getResourceDeck().get(0), view.getOpenGold(), view.getOpenResource());
             System.out.print(ansi().fg(color).a("~> Draw a card: (1/2/3/4/5/6)\n").reset());
             view.drawCard(sc.nextInt());
         }else{
+            System.out.print(ansi().fg(color).a("~> " + view.getTurnPlayer() + "is drawing a card\n").reset());
             dispositionPrinter.print(view.getDisposition());
             handPrinter.print(view.getHand());
             printPlayerInformation();

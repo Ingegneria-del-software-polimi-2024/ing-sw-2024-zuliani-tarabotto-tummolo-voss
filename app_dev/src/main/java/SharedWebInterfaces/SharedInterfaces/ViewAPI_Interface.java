@@ -48,4 +48,5 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
     boolean getMyTurn();
 
     public void confirmSecretObjective(ObjectiveCard card);
+    public void setTurnPlayer(String turnPlayer);
 }

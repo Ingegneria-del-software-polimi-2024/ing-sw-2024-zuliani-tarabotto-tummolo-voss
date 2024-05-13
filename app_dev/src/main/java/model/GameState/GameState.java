@@ -113,6 +113,9 @@ public class GameState {
         if(currentPlayer == players.size() - 1) {
             turnPlayer = players.get(0);
         } else{turnPlayer = players.get(currentPlayer+1);}
+
+        //broadcast notification about the new turnPlayer
+        modelListener.notifyChanges(turnPlayer.getNickname());
     }
 
     /**
@@ -189,7 +192,8 @@ public class GameState {
                                     turnPlayer.getPlacementArea().getAvailablePlaces(),
                                     turnPlayer.getPoints(), turnPlayer.getPlacementArea().getAllArtifactsNumber(),
                                     turnPlayer.getPlacementArea().getAllElementsNumber());
-
+        //we update the player hand by removing the card he placed
+        modelListener.notifyChanges(turnPlayer.getPlayingHand(), turnPlayer.getNickname());
 
     }
 
@@ -264,6 +268,7 @@ public class GameState {
         commonTable.drawCardGoldDeck(turnPlayer);
         setLastTurnTrue();
         modelListener.notifyChanges(getGoldDeck().getCards(), i);
+        modelListener.notifyChanges(turnPlayer.getPlayingHand(), turnPlayer.getNickname());
     }
 
     /**
@@ -276,6 +281,7 @@ public class GameState {
         commonTable.drawCardResourcesDeck(turnPlayer);
         setLastTurnTrue();
         modelListener.notifyChanges(getResourceDeck().getCards(), i);
+        modelListener.notifyChanges(turnPlayer.getPlayingHand(), turnPlayer.getNickname());
     }
 
     /**
@@ -289,6 +295,7 @@ public class GameState {
         commonTable.drawCardOpenGold(index, turnPlayer);
         setLastTurnTrue();
         modelListener.notifyChanges(getOpenGold(), i);
+        modelListener.notifyChanges(turnPlayer.getPlayingHand(), turnPlayer.getNickname());
     }
 
     /**
@@ -302,6 +309,7 @@ public class GameState {
         commonTable.drawCardOpenResources(index, turnPlayer);
         setLastTurnTrue();
         modelListener.notifyChanges(getOpenResources(), i);
+        modelListener.notifyChanges(turnPlayer.getPlayingHand(), turnPlayer.getNickname());
     }
 
 

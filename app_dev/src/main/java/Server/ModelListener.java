@@ -43,6 +43,19 @@ public class ModelListener {
         }
     }
 
+    /**
+     * notification about the new turnPlayer
+     * @param turnPlayer
+     */
+    public void notifyChanges(String turnPlayer){
+        try{
+            System.out.println("notification send");
+            serverAPI.broadcastNotifyChanges( new TurnPlayerMessage(turnPlayer));
+        } catch(MsgNotDeliveredException msg) {
+            throw new RuntimeException(msg);
+        }
+    }
+
 
     /**
      * notification with data about the order of the cards in decks

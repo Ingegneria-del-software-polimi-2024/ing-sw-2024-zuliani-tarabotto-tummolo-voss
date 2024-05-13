@@ -40,6 +40,10 @@ public class ViewAPI implements ViewAPI_Interface {
     private HashMap<Element, Integer> availableElements;
     //the id of THIS player
     private String playerId;
+    private boolean myTurn;
+
+
+    private String turnPlayer;
     private String pawnColor;
     private List<Coordinates> availablePlaces;
     //an array of 3 booleans indicating which of the cards in the player's hand can be placed(due to placementConstraint)
@@ -48,7 +52,6 @@ public class ViewAPI implements ViewAPI_Interface {
     private HashMap< String, HashMap< Coordinates, PlayableCard> > dispositions;
     //the points of all players are store here
     private HashMap< String , Integer> points;
-    private boolean myTurn;
     private UI ui;
     private ClientAPI_GO clientAPIGo;
 
@@ -340,5 +343,13 @@ public class ViewAPI implements ViewAPI_Interface {
         return openResource;
     }
 
+    public String getTurnPlayer() {
+        return turnPlayer;
+    }
+
+    @Override
+    public void setTurnPlayer(String turnPlayer) {
+        this.turnPlayer = turnPlayer;
+    }
 
 }
