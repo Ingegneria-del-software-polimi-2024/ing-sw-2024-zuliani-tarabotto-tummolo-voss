@@ -15,6 +15,11 @@ public class DrawCardMessage implements MessageFromServer{
         this.cardSource = cardSource;
     }
 
+    /**
+     * The receiver is notified of the drawing of a card from a specified source.
+     * The new state of the source and of the deck are contained.
+     * @param view the view interface of the receiver
+     */
     @Override
     public void execute(ViewAPI_Interface view)  {
         view.updateCardSource(deck, cardSource);

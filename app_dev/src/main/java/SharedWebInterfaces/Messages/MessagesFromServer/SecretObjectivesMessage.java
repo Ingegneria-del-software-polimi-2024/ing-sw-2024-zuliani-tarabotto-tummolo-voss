@@ -11,6 +11,10 @@ public class SecretObjectivesMessage implements MessageFromServer{
         this.obj2 = obj2;
     }
 
+    /**
+     * Sets the secret objectives of the receiver
+     * @param view the view interface of the receiver
+     */
     @Override
     public void execute(ViewAPI_Interface view) {
         view.setSecretObjectives(obj1, obj2);

@@ -16,6 +16,10 @@ public class PlaceableCardsMessage implements MessageFromServer{
         this.canBePlaced = canBePlaced;
     }
 
+    /**
+     * Notify of the correct placement of a card
+     * @param view the view interface of the receiver
+     */
     @Override
     public void execute(ViewAPI_Interface view) {
         view.setAvailablePlaces(availablePlaces);

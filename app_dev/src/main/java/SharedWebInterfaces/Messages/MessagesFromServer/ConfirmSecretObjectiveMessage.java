@@ -12,6 +12,10 @@ public class ConfirmSecretObjectiveMessage implements MessageFromServer{
 
     }
 
+    /**
+     * The objective chosen is selected
+     * @param view the view interface of the receiver
+     */
     @Override
     public void execute(ViewAPI_Interface view) {
         view.confirmSecretObjective(secretObjective);

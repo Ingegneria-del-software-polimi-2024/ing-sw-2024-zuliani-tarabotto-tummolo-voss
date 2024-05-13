@@ -11,6 +11,10 @@ public class StateMessage implements MessageFromServer{
         this.state = state;
     }
 
+    /**
+     * sets a new game state on the receiver
+     * @param viewApi the view interface of the receiver
+     */
     @Override
     public void execute(ViewAPI_Interface viewApi){
         viewApi.setState(state);

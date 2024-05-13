@@ -9,6 +9,7 @@ import model.placementArea.Coordinates;
 import java.util.HashMap;
 import java.util.List;
 
+//TODO must consider the possibility to notify also the other players of the change in the disposition
 public class UpdateDispositionMessage implements MessageFromServer{
     private String player;
     private HashMap<Coordinates, PlayableCard> disposition;
@@ -17,7 +18,8 @@ public class UpdateDispositionMessage implements MessageFromServer{
     private HashMap<Element, Integer> availableElements;
     private List<Coordinates> availablePlaces;
 
-    public UpdateDispositionMessage(String player, HashMap<Coordinates, PlayableCard> disposition, List<Coordinates> availablePlaces,
+    public UpdateDispositionMessage(String player, HashMap<Coordinates, PlayableCard> disposition,
+                                    List<Coordinates> availablePlaces,
                                     int points, HashMap<Artifact, Integer> availableArtifacts,
                                     HashMap<Element, Integer> availableElements) {
         this.player = player;
@@ -29,6 +31,10 @@ public class UpdateDispositionMessage implements MessageFromServer{
     }
 
 
+    /**
+     * Sets a disposition on the client receiving the message
+     * @param view the view interface of the receiver
+     */
     @Override
     public void execute(ViewAPI_Interface view) {
         view.setDisposition(player, disposition);
