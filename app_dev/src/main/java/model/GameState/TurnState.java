@@ -3,7 +3,10 @@ package model.GameState;
 import Client.UI.UI;
 import Client.View.ViewAPI;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
+import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.ChooseSecreteObjMessage;
+import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.DrawCardMessage;
 import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.SelectStarterCardMessage;
+import SharedWebInterfaces.Messages.MessagesFromServer.PlaceableCardsMessage;
 
 /**
  * a finite state machine that keeps track of the states occuring during the turn of a player,
@@ -36,9 +39,8 @@ public enum TurnState {
 
 
     OBJECTIVE_SELECTION{
-        //TODO change instanceof type
         public boolean controlMessage(MessageFromClient msg){
-            return (msg instanceof SelectStarterCardMessage);
+            return (msg instanceof ChooseSecreteObjMessage);
         }
 
         @Override
@@ -49,9 +51,8 @@ public enum TurnState {
 
 
     PLACING_CARD_SELECTION{
-        //TODO change instanceof type
         public boolean controlMessage(MessageFromClient msg){
-            return (msg instanceof SelectStarterCardMessage);
+            return (msg instanceof PlaceableCardsMessage);
         }
 
         @Override
@@ -62,9 +63,8 @@ public enum TurnState {
 
 
     CARD_DRAWING{
-        //TODO change instanceof type
         public boolean controlMessage(MessageFromClient msg){
-            return (msg instanceof SelectStarterCardMessage);
+            return (msg instanceof DrawCardMessage);
         }
 
         @Override

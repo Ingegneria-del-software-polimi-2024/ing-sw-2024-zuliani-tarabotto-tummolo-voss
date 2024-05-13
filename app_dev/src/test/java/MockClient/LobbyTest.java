@@ -3,12 +3,14 @@ package MockClient;
 import Server.Web.Lobby.Lobby;
 import SharedWebInterfaces.WebExceptions.MsgNotDeliveredException;
 import SharedWebInterfaces.WebExceptions.StartConnectionFailedException;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.rmi.AlreadyBoundException;
 
 class LobbyTest {
-    public static void main(String[] args) {
+    @Test
+    public void main() {
         Lobby lobby = new Lobby(1234);
         try {
             lobby.start();

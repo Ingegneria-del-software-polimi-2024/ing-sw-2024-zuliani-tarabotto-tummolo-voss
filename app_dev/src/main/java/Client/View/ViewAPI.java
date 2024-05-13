@@ -24,10 +24,10 @@ import java.util.List;
 public class ViewAPI implements ViewAPI_Interface {
     private List<PlayableCard> hand;
     private PlayableCard starterCard;
+
     private List<PlayableCard> goldDeck;
     private List<PlayableCard> resourceDeck;
     private ObjectiveCard secretObjective;
-
 
     private List<ObjectiveCard> commonObjectives;
     private List<ObjectiveCard> chooseSecretObjectives;
@@ -106,7 +106,7 @@ public class ViewAPI implements ViewAPI_Interface {
     @Override
     public void setState(TurnState state) {
         this.state = state;
-        System.out.println(state.toString());
+        //System.out.println(state.toString());
         this.state.display( ui);
     }
 
@@ -303,5 +303,42 @@ public class ViewAPI implements ViewAPI_Interface {
     public List<Coordinates> getAvailablePlaces(){
         return availablePlaces;
     }
+
+    public boolean[] getCanBePlaced() {
+        return canBePlaced;
+    }
+
+    public HashMap<String, Integer> getPoints() {
+        return points;
+    }
+
+    public String getPlayerId() {
+        return playerId;
+    }
+
+    public HashMap<Artifact, Integer> getAvailableArtifacts() {
+        return availableArtifacts;
+    }
+
+    public HashMap<Element, Integer> getAvailableElements() {
+        return availableElements;
+    }
+
+    public List<PlayableCard> getGoldDeck() {
+        return goldDeck;
+    }
+
+    public List<PlayableCard> getResourceDeck() {
+        return resourceDeck;
+    }
+
+    public List<PlayableCard> getOpenGold() {
+        return openGold;
+    }
+
+    public List<PlayableCard> getOpenResource() {
+        return openResource;
+    }
+
 
 }

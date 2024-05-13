@@ -7,6 +7,7 @@ import model.enums.Element;
 import model.placementArea.Coordinates;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class UpdateDispositionMessage implements MessageFromServer{
     private String player;
@@ -14,8 +15,9 @@ public class UpdateDispositionMessage implements MessageFromServer{
     private int points;
     private HashMap<Artifact, Integer> availableArtifacts;
     private HashMap<Element, Integer> availableElements;
+    private List<Coordinates> availablePlaces;
 
-    public UpdateDispositionMessage(String player, HashMap<Coordinates, PlayableCard> disposition,
+    public UpdateDispositionMessage(String player, HashMap<Coordinates, PlayableCard> disposition, List<Coordinates> availablePlaces,
                                     int points, HashMap<Artifact, Integer> availableArtifacts,
                                     HashMap<Element, Integer> availableElements) {
         this.player = player;
@@ -23,6 +25,7 @@ public class UpdateDispositionMessage implements MessageFromServer{
         this.points = points;
         this.availableArtifacts = availableArtifacts;
         this.availableElements = availableElements;
+        this.availablePlaces = availablePlaces;
     }
 
 
@@ -32,5 +35,6 @@ public class UpdateDispositionMessage implements MessageFromServer{
         view.setPoints(player, points);
         view.updateArtifacts(availableArtifacts);
         view.updateElements(availableElements);
+        view.setAvailablePlaces(availablePlaces);
     }
 }

@@ -17,7 +17,7 @@ public class DispositionPrinter {
     private Coordinates mapCenter;
     final int CARDHEIGHT = 6;
     final int CARDLENGTH = 10;
-    private CardBuilder cb = new CardBuilder();
+    private CardBuilder cb;
     private String[] outputDisposition;
     private HashMap<Coordinates, PlayableCard> disposition;
     int xMax=0;
@@ -29,7 +29,9 @@ public class DispositionPrinter {
     int minCol = 0;
     int maxCol = 0;
 
-
+    public DispositionPrinter(CardBuilder cb) {
+        this.cb = cb;
+    }
 
 
     //main function
@@ -178,8 +180,8 @@ public class DispositionPrinter {
 
                     } else if (row == 2) {
 
-                        if(mat[j][minCol + 1] == 0) line = "\u2551    " + buildCoordinates(0,j) + "    ";//15
-                        else if (mat[j][minCol + 1] > 0) line = "\u2551  " + buildCoordinates(0,j) + "   ";//12
+                        if(mat[j][minCol + 1] == 0) line = "\u2551    " + buildCoordinates(minCol,j) + "    ";//15
+                        else if (mat[j][minCol + 1] > 0) line = "\u2551  " + buildCoordinates(minCol,j) + "   ";//12
                     }
                 }
                 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -232,7 +234,7 @@ public class DispositionPrinter {
                     if(row != 2){
                         line += "            \u2551";//12 OK
                     }else if (row == 2){
-                        line += "  " + buildCoordinates(0,j) + "   \u2551";//12
+                        line += "  " + buildCoordinates(maxCol,j) + "   \u2551";//12
                     }
 
                 }

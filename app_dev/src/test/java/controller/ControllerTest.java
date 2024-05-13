@@ -27,7 +27,8 @@ class ControllerTest {
     private CliView view;
     private Scanner sc = new Scanner(new File("/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/final"));
     private Player initialPlayer;
-    private DispositionPrinter dispositionPrinter = new DispositionPrinter();
+    private DispositionPrinter dispositionPrinter;
+    private CardBuilder cb = new CardBuilder();
 
     ControllerTest() throws FileNotFoundException {
     }
@@ -123,6 +124,7 @@ class ControllerTest {
         File f2 = new File(filePath2);
 
         LoginPrinter title = new LoginPrinter();
+        dispositionPrinter = new DispositionPrinter(cb);
         dispositionPrinter.print(gameState.getTurnPlayer().getPlacementArea().getDisposition());
         dispositionPrinter.print(gameState.getTurnPlayer().getPlacementArea().getDisposition(), gameState.getTurnPlayer().getPlacementArea().getAvailablePlaces());
 
@@ -138,7 +140,7 @@ class ControllerTest {
         p1.printObjectivesBoard(gameState.getCommonObjectives().get(0),gameState.getCommonObjectives().get(0),gameState.getTurnPlayer().getSecretObjective());
         p1.print(gameState.getTurnPlayer().getSecretObjective());
 
-        DrawCardPrinter bo = new DrawCardPrinter();
+        DrawCardPrinter bo = new DrawCardPrinter(cb);
         bo.print(gameState.getGoldDeck().getCards().get(0), gameState.getResourceDeck().getCards().get(0), gameState.getOpenGold(), gameState.getOpenResources());
 
         assert filesCompareByLine(f1.toPath(), f2.toPath()) == -1;

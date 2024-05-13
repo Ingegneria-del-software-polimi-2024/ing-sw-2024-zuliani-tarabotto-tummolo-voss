@@ -157,13 +157,13 @@ public class ModelController implements ServerControllerInterface {
                     gameState.drawCardGoldDeck();
                     break;
                 case 2:
-                    gameState.drawCardResourcesDeck();
-                    break;
-                case 3:
                     gameState.drawCardOpenGold(0);
                     break;
-                case 4:
+                case 3:
                     gameState.drawCardOpenGold(1);
+                    break;
+                case 4:
+                    gameState.drawCardResourcesDeck();
                     break;
                 case 5:
                     gameState.drawCardOpenResources(0);

@@ -186,6 +186,7 @@ public class GameState {
         setLastTurnTrue();
         //NOTIFICATION: the player disposition, points, available resources are updated
         modelListener.notifyChanges(turnPlayer.getNickname(), turnPlayer.getPlacementArea().getDisposition(),
+                                    turnPlayer.getPlacementArea().getAvailablePlaces(),
                                     turnPlayer.getPoints(), turnPlayer.getPlacementArea().getAllArtifactsNumber(),
                                     turnPlayer.getPlacementArea().getAllElementsNumber());
 
@@ -201,7 +202,7 @@ public class GameState {
             if(p.getNickname().equals(player)){
                 p.playStarterCard();
                 //NOTIFICATION ABOUT THE STARTER CARD
-                modelListener.notifyChanges(p.getNickname(), p.getPlacementArea().getDisposition(),
+                modelListener.notifyChanges(p.getNickname(), p.getPlacementArea().getDisposition(), p.getPlacementArea().getAvailablePlaces(),
                         p.getPoints(), p.getPlacementArea().getAllArtifactsNumber(),
                         p.getPlacementArea().getAllElementsNumber());
 
@@ -262,7 +263,7 @@ public class GameState {
         int i = 1;
         commonTable.drawCardGoldDeck(turnPlayer);
         setLastTurnTrue();
-        //modelListener.notifyChanges(getGoldDeck().getCards(), i);
+        modelListener.notifyChanges(getGoldDeck().getCards(), i);
     }
 
     /**
@@ -274,7 +275,7 @@ public class GameState {
         int i = 2;
         commonTable.drawCardResourcesDeck(turnPlayer);
         setLastTurnTrue();
-        //modelListener.notifyChanges(getResourceDeck().getCards(), i);
+        modelListener.notifyChanges(getResourceDeck().getCards(), i);
     }
 
     /**
@@ -287,7 +288,7 @@ public class GameState {
         if(index == 0){ i = 3;} else { i = 4;}
         commonTable.drawCardOpenGold(index, turnPlayer);
         setLastTurnTrue();
-        //modelListener.notifyChanges(getOpenGold(), i);
+        modelListener.notifyChanges(getOpenGold(), i);
     }
 
     /**
@@ -300,7 +301,7 @@ public class GameState {
         if(index == 0){ i = 5;} else { i = 6;}
         commonTable.drawCardOpenResources(index, turnPlayer);
         setLastTurnTrue();
-        //modelListener.notifyChanges(getOpenResources(), i);
+        modelListener.notifyChanges(getOpenResources(), i);
     }
 
 

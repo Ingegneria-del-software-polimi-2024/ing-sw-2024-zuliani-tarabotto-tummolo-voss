@@ -150,16 +150,18 @@ public class ModelListener {
      * after placing the card each player is notified with his update disposition, points, elements and artifacts
      * @param player
      * @param disposition
+     * @param availablePlaces
      * @param points
      * @param availableArtifacts
      * @param availableElements
      */
-    public void notifyChanges(String player, HashMap<Coordinates, PlayableCard> disposition, int points,
-                              HashMap<Artifact, Integer> availableArtifacts, HashMap<Element, Integer> availableElements) {
+    public void notifyChanges(String player, HashMap<Coordinates, PlayableCard> disposition, List<Coordinates> availablePlaces,
+                              int points, HashMap<Artifact, Integer> availableArtifacts,
+                              HashMap<Element, Integer> availableElements) {
 
 
         try{
-            serverAPI.broadcastNotifyChanges(new UpdateDispositionMessage(player, disposition,
+            serverAPI.broadcastNotifyChanges(new UpdateDispositionMessage(player, disposition, availablePlaces,
                     points, availableArtifacts, availableElements));
         }catch (MsgNotDeliveredException msg){
             throw new RuntimeException(msg);
