@@ -4,6 +4,7 @@ import SharedWebInterfaces.SharedInterfaces.RMI_ManagerInterface;
 import Server.Web.Game.RMI_ClientHandler;
 import SharedWebInterfaces.Messages.MessagesFromLobby.WelcomeMessage;
 import SharedWebInterfaces.Messages.MessagesToLobby.MessageToLobby;
+import SharedWebInterfaces.SharedInterfaces.ServerHandlerInterface;
 
 import java.io.IOException;
 import java.rmi.AlreadyBoundException;
@@ -36,10 +37,9 @@ public class First_RMI_Manager implements RMI_ManagerInterface {
         lobby.enqueueMessage(msg);
     }
 
-    public void newHandler(String clientRegistry, String clientHost, int clientPort, ArrayList<String> games) throws RemoteException {
-        RMI_ClientHandler rmiClientHandler =
-                new RMI_ClientHandler(clientPort, clientHost, clientRegistry, registryName(connectionsNumber), lobby, serverPort);
-        rmiClientHandler.sendToClient(new WelcomeMessage(games, registryName(connectionsNumber)));
+    public void newHandler(ServerHandlerInterface clientRemote, ArrayList<String> games) throws RemoteException {
+        RMI_ClientHandler rmiClientHandler = new RMI_ClientHandler(clientRemote, lobby, serverPort);
+        rmiClientHandler.sendToClient(new WelcomeMessage(games, rmiClientHandler));
         connectionsNumber += 1;
     }
 

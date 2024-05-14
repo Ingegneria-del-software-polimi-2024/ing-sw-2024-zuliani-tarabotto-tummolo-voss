@@ -41,12 +41,13 @@ public class RMI_ServerHandler implements ServerHandlerInterface {
     @Override
     public void receiveFromLobby(MessageFromServer msg) throws RemoteException {
         if(msg instanceof WelcomeMessage){
-            try {
-                Registry registry1 = LocateRegistry.getRegistry(serverHost, serverPort);
-                server = (ClientHandlerInterface) registry1.lookup(((WelcomeMessage) msg).getRegistryName());
-            }catch (RemoteException | NotBoundException e){
-                throw new RemoteException();
-            }
+//            try {
+//                Registry registry1 = LocateRegistry.getRegistry(serverHost, serverPort);
+//                server = (ClientHandlerInterface) registry1.lookup(((WelcomeMessage) msg).getRegistryName());
+//            }catch (RemoteException | NotBoundException e){
+//                throw new RemoteException();
+//            }
+            server = ((WelcomeMessage)msg).getServer();
         }
         api.enqueue(msg);
     }
@@ -64,7 +65,7 @@ public class RMI_ServerHandler implements ServerHandlerInterface {
             Registry registry1 = LocateRegistry.getRegistry(host, port);
             manager = (RMI_ManagerInterface) registry1.lookup("Lobby");
 
-            manager.deliverToLobby(new NewRMI_Connection(registryName, myHost,localPort));
+            manager.deliverToLobby(new NewRMI_Connection(this));
         }catch (RemoteException | AlreadyBoundException | NotBoundException e){
             throw new StartConnectionFailedException();
         }

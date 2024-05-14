@@ -1,10 +1,12 @@
 package Server.Web.Lobby;
 
+import Client.Web.RMI_ServerHandler;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
 import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
 import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
 import SharedWebInterfaces.Messages.MessagesToLobby.MessageToLobby;
 import SharedWebInterfaces.Messages.MessagesToLobby.NewConnectionMessage;
+import SharedWebInterfaces.SharedInterfaces.ServerHandlerInterface;
 import SharedWebInterfaces.WebExceptions.MsgNotDeliveredException;
 import SharedWebInterfaces.WebExceptions.StartConnectionFailedException;
 
@@ -127,9 +129,9 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
         }
     }
 
-    public void newRMI_Connection(String registry, String host, int port){
+    public void newRMI_Connection(ServerHandlerInterface handlerInterface){
         try {
-            rmiManager.newHandler(registry, host, port, getGameNames());
+            rmiManager.newHandler(handlerInterface, getGameNames());
         } catch (RemoteException e) {
             throw new RuntimeException("Can't create connection with the new handler",e);
         }

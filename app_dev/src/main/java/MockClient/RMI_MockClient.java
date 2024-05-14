@@ -3,12 +3,17 @@ package MockClient;
 import Client.View.ViewAPI;
 import Client.Web.ClientAPI_COME;
 import Client.Web.ClientAPI_GO;
+import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_NewConnection;
 import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_RoomChoice;
+import SharedWebInterfaces.Messages.MessagesFromLobby.AvailableGames;
 import SharedWebInterfaces.Messages.MessagesFromLobby.WelcomeMessage;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
+import SharedWebInterfaces.Messages.MessagesToLobby.JoinGameMessage;
 import SharedWebInterfaces.Messages.MessagesToLobby.NewConnectionMessage;
 import SharedWebInterfaces.Messages.MessagesToLobby.NewRMI_Connection;
+import SharedWebInterfaces.Messages.MessagesToLobby.RequestAvailableGames;
 
+import javax.swing.*;
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -22,6 +27,8 @@ public class RMI_MockClient implements Runnable{
     private ClientAPI_GO goAPI;
     private int port;
 
+    private String userName;
+
 
     public void run(){
         Scanner scIn = new Scanner(System.in);
@@ -32,25 +39,53 @@ public class RMI_MockClient implements Runnable{
                 System.out.println(msg.toString());
                 //view.displayLogin();
                 System.out.println("inserire username");
-                String userName = scIn.next();
+                userName = scIn.next();
+                try {
+                    handler.send(new NewConnectionMessage(userName));
+                } catch (RemoteException e) {
+                    throw new RuntimeException(e);
+                }
                 //we notify the view about the nickName of its player
                 this.view.setPlayerId(userName);
-                System.out.println("inserire la partita in cui entrare:");
-                String game = scIn.next();
-                System.out.println("inserire il numero di giocatori");
-                int players = scIn.nextInt();
+
+
 //                try {
 //                    handler.send(new NewConnectionMessage(userName, game, players));
 //                } catch (RemoteException e) {
 //                    throw new RuntimeException(e);
 //                }
+            } else if (msg instanceof ACK_NewConnection || msg instanceof AvailableGames) {
+                if(msg instanceof AvailableGames)
+                    System.out.println(msg);
+
+                String game;
+
+                System.out.println("Inserire il gioco in cui entrare o un nome non presente per crearne uno, inserire r per refreshare: ");
+                game = scIn.next();
+                if(game.equals("r"))
+                    try {
+                        handler.send(new RequestAvailableGames(userName));
+                    }catch (RemoteException e) {
+                        throw new RuntimeException(e);
+                    }
+                else {
+                    System.out.println("inserire il numero di giocatori");
+                    int players = scIn.nextInt();
+
+                    try {
+                        handler.send(new JoinGameMessage(userName, game, players));
+                    } catch (RemoteException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
             } else if (msg instanceof ACK_RoomChoice) {
-                System.out.println(((ACK_RoomChoice) msg).getUser()+" correctly joined the game "+((ACK_RoomChoice) msg).getGame());
+                System.out.println(((ACK_RoomChoice) msg).getUser()+" correctly joined the game "+
+                        ((ACK_RoomChoice) msg).getGame());
             }
         }
     }
     public void startConnection() throws RemoteException {
-        handler.sendToLobby(new NewRMI_Connection("ciaoBello", "localHost", port));
+        handler.sendToLobby(new NewRMI_Connection(handler));
     }
 
     public void enQmsg(MessageFromServer msg){

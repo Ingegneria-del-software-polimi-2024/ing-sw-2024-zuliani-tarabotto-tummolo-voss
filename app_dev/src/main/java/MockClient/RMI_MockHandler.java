@@ -41,14 +41,15 @@ public class RMI_MockHandler implements ServerHandlerInterface {
     @Override
     public void receiveFromLobby(MessageFromServer msg) {
         if(msg instanceof WelcomeMessage){
-            try {
-                System.out.println(((WelcomeMessage) msg).getRegistryName());
-                Registry registry1 = LocateRegistry.getRegistry("localHost", 1237);
-                serverGame = (ClientHandlerInterface) registry1.lookup(((WelcomeMessage) msg).getRegistryName());
-                System.out.println("server found");
-            }catch (RemoteException | NotBoundException e){
-                throw new RuntimeException();
-            }
+//            try {
+//                System.out.println(((WelcomeMessage) msg).getRegistryName());
+//                Registry registry1 = LocateRegistry.getRegistry("localHost", 1237);
+//                serverGame = (ClientHandlerInterface) registry1.lookup(((WelcomeMessage) msg).getRegistryName());
+//                System.out.println("server found");
+//            }catch (RemoteException | NotBoundException e){
+//                throw new RuntimeException();
+//            }
+            serverGame =((WelcomeMessage) msg).getServer();
         }
         api.enQmsg(msg);
     }
@@ -60,9 +61,9 @@ public class RMI_MockHandler implements ServerHandlerInterface {
         Thread thread = new Thread(client);
         thread.start(); // This starts the thread
         //client.run();
-        UnicastRemoteObject.exportObject(this, 0);
-        Registry registry = LocateRegistry.createRegistry(port);
-        registry.bind("ciaoBello", this);
+        UnicastRemoteObject.exportObject(this, port);
+//        Registry registry = LocateRegistry.createRegistry(port);
+//        registry.bind("ciaoBello", this);
         System.out.println("Client published");
 
         Registry registry1 = LocateRegistry.getRegistry("localHost", 1237);

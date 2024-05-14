@@ -63,7 +63,7 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
     public SOCKET_ServerHandler(String add, int port, ClientAPI_COME come) throws StartConnectionFailedException {
         api = come;
         try {
-            //opnening the connection
+            //opening the connection
             socket = new Socket(add, port);
             out =  new ObjectOutputStream(socket.getOutputStream());
             in = new ObjectInputStream(socket.getInputStream());
@@ -77,6 +77,7 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
     public void attachAPI(ClientAPI_COME api){
         this.api = api;
     }
+
     /**
      * a method run by a single thread that keeps listening to the client handler
      */
