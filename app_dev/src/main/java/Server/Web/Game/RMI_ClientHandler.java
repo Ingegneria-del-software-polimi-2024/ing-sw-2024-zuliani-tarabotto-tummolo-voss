@@ -75,7 +75,7 @@ public class RMI_ClientHandler implements ClientHandlerInterface {
     public RMI_ClientHandler(int clientPort, String clientHost, String clientRegistry, String registryName, Lobby lobby, int serverPort) throws RemoteException{
         try {
             this.lobby = lobby;
-            UnicastRemoteObject.exportObject(this, 0);
+            UnicastRemoteObject.exportObject(this, serverPort);
             Registry serverRegistry = LocateRegistry.getRegistry(serverPort);
             serverRegistry.bind(registryName, this);
             System.out.println("Handler Published: registry " + registryName + " port " + serverPort);

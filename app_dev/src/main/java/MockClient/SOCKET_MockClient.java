@@ -16,7 +16,7 @@ public class SOCKET_MockClient {
 
         Scanner scIn = new Scanner(System.in);
 
-        Socket server = new Socket("localHost", 1234);
+        Socket server = new Socket("172.20.10.10", 1235);
         ObjectOutputStream out =  new ObjectOutputStream(server.getOutputStream());
         ObjectInputStream in = new ObjectInputStream(server.getInputStream());
 
