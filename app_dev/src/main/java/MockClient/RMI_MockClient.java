@@ -39,11 +39,11 @@ public class RMI_MockClient implements Runnable{
                 String game = scIn.next();
                 System.out.println("inserire il numero di giocatori");
                 int players = scIn.nextInt();
-                try {
-                    handler.send(new NewConnectionMessage(userName, game, players));
-                } catch (RemoteException e) {
-                    throw new RuntimeException(e);
-                }
+//                try {
+//                    handler.send(new NewConnectionMessage(userName, game, players));
+//                } catch (RemoteException e) {
+//                    throw new RuntimeException(e);
+//                }
             } else if (msg instanceof ACK_RoomChoice) {
                 System.out.println(((ACK_RoomChoice) msg).getUser()+" correctly joined the game "+((ACK_RoomChoice) msg).getGame());
             }

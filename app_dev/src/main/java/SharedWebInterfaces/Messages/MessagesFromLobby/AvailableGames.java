@@ -15,4 +15,15 @@ public class AvailableGames implements MessageFromServer {
     public AvailableGames(ArrayList<String> availableGames) {
         this.availableGames = availableGames;
     }
+
+    public String toString(){
+        String ret = "Giochi disponibili:";
+        if(availableGames == null)
+            return ret;
+        for(String s : availableGames){
+            ret = ret+"\n"+s;
+        }
+        return ret;
+    }
+
 }

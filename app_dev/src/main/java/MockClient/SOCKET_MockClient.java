@@ -1,8 +1,15 @@
 package MockClient;
 
+import SharedWebInterfaces.Messages.Message;
+import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_NewConnection;
+import SharedWebInterfaces.Messages.MessagesFromLobby.AvailableGames;
 import SharedWebInterfaces.Messages.MessagesFromLobby.WelcomeMessage;
+import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
+import SharedWebInterfaces.Messages.MessagesToLobby.JoinGameMessage;
+import SharedWebInterfaces.Messages.MessagesToLobby.MessageToLobby;
 import SharedWebInterfaces.Messages.MessagesToLobby.NewConnectionMessage;
 import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_RoomChoice;
+import SharedWebInterfaces.Messages.MessagesToLobby.RequestAvailableGames;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -29,12 +36,37 @@ public class SOCKET_MockClient {
         System.out.println("Inserire il proprio username: ");
         String username = scIn.next();
 
-        System.out.println("Inserire il gioco in cui entrare o un nome non presente per crearne uno: ");
-        String gameName = scIn.next();
+        out.writeObject(new NewConnectionMessage(username));
+        out.flush();
+        out.reset();
+
+        MessageFromServer incoming = (MessageFromServer) in.readObject();
+        if(incoming instanceof ACK_NewConnection){
+            System.out.println(((ACK_NewConnection) incoming).getUser()+" Correctly connected");
+        }
+
+        System.out.println("Inserire il gioco in cui entrare o un nome non presente per crearne uno, inserire r per refreshare: ");
+        String gameName;
+        do{
+             gameName = scIn.next();
+             if(gameName.equals("r")){
+                 out.writeObject(new RequestAvailableGames(username));
+                 out.flush();
+                 out.reset();
+                 MessageFromServer availableGamesMsg = (MessageFromServer) in.readObject();
+                 if(availableGamesMsg instanceof AvailableGames){
+                     System.out.println(availableGamesMsg);
+                 }else
+                     throw new RuntimeException();
+                 System.out.println("Inserire il gioco in cui entrare o un nome non presente per crearne uno, inserire r per refreshare: ");
+             }
+        }while(gameName.equals("r"));
+
         System.out.println("Inserire il numero di giocatori: ");
         int n = scIn.nextInt();
         System.out.println("Creating object with: "+username+" "+gameName+" "+n);
-        out.writeObject(new NewConnectionMessage(username, gameName, n));
+
+        out.writeObject(new JoinGameMessage(username, gameName, n));
 
         out.flush();
         out.reset();

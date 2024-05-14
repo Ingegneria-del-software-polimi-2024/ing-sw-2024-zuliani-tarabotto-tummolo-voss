@@ -4,7 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="" />
+    <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromLobby/ACK_NewConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesToLobby/JoinGameMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MockClient/RMI_MockClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MockClient/RMI_MockClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MockClient/SOCKET_MockClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MockClient/SOCKET_MockClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Game/RMI_ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Game/RMI_ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Game/SOCKET_ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Game/SOCKET_ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromLobby/AvailableGames.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromLobby/AvailableGames.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromLobby/WelcomeMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromLobby/WelcomeMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesToLobby/NewConnectionMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesToLobby/NewConnectionMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesToLobby/RequestAvailableGames.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesToLobby/RequestAvailableGames.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -91,7 +103,7 @@
       <recent name="model.lobby" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.prova">
+  <component name="RunManager" selected="JUnit.LobbyTest.main">
     <configuration name="RMI_CLIENT_START" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MockClient.RMI_CLIENT_START" />
       <module name="Ing_sw_proj" />
@@ -171,11 +183,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.SOCKET_MockClient" />
+        <item itemvalue="JUnit.LobbyTest.main" />
+        <item itemvalue="JUnit.LobbyTest" />
         <item itemvalue="Application.prova" />
         <item itemvalue="Application.RMI_CLIENT_START" />
-        <item itemvalue="JUnit.LobbyTest" />
-        <item itemvalue="JUnit.LobbyTest.main" />
-        <item itemvalue="Application.SOCKET_MockClient" />
       </list>
     </recent_temporary>
   </component>

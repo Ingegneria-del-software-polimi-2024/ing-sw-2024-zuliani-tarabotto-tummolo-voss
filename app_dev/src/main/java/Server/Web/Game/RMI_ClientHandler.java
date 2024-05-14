@@ -91,9 +91,6 @@ public class RMI_ClientHandler implements ClientHandlerInterface {
     public void deliverToLobby(MessageToLobby msg) throws RemoteException{
         if(msg instanceof NewConnectionMessage)
             ((NewConnectionMessage) msg).setHandler(this);
-        //send the available games when requested
-        else if (msg instanceof RequestAvailableGames)
-            sendToClient(new AvailableGames(lobby.getGameNames()));
         lobby.enqueueMessage(msg);
     }
 }

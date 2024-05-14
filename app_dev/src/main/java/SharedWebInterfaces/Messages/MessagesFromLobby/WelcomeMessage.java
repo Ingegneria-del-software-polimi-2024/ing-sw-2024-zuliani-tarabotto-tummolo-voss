@@ -30,16 +30,6 @@ public class WelcomeMessage implements MessageFromServer {
 
     }
 
-    public String toString(){
-        String ret = "Giochi disponibili:";
-        if(listOfGames == null)
-            return ret;
-        for(String s : listOfGames){
-            ret = ret+"\n"+s;
-        }
-        return ret;
-    }
-
     @Override
     public void execute(ViewAPI_Interface view) {
 
