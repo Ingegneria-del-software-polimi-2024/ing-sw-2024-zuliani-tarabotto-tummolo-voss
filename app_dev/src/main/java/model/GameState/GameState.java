@@ -193,6 +193,7 @@ public class GameState {
                                     turnPlayer.getPoints(), turnPlayer.getPlacementArea().getAllArtifactsNumber(),
                                     turnPlayer.getPlacementArea().getAllElementsNumber());
         //we update the player hand by removing the card he placed
+        //we could remove this
         modelListener.notifyChanges(turnPlayer.getPlayingHand(), turnPlayer.getNickname());
 
     }
