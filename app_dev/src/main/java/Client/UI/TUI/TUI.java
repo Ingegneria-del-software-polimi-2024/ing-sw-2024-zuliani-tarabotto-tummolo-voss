@@ -85,7 +85,7 @@ public class TUI implements UI {
         //we use the same function also to print the two objectives the player has to choose from
         objectivesPrinter.printCommonObjectives(view.getChooseSecretObjectives().get(0), view.getChooseSecretObjectives().get(1));
 
-        view.setSecretObjective(view.getChooseSecretObjectives().get(sc.nextInt()));//TODO : correggere sto schifo
+        view.setSecretObjective(view.getChooseSecretObjectives().get(sc.nextInt()));
 
     }
 
@@ -116,7 +116,7 @@ public class TUI implements UI {
 
             view.playCard(c, x, y);
         }else{
-            System.out.print(ansi().fg(color).a("~> " + view.getTurnPlayer() + "is placing a card\n").reset());
+            System.out.print(ansi().fg(color).a("~> " + view.getTurnPlayer() + " is placing a card\n").reset());
             dispositionPrinter.print(view.getDisposition());
             handPrinter.print(view.getHand());
             printPlayerInformation();
@@ -131,10 +131,8 @@ public class TUI implements UI {
             drawCardPrinter.print(view.getGoldDeck().get(0), view.getResourceDeck().get(0), view.getOpenGold(), view.getOpenResource());
             System.out.print(ansi().fg(color).a("~> Draw a card: (1/2/3/4/5/6)\n").reset());
             view.drawCard(sc.nextInt());
-            //my turn is finished and i set it to false
-            view.setMyTurn(false);
         }else{
-            System.out.print(ansi().fg(color).a("~> " + view.getTurnPlayer() + "is drawing a card\n").reset());
+            System.out.print(ansi().fg(color).a("~> " + view.getTurnPlayer() + " is drawing a card\n").reset());
             dispositionPrinter.print(view.getDisposition());
             handPrinter.print(view.getHand());
             printPlayerInformation();

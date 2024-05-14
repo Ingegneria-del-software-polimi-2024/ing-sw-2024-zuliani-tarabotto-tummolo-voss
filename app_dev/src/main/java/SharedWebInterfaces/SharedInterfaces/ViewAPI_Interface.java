@@ -44,7 +44,6 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
     void setAvailablePlaces(List<Coordinates> availablePlaces);
     void setCanBePlaced(boolean[] canBePlaced);
 
-    void setMyTurn(boolean bool);
     boolean getMyTurn();
 
     public void confirmSecretObjective(ObjectiveCard card);

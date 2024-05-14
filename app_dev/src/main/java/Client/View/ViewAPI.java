@@ -15,6 +15,7 @@ import model.placementArea.Coordinates;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * ViewAPI Class contains:
@@ -40,9 +41,6 @@ public class ViewAPI implements ViewAPI_Interface {
     private HashMap<Element, Integer> availableElements;
     //the id of THIS player
     private String playerId;
-    private boolean myTurn;
-
-
     private String turnPlayer;
     private String pawnColor;
     private List<Coordinates> availablePlaces;
@@ -265,10 +263,6 @@ public class ViewAPI implements ViewAPI_Interface {
         this.dispositions.put(player, disposition);
     }
 
-    @Override
-    public void setMyTurn(boolean bool){
-        myTurn = bool;
-    }
 
     public void setPlayerId(String playerId){
         this.playerId = playerId;
@@ -276,7 +270,8 @@ public class ViewAPI implements ViewAPI_Interface {
 
     @Override
     public boolean getMyTurn() {
-        return myTurn;
+        if(turnPlayer.equals(playerId)) return true;
+        return false;
     }
 
 

@@ -63,6 +63,9 @@ public class GameState {
                 commonTable.getOpenResources(), nickNames, id,
                 commonTable.getCommonObjectives().get(0), commonTable.getCommonObjectives().get(1));
 
+        //NOTIFICATION: first turnPlayer
+        modelListener.notifyChanges(turnPlayer.getNickname());
+
         //NOTIFICATION: about each player's starterCard and his hand
         for(Player p : players){
             modelListener.notifyChanges(p.getStarterCard(), p.getNickname(), p.getPawnColor());
@@ -190,8 +193,14 @@ public class GameState {
         //NOTIFICATION: the player disposition, points, available resources are updated
         modelListener.notifyChanges(turnPlayer.getNickname(), turnPlayer.getPlacementArea().getDisposition(),
                                     turnPlayer.getPlacementArea().getAvailablePlaces(),
-                                    turnPlayer.getPoints(), turnPlayer.getPlacementArea().getAllArtifactsNumber(),
-                                    turnPlayer.getPlacementArea().getAllElementsNumber());
+                                    turnPlayer.getPoints());
+
+
+        //NOTIFICATION: we notified the player of the new resources he acquired
+        modelListener.notifyChanges(turnPlayer.getNickname(), turnPlayer.getPlacementArea().getAllArtifactsNumber(),
+                turnPlayer.getPlacementArea().getAllElementsNumber());
+
+        //NOTIFICATION:
         //we update the player hand by removing the card he placed
         //we could remove this
         modelListener.notifyChanges(turnPlayer.getPlayingHand(), turnPlayer.getNickname());
@@ -208,10 +217,11 @@ public class GameState {
                 p.playStarterCard();
                 //NOTIFICATION ABOUT THE STARTER CARD
                 modelListener.notifyChanges(p.getNickname(), p.getPlacementArea().getDisposition(), p.getPlacementArea().getAvailablePlaces(),
-                        p.getPoints(), p.getPlacementArea().getAllArtifactsNumber(),
+                        p.getPoints());
+
+                //NOTIFICATION: we notified the player of the new resources he acquired
+                modelListener.notifyChanges(p.getNickname(), p.getPlacementArea().getAllArtifactsNumber(),
                         p.getPlacementArea().getAllElementsNumber());
-
-
             }
         }
         //turnPlayer.playStarterCard();

@@ -14,19 +14,14 @@ public class UpdateDispositionMessage implements MessageFromServer{
     private String player;
     private HashMap<Coordinates, PlayableCard> disposition;
     private int points;
-    private HashMap<Artifact, Integer> availableArtifacts;
-    private HashMap<Element, Integer> availableElements;
     private List<Coordinates> availablePlaces;
 
     public UpdateDispositionMessage(String player, HashMap<Coordinates, PlayableCard> disposition,
                                     List<Coordinates> availablePlaces,
-                                    int points, HashMap<Artifact, Integer> availableArtifacts,
-                                    HashMap<Element, Integer> availableElements) {
+                                    int points) {
         this.player = player;
         this.disposition = disposition;
         this.points = points;
-        this.availableArtifacts = availableArtifacts;
-        this.availableElements = availableElements;
         this.availablePlaces = availablePlaces;
     }
 
@@ -39,8 +34,6 @@ public class UpdateDispositionMessage implements MessageFromServer{
     public void execute(ViewAPI_Interface view) {
         view.setDisposition(player, disposition);
         view.setPoints(player, points);
-        view.updateArtifacts(availableArtifacts);
-        view.updateElements(availableElements);
         view.setAvailablePlaces(availablePlaces);
     }
 }
