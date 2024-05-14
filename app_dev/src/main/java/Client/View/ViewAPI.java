@@ -347,4 +347,5 @@ public class ViewAPI implements ViewAPI_Interface {
         this.turnPlayer = turnPlayer;
     }
 
+    public ObjectiveCard getSecretObjective(){return secretObjective;}
 }

@@ -5,19 +5,17 @@ import model.enums.Artifact;
 import model.objective.*;
 import org.fusesource.jansi.AnsiConsole;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.fusesource.jansi.Ansi.ansi;
 
 public class ObjectivesPrinter {
     private final int color = 226;
-    public void print(ObjectiveCard c){
+    private List<String> objField;
 
-    }
 
-    public void printElementObjective(ObjectiveCard c){
 
-    }
-
-    public void printArtifactObjective(ObjectiveCard c){}
 
     public String printRow(ObjectiveCard c, int i){
         String line;
@@ -31,13 +29,6 @@ public class ObjectivesPrinter {
     }
 
     public void printObjectivesBoard(ObjectiveCard c1, ObjectiveCard c2, ObjectiveCard s){
-
-        //System.out.print(ansi().cursorMove(69, -18));
-        //System.out.print(ansi().saveCursorPosition());
-
-
-        System.out.print("\033[10C");
-        System.out.print("\033[s"); // Save cursor position
 
         System.out.println("\u2554\u2550\u2550\u2550"+ ansi().fg(color).bold().a(" OBJECTIVES ").reset() + "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557");
         System.out.println("\u2551                                                                   \u2551");
@@ -74,4 +65,29 @@ public class ObjectivesPrinter {
         System.out.println("\u2551                                              \u2551");
         System.out.println("\u255A\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255D");
     }
+
+
+
+    ////////////////////////////////////////////////////// TEST ////////////////////////////////////////////////////////////////////
+    public List<String> getObjField(ObjectiveCard c1, ObjectiveCard c2, ObjectiveCard s){
+        this.objField = new ArrayList<>();
+
+
+        objField.add("\u2554\u2550\u2550\u2550"+ ansi().fg(color).bold().a(" OBJECTIVES ").reset() + "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557");
+        objField.add("\u2551                                                                   \u2551");
+
+        objField.add("\u2551          OBJ:1                OBJ:2          Secret Objective     \u2551");
+
+        for(int i = 0; i < 6; i++){
+            objField.add("\u2551     " + printRow(c1, i) + "      " + printRow(c2, i)  + "      " + printRow(s, i)  + "     \u2551");
+        }
+
+
+        objField.add("\u2551                                                                   \u2551");
+        objField.add("\u2551                                                                   \u2551");
+        objField.add("\u255A\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255D");
+
+        return objField;
+    }
+
 }
