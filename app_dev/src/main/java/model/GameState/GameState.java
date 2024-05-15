@@ -288,7 +288,7 @@ public class GameState {
      * @throws EmptyCardSourceException
      */
     public void drawCardResourcesDeck() throws EmptyCardSourceException {
-        int i = 2;
+        int i = 4;
         commonTable.drawCardResourcesDeck(turnPlayer);
         setLastTurnTrue();
         modelListener.notifyChanges(getResourceDeck().getCards(), i);
@@ -302,7 +302,7 @@ public class GameState {
      */
     public void drawCardOpenGold(int index) throws EmptyCardSourceException {
         int i;
-        if(index == 0){ i = 3;} else { i = 4;}
+        if(index == 0){ i = 2;} else { i = 3;}
         commonTable.drawCardOpenGold(index, turnPlayer);
         setLastTurnTrue();
         modelListener.notifyChanges(getOpenGold(), i);

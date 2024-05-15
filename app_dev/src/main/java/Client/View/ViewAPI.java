@@ -200,24 +200,26 @@ public class ViewAPI implements ViewAPI_Interface {
             case 1:
                 goldDeck = deck;
                 break;
-            case 2:
+            case 4:
                 resourceDeck = deck;
+                break;
+            case 2:
+                openGold = deck;
+                //we update openGold, this means that the first card of goldDeck has been turned and put in opendGold
+                // that is why we call goldDeck.remove(0)
+                goldDeck.remove(0);
                 break;
             case 3:
                 openGold = deck;
                 goldDeck.remove(0);
                 break;
-            case 4:
-                openGold = deck;
-                goldDeck.remove(0);
-                break;
             case 5:
                 openResource = deck;
-                openResource.remove(0);
+                resourceDeck.remove(0);
                 break;
             case 6:
                 openResource = deck;
-                openResource.remove(0);
+                resourceDeck.remove(0);
                 break;
         }
 
