@@ -28,11 +28,6 @@ public class Room {
         if(expectedPlayers == players.size())
             throw new RuntimeException("Too many players, can't join the room");//TODO handle or change the except
         players.add(name);
-        /*try {
-            handler.setReceiver(receive);
-        }catch (RemoteException e){
-            throw new RuntimeException("Can't join the room due to a comunication error");
-        }*/
         send.setHandler(name, handler);
         playersInterfaces.put(name, handler);
         if(expectedPlayers == players.size())
@@ -65,7 +60,6 @@ public class Room {
             for(String p : playersInterfaces.keySet()){
                 playersInterfaces.get(p).setReceiver(receive);
             }
-            //handler.setReceiver(receive);
         }catch (RemoteException e){
             throw new RuntimeException("Can't join the room due to a comunication error");
         }

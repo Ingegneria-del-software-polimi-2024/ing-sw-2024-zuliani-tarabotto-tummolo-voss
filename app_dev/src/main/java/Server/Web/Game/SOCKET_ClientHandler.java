@@ -19,12 +19,9 @@ import java.rmi.RemoteException;
 public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
     private ServerAPI_COME api;
     private Socket clientSocket;
-    private ServerSocket serverSocket;
     private ObjectInputStream in;
     private ObjectOutputStream out;
-    private String clientID;
-
-    private Lobby lobby; //todo interface with ServerAPI_COME
+    private Lobby lobby;
 
     private final int MAX_RETRY = 3;
 
@@ -34,37 +31,12 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
     @Override
     public void notifyChanges(MessageFromServer message) throws RemoteException {snd(message);}
 
-    /*public void listenForNewConnections(int port){
-        try{
-            //create new socket
-            serverSocket = new ServerSocket(port);
-            //if started
-            //wait for a client
-            clientSocket = serverSocket.accept();
-            //Listens for a connection to be made to this socket and accepts it.
-            // The method blocks until a connection is made.
-            SOCKET_ClientHandler x = new SOCKET_ClientHandler();
-            Thread t = new Thread(()->x.listenForNewConnections(port));
-            t.start();
 
-            //when a client is accepted
-            in = new ObjectInputStream(clientSocket.getInputStream());
-            out = new ObjectOutputStream(clientSocket.getOutputStream());
-            //to read an object: obj = in.readObject();
-
-            //...
-            //let the socket cook
-            //...
-            listenForCommands();
-            closeConnection();
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }*/
-
+    /**
+     * starts the listening loop for the gameplay
+     * @throws IOException when an error in the communication occurs
+     * @throws ClassNotFoundException when an error in the communication occurs
+     */
     private void listenForCommands() throws IOException, ClassNotFoundException {
         //TODO change in a conditional while and NOT while(true)
         while (true){
@@ -72,6 +44,11 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
             api.sendToServer(msg);
         }
     }
+
+    /**
+     * safely closes the connection
+     * @throws IOException when an error occurs, the connection must not be considered close in this case
+     */
     private void closeConnection() throws IOException {
         out.close();
         in.close();
@@ -79,9 +56,13 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
     }
 
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+    /**
+     * class constructor
+     * @param clientSocket the socket of the client
+     * @param lobby the reference to the lobby-controller
+     * @throws IOException when the streams couldn't be instantiated
+     */
     public SOCKET_ClientHandler(Socket clientSocket, Lobby lobby) throws IOException {
         this.lobby = lobby;
         this.clientSocket = clientSocket;
@@ -89,6 +70,9 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
         out = new ObjectOutputStream(clientSocket.getOutputStream());
     }
 
+    /**
+     * starts the listening loop
+     */
     public void run(){
         try{
             snd(new WelcomeMessage(lobby.getGameNames()));
@@ -118,12 +102,27 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
         //TODO insert the listening loop for game messages
     }
 
+    /**
+     * sets the api deputed to the reception of incoming web messages
+     * @param receiver the web API "come"
+     * @throws RemoteException because, implementing a remote interface this must be callable also remotely
+     */
     public void setReceiver(ServerAPI_COME receiver) throws RemoteException{
         this.api = receiver;
     }
 
+    /**
+     * Sends the message to the client
+     * @param msg the message for the client
+     * @throws RemoteException when the message is not correctly delivered
+     */
     public void sendToClient(MessageFromServer msg) throws RemoteException {snd(msg);}
 
+    /**
+     * handles the messages for the lobby
+     * @param msg the message from the client
+     * @throws RemoteException when the message couldn't be delivered to the lobby
+     */
     @Override
     public void deliverToLobby(MessageToLobby msg) throws RemoteException {
         lobby.enqueueMessage(msg);
@@ -147,9 +146,5 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
         }
         throw new RemoteException();
     }
-
-//    @Override
-//    public void addNewPlayer(String nickname, String lookupTableName, int clientPort, String clientHost) throws RemoteException {
-//    }
 
 }

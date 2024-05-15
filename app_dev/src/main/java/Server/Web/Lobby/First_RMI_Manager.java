@@ -18,12 +18,18 @@ import java.util.ArrayList;
 public class First_RMI_Manager implements RMI_ManagerInterface {
     private Lobby lobby;
     private int serverPort;
-    private int connectionsNumber;
-    public First_RMI_Manager(Lobby lobby, int serverPort) throws RemoteException{
+    private static First_RMI_Manager instance;
+
+    /**
+     * class constructor
+     * @param lobby the lobby-controller
+     * @param serverPort the port of the server
+     * @throws RemoteException when an error in setting of the connection occurs
+     */
+    private First_RMI_Manager(Lobby lobby, int serverPort) throws RemoteException{
         try {
             this.lobby = lobby;
             this.serverPort = serverPort;
-            this.connectionsNumber = 0;
             UnicastRemoteObject.exportObject(this, serverPort);
             Registry registry = LocateRegistry.createRegistry(serverPort);
             registry.bind("Lobby", this);
@@ -33,18 +39,33 @@ public class First_RMI_Manager implements RMI_ManagerInterface {
         }
     }
 
+    /**
+     * the class is a singleton, returns the single instance of the class. See First_RMI_Manager constructor
+     */
+    public static First_RMI_Manager getInstance(Lobby lobby, int serverPort) throws RemoteException {
+        if(instance == null)
+            instance =  new First_RMI_Manager(lobby, serverPort);
+        return instance;
+    }
+
+    /**
+     * enqueues in the message queue of the lobby a new incoming message
+     * @param msg incoming message from client
+     */
     public void deliverToLobby(MessageToLobby msg){
         lobby.enqueueMessage(msg);
     }
 
+    /**
+     * When receiving a request for a new connection creates a new RMI_handler for the client and sends a WelcomeMessage
+     * to the client after the connection
+     * @param clientRemote the remote interface of the client
+     * @param games the available games, to be sent to the client
+     * @throws RemoteException when an error in sending the WelcomeMessage occurs
+     */
     public void newHandler(ServerHandlerInterface clientRemote, ArrayList<String> games) throws RemoteException {
         RMI_ClientHandler rmiClientHandler = new RMI_ClientHandler(clientRemote, lobby, serverPort);
         rmiClientHandler.sendToClient(new WelcomeMessage(games, rmiClientHandler));
-        connectionsNumber += 1;
-    }
-
-    private String registryName(int number){
-        return String.valueOf(number)+"Server";
     }
 
 }

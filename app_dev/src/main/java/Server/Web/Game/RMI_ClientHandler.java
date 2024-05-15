@@ -22,6 +22,7 @@ public class RMI_ClientHandler implements ClientHandlerInterface {
     private ServerAPI_COME api;
     private ServerHandlerInterface client;
     private Lobby lobby;
+    private final int MAX_RETRY = 3;
 
     //Go
 
@@ -33,22 +34,6 @@ public class RMI_ClientHandler implements ClientHandlerInterface {
     public void sendToServer(MessageFromClient message) throws RemoteException{
         api.sendToServer(message);}
 
-//    public void addNewPlayer(String nickname, String lookupTableName, int clientPort, String clientHost) throws RemoteException{
-//        //searching in the register for the required connection
-//        Registry registry = LocateRegistry.getRegistry(clientHost, clientPort);
-//        try {
-//            client = (ServerHandlerInterface) registry.lookup(lookupTableName);
-//        } catch (NotBoundException e) {
-//            throw new RemoteException();
-//        }
-//        //memorizing in the hashmap of ServerAPI_COME
-//        api.addNewPlayer(nickname, this);
-//        //signaling controller to memorize in the hashmap of ServerAPI_GO
-//        api.sendToServer(new AddNewPlayerMessage(nickname, this));
-//    }
-
-    //Come
-
     /**
      * notifies the client of the changes happened in the model
      * @param message the changes contained in the model
@@ -56,36 +41,66 @@ public class RMI_ClientHandler implements ClientHandlerInterface {
      */
     public void notifyChanges(MessageFromServer message) throws RemoteException{client.notifyChanges(message);}
 
+    /**
+     * sets the api deputed to the reception of incoming web messages
+     * @param receiver the web API "come"
+     * @throws RemoteException because, implementing a remote interface this must be callable also remotely
+     */
     @Override
     public void setReceiver(ServerAPI_COME receiver) throws RemoteException {
         api = receiver;
     }
 
+    /**
+     * Sends the message to the client
+     * @param msg the message for the client
+     * @throws RemoteException when the message is not correctly delivered
+     */
     @Override
-    public void sendToClient(MessageFromServer msg) throws RemoteException {
-        client.receiveFromLobby(msg);
-    }
+    public void sendToClient(MessageFromServer msg) throws RemoteException {snd(msg);}
 
-    public RMI_ClientHandler(ServerHandlerInterface clientRemoteInterface/*, String registryName*/, Lobby lobby, int serverPort) throws RemoteException{
-//        try {
+    /**
+     * class creator
+     * @param clientRemoteInterface the remote interface of the client to which the server must comunicate
+     * @param lobby the lobby
+     * @param serverPort the port of the server, used to export the new personal handler
+     * @throws RemoteException when the handler could not be correctly exported
+     */
+    public RMI_ClientHandler(ServerHandlerInterface clientRemoteInterface, Lobby lobby, int serverPort) throws RemoteException{
             this.lobby = lobby;
             UnicastRemoteObject.exportObject(this, serverPort);
-//            Registry serverRegistry = LocateRegistry.getRegistry(serverPort);
-//            serverRegistry.bind(registryName, this);
-//            System.out.println("Handler Published: registry " + registryName + " port " + serverPort);
-//
-//            Registry registry = LocateRegistry.getRegistry(clientHost, clientPort);
-//            client = (ServerHandlerInterface) registry.lookup(clientRegistry);
+
             client = clientRemoteInterface;
 
             System.out.println("Client is bound with its handler");
-//        }catch (NotBoundException | AlreadyBoundException e){
-//            throw new RemoteException();
-//        }
     }
+
+    /**
+     * handles the messages for the lobby
+     * @param msg the message from the client
+     * @throws RemoteException when the message couldn't be delivered to the lobby
+     */
     public void deliverToLobby(MessageToLobby msg) throws RemoteException{
         if(msg instanceof NewConnectionMessage)
             ((NewConnectionMessage) msg).setHandler(this);
         lobby.enqueueMessage(msg);
+    }
+
+    /**
+     * This method tries to send the message MAX_RETRY times before signaling the exception to the caller
+     * @param msg
+     */
+    private void snd(MessageFromServer msg) throws RemoteException{
+        int count = 0;
+        while (count < MAX_RETRY){
+            try{
+                client.receiveFromLobby(msg);
+                return;
+            }catch (RemoteException e) {
+                if (count == MAX_RETRY)
+                    throw new RemoteException();
+                count++;
+            }
+        }
     }
 }

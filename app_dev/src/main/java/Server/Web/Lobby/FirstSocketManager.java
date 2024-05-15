@@ -12,18 +12,29 @@ public class FirstSocketManager implements Runnable {
     private Lobby lobby;
     private static FirstSocketManager instance;
     private int port;
-    private FirstSocketManager(Lobby l, int port) {
-        this.lobby = l;
+    /**
+     * class constructor
+     * @param lobby the lobby-controller
+     * @param port the port of the server
+     * @throws RemoteException when an error in setting of the connection occurs
+     */
+    private FirstSocketManager(Lobby lobby, int port) {
+        this.lobby = lobby;
         this.port = port;
     }
-
-    public static FirstSocketManager getInstance(Lobby l, int port){
+    /**
+     * the class is a singleton, returns the single instance of the class. See First_RMI_Manager constructor
+     */
+    public static FirstSocketManager getInstance(Lobby lobby, int port){//TODO is port really necessary?????
         if(instance == null) {
-            instance = new FirstSocketManager(l, port);
+            instance = new FirstSocketManager(lobby, port);
         }
         return instance;
     }
-
+    /**
+     * this method starts to listen for new connections, in case a new connection is found, a new handler for that
+     * client is created
+     */
     public void run() {
         //for debug purpose only
         System.out.println("Started listening for connections");
