@@ -16,7 +16,7 @@ public class DrawCardPrinter {
 
     }
     public void print(PlayableCard gold, PlayableCard resource, List<PlayableCard> openGold, List<PlayableCard> openResource){
-        int  color = 221;
+        int  color = 226;
         System.out.println("\u2554\u2550\u2550\u2550"+ ansi().fg(color).bold().a(" DRAWABLE CARDS ").reset() + "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557");
         System.out.println("\u2551                                                                   \u2551");
 

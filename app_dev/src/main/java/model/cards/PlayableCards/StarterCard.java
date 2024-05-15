@@ -31,6 +31,9 @@ public class StarterCard extends PlayableCard{
         return backFaceCorners;
     }
 
+    //we need this for TUI
+    private List<Corner> backCorners = new ArrayList<>();
+    private boolean initializeCorners = true;
 
     /**
      * json parsing
@@ -94,7 +97,20 @@ public class StarterCard extends PlayableCard{
     ///////////////////// GETTER METHODS ///////////////////////////////////////////////////
     @Override
     public Corner getCorner(int index) {
-        if(!getFaceSide()) return new Corner(backFaceCorners[index]);
+        if(initializeCorners){
+            //we initialize backCorners
+            for(int i = 0; i < backFaceCorners.length; i++){
+                backCorners.add(i, new Corner(backFaceCorners[i]));
+                backCorners.get(i).setId(i);
+            }
+            initializeCorners = false;
+        }
+
+        if(!getFaceSide()){
+            for(Corner corner : backCorners){
+                if(corner.getId() == index) return corner;
+            }
+        };
         for (Corner corner : corners) {
             if (corner.getId() == index) {
                 return corner;

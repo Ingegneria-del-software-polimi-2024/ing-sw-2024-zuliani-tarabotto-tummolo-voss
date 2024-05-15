@@ -30,7 +30,7 @@ public class RMI_MockClient implements Runnable{
     private String userName;
 
 
-    public void run(){
+    public void run(){//TODO no infinite loop
         Scanner scIn = new Scanner(System.in);
         while(true){
             MessageFromServer msg = todo.poll();

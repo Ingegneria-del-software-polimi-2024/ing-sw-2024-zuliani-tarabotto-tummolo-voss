@@ -7,6 +7,8 @@ import model.enums.Artifact;
 import model.enums.Element;
 
 import javax.swing.text.View;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static org.fusesource.jansi.Ansi.ansi;
@@ -85,7 +87,7 @@ public class TUI implements UI {
         //we use the same function also to print the two objectives the player has to choose from
         objectivesPrinter.printCommonObjectives(view.getChooseSecretObjectives().get(0), view.getChooseSecretObjectives().get(1));
 
-        view.setSecretObjective(view.getChooseSecretObjectives().get(sc.nextInt()));//TODO : correggere sto schifo
+        view.setSecretObjective(view.getChooseSecretObjectives().get(sc.nextInt()));
 
     }
 
@@ -95,8 +97,7 @@ public class TUI implements UI {
         //TODO: ERASE SCREEN
         if(view.getMyTurn()){
             dispositionPrinter.print(view.getDisposition(), view.getAvailablePlaces());
-            handPrinter.print(view.getHand());
-            printPlayerInformation();
+            ultimatePrint(view);
             System.out.print(ansi().fg(color).a("~> Choose a card to place from your hand. You can place card: ").reset());
             String line = new String();
             if(view.getCanBePlaced()[0]) line = "1, ";
@@ -116,10 +117,9 @@ public class TUI implements UI {
 
             view.playCard(c, x, y);
         }else{
-            System.out.print(ansi().fg(color).a("~> " + view.getTurnPlayer() + "is placing a card\n").reset());
+            System.out.print(ansi().fg(color).a("~> " + view.getTurnPlayer() + " is placing a card\n").reset());
             dispositionPrinter.print(view.getDisposition());
-            handPrinter.print(view.getHand());
-            printPlayerInformation();
+            ultimatePrint(view);
         }
     }
 
@@ -131,13 +131,10 @@ public class TUI implements UI {
             drawCardPrinter.print(view.getGoldDeck().get(0), view.getResourceDeck().get(0), view.getOpenGold(), view.getOpenResource());
             System.out.print(ansi().fg(color).a("~> Draw a card: (1/2/3/4/5/6)\n").reset());
             view.drawCard(sc.nextInt());
-            //my turn is finished and i set it to false
-            view.setMyTurn(false);
         }else{
-            System.out.print(ansi().fg(color).a("~> " + view.getTurnPlayer() + "is drawing a card\n").reset());
+            System.out.print(ansi().fg(color).a("~> " + view.getTurnPlayer() + " is drawing a card\n").reset());
             dispositionPrinter.print(view.getDisposition());
-            handPrinter.print(view.getHand());
-            printPlayerInformation();
+            ultimatePrint(view);
         }
 
     }
@@ -166,5 +163,39 @@ public class TUI implements UI {
         }
         System.out.println("\n");
     }
+
+
+
+    private List<String> getInfoField(){
+        List<String> infoField = new ArrayList<>();
+
+        infoField.add("\u2554\u2550\u2550\u2550"+ ansi().fg(color).bold().a(" RESOURCES ").reset() + "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557");
+        infoField.add("\u2551                                                                   \u2551");
+        infoField.add("\u2551   " + ansi().fg(color).a("POINTS:         ").reset() + view.getPoints().get(view.getPlayerId()) + "                                               \u2551");
+        infoField.add("\u2551   " + ansi().fg(color).a("ELEMENTS:").reset() + ansi().a("       " + Element.mushrooms.getStringValue() + "->" + view.getAvailableElements().get(Element.mushrooms)).reset()  + ansi().a("       " + Element.animals.getStringValue() + "->" + view.getAvailableElements().get(Element.animals)).reset() + ansi().a("       " + Element.vegetals.getStringValue() + "->" + view.getAvailableElements().get(Element.vegetals)).reset() + ansi().a("       " + Element.insects.getStringValue() + "->" + view.getAvailableElements().get(Element.insects)).reset() + "           \u2551");
+        infoField.add("\u2551   " + ansi().fg(color).a("ARTIFACTS:").reset() + ansi().a("      " + Artifact.feather.getStringValue() + "->" + view.getAvailableArtifacts().get(Artifact.feather)).reset() + ansi().a("       " + Artifact.paper.getStringValue() + "->" + view.getAvailableArtifacts().get(Artifact.paper)).reset() + ansi().a("       " + Artifact.ink.getStringValue() + "->" + view.getAvailableArtifacts().get(Artifact.ink)).reset() + "                      \u2551");
+        infoField.add("\u255A\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255D");
+
+        return infoField;
+    }
+
+    private String buildStat(int stat){
+        String line = new String();
+        if(stat < 10) return line = stat + " ";
+        else return line = String.valueOf(stat);
+    }
+
+    private void ultimatePrint(ViewAPI view){
+        List<String> handField = handPrinter.getHandField(view.getHand());
+        List<String> objFiel = objectivesPrinter.getObjField(view.getCommonObjectives().get(0), view.getCommonObjectives().get(1), view.getSecretObjective());
+        List<String> infoField = getInfoField();
+        for(int i = 0; i < 12; i++){
+            System.out.println(handField.get(i) + objFiel.get(i));
+        }
+        for(int i = 12; i < 18 ; i++){
+            System.out.println(handField.get(i) + infoField.get(i - 12));
+        }
+    }
+
 
 }

@@ -29,7 +29,7 @@ public class FirstSocketManager implements Runnable {
         System.out.println("Started listening for connections");
         ServerSocket serverSocket = null;
         try {
-            serverSocket = new ServerSocket(port);
+            serverSocket = new ServerSocket(port+1);
 
             System.out.println("server started..");
             while(true){

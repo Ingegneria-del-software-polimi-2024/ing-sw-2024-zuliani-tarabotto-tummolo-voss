@@ -165,21 +165,33 @@ public class ModelListener {
      * @param disposition
      * @param availablePlaces
      * @param points
-     * @param availableArtifacts
-     * @param availableElements
      */
     public void notifyChanges(String player, HashMap<Coordinates, PlayableCard> disposition, List<Coordinates> availablePlaces,
-                              int points, HashMap<Artifact, Integer> availableArtifacts,
-                              HashMap<Element, Integer> availableElements) {
+                              int points) {
 
 
         try{
             serverAPI.broadcastNotifyChanges(new UpdateDispositionMessage(player, disposition, availablePlaces,
-                    points, availableArtifacts, availableElements));
+                    points));
         }catch (MsgNotDeliveredException msg){
             throw new RuntimeException(msg);
         }
 
+    }
+
+    /**
+     * we update the player resources(elements, artifacts) NOT IN BROADCAST
+     * @param player
+     * @param availableArtifacts
+     * @param availableElements
+     */
+    public void notifyChanges (String player, HashMap<Artifact, Integer> availableArtifacts,
+                               HashMap<Element, Integer> availableElements){
+        try{
+            serverAPI.notifyChanges(new UpdateResourcesMessage(availableElements, availableArtifacts), player);
+        }catch (MsgNotDeliveredException msg){
+            throw new RuntimeException(msg);
+        }
     }
 
     /**

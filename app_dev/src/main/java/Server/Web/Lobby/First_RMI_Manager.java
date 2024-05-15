@@ -24,7 +24,7 @@ public class First_RMI_Manager implements RMI_ManagerInterface {
             this.lobby = lobby;
             this.serverPort = serverPort;
             this.connectionsNumber = 0;
-            UnicastRemoteObject.exportObject(this, 0);
+            UnicastRemoteObject.exportObject(this, serverPort);
             Registry registry = LocateRegistry.createRegistry(serverPort);
             registry.bind("Lobby", this);
             System.out.println("RMI interface ready to pair");

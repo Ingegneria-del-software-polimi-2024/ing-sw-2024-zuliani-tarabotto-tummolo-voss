@@ -148,10 +148,11 @@ public class DispositionPrinter {
         String line;
 
         //parte superiore della cornice
-        line = "\u2554";
+        line = "\u2554\u2550\u2550\u2550" + ansi().fg(226).a(" DISPOSITION ").reset();
         int numCol = maxCol - minCol;
         int matLength = (15*(numCol + 1)) - (3*(numCol));
-        for(int i = 0; i < matLength; i++){
+        int matLength1 = matLength - 16; //16 è la lunghezza della cornice fino a dopo la scritta disposition
+        for(int i = 0; i < matLength1; i++){
             line += "\u2550";
         }
         line += "\u2557";

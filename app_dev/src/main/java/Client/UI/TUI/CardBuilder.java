@@ -41,7 +41,7 @@ public class CardBuilder {
 
         int color;
         if(card instanceof StarterCard){
-            color = 3;//yellow
+            color = 221;//yellow
         }else{color = card.getBlockedElement().getColor();}
 
         //LEFT CORNER
@@ -65,7 +65,7 @@ public class CardBuilder {
     public String buildSecondRow(PlayableCard card){
         int color;
         if(card instanceof StarterCard){
-            color = 3;//yellow
+            color = 221;//yellow
         }else{color = card.getBlockedElement().getColor();}
 
         String line;
@@ -88,7 +88,7 @@ public class CardBuilder {
     public String buildThirdRow(PlayableCard card) {
         int color;
         if(card instanceof StarterCard){
-            color = 3;//yellow
+            color = 221;//yellow
         }else{color = card.getBlockedElement().getColor();}
 
         String line = new String();
@@ -118,7 +118,7 @@ public class CardBuilder {
     public String buildFourthRow(PlayableCard card){
         int color;
         if(card instanceof StarterCard){
-            color = 3;//yellow
+            color = 221;//yellow
         }else{color = card.getBlockedElement().getColor();}
 
         String line = new String();
@@ -146,7 +146,7 @@ public class CardBuilder {
     public String buildFifthRow(PlayableCard card){
         int color;
         if(card instanceof StarterCard){
-            color = 3;//yellow
+            color = 221;//yellow
         }else{color = card.getBlockedElement().getColor();}
 
         String line = new String();
@@ -167,7 +167,7 @@ public class CardBuilder {
     public String buildBottom(PlayableCard card){
         int color;
         if(card instanceof StarterCard){
-            color = 3;//yellow
+            color = 221;//yellow
         }else{color = card.getBlockedElement().getColor();}
 
         String line = new String();
@@ -228,7 +228,7 @@ public class CardBuilder {
     private String leftCornersBuilder(int corner, PlayableCard card){
         int color;
         if(card instanceof StarterCard){
-            color = 3;//yellow
+            color = 221;//yellow
         }else{color = card.getBlockedElement().getColor();}
 
         String line = new String();
@@ -247,7 +247,7 @@ public class CardBuilder {
     private String rightCornersBuilder(int corner, PlayableCard card){
         int color;
         if(card instanceof StarterCard){
-            color = 3;//yellow
+            color = 221;//yellow
         }else{color = card.getBlockedElement().getColor();}
 
         String line = new String();

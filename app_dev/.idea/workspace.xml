@@ -105,7 +105,7 @@
       <recent name="model.lobby" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.prova">
+  <component name="RunManager" selected="Application.RMI_CLIENT_START">
     <configuration name="RMI_CLIENT_START" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MockClient.RMI_CLIENT_START" />
       <module name="Ing_sw_proj" />
@@ -185,11 +185,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.prova" />
         <item itemvalue="Application.RMI_CLIENT_START" />
-        <item itemvalue="JUnit.LobbyTest" />
         <item itemvalue="JUnit.LobbyTest.main" />
         <item itemvalue="Application.SOCKET_MockClient" />
+        <item itemvalue="Application.prova" />
+        <item itemvalue="JUnit.LobbyTest" />
       </list>
     </recent_temporary>
   </component>

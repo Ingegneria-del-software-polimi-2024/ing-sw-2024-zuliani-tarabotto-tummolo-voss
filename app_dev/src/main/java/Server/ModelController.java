@@ -214,8 +214,8 @@ public class ModelController implements ServerControllerInterface {
      * we communicate GameState that another turn will be played
      */
     private void playNewTurn(){
-        gameState.setTurnState(TurnState.PLACING_CARD_SELECTION);
         gameState.playingTurn();
+        gameState.setTurnState(TurnState.PLACING_CARD_SELECTION);
     }
 
     public boolean checkMessage(MessageFromClient message){return gameState.checkMessage(message);}
