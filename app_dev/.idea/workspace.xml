@@ -5,8 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Client/View/ViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/View/ViewAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/View/ViewAPI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Client/RunTUI_Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/Web/RMI_ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/Web/RMI_ServerHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MockClient/SOCKET_MockClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MockClient/SOCKET_MockClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/FirstSocketManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/FirstSocketManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/View/ViewAPI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/View/ViewAPI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/View/ViewModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/View/ViewModel.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +99,7 @@
       <recent name="model.lobby" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.RMI_CLIENT_START">
+  <component name="RunManager" selected="Application.SOCKET_MockClient">
     <configuration name="RMI_CLIENT_START" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MockClient.RMI_CLIENT_START" />
       <module name="Ing_sw_proj" />
@@ -108,12 +113,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SOCKET_MockClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="MockClient.SOCKET_MockClient" />
+    <configuration name="RunTUI_Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Client.RunTUI_Client" />
       <module name="Ing_sw_proj" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="SharedWebInterfaces.Messages.MessagesFromLobby.*" />
+          <option name="PATTERN" value="Client.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -121,8 +126,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="prova" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="MockClient.prova" />
+    <configuration name="SOCKET_MockClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MockClient.SOCKET_MockClient" />
       <module name="Ing_sw_proj" />
       <extension name="coverage">
         <pattern>
@@ -166,7 +171,7 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.prova" />
+      <item itemvalue="Application.RunTUI_Client" />
       <item itemvalue="Application.RMI_CLIENT_START" />
       <item itemvalue="Application.SOCKET_MockClient" />
       <item itemvalue="JUnit.LobbyTest" />
@@ -174,11 +179,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.RMI_CLIENT_START" />
-        <item itemvalue="Application.prova" />
-        <item itemvalue="JUnit.LobbyTest.main" />
         <item itemvalue="Application.SOCKET_MockClient" />
         <item itemvalue="JUnit.LobbyTest" />
+        <item itemvalue="Application.RunTUI_Client" />
+        <item itemvalue="JUnit.LobbyTest.main" />
+        <item itemvalue="Application.RMI_CLIENT_START" />
       </list>
     </recent_temporary>
   </component>

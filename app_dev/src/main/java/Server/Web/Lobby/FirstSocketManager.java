@@ -40,7 +40,7 @@ public class FirstSocketManager implements Runnable {
         System.out.println("Started listening for connections");
         ServerSocket serverSocket = null;
         try {
-            serverSocket = new ServerSocket(port+1);
+            serverSocket = new ServerSocket(port);
 
             System.out.println("server started..");
             while(true){
