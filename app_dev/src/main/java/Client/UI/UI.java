@@ -2,7 +2,7 @@ package Client.UI;
 
 import Client.View.ViewAPI;
 
-public interface UI {
+public interface UI extends Runnable{
     //open cards and other other players' pawn and nicknames
     void displayInitialization();
 

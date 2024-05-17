@@ -5,27 +5,35 @@ import Client.View.ViewAPI;
 import model.cards.PlayableCards.PlayableCard;
 import model.enums.Artifact;
 import model.enums.Element;
+import model.objective.Objective;
 
 import javax.swing.text.View;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.locks.Lock;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
-public class TUI implements UI {
+public class TUI implements UI{
 
     private ViewAPI view;
     private DispositionPrinter dispositionPrinter;
     private LoginPrinter loginPrinter;
-    private Scanner sc = new Scanner(System.in);
+    private Scanner sc;
     private HandPrinter handPrinter;
     private ObjectivesPrinter objectivesPrinter;
     private DrawCardPrinter drawCardPrinter;
     private CardBuilder cb;
     private final int color = 226;
+    private String input;
+    private Scanner flowSc;
+    private boolean inputPresent = false;
+    private final Object lock;
 
-    public TUI(ViewAPI view) {
+    public TUI(ViewAPI view){
 
         this.view = view;
         cb = new CardBuilder();
@@ -34,6 +42,7 @@ public class TUI implements UI {
         handPrinter = new HandPrinter();
         objectivesPrinter = new ObjectivesPrinter();
         drawCardPrinter = new DrawCardPrinter(cb);
+        lock = new Object();
 
     }
 
@@ -43,21 +52,34 @@ public class TUI implements UI {
         //TODO: ERASE SCREEN
         loginPrinter.print();
         boolean enterPressed = false;
+        view.startUI();
 
         // Continuously check if Enter is pressed until it's pressed
         while (!enterPressed) {
             System.out.print(ansi().fg(color).a("~> Press Enter to continue...\n").reset());
 
-            // Wait for the player to press Enter
-            String input = sc.nextLine();
+            synchronized (lock) {
+                while (!inputPresent) {
+                    try {
+                       lock.wait();
+                    } catch (InterruptedException e) {
+                    }
+                }
 
-            // Check if the input is empty, meaning Enter was pressed
-            if (input.isEmpty()) {
-                enterPressed = true;
-                //System.out.println("Enter key was pressed.");
-                view.readyToPlay();
-            } else {
-                System.out.print(ansi().fg(color).a(" ~>Enter key was not pressed.\n").reset());
+                // Wait for the player to press Enter
+                //String in = sc.nextLine();
+                String in = input;
+                // Check if the input is empty, meaning Enter was pressed
+                if (in.isEmpty()) {
+                    enterPressed = true;
+                    //System.out.println("Enter key was pressed.");
+                    view.readyToPlay();
+                } else {
+                    System.out.print(ansi().fg(color).a(" ~> Enter key was not pressed.\n").reset());
+                }
+
+                inputPresent = false;
+                lock.notifyAll();
             }
         }
         System.out.print(ansi().fg(color).a("~> Waiting for other players to be ready\n").reset());
@@ -147,6 +169,8 @@ public class TUI implements UI {
 
 
 
+
+
     private void printPlayerInformation(){
         System.out.print(ansi().fg(color).a("POINTS: ").reset());
         System.out.print(ansi().a(view.getPoints().get(view.getPlayerId())+ "\n"));
@@ -171,18 +195,17 @@ public class TUI implements UI {
 
         infoField.add("\u2554\u2550\u2550\u2550"+ ansi().fg(color).bold().a(" RESOURCES ").reset() + "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557");
         infoField.add("\u2551                                                                   \u2551");
-        infoField.add("\u2551   " + ansi().fg(color).a("POINTS:         ").reset() + view.getPoints().get(view.getPlayerId()) + "                                               \u2551");
-        infoField.add("\u2551   " + ansi().fg(color).a("ELEMENTS:").reset() + ansi().a("       " + Element.mushrooms.getStringValue() + "->" + view.getAvailableElements().get(Element.mushrooms)).reset()  + ansi().a("       " + Element.animals.getStringValue() + "->" + view.getAvailableElements().get(Element.animals)).reset() + ansi().a("       " + Element.vegetals.getStringValue() + "->" + view.getAvailableElements().get(Element.vegetals)).reset() + ansi().a("       " + Element.insects.getStringValue() + "->" + view.getAvailableElements().get(Element.insects)).reset() + "           \u2551");
-        infoField.add("\u2551   " + ansi().fg(color).a("ARTIFACTS:").reset() + ansi().a("      " + Artifact.feather.getStringValue() + "->" + view.getAvailableArtifacts().get(Artifact.feather)).reset() + ansi().a("       " + Artifact.paper.getStringValue() + "->" + view.getAvailableArtifacts().get(Artifact.paper)).reset() + ansi().a("       " + Artifact.ink.getStringValue() + "->" + view.getAvailableArtifacts().get(Artifact.ink)).reset() + "                      \u2551");
+        infoField.add("\u2551   " + ansi().fg(color).a("POINTS:         ").reset() + buildStat(view.getPoints().get(view.getPlayerId())) + "                                               \u2551");
+        infoField.add("\u2551   " + ansi().fg(color).a("ELEMENTS:").reset() + ansi().a("       " + Element.mushrooms.getStringValue() + "->" +buildStat(view.getAvailableElements().get(Element.mushrooms))).reset()  + ansi().a("       " + Element.animals.getStringValue() + "->" + buildStat( view.getAvailableElements().get(Element.animals))).reset() + ansi().a("       " + Element.vegetals.getStringValue() + "->" + buildStat(view.getAvailableElements().get(Element.vegetals))).reset() + ansi().a("       " + Element.insects.getStringValue() + "->" + buildStat(view.getAvailableElements().get(Element.insects))).reset() + "           \u2551");
+        infoField.add("\u2551   " + ansi().fg(color).a("ARTIFACTS:").reset() + ansi().a("      " + Artifact.feather.getStringValue() + "->" + buildStat(view.getAvailableArtifacts().get(Artifact.feather))).reset() + ansi().a("       " + Artifact.paper.getStringValue() + "->" + buildStat(view.getAvailableArtifacts().get(Artifact.paper))).reset() + ansi().a("       " + Artifact.ink.getStringValue() + "->" + buildStat(view.getAvailableArtifacts().get(Artifact.ink))).reset() + "                      \u2551");
         infoField.add("\u255A\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255D");
 
         return infoField;
     }
 
     private String buildStat(int stat){
-        String line = new String();
-        if(stat < 10) return line = stat + " ";
-        else return line = String.valueOf(stat);
+        if(stat < 10) return stat + " ";
+        else return String.valueOf(stat);
     }
 
     private void ultimatePrint(ViewAPI view){
@@ -194,6 +217,36 @@ public class TUI implements UI {
         }
         for(int i = 12; i < 18 ; i++){
             System.out.println(handField.get(i) + infoField.get(i - 12));
+        }
+    }
+
+    @Override
+    public void run(){
+        String input1;
+        input = "";
+        sc = new Scanner(input);
+        flowSc = new Scanner(System.in);
+
+        while (true) {
+
+            synchronized (lock) {
+                while (inputPresent) {
+                    try {
+                        lock.wait();
+                    } catch (InterruptedException e) {}
+                }
+                System.out.println("command thread");
+                input1 = flowSc.nextLine();
+
+                if (input1.startsWith("--") && !input1.equals("")) {
+                    System.out.println("comando");
+                } else {
+                    System.out.println("inputPresent");
+                    input = input1;
+                    inputPresent = true;
+                    lock.notifyAll();
+                }
+            }
         }
     }
 
