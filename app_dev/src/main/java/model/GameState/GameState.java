@@ -275,10 +275,9 @@ public class GameState {
      * @throws EmptyCardSourceException
      */
     public void drawCardGoldDeck() throws EmptyCardSourceException {
-        int i = 1;
         commonTable.drawCardGoldDeck(turnPlayer);
         setLastTurnTrue();
-        modelListener.notifyChanges(getGoldDeck().getCards(), i);
+        modelListener.notifyChanges(getGoldDeck().getCards(), 0);
         modelListener.notifyChanges(turnPlayer.getPlayingHand(), turnPlayer.getNickname());
     }
 
@@ -288,10 +287,9 @@ public class GameState {
      * @throws EmptyCardSourceException
      */
     public void drawCardResourcesDeck() throws EmptyCardSourceException {
-        int i = 4;
         commonTable.drawCardResourcesDeck(turnPlayer);
         setLastTurnTrue();
-        modelListener.notifyChanges(getResourceDeck().getCards(), i);
+        modelListener.notifyChanges(getResourceDeck().getCards(), 1);
         modelListener.notifyChanges(turnPlayer.getPlayingHand(), turnPlayer.getNickname());
     }
 
@@ -301,11 +299,12 @@ public class GameState {
      * @throws EmptyCardSourceException
      */
     public void drawCardOpenGold(int index) throws EmptyCardSourceException {
-        int i;
-        if(index == 0){ i = 2;} else { i = 3;}
+        //TODO erase
+//        int i;
+//        if(index == 0){ i = 2;} else { i = 3;}
         commonTable.drawCardOpenGold(index, turnPlayer);
         setLastTurnTrue();
-        modelListener.notifyChanges(getOpenGold(), i);
+        modelListener.notifyChanges(getOpenGold(), 2, index);
         modelListener.notifyChanges(turnPlayer.getPlayingHand(), turnPlayer.getNickname());
     }
 
@@ -315,11 +314,11 @@ public class GameState {
      * @throws EmptyCardSourceException
      */
     public void drawCardOpenResources(int index) throws EmptyCardSourceException {
-        int i;
-        if(index == 0){ i = 5;} else { i = 6;}
+//        int i;
+//        if(index == 0){ i = 5;} else { i = 6;}
         commonTable.drawCardOpenResources(index, turnPlayer);
         setLastTurnTrue();
-        modelListener.notifyChanges(getOpenResources(), i);
+        modelListener.notifyChanges(getOpenResources(), 3, index);
         modelListener.notifyChanges(turnPlayer.getPlayingHand(), turnPlayer.getNickname());
     }
 

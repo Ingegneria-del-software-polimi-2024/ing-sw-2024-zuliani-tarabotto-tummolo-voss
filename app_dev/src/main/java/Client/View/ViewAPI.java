@@ -114,10 +114,12 @@ public class ViewAPI implements ViewAPI_Interface {
         viewModel.updateElements(elements);
     }
 
-    //TODO: togliere sta cagata
     @Override
     public void updateCardSource(List<PlayableCard> deck, int cardSource) {
         viewModel.updateCardSource(deck, cardSource);
+    }
+    public void updateOpenCards(List<PlayableCard> decK, int cardSource){
+        viewModel.updateOpenCards(decK, cardSource);
     }
 
     @Override

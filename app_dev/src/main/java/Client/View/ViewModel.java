@@ -15,17 +15,28 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ViewModel {
+    //private for the player
     private List<PlayableCard> hand;
     private PlayableCard starterCard;
-
-    private List<PlayableCard> goldDeck;
-    private List<PlayableCard> resourceDeck;
     private ObjectiveCard secretObjective;
+
+    //common on table
+    private HashMap<Integer,List<PlayableCard>> decks;
+    //this hashmap contains the decks from which the player can draw cards in the following order:
+    // 0- gold deck
+    // 1- open gold cards
+    // 2- resource deck
+    // 3- open resource cards
+
+//    private List<PlayableCard> goldDeck;
+//    private List<PlayableCard> resourceDeck;
+//    private List<PlayableCard> openGold;
+//    private List<PlayableCard> openResource;
 
     private List<ObjectiveCard> commonObjectives;
     private List<ObjectiveCard> chooseSecretObjectives;
-    private List<PlayableCard> openGold;
-    private List<PlayableCard> openResource;
+
+    //logistical support
     private TurnState state;
     private List<String> players;
     private String gameId;
@@ -36,6 +47,7 @@ public class ViewModel {
     private String turnPlayer;
     private String pawnColor;
     private List<Coordinates> availablePlaces;
+
     //an array of 3 booleans indicating which of the cards in the player's hand can be placed(due to placementConstraint)
     private boolean[] canBePlaced;
     //the disposition of all players' are stored here
@@ -43,6 +55,7 @@ public class ViewModel {
     //the points of all players are store here
     private HashMap< String , Integer> points;
 
+    //interfaces to communicate with
     private ClientAPI_GO clientAPIGo;
     private UI ui;
 
@@ -60,6 +73,7 @@ public class ViewModel {
         this.commonObjectives = new ArrayList<>();
         this.chooseSecretObjectives = new ArrayList<>();
 
+        this.decks = new HashMap<Integer,List<PlayableCard>>();
         this.ui = ui;
     }
     public void setClientAPIGo(ClientAPI_GO clientAPI_GO){
@@ -97,10 +111,16 @@ public class ViewModel {
         this.state.display(ui);
     }
 
-    public void setGoldDeck(List<PlayableCard> deck){goldDeck = deck;}
+    public void setGoldDeck(List<PlayableCard> deck){
+//        goldDeck = deck;
+        decks.put(0, deck);
+    }
 
 
-    public void setResourceDeck(List<PlayableCard> deck){resourceDeck = deck;}
+    public void setResourceDeck(List<PlayableCard> deck){
+//        resourceDeck = deck;
+        decks.put(2, deck);
+    }
 
 
     public void setPlayers(List<String> players){
@@ -169,36 +189,43 @@ public class ViewModel {
 
     //TODO: togliere sta cagata
     public void updateCardSource(List<PlayableCard> deck, int cardSource) {
-
-        switch (cardSource) {
-            case 1:
-                goldDeck = deck;
-                break;
-            case 4:
-                resourceDeck = deck;
-                break;
-            case 2:
-                openGold = deck;
-                //we update openGold, this means that the first card of goldDeck has been turned and put in opendGold
-                // that is why we call goldDeck.remove(0)
-                goldDeck.remove(0);
-                break;
-            case 3:
-                openGold = deck;
-                goldDeck.remove(0);
-                break;
-            case 5:
-                openResource = deck;
-                resourceDeck.remove(0);
-                break;
-            case 6:
-                openResource = deck;
-                resourceDeck.remove(0);
-                break;
-        }
+        decks.put(cardSource, deck);
+//        switch (cardSource) {
+//            case 1:
+//                goldDeck = deck;
+//                break;
+//            case 4:
+//                resourceDeck = deck;
+//                break;
+//            case 2:
+//                openGold = deck;
+//                //we update openGold, this means that the first card of goldDeck has been turned and put in opendGold
+//                // that is why we call goldDeck.remove(0)
+//                goldDeck.remove(0);
+//                break;
+//            case 3:
+//                openGold = deck;
+//                goldDeck.remove(0);
+//                break;
+//            case 5:
+//                openResource = deck;
+//                resourceDeck.remove(0);
+//                break;
+//            case 6:
+//                openResource = deck;
+//                resourceDeck.remove(0);
+//                break;
+//        }
 
     }
 
+    public void updateOpenCards(List<PlayableCard> decK, int cardSource){
+        //we update open cards, this means that the first card of a deck has been turned and put in the open ones
+        //that is why we call deck.remove(0). In particular the open cards are a position ahead in comparison to the
+        //same type decks
+        decks.put(cardSource, decK);
+        decks.get(cardSource-1).remove(0);
+    }
     public void endGame(HashMap<String, Integer> finalPoints) {
 
     }
@@ -213,11 +240,11 @@ public class ViewModel {
     }
 
     public void setOpenGold(List<PlayableCard> openGold){
-        this.openGold = openGold;
+        this.decks.put(1, openGold);
     }
 
     public void setOpenResource(List<PlayableCard> openResource){
-        this.openResource = openResource;
+        this.decks.put(3, openResource);
     }
 
     public void setAvailablePlaces(List<Coordinates> availablePlaces){
@@ -290,19 +317,19 @@ public class ViewModel {
     }
 
     public List<PlayableCard> getGoldDeck() {
-        return goldDeck;
+        return decks.get(0);
     }
 
     public List<PlayableCard> getResourceDeck() {
-        return resourceDeck;
+        return decks.get(2);
     }
 
     public List<PlayableCard> getOpenGold() {
-        return openGold;
+        return decks.get(1);
     }
 
     public List<PlayableCard> getOpenResource() {
-        return openResource;
+        return decks.get(3);
     }
 
     public String getTurnPlayer() {
