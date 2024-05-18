@@ -5,14 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/DrawOpenCardMessage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/View/ViewAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/View/ViewAPI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Client/View/ViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/View/ViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/ModelListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ModelListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/DrawCardMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/DrawDeckCardMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/SharedInterfaces/ViewAPI_Interface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/SharedInterfaces/ViewAPI_Interface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -244,7 +238,7 @@
       <workItem from="1715699779888" duration="3971000" />
       <workItem from="1715770037760" duration="266000" />
       <workItem from="1715770310100" duration="8268000" />
-      <workItem from="1716028068633" duration="5039000" />
+      <workItem from="1716028068633" duration="5959000" />
     </task>
     <servers />
   </component>

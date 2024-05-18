@@ -27,12 +27,10 @@ public class ViewModel {
     // 1- open gold cards
     // 2- resource deck
     // 3- open resource cards
-
-//    private List<PlayableCard> goldDeck;
-//    private List<PlayableCard> resourceDeck;
-//    private List<PlayableCard> openGold;
-//    private List<PlayableCard> openResource;
-
+    private final int GOLD_DECK_INDX = 0;
+    private final int OPEN_GOLD_INDX = 1;
+    private final int RESOURCE_DECK_INDX = 2;
+    private final int OPEN_RESOURCE_INDX = 3;
     private List<ObjectiveCard> commonObjectives;
     private List<ObjectiveCard> chooseSecretObjectives;
 
@@ -112,14 +110,12 @@ public class ViewModel {
     }
 
     public void setGoldDeck(List<PlayableCard> deck){
-//        goldDeck = deck;
-        decks.put(0, deck);
+        decks.put(GOLD_DECK_INDX, deck);
     }
 
 
     public void setResourceDeck(List<PlayableCard> deck){
-//        resourceDeck = deck;
-        decks.put(2, deck);
+        decks.put(RESOURCE_DECK_INDX, deck);
     }
 
 
@@ -190,33 +186,6 @@ public class ViewModel {
     //TODO: togliere sta cagata
     public void updateCardSource(List<PlayableCard> deck, int cardSource) {
         decks.put(cardSource, deck);
-//        switch (cardSource) {
-//            case 1:
-//                goldDeck = deck;
-//                break;
-//            case 4:
-//                resourceDeck = deck;
-//                break;
-//            case 2:
-//                openGold = deck;
-//                //we update openGold, this means that the first card of goldDeck has been turned and put in opendGold
-//                // that is why we call goldDeck.remove(0)
-//                goldDeck.remove(0);
-//                break;
-//            case 3:
-//                openGold = deck;
-//                goldDeck.remove(0);
-//                break;
-//            case 5:
-//                openResource = deck;
-//                resourceDeck.remove(0);
-//                break;
-//            case 6:
-//                openResource = deck;
-//                resourceDeck.remove(0);
-//                break;
-//        }
-
     }
 
     public void updateOpenCards(List<PlayableCard> decK, int cardSource){
@@ -240,11 +209,11 @@ public class ViewModel {
     }
 
     public void setOpenGold(List<PlayableCard> openGold){
-        this.decks.put(1, openGold);
+        this.decks.put(OPEN_GOLD_INDX, openGold);
     }
 
     public void setOpenResource(List<PlayableCard> openResource){
-        this.decks.put(3, openResource);
+        this.decks.put(OPEN_RESOURCE_INDX, openResource);
     }
 
     public void setAvailablePlaces(List<Coordinates> availablePlaces){
@@ -317,19 +286,19 @@ public class ViewModel {
     }
 
     public List<PlayableCard> getGoldDeck() {
-        return decks.get(0);
+        return decks.get(GOLD_DECK_INDX);
     }
 
     public List<PlayableCard> getResourceDeck() {
-        return decks.get(2);
+        return decks.get(RESOURCE_DECK_INDX);
     }
 
     public List<PlayableCard> getOpenGold() {
-        return decks.get(1);
+        return decks.get(OPEN_GOLD_INDX);
     }
 
     public List<PlayableCard> getOpenResource() {
-        return decks.get(3);
+        return decks.get(OPEN_RESOURCE_INDX);
     }
 
     public String getTurnPlayer() {
