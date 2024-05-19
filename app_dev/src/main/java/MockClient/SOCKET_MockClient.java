@@ -11,9 +11,7 @@ import SharedWebInterfaces.Messages.MessagesToLobby.NewConnectionMessage;
 import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_RoomChoice;
 import SharedWebInterfaces.Messages.MessagesToLobby.RequestAvailableGames;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -25,7 +23,7 @@ public class SOCKET_MockClient {
 
         Socket server = new Socket("localHost", 1234);
         ObjectOutputStream out =  new ObjectOutputStream(server.getOutputStream());
-        ObjectInputStream in = new ObjectInputStream(server.getInputStream());
+        ObjectInputStream in = new ObjectInputStream((server.getInputStream()));
 
         WelcomeMessage welcome = (WelcomeMessage) in.readObject();
         ArrayList<String> games = welcome.getListOfGames();

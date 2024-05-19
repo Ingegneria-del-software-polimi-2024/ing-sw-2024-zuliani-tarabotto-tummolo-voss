@@ -2,6 +2,8 @@ package Client.UI;
 
 import Client.View.ViewAPI;
 
+import java.util.ArrayList;
+
 public interface UI {
     //open cards and other other players' pawn and nicknames
     void displayInitialization();
@@ -21,5 +23,9 @@ public interface UI {
 
     //whatever -> probably the end
     void displayCalculateObjectives();
+    void chooseConnection();
+    void askNickname();
+    void displayAvailableGames(ArrayList<String> listOfGames);
+    void joinedGame(String gameID);
 
 }

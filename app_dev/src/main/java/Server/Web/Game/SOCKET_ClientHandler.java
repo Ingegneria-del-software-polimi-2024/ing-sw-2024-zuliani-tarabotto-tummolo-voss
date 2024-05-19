@@ -1,9 +1,11 @@
 package Server.Web.Game;
 
 import Server.Web.Lobby.Lobby;
+import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_RoomChoice;
 import SharedWebInterfaces.Messages.MessagesFromLobby.AvailableGames;
 import SharedWebInterfaces.Messages.MessagesFromLobby.WelcomeMessage;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
+import SharedWebInterfaces.Messages.MessagesFromServer.EndGameMessage;
 import SharedWebInterfaces.Messages.MessagesToLobby.JoinGameMessage;
 import SharedWebInterfaces.Messages.MessagesToLobby.RequestAvailableGames;
 import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
@@ -66,8 +68,8 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
     public SOCKET_ClientHandler(Socket clientSocket, Lobby lobby) throws IOException {
         this.lobby = lobby;
         this.clientSocket = clientSocket;
-        in = new ObjectInputStream(clientSocket.getInputStream());
         out = new ObjectOutputStream(clientSocket.getOutputStream());
+        in = new ObjectInputStream(clientSocket.getInputStream());
     }
 
     /**
@@ -76,13 +78,15 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
     public void run(){
         try{
             snd(new WelcomeMessage(lobby.getGameNames()));
-            MessageToLobby msg = null;
+            System.out.println("sent welcomeMessage");
+            NewConnectionMessage msg = null;
 
-            do {
-                msg = (MessageToLobby) in.readObject();
-            }while (! (msg instanceof NewConnectionMessage));
-
-            ((NewConnectionMessage) msg).setHandler(this);
+            boolean read = false;
+            while(!read) {
+                msg = (NewConnectionMessage) in.readObject();
+                read = true;
+            }
+            msg.setHandler(this);
             deliverToLobby(msg);
 
         } catch (IOException | ClassNotFoundException e) {
@@ -90,16 +94,26 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
         }
         try {
 
-            MessageToLobby msg = null;
+            MessageToLobby messageToLobby = null;
             do {
-                msg = (MessageToLobby) in.readObject();
-                deliverToLobby(msg);
-            }while (! (msg instanceof JoinGameMessage));
+                messageToLobby = (MessageToLobby) in.readObject();
+                deliverToLobby(messageToLobby);
+            }while (! (messageToLobby instanceof JoinGameMessage));
         }catch (IOException | ClassNotFoundException e){
             throw new RuntimeException();
         }
-
+        System.out.println("Started gameloop");
         //TODO insert the listening loop for game messages
+        MessageFromClient msg = null;
+        try {
+            do{
+                msg = (MessageFromClient) in.readObject();
+                sendToServer(msg);
+                System.out.println("NewMessage...\n");
+            }while (!(msg instanceof EndGameMessage));
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**

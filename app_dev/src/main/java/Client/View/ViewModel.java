@@ -3,6 +3,9 @@ package Client.View;
 import Client.UI.UI;
 import Client.Web.ClientAPI_GO;
 import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.*;
+import SharedWebInterfaces.Messages.MessagesToLobby.JoinGameMessage;
+import SharedWebInterfaces.Messages.MessagesToLobby.NewConnectionMessage;
+import SharedWebInterfaces.Messages.MessagesToLobby.RequestAvailableGames;
 import model.GameState.TurnState;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
@@ -15,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ViewModel {
+    private ArrayList<String> listOfGames;
     //private for the player
     private List<PlayableCard> hand;
     private PlayableCard starterCard;
@@ -76,7 +80,22 @@ public class ViewModel {
     }
     public void setClientAPIGo(ClientAPI_GO clientAPI_GO){
         clientAPIGo = clientAPI_GO;
+        //For debug purpose only
         System.out.println("helo");
+    }
+
+    /////////////////////////////////////////////////Lobby//////////////////////////////////////////////////////////////
+    public void setAvailableGames(ArrayList<String> listOfGames){
+        this.listOfGames = listOfGames;
+    }
+    public void displayAvailableGames(){
+        ui.displayAvailableGames(listOfGames);
+    }
+    public void requestAvailableGames(){
+        clientAPIGo.sendToLobby(new RequestAvailableGames(playerId));
+    }
+    public void joinGame(String game, int players){
+        clientAPIGo.sendToLobby(new JoinGameMessage(playerId, game, players));
     }
     /////////// from CLIENT to SERVER  ACTIONS ////////////////////////////////////////////////////////////////////////////////////
     //all this methods create a new MessageFromClient object containing an execute() method with the call to a specific method of ModelController
@@ -132,7 +151,10 @@ public class ViewModel {
         }
     }
 
-    public void setGameId(String gameId) { this.gameId = gameId;}
+    public void setGameId(String gameId) {
+        this.gameId = gameId;
+        ui.joinedGame(gameId);
+    }
 
     //the player is given his starterCard, he will then have to place it
     public void setStarterCard(PlayableCard starterCard){
@@ -230,6 +252,7 @@ public class ViewModel {
 
     public void setPlayerId(String playerId){
         this.playerId = playerId;
+        clientAPIGo.sendToLobby(new NewConnectionMessage(playerId));
     }
 
     public boolean getMyTurn() {
@@ -310,4 +333,6 @@ public class ViewModel {
     }
 
     public ObjectiveCard getSecretObjective(){return secretObjective;}
+
+
 }

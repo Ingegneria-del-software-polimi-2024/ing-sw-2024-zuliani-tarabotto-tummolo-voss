@@ -24,6 +24,6 @@ public class ACK_RoomChoice implements MessageFromServer {
 
     @Override
     public void execute(ViewAPI_Interface view) {
-
+        view.setGameId(game);
     }
 }

@@ -1,14 +1,15 @@
 package Client.Web;
 
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
+import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_RoomChoice;
 import SharedWebInterfaces.Messages.MessagesFromServer.InterruptConnectionMessage;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
+import SharedWebInterfaces.Messages.MessagesToLobby.MessageToLobby;
+import SharedWebInterfaces.Messages.MessagesToLobby.NewConnectionMessage;
 import SharedWebInterfaces.SharedInterfaces.ServerHandlerInterface;
 import SharedWebInterfaces.WebExceptions.StartConnectionFailedException;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.rmi.RemoteException;
 
@@ -46,6 +47,18 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
     @Override
     public void receiveFromLobby(MessageFromServer msg) {
         api.notifyChanges(msg);
+        System.out.println("new incoming message: "+msg.getClass());
+    }
+
+    @Override
+    public void sendToLobby(MessageToLobby msg) throws RemoteException {
+        try {
+            out.writeObject(msg);
+            out.flush();
+            out.reset();
+        } catch (IOException e) {
+            throw new RemoteException();
+        }
     }
 
     /**
@@ -54,7 +67,7 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
      * @throws ClassNotFoundException when an error in the communication occurs
      */
     private void gameListeningLoop() throws IOException, ClassNotFoundException{
-        MessageFromServer incomingMessage;
+        MessageFromServer incomingMessage = null;
         do{
             incomingMessage = (MessageFromServer) in.readObject();
             notifyChanges(incomingMessage);
@@ -67,7 +80,8 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
             socket = new Socket(add, port);
             out =  new ObjectOutputStream(socket.getOutputStream());
             in = new ObjectInputStream(socket.getInputStream());
-
+            //debug
+            System.out.println("Opened socket");
         } catch (IOException e) {
             throw new StartConnectionFailedException();
         }
@@ -83,6 +97,11 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
      */
     public void run() {
         try {
+            MessageFromServer msg = null;
+            do{
+                msg = (MessageFromServer) in.readObject();
+                receiveFromLobby(msg);
+            }while (!(msg instanceof ACK_RoomChoice));
             gameListeningLoop();
             out.close();
             in.close();

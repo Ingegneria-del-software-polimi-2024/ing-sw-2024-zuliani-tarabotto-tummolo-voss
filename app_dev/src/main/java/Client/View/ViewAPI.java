@@ -2,9 +2,14 @@ package Client.View;
 
 import Client.UI.TUI.TUI;
 import Client.UI.UI;
+import Client.Web.ClientAPI_COME;
 import Client.Web.ClientAPI_GO;
-import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.*;
+import Client.Web.RMI_ServerHandler;
+import Client.Web.SOCKET_ServerHandler;
+import SharedWebInterfaces.Messages.MessagesToLobby.JoinGameMessage;
+import SharedWebInterfaces.SharedInterfaces.ServerHandlerInterface;
 import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
+import SharedWebInterfaces.WebExceptions.StartConnectionFailedException;
 import model.GameState.TurnState;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
@@ -54,8 +59,64 @@ public class ViewAPI implements ViewAPI_Interface {
     @Override
     public void readyToPlay(){viewModel.readyToPlay();}
 
+//////////////////////////////////////////Lobby/////////////////////////////////////////////////////////////////////////
+    public void startConnection(String in, String host, int port, int localPort){
+        ClientAPI_COME clientAPICome = new ClientAPI_COME(this);
+        Thread readMessagesLoop = new Thread(clientAPICome);
+        readMessagesLoop.start();
+        try {
+            ServerHandlerInterface serverHandler;
+            if (in.equalsIgnoreCase("RMI")) {
+                serverHandler = new RMI_ServerHandler(host, port, clientAPICome, localPort);
+            } else {
+                //debug
+                System.out.println("instantiating handler");
+                serverHandler = new SOCKET_ServerHandler(host, port, clientAPICome);
+                //debug
+                System.out.println("starting thread");
+                Thread listeningThread = new Thread((SOCKET_ServerHandler)serverHandler);
+                listeningThread.start();
+                //debug
+                System.out.println("started listening for messages");
+            }
+            ClientAPI_GO clientAPIGo = new ClientAPI_GO(serverHandler);
+            this.setClientAPIGo(clientAPIGo);
+        }catch (StartConnectionFailedException e){
+            System.out.println("An error occurred");
+            e.printStackTrace();
+            throw new RuntimeException("Couldn't instaurate the connection due to a net error");
+        }
 
-//    /////////// from SERVER to CLIENT ACTIONS ////////////////////////////////////////////////////////////////////////////////////
+
+    }
+
+    public void chooseConnection(){
+        ui.chooseConnection();
+    }
+
+    public void askNickname(){
+        ui.askNickname();
+    }
+    public void setAvailableGames(ArrayList<String> listOfGames){
+        viewModel.setAvailableGames(listOfGames);
+    }
+    public void displayAvailableGames(){
+        viewModel.displayAvailableGames();
+    }
+    public void displayAvailableGames(ArrayList<String> availableGames){
+        viewModel.setAvailableGames(availableGames);
+        viewModel.displayAvailableGames();
+    }
+    public void requestAvailableGames(){
+        viewModel.requestAvailableGames();
+    }
+    public void joinGame(String game, int players){
+        viewModel.joinGame(game, players);
+    }
+
+//////////////////////////////////////////Lobby/////////////////////////////////////////////////////////////////////////
+
+    //    /////////// from SERVER to CLIENT ACTIONS ////////////////////////////////////////////////////////////////////////////////////
     @Override
     public void setState(TurnState state) {
         viewModel.setState(state);
