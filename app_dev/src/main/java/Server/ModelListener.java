@@ -7,18 +7,15 @@ import SharedWebInterfaces.WebExceptions.MsgNotDeliveredException;
 import model.GameState.TurnState;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
-import model.deckFactory.ObjectiveDeck;
 import model.deckFactory.PlayableDeck;
 import model.enums.Artifact;
 import model.enums.Element;
 import model.enums.Pawn;
 import model.placementArea.Coordinates;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ModelListener {
 
@@ -200,9 +197,15 @@ public class ModelListener {
      * @param cardSource
      */
     public void notifyChanges(List<PlayableCard> deck, int cardSource) {
-
         try{
-            serverAPI.broadcastNotifyChanges( new DrawCardMessage(deck, cardSource));
+            serverAPI.broadcastNotifyChanges( new DrawDeckCardMessage(deck, cardSource));
+        }catch (MsgNotDeliveredException msg){
+            throw new RuntimeException(msg);
+        }
+    }
+    public void notifyChanges(List<PlayableCard> deck, int cardSource, int index) {
+        try{
+            serverAPI.broadcastNotifyChanges( new DrawOpenCardMessage(deck, cardSource, index));
         }catch (MsgNotDeliveredException msg){
             throw new RuntimeException(msg);
         }

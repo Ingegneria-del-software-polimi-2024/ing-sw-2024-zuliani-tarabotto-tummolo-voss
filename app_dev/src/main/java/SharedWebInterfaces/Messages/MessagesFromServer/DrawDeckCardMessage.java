@@ -5,12 +5,12 @@ import model.cards.PlayableCards.PlayableCard;
 
 import java.util.List;
 
-public class DrawCardMessage implements MessageFromServer{
+public class DrawDeckCardMessage implements MessageFromServer{
 
     private List<PlayableCard> deck;
     private int cardSource;
 
-    public DrawCardMessage(List<PlayableCard> deck, int cardSource) {
+    public DrawDeckCardMessage(List<PlayableCard> deck, int cardSource) {
         this.deck = deck;
         this.cardSource = cardSource;
     }
