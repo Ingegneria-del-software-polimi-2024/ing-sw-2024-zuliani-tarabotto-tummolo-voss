@@ -272,7 +272,20 @@ public class ViewAPI implements ViewAPI_Interface {
     }
 
     public boolean checkCanDrawFrom(int cardSource) {
-        if(cardSource == 3 || cardSource == 6) return viewModel.getDecks().get(cardSource).size() > 1;
-        else return !viewModel.getDecks().get(cardSource).isEmpty();
+        switch (cardSource) {
+            case 1:
+                return !viewModel.getGoldDeck().isEmpty();
+            case 2:
+                return !viewModel.getOpenGold().isEmpty();
+            case 3:
+                return viewModel.getOpenGold().size() > 1;
+            case 4:
+                return !viewModel.getResourceDeck().isEmpty();
+            case 5:
+                return !viewModel.getOpenResource().isEmpty();
+            case 6:
+                return viewModel.getOpenResource().size() > 1;
+        }
+        return false;
     }
 }
