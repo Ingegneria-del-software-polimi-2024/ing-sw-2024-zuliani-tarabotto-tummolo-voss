@@ -33,6 +33,11 @@ public class ViewAPI implements ViewAPI_Interface {
     }
     //TODO: clientAPI_GO deve essere passato come parametro
 
+    public void startUI(){
+        Thread t = new Thread(ui);
+        t.start();
+    }
+
     public void setClientAPIGo(ClientAPI_GO clientAPI_GO){
         viewModel.setClientAPIGo(clientAPI_GO);
     }
@@ -243,4 +248,31 @@ public class ViewAPI implements ViewAPI_Interface {
     }
 
     public ObjectiveCard getSecretObjective(){return viewModel.getSecretObjective();}
+
+    public  HashMap< String, HashMap< Coordinates, PlayableCard> > getDispositions(){
+        return viewModel.getDispositions();
+    }
+
+    public UI getUi(){
+        return ui;
+    }
+
+    public List<String> getPlayers(){
+        return viewModel.getPlayers();
+    }
+
+
+
+    ///////////////////// functions used for input controls ///////////////////////////
+    public boolean checkAvailable(int x, int y){
+        for(Coordinates c : viewModel.getAvailablePlaces()){
+            if(c.equals(new Coordinates(x,y))) return true;
+        }
+        return false;
+    }
+
+    public boolean checkCanDrawFrom(int cardSource) {
+        if(cardSource == 3 || cardSource == 6) return viewModel.getDecks().get(cardSource).size() > 1;
+        else return !viewModel.getDecks().get(cardSource).isEmpty();
+    }
 }

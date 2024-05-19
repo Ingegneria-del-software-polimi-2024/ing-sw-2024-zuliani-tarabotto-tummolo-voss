@@ -1,6 +1,11 @@
 package Client.UI;
 
 import Client.View.ViewAPI;
+import model.cards.PlayableCards.PlayableCard;
+import model.placementArea.Coordinates;
+import model.placementArea.PlacementArea;
+
+import java.util.HashMap;
 
 public interface UI extends Runnable{
     //open cards and other other players' pawn and nicknames
@@ -20,6 +25,9 @@ public interface UI extends Runnable{
     void displayCardDrawing();
 
     //whatever -> probably the end
-    void displayCalculateObjectives();
+    void displayEndGame();
+
+    void printDisposition(HashMap<Coordinates, PlayableCard> disposition);
+
 
 }

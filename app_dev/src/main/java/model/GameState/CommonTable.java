@@ -158,6 +158,7 @@ public class CommonTable {
             throw new EmptyCardSourceException("OpenGold_"+ index + "is empty");
         }
         if(goldDeck.getSize() > 0) openGold.add(index, goldDeck.extract());
+        else openGold.add(index, null);
     }
 
     /**
@@ -175,6 +176,7 @@ public class CommonTable {
             throw new EmptyCardSourceException("OpenResources_"+ index + "is empty");
         }
         if(resourceDeck.getSize() > 0) openResources.add(index,  resourceDeck.extract());
+        else openResources.add(index, null);
     }
 
 

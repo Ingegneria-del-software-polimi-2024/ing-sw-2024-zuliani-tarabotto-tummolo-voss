@@ -20,6 +20,7 @@ public class ViewModel {
     private PlayableCard starterCard;
     private ObjectiveCard secretObjective;
 
+
     //common on table
     private HashMap<Integer,List<PlayableCard>> decks;
     //this hashmap contains the decks from which the player can draw cards in the following order:
@@ -48,6 +49,8 @@ public class ViewModel {
 
     //an array of 3 booleans indicating which of the cards in the player's hand can be placed(due to placementConstraint)
     private boolean[] canBePlaced;
+
+
     //the disposition of all players' are stored here
     private HashMap< String, HashMap< Coordinates, PlayableCard> > dispositions;
     //the points of all players are store here
@@ -137,7 +140,7 @@ public class ViewModel {
     //the player is given his starterCard, he will then have to place it
     public void setStarterCard(PlayableCard starterCard){
         //placeable is set to false because for starterCard it doesn't matter
-        System.out.println(starterCard.getId());
+        //System.out.println(starterCard.getId());
         this.starterCard = starterCard;
     }
 
@@ -153,7 +156,7 @@ public class ViewModel {
 
     //the player chooses his secretObjective
     public void setSecretObjective(ObjectiveCard secretObjective){
-        //this.secretObjective = secretObjective;
+        this.secretObjective = secretObjective;
         chooseSecretObjective(String.valueOf(secretObjective.getId()));
     }
 
@@ -196,7 +199,9 @@ public class ViewModel {
         decks.get(cardSource-1).remove(0);
     }
     public void endGame(HashMap<String, Integer> finalPoints) {
-
+        for(String player : points.keySet()){
+            points.put(player, finalPoints.get(player));
+        }
     }
 
     public void setPawnColor(String pawnColor) {
@@ -310,4 +315,15 @@ public class ViewModel {
     }
 
     public ObjectiveCard getSecretObjective(){return secretObjective;}
+
+    public HashMap<String, HashMap<Coordinates, PlayableCard>> getDispositions() {
+        return dispositions;
+    }
+    public List<String> getPlayers(){
+        return players;
+    }
+
+    public HashMap<Integer, List<PlayableCard>> getDecks() {
+        return decks;
+    }
 }

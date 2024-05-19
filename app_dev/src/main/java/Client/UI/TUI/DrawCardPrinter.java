@@ -35,16 +35,37 @@ public class DrawCardPrinter {
     }
 
     private void printFaces1(PlayableCard gold, List<PlayableCard> openGold){
-        openGold.get(0).setFaceSide(true);
-        openGold.get(1).setFaceSide(true);
+
+       if (openGold.isEmpty()){
+            openGold.add(0, null);
+            openGold.add(1, null);
+        } else if (openGold.size()==1) {
+            openGold.get(0).setFaceSide(true);
+            openGold.add(1, null);
+        }else {
+            openGold.get(0).setFaceSide(true);
+            openGold.get(1).setFaceSide(true);
+        }
+
         for(int i = 0; i < 6; i++){
             System.out.println("\u2551     " + buildLine(i,gold) + "      " + buildLine(i, openGold.get(0)) + "      " + buildLine(i, openGold.get(1)) + "     \u2551");
         }
     }
 
     private void printFaces2(PlayableCard resource, List<PlayableCard> openResource){
-        openResource.get(0).setFaceSide(true);
-        openResource.get(1).setFaceSide(true);
+        if(openResource.get(0) != null) openResource.get(0).setFaceSide(true);
+        if(openResource.get(1) != null) openResource.get(1).setFaceSide(true);
+
+        if (openResource.isEmpty()){
+            openResource.add(0, null);
+            openResource.add(1, null);
+        } else if (openResource.size()==1) {
+            openResource.get(0).setFaceSide(true);
+            openResource.add(1, null);
+        }else {
+            openResource.get(0).setFaceSide(true);
+            openResource.get(1).setFaceSide(true);
+        }
         for(int i = 0; i < 6; i++){
             System.out.println("\u2551     " + buildLine(i, resource) + "      " + buildLine(i, openResource.get(0)) + "      " + buildLine(i, openResource.get(1)) + "     \u2551");
         }

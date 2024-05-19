@@ -1,21 +1,20 @@
 package Client.UI.TUI;
 
+import Client.UI.TUI.Commands.DispositionCommand;
+import Client.UI.TUI.Commands.HelpCommand;
 import Client.UI.UI;
+import Client.UI.exceptions.InvalidInputException;
 import Client.View.ViewAPI;
 import model.cards.PlayableCards.PlayableCard;
 import model.enums.Artifact;
 import model.enums.Element;
-import model.objective.Objective;
 
-import javax.swing.text.View;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
-import java.util.concurrent.locks.Lock;
+import java.util.*;
 
 import static org.fusesource.jansi.Ansi.ansi;
+import Client.UI.TUI.Commands.Command;
+import model.placementArea.Coordinates;
+import org.fusesource.jansi.Ansi;
 
 public class TUI implements UI{
 
@@ -29,9 +28,12 @@ public class TUI implements UI{
     private CardBuilder cb;
     private final int color = 226;
     private String input;
-    private Scanner flowSc;
-    private boolean inputPresent = false;
+    private volatile boolean inputPresent = false;
     private final Object lock;
+    private final HashMap<String, Command> commandMap;
+    private Runnable rePrint;
+    private PlayableCard c = null;
+    boolean enterPressed = false;
 
     public TUI(ViewAPI view){
 
@@ -44,14 +46,17 @@ public class TUI implements UI{
         drawCardPrinter = new DrawCardPrinter(cb);
         lock = new Object();
 
+        this.commandMap = new HashMap<>();
+        commandMap.put("--help", new HelpCommand());
+        commandMap.put("--disp", new DispositionCommand(view));
+
     }
 
 
     @Override
     public void displayInitialization() {
-        //TODO: ERASE SCREEN
+        clear();
         loginPrinter.print();
-        boolean enterPressed = false;
         view.startUI();
 
         // Continuously check if Enter is pressed until it's pressed
@@ -77,115 +82,219 @@ public class TUI implements UI{
                 } else {
                     System.out.print(ansi().fg(color).a(" ~> Enter key was not pressed.\n").reset());
                 }
-
                 inputPresent = false;
                 lock.notifyAll();
             }
         }
-        System.out.print(ansi().fg(color).a("~> Waiting for other players to be ready\n").reset());
+        rePrint = () -> {
+            clear();
+            loginPrinter.print();
+            System.out.print(ansi().fg(color).a("~> Waiting for other players to be ready\n").reset());
+        };
+        rePrint.run();
 
     }
 
     @Override
     public void displayStarterCardSelection() {
-        //TODO: ERASE SCREEN
-        System.out.print(ansi().fg(color).a("~> This is your StarterCard, choose a face side: (true/false)\n").reset());
-        handPrinter.printStarterCard(view.getStarterCard());
-        boolean faceSide = sc.nextBoolean();
-        view.getStarterCard().setFaceSide(faceSide);
-        view.playStarterCard();
+
+        rePrint = () -> {
+            clear();
+            handPrinter.printStarterCard(view.getStarterCard());
+            System.out.print(ansi().fg(color).a("~> This is your StarterCard, choose a face side: (true/false)\n").reset());
+        };
+        rePrint.run();
+
+
+        //we read from input the line and parse it as boolean
+        synchronized (lock){
+            boolean faceSide = parseBoolean();
+            view.getStarterCard().setFaceSide(faceSide);
+            view.playStarterCard();
+            inputPresent = false;
+            lock.notifyAll();
+        }
+        rePrint = () -> {
+            clear();
+            System.out.print(ansi().fg(color).a("~> This is your StarterCard: \n").reset());
+            handPrinter.printStarterCard(view.getStarterCard());
+        };
+        rePrint.run();
     }
 
     @Override
     public void displayObjectiveSelection() {
-        //TODO: ERASE SCREEN
-        System.out.print(ansi().fg(color).a("~> This is your hand:\n").reset());
-        handPrinter.print(view.getHand());
 
-        System.out.print(ansi().fg(color).a("~> this are the two commonObjectives:\n").reset());
-        objectivesPrinter.printCommonObjectives(view.getCommonObjectives().get(0),view.getCommonObjectives().get(1));
+        rePrint = () -> {
+            clear();
+            System.out.print(ansi().fg(color).a("~> This is your hand:\n").reset());
+            handPrinter.print(view.getHand());
+            System.out.print(ansi().fg(color).a("~> this are the two commonObjectives:\n").reset());
+            objectivesPrinter.printCommonObjectives(view.getCommonObjectives().get(0),view.getCommonObjectives().get(1));
 
-        System.out.print(ansi().fg(color).a("~> choose your secretObjective: (0/1)\n").reset());
-        //we use the same function also to print the two objectives the player has to choose from
-        objectivesPrinter.printCommonObjectives(view.getChooseSecretObjectives().get(0), view.getChooseSecretObjectives().get(1));
+            System.out.print(ansi().fg(color).a("~> choose your secretObjective: (0/1)\n").reset());
+            //we use the same function also to print the two objectives the player has to choose from
+            objectivesPrinter.printCommonObjectives(view.getChooseSecretObjectives().get(0), view.getChooseSecretObjectives().get(1));
+        };
+        rePrint.run();
 
-        view.setSecretObjective(view.getChooseSecretObjectives().get(sc.nextInt()));
+        synchronized (lock){
+            Integer secretObj = parseInt();
+            while(!secretObj.equals(0)  && !secretObj.equals(1)){
+                System.out.println("please insert 0/1");
+                secretObj = parseInt();
+            }
+            view.setSecretObjective(view.getChooseSecretObjectives().get(secretObj));
+            inputPresent = false;
+            lock.notifyAll();
+        }
+
+
+        rePrint = () -> {
+            clear();
+            System.out.print(ansi().fg(color).a("~> These are your objectives\n").reset());
+            objectivesPrinter.getObjField(view.getCommonObjectives().get(0), view.getCommonObjectives().get(1), view.getSecretObjective());
+        };
+        rePrint.run();
+
 
     }
 
     @Override
     public void displayPlacingCard() {
+        int index;
+        int x = 0;
+        int y = 0;
         //if it's myturn then i need to play a card, else i just wait
-        //TODO: ERASE SCREEN
-        if(view.getMyTurn()){
-            dispositionPrinter.print(view.getDisposition(), view.getAvailablePlaces());
-            ultimatePrint(view);
-            System.out.print(ansi().fg(color).a("~> Choose a card to place from your hand. You can place card: ").reset());
-            String line = new String();
-            if(view.getCanBePlaced()[0]) line = "1, ";
-            if(view.getCanBePlaced()[1]) line += "2, ";
-            if(view.getCanBePlaced()[2]) line += "3";
-            System.out.print(ansi().fg(color).a("(" + line + ")\n").reset());
-            PlayableCard c = view.getHand().get(sc.nextInt() - 1);
+        if(view.getMyTurn()) {
 
-            System.out.print(ansi().fg(color).a("~> Select a face side for the card: (true/false)\n").reset());
-            boolean faceSide = sc.nextBoolean();
-            c.setFaceSide(faceSide);
+            // we choose which card we want to place
+            rePrint = () -> {
+                clear();
+                dispositionPrinter.print(view.getDisposition(), view.getAvailablePlaces());
+                ultimatePrint(view);
+                System.out.print(ansi().fg(color).a("~> Choose a card to place from your hand (1/2/3): ").reset());
+            };
+            rePrint.run();
 
-            System.out.print(ansi().fg(color).a("~> Choose one of the available coordinates to place the card: (x/y)\n").reset());
+            synchronized (lock){
+                index = parseInt();
+                while(index != 1 && index != 2 && index != 3 ){
+                    System.out.println("please insert 1/2/3");
+                    index = parseInt();
+                }
+                c = view.getHand().get(index - 1);
+                inputPresent = false;
+                lock.notifyAll();
+            }
 
-            int x = sc.nextInt();
-            int y = sc .nextInt();
+            //we select the face for the card
+            rePrint = () -> {
+                clear();
+                dispositionPrinter.print(view.getDisposition(), view.getAvailablePlaces());
+                ultimatePrint(view);
+                System.out.print(ansi().fg(color).a("~> Select a face side for the card: (true/false)\n").reset());
+            };
+            rePrint.run();
 
+            synchronized (lock){
+                boolean faceSide = parseBoolean();
+                if(faceSide == true && !view.getCanBePlaced()[index - 1]){
+                    System.out.println("Sorry, card " + index + "can't be placed face up due to its placement constraint");
+                    faceSide = false;
+                }
+                c.setFaceSide(faceSide);
+                inputPresent = false;
+                lock.notifyAll();
+            }
+
+
+            // we choose the coordinates where we want to place the card
+            rePrint = () -> {
+                clear();
+                dispositionPrinter.print(view.getDisposition(), view.getAvailablePlaces());
+                ultimatePrint(view);
+                System.out.print(ansi().fg(color).a("~> Choose one of the available coordinates to place the card: (x/y)\n").reset());
+            };
+            rePrint.run();
+
+
+            while (!view.checkAvailable(x, y)){
+                synchronized (lock) {
+                    x = parseInt();
+                    inputPresent = false;
+                    lock.notifyAll();
+                }
+                synchronized (lock){
+                    y = parseInt();
+                    //view.playCard(c, x, y);
+                    inputPresent = false;
+                    lock.notifyAll();
+                }
+                if(!view.checkAvailable(x, y)) System.out.println("These coordinates are not available, please choose some valid ones");
+            }
             view.playCard(c, x, y);
+
         }else{
-            System.out.print(ansi().fg(color).a("~> " + view.getTurnPlayer() + " is placing a card\n").reset());
-            dispositionPrinter.print(view.getDisposition());
-            ultimatePrint(view);
+            rePrint = () -> {
+                clear();
+                dispositionPrinter.print(view.getDisposition());
+                ultimatePrint(view);
+                System.out.print(ansi().fg(color).a("~> " + view.getTurnPlayer() + " is placing a card\n").reset());
+            };
+            rePrint.run();
         }
+
     }
 
     @Override
     public void displayCardDrawing() {
-        //TODO: ERASE SCREEN
 
         if(view.getMyTurn()){
-            drawCardPrinter.print(view.getGoldDeck().get(0), view.getResourceDeck().get(0), view.getOpenGold(), view.getOpenResource());
-            System.out.print(ansi().fg(color).a("~> Draw a card: (1/2/3/4/5/6)\n").reset());
-            view.drawCard(sc.nextInt());
+
+            rePrint= () -> {
+                clear();
+                drawCardPrinter.print(view.getGoldDeck().get(0), view.getResourceDeck().get(0), view.getOpenGold(), view.getOpenResource());
+                System.out.print(ansi().fg(color).a("~> Draw a card: (1/2/3/4/5/6)\n").reset());
+
+            };
+            rePrint.run();
+
+
+            synchronized (lock){
+                int cardSource = parseInt();
+                while(!view.checkCanDrawFrom(cardSource)){
+                    System.out.println("This card source is not available, choose a valid one");
+                    cardSource = parseInt();
+                }
+                view.drawCard(cardSource);
+                inputPresent = false;
+                lock.notifyAll();
+            }
         }else{
-            System.out.print(ansi().fg(color).a("~> " + view.getTurnPlayer() + " is drawing a card\n").reset());
-            dispositionPrinter.print(view.getDisposition());
-            ultimatePrint(view);
+            rePrint = () -> {
+                clear();
+                dispositionPrinter.print(view.getDisposition());
+                ultimatePrint(view);
+                System.out.print(ansi().fg(color).a("~> " + view.getTurnPlayer() + " is drawing a card\n").reset());
+
+            };
         }
 
     }
 
     @Override
-    public void displayCalculateObjectives() {
-        //TODO: ERASE SCREEN
+    public void displayEndGame() {
+        clear();
+        List<Map.Entry<String, Integer>> entryList = new ArrayList<>(view.getPoints().entrySet());
+        // Step 2: Sort the list with a comparator that compares the values in descending order
+        entryList.sort((e1, e2) -> e2.getValue().compareTo(e1.getValue()));
 
-    }
+        System.out.print(ansi().fg(221).a(entryList.get(0).getKey().toUpperCase() + "is the winner !!!\n"));
 
-
-
-
-
-    private void printPlayerInformation(){
-        System.out.print(ansi().fg(color).a("POINTS: ").reset());
-        System.out.print(ansi().a(view.getPoints().get(view.getPlayerId())+ "\n"));
-
-        System.out.print(ansi().fg(color).a("ELEMENTS: \n").reset());
-        for(Element e : view.getAvailableElements().keySet()){
-            System.out.print(ansi().a("       " + e.getStringValue() + "->" + view.getAvailableElements().get(e)).reset());
+        for(int i = 0; i < entryList.size(); i ++){
+            System.out.println("-> " + entryList.get(i).getKey() + ": " + entryList.get(i).getValue() + "points");
         }
-
-        System.out.println("\n");
-        System.out.print(ansi().fg(color).a("ARTIFACTS: \n").reset());
-        for(Artifact a : view.getAvailableArtifacts().keySet()){
-            System.out.print(ansi().a("       " + a.getStringValue() + "->" + view.getAvailableArtifacts().get(a)).reset());
-        }
-        System.out.println("\n");
     }
 
 
@@ -195,9 +304,9 @@ public class TUI implements UI{
 
         infoField.add("\u2554\u2550\u2550\u2550"+ ansi().fg(color).bold().a(" RESOURCES ").reset() + "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557");
         infoField.add("\u2551                                                                   \u2551");
-        infoField.add("\u2551   " + ansi().fg(color).a("POINTS:         ").reset() + buildStat(view.getPoints().get(view.getPlayerId())) + "                                               \u2551");
-        infoField.add("\u2551   " + ansi().fg(color).a("ELEMENTS:").reset() + ansi().a("       " + Element.mushrooms.getStringValue() + "->" +buildStat(view.getAvailableElements().get(Element.mushrooms))).reset()  + ansi().a("       " + Element.animals.getStringValue() + "->" + buildStat( view.getAvailableElements().get(Element.animals))).reset() + ansi().a("       " + Element.vegetals.getStringValue() + "->" + buildStat(view.getAvailableElements().get(Element.vegetals))).reset() + ansi().a("       " + Element.insects.getStringValue() + "->" + buildStat(view.getAvailableElements().get(Element.insects))).reset() + "           \u2551");
-        infoField.add("\u2551   " + ansi().fg(color).a("ARTIFACTS:").reset() + ansi().a("      " + Artifact.feather.getStringValue() + "->" + buildStat(view.getAvailableArtifacts().get(Artifact.feather))).reset() + ansi().a("       " + Artifact.paper.getStringValue() + "->" + buildStat(view.getAvailableArtifacts().get(Artifact.paper))).reset() + ansi().a("       " + Artifact.ink.getStringValue() + "->" + buildStat(view.getAvailableArtifacts().get(Artifact.ink))).reset() + "                      \u2551");
+        infoField.add("\u2551   " + ansi().fg(color).a("POINTS:         ").reset() + buildStat(view.getPoints().get(view.getPlayerId())) + "                                              \u2551");
+        infoField.add("\u2551   " + ansi().fg(color).a("ELEMENTS:").reset() + ansi().a("       " + Element.mushrooms.getStringValue() + "->" +buildStat(view.getAvailableElements().get(Element.mushrooms))).reset()  + ansi().a("       " + Element.animals.getStringValue() + "->" + buildStat( view.getAvailableElements().get(Element.animals))).reset() + ansi().a("       " + Element.vegetals.getStringValue() + "->" + buildStat(view.getAvailableElements().get(Element.vegetals))).reset() + ansi().a("       " + Element.insects.getStringValue() + "->" + buildStat(view.getAvailableElements().get(Element.insects))).reset() + "       \u2551");
+        infoField.add("\u2551   " + ansi().fg(color).a("ARTIFACTS:").reset() + ansi().a("      " + Artifact.feather.getStringValue() + "->" + buildStat(view.getAvailableArtifacts().get(Artifact.feather))).reset() + ansi().a("       " + Artifact.paper.getStringValue() + "->" + buildStat(view.getAvailableArtifacts().get(Artifact.paper))).reset() + ansi().a("       " + Artifact.ink.getStringValue() + "->" + buildStat(view.getAvailableArtifacts().get(Artifact.ink))).reset() + "                   \u2551");
         infoField.add("\u255A\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255D");
 
         return infoField;
@@ -220,12 +329,10 @@ public class TUI implements UI{
         }
     }
 
+
     @Override
     public void run(){
-        String input1;
-        input = "";
-        sc = new Scanner(input);
-        flowSc = new Scanner(System.in);
+        sc = new Scanner(System.in);
 
         while (true) {
 
@@ -235,20 +342,102 @@ public class TUI implements UI{
                         lock.wait();
                     } catch (InterruptedException e) {}
                 }
-                System.out.println("command thread");
-                input1 = flowSc.nextLine();
 
-                if (input1.startsWith("--") && !input1.equals("")) {
-                    System.out.println("comando");
+                System.out.println("command thread");
+                input = sc.nextLine();
+
+                if (input.startsWith("--") && !input.equals("")) {
+                    clear();
+                    commandMap.get(input).execute();
+                    //System.out.println("command");
+                    //System.out.println("type q to go back to the game");
+                    while(!sc.nextLine().equals("q")){
+                        System.out.println("type q to go back to the game");
+                    }
+                    rePrint.run();
                 } else {
-                    System.out.println("inputPresent");
-                    input = input1;
                     inputPresent = true;
                     lock.notifyAll();
                 }
             }
         }
     }
+
+
+
+    private int parseInt(){
+        int value = 0;
+        boolean validInput = false;
+
+
+        while(!validInput){
+
+            while (!inputPresent) {
+                try {
+                    lock.wait();
+                } catch (InterruptedException e) {
+                }
+            }
+
+            try{
+                value = Integer.parseInt(input);
+                validInput = true;
+            } catch(NumberFormatException e){
+                System.out.println("input type mismatch, please insert an integer");
+            }
+            inputPresent = false;
+            lock.notifyAll();
+        }
+        return value;
+    }
+
+    private boolean parseBoolean(){
+        boolean value = false;
+        boolean validInput = false;
+
+        while(!validInput){
+            while (!inputPresent) {
+                try {
+                    lock.wait();
+                } catch (InterruptedException e) {
+                }
+            }
+
+            if(input.equals("false") || input.equals("true")){
+                value = Boolean.parseBoolean(input);
+                validInput = true;
+
+            }else{
+                System.out.println("input type mismatch, please insert a boolean(true/false)");
+            }
+            inputPresent = false;
+            lock.notifyAll();
+        }
+        return value;
+
+    }
+
+
+    //we use this function to visualize the disposition of other players
+    @Override
+    public void printDisposition(HashMap<Coordinates, PlayableCard> disp){
+        dispositionPrinter.print(disp);
+    }
+
+
+
+    public void clear(){
+        System.out.print(ansi().eraseScreen().cursor(0, 0));
+
+        // Print a large number of new lines to push previous content out of view
+        for (int i = 0; i < 100; i++) {
+            System.out.println();
+        }
+        // Reset the cursor to the top-left corner again
+        System.out.print(ansi().cursor(0, 0));
+        System.out.flush();
+    }
+
 
 
 }

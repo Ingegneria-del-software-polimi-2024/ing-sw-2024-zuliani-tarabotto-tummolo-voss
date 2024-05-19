@@ -81,7 +81,9 @@ public class RMI_MockClient implements Runnable{
             } else if (msg instanceof ACK_RoomChoice) {
                 System.out.println(((ACK_RoomChoice) msg).getUser()+" correctly joined the game "+
                         ((ACK_RoomChoice) msg).getGame());
+                view.startUI();
             }
+
         }
     }
     public void startConnection() throws RemoteException {

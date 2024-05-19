@@ -150,7 +150,7 @@ public class ModelController implements ServerControllerInterface {
      * @param cardSource
      */
     @Override
-    public void drawCard(int cardSource){
+    public void drawCard(int cardSource) throws RuntimeException{
         try{
             switch (cardSource) {
                 case 1:
@@ -178,6 +178,7 @@ public class ModelController implements ServerControllerInterface {
             System.out.println("choose another source to draw a card from");
             //TODO: handle the exception
             //callDrawFunction(new Scanner(System.in).nextInt());
+            throw new RuntimeException();
         }
 
         gameState.nextPlayer();
@@ -192,10 +193,7 @@ public class ModelController implements ServerControllerInterface {
         }else if(gameState.getTurnPlayer().getNickname() != initialPlayer && !lastRound){
             roundCounter++;
             playNewTurn();
-        }else if(roundCounter == playersNicknames.size() - 1 && !lastRound){
-            gameState.calculateFinalPoints();
-            gameState.setTurnState(TurnState.CALCULATE_OBJECTIVES);
-        }else{
+        } else {
             if(!lastRound){
                 cont = 0;
                 lastRound = true;
@@ -203,7 +201,7 @@ public class ModelController implements ServerControllerInterface {
             playNewTurn();
             if(cont == playersNicknames.size() -1 ){
                 gameState.calculateFinalPoints();
-                gameState.setTurnState(TurnState.CALCULATE_OBJECTIVES);
+                gameState.setTurnState(TurnState.END_GAME);
                 return;
             };
             cont ++;

@@ -156,7 +156,7 @@ public class GameState {
                     if(String.valueOf(c.getId()).equals(cardId)){
                         p.setSecretObjective(c);
                         //NOTIFICATION: about which secretObjective the player chose
-                        modelListener.notifyChanges( c, player);
+                        //modelListener.notifyChanges( c, player);
                         return;
                     }
                 }
@@ -171,7 +171,7 @@ public class GameState {
     public void playingTurn(){
         boolean[] canBePlaced = new boolean[3];
         for(int i = 0; i < 3; i++){
-            if(turnPlayer.getPlacementArea().canBePlaced(turnPlayer.getPlayingHand().get(i))){
+            if(turnPlayer.getPlacementArea().tuiCanBePlaced(turnPlayer.getPlayingHand().get(i))){
                 canBePlaced[i] = true;
             } else { canBePlaced[i] = false;}
         }

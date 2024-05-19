@@ -49,16 +49,23 @@ public class HandPrinter {
 
 
     public void printStarterCard(PlayableCard card){
-        System.out.println("FRONT:");
-        card.setFaceSide(true);
+
+        System.out.println("\u2554\u2550\u2550\u2550"+ ansi().fg(color).bold().a(" STARTER CARD ").reset() + "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557");
+        System.out.println("\u2551                                              \u2551");
+
+        System.out.println("\u2551          FRONT                BACK           \u2551");
+
         for(int i = 0; i < 6; i++){
-            System.out.println(cb.buildLine(i, card));
+            card.setFaceSide(true);
+            System.out.print("\u2551     " + cb.buildLine(i, card));
+            card.setFaceSide(false);
+            System.out.print("      " + cb.buildLine(i, card)  + "     \u2551\n");
         }
-        System.out.println("BACK");
-        card.setFaceSide(false);
-        for(int i = 0; i < 6; i++){
-            System.out.println(cb.buildLine(i, card));
-        }
+
+
+        System.out.println("\u2551                                              \u2551");
+        System.out.println("\u2551                                              \u2551");
+        System.out.println("\u255A\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255D");
     }
 
 

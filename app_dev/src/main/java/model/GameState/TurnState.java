@@ -74,7 +74,7 @@ public enum TurnState {
     },
 
 
-    CALCULATE_OBJECTIVES{
+    END_GAME{
         //TODO change instanceof type
         public boolean controlMessage(MessageFromClient msg){
             return (msg instanceof SelectStarterCardMessage);
@@ -82,7 +82,7 @@ public enum TurnState {
 
         @Override
         public void display( UI ui){
-            ui.displayCalculateObjectives();
+            ui.displayEndGame();
         }
     };
 
@@ -101,7 +101,7 @@ public enum TurnState {
                 return;
             case CARD_DRAWING:
                 return;
-            case CALCULATE_OBJECTIVES:
+            case END_GAME:
                 return;
         }
         throw new UnsupportedOperationException();
@@ -120,7 +120,8 @@ public enum TurnState {
                 return;
             case CARD_DRAWING:
                 return;
-            case CALCULATE_OBJECTIVES:
+            case
+                    END_GAME:
                 return;
         }
         throw new UnsupportedOperationException();

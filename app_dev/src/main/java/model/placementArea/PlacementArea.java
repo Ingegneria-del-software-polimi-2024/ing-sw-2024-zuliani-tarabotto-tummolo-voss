@@ -139,6 +139,23 @@ public class PlacementArea {
     }
 
     /**
+     * performs the same control as the previous function except for the fact that it checks the
+     * placement constraint even if the card is turned
+     * @param card
+     * @return
+     */
+    public boolean tuiCanBePlaced(PlayableCard card) {
+        Map<Element, Integer> constraints = card.getPlacementConstraint();
+        //if there are no constraints the card can be placed
+        if(constraints == null) return true;
+        //if constraints are present...
+        for(Element e : constraints.keySet())
+            if(constraints.get(e) > availableElements.get(e))
+                return false;
+        return true;
+    }
+
+    /**
      * allows the turnPlayer to place the starting card
      * @param starterCard the card to be placed
      */
