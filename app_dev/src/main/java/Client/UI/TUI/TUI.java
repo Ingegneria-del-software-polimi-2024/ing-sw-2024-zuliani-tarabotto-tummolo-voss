@@ -151,7 +151,7 @@ public class TUI implements UI{
         rePrint = () -> {
             clear();
             System.out.print(ansi().fg(color).a("~> These are your objectives\n").reset());
-            objectivesPrinter.getObjField(view.getCommonObjectives().get(0), view.getCommonObjectives().get(1), view.getSecretObjective());
+            objectivesPrinter.printObjectivesBoard(view.getCommonObjectives().get(0), view.getCommonObjectives().get(1), view.getSecretObjective());
         };
         rePrint.run();
 
