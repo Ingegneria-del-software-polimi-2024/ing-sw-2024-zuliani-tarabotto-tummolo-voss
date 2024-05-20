@@ -23,6 +23,7 @@ public class ClientAPI_GO {
      */
     public void sendToServer(MessageFromClient message){
         try {
+            System.out.println("Sending message "+message.getClass());
             handler.sendToServer(message);
         } catch (RemoteException e) {
             //TODO handle correctly the exception, this is where indeed it is most important to handle correctly the exc.

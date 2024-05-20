@@ -1,7 +1,6 @@
 package model.GameState;
 
 import Client.UI.UI;
-import Client.View.ViewAPI;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.ChooseSecreteObjMessage;
 import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.DrawCardMessage;

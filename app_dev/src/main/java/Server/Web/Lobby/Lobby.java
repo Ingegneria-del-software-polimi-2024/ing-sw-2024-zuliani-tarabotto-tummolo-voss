@@ -88,6 +88,12 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
             System.out.println("correctly joined room: "+roomName);
         }
     }
+
+    public void verifyStart(String roomName){
+        Room room = lookFor(roomName);
+        if (room != null)
+            room.verifyStart();
+    }
     /**
      *
      * @return returns the names of the available rooms doesn't return the rooms which are already full

@@ -1,6 +1,7 @@
 package Server.Web.Game;
 
 import Server.Web.Lobby.Lobby;
+import SharedWebInterfaces.Messages.Message;
 import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_RoomChoice;
 import SharedWebInterfaces.Messages.MessagesFromLobby.AvailableGames;
 import SharedWebInterfaces.Messages.MessagesFromLobby.WelcomeMessage;
@@ -31,7 +32,9 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
     public void sendToServer(MessageFromClient message) throws RemoteException {api.sendToServer(message);}
 
     @Override
-    public void notifyChanges(MessageFromServer message) throws RemoteException {snd(message);}
+    public void notifyChanges(MessageFromServer message) throws RemoteException {
+        snd(message);
+    }
 
 
     /**
@@ -94,26 +97,30 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
         }
         try {
 
-            MessageToLobby messageToLobby = null;
+            Message messageToLobby = null;
             do {
-                messageToLobby = (MessageToLobby) in.readObject();
-                deliverToLobby(messageToLobby);
-            }while (! (messageToLobby instanceof JoinGameMessage));
+                messageToLobby = (Message) in.readObject();
+                if(messageToLobby instanceof MessageToLobby)
+                    deliverToLobby((MessageToLobby)messageToLobby);
+                else if(messageToLobby instanceof MessageFromClient)
+                    sendToServer((MessageFromClient)messageToLobby);
+            }while( !(messageToLobby instanceof JoinGameMessage));
         }catch (IOException | ClassNotFoundException e){
             throw new RuntimeException();
         }
-        System.out.println("Started gameloop");
-        //TODO insert the listening loop for game messages
-        MessageFromClient msg = null;
-        try {
-            do{
-                msg = (MessageFromClient) in.readObject();
-                sendToServer(msg);
-                System.out.println("NewMessage...\n");
-            }while (!(msg instanceof EndGameMessage));
-        } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+
+
+        //TODO SISTEMA STA MERDA
+
+//        try {
+//            MessageFromClient m = null;
+//            do{
+//                m = (MessageFromClient) in.readObject();
+//                sendToServer(m);
+//            }while (true);
+//        } catch (IOException | ClassNotFoundException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
     /**

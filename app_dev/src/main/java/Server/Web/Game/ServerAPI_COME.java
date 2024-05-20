@@ -18,6 +18,8 @@ public class ServerAPI_COME {
      * @param message is the message coming from the client
      */
      public void sendToServer(MessageFromClient message){
+         //debug
+         System.out.println("Received "+message.getClass());
         toDoQueue.enqueueMessage(message);
      }
     

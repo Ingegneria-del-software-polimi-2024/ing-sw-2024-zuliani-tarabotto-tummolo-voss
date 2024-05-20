@@ -22,6 +22,7 @@ public class JoinGameMessage implements MessageToLobby{
             throw new RuntimeException(e);
             //TODO verify this is handled correctly
         }
+        lobby.verifyStart(game);
     }
 
     @Override

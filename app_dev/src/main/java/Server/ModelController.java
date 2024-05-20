@@ -52,8 +52,8 @@ public class ModelController implements ServerControllerInterface {
     public void initializeGameState(){
 
         gameState = new GameState(playersNicknames, gameId, new ModelListener(send));
-        gameState.setTurnState(TurnState.GAME_INITIALIZATION);
         initialPlayer = gameState.getTurnPlayer().getNickname();
+        gameState.setTurnState(TurnState.GAME_INITIALIZATION);
     }
 
 
