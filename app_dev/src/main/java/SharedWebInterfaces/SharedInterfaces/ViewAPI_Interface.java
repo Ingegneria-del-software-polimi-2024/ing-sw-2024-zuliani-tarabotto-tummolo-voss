@@ -44,4 +44,6 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
 
     void setMyTurn(boolean bool);
     boolean getMyTurn();
+
+    void heartbeatFromServer();
 }

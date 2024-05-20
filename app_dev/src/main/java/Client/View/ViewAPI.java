@@ -13,6 +13,7 @@ import model.placementArea.Coordinates;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * ViewAPI Class contains:
@@ -48,6 +49,8 @@ public class ViewAPI implements ViewAPI_Interface {
     private UI ui;
     private ClientAPI_GO clientAPIGo;
 
+    private ConcurrentHashMap<String, Long> lastSeen;
+
     public ViewAPI(UI ui, ClientAPI_GO clientAPIGo) {
         for(Element el : Element.values()) {
             availableElements.put(el, 0);
@@ -59,12 +62,17 @@ public class ViewAPI implements ViewAPI_Interface {
         this.clientAPIGo = clientAPIGo;
     }
 
+    //METHODS TO MANAGE THE HEARTBEAT
+    public void HeartbeatToServer(){
+        clientAPIGo.sendToServer( new HeartbeatMessage(playerId));
+    }
+    @Override
+    public void heartbeatFromServer() {
+        lastSeen.put("server", System.currentTimeMillis());
+    }
     /////////// from CLIENT to SERVER  ACTIONS ////////////////////////////////////////////////////////////////////////////////////
     //all this methods create a new MessageFromClient object containing an execute() method with the call to a specific method of ModelController
 
-    public void HeartbeatToServer(){
-            clientAPIGo.sendToServer( new HeartbeatMessage(playerId));
-    }
 
     public void playStarterCard(){
         clientAPIGo.sendToServer( new PlayStarterCardMessage( starterCard.getFaceSide(), playerId));
@@ -244,6 +252,8 @@ public class ViewAPI implements ViewAPI_Interface {
     public boolean getMyTurn() {
         return myTurn;
     }
+
+
 
     ////////////////////////////////// GETTER METHODS //////////////////////////////////////////////////////////////////////////////
 

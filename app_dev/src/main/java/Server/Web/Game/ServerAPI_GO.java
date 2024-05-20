@@ -32,6 +32,8 @@ public class ServerAPI_GO {
         }
     }
 
+
+
     public void setHandler(String name, ClientHandlerInterface handler){
         players.put(name, handler);
     }

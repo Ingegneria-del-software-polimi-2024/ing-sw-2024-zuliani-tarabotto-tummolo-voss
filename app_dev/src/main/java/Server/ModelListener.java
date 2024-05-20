@@ -29,6 +29,19 @@ public class ModelListener {
     }
 
     //////////////////////// GAME SETUP NOTIFICATIONS ///////////////////////////////////////////////////
+    /**
+     * notification for heartbeatFromServer
+     *
+
+     */
+    public void notifyChanges() {
+
+        try{
+            serverAPI.broadcastNotifyChanges( new HeartbeatFromServer());
+        }catch (MsgNotDeliveredException msg){
+            throw new RuntimeException(msg);
+        }
+    }
 
     /**
      * notification about current state of GameState
