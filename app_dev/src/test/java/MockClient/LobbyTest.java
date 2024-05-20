@@ -15,7 +15,7 @@ class LobbyTest {
         try {
             lobby.start();
         } catch (MsgNotDeliveredException e) {
-            throw new RuntimeException("A message couldn't be delivered", e);
+            throw new RuntimeException("A message couldn't be delivered: "+e.getCause().getClass(), e);
         } catch (StartConnectionFailedException e) {
             throw new RuntimeException("Can't start an RMI connection", e);
         }

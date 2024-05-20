@@ -71,7 +71,7 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
         do{
             incomingMessage = (MessageFromServer) in.readObject();
             notifyChanges(incomingMessage);
-        }while(incomingMessage instanceof InterruptConnectionMessage);
+        }while(!(incomingMessage instanceof InterruptConnectionMessage));
     }
     public SOCKET_ServerHandler(String add, int port, ClientAPI_COME come) throws StartConnectionFailedException {
         api = come;
@@ -80,8 +80,7 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
             socket = new Socket(add, port);
             out =  new ObjectOutputStream(socket.getOutputStream());
             in = new ObjectInputStream(socket.getInputStream());
-            //debug
-            System.out.println("Opened socket");
+
         } catch (IOException e) {
             throw new StartConnectionFailedException();
         }

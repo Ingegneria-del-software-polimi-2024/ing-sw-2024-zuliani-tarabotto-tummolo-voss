@@ -104,7 +104,7 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
                     deliverToLobby((MessageToLobby)messageToLobby);
                 else if(messageToLobby instanceof MessageFromClient)
                     sendToServer((MessageFromClient)messageToLobby);
-            }while( !(messageToLobby instanceof JoinGameMessage));
+            }while(true);
         }catch (IOException | ClassNotFoundException e){
             throw new RuntimeException();
         }

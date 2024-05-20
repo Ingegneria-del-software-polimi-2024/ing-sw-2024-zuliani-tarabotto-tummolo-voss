@@ -26,7 +26,7 @@ public class ServerAPI_GO {
     public void broadcastNotifyChanges(MessageFromServer message) throws MsgNotDeliveredException {
         try {
             for(String p : players.keySet()){
-                System.out.println("broadcasting "+message.getClass());
+                System.out.println("broadcasting "+message.getClass()+ "to "+p);
                 players.get(p).notifyChanges(message);
             }
         } catch (RemoteException e) {

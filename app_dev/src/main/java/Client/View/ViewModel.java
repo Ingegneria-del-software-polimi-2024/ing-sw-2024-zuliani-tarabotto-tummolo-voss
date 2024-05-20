@@ -115,11 +115,7 @@ public class ViewModel {
         clientAPIGo.sendToServer( new DrawCardMessage(cardSource));
     }
 
-    public void readyToPlay(){
-        clientAPIGo.sendToServer( new ReadyToPlayMessage());
-        //debug
-        System.out.println("Sent ReadyToPlay");
-    }
+    public void readyToPlay(){clientAPIGo.sendToServer( new ReadyToPlayMessage());}
 
 
 

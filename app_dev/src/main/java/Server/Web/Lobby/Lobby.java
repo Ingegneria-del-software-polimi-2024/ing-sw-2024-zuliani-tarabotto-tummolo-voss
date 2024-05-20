@@ -53,7 +53,7 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
                         throw (MsgNotDeliveredException)e.getCause();
                     if(e.getCause() instanceof Remote)
                         throw new StartConnectionFailedException();
-                    throw new RuntimeException("Execution couldn't happen due to an unknown error", e);
+                    throw new RuntimeException("Execution couldn't happen due to an unknown error "+e.getCause().getClass(), e);
                 }
             }
         }
@@ -80,12 +80,10 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
         Room room = lookFor(roomName);
         if (room == null){
             createRoom(roomName, playerName, expectedPlayers);
-            //for debug purpose only
-            System.out.println("correctly created room: "+roomName);
+
         }else{
             room.joinRoom(playerName, players.get(playerName));
-            //for debug purpose only
-            System.out.println("correctly joined room: "+roomName);
+
         }
     }
 

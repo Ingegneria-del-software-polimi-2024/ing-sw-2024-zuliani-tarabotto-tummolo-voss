@@ -69,15 +69,9 @@ public class ViewAPI implements ViewAPI_Interface {
             if (in.equalsIgnoreCase("RMI")) {
                 serverHandler = new RMI_ServerHandler(host, port, clientAPICome, localPort);
             } else {
-                //debug
-                System.out.println("instantiating handler");
                 serverHandler = new SOCKET_ServerHandler(host, port, clientAPICome);
-                //debug
-                System.out.println("starting thread");
                 Thread listeningThread = new Thread((SOCKET_ServerHandler)serverHandler);
                 listeningThread.start();
-                //debug
-                System.out.println("started listening for messages");
             }
             ClientAPI_GO clientAPIGo = new ClientAPI_GO(serverHandler);
             this.setClientAPIGo(clientAPIGo);

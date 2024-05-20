@@ -12,8 +12,7 @@ public class JoinGameMessage implements MessageToLobby{
     @Override
     public void execute(Lobby lobby) {
         lobby.enterRoom(user, game, nPlayers);
-        //For debug purpose only
-        System.out.println(user+" has entered the room "+game);
+
 
         //sending ACK
         try {

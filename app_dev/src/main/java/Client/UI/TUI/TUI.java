@@ -74,8 +74,7 @@ public class TUI implements UI {
             if (!validPort(localPort))
                 System.out.print(ansi().fg(color).a("~> Insert a valid port: \n").reset());
         }while(!validPort(localPort));
-        //debug
-        System.out.println("Starting connection");
+
         view.startConnection(connectionType, host, port, localPort);
     }
 

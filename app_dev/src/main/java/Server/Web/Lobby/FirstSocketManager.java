@@ -36,8 +36,7 @@ public class FirstSocketManager implements Runnable {
      * client is created
      */
     public void run() {
-        //for debug purpose only
-        System.out.println("Started listening for connections");
+
         ServerSocket serverSocket = null;
         try {
             serverSocket = new ServerSocket(port);
