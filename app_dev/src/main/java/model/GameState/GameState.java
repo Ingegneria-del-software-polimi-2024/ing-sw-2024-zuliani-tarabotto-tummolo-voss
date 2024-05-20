@@ -171,9 +171,7 @@ public class GameState {
     public void playingTurn(){
         boolean[] canBePlaced = new boolean[3];
         for(int i = 0; i < 3; i++){
-            if(turnPlayer.getPlacementArea().tuiCanBePlaced(turnPlayer.getPlayingHand().get(i))){
-                canBePlaced[i] = true;
-            } else { canBePlaced[i] = false;}
+            canBePlaced[i] = turnPlayer.getPlacementArea().tuiCanBePlaced(turnPlayer.getPlayingHand().get(i));
         }
         //NOTIFICATION: about which cards the player can place and where on the placementArea
         modelListener.notifyChanges(turnPlayer.getNickname(), turnPlayer.getPlacementArea().getAvailablePlaces(), canBePlaced);

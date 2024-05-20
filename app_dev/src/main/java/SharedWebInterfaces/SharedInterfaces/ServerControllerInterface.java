@@ -15,5 +15,6 @@ public interface ServerControllerInterface extends ControllerInterface {
 
     public void setPlayerReady();
 
+    public void endGame();
 
 }

@@ -52,7 +52,7 @@ public class ViewAPI implements ViewAPI_Interface {
 //        viewModel.chooseSecretObjective(chosenObjective);
 //    }
 
-    public void playCard(PlayableCard c, int x, int y) {viewModel.playCard(c,x,y);}
+    public void playCard(PlayableCard c, boolean faceSide, int x, int y) {viewModel.playCard(c,faceSide, x,y);}
 
     public void drawCard(int cardSource){viewModel.drawCard(cardSource);}
 
@@ -128,8 +128,12 @@ public class ViewAPI implements ViewAPI_Interface {
     }
 
     @Override
-    public void endGame(HashMap<String, Integer> finalPoints) {
-        viewModel.endGame(finalPoints);
+    public void setFinalPoints(HashMap<String, Integer> finalPoints) {
+        viewModel.setFinalPoints(finalPoints);
+    }
+
+    public void endGame(){
+        viewModel.endGame();
     }
 
     @Override

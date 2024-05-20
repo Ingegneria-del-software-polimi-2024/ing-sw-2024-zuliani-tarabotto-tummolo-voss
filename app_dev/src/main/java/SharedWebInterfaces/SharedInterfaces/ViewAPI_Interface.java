@@ -39,7 +39,7 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
     void updateElements(HashMap<Element, Integer> elements);
     void updateCardSource(List<PlayableCard> deck, int cardSource);
     void updateOpenCards(List<PlayableCard> decK, int card);
-    void endGame( HashMap<String, Integer> finalPoints);
+    void setFinalPoints( HashMap<String, Integer> finalPoints);
     void setPawnColor(String pawnColor);
     void setAvailablePlaces(List<Coordinates> availablePlaces);
     void setCanBePlaced(boolean[] canBePlaced);

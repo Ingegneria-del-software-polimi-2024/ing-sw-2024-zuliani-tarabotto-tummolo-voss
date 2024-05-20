@@ -91,8 +91,8 @@ public class ViewModel {
         clientAPIGo.sendToServer(new ChooseSecreteObjMessage(chosenObjective, playerId));
     }
 
-    public void playCard(PlayableCard c, int x, int y) {
-        clientAPIGo.sendToServer( new PlayCardMessage(c.getId(), x, y, c.getFaceSide()));
+    public void playCard(PlayableCard c, boolean faceSide, int x, int y) {
+        clientAPIGo.sendToServer( new PlayCardMessage(c.getId(), x, y, faceSide));
     }
 
     public void drawCard(int cardSource){
@@ -198,10 +198,15 @@ public class ViewModel {
         decks.put(cardSource, decK);
         decks.get(cardSource-1).remove(0);
     }
-    public void endGame(HashMap<String, Integer> finalPoints) {
+    public void setFinalPoints(HashMap<String, Integer> finalPoints) {
         for(String player : points.keySet()){
             points.put(player, finalPoints.get(player));
         }
+    }
+
+    //we use this function to end the game whenever we want
+    public void endGame(){
+        clientAPIGo.sendToServer(new EndGameMessage());
     }
 
     public void setPawnColor(String pawnColor) {

@@ -1,20 +1,18 @@
 package Client.UI.TUI;
 
+import Client.UI.TUI.Commands.Command;
 import Client.UI.TUI.Commands.DispositionCommand;
+import Client.UI.TUI.Commands.EndGameCommand;
 import Client.UI.TUI.Commands.HelpCommand;
 import Client.UI.UI;
-import Client.UI.exceptions.InvalidInputException;
 import Client.View.ViewAPI;
 import model.cards.PlayableCards.PlayableCard;
 import model.enums.Artifact;
 import model.enums.Element;
-
-import java.util.*;
-
-import static org.fusesource.jansi.Ansi.ansi;
-import Client.UI.TUI.Commands.Command;
 import model.placementArea.Coordinates;
-import org.fusesource.jansi.Ansi;
+import java.util.*;
+import static org.fusesource.jansi.Ansi.ansi;
+
 
 public class TUI implements UI{
 
@@ -32,7 +30,6 @@ public class TUI implements UI{
     private final Object lock;
     private final HashMap<String, Command> commandMap;
     private Runnable rePrint;
-    private PlayableCard c = null;
     boolean enterPressed = false;
 
     public TUI(ViewAPI view){
@@ -49,6 +46,7 @@ public class TUI implements UI{
         this.commandMap = new HashMap<>();
         commandMap.put("--help", new HelpCommand());
         commandMap.put("--disp", new DispositionCommand(view));
+        commandMap.put("--end", new EndGameCommand(view));
 
     }
 
@@ -141,7 +139,7 @@ public class TUI implements UI{
         synchronized (lock){
             Integer secretObj = parseInt();
             while(!secretObj.equals(0)  && !secretObj.equals(1)){
-                System.out.println("please insert 0/1");
+                System.out.println("~> Please insert 0/1\n");
                 secretObj = parseInt();
             }
             view.setSecretObjective(view.getChooseSecretObjectives().get(secretObj));
@@ -165,6 +163,7 @@ public class TUI implements UI{
         int index;
         int x = 0;
         int y = 0;
+        boolean faceSide;
         //if it's myturn then i need to play a card, else i just wait
         if(view.getMyTurn()) {
 
@@ -173,17 +172,16 @@ public class TUI implements UI{
                 clear();
                 dispositionPrinter.print(view.getDisposition(), view.getAvailablePlaces());
                 ultimatePrint(view);
-                System.out.print(ansi().fg(color).a("~> Choose a card to place from your hand (1/2/3): ").reset());
+                System.out.print(ansi().fg(color).a("~> Choose a card to place from your hand (1/2/3): \n").reset());
             };
             rePrint.run();
 
             synchronized (lock){
                 index = parseInt();
                 while(index != 1 && index != 2 && index != 3 ){
-                    System.out.println("please insert 1/2/3");
+                    System.out.println("~> Please insert 1/2/3");
                     index = parseInt();
                 }
-                c = view.getHand().get(index - 1);
                 inputPresent = false;
                 lock.notifyAll();
             }
@@ -198,12 +196,11 @@ public class TUI implements UI{
             rePrint.run();
 
             synchronized (lock){
-                boolean faceSide = parseBoolean();
-                if(faceSide == true && !view.getCanBePlaced()[index - 1]){
-                    System.out.println("Sorry, card " + index + "can't be placed face up due to its placement constraint");
+                faceSide = parseBoolean();
+                if(faceSide && !view.getCanBePlaced()[index - 1]){
+                    System.out.println("~> Sorry, card " + index + "can't be placed face up due to its placement constraint");
                     faceSide = false;
                 }
-                c.setFaceSide(faceSide);
                 inputPresent = false;
                 lock.notifyAll();
             }
@@ -228,12 +225,13 @@ public class TUI implements UI{
                 synchronized (lock){
                     y = parseInt();
                     //view.playCard(c, x, y);
+                    if(!view.checkAvailable(x, y)) System.out.println("~> These coordinates are not available, please choose some valid ones");
+                    else view.playCard(view.getHand().get(index - 1), faceSide, x, y);
+                    //System.out.println(view.getHand().get(index - 1).getFaceSide());
                     inputPresent = false;
                     lock.notifyAll();
                 }
-                if(!view.checkAvailable(x, y)) System.out.println("These coordinates are not available, please choose some valid ones");
             }
-            view.playCard(c, x, y);
 
         }else{
             rePrint = () -> {
@@ -256,7 +254,6 @@ public class TUI implements UI{
                 clear();
                 drawCardPrinter.print(view.getGoldDeck().get(0), view.getResourceDeck().get(0), view.getOpenGold(), view.getOpenResource());
                 System.out.print(ansi().fg(color).a("~> Draw a card: (1/2/3/4/5/6)\n").reset());
-
             };
             rePrint.run();
 
@@ -264,7 +261,7 @@ public class TUI implements UI{
             synchronized (lock){
                 int cardSource = parseInt();
                 while(!view.checkCanDrawFrom(cardSource)){
-                    System.out.println("This card source is not available, choose a valid one");
+                    System.out.println("~> This card source is not available, choose a valid one\n");
                     cardSource = parseInt();
                 }
                 view.drawCard(cardSource);
@@ -285,15 +282,25 @@ public class TUI implements UI{
 
     @Override
     public void displayEndGame() {
-        clear();
+        //clear();
         List<Map.Entry<String, Integer>> entryList = new ArrayList<>(view.getPoints().entrySet());
         // Step 2: Sort the list with a comparator that compares the values in descending order
         entryList.sort((e1, e2) -> e2.getValue().compareTo(e1.getValue()));
 
-        System.out.print(ansi().fg(221).a(entryList.get(0).getKey().toUpperCase() + "is the winner !!!\n"));
+        System.out.println(ansi().fg(226).a(
+                " ███████╗██╗  ██╗███████╗    ███████╗███╗   ██╗██████╗\n" +
+                "╚══██╔══╝██║  ██║██╔════╝    ██╔════╝████╗  ██║██╔══██╗\n" +
+                "   ██║   ███████║█████╗      █████╗  ██╔██╗ ██║██║  ██║\n" +
+                "   ██║   ██╔══██║██╔══╝      ██╔══╝  ██║╚██╗██║██║  ██║\n" +
+                "   ██║   ██║  ██║███████╗    ███████╗██║ ╚████║██████╔╝\n" +
+                "   ╚═╝   ╚═╝  ╚═╝╚══════╝    ╚══════╝╚═╝  ╚═══╝╚═════╝\n"  +
+                "                                                      ").reset());
 
-        for(int i = 0; i < entryList.size(); i ++){
-            System.out.println("-> " + entryList.get(i).getKey() + ": " + entryList.get(i).getValue() + "points");
+
+        System.out.print(ansi().fg(226).a("~> " + entryList.get(0).getKey().toUpperCase() + " is the winner !!!\n").reset());
+
+        for (Map.Entry<String, Integer> stringIntegerEntry : entryList) {
+            System.out.println("-> " + stringIntegerEntry.getKey() + ": " + stringIntegerEntry.getValue() + " points");
         }
     }
 
@@ -343,14 +350,14 @@ public class TUI implements UI{
                     } catch (InterruptedException e) {}
                 }
 
-                System.out.println("command thread");
+                //System.out.println("command thread");
                 input = sc.nextLine();
 
                 if (input.startsWith("--") && !input.equals("")) {
                     clear();
                     commandMap.get(input).execute();
                     //System.out.println("command");
-                    //System.out.println("type q to go back to the game");
+                    System.out.println("type q to go back to the game");
                     while(!sc.nextLine().equals("q")){
                         System.out.println("type q to go back to the game");
                     }
@@ -383,7 +390,7 @@ public class TUI implements UI{
                 value = Integer.parseInt(input);
                 validInput = true;
             } catch(NumberFormatException e){
-                System.out.println("input type mismatch, please insert an integer");
+                System.out.println("input type mismatch, please insert an integer\n");
             }
             inputPresent = false;
             lock.notifyAll();
@@ -408,7 +415,7 @@ public class TUI implements UI{
                 validInput = true;
 
             }else{
-                System.out.println("input type mismatch, please insert a boolean(true/false)");
+                System.out.println("input type mismatch, please insert a boolean(true/false)\n");
             }
             inputPresent = false;
             lock.notifyAll();
@@ -430,7 +437,7 @@ public class TUI implements UI{
         System.out.print(ansi().eraseScreen().cursor(0, 0));
 
         // Print a large number of new lines to push previous content out of view
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 200; i++) {
             System.out.println();
         }
         // Reset the cursor to the top-left corner again

@@ -219,4 +219,8 @@ public class ModelController implements ServerControllerInterface {
     public boolean checkMessage(MessageFromClient message){return gameState.checkMessage(message);}
 
 
+    public void endGame(){
+        gameState.calculateFinalPoints();
+        gameState.setTurnState(TurnState.END_GAME);
+    }
 }
