@@ -2,10 +2,7 @@ package Client.View;
 
 import Client.UI.UI;
 import Client.Web.ClientAPI_GO;
-import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.ChooseSecreteObjMessage;
-import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.DrawCardMessage;
-import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.PlayCardMessage;
-import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.PlayStarterCardMessage;
+import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.*;
 import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
 import model.GameState.TurnState;
 import model.cards.ObjectiveCard;
@@ -64,6 +61,11 @@ public class ViewAPI implements ViewAPI_Interface {
 
     /////////// from CLIENT to SERVER  ACTIONS ////////////////////////////////////////////////////////////////////////////////////
     //all this methods create a new MessageFromClient object containing an execute() method with the call to a specific method of ModelController
+
+    public void HeartbeatToServer(){
+            clientAPIGo.sendToServer( new HeartbeatMessage(playerId));
+    }
+
     public void playStarterCard(){
         clientAPIGo.sendToServer( new PlayStarterCardMessage( starterCard.getFaceSide(), playerId));
     }

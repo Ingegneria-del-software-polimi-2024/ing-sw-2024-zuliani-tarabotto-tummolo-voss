@@ -13,4 +13,5 @@ public interface ServerControllerInterface extends GeneralAPI_Interface, Control
 
     public void drawCard(int cardSource);
 
+    public void updateHeartBeat(String playerId);
 }

@@ -1,4 +1,5 @@
 package Server;
+import Server.Web.Lobby.Room;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import model.Exceptions.EmptyCardSourceException;
 import SharedWebInterfaces.SharedInterfaces.ServerControllerInterface;
@@ -8,6 +9,7 @@ import model.cards.PlayableCards.PlayableCard;
 import model.placementArea.Coordinates;
 
 import java.util.ArrayList;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 /*
@@ -27,15 +29,16 @@ public class ModelController implements ServerControllerInterface {
     private int roundCounter = 0;
     private String initialPlayer;
     private boolean lastRound = false;
-
+    private Room room;
     /**
      * class constructor
      * @param playersNicknames nicknames of the players
      * @param gameId id of the game
      */
-    public ModelController(ArrayList<String> playersNicknames, String gameId){
+    public ModelController(ArrayList<String> playersNicknames, String gameId, Room room){
         this.playersNicknames = playersNicknames;
         this.gameId = gameId;
+        this.room = room;
     }
 
     /**
@@ -120,7 +123,7 @@ public class ModelController implements ServerControllerInterface {
         gameState.setTurnState(TurnState.CARD_DRAWING);
     }
 
-    
+
     /**
      * we draw a card from the specified card source
      * Also since this is the last performed action in a turn, we check if this is the last turn of the game
@@ -187,9 +190,19 @@ public class ModelController implements ServerControllerInterface {
         }
     }
 
+    @Override
+    public void updateHeartBeat(String playerId) {
+        // Update the last seen timestamp for the player in the room
+        room.updateHeartBeat(playerId);
+    }
+
+
+
     /**
      * we communicate GameState that another turn will be played
      */
+
+
     private void playNewTurn(){
         gameState.setTurnState(TurnState.PLACING_CARD_SELECTION);
         gameState.playingTurn();
