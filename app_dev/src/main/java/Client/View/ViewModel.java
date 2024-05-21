@@ -81,7 +81,7 @@ public class ViewModel {
     public void setClientAPIGo(ClientAPI_GO clientAPI_GO){
         clientAPIGo = clientAPI_GO;
         //For debug purpose only
-        System.out.println("helo");
+//        System.out.println("helo");
     }
 
     /////////////////////////////////////////////////Lobby//////////////////////////////////////////////////////////////

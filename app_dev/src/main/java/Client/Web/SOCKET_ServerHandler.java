@@ -47,7 +47,6 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
     @Override
     public void receiveFromLobby(MessageFromServer msg) {
         api.notifyChanges(msg);
-        System.out.println("new incoming message: "+msg.getClass());
     }
 
     @Override
