@@ -38,6 +38,11 @@ public class ViewAPI implements ViewAPI_Interface {
     }
     //TODO: clientAPI_GO deve essere passato come parametro
 
+    public void startUI(){
+        Thread t = new Thread(ui);
+        t.start();
+    }
+
     public void setClientAPIGo(ClientAPI_GO clientAPI_GO){
         viewModel.setClientAPIGo(clientAPI_GO);
     }
@@ -52,7 +57,7 @@ public class ViewAPI implements ViewAPI_Interface {
 //        viewModel.chooseSecretObjective(chosenObjective);
 //    }
 
-    public void playCard(PlayableCard c, int x, int y) {viewModel.playCard(c,x,y);}
+    public void playCard(PlayableCard c, boolean faceSide, int x, int y) {viewModel.playCard(c,faceSide, x,y);}
 
     public void drawCard(int cardSource){viewModel.drawCard(cardSource);}
 
@@ -178,8 +183,12 @@ public class ViewAPI implements ViewAPI_Interface {
     }
 
     @Override
-    public void endGame(HashMap<String, Integer> finalPoints) {
-        viewModel.endGame(finalPoints);
+    public void setFinalPoints(HashMap<String, Integer> finalPoints) {
+        viewModel.setFinalPoints(finalPoints);
+    }
+
+    public void endGame(){
+        viewModel.endGame();
     }
 
     @Override
@@ -298,4 +307,44 @@ public class ViewAPI implements ViewAPI_Interface {
     }
 
     public ObjectiveCard getSecretObjective(){return viewModel.getSecretObjective();}
+
+    public  HashMap< String, HashMap< Coordinates, PlayableCard> > getDispositions(){
+        return viewModel.getDispositions();
+    }
+
+    public UI getUi(){
+        return ui;
+    }
+
+    public List<String> getPlayers(){
+        return viewModel.getPlayers();
+    }
+
+
+
+    ///////////////////// functions used for input controls ///////////////////////////
+    public boolean checkAvailable(int x, int y){
+        for(Coordinates c : viewModel.getAvailablePlaces()){
+            if(c.equals(new Coordinates(x,y))) return true;
+        }
+        return false;
+    }
+
+    public boolean checkCanDrawFrom(int cardSource) {
+        switch (cardSource) {
+            case 1:
+                return !viewModel.getGoldDeck().isEmpty();
+            case 2:
+                return !viewModel.getOpenGold().isEmpty();
+            case 3:
+                return viewModel.getOpenGold().size() > 1;
+            case 4:
+                return !viewModel.getResourceDeck().isEmpty();
+            case 5:
+                return !viewModel.getOpenResource().isEmpty();
+            case 6:
+                return viewModel.getOpenResource().size() > 1;
+        }
+        return false;
+    }
 }

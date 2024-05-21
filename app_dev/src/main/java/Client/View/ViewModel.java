@@ -3,9 +3,6 @@ package Client.View;
 import Client.UI.UI;
 import Client.Web.ClientAPI_GO;
 import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.*;
-import SharedWebInterfaces.Messages.MessagesToLobby.JoinGameMessage;
-import SharedWebInterfaces.Messages.MessagesToLobby.NewConnectionMessage;
-import SharedWebInterfaces.Messages.MessagesToLobby.RequestAvailableGames;
 import model.GameState.TurnState;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
@@ -18,11 +15,11 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ViewModel {
-    private ArrayList<String> listOfGames;
     //private for the player
     private List<PlayableCard> hand;
     private PlayableCard starterCard;
     private ObjectiveCard secretObjective;
+
 
     //common on table
     private HashMap<Integer,List<PlayableCard>> decks;
@@ -52,6 +49,8 @@ public class ViewModel {
 
     //an array of 3 booleans indicating which of the cards in the player's hand can be placed(due to placementConstraint)
     private boolean[] canBePlaced;
+
+
     //the disposition of all players' are stored here
     private HashMap< String, HashMap< Coordinates, PlayableCard> > dispositions;
     //the points of all players are store here
@@ -80,22 +79,7 @@ public class ViewModel {
     }
     public void setClientAPIGo(ClientAPI_GO clientAPI_GO){
         clientAPIGo = clientAPI_GO;
-        //For debug purpose only
         System.out.println("helo");
-    }
-
-    /////////////////////////////////////////////////Lobby//////////////////////////////////////////////////////////////
-    public void setAvailableGames(ArrayList<String> listOfGames){
-        this.listOfGames = listOfGames;
-    }
-    public void displayAvailableGames(){
-        ui.displayAvailableGames(listOfGames);
-    }
-    public void requestAvailableGames(){
-        clientAPIGo.sendToLobby(new RequestAvailableGames(playerId));
-    }
-    public void joinGame(String game, int players){
-        clientAPIGo.sendToLobby(new JoinGameMessage(playerId, game, players));
     }
     /////////// from CLIENT to SERVER  ACTIONS ////////////////////////////////////////////////////////////////////////////////////
     //all this methods create a new MessageFromClient object containing an execute() method with the call to a specific method of ModelController
@@ -107,15 +91,17 @@ public class ViewModel {
         clientAPIGo.sendToServer(new ChooseSecreteObjMessage(chosenObjective, playerId));
     }
 
-    public void playCard(PlayableCard c, int x, int y) {
-        clientAPIGo.sendToServer( new PlayCardMessage(c.getId(), x, y, c.getFaceSide()));
+    public void playCard(PlayableCard c, boolean faceSide, int x, int y) {
+        clientAPIGo.sendToServer( new PlayCardMessage(c.getId(), x, y, faceSide));
     }
 
     public void drawCard(int cardSource){
         clientAPIGo.sendToServer( new DrawCardMessage(cardSource));
     }
 
-    public void readyToPlay(){clientAPIGo.sendToServer( new ReadyToPlayMessage());}
+    public void readyToPlay(){
+        clientAPIGo.sendToServer( new ReadyToPlayMessage());
+    }
 
 
 
@@ -149,15 +135,12 @@ public class ViewModel {
         }
     }
 
-    public void setGameId(String gameId) {
-        this.gameId = gameId;
-        ui.joinedGame(gameId);
-    }
+    public void setGameId(String gameId) { this.gameId = gameId;}
 
     //the player is given his starterCard, he will then have to place it
     public void setStarterCard(PlayableCard starterCard){
         //placeable is set to false because for starterCard it doesn't matter
-        System.out.println(starterCard.getId());
+        //System.out.println(starterCard.getId());
         this.starterCard = starterCard;
     }
 
@@ -173,7 +156,7 @@ public class ViewModel {
 
     //the player chooses his secretObjective
     public void setSecretObjective(ObjectiveCard secretObjective){
-        //this.secretObjective = secretObjective;
+        this.secretObjective = secretObjective;
         chooseSecretObjective(String.valueOf(secretObjective.getId()));
     }
 
@@ -215,8 +198,15 @@ public class ViewModel {
         decks.put(cardSource, decK);
         decks.get(cardSource-1).remove(0);
     }
-    public void endGame(HashMap<String, Integer> finalPoints) {
+    public void setFinalPoints(HashMap<String, Integer> finalPoints) {
+        for(String player : points.keySet()){
+            points.put(player, finalPoints.get(player));
+        }
+    }
 
+    //we use this function to end the game whenever we want
+    public void endGame(){
+        clientAPIGo.sendToServer(new EndGameMessage());
     }
 
     public void setPawnColor(String pawnColor) {
@@ -250,7 +240,6 @@ public class ViewModel {
 
     public void setPlayerId(String playerId){
         this.playerId = playerId;
-        clientAPIGo.sendToLobby(new NewConnectionMessage(playerId));
     }
 
     public boolean getMyTurn() {
@@ -332,5 +321,14 @@ public class ViewModel {
 
     public ObjectiveCard getSecretObjective(){return secretObjective;}
 
+    public HashMap<String, HashMap<Coordinates, PlayableCard>> getDispositions() {
+        return dispositions;
+    }
+    public List<String> getPlayers(){
+        return players;
+    }
 
+    public HashMap<Integer, List<PlayableCard>> getDecks() {
+        return decks;
+    }
 }

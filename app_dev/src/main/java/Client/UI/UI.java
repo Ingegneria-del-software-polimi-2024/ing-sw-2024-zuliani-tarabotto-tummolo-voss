@@ -1,10 +1,13 @@
 package Client.UI;
 
 import Client.View.ViewAPI;
+import model.cards.PlayableCards.PlayableCard;
+import model.placementArea.Coordinates;
+import model.placementArea.PlacementArea;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
-public interface UI {
+public interface UI extends Runnable{
     //open cards and other other players' pawn and nicknames
     void displayInitialization();
 
@@ -22,10 +25,9 @@ public interface UI {
     void displayCardDrawing();
 
     //whatever -> probably the end
-    void displayCalculateObjectives();
-    void chooseConnection();
-    void askNickname();
-    void displayAvailableGames(ArrayList<String> listOfGames);
-    void joinedGame(String gameID);
+    void displayEndGame();
+
+    void printDisposition(HashMap<Coordinates, PlayableCard> disposition);
+
 
 }

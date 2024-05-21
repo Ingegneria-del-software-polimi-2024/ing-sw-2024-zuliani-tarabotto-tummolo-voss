@@ -36,7 +36,7 @@ public class RMI_MockClient implements Runnable{
             MessageFromServer msg = todo.poll();
             if(msg instanceof WelcomeMessage){
 
-                System.out.println(msg.toString());
+                //System.out.println(msg.toString());
                 //view.displayLogin();
                 System.out.println("inserire username");
                 userName = scIn.next();
@@ -60,9 +60,9 @@ public class RMI_MockClient implements Runnable{
 
                 String game;
 
-                System.out.println("Inserire il gioco in cui entrare o un nome non presente per crearne uno, inserire -r per refreshare: ");
+                System.out.println("Inserire il gioco in cui entrare o un nome non presente per crearne uno, inserire --r per refreshare: ");
                 game = scIn.next();
-                if(game.equals("r"))
+                if(game.equals("--r"))
                     try {
                         handler.send(new RequestAvailableGames(userName));
                     }catch (RemoteException e) {
@@ -81,7 +81,9 @@ public class RMI_MockClient implements Runnable{
             } else if (msg instanceof ACK_RoomChoice) {
                 System.out.println(((ACK_RoomChoice) msg).getUser()+" correctly joined the game "+
                         ((ACK_RoomChoice) msg).getGame());
+                view.startUI();
             }
+
         }
     }
     public void startConnection() throws RemoteException {

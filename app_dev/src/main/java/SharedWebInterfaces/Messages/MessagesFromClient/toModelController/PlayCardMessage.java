@@ -7,10 +7,10 @@ import SharedWebInterfaces.SharedInterfaces.ServerControllerInterface;
 
 public class PlayCardMessage implements MessageFromViewToModelController {
 
-    private int card;
-    private int x;
-    private int y;
-    private boolean faceSide;
+    private final int card;
+    private final int x;
+    private final int y;
+    private final boolean faceSide;
 
     public PlayCardMessage(int card, int x, int y, boolean faceSide) {
         this.card = card;
