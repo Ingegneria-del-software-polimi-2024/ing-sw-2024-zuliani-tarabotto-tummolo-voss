@@ -50,6 +50,7 @@ public class TUI implements UI{
         commandMap.put("--disp", new DispositionCommand(view));
         commandMap.put("--end", new EndGameCommand(view));
 
+        sc = new Scanner(System.in);
     }
 ///////////////////////////////////////<Lobby>//////////////////////////////////////////////////////////////////////////
     public void chooseConnection(){
@@ -436,9 +437,7 @@ public class TUI implements UI{
 
     @Override
     public void run(){
-        sc = new Scanner(System.in);
-
-        while (true) {
+        while(true) {
 
             synchronized (lock) {
                 while (inputPresent) {
@@ -528,6 +527,10 @@ public class TUI implements UI{
         dispositionPrinter.print(disp);
     }
 
+    @Override
+    public void displayCalculateObjectives() {
+        //TODO Implement
+    }
 
 
     public void clear(){

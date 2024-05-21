@@ -25,7 +25,7 @@ class ControllerTest {
     private GameState gameState;
     private ArrayList<String> nickNames;
     private CliView view;
-    private Scanner sc = new Scanner(new File("/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/final"));
+    private Scanner sc = new Scanner(new File("/Users/andre/Documents/GitHub.nosync/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/final"));
     private Player initialPlayer;
 
     ControllerTest() throws FileNotFoundException {

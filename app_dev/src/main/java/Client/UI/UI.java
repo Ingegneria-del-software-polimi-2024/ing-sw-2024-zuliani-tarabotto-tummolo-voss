@@ -1,10 +1,9 @@
 package Client.UI;
 
-import Client.View.ViewAPI;
 import model.cards.PlayableCards.PlayableCard;
 import model.placementArea.Coordinates;
-import model.placementArea.PlacementArea;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public interface UI extends Runnable{
