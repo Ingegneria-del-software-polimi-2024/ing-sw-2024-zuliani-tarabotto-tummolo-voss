@@ -32,8 +32,11 @@ public class ViewAPI implements ViewAPI_Interface {
     private UI ui;
     private ViewModel viewModel;
 
-    public ViewAPI() {
-        this.ui = new TUI(this);
+    public ViewAPI(boolean x) {
+        if (x)
+            this.ui = new TUI(this);
+        else
+            //todo...
         this.viewModel = new ViewModel(ui);
     }
     //TODO: clientAPI_GO deve essere passato come parametro

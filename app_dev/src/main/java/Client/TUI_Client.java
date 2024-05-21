@@ -14,7 +14,7 @@ public class TUI_Client implements Runnable{
     private ViewAPI view;
 
     public TUI_Client() {
-        this.view = new ViewAPI();
+        this.view = new ViewAPI(true);
     }
 
     @Override
