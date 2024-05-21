@@ -11,9 +11,7 @@ import java.rmi.NotBoundException;
 
 public class NewRMI_Connection implements MessageToLobby {
     private ServerHandlerInterface handler;
-//    private String registryName;
-//    private String host;
-//    private int port; //is this actually necessary
+
 
     @Override
     public void execute(Lobby lobby){
@@ -22,20 +20,10 @@ public class NewRMI_Connection implements MessageToLobby {
 
     @Override
     public String getSender() {
-        //TO BE IMPLEMENTED
         return null;
     }
 
-//    @Override
-//    public String getSender() {
-//        return registryName;
-//    }
 
-//    public NewRMI_Connection(String registry, String host, int port){
-//        registryName = registry;
-//        this.host = host;
-//        this.port = port;
-//    }
 
 
     public NewRMI_Connection(ServerHandlerInterface handler) {

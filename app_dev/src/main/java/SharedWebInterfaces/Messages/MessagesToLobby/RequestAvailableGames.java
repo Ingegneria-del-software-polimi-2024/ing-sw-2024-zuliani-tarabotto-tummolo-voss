@@ -4,8 +4,6 @@ import Server.Web.Lobby.Lobby;
 import SharedWebInterfaces.Messages.MessagesFromLobby.AvailableGames;
 import SharedWebInterfaces.WebExceptions.MsgNotDeliveredException;
 
-import java.rmi.RemoteException;
-
 public class RequestAvailableGames implements MessageToLobby{
     private String user;
     @Override
