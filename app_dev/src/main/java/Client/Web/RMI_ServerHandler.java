@@ -59,15 +59,14 @@ public class RMI_ServerHandler implements ServerHandlerInterface {
         serverPort = port;
         this.localPort = localPort;
         try {
-            UnicastRemoteObject.exportObject(this, this.localPort);
-            Registry registry = LocateRegistry.createRegistry(this.localPort);
-            registry.bind(registryName, this);
+            UnicastRemoteObject.exportObject(this, 0);/*, this.localPort);*/
+
 
             Registry registry1 = LocateRegistry.getRegistry(host, port);
             manager = (RMI_ManagerInterface) registry1.lookup("Lobby");
 
             manager.deliverToLobby(new NewRMI_Connection(this));
-        }catch (RemoteException | AlreadyBoundException | NotBoundException e){
+        }catch (RemoteException |/* AlreadyBoundException |*/ NotBoundException e){
             throw new StartConnectionFailedException();
         }
     }

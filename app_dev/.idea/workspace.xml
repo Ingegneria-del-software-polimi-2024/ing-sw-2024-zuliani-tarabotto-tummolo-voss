@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/TUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/TUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/UI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/controller/ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/controller/ControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/Web/RMI_ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/Web/RMI_ServerHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,28 +152,36 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="java in Ing_sw_proj" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="LobbyTest.main" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Ing_sw_proj" />
-      <option name="TEST_OBJECT" value="directory" />
-      <dir value="$PROJECT_DIR$/src/test/java" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="MockClient.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="MockClient" />
+      <option name="MAIN_CLASS_NAME" value="MockClient.LobbyTest" />
+      <option name="METHOD_NAME" value="main" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
       <item itemvalue="Application.RunTUI_Client" />
+      <item itemvalue="JUnit.LobbyTest.main" />
       <item itemvalue="JUnit.ControllerTest" />
       <item itemvalue="JUnit.LobbyTest (1)" />
-      <item itemvalue="JUnit.java in Ing_sw_proj" />
       <item itemvalue="JUnit.LobbyTest" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.RunTUI_Client" />
+        <item itemvalue="JUnit.LobbyTest.main" />
         <item itemvalue="JUnit.LobbyTest" />
         <item itemvalue="JUnit.ControllerTest" />
         <item itemvalue="JUnit.LobbyTest (1)" />
-        <item itemvalue="JUnit.java in Ing_sw_proj" />
       </list>
     </recent_temporary>
   </component>
@@ -248,6 +253,7 @@
       <workItem from="1716283911339" duration="461000" />
       <workItem from="1716284443023" duration="183000" />
       <workItem from="1716291240186" duration="4070000" />
+      <workItem from="1716297407017" duration="1002000" />
     </task>
     <servers />
   </component>

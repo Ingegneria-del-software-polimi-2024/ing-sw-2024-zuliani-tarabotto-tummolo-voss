@@ -61,7 +61,7 @@ public class RMI_MockHandler implements ServerHandlerInterface {
         Thread thread = new Thread(client);
         thread.start(); // This starts the thread
         //client.run();
-        UnicastRemoteObject.exportObject(this, port);
+        UnicastRemoteObject.exportObject(this, 0);
 //        Registry registry = LocateRegistry.createRegistry(port);
 //        registry.bind("ciaoBello", this);
         System.out.println("Client published");
