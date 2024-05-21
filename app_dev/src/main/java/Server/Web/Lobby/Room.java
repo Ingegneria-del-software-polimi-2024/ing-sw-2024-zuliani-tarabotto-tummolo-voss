@@ -30,8 +30,14 @@ public class Room {
         players.add(name);
         send.setHandler(name, handler);
         playersInterfaces.put(name, handler);
+    }
+
+    /**
+     * verifies if a match in the room can start
+     */
+    public void verifyStart(){
         if(expectedPlayers == players.size())
-            startGame(handler);
+            startGame();
     }
 
     public Room(String name, int expectedPlayers){
@@ -50,7 +56,7 @@ public class Room {
     public String getName() {
         return name;
     }
-    private void startGame(ClientHandlerInterface handler){
+    private void startGame(){
         //starts a thread starting the controller execution...
         //game = new GameState(players, "3");
         //game.setTurnState(TurnState.GAME_INITIALIZATION);

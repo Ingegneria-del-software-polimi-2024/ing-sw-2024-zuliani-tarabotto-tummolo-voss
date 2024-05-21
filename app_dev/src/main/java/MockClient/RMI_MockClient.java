@@ -40,13 +40,13 @@ public class RMI_MockClient implements Runnable{
                 //view.displayLogin();
                 System.out.println("inserire username");
                 userName = scIn.next();
-                try {
-                    handler.send(new NewConnectionMessage(userName));
-                } catch (RemoteException e) {
-                    throw new RuntimeException(e);
-                }
+//                try {
+//                    //handler.send(new NewConnectionMessage(userName));
+//                } catch (RemoteException e) {
+//                    throw new RuntimeException(e);
+//                }
                 //we notify the view about the nickName of its player
-                this.view.setPlayerId(userName);
+                //this.view.setPlayerId(userName);
 
 
 //                try {

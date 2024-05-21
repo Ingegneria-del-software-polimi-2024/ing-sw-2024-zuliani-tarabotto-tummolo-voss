@@ -1,18 +1,13 @@
 package Server.Web.Lobby;
 
-import Client.Web.RMI_ServerHandler;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
 import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
 import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
 import SharedWebInterfaces.Messages.MessagesToLobby.MessageToLobby;
-import SharedWebInterfaces.Messages.MessagesToLobby.NewConnectionMessage;
 import SharedWebInterfaces.SharedInterfaces.ServerHandlerInterface;
 import SharedWebInterfaces.WebExceptions.MsgNotDeliveredException;
 import SharedWebInterfaces.WebExceptions.StartConnectionFailedException;
 
-import java.io.IOException;
-import java.rmi.AlreadyBoundException;
-import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -24,7 +19,6 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
     private HashMap<String, ClientHandlerInterface> players;
     private FirstSocketManager socketManager;
     private First_RMI_Manager rmiManager;
-
     private LobbyMessageQueue queue;
 
     public Lobby(int port){
@@ -51,6 +45,7 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
         while(true){
             MessageToLobby msg = queue.getNextMessage();
             if(msg != null){
+                System.out.println("Arrived a new message:"+  msg.getClass());
                 try{
                     msg.execute(this);
                 }catch (RuntimeException e){
@@ -58,7 +53,7 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
                         throw (MsgNotDeliveredException)e.getCause();
                     if(e.getCause() instanceof Remote)
                         throw new StartConnectionFailedException();
-                    throw new RuntimeException("Execution couldn't happen due to an unknown error");
+                    throw new RuntimeException("Execution couldn't happen due to an unknown error "+e.getCause().getClass(), e);
                 }
             }
         }
@@ -71,7 +66,7 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
      */
     public void addConnection(String name, ClientHandlerInterface handlerInterface){
         if (players.containsKey(name))
-            throw new RuntimeException();//TODO is this good? IDK
+            throw new RuntimeException("Name already in use");//TODO is this good? IDK
         players.put(name, handlerInterface);
     }
 
@@ -85,13 +80,17 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
         Room room = lookFor(roomName);
         if (room == null){
             createRoom(roomName, playerName, expectedPlayers);
-            //for debug purpose only
-            System.out.println("correctly created room: "+roomName);
+
         }else{
             room.joinRoom(playerName, players.get(playerName));
-            //for debug purpose only
-            System.out.println("correctly joined room: "+roomName);
+
         }
+    }
+
+    public void verifyStart(String roomName){
+        Room room = lookFor(roomName);
+        if (room != null)
+            room.verifyStart();
     }
     /**
      *

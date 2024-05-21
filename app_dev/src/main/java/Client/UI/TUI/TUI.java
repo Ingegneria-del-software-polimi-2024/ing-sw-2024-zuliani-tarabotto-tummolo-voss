@@ -6,6 +6,8 @@ import Client.UI.TUI.Commands.EndGameCommand;
 import Client.UI.TUI.Commands.HelpCommand;
 import Client.UI.UI;
 import Client.View.ViewAPI;
+import SharedWebInterfaces.Messages.MessagesToLobby.JoinGameMessage;
+import SharedWebInterfaces.Messages.MessagesToLobby.RequestAvailableGames;
 import model.cards.PlayableCards.PlayableCard;
 import model.enums.Artifact;
 import model.enums.Element;
@@ -49,7 +51,102 @@ public class TUI implements UI{
         commandMap.put("--end", new EndGameCommand(view));
 
     }
+///////////////////////////////////////<Lobby>//////////////////////////////////////////////////////////////////////////
+    public void chooseConnection(){
+        //TODO: ERASE SCREEN
+        loginPrinter.print();
+        System.out.print(ansi().fg(color).a("~> Welcome to Codex Naturalis, insert the techonolgy of connection (RMI/Socket): \n").reset());
+        String connectionType;
+        do{
+            connectionType = sc.nextLine();
+            if(!(connectionType.equalsIgnoreCase("RMI") || connectionType.equalsIgnoreCase("SOCKET")))
+                System.out.print(ansi().fg(color).a("~> Insert a correct value \"RMI\" or \"Socket\":\n").reset());
+        }while (!(connectionType.equalsIgnoreCase("RMI") || connectionType.equalsIgnoreCase("SOCKET")));
 
+        String host;
+        System.out.print(ansi().fg(color).a("~> Insert the host ip address: \n").reset());
+        do{
+            host = sc.nextLine();
+            if (!validIP(host))
+                System.out.print(ansi().fg(color).a("~> Insert a valid ip address (xxx.xxx.xxx.xxx): \n").reset());
+        }while(!validIP(host));
+
+        int port;
+        System.out.print(ansi().fg(color).a("~> Insert the host port: \n").reset());
+        do{
+            port = Integer.parseInt(sc.nextLine());
+            if (!validPort(port))
+                System.out.print(ansi().fg(color).a("~> Insert a valid port: \n").reset());
+        }while(!validPort(port));
+
+        int localPort;
+        System.out.print(ansi().fg(color).a("~> Insert the local port: \n").reset());
+        do{
+            localPort = Integer.parseInt(sc.nextLine());
+            if (!validPort(localPort))
+                System.out.print(ansi().fg(color).a("~> Insert a valid port: \n").reset());
+        }while(!validPort(localPort));
+
+        view.startConnection(connectionType, host, port, localPort);
+    }
+
+    private boolean validIP(String ip){
+        //todo control if the ip is valid
+        return true;
+    }
+    private boolean validPort(int port){
+        return(1024<=port && port <=49151);
+    }
+
+    public void askNickname(){
+        System.out.print(ansi().fg(color).a("~> Insert your nickname: \n").reset());
+        String nickname = sc.nextLine();
+        view.setPlayerId(nickname);
+
+    }
+    public void displayAvailableGames(ArrayList<String> listOfGames){
+        String game;
+
+
+        if(listOfGames != null && !listOfGames.isEmpty()){
+            System.out.print(ansi().fg(color).a("~> Available games:\n").reset());
+            for(String g : listOfGames)
+                System.out.print(ansi().fg(color).a("   "+g+"\n").reset());
+            System.out.print(ansi().fg(color).a("~> Insert the name of the game you want to join or a new name if you want to create it, write -r to refresh the available games: \n").reset());
+        }else
+            System.out.print(ansi().fg(color).a("~> There are no available games, please create a new game by typing its name or write -r to refresh the available games: \n").reset());
+
+        game = sc.nextLine();
+        if(game.equals("-r")) {
+            view.requestAvailableGames();
+            //            try {
+//                view.requestAvailableGames();
+//            }catch (RemoteException e) {
+//                throw new RuntimeException(e);
+//            }
+        }else{
+            int nPlayers = 0;
+            if(listOfGames == null || !listOfGames.contains(game)) {
+                System.out.print(ansi().fg(color).a("~> You want to create a new game!\n~> Insert the number of players: ").reset());
+                String players;
+                boolean flag = false;
+                do {
+                    players = sc.nextLine();
+                    try {
+                        nPlayers = Math.abs(Integer.parseInt(players));
+                    } catch (Exception e) {
+                        flag = true;
+                    }
+                } while (flag);
+            }
+            view.joinGame(game, nPlayers);
+        }
+
+    }
+    public void joinedGame(String id){
+        System.out.print(ansi().fg(color).a("~> Correctly joined the game "+id+"\n").reset());
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
     public void displayInitialization() {

@@ -29,5 +29,10 @@ public interface UI extends Runnable{
 
     void printDisposition(HashMap<Coordinates, PlayableCard> disposition);
 
+    void displayCalculateObjectives();
+    void chooseConnection();
+    void askNickname();
+    void displayAvailableGames(ArrayList<String> listOfGames);
+    void joinedGame(String gameID);
 
 }

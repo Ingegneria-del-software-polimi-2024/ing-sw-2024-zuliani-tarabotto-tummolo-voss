@@ -48,4 +48,8 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
 
     public void confirmSecretObjective(ObjectiveCard card);
     public void setTurnPlayer(String turnPlayer);
+    void askNickname();
+    void setAvailableGames(ArrayList<String> listOfGames);
+    void displayAvailableGames();
+    void displayAvailableGames(ArrayList<String> availableGames);
 }

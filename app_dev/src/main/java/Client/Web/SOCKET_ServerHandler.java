@@ -1,14 +1,15 @@
 package Client.Web;
 
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
+import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_RoomChoice;
 import SharedWebInterfaces.Messages.MessagesFromServer.InterruptConnectionMessage;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
+import SharedWebInterfaces.Messages.MessagesToLobby.MessageToLobby;
+import SharedWebInterfaces.Messages.MessagesToLobby.NewConnectionMessage;
 import SharedWebInterfaces.SharedInterfaces.ServerHandlerInterface;
 import SharedWebInterfaces.WebExceptions.StartConnectionFailedException;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.rmi.RemoteException;
 
@@ -48,17 +49,28 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
         api.notifyChanges(msg);
     }
 
+    @Override
+    public void sendToLobby(MessageToLobby msg) throws RemoteException {
+        try {
+            out.writeObject(msg);
+            out.flush();
+            out.reset();
+        } catch (IOException e) {
+            throw new RemoteException();
+        }
+    }
+
     /**
      * a loop that keeps the socket in listening status
      * @throws IOException when an error in the communication occurs
      * @throws ClassNotFoundException when an error in the communication occurs
      */
     private void gameListeningLoop() throws IOException, ClassNotFoundException{
-        MessageFromServer incomingMessage;
+        MessageFromServer incomingMessage = null;
         do{
             incomingMessage = (MessageFromServer) in.readObject();
             notifyChanges(incomingMessage);
-        }while(incomingMessage instanceof InterruptConnectionMessage);
+        }while(!(incomingMessage instanceof InterruptConnectionMessage));
     }
     public SOCKET_ServerHandler(String add, int port, ClientAPI_COME come) throws StartConnectionFailedException {
         api = come;
@@ -83,6 +95,11 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
      */
     public void run() {
         try {
+            MessageFromServer msg = null;
+            do{
+                msg = (MessageFromServer) in.readObject();
+                receiveFromLobby(msg);
+            }while (!(msg instanceof ACK_RoomChoice));
             gameListeningLoop();
             out.close();
             in.close();

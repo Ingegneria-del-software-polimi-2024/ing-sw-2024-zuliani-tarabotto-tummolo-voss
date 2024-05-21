@@ -36,7 +36,8 @@ public class WelcomeMessage implements MessageFromServer {
 
     @Override
     public void execute(ViewAPI_Interface view) {
-
+        view.setAvailableGames(listOfGames);
+        view.askNickname();
     }
 
     public ClientHandlerInterface getServer(){

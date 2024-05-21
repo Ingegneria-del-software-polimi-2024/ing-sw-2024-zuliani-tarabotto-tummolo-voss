@@ -65,13 +65,15 @@ public class ModelListener {
      * @param commonObjective1
      * @param commonObjective2
      */
-    public void notifyChanges(PlayableDeck goldDeck, PlayableDeck  resourceDeck, List<PlayableCard> openGold, List<PlayableCard> openResource,
+    public void notifyChanges(PlayableDeck goldDeck, PlayableDeck  resourceDeck, List<PlayableCard> openGold,
+                              List<PlayableCard> openResource,
                               ArrayList<String> players, String gameId,
                               ObjectiveCard commonObjective1, ObjectiveCard commonObjective2){
 
 
         try{
-            serverAPI.broadcastNotifyChanges( new InitializationMessage( goldDeck.getCards(), resourceDeck.getCards(), openGold, openResource,
+            serverAPI.broadcastNotifyChanges( new InitializationMessage( goldDeck.getCards(), resourceDeck.getCards(),
+                    openGold, openResource,
                      players, gameId,
                     commonObjective1, commonObjective2));
         }catch (MsgNotDeliveredException msg){

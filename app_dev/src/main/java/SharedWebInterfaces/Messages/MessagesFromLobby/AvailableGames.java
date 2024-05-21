@@ -9,7 +9,7 @@ public class AvailableGames implements MessageFromServer {
     private ArrayList<String> availableGames;
     @Override
     public void execute(ViewAPI_Interface view) {
-        //TODO implement!
+        view.displayAvailableGames(availableGames);
     }
 
     public AvailableGames(ArrayList<String> availableGames) {

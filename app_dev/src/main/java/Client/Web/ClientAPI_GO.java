@@ -1,5 +1,6 @@
 package Client.Web;
 
+import SharedWebInterfaces.Messages.MessagesToLobby.MessageToLobby;
 import SharedWebInterfaces.SharedInterfaces.ServerHandlerInterface;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import SharedWebInterfaces.WebExceptions.StartConnectionFailedException;
@@ -28,15 +29,16 @@ public class ClientAPI_GO {
             throw new RuntimeException(e);
         }
     }
+    public void sendToLobby(MessageToLobby message){
+        try {
+            handler.sendToLobby(message);
+        } catch (RemoteException e) {
+            //TODO handle correctly the exception, this is where indeed it is most important to handle correctly the exc.
+            throw new RuntimeException(e);
+        }
+    }
 
-    public void newRMI_Connection(String host, int port, ClientAPI_COME come) throws StartConnectionFailedException {
-        handler = new RMI_ServerHandler(host, port, come);
-    }
-    public void newSocketConnection(String host, int port, ClientAPI_COME come) throws StartConnectionFailedException {
-        handler = new SOCKET_ServerHandler(host, port, come);
-        SOCKET_ServerHandler listener = (SOCKET_ServerHandler) handler;
-        Thread listenForMessages = new Thread(listener);
-        listenForMessages.start();
-    }
+
+
 
 }

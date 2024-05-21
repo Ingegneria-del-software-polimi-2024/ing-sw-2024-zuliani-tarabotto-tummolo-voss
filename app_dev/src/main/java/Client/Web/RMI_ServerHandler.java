@@ -2,6 +2,7 @@ package Client.Web;
 
 import SharedWebInterfaces.Messages.MessagesFromLobby.WelcomeMessage;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
+import SharedWebInterfaces.Messages.MessagesToLobby.MessageToLobby;
 import SharedWebInterfaces.Messages.MessagesToLobby.NewRMI_Connection;
 import SharedWebInterfaces.SharedInterfaces.RMI_ManagerInterface;
 import SharedWebInterfaces.SharedInterfaces.ServerHandlerInterface;
@@ -23,15 +24,15 @@ public class RMI_ServerHandler implements ServerHandlerInterface {
     private RMI_ManagerInterface manager;
 
     private final String registryName = "Client";
-    private final int localPort = 0; //TODO insert the port
-    private final String myHost = ""; //TODO insert the host
+    private int localPort = 12349; //TODO insert the port
+    private final String myHost = "localHost"; //TODO insert the host
 
 
     private final String serverHost;
     private final int serverPort;
 
     public void sendToServer(MessageFromClient message) throws RemoteException{server.sendToServer(message);}
-
+    public void sendToLobby(MessageToLobby message)throws RemoteException{server.deliverToLobby(message);}
 //    @Override
 //    public void addNewPlayer() throws RemoteException{}
 
@@ -52,14 +53,14 @@ public class RMI_ServerHandler implements ServerHandlerInterface {
         api.enqueue(msg);
     }
 
-    public RMI_ServerHandler(String host, int port, ClientAPI_COME come) throws StartConnectionFailedException {
+    public RMI_ServerHandler(String host, int port, ClientAPI_COME come, int localPort) throws StartConnectionFailedException {
         api = come;
         serverHost = host;
         serverPort = port;
-
+        this.localPort = localPort;
         try {
-            UnicastRemoteObject.exportObject(this, localPort);
-            Registry registry = LocateRegistry.createRegistry(localPort);
+            UnicastRemoteObject.exportObject(this, this.localPort);
+            Registry registry = LocateRegistry.createRegistry(this.localPort);
             registry.bind(registryName, this);
 
             Registry registry1 = LocateRegistry.getRegistry(host, port);

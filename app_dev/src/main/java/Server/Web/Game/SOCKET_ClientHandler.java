@@ -1,9 +1,12 @@
 package Server.Web.Game;
 
 import Server.Web.Lobby.Lobby;
+import SharedWebInterfaces.Messages.Message;
+import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_RoomChoice;
 import SharedWebInterfaces.Messages.MessagesFromLobby.AvailableGames;
 import SharedWebInterfaces.Messages.MessagesFromLobby.WelcomeMessage;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
+import SharedWebInterfaces.Messages.MessagesFromServer.EndGameMessage;
 import SharedWebInterfaces.Messages.MessagesToLobby.JoinGameMessage;
 import SharedWebInterfaces.Messages.MessagesToLobby.RequestAvailableGames;
 import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
@@ -29,7 +32,9 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
     public void sendToServer(MessageFromClient message) throws RemoteException {api.sendToServer(message);}
 
     @Override
-    public void notifyChanges(MessageFromServer message) throws RemoteException {snd(message);}
+    public void notifyChanges(MessageFromServer message) throws RemoteException {
+        snd(message);
+    }
 
 
     /**
@@ -66,8 +71,8 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
     public SOCKET_ClientHandler(Socket clientSocket, Lobby lobby) throws IOException {
         this.lobby = lobby;
         this.clientSocket = clientSocket;
-        in = new ObjectInputStream(clientSocket.getInputStream());
         out = new ObjectOutputStream(clientSocket.getOutputStream());
+        in = new ObjectInputStream(clientSocket.getInputStream());
     }
 
     /**
@@ -76,13 +81,15 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
     public void run(){
         try{
             snd(new WelcomeMessage(lobby.getGameNames()));
-            MessageToLobby msg = null;
+            System.out.println("sent welcomeMessage");
+            NewConnectionMessage msg = null;
 
-            do {
-                msg = (MessageToLobby) in.readObject();
-            }while (! (msg instanceof NewConnectionMessage));
-
-            ((NewConnectionMessage) msg).setHandler(this);
+            boolean read = false;
+            while(!read) {
+                msg = (NewConnectionMessage) in.readObject();
+                read = true;
+            }
+            msg.setHandler(this);
             deliverToLobby(msg);
 
         } catch (IOException | ClassNotFoundException e) {
@@ -90,16 +97,30 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
         }
         try {
 
-            MessageToLobby msg = null;
+            Message messageToLobby = null;
             do {
-                msg = (MessageToLobby) in.readObject();
-                deliverToLobby(msg);
-            }while (! (msg instanceof JoinGameMessage));
+                messageToLobby = (Message) in.readObject();
+                if(messageToLobby instanceof MessageToLobby)
+                    deliverToLobby((MessageToLobby)messageToLobby);
+                else if(messageToLobby instanceof MessageFromClient)
+                    sendToServer((MessageFromClient)messageToLobby);
+            }while(true);
         }catch (IOException | ClassNotFoundException e){
             throw new RuntimeException();
         }
 
-        //TODO insert the listening loop for game messages
+
+        //TODO SISTEMA STA MERDA
+
+//        try {
+//            MessageFromClient m = null;
+//            do{
+//                m = (MessageFromClient) in.readObject();
+//                sendToServer(m);
+//            }while (true);
+//        } catch (IOException | ClassNotFoundException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
     /**
