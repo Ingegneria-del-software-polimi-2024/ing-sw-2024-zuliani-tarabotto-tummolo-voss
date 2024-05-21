@@ -71,6 +71,9 @@ public class GameState {
 
     }
 
+    public GameState(ArrayList<String> nicknames, String id) {
+    }
+
 
     //////////////////// GENERAL TURN CONTROL METHODS ///////////////////////////////////////
     /**
