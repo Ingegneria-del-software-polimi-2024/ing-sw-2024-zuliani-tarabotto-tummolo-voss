@@ -28,6 +28,7 @@ public class First_RMI_Manager implements RMI_ManagerInterface {
      */
     private First_RMI_Manager(Lobby lobby, int serverPort) throws RemoteException{
         try {
+            System.setProperty("java.rmi.server.hostname","172.20.10.2");
             this.lobby = lobby;
             this.serverPort = serverPort;
             UnicastRemoteObject.exportObject(this, serverPort);

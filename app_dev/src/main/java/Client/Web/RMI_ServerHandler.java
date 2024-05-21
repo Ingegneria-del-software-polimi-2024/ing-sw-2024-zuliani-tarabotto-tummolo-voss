@@ -59,7 +59,7 @@ public class RMI_ServerHandler implements ServerHandlerInterface {
         serverPort = port;
         this.localPort = localPort;
         try {
-            UnicastRemoteObject.exportObject(this, 0);/*, this.localPort);*/
+            UnicastRemoteObject.exportObject(this,  this.localPort);
 
 
             Registry registry1 = LocateRegistry.getRegistry(host, port);

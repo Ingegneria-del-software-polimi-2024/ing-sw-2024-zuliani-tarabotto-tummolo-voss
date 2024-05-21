@@ -92,14 +92,14 @@ public class RMI_ClientHandler implements ClientHandlerInterface {
      */
     private void snd(MessageFromServer msg) throws RemoteException{
         int count = 0;
-        while (count < MAX_RETRY){
+        while (count < MAX_RETRY+1){
             try{
                 client.receiveFromLobby(msg);
                 return;
-            }catch (RemoteException e) {
-                if (count == MAX_RETRY)
-                    throw new RemoteException();
+            } catch (RemoteException e) {
                 count++;
+                if (count == MAX_RETRY+1)
+                    throw new RemoteException();
             }
         }
     }
