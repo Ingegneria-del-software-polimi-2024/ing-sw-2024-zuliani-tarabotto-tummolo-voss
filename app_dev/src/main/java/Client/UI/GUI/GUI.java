@@ -1,4 +1,4 @@
-package Client.UI.GUI;
+/*package Client.UI.GUI;
 
 import Client.UI.GUI.ConnectionChoicePage;
 import Client.UI.UI;
@@ -17,6 +17,8 @@ public class GUI implements UI {
     private ViewAPI view;
 
     public GUI(ViewAPI view){
+
+        ConnectionChoicePage CCG = new ConnectionChoicePage();
 
         this.view = view;
 
@@ -64,12 +66,34 @@ public class GUI implements UI {
     }
 
     @Override
-    public void chooseConnection(){
+    private void chooseConnection() {
 
+        String connectionType;
+        if (CCG.Socket_JButton.isSelected()) {
+            connectionType = "Socket";
+        } else if (RMI_JButton.isSelected()) {
+            connectionType = "RMI";
+        } else {
+            // Nessun pulsante selezionato, esci dal metodo
+            return;
+        }
 
+        String host = IP_JField.getText().trim();
+        if (!validIP(host)) {
+            // Gestisci l'errore di indirizzo IP non valido, ad esempio mostrando un messaggio di errore all'utente
+            JOptionPane.showMessageDialog(this, "Indirizzo IP non valido.", "Errore", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-        view.startConnection(connectionType, host, port, localPort);
+        int port = 1099; // Porta predefinita per RMI
+        int localPort = 12345; // Porta locale fissa
+
+        // Chiama il metodo per iniziare la connessione con i parametri corretti
+        if (view != null) {
+            view.startConnection(connectionType, host, port, localPort);
+        }
     }
+
 
     private boolean validIP(String ip) {
         if (ip == null || ip.isEmpty()) {
@@ -117,3 +141,4 @@ public class GUI implements UI {
 
     }
 }
+*/
