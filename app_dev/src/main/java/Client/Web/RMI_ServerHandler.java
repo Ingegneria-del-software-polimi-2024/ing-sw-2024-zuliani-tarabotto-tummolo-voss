@@ -22,19 +22,10 @@ public class RMI_ServerHandler implements ServerHandlerInterface {
     private ClientAPI_COME api;
     private ClientHandlerInterface server;
     private RMI_ManagerInterface manager;
-
-    private final String registryName = "Client";
-    private int localPort = 12349; //TODO insert the port
-    private final String myHost = "localHost"; //TODO insert the host
-
-
-    private final String serverHost;
-    private final int serverPort;
+    private String serverHost;
 
     public void sendToServer(MessageFromClient message) throws RemoteException{server.sendToServer(message);}
     public void sendToLobby(MessageToLobby message)throws RemoteException{server.deliverToLobby(message);}
-//    @Override
-//    public void addNewPlayer() throws RemoteException{}
 
     @Override
     public void notifyChanges(MessageFromServer message) throws RemoteException{api.notifyChanges(message);}
@@ -42,31 +33,23 @@ public class RMI_ServerHandler implements ServerHandlerInterface {
     @Override
     public void receiveFromLobby(MessageFromServer msg) throws RemoteException {
         if(msg instanceof WelcomeMessage){
-//            try {
-//                Registry registry1 = LocateRegistry.getRegistry(serverHost, serverPort);
-//                server = (ClientHandlerInterface) registry1.lookup(((WelcomeMessage) msg).getRegistryName());
-//            }catch (RemoteException | NotBoundException e){
-//                throw new RemoteException();
-//            }
             server = ((WelcomeMessage)msg).getServer();
         }
         api.enqueue(msg);
     }
 
-    public RMI_ServerHandler(String host, int port, ClientAPI_COME come, int localPort) throws StartConnectionFailedException {
+    public RMI_ServerHandler(String host, int port, ClientAPI_COME come) throws StartConnectionFailedException {
         api = come;
         serverHost = host;
-        serverPort = port;
-        this.localPort = localPort;
         try {
-            UnicastRemoteObject.exportObject(this,  this.localPort);
+            UnicastRemoteObject.exportObject(this,  0);
 
 
             Registry registry1 = LocateRegistry.getRegistry(host, port);
-            manager = (RMI_ManagerInterface) registry1.lookup("Lobby");
+            manager = (RMI_ManagerInterface) registry1.lookup(WebSettings.serverRegistryName);
 
             manager.deliverToLobby(new NewRMI_Connection(this));
-        }catch (RemoteException |/* AlreadyBoundException |*/ NotBoundException e){
+        }catch (RemoteException | NotBoundException e){
             throw new StartConnectionFailedException();
         }
     }

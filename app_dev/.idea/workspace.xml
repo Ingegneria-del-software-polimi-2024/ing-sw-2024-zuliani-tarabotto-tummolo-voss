@@ -5,9 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromLobby/WelcomeMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromLobby/WelcomeMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesToLobby/NewRMI_Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesToLobby/NewRMI_Connection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesToLobby/RequestAvailableGames.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesToLobby/RequestAvailableGames.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Client/Web/WebSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/TUI_Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/TUI_Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/TUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/TUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/UI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/View/ViewAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/View/ViewAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/Web/RMI_ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/Web/RMI_ServerHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/Web/SOCKET_ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/Web/SOCKET_ServerHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MockClient/serverTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MockClient/serverTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/First_RMI_Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/First_RMI_Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/Lobby.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/Lobby.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/MockClient/LobbyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MockClient/LobbyTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +104,7 @@
       <recent name="model.lobby" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.SecondClient">
+  <component name="RunManager" selected="Application.RunTUI_Client">
     <configuration name="RunTUI_Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Client.RunTUI_Client" />
       <module name="Ing_sw_proj" />
@@ -254,6 +263,8 @@
       <workItem from="1716284443023" duration="183000" />
       <workItem from="1716291240186" duration="4070000" />
       <workItem from="1716297407017" duration="10691000" />
+      <workItem from="1716399679795" duration="26000" />
+      <workItem from="1716456295461" duration="4790000" />
     </task>
     <servers />
   </component>

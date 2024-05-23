@@ -5,7 +5,6 @@ import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_RoomChoice;
 import SharedWebInterfaces.Messages.MessagesFromServer.InterruptConnectionMessage;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
 import SharedWebInterfaces.Messages.MessagesToLobby.MessageToLobby;
-import SharedWebInterfaces.Messages.MessagesToLobby.NewConnectionMessage;
 import SharedWebInterfaces.SharedInterfaces.ServerHandlerInterface;
 import SharedWebInterfaces.WebExceptions.StartConnectionFailedException;
 
@@ -34,8 +33,6 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
             throw new RemoteException();
         }
     }
-
-//    public void addNewPlayer() throws RemoteException {}
 
     /**
      * receives and enqueues the message coming from the server
@@ -85,10 +82,10 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
         }
     }
 
-    //TODO just ALWAYS remember to call this
-    public void attachAPI(ClientAPI_COME api){
-        this.api = api;
-    }
+//    //TODO remember to delete this
+//    public void attachAPI(ClientAPI_COME api){
+//        this.api = api;
+//    }
 
     /**
      * a method run by a single thread that keeps listening to the client handler

@@ -7,6 +7,8 @@ import SharedWebInterfaces.Messages.MessagesToLobby.MessageToLobby;
 import SharedWebInterfaces.SharedInterfaces.ServerHandlerInterface;
 
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -28,14 +30,17 @@ public class First_RMI_Manager implements RMI_ManagerInterface {
      */
     private First_RMI_Manager(Lobby lobby, int serverPort) throws RemoteException{
         try {
-            System.setProperty("java.rmi.server.hostname","172.20.10.2");
+            InetAddress localHost = InetAddress.getLocalHost();
+            String ip = localHost.getHostAddress();
+            System.out.println("Server ip is: "+ip);
+            System.setProperty("java.rmi.server.hostname",ip);
             this.lobby = lobby;
             this.serverPort = serverPort;
             UnicastRemoteObject.exportObject(this, serverPort);
             Registry registry = LocateRegistry.createRegistry(serverPort);
             registry.bind("Lobby", this);
             System.out.println("RMI interface ready to pair");
-        }catch (AlreadyBoundException e){
+        }catch (AlreadyBoundException | UnknownHostException e){
             throw new RemoteException();
         }
     }

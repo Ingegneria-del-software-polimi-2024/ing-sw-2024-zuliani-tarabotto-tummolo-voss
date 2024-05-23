@@ -11,7 +11,7 @@ import java.rmi.AlreadyBoundException;
 class LobbyTest {
     @Test
     public void main() {
-        Lobby lobby = new Lobby(1234);
+        Lobby lobby = new Lobby(1234, 1237);
         try {
             lobby.start();
         } catch (MsgNotDeliveredException e) {

@@ -14,21 +14,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Lobby implements ControllerInterface {//TODO all the methods here must be sinchronized!! :)
-    private int port;
     private ArrayList<Room> rooms;
     private HashMap<String, ClientHandlerInterface> players;
     private FirstSocketManager socketManager;
     private First_RMI_Manager rmiManager;
     private LobbyMessageQueue queue;
 
-    public Lobby(int port){
+    public Lobby(int portSocket, int portRMI){
         try {
             rooms = new ArrayList<Room>();
             players = new HashMap<String, ClientHandlerInterface>();
-            socketManager = FirstSocketManager.getInstance(this, port);
+            socketManager = FirstSocketManager.getInstance(this, portSocket);
             Thread listenForNewConnection = new Thread(socketManager);
             listenForNewConnection.start();
-            rmiManager = First_RMI_Manager.getInstance(this, port + 3); //the ports must be different!!!
+            rmiManager = First_RMI_Manager.getInstance(this, portRMI); //the ports must be different!!!
             queue = new LobbyMessageQueue();
         }catch (RemoteException | RuntimeException e){
             throw new RuntimeException("Can't create lobby, control the connection parameters", e);

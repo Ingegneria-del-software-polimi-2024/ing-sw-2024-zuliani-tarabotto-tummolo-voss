@@ -8,11 +8,15 @@ import Client.UI.UI;
 import Client.View.ViewAPI;
 import SharedWebInterfaces.Messages.MessagesToLobby.JoinGameMessage;
 import SharedWebInterfaces.Messages.MessagesToLobby.RequestAvailableGames;
+import SharedWebInterfaces.WebExceptions.StartConnectionFailedException;
 import model.cards.PlayableCards.PlayableCard;
 import model.enums.Artifact;
 import model.enums.Element;
 import model.placementArea.Coordinates;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static org.fusesource.jansi.Ansi.ansi;
 
 
@@ -53,10 +57,13 @@ public class TUI implements UI{
         sc = new Scanner(System.in);
     }
 ///////////////////////////////////////<Lobby>//////////////////////////////////////////////////////////////////////////
+    public void firstWelcome(){
+        loginPrinter.print();
+        System.out.println("~> Welcome to Codex Naturalis");
+    }
     public void chooseConnection(){
         //TODO: ERASE SCREEN
-        loginPrinter.print();
-        System.out.print(ansi().fg(color).a("~> Welcome to Codex Naturalis, insert the techonolgy of connection (RMI/Socket): \n").reset());
+        System.out.print(ansi().fg(color).a("~> Insert the techonolgy of connection (RMI/Socket): \n").reset());
         String connectionType;
         do{
             connectionType = sc.nextLine();
@@ -72,32 +79,45 @@ public class TUI implements UI{
                 System.out.print(ansi().fg(color).a("~> Insert a valid ip address (xxx.xxx.xxx.xxx): \n").reset());
         }while(!validIP(host));
 
-        int port;
-        System.out.print(ansi().fg(color).a("~> Insert the host port: \n").reset());
-        do{
-            port = Integer.parseInt(sc.nextLine());
-            if (!validPort(port))
-                System.out.print(ansi().fg(color).a("~> Insert a valid port: \n").reset());
-        }while(!validPort(port));
+//        int port;
+//        System.out.print(ansi().fg(color).a("~> Insert the host port: \n").reset());
+//        do{
+//            port = Integer.parseInt(sc.nextLine());
+//            if (!validPort(port))
+//                System.out.print(ansi().fg(color).a("~> Insert a valid port: \n").reset());
+//        }while(!validPort(port));
 
-        int localPort;
-        System.out.print(ansi().fg(color).a("~> Insert the local port: \n").reset());
-        do{
-            localPort = Integer.parseInt(sc.nextLine());
-            if (!validPort(localPort))
-                System.out.print(ansi().fg(color).a("~> Insert a valid port: \n").reset());
-        }while(!validPort(localPort));
+//        int localPort;
+//        System.out.print(ansi().fg(color).a("~> Insert the local port: \n").reset());
+//        do{
+//            localPort = Integer.parseInt(sc.nextLine());
+//            if (!validPort(localPort))
+//                System.out.print(ansi().fg(color).a("~> Insert a valid port: \n").reset());
+//        }while(!validPort(localPort));
 
-        view.startConnection(connectionType, host, port, localPort);
+        try {
+            view.startConnection(connectionType, host);
+        } catch (StartConnectionFailedException e) {
+            System.out.print(ansi().fg(color).a("~> An error during the connection occurred\n   Check your internet connection and retry\n").reset());
+            chooseConnection();
+        }
     }
 
     private boolean validIP(String ip){
-        //todo control if the ip is valid
-        return true;
+        if(ip.equals("localHost"))
+            return true;
+        String desiredFormat = "^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\." +
+                "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\." +
+                "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\." +
+                "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$";
+        Pattern pattern = Pattern.compile(desiredFormat);
+        Matcher matcher = pattern.matcher(ip);
+        return matcher.matches();
     }
-    private boolean validPort(int port){
-        return(1024<=port && port <=49151);
-    }
+
+//    private boolean validPort(int port){
+//        return(1024<=port && port <=49151);
+//    }
 
     public void askNickname(){
         System.out.print(ansi().fg(color).a("~> Insert your nickname: \n").reset());

@@ -2,10 +2,7 @@ package Client.View;
 
 import Client.UI.TUI.TUI;
 import Client.UI.UI;
-import Client.Web.ClientAPI_COME;
-import Client.Web.ClientAPI_GO;
-import Client.Web.RMI_ServerHandler;
-import Client.Web.SOCKET_ServerHandler;
+import Client.Web.*;
 import SharedWebInterfaces.Messages.MessagesToLobby.JoinGameMessage;
 import SharedWebInterfaces.SharedInterfaces.ServerHandlerInterface;
 import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
@@ -65,34 +62,48 @@ public class ViewAPI implements ViewAPI_Interface {
     public void readyToPlay(){viewModel.readyToPlay();}
 
 //////////////////////////////////////////Lobby/////////////////////////////////////////////////////////////////////////
-    public void startConnection(String in, String host, int port, int localPort){
+
+    /**
+     * starts the connection with the server
+     * @param in the string defining the connection technology, either "RMI" or "Socket"
+     * @param host the ip of the server
+     */
+    public void startConnection(String in, String host) throws StartConnectionFailedException {
         ClientAPI_COME clientAPICome = new ClientAPI_COME(this);
         Thread readMessagesLoop = new Thread(clientAPICome);
         readMessagesLoop.start();
-        try {
-            ServerHandlerInterface serverHandler;
-            if (in.equalsIgnoreCase("RMI")) {
-                serverHandler = new RMI_ServerHandler(host, port, clientAPICome, localPort);
-            } else {
-                serverHandler = new SOCKET_ServerHandler(host, port, clientAPICome);
-                Thread listeningThread = new Thread((SOCKET_ServerHandler)serverHandler);
-                listeningThread.start();
-            }
-            ClientAPI_GO clientAPIGo = new ClientAPI_GO(serverHandler);
-            this.setClientAPIGo(clientAPIGo);
-        }catch (StartConnectionFailedException e){
-            System.out.println("An error occurred");
-            e.printStackTrace();
-            throw new RuntimeException("Couldn't instaurate the connection due to a net error");
-        }
+        ClientAPI_GO clientAPIGo = getClientAPIGo(in, host, clientAPICome);
+        this.setClientAPIGo(clientAPIGo);
+    }
 
+    /**
+     *
+     * @param in the string defining the connection technology, either "RMI" or "Socket"
+     * @param host the ip of the server
+     * @param clientAPICome the interface to which messages will be forwarded
+     * @return a new clientAPI_GO object connected with the server
+     * @throws StartConnectionFailedException when the connection couldn't be created
+     */
+    private ClientAPI_GO getClientAPIGo(String in, String host, ClientAPI_COME clientAPICome) throws StartConnectionFailedException {
+        ServerHandlerInterface serverHandler;
+        if (in.equalsIgnoreCase("RMI")) {
+            serverHandler = new RMI_ServerHandler(host, WebSettings.serverPortRMI, clientAPICome);
+        } else if(in.equalsIgnoreCase("SOCKET")){
+            serverHandler = new SOCKET_ServerHandler(host, WebSettings.serverPortSocket, clientAPICome);
+            Thread listeningThread = new Thread((SOCKET_ServerHandler)serverHandler);
+            listeningThread.start();
+        }else
+            throw new StartConnectionFailedException();
 
+        return new ClientAPI_GO(serverHandler);
     }
 
     public void chooseConnection(){
         ui.chooseConnection();
     }
-
+    public void welcome(){
+        ui.firstWelcome();
+    }
     public void askNickname(){
         ui.askNickname();
     }
