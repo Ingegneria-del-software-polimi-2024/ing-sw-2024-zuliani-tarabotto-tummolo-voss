@@ -6,8 +6,6 @@ import Client.UI.TUI.Commands.EndGameCommand;
 import Client.UI.TUI.Commands.HelpCommand;
 import Client.UI.UI;
 import Client.View.ViewAPI;
-import SharedWebInterfaces.Messages.MessagesToLobby.JoinGameMessage;
-import SharedWebInterfaces.Messages.MessagesToLobby.RequestAvailableGames;
 import SharedWebInterfaces.WebExceptions.StartConnectionFailedException;
 import model.cards.PlayableCards.PlayableCard;
 import model.enums.Artifact;
@@ -20,7 +18,7 @@ import java.util.regex.Pattern;
 import static org.fusesource.jansi.Ansi.ansi;
 
 
-public class TUI implements UI{
+public class TUI implements UI {
 
     private ViewAPI view;
     private DispositionPrinter dispositionPrinter;
@@ -115,9 +113,9 @@ public class TUI implements UI{
         return matcher.matches();
     }
 
-//    private boolean validPort(int port){
-//        return(1024<=port && port <=49151);
-//    }
+    private boolean validPort(int port){
+        return(1024<=port && port <=49151);
+    }
 
     public void askNickname(){
         System.out.print(ansi().fg(color).a("~> Insert your nickname: \n").reset());
@@ -129,6 +127,19 @@ public class TUI implements UI{
         System.out.print(ansi().fg(color).a("~> This nickname is already in use, please change nickname\n").reset());
         askNickname();
     }
+
+    @Override
+    public void cantPlaceACard(PlayableCard card, Coordinates coord) {
+        System.out.print(ansi().fg(color).a("~> Can't place the card in the position ("+coord.getX()+";"+coord.getY()+")"+"\n   Choose a different card\n").reset());
+        displayPlacingCard();
+    }
+
+    @Override
+    public void cantDrawCard(int source) {
+        System.out.print(ansi().fg(color).a("~> Can't draw the card from the selected source\n").reset());
+        displayCardDrawing();
+    }
+
     public void displayAvailableGames(ArrayList<String> listOfGames){
         String game;
 
@@ -188,6 +199,7 @@ public class TUI implements UI{
                     try {
                        lock.wait();
                     } catch (InterruptedException e) {
+                        //TODO ERROR management
                     }
                 }
 
@@ -286,7 +298,7 @@ public class TUI implements UI{
         int x = 0;
         int y = 0;
         boolean faceSide;
-        //if it's myturn then i need to play a card, else i just wait
+        //if it's my turn then i need to play a card, else i just wait
         if(view.getMyTurn()) {
 
             // we choose which card we want to place
@@ -336,7 +348,6 @@ public class TUI implements UI{
                 System.out.print(ansi().fg(color).a("~> Choose one of the available coordinates to place the card: (x/y)\n").reset());
             };
             rePrint.run();
-
 
             while (!view.checkAvailable(x, y)){
                 synchronized (lock) {

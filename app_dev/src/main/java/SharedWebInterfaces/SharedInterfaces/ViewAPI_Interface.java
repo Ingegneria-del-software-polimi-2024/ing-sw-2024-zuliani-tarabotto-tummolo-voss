@@ -53,4 +53,6 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
     void displayAvailableGames();
     void displayAvailableGames(ArrayList<String> availableGames);
     void nickNameAlreadyInUse();
+    void cantPlaceACard(PlayableCard card, Coordinates coord);
+    void cantDrawCard(int source);
 }

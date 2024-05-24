@@ -54,7 +54,6 @@ public class ServerAPI_COME {
         toDoQueue = new ServerMessageQueue();
         players = new HashMap<String, ClientHandlerInterface>();
         this.controller = controller;
-        //TODO how to initialize the controller?
     }
 
 

@@ -1,5 +1,7 @@
 package model.placementArea;
 
+import model.Exceptions.CantPlaceCardException;
+import model.Exceptions.KickOutOfGameException;
 import model.GameState.GameState;
 import model.cards.Card;
 import model.cards.ObjectiveCard;
@@ -19,6 +21,7 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.CancellationException;
 
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -238,7 +241,12 @@ class AddCardTest {
 
         PlayableCard cardToBePlaced = (PlayableCard) getCard(deckList, starterCard);
         cardToBePlaced.setFaceSide(faceStarterCard);
-        area.addCard(cardToBePlaced);
+
+        try{
+            area.addCard(cardToBePlaced);
+        }catch(KickOutOfGameException e){
+            throw new RuntimeException(e);
+        }
         System.out.println("starter card placed");
 
         System.out.println("artifacts:");
@@ -287,10 +295,13 @@ class AddCardTest {
             PlayableCard x = (PlayableCard) getCard(deckList, cards.get(i));
             System.out.println("putting card n. "+cards.get(i));
             x.setFaceSide(face);
-            area.addCard(coord, x);
-
-            int cardPoint = area.addCard(coord, x);
-
+            int cardPoint;
+            try {
+                area.addCard(coord, x);
+                cardPoint = area.addCard(coord, x);
+            }catch (CantPlaceCardException e){
+                throw new RuntimeException(e);
+            }
 
             System.out.println("inserted card "+i);
             System.out.println("card point: "+cardPoint);
@@ -363,7 +374,13 @@ class AddCardTest {
         PlayableCard c = (PlayableCard) getCard(deckList, testPointCardID);
         c.setFaceSide(face);
 
-        int cardPoint = area.addCard(testCoord, c);
+        int cardPoint;
+
+        try{
+            cardPoint = area.addCard(testCoord, c);
+        } catch (CantPlaceCardException e ){
+            throw new RuntimeException(e);
+        }
 
         int animals = area.getNumberElements(Element.animals);
         int insects = area.getNumberElements(Element.insects);

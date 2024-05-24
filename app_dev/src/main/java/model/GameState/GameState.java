@@ -2,14 +2,18 @@ package model.GameState;
 
 import Server.ModelListener;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
+import model.Exceptions.CantPlaceCardException;
 import model.Exceptions.EmptyCardSourceException;
 //import Server.ModelListener;
+import model.Exceptions.KickOutOfGameException;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
 import model.enums.Pawn;
 import model.placementArea.Coordinates;
 import model.player.Player;
 import model.deckFactory.*;
+
+import javax.sql.rowset.CachedRowSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -184,8 +188,13 @@ public class GameState {
      * INTERFACE METHOD
      * calls playCard method contained in Player class
      */
-    public void playCard(){
-        turnPlayer.playCard(selectedHandCard, selectedCoordinates);
+    public void playCard() throws CantPlaceCardException {
+        try {
+            turnPlayer.playCard(selectedHandCard, selectedCoordinates);
+        }catch (CantPlaceCardException e){
+            modelListener.notifyChanges(turnPlayer.getNickname(), e);
+            throw e;
+        }
         //we check if the player reached 20 points
         setLastTurnTrue();
         //NOTIFICATION: the player disposition, points, available resources are updated
@@ -212,7 +221,11 @@ public class GameState {
     public void playStarterCard(String player) {
         for(Player p : players){
             if(p.getNickname().equals(player)){
-                p.playStarterCard();
+                try {
+                    p.playStarterCard();
+                }catch (KickOutOfGameException e){
+                    modelListener.notifyChanges(player, e);
+                }
                 //NOTIFICATION ABOUT THE STARTER CARD
                 modelListener.notifyChanges(p.getNickname(), p.getPlacementArea().getDisposition(), p.getPlacementArea().getAvailablePlaces(),
                         p.getPoints());
@@ -270,10 +283,13 @@ public class GameState {
     /**
      * INTERFACE METHOD
      * draws a card from goldDeck
-     * @throws EmptyCardSourceException
      */
-    public void drawCardGoldDeck() throws EmptyCardSourceException {
-        commonTable.drawCardGoldDeck(turnPlayer);
+    public void drawCardGoldDeck(){
+        try {
+            commonTable.drawCardGoldDeck(turnPlayer);
+        } catch (EmptyCardSourceException e) {
+            modelListener.notifyChanges(turnPlayer.getNickname(), e);
+        }
         setLastTurnTrue();
         modelListener.notifyChanges(getGoldDeck().getCards(), 0);
         modelListener.notifyChanges(turnPlayer.getPlayingHand(), turnPlayer.getNickname());
@@ -282,10 +298,13 @@ public class GameState {
     /**
      * INTERFACE METHOD
      * draws a card from resourcesDeck
-     * @throws EmptyCardSourceException
      */
-    public void drawCardResourcesDeck() throws EmptyCardSourceException {
-        commonTable.drawCardResourcesDeck(turnPlayer);
+    public void drawCardResourcesDeck(){
+        try {
+            commonTable.drawCardResourcesDeck(turnPlayer);
+        } catch (EmptyCardSourceException e) {
+            modelListener.notifyChanges(turnPlayer.getNickname(), e);
+        }
         setLastTurnTrue();
         modelListener.notifyChanges(getResourceDeck().getCards(), 2);
         modelListener.notifyChanges(turnPlayer.getPlayingHand(), turnPlayer.getNickname());
@@ -294,13 +313,13 @@ public class GameState {
     /**
      * INTERFACE METHOD
      * draws a card from openGold at index 0 or 1
-     * @throws EmptyCardSourceException
      */
-    public void drawCardOpenGold(int index) throws EmptyCardSourceException {
-        //TODO erase
-//        int i;
-//        if(index == 0){ i = 2;} else { i = 3;}
-        commonTable.drawCardOpenGold(index, turnPlayer);
+    public void drawCardOpenGold(int index){
+        try {
+            commonTable.drawCardOpenGold(index, turnPlayer);
+        } catch (EmptyCardSourceException e) {
+            modelListener.notifyChanges(turnPlayer.getNickname(), e);
+        }
         setLastTurnTrue();
         modelListener.notifyChanges(getOpenGold(), 1, index);
         modelListener.notifyChanges(turnPlayer.getPlayingHand(), turnPlayer.getNickname());
@@ -309,12 +328,13 @@ public class GameState {
     /**
      * INTERFACE METHOD
      * draws a card from openResources at index 0 or 1
-     * @throws EmptyCardSourceException
      */
-    public void drawCardOpenResources(int index) throws EmptyCardSourceException {
-//        int i;
-//        if(index == 0){ i = 5;} else { i = 6;}
-        commonTable.drawCardOpenResources(index, turnPlayer);
+    public void drawCardOpenResources(int index){
+        try {
+            commonTable.drawCardOpenResources(index, turnPlayer);
+        } catch (EmptyCardSourceException e) {
+            modelListener.notifyChanges(turnPlayer.getNickname(), e);
+        }
         setLastTurnTrue();
         modelListener.notifyChanges(getOpenResources(), 3, index);
         modelListener.notifyChanges(turnPlayer.getPlayingHand(), turnPlayer.getNickname());

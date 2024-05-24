@@ -1,6 +1,9 @@
 package model.player;
 
 //import model.cards.ObjectiveCard;
+import SharedWebInterfaces.Messages.MessagesFromServer.Errors.KickOutOfGameMessage;
+import model.Exceptions.CantPlaceCardException;
+import model.Exceptions.KickOutOfGameException;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
 import model.cards.PlayableCards.StarterCard;
@@ -45,15 +48,15 @@ public class Player implements Serializable {
      * @param card
      * @param coordinates
      */
-    public void playCard(PlayableCard card, Coordinates coordinates){
-        takeFromHand(card);
+    public void playCard(PlayableCard card, Coordinates coordinates) throws CantPlaceCardException {
         this.points += placementArea.addCard(coordinates, card);
+        takeFromHand(card);
     }
 
     /**
      * the starterCard is placed on the PlacementsArea at the default position (0,0)
      */
-    public void playStarterCard(){
+    public void playStarterCard() throws KickOutOfGameException {
         placementArea.addCard(starterCard);
     }
     //auxiliary method for the method playCard() removes and returns

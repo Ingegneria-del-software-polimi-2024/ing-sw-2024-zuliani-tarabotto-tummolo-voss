@@ -3,7 +3,13 @@ package Server;
 
 import Server.Web.Game.ServerAPI_GO;
 import SharedWebInterfaces.Messages.MessagesFromServer.*;
+import SharedWebInterfaces.Messages.MessagesFromServer.Errors.CantPlaceCardMessage;
+import SharedWebInterfaces.Messages.MessagesFromServer.Errors.EmptyDeckMessage;
+import SharedWebInterfaces.Messages.MessagesFromServer.Errors.KickOutOfGameMessage;
 import SharedWebInterfaces.WebExceptions.MsgNotDeliveredException;
+import model.Exceptions.CantPlaceCardException;
+import model.Exceptions.EmptyCardSourceException;
+import model.Exceptions.KickOutOfGameException;
 import model.GameState.TurnState;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
@@ -17,7 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ModelListener {
+public class ModelListener {//TODO Handle correctly the exceptions
 
     private ServerAPI_GO serverAPI;
 
@@ -215,7 +221,7 @@ public class ModelListener {
 
     /**
      * at the end of the game each player is notified with the final points of every player,
-     * the view is responsible of displaying the winner
+     * the view is responsible for displaying the winner
      * @param finalPoints
      */
     public void notifyChanges(HashMap<String, Integer> finalPoints){
@@ -224,6 +230,28 @@ public class ModelListener {
             serverAPI.broadcastNotifyChanges(new EndGameMessage(finalPoints));
         }catch (MsgNotDeliveredException msg){
             throw new RuntimeException(msg);
+        }
+    }
+    ////////////////////////////// ERROR NOTIFICATIONS ///////////////////////////////////////////////////////////////
+    public void notifyChanges(String player, CantPlaceCardException e) {
+        try {
+            serverAPI.notifyChanges(new CantPlaceCardMessage(player, e.getCard(), e.getCoord()), player);
+        }catch (MsgNotDeliveredException msg){
+            throw new RuntimeException(msg);
+        }
+    }
+    public void notifyChanges(String player, KickOutOfGameException e){
+        try {
+            serverAPI.notifyChanges(new KickOutOfGameMessage(player), player);
+        }catch(MsgNotDeliveredException msg){
+            throw new RuntimeException(msg);
+        }
+    }
+    public void notifyChanges(String player, EmptyCardSourceException e){
+        try {
+            serverAPI.notifyChanges(new EmptyDeckMessage(e.getIndx()), player);
+        }catch (MsgNotDeliveredException msg){
+            throw new RuntimeException(e);
         }
     }
 }

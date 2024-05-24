@@ -180,9 +180,6 @@ public class ViewModel {
         chooseSecretObjective(String.valueOf(secretObjective.getId()));
     }
 
-
-    //TODO: rendere più chiara la scelta di secretObjective, confirmSecretObjective potrebbe essere eliminato
-
     public void confirmSecretObjective(ObjectiveCard secretObjective){
         this.secretObjective = secretObjective;
     }
@@ -190,7 +187,6 @@ public class ViewModel {
 
     //the player's points are updated
     public void setPoints(String player, int points) {
-        //
         this.points.put(player, points);
     }
 
@@ -206,7 +202,6 @@ public class ViewModel {
         }
     }
 
-    //TODO: togliere sta cagata
     public void updateCardSource(List<PlayableCard> deck, int cardSource) {
         decks.put(cardSource, deck);
     }

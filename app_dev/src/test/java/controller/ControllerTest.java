@@ -2,6 +2,7 @@ package controller;
 
 
 import Client.UI.TUI.*;
+import model.Exceptions.CantPlaceCardException;
 import model.Exceptions.EmptyCardSourceException;
 import model.GameState.GameState;
 import model.cards.ObjectiveCard;
@@ -129,33 +130,27 @@ class ControllerTest {
 
 ;
     private void callDrawFunction(int i) throws EmptyCardSourceException {
-        try{
-            switch (i) {
-                case 1:
-                    gameState.drawCardGoldDeck();
-                    break;
-                case 2:
-                    gameState.drawCardResourcesDeck();
-                    break;
-                case 3:
-                    gameState.drawCardOpenGold(0);
-                    break;
-                case 4:
-                    gameState.drawCardOpenGold(1);
-                    break;
-                case 5:
-                    gameState.drawCardOpenResources(0);
-                    break;
-                case 6:
-                    gameState.drawCardOpenResources(1);
-                    break;
-            }
+        switch (i) {
+            case 1:
+                gameState.drawCardGoldDeck();
+                break;
+            case 2:
+                gameState.drawCardResourcesDeck();
+                break;
+            case 3:
+                gameState.drawCardOpenGold(0);
+                break;
+            case 4:
+                gameState.drawCardOpenGold(1);
+                break;
+            case 5:
+                gameState.drawCardOpenResources(0);
+                break;
+            case 6:
+                gameState.drawCardOpenResources(1);
+                break;
         }
-        catch (EmptyCardSourceException ex) {
-            System.out.println(ex.getMessage());
-            System.out.println("choose another source to draw a card from");
-            callDrawFunction(new Scanner(System.in).nextInt());
-        }
+    }
 
     }
 
@@ -177,8 +172,11 @@ class ControllerTest {
         gameState.setSelectedCardFace(sc.nextBoolean());
         Coordinates c = new Coordinates(Integer.parseInt(sc.next()), Integer.parseInt(sc.next()));
         gameState.setSelectedCoordinates(c);
-
-        gameState.playCard();
+        try {
+            gameState.playCard();
+        }catch (CantPlaceCardException e) {
+            throw new RuntimeException(e);
+        }
         callDrawFunction(sc.nextInt());
         gameState.setLastTurnTrue();
         gameState.nextPlayer();

@@ -1,5 +1,6 @@
 package controller;
 
+import model.Exceptions.CantPlaceCardException;
 import model.Exceptions.EmptyCardSourceException;
 import model.GameState.GameState;
 import model.placementArea.Coordinates;
@@ -110,33 +111,27 @@ public class Controller {
 
 
     private void callDrawFunction(int i) throws EmptyCardSourceException {
-        try{
-            switch (i) {
-                case 1:
-                    gameState.drawCardGoldDeck();
-                    break;
-                case 2:
-                    gameState.drawCardResourcesDeck();
-                    break;
-                case 3:
-                    gameState.drawCardOpenGold(0);
-                    break;
-                case 4:
-                    gameState.drawCardOpenGold(1);
-                    break;
-                case 5:
-                    gameState.drawCardOpenResources(0);
-                    break;
-                case 6:
-                    gameState.drawCardOpenResources(1);
-                    break;
-            }
+        switch (i) {
+            case 1:
+                gameState.drawCardGoldDeck();
+                break;
+            case 2:
+                gameState.drawCardResourcesDeck();
+                break;
+            case 3:
+                gameState.drawCardOpenGold(0);
+                break;
+            case 4:
+                gameState.drawCardOpenGold(1);
+                break;
+            case 5:
+                gameState.drawCardOpenResources(0);
+                break;
+            case 6:
+                gameState.drawCardOpenResources(1);
+                break;
         }
-        catch (EmptyCardSourceException ex) {
-            System.out.println(ex.getMessage());
-            System.out.println("choose another source to draw a card from");
-            callDrawFunction(new Scanner(System.in).nextInt());
-        }
+
 
     }
 
@@ -172,8 +167,11 @@ public class Controller {
         gameState.printPlayerAvailablePlaces();
         Coordinates c = new Coordinates(sc.nextInt(), sc.nextInt());
         gameState.setSelectedCoordinates(c);
-
-        gameState.playCard();
+        try {
+            gameState.playCard();
+        }catch (CantPlaceCardException e){
+            throw new RuntimeException(e);
+        }
         gameState.printPlayerDisposition();
 
         System.out.println("DRAW A CARD: 1 -> gold deck");

@@ -1,7 +1,7 @@
 package Server;
 import Server.Web.Game.ServerAPI_GO;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
-import model.Exceptions.EmptyCardSourceException;
+import model.Exceptions.CantPlaceCardException;
 import SharedWebInterfaces.SharedInterfaces.ServerControllerInterface;
 import model.GameState.GameState;
 import model.GameState.TurnState;
@@ -139,7 +139,11 @@ public class ModelController implements ServerControllerInterface {
 
         gameState.setSelectedCardFace(faceSide);
         gameState.setSelectedCoordinates(new Coordinates(x,y));
-        gameState.playCard();
+        try{
+            gameState.playCard();
+        }catch (CantPlaceCardException e){
+            return;
+        }
         gameState.setTurnState(TurnState.CARD_DRAWING);
     }
 
@@ -151,35 +155,27 @@ public class ModelController implements ServerControllerInterface {
      */
     @Override
     public void drawCard(int cardSource) throws RuntimeException{
-        try{
-            switch (cardSource) {
-                case 1:
-                    gameState.drawCardGoldDeck();
-                    break;
-                case 2:
-                    gameState.drawCardOpenGold(0);
-                    break;
-                case 3:
-                    gameState.drawCardOpenGold(1);
-                    break;
-                case 4:
-                    gameState.drawCardResourcesDeck();
-                    break;
-                case 5:
-                    gameState.drawCardOpenResources(0);
-                    break;
-                case 6:
-                    gameState.drawCardOpenResources(1);
-                    break;
-            }
+        switch (cardSource) {
+            case 1:
+                gameState.drawCardGoldDeck();
+                break;
+            case 2:
+                gameState.drawCardOpenGold(0);
+                break;
+            case 3:
+                gameState.drawCardOpenGold(1);
+                break;
+            case 4:
+                gameState.drawCardResourcesDeck();
+                break;
+            case 5:
+                gameState.drawCardOpenResources(0);
+                break;
+            case 6:
+                gameState.drawCardOpenResources(1);
+                break;
         }
-        catch (EmptyCardSourceException ex) {
-            System.out.println(ex.getMessage());
-            System.out.println("choose another source to draw a card from");
-            //TODO: handle the exception
-            //callDrawFunction(new Scanner(System.in).nextInt());
-            throw new RuntimeException();
-        }
+
 
         gameState.nextPlayer();
 

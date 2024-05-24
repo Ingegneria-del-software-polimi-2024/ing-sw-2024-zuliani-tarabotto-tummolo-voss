@@ -29,7 +29,7 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
             socketManager = FirstSocketManager.getInstance(this, portSocket);
             Thread listenForNewConnection = new Thread(socketManager);
             listenForNewConnection.start();
-            rmiManager = First_RMI_Manager.getInstance(this, portRMI); //the ports must be different!!!
+            rmiManager = First_RMI_Manager.getInstance(this, portRMI);
             queue = new LobbyMessageQueue();
         }catch (RemoteException | RuntimeException e){
             throw new RuntimeException("Can't create lobby, control the connection parameters", e);

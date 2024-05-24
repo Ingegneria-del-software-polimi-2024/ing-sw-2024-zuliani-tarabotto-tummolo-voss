@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public interface UI extends Runnable{
-    //open cards and other other players' pawn and nicknames
+    //open cards and other players' pawn and nicknames
     void displayInitialization();
 
     //starter card for the player
@@ -35,5 +35,7 @@ public interface UI extends Runnable{
     void joinedGame(String gameID);
     void firstWelcome();
     void nickNameAlreadyInUse();
+    void cantPlaceACard(PlayableCard card, Coordinates coord);
+    void cantDrawCard(int source);
 
 }

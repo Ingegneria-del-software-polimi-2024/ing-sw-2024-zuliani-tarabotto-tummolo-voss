@@ -85,25 +85,26 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
             NewConnectionMessage msg = null;
 
             boolean read = false;
-            while(!read) {
-                msg = (NewConnectionMessage) in.readObject();
-                read = true;
-            }
-            msg.setHandler(this);
-            deliverToLobby(msg);
+            MessageToLobby incoming;
+            do{
+                incoming = (MessageToLobby) in.readObject();
+                if(incoming instanceof NewConnectionMessage)
+                    ((NewConnectionMessage) incoming).setHandler(this);
+                deliverToLobby(incoming);
+            }while(incoming instanceof NewConnectionMessage);
 
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException();
         }
         try {
 
-            Message messageToLobby = null;
+            Message message = null;
             do {
-                messageToLobby = (Message) in.readObject();
-                if(messageToLobby instanceof MessageToLobby)
-                    deliverToLobby((MessageToLobby)messageToLobby);
-                else if(messageToLobby instanceof MessageFromClient)
-                    sendToServer((MessageFromClient)messageToLobby);
+                message = (Message) in.readObject();
+                if(message instanceof MessageToLobby)
+                    deliverToLobby((MessageToLobby)message);
+                else if(message instanceof MessageFromClient)
+                    sendToServer((MessageFromClient)message);
             }while(true);
         }catch (IOException | ClassNotFoundException e){
             throw new RuntimeException();
