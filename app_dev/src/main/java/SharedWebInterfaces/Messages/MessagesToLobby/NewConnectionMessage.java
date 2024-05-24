@@ -20,17 +20,11 @@ public class NewConnectionMessage implements Serializable, MessageToLobby {//tod
     public void execute(Lobby lobby){
         lobby.addConnection(username, handler);
         //For debug purpose only
-        System.out.println("Added Connection");
 //        lobby.enterRoom(username, roomName, expectedPlayers);
         //For debug purpose only
 //        System.out.println(username+" has entered the room "+roomName);
 
         //sending an ACK to the player
-        try {
-            lobby.sendToPlayer(username, new ACK_NewConnection(username));
-        } catch (MsgNotDeliveredException e) {
-            throw new RuntimeException(e);
-        }
 
     }
 

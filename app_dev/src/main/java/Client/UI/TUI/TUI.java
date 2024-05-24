@@ -125,6 +125,10 @@ public class TUI implements UI{
         view.setPlayerId(nickname);
 
     }
+    public void nickNameAlreadyInUse(){
+        System.out.print(ansi().fg(color).a("~> This nickname is already in use, please change nickname\n").reset());
+        askNickname();
+    }
     public void displayAvailableGames(ArrayList<String> listOfGames){
         String game;
 

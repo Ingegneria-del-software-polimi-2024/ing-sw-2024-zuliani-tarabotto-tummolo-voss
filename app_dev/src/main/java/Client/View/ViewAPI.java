@@ -123,6 +123,7 @@ public class ViewAPI implements ViewAPI_Interface {
     public void joinGame(String game, int players){
         viewModel.joinGame(game, players);
     }
+    public void nickNameAlreadyInUse(){ui.nickNameAlreadyInUse();}
 
 //////////////////////////////////////////Lobby/////////////////////////////////////////////////////////////////////////
 

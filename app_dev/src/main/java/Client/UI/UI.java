@@ -34,5 +34,6 @@ public interface UI extends Runnable{
     void displayAvailableGames(ArrayList<String> listOfGames);
     void joinedGame(String gameID);
     void firstWelcome();
+    void nickNameAlreadyInUse();
 
 }

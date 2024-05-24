@@ -52,4 +52,5 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
     void setAvailableGames(ArrayList<String> listOfGames);
     void displayAvailableGames();
     void displayAvailableGames(ArrayList<String> availableGames);
+    void nickNameAlreadyInUse();
 }

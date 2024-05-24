@@ -1,5 +1,7 @@
 package Server.Web.Lobby;
 
+import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_NewConnection;
+import SharedWebInterfaces.Messages.MessagesFromLobby.AlreadyExistingNameMessage;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
 import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
 import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
@@ -64,9 +66,25 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
      * @param handlerInterface the handler of the player
      */
     public void addConnection(String name, ClientHandlerInterface handlerInterface){
-        if (players.containsKey(name))
-            throw new RuntimeException("Name already in use");//TODO is this good? IDK
+        //if the name is already in use, we have to notify the client
+        if (players.containsKey(name)){
+            try {
+                handlerInterface.sendToClient(new AlreadyExistingNameMessage(name));
+            } catch (RemoteException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println("The name chosen was already taken");
+            return;
+        }
+        //if the name isn't taken we add the player to the lobby's players list
         players.put(name, handlerInterface);
+        System.out.println("Added a player: "+name);
+        try {
+            sendToPlayer(name, new ACK_NewConnection(name));
+        } catch (MsgNotDeliveredException e) {
+            throw new RuntimeException(e);
+        }
+        //TODO sistema exception handling
     }
 
     /**
