@@ -254,6 +254,16 @@ public class ViewAPI implements ViewAPI_Interface {
         ui.cantDrawCard(source);
     }
 
+    @Override
+    public void cantJoinRoom() {
+        ui.cantJoinRoom();
+    }
+
+    @Override
+    public void cantCreateRoom() {
+        ui.cantCreateRoom();
+    }
+
 //    ////////////////////////////////// GETTER METHODS //////////////////////////////////////////////////////////////////////////////
 
     /**

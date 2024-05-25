@@ -37,5 +37,6 @@ public interface UI extends Runnable{
     void nickNameAlreadyInUse();
     void cantPlaceACard(PlayableCard card, Coordinates coord);
     void cantDrawCard(int source);
-
+    void cantCreateRoom();
+    void cantJoinRoom();
 }

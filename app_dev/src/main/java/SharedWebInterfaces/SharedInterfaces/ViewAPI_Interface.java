@@ -55,4 +55,6 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
     void nickNameAlreadyInUse();
     void cantPlaceACard(PlayableCard card, Coordinates coord);
     void cantDrawCard(int source);
+    void cantJoinRoom();
+    void cantCreateRoom();
 }

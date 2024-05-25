@@ -80,6 +80,8 @@ public class ModelController implements ServerControllerInterface {
      */
     @Override
     public void playStarterCard(boolean face, String player){
+        if(!playersNicknames.contains(player))
+            return;
         gameState.setStartingCardFace(face,player);
         gameState.playStarterCard(player);
         //IF THIS FUNCTION GETS CALLED A NUMBER OF TIMES EQUALS TO THE NUMBER OF PLAYERS THEN THE STATE OF THE GAME IS CHANGED
@@ -111,6 +113,8 @@ public class ModelController implements ServerControllerInterface {
      */
     @Override
     public void chooseSecretObjective(String cardId, String player) {
+        if(!playersNicknames.contains(player))
+
         gameState.setPlayerSecretObjective(cardId, player);
 
         if(cont == playersNicknames.size() - 1){
@@ -135,6 +139,7 @@ public class ModelController implements ServerControllerInterface {
     public void playCard(int cardId, int x , int y, Boolean faceSide){
         for(PlayableCard c : gameState.getTurnPlayer().getPlayingHand()){
             if(c.getId() == cardId) { gameState.setSelectedHandCard(c); }
+            else gameState.wrongCardRoutine(new CantPlaceCardException(new Coordinates(x,y)));
         }
 
         gameState.setSelectedCardFace(faceSide);
@@ -174,6 +179,8 @@ public class ModelController implements ServerControllerInterface {
             case 6:
                 gameState.drawCardOpenResources(1);
                 break;
+            default:
+                gameState.drawCardGoldDeck();
         }
 
 

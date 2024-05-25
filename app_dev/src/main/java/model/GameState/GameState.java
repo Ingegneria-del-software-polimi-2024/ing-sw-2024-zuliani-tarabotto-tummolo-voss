@@ -192,7 +192,7 @@ public class GameState {
         try {
             turnPlayer.playCard(selectedHandCard, selectedCoordinates);
         }catch (CantPlaceCardException e){
-            modelListener.notifyChanges(turnPlayer.getNickname(), e);
+            wrongCardRoutine(e);
             throw e;
         }
         //we check if the player reached 20 points
@@ -212,6 +212,14 @@ public class GameState {
         //we could remove this
         modelListener.notifyChanges(turnPlayer.getPlayingHand(), turnPlayer.getNickname());
 
+    }
+
+    /**
+     * notifies the player of not being able to place the card
+     * @param e
+     */
+    public void wrongCardRoutine(CantPlaceCardException e){
+        modelListener.notifyChanges(turnPlayer.getNickname(), e);
     }
 
     /**
@@ -262,7 +270,10 @@ public class GameState {
      */
     public void setStartingCardFace(boolean faceSide, String player) {
         for(Player p : players){
-            if(p.getNickname().equals(player)) p.getStarterCard().setFaceSide(faceSide);
+            if(p.getNickname().equals(player)){
+                p.getStarterCard().setFaceSide(faceSide);
+                return;
+            }
         }
         //turnPlayer.getStarterCard().setFaceSide(faceSide);
     }

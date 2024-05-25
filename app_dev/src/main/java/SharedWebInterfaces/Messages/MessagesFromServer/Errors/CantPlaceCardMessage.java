@@ -12,8 +12,6 @@ public class CantPlaceCardMessage implements MessageFromServer {
 
     @Override
     public void execute(ViewAPI_Interface view) {
-
-        System.out.println("executed");
         view.cantPlaceACard(card, coord);
     }
 

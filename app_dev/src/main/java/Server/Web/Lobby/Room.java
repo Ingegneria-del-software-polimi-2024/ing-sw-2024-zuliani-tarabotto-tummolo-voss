@@ -3,6 +3,7 @@ package Server.Web.Lobby;
 import Server.ModelController;
 import Server.Web.Game.ServerAPI_COME;
 import Server.Web.Game.ServerAPI_GO;
+import Server.Web.Lobby.LobbyExceptions.CantJoinRoomExcept;
 import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
 import model.GameState.GameState;
 import model.GameState.TurnState;
@@ -24,9 +25,9 @@ public class Room {
     private HashMap<String, ClientHandlerInterface> playersInterfaces;
 
 
-    public void joinRoom(String name, ClientHandlerInterface handler){
+    public void joinRoom(String name, ClientHandlerInterface handler) throws CantJoinRoomExcept {
         if(expectedPlayers == players.size())
-            throw new RuntimeException("Too many players, can't join the room");//TODO handle or change the except
+            throw new CantJoinRoomExcept(false);
         players.add(name);
         send.setHandler(name, handler);
         playersInterfaces.put(name, handler);

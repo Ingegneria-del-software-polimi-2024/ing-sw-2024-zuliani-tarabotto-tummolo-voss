@@ -57,7 +57,7 @@ public class TUI implements UI {
 ///////////////////////////////////////<Lobby>//////////////////////////////////////////////////////////////////////////
     public void firstWelcome(){
         loginPrinter.print();
-        System.out.println("~> Welcome to Codex Naturalis");
+        System.out.println("~> Welcome to Codex Naturalis");//TODO print the instructions
     }
     public void chooseConnection(){
         //TODO: ERASE SCREEN
@@ -131,13 +131,25 @@ public class TUI implements UI {
     @Override
     public void cantPlaceACard(PlayableCard card, Coordinates coord) {
         System.out.print(ansi().fg(color).a("~> Can't place the card in the position ("+coord.getX()+";"+coord.getY()+")"+"\n   Choose a different card\n").reset());
-        displayPlacingCard();
+        displayPlacingCard(false);
     }
 
     @Override
     public void cantDrawCard(int source) {
         System.out.print(ansi().fg(color).a("~> Can't draw the card from the selected source\n").reset());
-        displayCardDrawing();
+        displayCardDrawing(false);
+    }
+
+    @Override
+    public void cantCreateRoom() {
+        System.out.print(ansi().fg(color).a("~> Can't create the room, the players must be between 2 and 4\n").reset());
+        view.displayAvailableGames();
+    }
+
+    @Override
+    public void cantJoinRoom() {
+        System.out.print(ansi().fg(color).a("~> Can't join the room, too many players are present\n").reset());
+        view.displayAvailableGames();
     }
 
     public void displayAvailableGames(ArrayList<String> listOfGames){
@@ -163,14 +175,18 @@ public class TUI implements UI {
         }else{
             int nPlayers = 0;
             if(listOfGames == null || !listOfGames.contains(game)) {
-                System.out.print(ansi().fg(color).a("~> You want to create a new game!\n~> Insert the number of players: ").reset());
                 String players;
                 boolean flag = false;
+                System.out.print(ansi().fg(color).a("~> You want to create a new game!\n~> Insert the number of players: ").reset());
                 do {
                     players = sc.nextLine();
                     try {
                         nPlayers = Math.abs(Integer.parseInt(players));
                     } catch (Exception e) {
+                        flag = true;
+                    }
+                    if(flag||nPlayers<2 || nPlayers>4){
+                        System.out.print(ansi().fg(color).a("~> The game must contain at least 2 players and maximum 4 players\n~> Insert the number of players: ").reset());
                         flag = true;
                     }
                 } while (flag);
@@ -292,8 +308,10 @@ public class TUI implements UI {
 
     }
 
-    @Override
-    public void displayPlacingCard() {
+    public void displayPlacingCard(){
+        displayPlacingCard(true);
+    }
+    private void displayPlacingCard(boolean clear) {
         int index;
         int x = 0;
         int y = 0;
@@ -303,7 +321,8 @@ public class TUI implements UI {
 
             // we choose which card we want to place
             rePrint = () -> {
-                clear();
+                if(clear)
+                    clear();
                 dispositionPrinter.print(view.getDisposition(), view.getAvailablePlaces());
                 ultimatePrint(view);
                 System.out.print(ansi().fg(color).a("~> Choose a card to place from your hand (1/2/3): \n").reset());
@@ -378,13 +397,16 @@ public class TUI implements UI {
 
     }
 
-    @Override
-    public void displayCardDrawing() {
+    public void displayCardDrawing(){
+        displayCardDrawing(true);
+    }
+    private void displayCardDrawing(boolean clear) {
 
         if(view.getMyTurn()){
 
             rePrint= () -> {
-                clear();
+                if(clear)
+                    clear();
                 drawCardPrinter.print(view.getGoldDeck().get(0), view.getResourceDeck().get(0), view.getOpenGold(), view.getOpenResource());
                 System.out.print(ansi().fg(color).a("~> Draw a card: (1/2/3/4/5/6)\n").reset());
             };

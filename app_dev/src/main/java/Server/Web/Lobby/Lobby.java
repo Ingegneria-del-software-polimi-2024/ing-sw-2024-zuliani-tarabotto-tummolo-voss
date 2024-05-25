@@ -1,7 +1,10 @@
 package Server.Web.Lobby;
 
+import Server.Web.Lobby.LobbyExceptions.CantJoinRoomExcept;
 import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_NewConnection;
+import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_RoomChoice;
 import SharedWebInterfaces.Messages.MessagesFromLobby.AlreadyExistingNameMessage;
+import SharedWebInterfaces.Messages.MessagesFromLobby.CantJoinRoomMsg;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
 import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
 import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
@@ -94,14 +97,35 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
      * @param expectedPlayers the number of expected players, it is null if the room already exists
      */
     public void enterRoom(String playerName, String roomName, int expectedPlayers){
+        if(roomName == null||!players.containsKey(playerName))
+            return;
+
         Room room = lookFor(roomName);
-        if (room == null){
-            createRoom(roomName, playerName, expectedPlayers);
+        try {
+            if (room == null) {
+                createRoom(roomName, playerName, expectedPlayers);
 
-        }else{
-            room.joinRoom(playerName, players.get(playerName));
+            } else {
+                room.joinRoom(playerName, players.get(playerName));
 
+            }
+        }catch (CantJoinRoomExcept e){
+            try {
+                sendToPlayer(playerName, new CantJoinRoomMsg(e.isCreating()));
+            } catch (MsgNotDeliveredException ex) {
+                throw new RuntimeException(e);
+                //TODO remove this trycatch
+            }
+            return;
         }
+        //sending ACK
+        try {
+            sendToPlayer(playerName, new ACK_RoomChoice(playerName, roomName));
+        } catch (MsgNotDeliveredException e) {
+            throw new RuntimeException(e);
+            //TODO verify this is handled correctly
+        }
+        verifyStart(roomName);
     }
 
     public void verifyStart(String roomName){
@@ -193,7 +217,9 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
      * @param playerName who requested the creation of the room
      * @param expectedPlayers number of players to play with
      */
-    private void createRoom(String roomName, String playerName, int expectedPlayers){
+    private void createRoom(String roomName, String playerName, int expectedPlayers) throws CantJoinRoomExcept {
+        if(expectedPlayers<2||expectedPlayers>4)
+            throw new CantJoinRoomExcept(true);
         Room room = new Room(roomName, expectedPlayers);
         rooms.add(room);
         room.joinRoom(playerName, players.get(playerName));
