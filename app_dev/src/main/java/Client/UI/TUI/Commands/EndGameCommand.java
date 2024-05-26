@@ -2,7 +2,6 @@ package Client.UI.TUI.Commands;
 
 import Client.View.ViewAPI;
 import Server.ModelController;
-import model.Model;
 
 public class EndGameCommand implements Command{
 

@@ -15,6 +15,7 @@ import model.deckFactory.ObjectiveDeck;
 import model.deckFactory.PlayableDeck;
 import model.enums.Artifact;
 import model.enums.Element;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -335,6 +336,7 @@ class AddCardTest {
         System.out.println("numberNearbyCards: "+numberNearbyCards);
     }
 
+    @Test
     public static void runTest(int[] cards, int[] coordinates, int expectedResults, boolean face, int starterCard, boolean faceStarterCard, Coordinates testCoord, int testPointCardID, int expAnimals, int expInsects, int expMushrooms, int expVegetals, int expFeather, int expInk, int expPaper, List<Coordinates> expAvailablePosition, HashMap<Coordinates, PlayableCard> expDisposition, int expNumberNearbyCards){
 
         PlacementArea area = new PlacementArea();

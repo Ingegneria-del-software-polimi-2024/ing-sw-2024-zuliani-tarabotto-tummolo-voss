@@ -7,7 +7,6 @@ import Server.Web.Lobby.LobbyExceptions.CantJoinRoomExcept;
 import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
 import model.GameState.GameState;
 import model.GameState.TurnState;
-import model.Model;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;

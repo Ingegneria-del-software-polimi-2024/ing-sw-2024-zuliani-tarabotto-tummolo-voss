@@ -401,6 +401,22 @@ public class GameState {
      * @param id
      * @param i
      */
+    public GameState(ArrayList<String> nickNames, String id, int i, ModelListener listener) {
+        this.modelListener = listener;
+        players = new ArrayList<Player>();
+        for(String name : nickNames) {
+            Player p;
+            players.add(p = new Player());
+            p.setNickname(name);
+        }
+        this.turnPlayer = players.get(0);
+        this.id = id;
+        // initialize commonTable
+        this.commonTable = new CommonTable();
+        //function that calls every initializing method contained in commonTable
+        commonTable.definedDeckInitialization(players);
+    }
+
     public GameState(ArrayList<String> nickNames, String id, int i) {
         players = new ArrayList<Player>();
         for(String name : nickNames) {

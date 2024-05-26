@@ -1,16 +1,9 @@
-package Server;
+package model.GameState;
 
-
-import Server.Web.Game.ServerAPI_GO;
-import SharedWebInterfaces.Messages.MessagesFromServer.*;
-import SharedWebInterfaces.Messages.MessagesFromServer.Errors.CantPlaceCardMessage;
-import SharedWebInterfaces.Messages.MessagesFromServer.Errors.EmptyDeckMessage;
-import SharedWebInterfaces.Messages.MessagesFromServer.Errors.KickOutOfGameMessage;
-import SharedWebInterfaces.WebExceptions.MsgNotDeliveredException;
+import Server.ModelListener;
 import model.Exceptions.CantPlaceCardException;
 import model.Exceptions.EmptyCardSourceException;
 import model.Exceptions.KickOutOfGameException;
-import model.GameState.TurnState;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
 import model.deckFactory.PlayableDeck;
@@ -23,30 +16,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ModelListener {//TODO Handle correctly the exceptions
+public class MockModelListener extends ModelListener {
 
-    private ServerAPI_GO serverAPI;
-
-    public ModelListener(ServerAPI_GO serverAPI){
-        this.serverAPI = serverAPI;
-    }
-
-    public ModelListener() {
-    }
-
-    //////////////////////// GAME SETUP NOTIFICATIONS ///////////////////////////////////////////////////
+    public MockModelListener() {}
 
     /**
      * notification about current state of GameState
      * @param state
      */
     public void notifyChanges(TurnState state){
-        try{
-            System.out.println("notification send");
-            serverAPI.broadcastNotifyChanges( new StateMessage( state ));
-        } catch(MsgNotDeliveredException msg) {
-            throw new RuntimeException(msg);
-        }
+        System.out.println("calledNotifyChanges");
     }
 
     /**
@@ -54,12 +33,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
      * @param turnPlayer
      */
     public void notifyChanges(String turnPlayer){
-        try{
-            System.out.println("notification send");
-            serverAPI.broadcastNotifyChanges( new TurnPlayerMessage(turnPlayer));
-        } catch(MsgNotDeliveredException msg) {
-            throw new RuntimeException(msg);
-        }
+        System.out.println("calledNotifyChanges");
     }
 
 
@@ -78,17 +52,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
                               List<PlayableCard> openResource,
                               ArrayList<String> players, String gameId,
                               ObjectiveCard commonObjective1, ObjectiveCard commonObjective2){
-
-
-        try{
-            serverAPI.broadcastNotifyChanges( new InitializationMessage( goldDeck.getCards(), resourceDeck.getCards(),
-                    openGold, openResource,
-                     players, gameId,
-                    commonObjective1, commonObjective2));
-        }catch (MsgNotDeliveredException msg){
-            throw new RuntimeException(msg);
-        }
-
+        System.out.println("calledNotifyChanges");
     }
 
 
@@ -99,11 +63,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
      * @param player
      */
     public void notifyChanges(PlayableCard starterCard, String player, Pawn pawnColor){
-        try{
-            serverAPI.notifyChanges( new StarterCardMessage(starterCard, pawnColor.toString()), player );
-        }catch (MsgNotDeliveredException msg){
-            throw new RuntimeException(msg);
-        }
+        System.out.println("calledNotifyChanges");
     }
 
     /**
@@ -112,12 +72,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
      * @param player
      */
     public void notifyChanges(List<PlayableCard> hand , String player){
-
-        try{
-            serverAPI.notifyChanges( new UpdateHandMessage(hand), player);
-        }catch (MsgNotDeliveredException msg){
-            throw new RuntimeException(msg);
-        }
+        System.out.println("calledNotifyChanges");
     }
 
     /**
@@ -126,12 +81,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
      * @param secretObjective2
      */
     public void notifyChanges(ObjectiveCard secretObjective1, ObjectiveCard secretObjective2, String player){
-
-        try{
-            serverAPI.notifyChanges( new SecretObjectivesMessage(secretObjective1, secretObjective2), player);
-        }catch (MsgNotDeliveredException msg){
-            throw new RuntimeException(msg);
-        }
+        System.out.println("calledNotifyChanges");
     }
 
 
@@ -141,11 +91,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
      * @param player
      */
     public void notifyChanges(ObjectiveCard secretObjective, String player){
-        try{
-            serverAPI.notifyChanges( new ConfirmSecretObjectiveMessage(secretObjective), player);
-        }catch (MsgNotDeliveredException msg){
-            throw new RuntimeException(msg);
-        }
+        System.out.println("calledNotifyChanges");
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -159,11 +105,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
      * @param canBePlaced
      */
     public void notifyChanges(String player, List<Coordinates> availablePlaces, boolean[] canBePlaced){
-        try{
-            serverAPI.notifyChanges( new PlaceableCardsMessage(availablePlaces, canBePlaced), player);
-        }catch (MsgNotDeliveredException msg){
-            throw new RuntimeException(msg);
-        }
+        System.out.println("calledNotifyChanges");
     }
 
 
@@ -176,15 +118,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
      */
     public void notifyChanges(String player, HashMap<Coordinates, PlayableCard> disposition, List<Coordinates> availablePlaces,
                               int points) {
-
-
-        try{
-            serverAPI.broadcastNotifyChanges(new UpdateDispositionMessage(player, disposition, availablePlaces,
-                    points));
-        }catch (MsgNotDeliveredException msg){
-            throw new RuntimeException(msg);
-        }
-
+        System.out.println("calledNotifyChanges");
     }
 
     /**
@@ -195,11 +129,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
      */
     public void notifyChanges (String player, HashMap<Artifact, Integer> availableArtifacts,
                                HashMap<Element, Integer> availableElements){
-        try{
-            serverAPI.notifyChanges(new UpdateResourcesMessage(availableElements, availableArtifacts), player);
-        }catch (MsgNotDeliveredException msg){
-            throw new RuntimeException(msg);
-        }
+        System.out.println("calledNotifyChanges");
     }
 
     /**
@@ -208,18 +138,10 @@ public class ModelListener {//TODO Handle correctly the exceptions
      * @param cardSource
      */
     public void notifyChanges(List<PlayableCard> deck, int cardSource) {
-        try{
-            serverAPI.broadcastNotifyChanges( new DrawDeckCardMessage(deck, cardSource));
-        }catch (MsgNotDeliveredException msg){
-            throw new RuntimeException(msg);
-        }
+        System.out.println("calledNotifyChanges");
     }
     public void notifyChanges(List<PlayableCard> deck, int cardSource, int index) {
-        try{
-            serverAPI.broadcastNotifyChanges( new DrawOpenCardMessage(deck, cardSource, index));
-        }catch (MsgNotDeliveredException msg){
-            throw new RuntimeException(msg);
-        }
+        System.out.println("calledNotifyChanges");
     }
 
     /**
@@ -228,33 +150,17 @@ public class ModelListener {//TODO Handle correctly the exceptions
      * @param finalPoints
      */
     public void notifyChanges(HashMap<String, Integer> finalPoints){
-
-        try{
-            serverAPI.broadcastNotifyChanges(new EndGameMessage(finalPoints));
-        }catch (MsgNotDeliveredException msg){
-            throw new RuntimeException(msg);
-        }
+        System.out.println("calledNotifyChanges");
     }
     ////////////////////////////// ERROR NOTIFICATIONS ///////////////////////////////////////////////////////////////
     public void notifyChanges(String player, CantPlaceCardException e) {
-        try {
-            serverAPI.notifyChanges(new CantPlaceCardMessage(player, e.getCard(), e.getCoord()), player);
-        }catch (MsgNotDeliveredException msg){
-            throw new RuntimeException(msg);
-        }
+        System.out.println("calledNotifyChanges");
     }
     public void notifyChanges(String player, KickOutOfGameException e){
-        try {
-            serverAPI.notifyChanges(new KickOutOfGameMessage(player), player);
-        }catch(MsgNotDeliveredException msg){
-            throw new RuntimeException(msg);
-        }
+        System.out.println("calledNotifyChanges");
     }
     public void notifyChanges(String player, EmptyCardSourceException e){
-        try {
-            serverAPI.notifyChanges(new EmptyDeckMessage(e.getIndx()), player);
-        }catch (MsgNotDeliveredException msg){
-            throw new RuntimeException(e);
-        }
+        System.out.println("calledNotifyChanges");
     }
+
 }
