@@ -102,7 +102,7 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
             in.close();
             socket.close();
         } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e);//TODO da sistemare per disconnessione parte quando metto un nome già utilizzato
         }
 
     }

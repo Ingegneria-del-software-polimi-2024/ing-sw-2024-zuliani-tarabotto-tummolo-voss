@@ -2,6 +2,7 @@ package Server.Web.Game;
 
 import Server.Web.Lobby.Lobby;
 import SharedWebInterfaces.Messages.Message;
+import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.DisconnectionMessage;
 import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_RoomChoice;
 import SharedWebInterfaces.Messages.MessagesFromLobby.AvailableGames;
 import SharedWebInterfaces.Messages.MessagesFromLobby.WelcomeMessage;
@@ -106,7 +107,12 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
                     sendToServer((MessageFromClient)messageToLobby);
             }while(true);
         }catch (IOException | ClassNotFoundException e){
-            throw new RuntimeException();
+            System.err.println("Connection lost: " + e.getMessage());
+
+            DisconnectionMessage disconnectionMessage = new DisconnectionMessage();
+            api.sendToServer(disconnectionMessage);
+           // handleDisconnection();
+            //throw new RuntimeException();//TODO HANDLE DISCONNECTION
         }
 
 
@@ -165,7 +171,7 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
                 retryCount++;
             }
         }
-        throw new RemoteException();
+        throw new RemoteException(); //TODO handle possible disconnection
     }
 
 }

@@ -1,5 +1,6 @@
 package Server;
 import Server.Web.Game.ServerAPI_GO;
+import Server.Web.Lobby.Room;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import model.Exceptions.EmptyCardSourceException;
 import SharedWebInterfaces.SharedInterfaces.ServerControllerInterface;
@@ -21,6 +22,8 @@ import java.util.ArrayList;
  */
 
 public class ModelController implements ServerControllerInterface {
+
+    private Room room;
     private GameState gameState;
     private ArrayList<String> playersNicknames;
     private String gameId;
@@ -36,12 +39,19 @@ public class ModelController implements ServerControllerInterface {
      * @param playersNicknames nicknames of the players
      * @param gameId id of the game
      */
-    public ModelController(ArrayList<String> playersNicknames, String gameId, ServerAPI_GO send){
+    public ModelController(ArrayList<String> playersNicknames, String gameId, ServerAPI_GO send, Room room){
         System.out.println("model controller created");
         this.playersNicknames = playersNicknames;
         this.gameId = gameId;
         this.send = send;
         this.readyPlayers = 0;
+        this.room = room;
+    }
+
+    @Override
+    public void updateHeartBeat(String playerId) {
+        // Update the last seen timestamp for the player in the room
+        room.updateHeartBeat(playerId);
     }
 
     /**
@@ -222,5 +232,11 @@ public class ModelController implements ServerControllerInterface {
     public void endGame(){
         gameState.calculateFinalPoints();
         gameState.setTurnState(TurnState.END_GAME);
+    }
+
+    public void HandleDisconnection() {
+        System.out.println("DISCONNECTION DETECTED");
+        room.handleADetectedDisconnection();
+
     }
 }

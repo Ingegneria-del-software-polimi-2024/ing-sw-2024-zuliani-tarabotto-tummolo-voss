@@ -14,6 +14,8 @@ import model.enums.Artifact;
 import model.enums.Element;
 import model.placementArea.Coordinates;
 
+import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,6 +46,11 @@ public class ViewAPI implements ViewAPI_Interface {
         viewModel.setClientAPIGo(clientAPI_GO);
     }
 
+    public void HeartbeatToServer(){
+        viewModel.HeartbeatToServer();
+    }
+    //all this methods create a new MessageFromClient object containing an execute() method with t
+
     /////////// from CLIENT to SERVER  ACTIONS ////////////////////////////////////////////////////////////////////////////////////
     //all this methods create a new MessageFromClient object containing an execute() method with the call to a specific method of ModelController
     public void playStarterCard(){
@@ -60,6 +67,9 @@ public class ViewAPI implements ViewAPI_Interface {
 
     @Override
     public void readyToPlay(){viewModel.readyToPlay();}
+
+
+
 
 //////////////////////////////////////////Lobby/////////////////////////////////////////////////////////////////////////
 

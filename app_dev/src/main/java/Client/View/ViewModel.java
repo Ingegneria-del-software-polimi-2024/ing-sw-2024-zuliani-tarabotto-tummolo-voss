@@ -101,6 +101,12 @@ public class ViewModel {
         clientAPIGo.sendToLobby(new JoinGameMessage(playerId, game, players));
     }
     /////////// from CLIENT to SERVER  ACTIONS ////////////////////////////////////////////////////////////////////////////////////
+
+
+    //HEARTBEAT
+    public void HeartbeatToServer(){
+        clientAPIGo.sendToServer( new HeartbeatMessage(playerId));
+    }
     //all this methods create a new MessageFromClient object containing an execute() method with the call to a specific method of ModelController
     public void playStarterCard(){
         clientAPIGo.sendToServer( new PlayStarterCardMessage( starterCard.getFaceSide(), playerId));
