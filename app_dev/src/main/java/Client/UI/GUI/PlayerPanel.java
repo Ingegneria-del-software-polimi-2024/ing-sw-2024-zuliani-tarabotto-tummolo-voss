@@ -1,6 +1,6 @@
 package Client.UI.GUI;
 
-import Client.UI.GUI.PlayerBanner.IconLabel;
+
 
 
 import javax.imageio.ImageIO;

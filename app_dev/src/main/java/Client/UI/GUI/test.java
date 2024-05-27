@@ -1,7 +1,6 @@
 package Client.UI.GUI;
 
-import Client.UI.GUI.PlayerBanner.CellPanel;
-import Client.UI.GUI.PlayerBanner.IconLabel;
+
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
