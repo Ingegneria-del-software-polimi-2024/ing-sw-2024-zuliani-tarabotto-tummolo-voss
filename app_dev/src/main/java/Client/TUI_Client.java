@@ -1,5 +1,7 @@
 package Client;
 
+import Client.UI.TUI.TUI;
+import Client.UI.UI;
 import Client.View.ViewAPI;
 import Client.Web.ClientAPI_COME;
 import Client.Web.ClientAPI_GO;
@@ -15,6 +17,8 @@ public class TUI_Client implements Runnable{
 
     public TUI_Client() {
         this.view = new ViewAPI();
+        UI ui = new TUI(view);
+        view.setUI(ui);
     }
 
     @Override
