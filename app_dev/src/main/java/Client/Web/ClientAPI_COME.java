@@ -25,6 +25,9 @@ public class ClientAPI_COME implements Runnable{
      */
     public void performChanges(){toDoQueue.executeNextMessage(view);};
 
+    /**
+     * method that dequeues continuously messages from the queue
+     */
     @Override
     public void run() {
         MessageFromServer message;
@@ -37,8 +40,12 @@ public class ClientAPI_COME implements Runnable{
             }
         }while(!(message instanceof InterruptConnectionMessage));
     }
-    public void enqueue(MessageFromServer msg){
 
+    /**
+     * enqueues a message in the list of actions
+     * @param msg the message
+     */
+    public void enqueue(MessageFromServer msg){
         toDoQueue.enqueueMessage(msg);
     }
 }

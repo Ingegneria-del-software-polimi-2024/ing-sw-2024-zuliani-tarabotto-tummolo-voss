@@ -24,7 +24,7 @@ class ControllerTest {
     private GameState gameState;
     private ArrayList<String> nickNames;
     private CliView view;
-    private Scanner sc = new Scanner(new File("/Users/andre/Documents/GitHub.nosync/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/input"));
+    private Scanner sc = new Scanner(new File("/Users/andre/Documents/GitHub.nosync/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/final"));
     private Player initialPlayer;
 
     ControllerTest() throws FileNotFoundException {
@@ -43,8 +43,8 @@ class ControllerTest {
         String id = "gameState_0";
         nickNames = new ArrayList<String>();
         int numPlayers = Integer.parseInt(sc.next());
-        nickNames.add(sc.next());
-        nickNames.add(sc.next());
+        for(int x= 0; x<numPlayers; x++)
+            nickNames.add(sc.next());
         //creates a GameState
         int i = 0;
         gameState = new GameState(nickNames, id, i, new MockModelListener());

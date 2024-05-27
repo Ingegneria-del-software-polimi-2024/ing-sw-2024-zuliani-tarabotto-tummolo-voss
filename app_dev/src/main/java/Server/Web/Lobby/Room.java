@@ -24,6 +24,12 @@ public class Room {
     private HashMap<String, ClientHandlerInterface> playersInterfaces;
 
 
+    /**
+     * allows a player in the room
+     * @param name the player's nickname
+     * @param handler the player's handler
+     * @throws CantJoinRoomExcept if the room is full
+     */
     public void joinRoom(String name, ClientHandlerInterface handler) throws CantJoinRoomExcept {
         if(expectedPlayers == players.size())
             throw new CantJoinRoomExcept(false);
@@ -40,6 +46,11 @@ public class Room {
             startGame();
     }
 
+    /**
+     * class constructor
+     * @param name the name of the room
+     * @param expectedPlayers the number of player to wait in order to start the game
+     */
     public Room(String name, int expectedPlayers){
         this.playersInterfaces = new HashMap<>();
         this.expectedPlayers = expectedPlayers;
@@ -49,13 +60,25 @@ public class Room {
         full = false;
     }
 
+    /**
+     *
+     * @return the players in the room
+     */
     public ArrayList<String> getPlayers() {
         return (ArrayList<String>) players.clone();
     }
 
+    /**
+     *
+     * @return the room's name
+     */
     public String getName() {
         return name;
     }
+
+    /**
+     * starts a thread starting the controller execution...
+     */
     private void startGame(){
         //starts a thread starting the controller execution...
         //game = new GameState(players, "3");
@@ -74,8 +97,19 @@ public class Room {
         modelController.initializeGameState();
         System.out.println("game can now start");
     }
+
+    /**
+     * verifies if a player is contained in a room
+     * @param player the player's nickname
+     * @return a boolean
+     */
     public boolean contains(String player){
         return players.contains(player);
     }
+
+    /**
+     *
+     * @return true if the room is full else false
+     */
     public boolean isFull(){return full;}
 }

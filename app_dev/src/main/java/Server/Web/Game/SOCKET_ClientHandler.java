@@ -28,9 +28,19 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
 
     private final int MAX_RETRY = 3;
 
+    /**
+     * forwards the message to the interface managing incoming messages
+     * @param message the incoming message
+     * @throws RemoteException when a communication error occurs
+     */
     @Override
     public void sendToServer(MessageFromClient message) throws RemoteException {api.sendToServer(message);}
 
+    /**
+     * sends a message to the client
+     * @param message the message to be sent
+     * @throws RemoteException when a communication error occurs
+     */
     @Override
     public void notifyChanges(MessageFromServer message) throws RemoteException {
         snd(message);

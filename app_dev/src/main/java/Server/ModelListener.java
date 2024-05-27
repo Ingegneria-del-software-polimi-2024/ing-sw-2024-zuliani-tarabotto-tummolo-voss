@@ -214,6 +214,14 @@ public class ModelListener {//TODO Handle correctly the exceptions
             throw new RuntimeException(msg);
         }
     }
+
+    /**
+     * after the player decided where to draw the next card from, the involved card source gets updated based on cardSource
+     * method used when picking a card from an "open card" deck
+     * @param deck
+     * @param cardSource
+     * @param index
+     */
     public void notifyChanges(List<PlayableCard> deck, int cardSource, int index) {
         try{
             serverAPI.broadcastNotifyChanges( new DrawOpenCardMessage(deck, cardSource, index));
@@ -236,6 +244,12 @@ public class ModelListener {//TODO Handle correctly the exceptions
         }
     }
     ////////////////////////////// ERROR NOTIFICATIONS ///////////////////////////////////////////////////////////////
+
+    /**
+     * notify a player when can't play a card
+     * @param player the player's nickname
+     * @param e the raised exception
+     */
     public void notifyChanges(String player, CantPlaceCardException e) {
         try {
             serverAPI.notifyChanges(new CantPlaceCardMessage(player, e.getCard(), e.getCoord()), player);
@@ -243,6 +257,12 @@ public class ModelListener {//TODO Handle correctly the exceptions
             throw new RuntimeException(msg);
         }
     }
+
+    /**
+     * notify a player when he is kicked out of the game or exits it
+     * @param player the player's nickname
+     * @param e the raised exception
+     */
     public void notifyChanges(String player, KickOutOfGameException e){
         try {
             serverAPI.notifyChanges(new KickOutOfGameMessage(player), player);
@@ -250,6 +270,12 @@ public class ModelListener {//TODO Handle correctly the exceptions
             throw new RuntimeException(msg);
         }
     }
+
+    /**
+     * notify a player when can't draw from a deck
+     * @param player the player's nickname
+     * @param e the raised exception
+     */
     public void notifyChanges(String player, EmptyCardSourceException e){
         try {
             serverAPI.notifyChanges(new EmptyDeckMessage(e.getIndx()), player);

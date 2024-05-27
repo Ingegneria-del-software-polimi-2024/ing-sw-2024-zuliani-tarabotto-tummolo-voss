@@ -30,6 +30,9 @@ public class ServerAPI_COME {
     //controller called
     public void performNextMethod(){}
 
+    /**
+     * loops that dequeues messages from the queue of incoming messages
+     */
     public void loop(){
         MessageFromClient message;
          while (true) {
@@ -50,6 +53,11 @@ public class ServerAPI_COME {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    /**
+     * class constructor
+     * @param controller
+     */
+    //TODO complete description
     public ServerAPI_COME(ModelController controller) {
         toDoQueue = new ServerMessageQueue();
         players = new HashMap<String, ClientHandlerInterface>();

@@ -385,7 +385,7 @@ public class GameState {
 
     //calls the PlacementArea method to print the player's cards disposition
     public void printPlayerDisposition(){
-        turnPlayer.getPlacementArea().printDisposition();
+        turnPlayer.getPlacementArea(). printDisposition();
     }
 
     public void printCommonObjectives() {

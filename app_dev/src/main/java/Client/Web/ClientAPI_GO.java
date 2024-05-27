@@ -29,6 +29,11 @@ public class ClientAPI_GO {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * forwards to the lobby the message
+     * @param message the message to pass to the lobby
+     */
     public void sendToLobby(MessageToLobby message){
         try {
             handler.sendToLobby(message);

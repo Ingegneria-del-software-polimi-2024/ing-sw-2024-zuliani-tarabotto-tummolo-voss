@@ -24,12 +24,33 @@ public class RMI_ServerHandler implements ServerHandlerInterface {
     private RMI_ManagerInterface manager;
     private String serverHost;
 
+    /**
+     * sends the message to the server
+     * @param message message to be sent
+     * @throws RemoteException if the message couldn't be delivered
+     */
     public void sendToServer(MessageFromClient message) throws RemoteException{server.sendToServer(message);}
+
+    /**
+     * sends the message to the lobby
+     * @param message message to be sent
+     * @throws RemoteException if the message couldn't be delivered
+     */
     public void sendToLobby(MessageToLobby message)throws RemoteException{server.deliverToLobby(message);}
 
+    /**
+     * forwards the incoming message to the client API incoming interface
+     * @param message incoming message
+     * @throws RemoteException if an error in the network happens
+     */
     @Override
     public void notifyChanges(MessageFromServer message) throws RemoteException{api.notifyChanges(message);}
 
+    /**
+     * forwards the incoming message to the client API incoming interface
+     * @param msg incoming message
+     * @throws RemoteException if an error in the network happens
+     */
     @Override
     public void receiveFromLobby(MessageFromServer msg) throws RemoteException {
         if(msg instanceof WelcomeMessage){
@@ -38,6 +59,13 @@ public class RMI_ServerHandler implements ServerHandlerInterface {
         api.enqueue(msg);
     }
 
+    /**
+     * class constructor
+     * @param host the hostname of the server
+     * @param port the server port
+     * @param come the interface for the reception of the messages
+     * @throws StartConnectionFailedException if an error in the instantiation of the connection happens
+     */
     public RMI_ServerHandler(String host, int port, ClientAPI_COME come) throws StartConnectionFailedException {
         api = come;
         serverHost = host;
