@@ -5,12 +5,15 @@ import Client.UI.GUI.PlayerBanner.PlayerPanel;
 import Client.UI.UI;
 import Client.View.ViewAPI;
 import model.cards.PlayableCards.PlayableCard;
+import model.enums.Artifact;
+import model.enums.Element;
 import model.placementArea.Coordinates;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 import static org.fusesource.jansi.Ansi.ansi;
@@ -22,12 +25,14 @@ public class GUI  implements UI {
     private ViewAPI view;
     private int screenWidth;
     private int screenHeight;
+    private HashMap<String, PlayerPanel> banners;
     Scanner sc = new Scanner(System.in);
+
 
 
     public GUI(ViewAPI view){
         this.view = view;
-
+        this.banners = new HashMap<>();
 
         SwingUtilities.invokeLater(() -> {
             frame = new JFrame("CODEX NATURALIS");
@@ -35,59 +40,21 @@ public class GUI  implements UI {
             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
             screenWidth = (int)screenSize.getWidth();
             screenHeight = (int)screenSize.getHeight();
-
-
             frame.setSize(screenWidth, screenHeight);
             frame.setLayout(new FlowLayout(FlowLayout.LEADING));
 
-
-            /*ArrayList<String> paths= new ArrayList<>();
-            int[] numbers = {1,2,3,4,5,6,7};
-            paths.add("/Images/f.png");
-            paths.add("/Images/animal.png");
-            paths.add("/Images/plant.png");
-            paths.add("/Images/insect.png");
-            paths.add("/Images/feather.png");
-            paths.add("/Images/inkwell.png");
-            paths.add("/Images/manuscript.png");
-
-            ImageIcon playerIcon = new ImageIcon("/Images/playerIcon/icon2.jpeg");
-
-
-            int[] nums = {1,2,3,4,5,6,7};
-            PlayerPanel player = new PlayerPanel(paths, numbers, (int ) (width * 0.18), (int)(height * 0.13));
-            player.setPreferredSize(new Dimension((int ) (width * 0.18), (int)(height * 0.13)));
-            frame.add(player);
-            //frame.add(new test("/Images/playerIcon/icon2.jpeg", paths, nums));
-
-            //PlayerBanner player1 = new PlayerBanner(width, height);
-            //player.setBackground(new Color(14, 32, 24));
-            //frame.add(player1);
-            frame.setVisible(true);*/
-            //frame.setVisible(true);
         });
     }
 
     @Override
     public void displayInitialization() {
         System.out.println("heki");
-        ArrayList<String> paths= new ArrayList<>();
-        int[] numbers = {1,2,3,4,5,6,7};
-        paths.add("/Images/f.png");
-        paths.add("/Images/animal.png");
-        paths.add("/Images/plant.png");
-        paths.add("/Images/insect.png");
-        paths.add("/Images/feather.png");
-        paths.add("/Images/inkwell.png");
-        paths.add("/Images/manuscript.png");
-
-        ImageIcon playerIcon = new ImageIcon("/Images/playerIcon/icon2.jpeg");
-
-        PlayerPanel player = new PlayerPanel(paths, numbers, (int ) (screenWidth * 0.18), (int)(screenHeight * 0.13));
-        player.setPreferredSize(new Dimension((int ) (screenWidth * 0.18), (int)(screenHeight * 0.13)));
-        frame.add(player);
+        createPlayerBanner();
         frame.setVisible(true);
-        //frame.repaint();
+        sc.next();
+        view.getAvailableArtifacts("fra").put(Artifact.paper, 3);
+        updateBannerResources();
+
     }
 
     @Override
@@ -228,5 +195,20 @@ public class GUI  implements UI {
 
     private boolean validPort(int port){
         return(1024<=port && port <=49151);
+    }
+
+    private void createPlayerBanner(){
+        for(String p : view.getPlayers()){
+            PlayerPanel player = new PlayerPanel( p, (int ) (screenWidth * 0.18), (int)(screenHeight * 0.13));
+            player.setPreferredSize(new Dimension((int ) (screenWidth * 0.18), (int)(screenHeight * 0.13)));
+            banners.put(p, player);
+            frame.add(player);
+        }
+    }
+
+    private void updateBannerResources( ){
+        for(String p : view.getPlayers()){
+            banners.get(p).updateResources(view.getAvailableElements(p), view.getAvailableArtifacts(p));
+        }
     }
 }

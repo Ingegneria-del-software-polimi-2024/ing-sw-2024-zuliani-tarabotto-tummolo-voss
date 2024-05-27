@@ -2,74 +2,76 @@ package Client.UI.GUI.PlayerBanner;
 
 
 
+import Client.UI.GUI.Resources;
+import model.enums.Artifact;
+import model.enums.Element;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
         import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
 public class test extends JPanel {
 
-    public test(String Icon, List<String> paths, int[] numbers) {
+    private int points;
+    private HashMap<Resources, Integer> resources;
+    private JPanel tablePanel;
+    private HashMap<Resources, JPanel> resourcePanel;
+    public test( String name) {
 
-
+        resourcePanel = new HashMap<>();
         setOpaque(false);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         //this.setAlignmentX(JPanel.LEFT_ALIGNMENT);
 
         Font customFont = new Font("Serif", Font.BOLD, 150); // Font name, style, size
-        JLabel nickname = new JLabel("NickName");
+        JLabel nickname = new JLabel(name);
         //nickname.setFont(nickname.getFont().deriveFont(Font.BOLD));
 
         add(nickname);
         // Create the table panel with 2 columns and 4 rows
-        JPanel tablePanel = new JPanel(new GridLayout(4, 2, 25, -5));
+        tablePanel = new JPanel(new GridLayout(4, 2, 25, -5));
         tablePanel.setOpaque(false);
 
-        ImageIcon[] resources = new ImageIcon[7];
-        int cont = 0;
-        for(String s : paths){
+
+        HashMap<Resources, ImageIcon> resourcesImg = new HashMap<>();
+
+
+        for(Resources r : Resources.values()){
             BufferedImage img = null;
             try{
-                img = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(s)));
+                img = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(r.getImg())));
 
                 ImageIcon image= new ImageIcon(img.getScaledInstance(15,15,Image.SCALE_SMOOTH));
                 //ImageIcon image= new ImageIcon(img);
-                resources[cont] = image;
-                cont++;
+                resourcesImg.put(r, image);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        }
-
-        // Add images and numbers to the table
-        for (int i = 0; i < resources.length; i++) {
 
             JPanel cellPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
             cellPanel.setOpaque(false);
-            JLabel iconLabel = new JLabel(resources[i]);
+            JLabel iconLabel = new JLabel(resourcesImg.get(r));
             iconLabel.setOpaque(false);
-            JLabel numberLabel = new JLabel(String.valueOf(numbers[i]));
+            JLabel numberLabel = new JLabel("0");
             numberLabel.setOpaque(false);
 
             // Add image and number to cell panel
             cellPanel.add(iconLabel);
             cellPanel.add(numberLabel);
+            resourcePanel.put(r, cellPanel);
 
             // Add cell panel to the table panel
             tablePanel.add(cellPanel);
+
         }
 
-        // Add icon panel and table panel to the main panel
-        //add(iconPanel, BorderLayout.WEST);
         add(tablePanel);
-
-
-
     }
-
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -78,5 +80,19 @@ public class test extends JPanel {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
     }
+
+    public void updatePoints(int points){
+
+    }
+
+    public void updateResources(HashMap<Resources, Integer> res){
+        resources = res;
+        for(Resources r : Resources.values()) {
+            ((JLabel)(resourcePanel.get(r).getComponent(1))).setText(String.valueOf(res.get(r)));
+
+        }
+
+    }
+
 
 }

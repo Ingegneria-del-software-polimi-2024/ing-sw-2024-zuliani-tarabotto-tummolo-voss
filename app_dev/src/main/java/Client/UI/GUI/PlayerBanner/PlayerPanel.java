@@ -4,12 +4,17 @@ package Client.UI.GUI.PlayerBanner;
 
 
 import Client.UI.GUI.PlayerBanner.test;
+import Client.UI.GUI.Resources;
+import Client.View.ViewAPI;
+import model.enums.Artifact;
+import model.enums.Element;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,9 +27,12 @@ public class PlayerPanel extends JPanel {
     private int imageDim = (int)(getHeight() * 0.8);
     private int imagePos = (getHeight() - imageDim) / 2;
     BufferedImage[] icons;
+    private String player;
+    private test infoPanel;
 
-    public PlayerPanel(List<String> paths, int[] numbers, int width, int height) {
 
+    public PlayerPanel(String player, int width, int height ) {
+        this.player = player;
         imageDim = (int)(height * 0.8);
         imagePos = (height - imageDim) / 2;
         setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -33,9 +41,9 @@ public class PlayerPanel extends JPanel {
 
         icons = new BufferedImage[7];
 
-        test t = new test("/Images/playerIcon/icon2.jpeg",paths, numbers);
+        infoPanel = new test(player);
         //t.setPreferredSize(new Dimension((int)(width * 0.5), (int)(height* 0.7)));
-        add(t);
+        add(infoPanel);
 
 
         setBackground(new Color(218, 211, 168));
@@ -74,10 +82,6 @@ public class PlayerPanel extends JPanel {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         // Define the bounds and properties for the rounded rectangle
-        int rectX = 10;
-        int rectY = 10;
-        int rectWidth = 100;
-        int rectHeight = 100;
         int arcWidth = 10;
         int arcHeight = 10;
 
@@ -111,8 +115,32 @@ public class PlayerPanel extends JPanel {
 
    }
 
+   public void updatePoints(int points){
+        infoPanel.updatePoints(points);
+   }
 
+   public void updateResources(HashMap<Element, Integer> availableElements, HashMap<Artifact, Integer> availableArtifacts){
+        HashMap<Resources, Integer> res = new HashMap<>();
+        for(Resources r : Resources.values()){
+            res.put(r, 0);
+        }
+       for(Element e : availableElements.keySet()){
+            for(Resources r : res.keySet()){
+                if(String.valueOf(r).equals(String.valueOf(e))){
+                    res.put(r, availableElements.get(e));
+                }
+            }
+        }
 
+       for(Artifact a  : availableArtifacts.keySet()){
+           for(Resources r : res.keySet()){
+               if(String.valueOf(r).equals(String.valueOf(a))){
+                   res.put(r, availableArtifacts.get(a));
+               }
+           }
+       }
 
+       infoPanel.updateResources(res);
+   }
 }
 
