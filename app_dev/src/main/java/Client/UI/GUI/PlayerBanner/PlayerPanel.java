@@ -37,7 +37,7 @@ public class PlayerPanel extends JPanel {
         imagePos = (height - imageDim) / 2;
         setLayout(new FlowLayout(FlowLayout.LEFT));
         //setBorder(BorderFactory.createEmptyBorder((int)(height * 0.05), (int)(height * 0.05), (int)(height * 0.05), (int)(height * 0.05)));
-        setBorder(BorderFactory.createEmptyBorder(imagePos, 2*imagePos + imageDim, 0, 0));
+        setBorder(BorderFactory.createEmptyBorder(0, 2*imagePos + imageDim, 0, 0));
 
         icons = new BufferedImage[7];
 
@@ -46,7 +46,7 @@ public class PlayerPanel extends JPanel {
         add(infoPanel);
 
 
-        setBackground(new Color(218, 211, 168));
+        setBackground(new Color(50, 84, 70));
 
         setOpaque(true);
 
@@ -90,7 +90,7 @@ public class PlayerPanel extends JPanel {
         if (playerImage != null) {
             System.out.println("image ");
             //g2d.setClip(new RoundRectangle2D.Double(imagePos, imagePos, imageDim + 5, imageDim + 5, 20, 20));
-            g2d.drawImage(playerImage, imagePos, imagePos, imageDim , imageDim , this); // Adjust padding as needed
+            g2d.drawImage(playerImage, imagePos, imagePos, imageDim, imageDim , this); // Adjust padding as needed
         }
 
 
@@ -110,7 +110,7 @@ public class PlayerPanel extends JPanel {
         // Draw points in a circle at the top left corner
         g2d.setColor(new Color(102, 22, 188));
         g2d.fillOval(imagePos - 5 , imagePos - 5, 30, 30);
-        g2d.setColor(new Color(171, 144, 76));
+        g2d.setColor(new Color(255, 248, 164));
         g2d.drawString(String.valueOf(points), imagePos  + 5, imagePos + 10 );
 
    }

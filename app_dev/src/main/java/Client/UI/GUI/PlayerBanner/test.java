@@ -21,24 +21,30 @@ public class test extends JPanel {
     private HashMap<Resources, Integer> resources;
     private JPanel tablePanel;
     private HashMap<Resources, JPanel> resourcePanel;
+    private HashMap<Resources, BufferedImage> icons;
     public test( String name) {
 
         resourcePanel = new HashMap<>();
-        setOpaque(false);
+        icons = new HashMap<>();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        //this.setAlignmentX(JPanel.LEFT_ALIGNMENT);
+        this.setOpaque(false);
+        JPanel nickPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        nickPanel.setOpaque(false);
 
-        Font customFont = new Font("Serif", Font.BOLD, 150); // Font name, style, size
+        Font customFont = new Font("Serif", Font.BOLD, 15); // Font name, style, size
         JLabel nickname = new JLabel(name);
+        nickname.setFont(customFont);
+        nickname.setForeground(new Color(255, 248, 164));
+        //nickname.setAlignmentX(Component.LEFT_ALIGNMENT);
+        nickPanel.add(nickname);
         //nickname.setFont(nickname.getFont().deriveFont(Font.BOLD));
 
-        add(nickname);
+        add(nickPanel);
         // Create the table panel with 2 columns and 4 rows
         tablePanel = new JPanel(new GridLayout(4, 2, 25, -5));
         tablePanel.setOpaque(false);
 
 
-        HashMap<Resources, ImageIcon> resourcesImg = new HashMap<>();
 
 
         for(Resources r : Resources.values()){
@@ -46,18 +52,24 @@ public class test extends JPanel {
             try{
                 img = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(r.getImg())));
 
-                ImageIcon image= new ImageIcon(img.getScaledInstance(15,15,Image.SCALE_SMOOTH));
                 //ImageIcon image= new ImageIcon(img);
-                resourcesImg.put(r, image);
+                icons.put(r, img);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
 
             JPanel cellPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
             cellPanel.setOpaque(false);
-            JLabel iconLabel = new JLabel(resourcesImg.get(r));
-            iconLabel.setOpaque(false);
+            Dimension size = new Dimension(16, 16);
+            JLabel iconLabel = new JLabel();
+            iconLabel.setPreferredSize(size);
+            iconLabel.setPreferredSize(size);
+            iconLabel.setMinimumSize(size);
+            iconLabel.setMaximumSize(size);
+            iconLabel.setBackground(Color.CYAN);
+            //iconLabel.setOpaque(false);
             JLabel numberLabel = new JLabel("0");
+            numberLabel.setForeground(new Color(255, 248, 164));
             numberLabel.setOpaque(false);
 
             // Add image and number to cell panel
@@ -79,6 +91,15 @@ public class test extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
+
+        for(Resources r : Resources.values()) {
+            JLabel label;
+            label = ((JLabel)(resourcePanel.get(r).getComponent(0)));
+            Point labelPos = new Point(resourcePanel.get(r).getLocation());
+            g2d.drawImage(icons.get(r),(int)( labelPos.getX() + tablePanel.getX()+ label.getX()) /*+ label.getX()*/, (int)( labelPos.getY() + tablePanel.getY() + label.getY()) /*+ label.getY() + label.getHeight()*/, resourcePanel.get(r).getComponent(0).getWidth(), resourcePanel.get(r).getComponent(0).getHeight() , this);
+
+        }
+
     }
 
     public void updatePoints(int points){
@@ -89,7 +110,6 @@ public class test extends JPanel {
         resources = res;
         for(Resources r : Resources.values()) {
             ((JLabel)(resourcePanel.get(r).getComponent(1))).setText(String.valueOf(res.get(r)));
-
         }
 
     }

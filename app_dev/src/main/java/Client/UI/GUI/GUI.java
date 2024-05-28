@@ -4,16 +4,15 @@ package Client.UI.GUI;
 import Client.UI.GUI.PlayerBanner.PlayerPanel;
 import Client.UI.UI;
 import Client.View.ViewAPI;
+
 import model.cards.PlayableCards.PlayableCard;
 import model.enums.Artifact;
-import model.enums.Element;
 import model.placementArea.Coordinates;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
 
 import static org.fusesource.jansi.Ansi.ansi;
@@ -41,7 +40,7 @@ public class GUI  implements UI {
             screenWidth = (int)screenSize.getWidth();
             screenHeight = (int)screenSize.getHeight();
             frame.setSize(screenWidth, screenHeight);
-            frame.setLayout(new FlowLayout(FlowLayout.LEADING));
+            frame.setLayout(new BorderLayout());
 
         });
     }
@@ -50,6 +49,7 @@ public class GUI  implements UI {
     public void displayInitialization() {
         System.out.println("heki");
         createPlayerBanner();
+        createHandPanel();
         frame.setVisible(true);
         sc.next();
         view.getAvailableArtifacts("fra").put(Artifact.paper, 3);
@@ -198,12 +198,31 @@ public class GUI  implements UI {
     }
 
     private void createPlayerBanner(){
+        JPanel bannerPanel = new JPanel();
+        bannerPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         for(String p : view.getPlayers()){
             PlayerPanel player = new PlayerPanel( p, (int ) (screenWidth * 0.18), (int)(screenHeight * 0.13));
             player.setPreferredSize(new Dimension((int ) (screenWidth * 0.18), (int)(screenHeight * 0.13)));
             banners.put(p, player);
-            frame.add(player);
+            bannerPanel.add(player);
         }
+        frame.add(bannerPanel);
+    }
+
+    public void createDecksBanner(){
+
+    }
+
+    public void createHandPanel(){
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        HandPanel hand = new HandPanel();
+        //hand.setPreferredSize(new Dimension((int)(screenWidth * 0.5), (int)(screenHeight * 0.3)));
+        DeckPanel decks = new DeckPanel();
+        //decks.setPreferredSize(new Dimension((int)(screenWidth * 0.5), (int)(screenHeight * 0.3)));
+        bottomPanel.add(hand);
+        bottomPanel.add(decks);
+        //bottomPanel.setBackground(Color.CYAN);
+        frame.add(bottomPanel, BorderLayout.SOUTH);
     }
 
     private void updateBannerResources( ){
