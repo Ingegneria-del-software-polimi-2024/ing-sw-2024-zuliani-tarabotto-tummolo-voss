@@ -368,4 +368,29 @@ public class ViewAPI implements ViewAPI_Interface {
         }
         return false;
     }
+    ////////////////////////////////////
+
+
+
+
+
+
+
+    public void startHeartbeatThread() {
+        Thread heartbeatThread = new Thread(() -> {
+            while (true) {
+                try {
+                    this.HeartbeatToServer();
+//                    System.out.println("l");
+                    Thread.sleep(3000); // Send heartbeat every 1 second
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    break;
+                }
+            }
+        });
+
+        heartbeatThread.setDaemon(true);
+        heartbeatThread.start();
+    }
 }

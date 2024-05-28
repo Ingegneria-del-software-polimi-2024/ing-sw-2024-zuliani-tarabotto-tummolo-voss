@@ -10,4 +10,5 @@ import java.io.Serializable;
 public interface MessageToLobby extends Message, Serializable {
     public abstract void execute(Lobby lobby);
     public abstract String getSender();
+
 }

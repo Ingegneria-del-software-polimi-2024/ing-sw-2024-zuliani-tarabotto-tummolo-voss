@@ -38,6 +38,7 @@ public class ServerAPI_COME {
              if (message != null) {
                  //if(controller.checkMessage(message))
                  //if that message has sense execute it
+                 //TODO insert here the method for the heartbeat heartbeatFunc(msg.getSender)
                  message.execute(controller);
                  //else
                  //if that message doesn't have sense

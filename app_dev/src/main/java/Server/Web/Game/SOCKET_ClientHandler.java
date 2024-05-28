@@ -83,15 +83,18 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
         try{
             snd(new WelcomeMessage(lobby.getGameNames()));
             System.out.println("sent welcomeMessage");
-            NewConnectionMessage msg = null;
+            MessageToLobby msg = null;
 
             boolean read = false;
+
             while(!read) {
-                msg = (NewConnectionMessage) in.readObject();
-                read = true;
+                msg = (MessageToLobby) in.readObject();
+                if(msg instanceof NewConnectionMessage){
+                    read = true;
+                    ((NewConnectionMessage) msg).setHandler(this);
+                }
+                deliverToLobby(msg);
             }
-            msg.setHandler(this);
-            deliverToLobby(msg);
 
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException();
@@ -110,6 +113,8 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
             System.err.println("Connection lost: " + e.getMessage());
 
             DisconnectionMessage disconnectionMessage = new DisconnectionMessage();
+            if(api == null)
+                return;
             api.sendToServer(disconnectionMessage);
            // handleDisconnection();
             //throw new RuntimeException();//TODO HANDLE DISCONNECTION

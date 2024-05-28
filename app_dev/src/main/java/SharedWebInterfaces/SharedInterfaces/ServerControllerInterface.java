@@ -6,7 +6,7 @@ public interface ServerControllerInterface extends ControllerInterface {
 
     public void initializeGameState();
 
-    public void updateHeartBeat(String playerId);
+//    public void updateHeartBeat(String playerId);
 
 
     public void playStarterCard(boolean face, String player);

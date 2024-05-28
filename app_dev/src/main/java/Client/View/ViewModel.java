@@ -3,6 +3,7 @@ package Client.View;
 import Client.UI.UI;
 import Client.Web.ClientAPI_GO;
 import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.*;
+import SharedWebInterfaces.Messages.MessagesToLobby.HeartbeatMessage;
 import SharedWebInterfaces.Messages.MessagesToLobby.JoinGameMessage;
 import SharedWebInterfaces.Messages.MessagesToLobby.NewConnectionMessage;
 import SharedWebInterfaces.Messages.MessagesToLobby.RequestAvailableGames;
@@ -105,7 +106,7 @@ public class ViewModel {
 
     //HEARTBEAT
     public void HeartbeatToServer(){
-        clientAPIGo.sendToServer( new HeartbeatMessage(playerId));
+        clientAPIGo.sendToLobby( new HeartbeatMessage(playerId));
     }
     //all this methods create a new MessageFromClient object containing an execute() method with the call to a specific method of ModelController
     public void playStarterCard(){

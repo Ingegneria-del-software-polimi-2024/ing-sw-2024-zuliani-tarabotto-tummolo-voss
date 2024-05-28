@@ -48,11 +48,6 @@ public class ModelController implements ServerControllerInterface {
         this.room = room;
     }
 
-    @Override
-    public void updateHeartBeat(String playerId) {
-        // Update the last seen timestamp for the player in the room
-        room.updateHeartBeat(playerId);
-    }
 
     /**
      * decks and open cards are created, also each player is given his initial hand of cards

@@ -11,6 +11,7 @@ public class JoinGameMessage implements MessageToLobby{
 
     @Override
     public void execute(Lobby lobby) {
+        lobby.updateHeartBeat(user);
         lobby.enterRoom(user, game, nPlayers);
 
 

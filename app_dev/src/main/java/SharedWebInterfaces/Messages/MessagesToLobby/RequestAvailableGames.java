@@ -8,6 +8,7 @@ public class RequestAvailableGames implements MessageToLobby{
     private String user;
     @Override
     public void execute(Lobby lobby) {
+        lobby.updateHeartBeat(user);
         try {
             lobby.sendToPlayer(user, new AvailableGames(lobby.getGameNames()));
         } catch (MsgNotDeliveredException e) {

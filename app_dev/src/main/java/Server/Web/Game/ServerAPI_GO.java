@@ -30,8 +30,9 @@ public class ServerAPI_GO {
                 players.get(p).notifyChanges(message);
             }
         } catch (RemoteException e) {
-            throw new RuntimeException(e); //TODO HANDLE RMI DISCONNECTION
+//            throw new RuntimeException(e); //TODO HANDLE RMI DISCONNECTION
 //            throw new MsgNotDeliveredException(message);
+            System.out.println("HelloWorld X)");
         }
     }
 

@@ -101,13 +101,16 @@ public class Room {
         }
     }
 
-    private void startHeartbeatChecker() {
+    private void startHeartbeatChecker() {//TODO this MUST be sinchronized
         new Thread(() -> {
+            System.out.println("Starting Heartbeat checker");
             while (true) {
                 long currentTime = System.currentTimeMillis();
-                long timeout = 5000; // 5 seconds timeout
+                long timeout = 3000; // 3 seconds timeout
 
                 for (String player : players) {
+                    System.out.println("Checking player "+ player);
+                    System.out.println("Last seen: "+lastSeen);
                     Long lastSeenTime = lastSeen.get(player);
                     if (lastSeenTime != null && currentTime - lastSeenTime > timeout) {
                         if (!disconnectedUsers.contains(player)) {
