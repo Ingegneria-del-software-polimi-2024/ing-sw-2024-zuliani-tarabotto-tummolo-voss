@@ -1,7 +1,6 @@
 package model.placementArea;
 
 
-import SharedWebInterfaces.Messages.MessagesFromServer.Errors.KickOutOfGameMessage;
 import model.Exceptions.CantPlaceCardException;
 import model.Exceptions.KickOutOfGameException;
 import model.cards.PlayableCards.PlayableCard;
@@ -65,11 +64,9 @@ public class PlacementArea {
         Coordinates coord;
         PlayableCard cardOnTable;
         numberNearbyCards = 0;
-
         //we should throw an exception if there is already a card in those coordinates or if it can't be placed
         if(contain(disposition, xy) || !contain(availablePlaces, xy))
             throw new CantPlaceCardException(xy, card);
-
         //we should throw an exception if the card can't be placed due to its restrictions
         if(!canBePlaced(card))
             throw new CantPlaceCardException(xy, card);
@@ -360,28 +357,28 @@ public class PlacementArea {
 
 
     ///////////////// FOR TESTING PURPOSES ONLY /////////////////////////////////////////////////
-    public void printAvailablePlaces() {
-        for(Coordinates c : availablePlaces ) {
-            System.out.println("(" + c.getX() + "; " + c.getY() + ")");
-        }
-    }
-    public void printDisposition() {
-        System.out.println("––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––");
-        //printing elements
-        System.out.println("elements: mushrooms " + this.getNumberElements(Element.mushrooms));
-        System.out.println("          animals " + this.getNumberElements(Element.animals));
-        System.out.println("          insects " + this.getNumberElements(Element.insects));
-        System.out.println("          vegetals " + this.getNumberElements(Element.vegetals));
-        //printing artifacts
-        System.out.println("objects: feather " + this.getNumberArtifacts(Artifact.feather));
-        System.out.println("         ink " + this.getNumberArtifacts(Artifact.ink));
-        System.out.println("         paper " + this.getNumberArtifacts(Artifact.paper));
-        System.out.println("***\t\t***\t\t***\t\t***\t\t***\t\t***\t\t***\t\t***\t\t***");
-        for (Coordinates c : disposition.keySet()) {
-            System.out.println("Card: " + disposition.get(c).getId() + " || Coordinates: (" + c.getX() + ";" + c.getY() + ")");
-        }
-        System.out.println("––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––");
-    }
+//    public void printAvailablePlaces() {
+//        for(Coordinates c : availablePlaces ) {
+//            System.out.println("(" + c.getX() + "; " + c.getY() + ")");
+//        }
+//    }
+//    public void printDisposition() {
+//        System.out.println("––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––");
+//        //printing elements
+//        System.out.println("elements: mushrooms " + this.getNumberElements(Element.mushrooms));
+//        System.out.println("          animals " + this.getNumberElements(Element.animals));
+//        System.out.println("          insects " + this.getNumberElements(Element.insects));
+//        System.out.println("          vegetals " + this.getNumberElements(Element.vegetals));
+//        //printing artifacts
+//        System.out.println("objects: feather " + this.getNumberArtifacts(Artifact.feather));
+//        System.out.println("         ink " + this.getNumberArtifacts(Artifact.ink));
+//        System.out.println("         paper " + this.getNumberArtifacts(Artifact.paper));
+//        System.out.println("***\t\t***\t\t***\t\t***\t\t***\t\t***\t\t***\t\t***\t\t***");
+//        for (Coordinates c : disposition.keySet()) {
+//            System.out.println("Card: " + disposition.get(c).getId() + " || Coordinates: (" + c.getX() + ";" + c.getY() + ")");
+//        }
+//        System.out.println("––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––");
+//    }
 
     //TODO this MUST BE SET PROTECTED
     public HashMap<Coordinates, PlayableCard> getDisposition() { return disposition;}

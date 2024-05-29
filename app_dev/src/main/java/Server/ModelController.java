@@ -64,8 +64,6 @@ public class ModelController implements ServerControllerInterface {
     @Override
     public void setPlayerReady(){
         readyPlayers ++;
-        System.out.println("starter selection");
-        System.out.println(readyPlayers + playersNicknames.size());
         if(readyPlayers == playersNicknames.size()){
             gameState.setTurnState(TurnState.STARTER_CARD_SELECTION);
         }
@@ -114,6 +112,7 @@ public class ModelController implements ServerControllerInterface {
     @Override
     public void chooseSecretObjective(String cardId, String player) {
         if(!playersNicknames.contains(player))
+            return;
 
         gameState.setPlayerSecretObjective(cardId, player);
 
@@ -137,10 +136,15 @@ public class ModelController implements ServerControllerInterface {
      */
     @Override
     public void playCard(int cardId, int x , int y, Boolean faceSide){
+        boolean found = false;
         for(PlayableCard c : gameState.getTurnPlayer().getPlayingHand()){
-            if(c.getId() == cardId) { gameState.setSelectedHandCard(c); }
-            else gameState.wrongCardRoutine(new CantPlaceCardException(new Coordinates(x,y)));
+            if(c.getId() == cardId) {
+                gameState.setSelectedHandCard(c);
+                found = true;
+            }
         }
+        if(!found)
+            gameState.wrongCardRoutine(new CantPlaceCardException(new Coordinates(x,y)));
 
         gameState.setSelectedCardFace(faceSide);
         gameState.setSelectedCoordinates(new Coordinates(x,y));

@@ -233,7 +233,7 @@ public class CommonTable {
         initializePlayersHands(players);
     }
 
-    public static  void deterministicShuffle(PlayableDeck list, int[] permutation) {
+    public  void deterministicShuffle(PlayableDeck list, int[] permutation) {
         // Fisher-Yates shuffle algorithm with a fixed permutation
         ArrayList<PlayableCard> copy = new ArrayList<>(list.getCards());
         for (int i = 0; i < list.getCards().size(); i++) {
@@ -245,7 +245,7 @@ public class CommonTable {
         list.getCards().clear();
         list.getCards().addAll(copy);
     }
-    public static  void deterministicShuffle(ObjectiveDeck list, int[] permutation) {
+    public  void deterministicShuffle(ObjectiveDeck list, int[] permutation) {
         // Fisher-Yates shuffle algorithm with a fixed permutation
         ArrayList<ObjectiveCard> copy = new ArrayList<>(list.getCards());
         for (int i = 0; i < list.getCards().size(); i++) {
@@ -258,4 +258,7 @@ public class CommonTable {
         list.getCards().addAll(copy);
     }
 
+    private ObjectiveCard getOCard(int i){
+        return objectiveDeck.getCard(i);
+    }
 }

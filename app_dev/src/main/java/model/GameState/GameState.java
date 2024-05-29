@@ -18,9 +18,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- *
- */
 public class GameState {
 
     private ArrayList<Player> players;
@@ -352,8 +349,8 @@ public class GameState {
     }
 
 
-    public void nextState(){turnState.nextState();}
-    public void nextStage(){turnState.nextStage();}
+//    public void nextState(){turnState.nextState();}
+//    public void nextStage(){turnState.nextStage();}
 
     /////////////// GETTER METHODS FOR COMMONTABLE ATTRIBUTES ////////////////////////
     public PlayableDeck getGoldDeck() { return commonTable.getGoldDeck(); }
@@ -381,19 +378,19 @@ public class GameState {
 
     /////////////////////// METHODS RELATED TO TESTING ONLY ////////////////////////////////////////////////////////////////
     //calls the PlacementArea method to print available places where the player can put the selected card
-    public void printPlayerAvailablePlaces() {turnPlayer.getPlacementArea().printAvailablePlaces();}
-
-    //calls the PlacementArea method to print the player's cards disposition
-    public void printPlayerDisposition(){
-        turnPlayer.getPlacementArea(). printDisposition();
-    }
-
-    public void printCommonObjectives() {
-        System.out.println("COMMON OBJECTIVE 1:");
-        commonTable.getCommonObjectives().get(0).printCard();
-        System.out.println("COMMON OBJECTIVE 2:");
-        commonTable.getCommonObjectives().get(1).printCard();
-    }
+//    public void printPlayerAvailablePlaces() {turnPlayer.getPlacementArea().printAvailablePlaces();}
+//
+//    //calls the PlacementArea method to print the player's cards disposition
+//    public void printPlayerDisposition(){
+//        turnPlayer.getPlacementArea(). printDisposition();
+//    }
+//
+//    public void printCommonObjectives() {
+//        System.out.println("COMMON OBJECTIVE 1:");
+//        commonTable.getCommonObjectives().get(0).printCard();
+//        System.out.println("COMMON OBJECTIVE 2:");
+//        commonTable.getCommonObjectives().get(1).printCard();
+//    }
 
     /**
      * this is a variation of the default constructor, ONLY USED FOR THE CONTROLLER TESTS
@@ -417,18 +414,18 @@ public class GameState {
         commonTable.definedDeckInitialization(players);
     }
 
-    public GameState(ArrayList<String> nickNames, String id, int i) {
-        players = new ArrayList<Player>();
-        for(String name : nickNames) {
-            Player p;
-            players.add(p = new Player());
-            p.setNickname(name);
-        }
-        this.turnPlayer = players.get(0);
-        this.id = id;
-        // initialize commonTable
-        this.commonTable = new CommonTable();
-        //function that calls every initializing method contained in commonTable
-        commonTable.definedDeckInitialization(players);
-    }
+//    public GameState(ArrayList<String> nickNames, String id, int i) {
+//        players = new ArrayList<Player>();
+//        for(String name : nickNames) {
+//            Player p;
+//            players.add(p = new Player());
+//            p.setNickname(name);
+//        }
+//        this.turnPlayer = players.get(0);
+//        this.id = id;
+//        // initialize commonTable
+//        this.commonTable = new CommonTable();
+//        //function that calls every initializing method contained in commonTable
+//        commonTable.definedDeckInitialization(players);
+//    }
 }

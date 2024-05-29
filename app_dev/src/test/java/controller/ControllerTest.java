@@ -6,7 +6,10 @@ import model.Exceptions.EmptyCardSourceException;
 import model.GameState.GameState;
 import model.GameState.MockModelListener;
 import model.enums.Pawn;
+import model.objective.Shape;
 import model.placementArea.Coordinates;
+import model.placementArea.PlacementArea;
+import model.placementArea.PlacementAreaIterator;
 import model.player.Player;
 import org.junit.jupiter.api.Test;
 import view.CliView;
@@ -212,7 +215,11 @@ class ControllerTest {
             writer.write("winner: " +  winner.getNickname() + "\n");
             for (int i = 0; i < nickNames.size(); i++) {
                 writer.write(gameState.getPlayer(i).getNickname()+ ": " + gameState.getPlayer(i).getPoints() + " points\n");
-                for(Coordinates c : gameState.getPlayer(i).getPlacementArea().getDisposition().keySet()){
+
+                PlacementAreaIterator placementAreaIterator = new PlacementAreaIterator(gameState.getPlayer(i).getPlacementArea().getDisposition(), Shape.TOPLEFTL);
+                Coordinates c;
+                while(placementAreaIterator.hasNext()){
+                    c = placementAreaIterator.next();
                     writer.write("Card: " + gameState.getPlayer(i).getPlacementArea().getDisposition().get(c).getId() + ", (" + c.getX() + ";" + c.getY() + ")\n");
                 }
             }

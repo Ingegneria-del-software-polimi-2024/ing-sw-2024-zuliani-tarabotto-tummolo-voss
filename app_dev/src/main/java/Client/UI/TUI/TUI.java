@@ -459,8 +459,6 @@ public class TUI implements UI {
         }
     }
 
-
-
     private List<String> getInfoField(){
         List<String> infoField = new ArrayList<>();
 

@@ -7,23 +7,32 @@
     <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/Web/ClientAPI_COME.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/Web/ClientAPI_COME.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/Web/ClientAPI_GO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/Web/ClientAPI_GO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/Web/RMI_ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/Web/RMI_ServerHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/Web/SOCKET_ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/Web/SOCKET_ServerHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/ModelListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ModelListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Game/SOCKET_ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Game/SOCKET_ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Game/ServerAPI_COME.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Game/ServerAPI_COME.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Game/ServerAPI_GO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Game/ServerAPI_GO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Game/ServerMessageQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Game/ServerMessageQueue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/Room.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/SharedInterfaces/ClientHandlerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/SharedInterfaces/ClientHandlerInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/SharedInterfaces/ServerHandlerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/SharedInterfaces/ServerHandlerInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/TUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/TUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/ModelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ModelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/CommonTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/CommonTable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/TurnState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/TurnState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/placementArea/PlacementArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/placementArea/PlacementArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/player/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/controller/ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/controller/ControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/controller/expectedOutput" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/controller/expectedOutput" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/controller/output" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/controller/output" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/Web/ClientAPI_COME.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/Web/ClientAPI_COME.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/Web/ClientAPI_GO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/Web/ClientAPI_GO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/Web/RMI_ServerHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/Web/RMI_ServerHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/Web/SOCKET_ServerHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/Web/SOCKET_ServerHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Server/ModelController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Server/ModelController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Server/ModelListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Server/ModelListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Server/Web/Game/SOCKET_ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Server/Web/Game/SOCKET_ClientHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Server/Web/Game/ServerAPI_COME.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Server/Web/Game/ServerAPI_COME.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Server/Web/Game/ServerAPI_GO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Server/Web/Game/ServerAPI_GO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Server/Web/Game/ServerMessageQueue.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Server/Web/Game/ServerMessageQueue.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Server/Web/Lobby/Room.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Server/Web/Lobby/Room.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/Controller.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/GameState/CommonTable.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/GameState/CommonTable.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/GameState/GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/GameState/GameState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/CliView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/controller/ControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/controller/ControllerTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +121,46 @@
       <recent name="model.lobby" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.java in Ing_sw_proj">
+  <component name="RunManager" selected="Application.SecondClient">
+    <configuration name="RunServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Server.RunServer" />
+      <module name="Ing_sw_proj" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RunTUI_Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Client.RunTUI_Client" />
+      <module name="Ing_sw_proj" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SecondClient" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Client.SecondClient" />
+      <module name="Ing_sw_proj" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Ing_sw_proj" />
       <extension name="coverage">
@@ -128,53 +176,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameStateTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Ing_sw_proj" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="model.GameState.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="model.GameState" />
-      <option name="MAIN_CLASS_NAME" value="model.GameState.GameStateTest" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PlacementAreaTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Ing_sw_proj" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="model.placementArea.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="model.placementArea" />
-      <option name="MAIN_CLASS_NAME" value="model.placementArea.PlacementAreaTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PlacementAreaTest.testObjectiveCounts" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Ing_sw_proj" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="model.placementArea.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="model.placementArea" />
-      <option name="MAIN_CLASS_NAME" value="model.placementArea.PlacementAreaTest" />
-      <option name="METHOD_NAME" value="testObjectiveCounts" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="java in Ing_sw_proj" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Ing_sw_proj" />
       <option name="TEST_OBJECT" value="directory" />
@@ -184,19 +185,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.GameStateTest" />
-      <item itemvalue="JUnit.PlacementAreaTest" />
+      <item itemvalue="Application.RunServer" />
+      <item itemvalue="Application.RunTUI_Client" />
+      <item itemvalue="Application.SecondClient" />
       <item itemvalue="JUnit.java in Ing_sw_proj" />
       <item itemvalue="JUnit.ControllerTest" />
-      <item itemvalue="JUnit.PlacementAreaTest.testObjectiveCounts" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.SecondClient" />
+        <item itemvalue="Application.RunServer" />
         <item itemvalue="JUnit.java in Ing_sw_proj" />
         <item itemvalue="JUnit.ControllerTest" />
-        <item itemvalue="JUnit.GameStateTest" />
-        <item itemvalue="JUnit.PlacementAreaTest" />
-        <item itemvalue="JUnit.PlacementAreaTest.testObjectiveCounts" />
+        <item itemvalue="Application.RunTUI_Client" />
       </list>
     </recent_temporary>
   </component>
@@ -275,6 +276,8 @@
       <workItem from="1716655447981" duration="4204000" />
       <workItem from="1716741723722" duration="3784000" />
       <workItem from="1716745551658" duration="519000" />
+      <workItem from="1716895936458" duration="2308000" />
+      <workItem from="1716898331083" duration="2817000" />
     </task>
     <servers />
   </component>
@@ -340,13 +343,13 @@
     <SUITE FILE_PATH="coverage/app_dev$GameStateTest.ic" NAME="GameStateTest Coverage Results" MODIFIED="1716836235265" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>model.GameState.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/app_dev$ControllerTest.ic" NAME="ControllerTest Coverage Results" MODIFIED="1716836144557" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/app_dev$ControllerTest.ic" NAME="ControllerTest Coverage Results" MODIFIED="1716900290704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>controller.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/app_dev$PlacementAreaTest.ic" NAME="PlacementAreaTest Coverage Results" MODIFIED="1712502932674" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>model.placementArea.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/app_dev$_default_.ic" NAME="&lt;default&gt; Coverage Results" MODIFIED="1716745697859" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/app_dev$java_in_Ing_sw_proj.ic" NAME="java in Ing_sw_proj Coverage Results" MODIFIED="1716836526413" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/app_dev$java_in_Ing_sw_proj.ic" NAME="java in Ing_sw_proj Coverage Results" MODIFIED="1716966066739" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

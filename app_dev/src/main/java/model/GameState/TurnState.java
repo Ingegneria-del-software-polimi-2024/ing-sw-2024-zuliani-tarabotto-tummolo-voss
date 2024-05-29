@@ -119,8 +119,7 @@ public enum TurnState {
                 return;
             case CARD_DRAWING:
                 return;
-            case
-                    END_GAME:
+            case END_GAME:
                 return;
         }
         throw new UnsupportedOperationException();
