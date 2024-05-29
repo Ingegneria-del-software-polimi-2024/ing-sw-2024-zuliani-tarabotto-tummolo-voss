@@ -8,11 +8,9 @@ import model.GameState.MockModelListener;
 import model.enums.Pawn;
 import model.objective.Shape;
 import model.placementArea.Coordinates;
-import model.placementArea.PlacementArea;
 import model.placementArea.PlacementAreaIterator;
 import model.player.Player;
 import org.junit.jupiter.api.Test;
-import view.CliView;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -26,7 +24,6 @@ import static org.fusesource.jansi.Ansi.ansi;
 class ControllerTest {
     private GameState gameState;
     private ArrayList<String> nickNames;
-    private CliView view;
     private Scanner sc = new Scanner(new File("/Users/andre/Documents/GitHub.nosync/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/final"));
     private Player initialPlayer;
 
@@ -219,8 +216,9 @@ class ControllerTest {
                 PlacementAreaIterator placementAreaIterator = new PlacementAreaIterator(gameState.getPlayer(i).getPlacementArea().getDisposition(), Shape.TOPLEFTL);
                 Coordinates c;
                 while(placementAreaIterator.hasNext()){
-                    c = placementAreaIterator.next();
+                    c = placementAreaIterator.current();
                     writer.write("Card: " + gameState.getPlayer(i).getPlacementArea().getDisposition().get(c).getId() + ", (" + c.getX() + ";" + c.getY() + ")\n");
+                    placementAreaIterator.next();
                 }
             }
 
