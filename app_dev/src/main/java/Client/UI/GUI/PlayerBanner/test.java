@@ -2,6 +2,7 @@ package Client.UI.GUI.PlayerBanner;
 
 
 
+import Client.UI.GUI.GUI;
 import Client.UI.GUI.Resources;
 import model.enums.Artifact;
 import model.enums.Element;
@@ -21,11 +22,12 @@ public class test extends JPanel {
     private HashMap<Resources, Integer> resources;
     private JPanel tablePanel;
     private HashMap<Resources, JPanel> resourcePanel;
-    private HashMap<Resources, BufferedImage> icons;
-    public test( String name) {
+    private GUI gui;
 
+    public test( String name, GUI gui) {
+
+        this.gui = gui;
         resourcePanel = new HashMap<>();
-        icons = new HashMap<>();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setOpaque(false);
         JPanel nickPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -48,15 +50,6 @@ public class test extends JPanel {
 
 
         for(Resources r : Resources.values()){
-            BufferedImage img = null;
-            try{
-                img = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(r.getImg())));
-
-                //ImageIcon image= new ImageIcon(img);
-                icons.put(r, img);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
 
             JPanel cellPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
             cellPanel.setOpaque(false);
@@ -66,7 +59,7 @@ public class test extends JPanel {
             iconLabel.setPreferredSize(size);
             iconLabel.setMinimumSize(size);
             iconLabel.setMaximumSize(size);
-            iconLabel.setBackground(Color.CYAN);
+            //iconLabel.setBackground(Color.CYAN);
             //iconLabel.setOpaque(false);
             JLabel numberLabel = new JLabel("0");
             numberLabel.setForeground(new Color(255, 248, 164));
@@ -90,6 +83,8 @@ public class test extends JPanel {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        HashMap<Resources, BufferedImage> icons = gui.getResIcons();
 
 
         for(Resources r : Resources.values()) {

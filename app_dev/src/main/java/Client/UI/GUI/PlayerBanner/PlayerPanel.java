@@ -3,6 +3,7 @@ package Client.UI.GUI.PlayerBanner;
 
 
 
+import Client.UI.GUI.GUI;
 import Client.UI.GUI.PlayerBanner.test;
 import Client.UI.GUI.Resources;
 import Client.View.ViewAPI;
@@ -26,12 +27,14 @@ public class PlayerPanel extends JPanel {
     private int resource;
     private int imageDim = (int)(getHeight() * 0.8);
     private int imagePos = (getHeight() - imageDim) / 2;
-    BufferedImage[] icons;
     private String player;
     private test infoPanel;
+    //private ViewAPI view;
+    private GUI gui;
 
 
-    public PlayerPanel(String player, int width, int height ) {
+    public PlayerPanel(String player, int width, int height, GUI gui ) {
+        this.gui = gui;
         this.player = player;
         imageDim = (int)(height * 0.8);
         imagePos = (height - imageDim) / 2;
@@ -39,13 +42,8 @@ public class PlayerPanel extends JPanel {
         //setBorder(BorderFactory.createEmptyBorder((int)(height * 0.05), (int)(height * 0.05), (int)(height * 0.05), (int)(height * 0.05)));
         setBorder(BorderFactory.createEmptyBorder(0, 2*imagePos + imageDim, 0, 0));
 
-        icons = new BufferedImage[7];
-
-        infoPanel = new test(player);
-        //t.setPreferredSize(new Dimension((int)(width * 0.5), (int)(height* 0.7)));
+        infoPanel = new test(player, gui);
         add(infoPanel);
-
-
         setBackground(new Color(50, 84, 70));
 
         setOpaque(true);
@@ -61,7 +59,6 @@ public class PlayerPanel extends JPanel {
     }
 
     public void setPlayerImage(BufferedImage image) {
-        //this.playerImage = createRoundedImage(image, 50);
         repaint();
     }
 
@@ -88,7 +85,7 @@ public class PlayerPanel extends JPanel {
 
         // Draw the player image within the rounded rectangle
         if (playerImage != null) {
-            System.out.println("image ");
+            //System.out.println("image ");
             //g2d.setClip(new RoundRectangle2D.Double(imagePos, imagePos, imageDim + 5, imageDim + 5, 20, 20));
             g2d.drawImage(playerImage, imagePos, imagePos, imageDim, imageDim , this); // Adjust padding as needed
         }
@@ -119,8 +116,10 @@ public class PlayerPanel extends JPanel {
         infoPanel.updatePoints(points);
    }
 
-   public void updateResources(HashMap<Element, Integer> availableElements, HashMap<Artifact, Integer> availableArtifacts){
-        HashMap<Resources, Integer> res = new HashMap<>();
+   public void updateResources(){
+       HashMap<Resources, Integer> res = new HashMap<>();
+       HashMap<Element, Integer> availableElements = gui.getView().getAvailableElements(player);
+       HashMap<Artifact, Integer> availableArtifacts = gui.getView().getAvailableArtifacts(player);
         for(Resources r : Resources.values()){
             res.put(r, 0);
         }

@@ -32,7 +32,10 @@ public class GUI  implements UI {
     Scanner sc = new Scanner(System.in);
     private HashMap<Integer, BufferedImage> fronts;
     private HashMap<Integer, BufferedImage> backs;
+    private HashMap<Resources, BufferedImage> resIcons;
     private HandPanel handPanel;
+    private DeckPanel deckPanel;
+
 
 
 
@@ -58,12 +61,12 @@ public class GUI  implements UI {
         System.out.println("heki");
         createPlayerBanner();
         createHandPanel();
-        handPanel.updateHand(view.getHand());
+        deckPanel.updateDecks();
+        handPanel.updateHand();
         frame.setVisible(true);
         sc.next();
         view.getAvailableArtifacts("fra").put(Artifact.paper, 3);
         updateBannerResources();
-        //loadImages();
 
     }
 
@@ -211,7 +214,7 @@ public class GUI  implements UI {
         JPanel bannerPanel = new JPanel();
         bannerPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         for(String p : view.getPlayers()){
-            PlayerPanel player = new PlayerPanel( p, (int ) (screenWidth * 0.18), (int)(screenHeight * 0.13));
+            PlayerPanel player = new PlayerPanel( p, (int ) (screenWidth * 0.18), (int)(screenHeight * 0.13), this);
             player.setPreferredSize(new Dimension((int ) (screenWidth * 0.18), (int)(screenHeight * 0.13)));
             banners.put(p, player);
             bannerPanel.add(player);
@@ -226,18 +229,15 @@ public class GUI  implements UI {
     public void createHandPanel(){
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         this.handPanel = new HandPanel(this);
-        //hand.setPreferredSize(new Dimension((int)(screenWidth * 0.5), (int)(screenHeight * 0.3)));
-        //DeckPanel decks = new DeckPanel();
-        //decks.setPreferredSize(new Dimension((int)(screenWidth * 0.5), (int)(screenHeight * 0.3)));
+        this.deckPanel = new DeckPanel(this);
         bottomPanel.add(handPanel);
-        //bottomPanel.add(decks);
-        //bottomPanel.setBackground(Color.CYAN);
+        bottomPanel.add(deckPanel);
         frame.add(bottomPanel, BorderLayout.SOUTH);
     }
 
     private void updateBannerResources( ){
         for(String p : view.getPlayers()){
-            banners.get(p).updateResources(view.getAvailableElements(p), view.getAvailableArtifacts(p));
+            banners.get(p).updateResources();
         }
     }
 
@@ -245,6 +245,7 @@ public class GUI  implements UI {
         String index;
         fronts = new HashMap<>();
         backs = new HashMap<>();
+        resIcons = new HashMap<>();
         //we load the card images
         for(int i = 1; i <= 102; i++){
 
@@ -260,6 +261,14 @@ public class GUI  implements UI {
                 backs.put(i, makeRoundedCorner(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(backImagePath)))) );
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+        }
+
+        for(Resources r : Resources.values()){
+            try{
+                resIcons.put(r, ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(r.getImg()))));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         }
     }
@@ -289,4 +298,8 @@ public class GUI  implements UI {
 
     public HashMap<Integer, BufferedImage> getFronts(){ return fronts;}
     public HashMap<Integer, BufferedImage> getBacks(){ return backs;}
+    public ViewAPI getView(){
+        return view;
+    }
+    public HashMap<Resources, BufferedImage> getResIcons(){return resIcons;}
 }

@@ -1,5 +1,6 @@
 package Client.UI.GUI;
 
+import Client.UI.GUI.EventListeners.FlipCardListener;
 import Client.UI.TUI.HandPrinter;
 import model.cards.PlayableCards.PlayableCard;
 
@@ -28,15 +29,17 @@ public class HandPanel extends JPanel {
         c1 = new CardLabel();
         c2 = new CardLabel();
         c3 = new CardLabel();
+        c1.addMouseListener(new FlipCardListener());
+        c2.addMouseListener(new FlipCardListener());
+        c3.addMouseListener(new FlipCardListener());
 
         this.add(c1);
         this.add(c2);
         this.add(c3);
-
-
     }
 
-    public void updateHand(List<PlayableCard> hand){
+    public void updateHand(){
+        List<PlayableCard> hand = gui.getView().getHand();
         hand.get(0).setFaceSide(true);
         hand.get(1).setFaceSide(true);
         hand.get(2).setFaceSide(true);

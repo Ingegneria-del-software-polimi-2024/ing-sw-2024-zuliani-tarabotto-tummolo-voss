@@ -1,17 +1,10 @@
 package Client.UI.GUI;
 
-import model.cards.Card;
 import model.cards.PlayableCards.PlayableCard;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Objects;
+
 
 public class CardLabel extends JLabel {
     private PlayableCard c;
@@ -21,15 +14,13 @@ public class CardLabel extends JLabel {
 
     public CardLabel(){
         setOpaque(false);
-        this.addMouseListener(new MouseAdapter() {
+        /*this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 // Action to perform when the label is clicked
                 flipCard();
-                repaint();
-                System.out.println("flip");
             }
-        });
+        });*/
     }
 
     public void updateCard(PlayableCard c, BufferedImage front, BufferedImage back){
@@ -38,8 +29,9 @@ public class CardLabel extends JLabel {
         this.front = front;
     }
 
-    private void flipCard(){
+    public void flipCard(){
         c.setFaceSide(!c.getFaceSide());
+        this.repaint();
     }
     @Override
     public Dimension getPreferredSize() {
