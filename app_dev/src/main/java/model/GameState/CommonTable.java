@@ -243,6 +243,7 @@ public class CommonTable {
         list.getCards().clear();
         list.getCards().addAll(copy);
     }
+
     public static  void deterministicShuffle(ObjectiveDeck list, int[] permutation) {
         // Fisher-Yates shuffle algorithm with a fixed permutation
         ArrayList<ObjectiveCard> copy = new ArrayList<>(list.getCards());

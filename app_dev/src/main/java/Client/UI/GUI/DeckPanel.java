@@ -21,7 +21,7 @@ public class DeckPanel extends JPanel {
         this.add(c1);
         this.add(c2);
         this.add(c3);
-*/
+*//*
         setBackground(new Color(50, 84, 70));
         setLayout(new GridLayout(2, 3,10, 10));
         this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -50,6 +50,6 @@ public class DeckPanel extends JPanel {
         g2d.setColor(new Color(171, 144, 76));
         g2d.setStroke(new BasicStroke(borderWidth));
         g2d.drawRect(borderWidth / 2, borderWidth / 2, getWidth() - borderWidth, getHeight() - borderWidth);
-
+*/
     }
 }

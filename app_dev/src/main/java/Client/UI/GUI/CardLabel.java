@@ -1,6 +1,7 @@
 package Client.UI.GUI;
 
 import model.cards.Card;
+import model.cards.PlayableCards.PlayableCard;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -13,19 +14,13 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class CardLabel extends JLabel {
+    private PlayableCard c;
+    private BufferedImage front;
+    private BufferedImage back;
 
-    private HashMap<String, String[]> imgPath;
-    private String card;
-    private boolean face;
-    public CardLabel(String card){
-        //setOpaque(true);
-        this.card = card;
-        face = true;
-        imgPath = new HashMap<>();
-        imgPath.put("fungi", new String[]{"/Images/cardsFront/fungiFront.png", "/Images/cardsBack/fungiBack.png"});
-        imgPath.put("plant", new String[]{"/Images/cardsFront/plantFront.png", "/Images/cardsBack/plantBack.png"});
-        imgPath.put("animal", new String[]{"/Images/cardsFront/animalFront.png", "/Images/cardsBack/animalBack.png"});
 
+    public CardLabel(){
+        setOpaque(false);
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -37,9 +32,14 @@ public class CardLabel extends JLabel {
         });
     }
 
+    public void updateCard(PlayableCard c, BufferedImage front, BufferedImage back){
+        this.c = c;
+        this.back = back;
+        this.front = front;
+    }
 
     private void flipCard(){
-        face = !face;
+        c.setFaceSide(!c.getFaceSide());
     }
     @Override
     public Dimension getPreferredSize() {
@@ -51,21 +51,12 @@ public class CardLabel extends JLabel {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        int borderWidth = 2;
+        /*int borderWidth = 2;
         g2d.setColor(new Color(171, 144, 76));
         g2d.setStroke(new BasicStroke(borderWidth));
         g2d.drawRect(borderWidth / 2, borderWidth / 2, getWidth() - borderWidth, getHeight() - borderWidth);
-
-        BufferedImage img = null;
-        try{
-            int index;
-            if(face) index = 0;
-            else index = 1;
-
-            img = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(imgPath.get(card)[index])));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        g2d.drawImage(img, 0, 0 , getWidth(), getHeight() , this);
+*/
+        if(c.getFaceSide()) g2d.drawImage(front, 0, 0 , getWidth(), getHeight() , this);
+        else g2d.drawImage(back, 0, 0 , getWidth(), getHeight() , this);
     }
 }

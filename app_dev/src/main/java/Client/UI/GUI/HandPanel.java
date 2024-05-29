@@ -1,30 +1,33 @@
 package Client.UI.GUI;
 
 import Client.UI.TUI.HandPrinter;
+import model.cards.PlayableCards.PlayableCard;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 public class HandPanel extends JPanel {
-    private String card;
     private CardLabel c1;
     private CardLabel c2;
     private CardLabel c3;
+    private GUI gui;
 
-    public HandPanel(){
+    public HandPanel(GUI gui){
+        this.gui = gui;
         FlowLayout layout = new FlowLayout(FlowLayout.CENTER);
         layout.setHgap(20); // Set horizontal gap
         setLayout(layout);
         //setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         setBackground(new Color(50, 84, 70));
         this.setBorder(BorderFactory.createEmptyBorder(80, 20, 80, 20));
-        c1 = new CardLabel("fungi");
-        c2 = new CardLabel("plant");
-        c3 = new CardLabel("animal");
+        c1 = new CardLabel();
+        c2 = new CardLabel();
+        c3 = new CardLabel();
 
         this.add(c1);
         this.add(c2);
@@ -33,9 +36,15 @@ public class HandPanel extends JPanel {
 
     }
 
-    public void updateCard(String c){
-        this.card = c;
+    public void updateHand(List<PlayableCard> hand){
+        hand.get(0).setFaceSide(true);
+        hand.get(1).setFaceSide(true);
+        hand.get(2).setFaceSide(true);
+        c1.updateCard(hand.get(0), gui.getFronts().get(hand.get(0).getId()), gui.getBacks().get(hand.get(0).getId()) );
+        c2.updateCard(hand.get(1), gui.getFronts().get(hand.get(1).getId()), gui.getBacks().get(hand.get(1).getId()) );
+        c3.updateCard(hand.get(2), gui.getFronts().get(hand.get(2).getId()), gui.getBacks().get(hand.get(2).getId()) );
     }
+
 
 
     @Override

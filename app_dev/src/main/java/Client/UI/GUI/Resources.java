@@ -1,13 +1,13 @@
 package Client.UI.GUI;
 
 public enum Resources {
-    mushrooms("/Images/fungi.png"),
-    paper("/Images/manuscript.png"),
-    vegetals("/Images/plant.png"),
-    ink("/Images/inkwell.png"),
-    animals("/Images/animal.png"),
-    feather("/Images/feather.png"),
-    insects("/Images/insect.png");
+    mushrooms("/Images/icons/fungi.png"),
+    paper("/Images/icons/manuscript.png"),
+    vegetals("/Images/icons/plant.png"),
+    ink("/Images/icons/inkwell.png"),
+    animals("/Images/icons/animal.png"),
+    feather("/Images/icons/feather.png"),
+    insects("/Images/icons/insect.png");
 
 
     private final String img;

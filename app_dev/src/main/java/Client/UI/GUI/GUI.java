@@ -9,10 +9,14 @@ import model.cards.PlayableCards.PlayableCard;
 import model.enums.Artifact;
 import model.placementArea.Coordinates;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Scanner;
 
 import static org.fusesource.jansi.Ansi.ansi;
@@ -26,6 +30,9 @@ public class GUI  implements UI {
     private int screenHeight;
     private HashMap<String, PlayerPanel> banners;
     Scanner sc = new Scanner(System.in);
+    private HashMap<Integer, BufferedImage> fronts;
+    private HashMap<Integer, BufferedImage> backs;
+    private HandPanel handPanel;
 
 
 
@@ -43,6 +50,7 @@ public class GUI  implements UI {
             frame.setLayout(new BorderLayout());
 
         });
+        loadImages();
     }
 
     @Override
@@ -50,10 +58,12 @@ public class GUI  implements UI {
         System.out.println("heki");
         createPlayerBanner();
         createHandPanel();
+        handPanel.updateHand(view.getHand());
         frame.setVisible(true);
         sc.next();
         view.getAvailableArtifacts("fra").put(Artifact.paper, 3);
         updateBannerResources();
+        //loadImages();
 
     }
 
@@ -215,12 +225,12 @@ public class GUI  implements UI {
 
     public void createHandPanel(){
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        HandPanel hand = new HandPanel();
+        this.handPanel = new HandPanel(this);
         //hand.setPreferredSize(new Dimension((int)(screenWidth * 0.5), (int)(screenHeight * 0.3)));
-        DeckPanel decks = new DeckPanel();
+        //DeckPanel decks = new DeckPanel();
         //decks.setPreferredSize(new Dimension((int)(screenWidth * 0.5), (int)(screenHeight * 0.3)));
-        bottomPanel.add(hand);
-        bottomPanel.add(decks);
+        bottomPanel.add(handPanel);
+        //bottomPanel.add(decks);
         //bottomPanel.setBackground(Color.CYAN);
         frame.add(bottomPanel, BorderLayout.SOUTH);
     }
@@ -230,4 +240,53 @@ public class GUI  implements UI {
             banners.get(p).updateResources(view.getAvailableElements(p), view.getAvailableArtifacts(p));
         }
     }
+
+    private void loadImages(){
+        String index;
+        fronts = new HashMap<>();
+        backs = new HashMap<>();
+        //we load the card images
+        for(int i = 1; i <= 102; i++){
+
+            if(i < 10) {index = "00" + i;}
+            else if(i < 100) {index = "0" + i;}
+            else {index = String.valueOf(i);}
+            //System.out.println(index);
+
+            String frontImagePath = "/Images/front/"+ index + ".png";
+            String backImagePath = "/Images/back/" + index + ".png";
+            try {
+                fronts.put(i, makeRoundedCorner(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(frontImagePath)))) );
+                backs.put(i, makeRoundedCorner(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(backImagePath)))) );
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private BufferedImage makeRoundedCorner(BufferedImage image) {
+        int cornerRadius = 50;
+        int w = image.getWidth();
+        int h = image.getHeight();
+        BufferedImage output = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+
+        Graphics2D g2 = output.createGraphics();
+        // Enable antialiasing for smoother corners
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        // Draw the rounded rectangle
+        g2.setComposite(AlphaComposite.Src);
+        g2.setColor(Color.WHITE); // The color doesn't matter, we use it to define the shape
+        g2.fillRoundRect(0, 0, w, h, cornerRadius, cornerRadius);
+
+        // Apply the mask to the image
+        g2.setComposite(AlphaComposite.SrcAtop);
+        g2.drawImage(image, 0, 0, null);
+
+        g2.dispose();
+        return output;
+    }
+
+    public HashMap<Integer, BufferedImage> getFronts(){ return fronts;}
+    public HashMap<Integer, BufferedImage> getBacks(){ return backs;}
 }
