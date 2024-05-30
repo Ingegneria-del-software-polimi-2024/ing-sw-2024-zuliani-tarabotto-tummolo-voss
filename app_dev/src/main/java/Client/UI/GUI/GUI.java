@@ -35,9 +35,7 @@ public class GUI  implements UI {
     private HashMap<Resources, BufferedImage> resIcons;
     private HandPanel handPanel;
     private DeckPanel deckPanel;
-
-
-
+    private ObjectivesPanel objPanel;
 
     public GUI(ViewAPI view){
         this.view = view;
@@ -61,8 +59,10 @@ public class GUI  implements UI {
         System.out.println("heki");
         createPlayerBanner();
         createHandPanel();
+        createObjectivesPanel();
         deckPanel.updateDecks();
         handPanel.updateHand();
+        objPanel.updateObjectivesPanel();
         frame.setVisible(true);
         sc.next();
         view.getAvailableArtifacts("fra").put(Artifact.paper, 3);
@@ -235,12 +235,35 @@ public class GUI  implements UI {
         frame.add(bottomPanel, BorderLayout.SOUTH);
     }
 
+    public void createDecksPanel(){
+
+    }
+
+    public void createObjectivesPanel(){
+        this.objPanel = new ObjectivesPanel(this);
+        //JPanel leftPanel = new JPanel(new FlowLayout(FlowLayout.LEFT)e);
+        //leftPanel.add(objPanel);
+        frame.add(objPanel, BorderLayout.EAST);
+    }
+
     private void updateBannerResources( ){
         for(String p : view.getPlayers()){
             banners.get(p).updateResources();
         }
     }
 
+    ////////////////////////////////// GETTER METHODS ////////////////////////////////////////////////////////////////
+
+    public HashMap<Integer, BufferedImage> getFronts(){ return fronts;}
+    public HashMap<Integer, BufferedImage> getBacks(){ return backs;}
+    public ViewAPI getView(){
+        return view;
+    }
+    public HashMap<Resources, BufferedImage> getResIcons(){return resIcons;}
+
+
+
+    /////////////////////////////////////// IMAGE LOADING METHODS /////////////////////////////
     private void loadImages(){
         String index;
         fronts = new HashMap<>();
@@ -296,10 +319,4 @@ public class GUI  implements UI {
         return output;
     }
 
-    public HashMap<Integer, BufferedImage> getFronts(){ return fronts;}
-    public HashMap<Integer, BufferedImage> getBacks(){ return backs;}
-    public ViewAPI getView(){
-        return view;
-    }
-    public HashMap<Resources, BufferedImage> getResIcons(){return resIcons;}
 }
