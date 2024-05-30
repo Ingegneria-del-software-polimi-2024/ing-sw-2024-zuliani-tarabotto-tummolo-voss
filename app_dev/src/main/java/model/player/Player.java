@@ -50,7 +50,6 @@ public class Player implements Serializable {
      */
     public void playCard(PlayableCard card, Coordinates coordinates) throws CantPlaceCardException {
         this.points += placementArea.addCard(coordinates, card);
-        System.out.println("ERRORE RIGA 53 di Player");
         takeFromHand(card);
     }
 

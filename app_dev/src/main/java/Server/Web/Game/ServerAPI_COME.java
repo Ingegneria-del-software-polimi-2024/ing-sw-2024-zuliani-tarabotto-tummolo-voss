@@ -39,9 +39,9 @@ public class ServerAPI_COME {
              message = toDoQueue.getNextMessage();
              //if you find a message in the waiting list
              if (message != null) {
-                 //if(controller.checkMessage(message))
-                 //if that message has sense execute it
-                 message.execute(controller);
+                 if(controller.checkMessage(message))
+                    //if that message has sense execute it
+                    message.execute(controller);
                  //else
                  //if that message doesn't have sense
                  //    toDoQueue.enqueueMessage(message);

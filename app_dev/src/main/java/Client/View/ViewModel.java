@@ -214,14 +214,12 @@ public class ViewModel {
         decks.get(cardSource-1).remove(0);
     }
     public void setFinalPoints(HashMap<String, Integer> finalPoints) {
-        for(String player : points.keySet()){
-            points.put(player, finalPoints.get(player));
-        }
+        points.replaceAll((p, v) -> finalPoints.get(p));
     }
 
     //we use this function to end the game whenever we want
     public void endGame(){
-        clientAPIGo.sendToServer(new EndGameMessage());
+        clientAPIGo.sendToServer(new QuitGameMessage());
     }
 
     public void setPawnColor(String pawnColor) {

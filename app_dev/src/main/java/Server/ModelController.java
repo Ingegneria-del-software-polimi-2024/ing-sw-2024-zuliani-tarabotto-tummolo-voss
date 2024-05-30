@@ -9,6 +9,7 @@ import model.cards.PlayableCards.PlayableCard;
 import model.placementArea.Coordinates;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 /*
@@ -25,7 +26,6 @@ public class ModelController implements ServerControllerInterface {
     private ArrayList<String> playersNicknames;
     private String gameId;
     private int cont = 0;
-    private int roundCounter = 0;
     private String initialPlayer;
     private boolean lastRound = false;
     private ServerAPI_GO send;
@@ -197,20 +197,19 @@ public class ModelController implements ServerControllerInterface {
         //TODO: optimize this control
         if(!gameState.getLastTurn() && !lastRound){
             playNewTurn();
-        }else if(gameState.getTurnPlayer().getNickname() != initialPlayer && !lastRound){
-            roundCounter++;
+        }else if(!Objects.equals(gameState.getTurnPlayer().getNickname(), initialPlayer) && !lastRound){
             playNewTurn();
         } else {
             if(!lastRound){
                 cont = 0;
                 lastRound = true;
             }
-            playNewTurn();
-            if(cont == playersNicknames.size() -1 ){
+
+            if(cont == playersNicknames.size()){
                 gameState.calculateFinalPoints();
                 gameState.setTurnState(TurnState.END_GAME);
                 return;
-            };
+            }else{playNewTurn();}
             cont ++;
         }
     }

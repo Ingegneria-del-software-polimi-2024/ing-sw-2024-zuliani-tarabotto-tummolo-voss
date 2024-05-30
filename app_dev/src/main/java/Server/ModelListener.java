@@ -233,7 +233,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
     /**
      * at the end of the game each player is notified with the final points of every player,
      * the view is responsible for displaying the winner
-     * @param finalPoints
+     * @param finalPoints an hashmap containing the players' names and their points
      */
     public void notifyChanges(HashMap<String, Integer> finalPoints){
 

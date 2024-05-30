@@ -6,11 +6,29 @@
   <component name="ChangeListManager">
     <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/controller/ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/controller/ControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/controller/expectedOutput" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/controller/expectedOutput" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/controller/output" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/controller/output" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/TUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/TUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/View/ViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/View/ViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/ModelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ModelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/ModelListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ModelListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Game/SOCKET_ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Game/SOCKET_ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Game/ServerAPI_COME.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Game/ServerAPI_COME.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromClient/toModelController/EndGameMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromClient/toModelController/QuitGameMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/CommonTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/CommonTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/TurnState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/TurnState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/player/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Server/ModelController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Server/ModelController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/controller/ControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/controller/ControllerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Server/Web/Game/ServerAPI_COME.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Server/Web/Game/ServerAPI_COME.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/GameState/CommonTable.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/GameState/CommonTable.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/GameState/GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/GameState/GameState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/GameState/TurnState$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/GameState/TurnState$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/GameState/TurnState$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/GameState/TurnState$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/GameState/TurnState$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/GameState/TurnState$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/GameState/TurnState$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/GameState/TurnState$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/GameState/TurnState$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/GameState/TurnState$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/GameState/TurnState$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/GameState/TurnState$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/GameState/TurnState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/GameState/TurnState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/player/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/player/Player.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +117,7 @@
       <recent name="model.lobby" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ControllerTest">
+  <component name="RunManager" selected="Application.RunTUI_Client">
     <configuration name="RunServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Server.RunServer" />
       <module name="Ing_sw_proj" />
@@ -113,7 +131,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RunTUI_Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="RunTUI_Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Client.RunTUI_Client" />
       <module name="Ing_sw_proj" />
       <extension name="coverage">
@@ -171,11 +189,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.RunTUI_Client" />
+        <item itemvalue="Application.RunServer" />
         <item itemvalue="JUnit.ControllerTest" />
         <item itemvalue="Application.SecondClient" />
-        <item itemvalue="Application.RunServer" />
         <item itemvalue="JUnit.java in Ing_sw_proj" />
-        <item itemvalue="Application.RunTUI_Client" />
       </list>
     </recent_temporary>
   </component>
@@ -256,6 +274,8 @@
       <workItem from="1716745551658" duration="519000" />
       <workItem from="1716895936458" duration="2308000" />
       <workItem from="1716898331083" duration="2817000" />
+      <workItem from="1716992243550" duration="99000" />
+      <workItem from="1717073512503" duration="10091000" />
     </task>
     <servers />
   </component>

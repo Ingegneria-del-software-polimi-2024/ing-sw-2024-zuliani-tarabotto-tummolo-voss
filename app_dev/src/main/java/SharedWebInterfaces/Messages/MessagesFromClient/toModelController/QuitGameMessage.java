@@ -3,7 +3,7 @@ package SharedWebInterfaces.Messages.MessagesFromClient.toModelController;
 import Server.ModelController;
 import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
 
-public class EndGameMessage implements MessageFromViewToModelController{
+public class QuitGameMessage implements MessageFromViewToModelController{
     @Override
     public void execute(ModelController controller) {
         controller.endGame();

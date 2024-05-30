@@ -28,7 +28,7 @@ public class GameState {
     private Coordinates selectedCoordinates;
     private CommonTable commonTable;
     private TurnState turnState;
-    private final int MAX_POINTS = 10;
+    private final int MAX_POINTS = 1;//TODO insert 20
     private ModelListener modelListener;
     private List<ObjectiveCard> objectiveBuffer;
 
@@ -139,6 +139,7 @@ public class GameState {
         this.turnState = state;
         //NOTIFICATION: ABOUT THE CHANGED STATE OF GAMESTATE
         modelListener.notifyChanges(state);
+        System.out.println("NEW STATE SET: "+ state.getClass());
     }
 
     public void distributeSecretOjectives() {

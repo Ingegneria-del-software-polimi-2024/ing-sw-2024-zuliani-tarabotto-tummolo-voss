@@ -2,10 +2,8 @@ package model.GameState;
 
 import Client.UI.UI;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
-import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.ChooseSecreteObjMessage;
-import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.DrawCardMessage;
-import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.SelectStarterCardMessage;
-import SharedWebInterfaces.Messages.MessagesFromServer.PlaceableCardsMessage;
+import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.*;
+import SharedWebInterfaces.Messages.MessagesFromServer.EndGameMessage;
 
 /**
  * a finite state machine that keeps track of the states occuring during the turn of a player,
@@ -19,6 +17,13 @@ import SharedWebInterfaces.Messages.MessagesFromServer.PlaceableCardsMessage;
 public enum TurnState {
     GAME_INITIALIZATION{
         @Override
+        public boolean controlMessage(MessageFromClient message) {
+            return (message instanceof ChooseSecreteObjMessage ||
+                    message instanceof ReadyToPlayMessage      ||
+                    message instanceof QuitGameMessage);
+        }
+
+        @Override
         public void display(UI ui){
             ui.displayInitialization();
         }
@@ -28,7 +33,9 @@ public enum TurnState {
 
     STARTER_CARD_SELECTION{
         public boolean controlMessage(MessageFromClient msg){
-            return (msg instanceof SelectStarterCardMessage);
+            return (msg instanceof SelectStarterCardMessage ||
+                    msg instanceof PlayStarterCardMessage   ||
+                    msg instanceof QuitGameMessage);
         }
         @Override
         public void display(UI ui){
@@ -39,7 +46,8 @@ public enum TurnState {
 
     OBJECTIVE_SELECTION{
         public boolean controlMessage(MessageFromClient msg){
-            return (msg instanceof ChooseSecreteObjMessage);
+            return (msg instanceof ChooseSecreteObjMessage ||
+                    msg instanceof QuitGameMessage);
         }
 
         @Override
@@ -51,7 +59,8 @@ public enum TurnState {
 
     PLACING_CARD_SELECTION{
         public boolean controlMessage(MessageFromClient msg){
-            return (msg instanceof PlaceableCardsMessage);
+            return (msg instanceof PlayCardMessage ||
+                    msg instanceof QuitGameMessage);
         }
 
         @Override
@@ -63,7 +72,8 @@ public enum TurnState {
 
     CARD_DRAWING{
         public boolean controlMessage(MessageFromClient msg){
-            return (msg instanceof DrawCardMessage);
+            return (msg instanceof DrawCardMessage ||
+                    msg instanceof QuitGameMessage);
         }
 
         @Override
@@ -76,7 +86,7 @@ public enum TurnState {
     END_GAME{
         //TODO change instanceof type
         public boolean controlMessage(MessageFromClient msg){
-            return (msg instanceof SelectStarterCardMessage);
+            return (msg instanceof QuitGameMessage);
         }
 
         @Override
@@ -87,43 +97,43 @@ public enum TurnState {
 
 
 
-    /**
-     * @throws UnsupportedOperationException when the next state is in a different stage
-     */
-    public void nextState() throws UnsupportedOperationException{
-        switch(this){
-            case STARTER_CARD_SELECTION:
-                return;
-            case OBJECTIVE_SELECTION:
-                return;
-            case PLACING_CARD_SELECTION:
-                return;
-            case CARD_DRAWING:
-                return;
-            case END_GAME:
-                return;
-        }
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * @throws UnsupportedOperationException when trying to change stage not being in the final state of the present stage
-     */
-    public void nextStage() throws UnsupportedOperationException{
-        switch(this){
-            case STARTER_CARD_SELECTION:
-                return;
-            case OBJECTIVE_SELECTION:
-                return;
-            case PLACING_CARD_SELECTION:
-                return;
-            case CARD_DRAWING:
-                return;
-            case END_GAME:
-                return;
-        }
-        throw new UnsupportedOperationException();
-    }
+//    /**
+//     * @throws UnsupportedOperationException when the next state is in a different stage
+//     */
+//    public void nextState() throws UnsupportedOperationException{
+//        switch(this){
+//            case STARTER_CARD_SELECTION:
+//                return;
+//            case OBJECTIVE_SELECTION:
+//                return;
+//            case PLACING_CARD_SELECTION:
+//                return;
+//            case CARD_DRAWING:
+//                return;
+//            case END_GAME:
+//                return;
+//        }
+//        throw new UnsupportedOperationException();
+//    }
+//
+//    /**
+//     * @throws UnsupportedOperationException when trying to change stage not being in the final state of the present stage
+//     */
+//    public void nextStage() throws UnsupportedOperationException{
+//        switch(this){
+//            case STARTER_CARD_SELECTION:
+//                return;
+//            case OBJECTIVE_SELECTION:
+//                return;
+//            case PLACING_CARD_SELECTION:
+//                return;
+//            case CARD_DRAWING:
+//                return;
+//            case END_GAME:
+//                return;
+//        }
+//        throw new UnsupportedOperationException();
+//    }
 
     public boolean controlMessage(MessageFromClient message){return false;}
 

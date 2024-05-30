@@ -182,6 +182,7 @@ public class TUI implements UI {
                     players = sc.nextLine();
                     try {
                         nPlayers = Math.abs(Integer.parseInt(players));
+                        flag = false;
                     } catch (Exception e) {
                         flag = true;
                     }
@@ -196,7 +197,7 @@ public class TUI implements UI {
 
     }
     public void joinedGame(String id){
-        System.out.print(ansi().fg(color).a("~> Correctly joined the game "+id+"\n").reset());
+        System.out.print(ansi().fg(color).a("~> Correctly joined the game "+id+"\n   waiting for other players...\n").reset());
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -434,6 +435,10 @@ public class TUI implements UI {
         }
 
     }
+
+//    public void displayEndGame(){
+//        System.out.print(ansi().fg(color).a("~> Waiting for the other players to finish...\n").reset());
+//    }
 
     @Override
     public void displayEndGame() {
