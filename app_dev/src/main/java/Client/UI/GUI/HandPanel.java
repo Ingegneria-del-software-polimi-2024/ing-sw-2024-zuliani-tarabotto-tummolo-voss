@@ -46,6 +46,7 @@ public class HandPanel extends JPanel {
         c1.updateCard(hand.get(0), gui.getFronts().get(hand.get(0).getId()), gui.getBacks().get(hand.get(0).getId()) );
         c2.updateCard(hand.get(1), gui.getFronts().get(hand.get(1).getId()), gui.getBacks().get(hand.get(1).getId()) );
         c3.updateCard(hand.get(2), gui.getFronts().get(hand.get(2).getId()), gui.getBacks().get(hand.get(2).getId()) );
+        //repaint();
     }
 
 

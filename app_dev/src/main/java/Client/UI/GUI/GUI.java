@@ -5,6 +5,7 @@ import Client.UI.GUI.PlayerBanner.PlayerPanel;
 import Client.UI.UI;
 import Client.View.ViewAPI;
 
+
 import model.cards.PlayableCards.PlayableCard;
 import model.enums.Artifact;
 import model.placementArea.Coordinates;
@@ -36,6 +37,8 @@ public class GUI  implements UI {
     private HandPanel handPanel;
     private DeckPanel deckPanel;
     private ObjectivesPanel objPanel;
+    private JPanel bottomPanel;
+    final int FPS = 40;
 
     public GUI(ViewAPI view){
         this.view = view;
@@ -56,27 +59,35 @@ public class GUI  implements UI {
 
     @Override
     public void displayInitialization() {
-        System.out.println("heki");
         createPlayerBanner();
         createHandPanel();
+        createDecksPanel();
         createObjectivesPanel();
         deckPanel.updateDecks();
-        handPanel.updateHand();
-        objPanel.updateObjectivesPanel();
+        //handPanel.updateHand();
+        //objPanel.updateObjectivesPanel();
         frame.setVisible(true);
         sc.next();
+        view.readyToPlay();
+        /*
         view.getAvailableArtifacts("fra").put(Artifact.paper, 3);
-        updateBannerResources();
+        updateBannerResources();*/
+        //StarterPanel panel = new StarterPanel(frame, this);
 
     }
 
     @Override
     public void displayStarterCardSelection() {
-
+        view.getStarterCard().setFaceSide(true);
+        view.playStarterCard();
     }
 
     @Override
     public void displayObjectiveSelection() {
+        handPanel.updateHand();
+        objPanel.updateObjectivesPanel();
+        objPanel.chooseObjectives();
+
 
     }
 
@@ -196,10 +207,6 @@ public class GUI  implements UI {
         System.out.println("~> Correctly joined the game "+id+"");
     }
 
-    @Override
-    public void run() {
-
-    }
 
     private boolean validIP(String ip){
         //todo control if the ip is valid
@@ -222,28 +229,22 @@ public class GUI  implements UI {
         frame.add(bannerPanel);
     }
 
-    public void createDecksBanner(){
-
-    }
 
     public void createHandPanel(){
-        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         this.handPanel = new HandPanel(this);
-        this.deckPanel = new DeckPanel(this);
         bottomPanel.add(handPanel);
-        bottomPanel.add(deckPanel);
-        frame.add(bottomPanel, BorderLayout.SOUTH);
     }
 
-    public void createDecksPanel(){
-
-    }
 
     public void createObjectivesPanel(){
         this.objPanel = new ObjectivesPanel(this);
-        //JPanel leftPanel = new JPanel(new FlowLayout(FlowLayout.LEFT)e);
-        //leftPanel.add(objPanel);
         frame.add(objPanel, BorderLayout.EAST);
+    }
+    private void createDecksPanel(){
+        this.deckPanel = new DeckPanel(this);
+        bottomPanel.add(deckPanel);
+        frame.add(bottomPanel, BorderLayout.SOUTH);
     }
 
     private void updateBannerResources( ){
@@ -317,6 +318,26 @@ public class GUI  implements UI {
 
         g2.dispose();
         return output;
+    }
+
+    @Override
+    public void run() {
+        //GAMELOOP
+        double drawInterval = 1000000000 / FPS;
+        double delta = 0;
+        long lastTime = System.nanoTime();
+        long currentTime;
+
+        while (true) {
+            currentTime = System.nanoTime();
+            delta += (currentTime - lastTime) / drawInterval;
+            lastTime = currentTime;
+
+            if (delta >= 1) {
+                frame.repaint();
+                delta--;
+            }
+        }
     }
 
 }

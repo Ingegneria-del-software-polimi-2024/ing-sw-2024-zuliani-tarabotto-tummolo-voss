@@ -1,17 +1,19 @@
 package Client.UI.GUI;
 
 import model.cards.ObjectiveCard;
-import model.objective.Objective;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ObjectivesPanel extends JPanel {
     private GUI gui;
-    private objCardLabel common1;
-    private objCardLabel common2;
-    private objCardLabel secret;
+    private ObjCardLabel common1;
+    private ObjCardLabel common2;
+    private ObjCardLabel secret1;
+    private ObjCardLabel secret2;
+    private ObjectivesPanel panel;
 
     public ObjectivesPanel(GUI gui){
         this.gui = gui;
@@ -19,11 +21,41 @@ public class ObjectivesPanel extends JPanel {
 
         //this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        common1 = new objCardLabel();
-        common2 = new objCardLabel();
-        secret = new objCardLabel();
+        common1 = new ObjCardLabel();
+        common2 = new ObjCardLabel();
+        secret1 = new ObjCardLabel();
+        secret2 = new ObjCardLabel();
         this.add(common1);
         this.add(common2);
+        this.add(secret1);
+        this.add(secret2);
+    }
+
+    public void chooseObjectives(){
+        ObjectiveCard s1 = gui.getView().getChooseSecretObjectives().get(0);
+        ObjectiveCard s2 = gui.getView().getChooseSecretObjectives().get(1);
+
+        secret1.updateCard(s1, gui.getFronts().get(s1.getId()), gui.getBacks().get(s1.getId()));
+        secret2.updateCard(s2, gui.getFronts().get(s2.getId()), gui.getBacks().get(s2.getId()));
+
+        panel = this;
+        secret1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                panel.remove(secret2);
+                panel.revalidate();
+                panel.repaint();
+            }
+        });
+
+        secret2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                panel.remove(secret1);
+                panel.revalidate();
+                panel.repaint();
+            }
+        });
     }
 
     public void updateObjectivesPanel(){
@@ -36,6 +68,6 @@ public class ObjectivesPanel extends JPanel {
 
     public void addSecretObj(){
         ObjectiveCard secretObj = gui.getView().getSecretObjective();
-        secret.updateCard(secretObj, gui.getFronts().get(secretObj.getId()), gui.getFronts().get(secretObj.getId()));
+        secret1.updateCard(secretObj, gui.getFronts().get(secretObj.getId()), gui.getFronts().get(secretObj.getId()));
     }
 }

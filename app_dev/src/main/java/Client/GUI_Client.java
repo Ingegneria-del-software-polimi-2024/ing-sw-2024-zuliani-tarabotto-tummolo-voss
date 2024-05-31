@@ -13,6 +13,8 @@ public class GUI_Client implements Runnable{
         this.view = new ViewAPI();
         UI ui = new GUI(view);
         view.setUI(ui);
+        Thread t = new Thread(ui);
+        t.start();
     }
 
     @Override

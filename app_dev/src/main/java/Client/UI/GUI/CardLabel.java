@@ -14,13 +14,6 @@ public class CardLabel extends JLabel {
 
     public CardLabel(){
         setOpaque(false);
-        /*this.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                // Action to perform when the label is clicked
-                flipCard();
-            }
-        });*/
     }
 
     public void updateCard(PlayableCard c, BufferedImage front, BufferedImage back){
@@ -48,6 +41,7 @@ public class CardLabel extends JLabel {
         g2d.setStroke(new BasicStroke(borderWidth));
         g2d.drawRect(borderWidth / 2, borderWidth / 2, getWidth() - borderWidth, getHeight() - borderWidth);
 */
+        if(c == null) return;
         if(c.getFaceSide()) g2d.drawImage(front, 0, 0 , getWidth(), getHeight() , this);
         else g2d.drawImage(back, 0, 0 , getWidth(), getHeight() , this);
     }
