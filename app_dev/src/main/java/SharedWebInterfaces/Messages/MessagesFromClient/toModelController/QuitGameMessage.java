@@ -4,15 +4,24 @@ import Server.ModelController;
 import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
 
 public class QuitGameMessage implements MessageFromViewToModelController{
-    @Override
-    public void execute(ModelController controller) {
-        controller.endGame();
+    private final String playerID;
+
+    public QuitGameMessage(String playerID) {
+        this.playerID = playerID;
     }
 
-    //ignore this
     @Override
     public void execute(ControllerInterface controller) {
-
     }
+
+    @Override
+    public void execute(ModelController controller) {
+        controller.quitGame(playerID);
+    }
+
+
+
+
+
 
 }

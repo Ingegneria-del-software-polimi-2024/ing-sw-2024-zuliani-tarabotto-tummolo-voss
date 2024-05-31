@@ -3,7 +3,6 @@ package Client.View;
 import Client.UI.TUI.TUI;
 import Client.UI.UI;
 import Client.Web.*;
-import SharedWebInterfaces.Messages.MessagesToLobby.JoinGameMessage;
 import SharedWebInterfaces.SharedInterfaces.ServerHandlerInterface;
 import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
 import SharedWebInterfaces.WebExceptions.StartConnectionFailedException;
@@ -17,7 +16,6 @@ import model.placementArea.Coordinates;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * ViewAPI Class contains:
@@ -195,12 +193,12 @@ public class ViewAPI implements ViewAPI_Interface {
     }
 
     @Override
-    public void setFinalPoints(HashMap<String, Integer> finalPoints) {
-        viewModel.setFinalPoints(finalPoints);
+    public void setFinalPoints(HashMap<String, Integer> finalPoints, ArrayList<String> winnersList) {
+        viewModel.setFinalPoints(finalPoints, winnersList);
     }
 
-    public void endGame(){
-        viewModel.endGame();
+    public void quitGame(){
+        viewModel.quitGame();
     }
 
     @Override
@@ -263,6 +261,9 @@ public class ViewAPI implements ViewAPI_Interface {
     public void cantCreateRoom() {
         ui.cantCreateRoom();
     }
+
+    @Override
+    public void returnToLobby() {ui.returnToLobby();}
 
 //    ////////////////////////////////// GETTER METHODS //////////////////////////////////////////////////////////////////////////////
 
@@ -350,7 +351,7 @@ public class ViewAPI implements ViewAPI_Interface {
         return viewModel.getPlayers();
     }
 
-
+    public List<String> getWinners(){return  viewModel.getWinners();}
 
     ///////////////////// functions used for input controls ///////////////////////////
     public boolean checkAvailable(int x, int y){

@@ -235,10 +235,10 @@ public class ModelListener {//TODO Handle correctly the exceptions
      * the view is responsible for displaying the winner
      * @param finalPoints an hashmap containing the players' names and their points
      */
-    public void notifyChanges(HashMap<String, Integer> finalPoints){
+    public void notifyChanges(HashMap<String, Integer> finalPoints, ArrayList<String> winners){
 
         try{
-            serverAPI.broadcastNotifyChanges(new EndGameMessage(finalPoints));
+            serverAPI.broadcastNotifyChanges(new EndGameMessage(finalPoints, winners));
         }catch (MsgNotDeliveredException msg){
             throw new RuntimeException(msg);
         }

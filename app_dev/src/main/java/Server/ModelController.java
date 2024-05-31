@@ -160,7 +160,9 @@ public class ModelController implements ServerControllerInterface {
     /**
      * we draw a card from the specified card source
      * Also since this is the last performed action in a turn, we check if this is the last turn of the game
-     * @param cardSource
+     * @param cardSource the deck to draw from: 1 if it is goldDeck, 2 if it is openGold with index 0,
+     *                   3 if it is openGold with index 1, 4 if it is resourceDeck, 5 if it is openResource with index 0,
+     *                   6 if it is openResource with index 1
      */
     @Override
     public void drawCard(int cardSource) throws RuntimeException{
@@ -224,9 +226,14 @@ public class ModelController implements ServerControllerInterface {
 
     public boolean checkMessage(MessageFromClient message){return gameState.checkMessage(message);}
 
-
     public void endGame(){
         gameState.calculateFinalPoints();
         gameState.setTurnState(TurnState.END_GAME);
+    }
+
+    public void quitGame(String playerID){
+        //the player must be added to the "unavailable" list, some kind of control MUST be done
+        //TODO control
+        gameState.quitGame(playerID);
     }
 }

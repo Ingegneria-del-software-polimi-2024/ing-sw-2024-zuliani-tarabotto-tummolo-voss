@@ -15,6 +15,7 @@ import model.deckFactory.*;
 
 import javax.sql.rowset.CachedRowSet;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -78,20 +79,33 @@ public class GameState {
 
     //////////////////// GENERAL TURN CONTROL METHODS ///////////////////////////////////////
     /**
-     * this method is called at the end of the game and it checks for each Player if they completed any Objective(both secret and commoon)
+     * this method is called at the end of the game, it checks for each Player if they completed any Objective(both secret and commoon)
      */
     public void calculateFinalPoints(){
         int i, j;
         HashMap<String, Integer> finalPoints = new HashMap<>();
+        ArrayList<Integer> playersObjectives = new ArrayList<Integer>();
+
         for(i=0; i< players.size(); i++){
-            players.get(i).calculateSecretObj();
+            int obj = players.get(i).calculateSecretObj();
             for(j=0; j<2; j++){
-                players.get(i).calculateSingleCommonObj(commonTable.getCommonObjectives().get(j));
+                obj += players.get(i).calculateSingleCommonObj(commonTable.getCommonObjectives().get(j));
             }
             finalPoints.put(players.get(i).getNickname(),players.get(i).getPoints() );
+            playersObjectives.add(i, obj);
         }
+
+        //if there are at least two players with the same number of points
+        int max = finalPoints.values().stream().max(Integer::compareTo).orElse(0);
+        ArrayList<String> winners = new ArrayList<String>();
+        for (i = 0; i<players.size(); i++){
+            if (finalPoints.get(players.get(i).getNickname()) == max)
+                winners.add(players.get(i).getNickname());
+        }
+
+
         //NOTIFICATION:
-        modelListener.notifyChanges(finalPoints);
+        modelListener.notifyChanges(finalPoints, winners);
     }
 
     /**
@@ -181,6 +195,11 @@ public class GameState {
 
     public boolean checkMessage(MessageFromClient message){return turnState.controlMessage(message);}
 
+    public void quitGame(String playerName){
+        //TODO signals playerName has quit the game
+        modelListener.notifyChanges(playerName, new KickOutOfGameException());
+    }
+
     ////////////////// CARDS PLACEMENT RELATED METHODS //////////////////////////////////////////////////////
     /**
      * INTERFACE METHOD
@@ -230,6 +249,7 @@ public class GameState {
                 try {
                     p.playStarterCard();
                 }catch (KickOutOfGameException e){
+                    //TODO signal the throwing out of the player
                     modelListener.notifyChanges(player, e);
                 }
                 //NOTIFICATION ABOUT THE STARTER CARD

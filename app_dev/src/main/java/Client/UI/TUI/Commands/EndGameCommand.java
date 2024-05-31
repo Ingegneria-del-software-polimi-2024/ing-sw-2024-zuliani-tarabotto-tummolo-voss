@@ -1,11 +1,10 @@
 package Client.UI.TUI.Commands;
 
 import Client.View.ViewAPI;
-import Server.ModelController;
 
 public class EndGameCommand implements Command{
 
-    private final String name = "--end";
+    private final String name = "--quit";
     private ViewAPI view;
 
     public EndGameCommand(ViewAPI view){
@@ -13,7 +12,7 @@ public class EndGameCommand implements Command{
     }
     @Override
     public void execute() {
-        view.endGame();
+        view.quitGame();
     }
 
     @Override

@@ -14,6 +14,7 @@ import model.enums.Element;
 import model.placementArea.Coordinates;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -60,6 +61,11 @@ public class ViewModel {
     //the points of all players are store here
     private HashMap< String , Integer> points;
 
+    /**
+     * the list of the winners of the game
+     */
+    private ArrayList<String> winners;
+
     //interfaces to communicate with
     private ClientAPI_GO clientAPIGo;
     private UI ui;
@@ -77,6 +83,7 @@ public class ViewModel {
 
         this.commonObjectives = new ArrayList<>();
         this.chooseSecretObjectives = new ArrayList<>();
+        this.winners = new ArrayList<String>();
 
         this.decks = new HashMap<Integer,List<PlayableCard>>();
         this.ui = ui;
@@ -213,13 +220,14 @@ public class ViewModel {
         decks.put(cardSource, decK);
         decks.get(cardSource-1).remove(0);
     }
-    public void setFinalPoints(HashMap<String, Integer> finalPoints) {
+    public void setFinalPoints(HashMap<String, Integer> finalPoints, ArrayList<String> winnersList) {
         points.replaceAll((p, v) -> finalPoints.get(p));
+        winners = winnersList;
     }
 
     //we use this function to end the game whenever we want
-    public void endGame(){
-        clientAPIGo.sendToServer(new QuitGameMessage());
+    public void quitGame(){
+        clientAPIGo.sendToServer(new QuitGameMessage(playerId));
     }
 
     public void setPawnColor(String pawnColor) {
@@ -341,7 +349,7 @@ public class ViewModel {
     public List<String> getPlayers(){
         return players;
     }
-
+    public List<String> getWinners(){return Collections.unmodifiableList(winners);}
     public HashMap<Integer, List<PlayableCard>> getDecks() {
         return decks;
     }

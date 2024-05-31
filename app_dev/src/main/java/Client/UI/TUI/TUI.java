@@ -35,6 +35,7 @@ public class TUI implements UI {
     private final HashMap<String, Command> commandMap;
     private Runnable rePrint;
     boolean enterPressed = false;
+    private final Object lockForControllingCommands;
 
     public TUI(ViewAPI view){
 
@@ -46,11 +47,12 @@ public class TUI implements UI {
         objectivesPrinter = new ObjectivesPrinter();
         drawCardPrinter = new DrawCardPrinter(cb);
         lock = new Object();
+        lockForControllingCommands = new Object();
 
         this.commandMap = new HashMap<>();
         commandMap.put("--help", new HelpCommand());
         commandMap.put("--disp", new DispositionCommand(view));
-        commandMap.put("--end", new EndGameCommand(view));
+        commandMap.put("--quit", new EndGameCommand(view));
 
         sc = new Scanner(System.in);
     }
@@ -60,7 +62,6 @@ public class TUI implements UI {
         System.out.println("~> Welcome to Codex Naturalis");//TODO print the instructions
     }
     public void chooseConnection(){
-        //TODO: ERASE SCREEN
         System.out.print(ansi().fg(color).a("~> Insert the techonolgy of connection (RMI/Socket): \n").reset());
         String connectionType;
         do{
@@ -155,7 +156,6 @@ public class TUI implements UI {
     public void displayAvailableGames(ArrayList<String> listOfGames){
         String game;
 
-
         if(listOfGames != null && !listOfGames.isEmpty()){
             System.out.print(ansi().fg(color).a("~> Available games:\n").reset());
             for(String g : listOfGames)
@@ -163,15 +163,10 @@ public class TUI implements UI {
             System.out.print(ansi().fg(color).a("~> Insert the name of the game you want to join or a new name if you want to create it, write -r to refresh the available games: \n").reset());
         }else
             System.out.print(ansi().fg(color).a("~> There are no available games, please create a new game by typing its name or write -r to refresh the available games: \n").reset());
-
+        sc.reset();
         game = sc.nextLine();
         if(game.equals("-r")) {
             view.requestAvailableGames();
-            //            try {
-//                view.requestAvailableGames();
-//            }catch (RemoteException e) {
-//                throw new RuntimeException(e);
-//            }
         }else{
             int nPlayers = 0;
             if(listOfGames == null || !listOfGames.contains(game)) {
@@ -199,12 +194,21 @@ public class TUI implements UI {
     public void joinedGame(String id){
         System.out.print(ansi().fg(color).a("~> Correctly joined the game "+id+"\n   waiting for other players...\n").reset());
     }
+
+    public void returnToLobby(){
+        clear();
+        view.welcome();
+
+        view.requestAvailableGames();
+        //TODO fix the bug, problem related to scanner
+    }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
     public void displayInitialization() {
         clear();
         loginPrinter.print();
+
         view.startUI();
 
         // Continuously check if Enter is pressed until it's pressed
@@ -436,13 +440,9 @@ public class TUI implements UI {
 
     }
 
-//    public void displayEndGame(){
-//        System.out.print(ansi().fg(color).a("~> Waiting for the other players to finish...\n").reset());
-//    }
-
     @Override
     public void displayEndGame() {
-        //clear();
+        clear();
         List<Map.Entry<String, Integer>> entryList = new ArrayList<>(view.getPoints().entrySet());
         // Step 2: Sort the list with a comparator that compares the values in descending order
         entryList.sort((e1, e2) -> e2.getValue().compareTo(e1.getValue()));
@@ -456,9 +456,15 @@ public class TUI implements UI {
                 "   ╚═╝   ╚═╝  ╚═╝╚══════╝    ╚══════╝╚═╝  ╚═══╝╚═════╝\n"  +
                 "                                                      ").reset());
 
-
-        System.out.print(ansi().fg(226).a("~> " + entryList.get(0).getKey().toUpperCase() + " is the winner !!!\n").reset());
-
+        List<String> winners = view.getWinners();
+        if(winners.size() == 1)
+            System.out.print(ansi().fg(226).a("~> " + winners.get(0).toUpperCase() + " is the winner !!!\n").reset());
+        else {
+            System.out.print(ansi().fg(226).a("~> The winners are:\n").reset());
+            for (String win : view.getWinners()) {
+                System.out.print(ansi().fg(226).a("                   " + win.toUpperCase() + " !!!\n").reset());
+            }
+        }
         for (Map.Entry<String, Integer> stringIntegerEntry : entryList) {
             System.out.println("-> " + stringIntegerEntry.getKey() + ": " + stringIntegerEntry.getValue() + " points");
         }
@@ -497,24 +503,27 @@ public class TUI implements UI {
 
     @Override
     public void run(){
-        while(true) {
-
+        while (true) {
             synchronized (lock) {
                 while (inputPresent) {
                     try {
                         lock.wait();
-                    } catch (InterruptedException e) {}
+                    } catch (InterruptedException e) {
+                    }
                 }
 
                 //System.out.println("command thread");
                 input = sc.nextLine();
 
-                if (input.startsWith("--") && !input.equals("")) {
+                if (input.equals("--quit")) {
+                    clear();
+                    commandMap.get(input).execute();
+                }else if(input.startsWith("--") && !input.equals("")) {
                     clear();
                     commandMap.get(input).execute();
                     //System.out.println("command");
                     System.out.println("type q to go back to the game");
-                    while(!sc.nextLine().equals("q")){
+                    while (!sc.nextLine().equals("q")) {
                         System.out.println("type q to go back to the game");
                     }
                     rePrint.run();
@@ -524,6 +533,7 @@ public class TUI implements UI {
                 }
             }
         }
+
     }
 
 

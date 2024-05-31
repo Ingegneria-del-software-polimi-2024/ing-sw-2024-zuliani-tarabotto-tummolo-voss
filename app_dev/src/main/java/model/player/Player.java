@@ -73,18 +73,32 @@ public class Player implements Serializable {
     }
 
     /**
-     * checks if the Player's secretObjective was satisfied ad least once and if so the points counter is updated
+     * checks if the Player's secretObjective was satisfied at least once and if so the points counter is updated
+     * @return 1 if the objective is satisfied at least once, else 0
      */
-    public void calculateSecretObj(){
-        points = points + secretObjective.countPoints(placementArea);
+    public int calculateSecretObj(){
+        int objP = secretObjective.countPoints(placementArea);
+
+        points = points + objP;
+
+        if (objP>0)
+            return 1;
+        else
+            return 0;
     }
 
     /**
      * checks if the ObjectiveCard commonObjective was satisfied at least once and if so the points counter is updated
-     * @param commonObjective
+     *@param commonObjective the objective to be verified
+     * @return 1 if the objective is satisfied at least once, else 0
      */
-    public void calculateSingleCommonObj(ObjectiveCard commonObjective) {
-        points = points + commonObjective.countPoints(placementArea);
+    public int calculateSingleCommonObj(ObjectiveCard commonObjective) {
+        int objPoints = commonObjective.countPoints(placementArea);
+        points = points + objPoints;
+        if (objPoints>0)
+            return 1;
+        else
+            return 0;
     }
 
     /////////////// SETTER METHODS ///////////////////////////

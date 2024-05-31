@@ -39,4 +39,5 @@ public interface UI extends Runnable{
     void cantDrawCard(int source);
     void cantCreateRoom();
     void cantJoinRoom();
+    void returnToLobby();
 }
