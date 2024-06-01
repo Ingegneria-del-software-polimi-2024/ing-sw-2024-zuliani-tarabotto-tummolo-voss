@@ -14,6 +14,7 @@ public class ObjectivesPanel extends JPanel {
     private ObjCardLabel secret1;
     private ObjCardLabel secret2;
     private ObjectivesPanel panel;
+    private JPanel subPanel;
 
     public ObjectivesPanel(GUI gui){
         this.gui = gui;
@@ -27,8 +28,21 @@ public class ObjectivesPanel extends JPanel {
         secret2 = new ObjCardLabel();
         this.add(common1);
         this.add(common2);
-        this.add(secret1);
-        this.add(secret2);
+       // this.add(secret1);
+       // this.add(secret2);
+
+        JPanel secretPanel1 = new JPanel();
+        secretPanel1.setOpaque(false);
+        secretPanel1.add(secret1);
+        JPanel secretPanel2 = new JPanel();
+        secretPanel2.setOpaque(false);
+        secretPanel2.add(secret2);
+        subPanel = new JPanel();
+        subPanel.setOpaque(false);
+        subPanel.setLayout(new BoxLayout(subPanel, BoxLayout.Y_AXIS));
+        subPanel.add(secretPanel1, 0 );
+        subPanel.add(secretPanel2, 1);
+        this.add(subPanel);
     }
 
     public void chooseObjectives(){
@@ -42,7 +56,8 @@ public class ObjectivesPanel extends JPanel {
         secret1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                panel.remove(secret2);
+                panel.remove(subPanel);
+                panel.add(secret1);
                 panel.revalidate();
                 panel.repaint();
             }
@@ -51,7 +66,8 @@ public class ObjectivesPanel extends JPanel {
         secret2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                panel.remove(secret1);
+                panel.remove(subPanel);
+                panel.add(secret2);
                 panel.revalidate();
                 panel.repaint();
             }
@@ -69,5 +85,26 @@ public class ObjectivesPanel extends JPanel {
     public void addSecretObj(){
         ObjectiveCard secretObj = gui.getView().getSecretObjective();
         secret1.updateCard(secretObj, gui.getFronts().get(secretObj.getId()), gui.getFronts().get(secretObj.getId()));
+    }
+
+
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+
+        int borderWidth = 4;
+        g2d.setColor(new Color(171, 144, 76));
+        g2d.setStroke(new BasicStroke(borderWidth));
+        g2d.drawRect(borderWidth/2, borderWidth/2, getWidth() - borderWidth, getHeight() - borderWidth);
+
+        int innerBorder = borderWidth/2;
+
+        g2d.setStroke(new BasicStroke(innerBorder));
+        g2d.drawRect((borderWidth*2), (borderWidth*2), getWidth() - 2*(borderWidth*2), getHeight() - 2*(borderWidth*2));
+
     }
 }

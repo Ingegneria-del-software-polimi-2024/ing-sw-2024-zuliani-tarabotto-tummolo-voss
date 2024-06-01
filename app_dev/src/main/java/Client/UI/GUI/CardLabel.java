@@ -10,6 +10,9 @@ public class CardLabel extends JLabel {
     private PlayableCard c;
     private BufferedImage front;
     private BufferedImage back;
+    private final int cardLength = 140;
+    private final float heightLengthRatio =   (float) 2 /3;
+    private int cardSource;
 
 
     public CardLabel(){
@@ -26,9 +29,15 @@ public class CardLabel extends JLabel {
         c.setFaceSide(!c.getFaceSide());
         this.repaint();
     }
+
+    public void setCardSource(int cardSource){
+        this.cardSource = cardSource;
+    }
+
+    public int getCardSource(){return cardSource;}
     @Override
     public Dimension getPreferredSize() {
-        return new Dimension(200, 120);
+        return new Dimension(cardLength, (int)(cardLength * heightLengthRatio));
     }
     @Override
     protected void paintComponent(Graphics g) {
@@ -36,13 +45,10 @@ public class CardLabel extends JLabel {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        /*int borderWidth = 2;
-        g2d.setColor(new Color(171, 144, 76));
-        g2d.setStroke(new BasicStroke(borderWidth));
-        g2d.drawRect(borderWidth / 2, borderWidth / 2, getWidth() - borderWidth, getHeight() - borderWidth);
-*/
         if(c == null) return;
         if(c.getFaceSide()) g2d.drawImage(front, 0, 0 , getWidth(), getHeight() , this);
         else g2d.drawImage(back, 0, 0 , getWidth(), getHeight() , this);
     }
+
+
 }

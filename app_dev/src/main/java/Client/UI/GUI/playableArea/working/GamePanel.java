@@ -147,7 +147,5 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
-    //public void addPiece(org.example.APP2.Piece piece) {
-     //   pieces.add(new Pawn(WHITE, 0, 6));
-   // }
+
 }

@@ -1,5 +1,6 @@
 package Client.UI.GUI;
 
+import Client.UI.GUI.EventListeners.DrawCardListener;
 import model.cards.PlayableCards.GoldCard;
 import model.cards.PlayableCards.PlayableCard;
 
@@ -28,11 +29,19 @@ public class DeckPanel extends JPanel {
         resource1 = new CardLabel();
         resource2 = new CardLabel();
         this.add(goldDeck);
-        this.add(gold1);
-        this.add(gold2);
+        goldDeck.setCardSource(1);
         this.add(resourceDeck);
+        resourceDeck.setCardSource(4);
+        this.add(gold1);
+        gold1.setCardSource(2);
         this.add(resource1);
+        resource1.setCardSource(5);
+        this.add(gold2);
+        gold2.setCardSource(3);
         this.add(resource2);
+        resource2.setCardSource(6);
+
+        goldDeck.addMouseListener(new DrawCardListener(gui));
 
     }
 
@@ -67,10 +76,15 @@ public class DeckPanel extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        int borderWidth = 2;
+        int borderWidth = 4;
         g2d.setColor(new Color(171, 144, 76));
         g2d.setStroke(new BasicStroke(borderWidth));
-        g2d.drawRect(borderWidth / 2, borderWidth / 2, getWidth() - borderWidth, getHeight() - borderWidth);
+        g2d.drawRect(borderWidth/2, borderWidth/2, getWidth() - borderWidth, getHeight() - borderWidth);
+
+        int innerBorder = borderWidth/2;
+
+        g2d.setStroke(new BasicStroke(innerBorder));
+        g2d.drawRect((borderWidth*2), (borderWidth*2), getWidth() - 2*(borderWidth*2), getHeight() - 2*(borderWidth*2));
 
     }
 }

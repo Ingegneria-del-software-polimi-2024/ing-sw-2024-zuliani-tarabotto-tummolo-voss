@@ -5,13 +5,11 @@ import Client.UI.GUI.PlayerBanner.PlayerPanel;
 import Client.UI.UI;
 import Client.View.ViewAPI;
 
-
 import model.cards.PlayableCards.PlayableCard;
-import model.enums.Artifact;
 import model.placementArea.Coordinates;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -19,8 +17,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Scanner;
-
-import static org.fusesource.jansi.Ansi.ansi;
 
 
 public class GUI  implements UI {
@@ -37,7 +33,9 @@ public class GUI  implements UI {
     private HandPanel handPanel;
     private DeckPanel deckPanel;
     private ObjectivesPanel objPanel;
+    private JPanel eastPanel;
     private JPanel bottomPanel;
+    private JPanel topPanel;
     final int FPS = 40;
 
     public GUI(ViewAPI view){
@@ -50,29 +48,40 @@ public class GUI  implements UI {
             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
             screenWidth = (int)screenSize.getWidth();
             screenHeight = (int)screenSize.getHeight();
+            frame.getContentPane().setBackground(new Color(218, 211, 168));
             frame.setSize(screenWidth, screenHeight);
             frame.setLayout(new BorderLayout());
+            frame.setLocationRelativeTo(null);
 
         });
         loadImages();
     }
 
+    private void createBorderPanels(){
+
+        this.bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        bottomPanel.setOpaque(false);
+        bottomPanel.setPreferredSize(new Dimension(screenWidth, (int)(screenHeight * 0.26)));
+        frame.add(bottomPanel, BorderLayout.SOUTH);
+
+        this.eastPanel = new JPanel();
+        eastPanel.setLayout(new FlowLayout(FlowLayout.LEADING));
+        eastPanel.setOpaque(false);
+        frame.add(eastPanel, BorderLayout.EAST);
+    }
+
     @Override
     public void displayInitialization() {
+        createBorderPanels();
         createPlayerBanner();
         createHandPanel();
         createDecksPanel();
         createObjectivesPanel();
         deckPanel.updateDecks();
-        //handPanel.updateHand();
-        //objPanel.updateObjectivesPanel();
         frame.setVisible(true);
         sc.next();
         view.readyToPlay();
-        /*
-        view.getAvailableArtifacts("fra").put(Artifact.paper, 3);
-        updateBannerResources();*/
-        //StarterPanel panel = new StarterPanel(frame, this);
+
 
     }
 
@@ -218,33 +227,33 @@ public class GUI  implements UI {
     }
 
     private void createPlayerBanner(){
-        JPanel bannerPanel = new JPanel();
-        bannerPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         for(String p : view.getPlayers()){
             PlayerPanel player = new PlayerPanel( p, (int ) (screenWidth * 0.18), (int)(screenHeight * 0.13), this);
             player.setPreferredSize(new Dimension((int ) (screenWidth * 0.18), (int)(screenHeight * 0.13)));
             banners.put(p, player);
-            bannerPanel.add(player);
+            eastPanel.add(player);
+            //topPanel.add(player);
         }
-        frame.add(bannerPanel);
     }
 
 
     public void createHandPanel(){
-        bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        this.handPanel = new HandPanel(this);
+        this.handPanel = new HandPanel(this, (int)bottomPanel.getPreferredSize().getHeight());
         bottomPanel.add(handPanel);
+        //frame.add(bottomPanel, BorderLayout.SOUTH);
     }
 
 
     public void createObjectivesPanel(){
         this.objPanel = new ObjectivesPanel(this);
-        frame.add(objPanel, BorderLayout.EAST);
+        objPanel.setPreferredSize(new Dimension((int)(screenWidth * 0.33), (int)(screenHeight * 0.25)));
+        bottomPanel.add(objPanel);
+        //frame.add(objPanel, BorderLayout.EAST);
     }
     private void createDecksPanel(){
         this.deckPanel = new DeckPanel(this);
+        deckPanel.setPreferredSize(new Dimension((int)(screenWidth * 0.33), (int)(screenHeight * 0.25)));
         bottomPanel.add(deckPanel);
-        frame.add(bottomPanel, BorderLayout.SOUTH);
     }
 
     private void updateBannerResources( ){
@@ -298,7 +307,7 @@ public class GUI  implements UI {
     }
 
     private BufferedImage makeRoundedCorner(BufferedImage image) {
-        int cornerRadius = 50;
+        int cornerRadius = 70;
         int w = image.getWidth();
         int h = image.getHeight();
         BufferedImage output = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
@@ -338,6 +347,13 @@ public class GUI  implements UI {
                 delta--;
             }
         }
+    }
+
+    public int getScreenWidth(){
+        return screenWidth;
+    }
+    public int getScreenHeight(){
+        return screenHeight;
     }
 
 }
