@@ -16,6 +16,8 @@ import java.util.List;
 
 public interface ViewAPI_Interface extends GeneralAPI_Interface {
 
+    void startHeartbeatThread();
+
     void readyToPlay();
     void setState(TurnState state);
     void setGoldDeck(List<PlayableCard> deck);
@@ -62,4 +64,6 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
      * brings the player back to the lobby
      */
     void returnToLobby();
+
+
 }

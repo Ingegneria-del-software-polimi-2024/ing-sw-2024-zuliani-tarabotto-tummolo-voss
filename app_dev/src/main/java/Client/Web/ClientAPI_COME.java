@@ -18,8 +18,11 @@ public class ClientAPI_COME implements Runnable{
      * receives and enqueues the message specified from the Server
      * @param message the message from the server
      */
-    public void notifyChanges(MessageFromServer message){toDoQueue.enqueueMessage(message);}
+    public void notifyChanges(MessageFromServer message){
 
+        System.out.println("Arrived a new message "+message.getClass());        //TODO remove
+        toDoQueue.enqueueMessage(message);
+    }
     /**
      * executes the first action in the queue
      */

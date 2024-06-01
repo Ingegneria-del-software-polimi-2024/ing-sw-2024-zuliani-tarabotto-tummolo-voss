@@ -8,7 +8,7 @@ import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
 import SharedWebInterfaces.Messages.MessagesToLobby.MessageToLobby;
 import SharedWebInterfaces.Messages.MessagesToLobby.NewConnectionMessage;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
-
+import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.DisconnectionMessage;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -87,7 +87,7 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
         try{
             snd(new WelcomeMessage(lobby.getGameNames()));
             System.out.println("sent welcomeMessage");
-            NewConnectionMessage msg = null;
+            MessageToLobby msg = null;
 
             boolean read = false;
             MessageToLobby incoming;
@@ -112,7 +112,14 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
                     sendToServer((MessageFromClient)message);
             }while(true);
         }catch (IOException | ClassNotFoundException e){
-            throw new RuntimeException();
+            System.err.println("Connection lost: " + e.getMessage());
+
+            DisconnectionMessage disconnectionMessage = new DisconnectionMessage();
+            if(api == null)
+                return;
+            api.sendToServer(disconnectionMessage);
+            // handleDisconnection();
+            //throw new RuntimeException();//TODO HANDLE DISCONNECTION
         }
 
 

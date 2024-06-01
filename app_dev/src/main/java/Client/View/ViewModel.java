@@ -6,6 +6,7 @@ import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.*;
 import SharedWebInterfaces.Messages.MessagesToLobby.JoinGameMessage;
 import SharedWebInterfaces.Messages.MessagesToLobby.NewConnectionMessage;
 import SharedWebInterfaces.Messages.MessagesToLobby.RequestAvailableGames;
+import SharedWebInterfaces.Messages.MessagesToLobby.HeartbeatMessage;
 import model.GameState.TurnState;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
@@ -39,6 +40,7 @@ public class ViewModel {
     private final int OPEN_RESOURCE_INDX = 3;
     private List<ObjectiveCard> commonObjectives;
     private List<ObjectiveCard> chooseSecretObjectives;
+
 
     //logistical support
     private TurnState state;
@@ -100,6 +102,13 @@ public class ViewModel {
     }
     public void displayAvailableGames(){
         ui.displayAvailableGames(listOfGames);
+    }
+
+
+
+    //HEARTBEAT
+    public void HeartbeatToServer(){
+        clientAPIGo.sendToLobby( new HeartbeatMessage(playerId));
     }
     public void requestAvailableGames(){
         clientAPIGo.sendToLobby(new RequestAvailableGames(playerId));

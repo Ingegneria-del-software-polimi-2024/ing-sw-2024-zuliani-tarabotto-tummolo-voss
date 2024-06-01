@@ -17,6 +17,10 @@ public class TUI_Client implements Runnable{
         this.view = new ViewAPI();
     }
 
+
+
+
+
     @Override
     public void run() {
         view.welcome();

@@ -35,8 +35,9 @@ public class ServerAPI_GO {
                 players.get(p).notifyChanges(message);
             }
         } catch (RemoteException e) {
-            throw new RuntimeException(e);
+            //throw new RuntimeException(e);
 //            throw new MsgNotDeliveredException(message);
+            System.out.println("RMI DISCONNECTION DETECTED");
         }
     }
 

@@ -55,7 +55,7 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
                 }catch (RuntimeException e){
                     if(e.getCause() instanceof MsgNotDeliveredException)
                         throw (MsgNotDeliveredException)e.getCause();
-                    if(e.getCause() instanceof Remote)
+                    if(e.getCause() instanceof RemoteException)
                         throw new StartConnectionFailedException();
                     throw new RuntimeException("Execution couldn't happen due to an unknown error "+e.getCause().getClass(), e);
                 }
@@ -161,18 +161,7 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
         return null;
     }
 
-    /**
-     *
-     * @param playerName the name of the player
-     * @return the name of the room in which the player is
-     */
-    public String isInRoom(String playerName){
-        for(Room r : rooms){
-            if(r.contains(playerName))
-                return r.getName();
-        }
-        return null;
-    }
+
 
     /**
      * adds a message to the queue of incoming messages
@@ -236,6 +225,27 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
                 return r;
             }
         return null;
+    }
+
+    /**
+     *
+     * @param playerName the name of the player
+     * @return the name of the room in which the player is
+     */
+    private Room isInRoom(String playerName){
+        for(Room r : rooms){
+            if(r.contains(playerName))
+                return r;
+        }
+        return null;
+    }
+
+    public void updateHeartBeat(String playerId) {
+        // Update the last seen timestamp for the player in the room
+        Room r = isInRoom(playerId);
+        if(r == null)
+            return;
+        r.updateHeartBeat(playerId);
     }
 
 }

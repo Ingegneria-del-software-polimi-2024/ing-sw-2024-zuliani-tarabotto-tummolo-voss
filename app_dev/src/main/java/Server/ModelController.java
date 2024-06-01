@@ -7,7 +7,7 @@ import model.GameState.GameState;
 import model.GameState.TurnState;
 import model.cards.PlayableCards.PlayableCard;
 import model.placementArea.Coordinates;
-
+import Server.Web.Lobby.Room;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -30,13 +30,16 @@ public class ModelController implements ServerControllerInterface {
     private boolean lastRound = false;
     private ServerAPI_GO send;
     private int readyPlayers;
+    private Room room;
+
+
 
     /**
      * class constructor
      * @param playersNicknames nicknames of the players
      * @param gameId id of the game
      */
-    public ModelController(ArrayList<String> playersNicknames, String gameId, ServerAPI_GO send){
+    public ModelController(ArrayList<String> playersNicknames, String gameId, ServerAPI_GO send, Room room){
         System.out.println("model controller created");
         this.playersNicknames = playersNicknames;
         this.gameId = gameId;
@@ -229,6 +232,14 @@ public class ModelController implements ServerControllerInterface {
     public void endGame(){
         gameState.calculateFinalPoints();
         gameState.setTurnState(TurnState.END_GAME);
+    }
+
+
+
+    public void HandleDisconnection() {
+        System.out.println("DISCONNECTION DETECTED");
+        room.handleADetectedDisconnection();
+
     }
 
     public void quitGame(String playerID){

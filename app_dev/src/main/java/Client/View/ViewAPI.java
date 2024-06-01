@@ -12,6 +12,7 @@ import model.cards.PlayableCards.PlayableCard;
 import model.enums.Artifact;
 import model.enums.Element;
 import model.placementArea.Coordinates;
+import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,6 +43,13 @@ public class ViewAPI implements ViewAPI_Interface {
         viewModel.setClientAPIGo(clientAPI_GO);
     }
 
+
+
+    public void HeartbeatToServer(){
+        viewModel.HeartbeatToServer();
+    }
+    //all this methods create a new MessageFromClient object containing an execute() method with t
+
     /////////// from CLIENT to SERVER  ACTIONS ////////////////////////////////////////////////////////////////////////////////////
     //all this methods create a new MessageFromClient object containing an execute() method with the call to a specific method of ModelController
     public void playStarterCard(){
@@ -58,6 +66,28 @@ public class ViewAPI implements ViewAPI_Interface {
 
     @Override
     public void readyToPlay(){viewModel.readyToPlay();}
+
+
+
+    ////////////////////////////////heartbeat////////////////
+
+    public void startHeartbeatThread() {
+        Thread heartbeatThread = new Thread(() -> {
+            while (true) {
+                try {
+                    this.HeartbeatToServer();
+//                    System.out.println("l");
+                    Thread.sleep(3000); // Send heartbeat every 1 second
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    break;
+                }
+            }
+        });
+
+        heartbeatThread.setDaemon(true);
+        heartbeatThread.start();
+    }
 
 //////////////////////////////////////////Lobby/////////////////////////////////////////////////////////////////////////
 
@@ -360,6 +390,11 @@ public class ViewAPI implements ViewAPI_Interface {
         }
         return false;
     }
+
+
+
+
+
 
     public boolean checkCanDrawFrom(int cardSource) {
         switch (cardSource) {

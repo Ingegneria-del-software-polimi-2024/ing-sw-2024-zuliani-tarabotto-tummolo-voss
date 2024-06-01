@@ -8,5 +8,4 @@ public interface ServerControllerInterface extends ControllerInterface {
     public void drawCard(int cardSource);
     public void setPlayerReady();
     public void endGame();
-
 }
