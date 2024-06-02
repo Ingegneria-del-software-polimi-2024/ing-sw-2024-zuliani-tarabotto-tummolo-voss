@@ -1,6 +1,6 @@
 package Server.Web.Lobby;
 
-public class HeartBeatSettings {
+public final class HeartBeatSettings {
     public static final long timeoutCheck = 4000;
     public static final long checkFreq = 1000;
     public static final long timeout = 5000;

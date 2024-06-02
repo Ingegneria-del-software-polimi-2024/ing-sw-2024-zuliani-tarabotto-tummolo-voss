@@ -186,24 +186,27 @@ public class GameState {
      */
     public void setTurnState(TurnState state) {
         this.turnState = state;
+        //NOTIFICATION: ABOUT THE CHANGED STATE OF GAMESTATE
+        modelListener.notifyChanges(state);
         if(state.equals(TurnState.OBJECTIVE_SELECTION)){
+            //DEBUG
+            System.out.println("Correctly entered control");
             for(Player p : players){
                 if(!p.isActive())
                     recoveryObjectiveChoice(p);
             }
         }
-        //NOTIFICATION: ABOUT THE CHANGED STATE OF GAMESTATE
-        modelListener.notifyChanges(state);
     }
 
     public void distributeSecretOjectives() {
-        for(int i = 0; i <players.size(); i++){
+        for(int i=0; i<players.size(); i++) {
             Player p = players.get(i);
             objectiveBuffer.add(getObjectiveDeck().extract());
             objectiveBuffer.add(getObjectiveDeck().extract());
             //NOTIFICATION: about the two objectives the player has to choose between
-            modelListener.notifyChanges(objectiveBuffer.get(objectiveBuffer.size()-2), objectiveBuffer.get(objectiveBuffer.size()-1), p.getNickname());
+            modelListener.notifyChanges(objectiveBuffer.get(objectiveBuffer.size() - 2), objectiveBuffer.get(objectiveBuffer.size() - 1), p.getNickname());
         }
+        System.out.println("distribution ended");
     }
 
     public void setPlayerSecretObjective(String cardId, String player){

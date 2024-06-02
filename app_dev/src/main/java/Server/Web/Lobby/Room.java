@@ -138,6 +138,7 @@ public class Room {
         playersInterfaces.put(player, null);
         send.disconnectPlayer(player);
         modelController.setPlayerInactive(player);
+
         System.out.println("Player " + player + " is disconnected.");
     }
 

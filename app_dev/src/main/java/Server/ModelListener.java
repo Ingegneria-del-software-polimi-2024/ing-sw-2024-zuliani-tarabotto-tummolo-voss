@@ -36,11 +36,11 @@ public class ModelListener {//TODO Handle correctly the exceptions
 
     /**
      * notification about current state of GameState
-     * @param state
+     * @param state the state to be set
      */
     public void notifyChanges(TurnState state){
         try{
-            System.out.println("notification send");
+            System.out.println("state notification send");
             serverAPI.broadcastNotifyChanges( new StateMessage( state ));
         } catch(MsgNotDeliveredException msg) {
             throw new RuntimeException(msg);

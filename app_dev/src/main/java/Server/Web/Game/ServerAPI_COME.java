@@ -40,9 +40,10 @@ public class ServerAPI_COME {
              //if you find a message in the waiting list
              if (message != null) {
                  //TODO check if there is a msg sender if yes ->  insert here the method for the heartbeat heartbeatFunc(msg.getSender) called from modelcontroller-> put in controller heartbeat function
-                 if(controller.checkMessage(message))
-                    //if that message has sense execute it
-                    message.execute(controller);
+                 if (controller.checkMessage(message))
+                     //if that message has sense execute it
+                     message.execute(controller);
+
                  //else
                  //if that message doesn't have sense
                  //    toDoQueue.enqueueMessage(message);

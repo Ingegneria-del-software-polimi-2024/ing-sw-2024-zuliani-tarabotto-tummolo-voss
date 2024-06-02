@@ -87,13 +87,12 @@ public class ModelController implements ServerControllerInterface {
             return;
         gameState.setStartingCardFace(face,player);
         gameState.playStarterCard(player);
-        //IF THIS FUNCTION GETS CALLED A NUMBER OF TIMES EQUALS TO THE NUMBER OF PLAYERS THEN THE STATE OF THE GAME IS CHANGED
-        if(cont == playersNicknames.size() - 1){
-            distributeSecretObjectives();
-            cont = 0;
-            return;
-        }
         cont++;
+        //IF THIS FUNCTION GETS CALLED A NUMBER OF TIMES EQUALS TO THE NUMBER OF PLAYERS THEN THE STATE OF THE GAME IS CHANGED
+        if(cont == playersNicknames.size()){
+            cont = 0;
+            distributeSecretObjectives();
+        }
     }
 
 
@@ -102,8 +101,14 @@ public class ModelController implements ServerControllerInterface {
      * the player can choose between the two secretObjective cards that he is given
      */
     private void distributeSecretObjectives(){
+        //DEBUG
+        System.out.println("obj are being distributed");
         gameState.distributeSecretOjectives();
+        gameState.nextPlayer();
         gameState.setTurnState(TurnState.OBJECTIVE_SELECTION);
+        //DEBUG
+        System.out.println("obj have been distributed");
+
     }
 
 
@@ -119,11 +124,11 @@ public class ModelController implements ServerControllerInterface {
         cont++;
         if(!playersNicknames.contains(player))
             return;
-
+        System.out.println(cont +" !!!!!!!!!!");
         gameState.setPlayerSecretObjective(cardId, player);
-
+        System.out.println("MHHHH");
         if(cont == playersNicknames.size()){
-
+            System.out.println("WTF");
             //Now the first round will be played
             gameState.playingTurn();
             gameState.setTurnState(TurnState.PLACING_CARD_SELECTION);

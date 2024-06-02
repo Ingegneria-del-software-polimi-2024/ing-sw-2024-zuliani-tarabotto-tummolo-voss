@@ -32,7 +32,7 @@ public enum TurnState {
 
         @Override
         public void recoverDisconnection(GameState gameState, Player disconnectedPlayer) {
-            gameState.recoveryObjectiveChoice(disconnectedPlayer);
+            gameState.recoveryStarterCard(disconnectedPlayer);
         }
     },
 

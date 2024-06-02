@@ -5,23 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/HeartBeatSettings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Server/ModelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ModelController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Server/ModelListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ModelListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Game/SOCKET_ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Game/SOCKET_ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Game/ServerAPI_GO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Game/ServerAPI_GO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/Lobby.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/Lobby.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/LobbyMessageQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/LobbyMessageQueue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Game/ServerAPI_COME.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Game/ServerAPI_COME.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/HeartBeatSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/HeartBeatSettings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/Room.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromClient/toModelController/DisconnectionMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromClient/toModelController/DisconnectionMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromClient/toModelController/ReadyToPlayMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromClient/toModelController/ReadyToPlayMessage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/TurnState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/TurnState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/placementArea/PlacementArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/placementArea/PlacementArea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/placementArea/PlacementAreaIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/placementArea/PlacementAreaIterator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/player/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/model/GameState/MockModelListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/GameState/MockModelListener.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -272,7 +263,7 @@
       <workItem from="1717171165000" duration="11237000" />
       <workItem from="1717246424595" duration="5379000" />
       <workItem from="1717260823195" duration="2531000" />
-      <workItem from="1717333185692" duration="22321000" />
+      <workItem from="1717333185692" duration="27266000" />
     </task>
     <servers />
   </component>
