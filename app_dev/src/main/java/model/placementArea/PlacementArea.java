@@ -196,6 +196,9 @@ public class PlacementArea {
      * @return the occurrences of the shape "shape"
      */
     public int verifyObjective(Shape shape, List<Element> element){
+        //if i don't have cards it's useless to count
+        if(disposition.keySet().isEmpty())
+            return 0;
         //declare and initialize
         final Coordinates ORIGIN = new Coordinates(0,0);
         Coordinates tmpCoordinates;

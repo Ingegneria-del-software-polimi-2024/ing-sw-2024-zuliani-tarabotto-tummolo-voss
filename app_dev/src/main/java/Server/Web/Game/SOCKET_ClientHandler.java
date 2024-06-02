@@ -115,7 +115,7 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
                     sendToServer((MessageFromClient)message);
             }while(true);
         }catch (IOException | ClassNotFoundException e){
-            System.err.println("Connection lost: " + e.getMessage());
+//            System.err.println("Connection lost: " + e.getMessage());
 
             DisconnectionMessage disconnectionMessage = new DisconnectionMessage();
             if(api == null)

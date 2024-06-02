@@ -21,8 +21,6 @@ public class Room {
     private String name;
     private int expectedPlayers;
     private ArrayList<String> players;
-    private GameState game;//Maybe controller??
-
     private ServerAPI_COME receive;
     private ServerAPI_GO send;
     private boolean full;
@@ -58,8 +56,10 @@ public class Room {
      * verifies if a match in the room can start
      */
     public void verifyStart(){
-        if(expectedPlayers == players.size())
-            startGame();
+        if(expectedPlayers == players.size()) {
+            Thread gameStarter = new Thread(this::startGame);
+            gameStarter.start();//TODO CONTROL IF THIS MAKES SENSE
+        }
     }
 
     /**
@@ -86,20 +86,20 @@ public class Room {
         lastSeen.put(playerId, System.currentTimeMillis());
     }
     public void handleADetectedDisconnection() {
-
-        Boolean disconnection = false;
-        while(disconnection!=true){
+        //DEBUG
+        System.out.println("handleADetectedDisconnection was called");
+        boolean disconnection = false;
+        while(!disconnection){
             long currentTime = System.currentTimeMillis();
-            long timeout = 5000; // 5 seconds timeout
 
             for (String player : players) {
                 Long lastSeenTime = lastSeen.get(player);
-                if (lastSeenTime != null && currentTime - lastSeenTime > timeout) {
+                if (lastSeenTime != null && currentTime - lastSeenTime > HeartBeatSettings.timeout) {
                     if (!disconnectedUsers.contains(player)) {
-                        disconnectedUsers.add(player);
+                        disconnectPlayer(player);
                         disconnection = true;
-                        System.out.println("Player " + player + " is disconnected.");
-                        //TODO NOTIFY ALL PLAYERS WITH BROADCAST AND MAYE BLOCK UI
+                        System.out.println("Correctly disconnected player "+player);
+                        //TODO NOTIFY ALL PLAYERS WITH BROADCAST AND MAYBE BLOCK UI
                     }
                 }
             }
@@ -112,21 +112,20 @@ public class Room {
         new Thread(() -> {
             while (true) {
                 long currentTime = System.currentTimeMillis();
-                long timeout = 4000; // 4 seconds timeout
 
                 for (String player : players) {
                     Long lastSeenTime = lastSeen.get(player);
-                    if (lastSeenTime != null && currentTime - lastSeenTime > timeout) {
-                        if (!disconnectedUsers.contains(player)) {
-                            disconnectedUsers.add(player);
-                            System.out.println("Player " + player + " is disconnected.");
-                            //TODO NOTIFY ALL PLAYERS WITH BROADCAST AND MAYE BLOCK UI
-                        }
+                    if (!disconnectedUsers.contains(player) && lastSeenTime != null && currentTime - lastSeenTime > HeartBeatSettings.timeout) {
+                        //DEBUG
+                        System.out.println("a disconnection was seen by the thread");
+                        System.out.println("the delta percieved is: "+ (currentTime - lastSeenTime)+ " milliseconds");
+                        System.out.println("the player involved is: "+player);
+                        disconnectPlayer(player);
+                        //TODO NOTIFY ALL PLAYERS WITH BROADCAST AND MAYE BLOCK UI
                     }
                 }
-
                 try {
-                    Thread.sleep(1000); // Check every second
+                    Thread.sleep(HeartBeatSettings.checkFreq); // Check every second
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -134,6 +133,13 @@ public class Room {
         }).start();
     }
 
+    private void disconnectPlayer(String player){
+        disconnectedUsers.add(player);
+        playersInterfaces.put(player, null);
+        send.disconnectPlayer(player);
+        modelController.setPlayerInactive(player);
+        System.out.println("Player " + player + " is disconnected.");
+    }
 
     /**
      *

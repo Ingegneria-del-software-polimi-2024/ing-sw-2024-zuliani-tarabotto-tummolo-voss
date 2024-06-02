@@ -31,8 +31,6 @@ public class ModelListener {//TODO Handle correctly the exceptions
         this.serverAPI = serverAPI;
     }
 
-    public ModelListener() {
-    }
 
     //////////////////////// GAME SETUP NOTIFICATIONS ///////////////////////////////////////////////////
 

@@ -11,11 +11,8 @@ public class DisconnectionMessage implements MessageFromViewToModelController {
 
     @Override
     public void execute(ModelController controller) {
-        controller.HandleDisconnection();
+        controller.handleDisconnection();
     }
-
-    //ignore this
-
 
     @Override
     public void execute(ControllerInterface controller) {

@@ -18,19 +18,21 @@ import java.util.List;
 public class Player implements Serializable {
     private String nickname;
     private List<PlayableCard> hand;
-    private ObjectiveCard secretObjective;
+    private ObjectiveCard secretObjective = null;
     private PlacementArea placementArea;
     private int points;
     private PlayableCard starterCard;
     private Pawn pawnColor;
 
-
+    private Boolean active;
+    private final Object activityMutex = new Object();
     /**
      * class constructor
      */
     public Player() {
         this.hand = new ArrayList<>();
         this.placementArea = new PlacementArea();
+        this.active = true;
     }
 
     /**
@@ -77,7 +79,10 @@ public class Player implements Serializable {
      * @return 1 if the objective is satisfied at least once, else 0
      */
     public int calculateSecretObj(){
-        int objP = secretObjective.countPoints(placementArea);
+
+        int objP = 0;
+        if(secretObjective!= null)
+            objP += secretObjective.countPoints(placementArea);
 
         points = points + objP;
 
@@ -107,8 +112,16 @@ public class Player implements Serializable {
     public void setStarterCard(PlayableCard starterCard) { this.starterCard = starterCard; }
     public void setSecretObjective(ObjectiveCard secretObjective) { this.secretObjective = secretObjective; }
     public void setPawnColor(Pawn pawnColor) { this.pawnColor = pawnColor; }
-
-
+    public void setActive() {
+        synchronized (activityMutex) {
+            this.active = true;
+        }
+    }
+    public void setInactive(){
+        synchronized (activityMutex){
+            this.active = false;
+        }
+    }
 
     ///////////////// GETTER METHODS ///////////////////////////////////////
     public String getNickname() { return nickname; }
@@ -118,6 +131,11 @@ public class Player implements Serializable {
     public PlacementArea getPlacementArea() { return placementArea; }
     public ObjectiveCard getSecretObjective() { return secretObjective; }
     public Pawn getPawnColor(){return pawnColor;}
+    public boolean isActive(){
+        synchronized (activityMutex){
+            return active;
+        }
+    }
 
 }
 

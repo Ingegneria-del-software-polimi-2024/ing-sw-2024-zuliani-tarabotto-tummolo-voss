@@ -18,7 +18,9 @@ import java.util.List;
 
 public class MockModelListener extends ModelListener {
 
-    public MockModelListener() {}
+    public MockModelListener() {
+        super(null);
+    }
 
     /**
      * notification about current state of GameState

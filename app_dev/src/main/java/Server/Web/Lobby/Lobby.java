@@ -6,6 +6,7 @@ import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_RoomChoice;
 import SharedWebInterfaces.Messages.MessagesFromLobby.AlreadyExistingNameMessage;
 import SharedWebInterfaces.Messages.MessagesFromLobby.CantJoinRoomMsg;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
+import SharedWebInterfaces.Messages.MessagesToLobby.HeartbeatMessage;
 import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
 import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
 import SharedWebInterfaces.Messages.MessagesToLobby.MessageToLobby;
@@ -49,7 +50,12 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
         while(true){
             MessageToLobby msg = queue.getNextMessage();
             if(msg != null){
-                System.out.println("Arrived a new message:"+  msg.getClass());
+                //DEBUG
+                if(!(msg instanceof HeartbeatMessage)) {
+                    System.out.println("———————————————————————————————————————————————————————————————");
+                    System.out.println("Arrived a new message:      " + msg.getClass());
+                    System.out.println("———————————————————————————————————————————————————————————————");
+                }
                 try{
                     msg.execute(this);
                 }catch (RuntimeException e){
@@ -170,7 +176,6 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
      */
     public void enqueueMessage(MessageToLobby msg){
         queue.enqueueMessage(msg);
-        System.out.println("Enqueued the following message: "+msg.getClass());
     }
 
     /**

@@ -4,6 +4,7 @@ import Client.UI.UI;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.*;
 import SharedWebInterfaces.Messages.MessagesFromServer.EndGameMessage;
+import model.player.Player;
 
 /**
  * a finite state machine that keeps track of the states occuring during the turn of a player,
@@ -20,7 +21,8 @@ public enum TurnState {
         public boolean controlMessage(MessageFromClient message) {
             return (message instanceof ChooseSecreteObjMessage ||
                     message instanceof ReadyToPlayMessage      ||
-                    message instanceof QuitGameMessage);
+                    message instanceof QuitGameMessage         ||
+                    message instanceof DisconnectionMessage);
         }
 
         @Override
@@ -28,6 +30,10 @@ public enum TurnState {
             ui.displayInitialization();
         }
 
+        @Override
+        public void recoverDisconnection(GameState gameState, Player disconnectedPlayer) {
+            gameState.recoveryObjectiveChoice(disconnectedPlayer);
+        }
     },
 
 
@@ -35,11 +41,17 @@ public enum TurnState {
         public boolean controlMessage(MessageFromClient msg){
             return (msg instanceof SelectStarterCardMessage ||
                     msg instanceof PlayStarterCardMessage   ||
-                    msg instanceof QuitGameMessage);
+                    msg instanceof QuitGameMessage          ||
+                    msg instanceof DisconnectionMessage);
         }
         @Override
         public void display(UI ui){
             ui.displayStarterCardSelection();
+        }
+
+        @Override
+        public void recoverDisconnection(GameState gameState, Player disconnectedPlayer) {
+            gameState.recoveryStarterCard(disconnectedPlayer);
         }
     },
 
@@ -47,25 +59,38 @@ public enum TurnState {
     OBJECTIVE_SELECTION{
         public boolean controlMessage(MessageFromClient msg){
             return (msg instanceof ChooseSecreteObjMessage ||
-                    msg instanceof QuitGameMessage);
+                    msg instanceof QuitGameMessage         ||
+                    msg instanceof DisconnectionMessage);
         }
 
         @Override
         public void display(UI ui){
             ui.displayObjectiveSelection();
         }
+
+        @Override
+        public void recoverDisconnection(GameState gameState, Player disconnectedPlayer) {
+            gameState.recoveryObjectiveChoice(disconnectedPlayer);
+        }
+
     },
 
 
     PLACING_CARD_SELECTION{
         public boolean controlMessage(MessageFromClient msg){
             return (msg instanceof PlayCardMessage ||
-                    msg instanceof QuitGameMessage);
+                    msg instanceof QuitGameMessage ||
+                    msg instanceof DisconnectionMessage);
         }
 
         @Override
         public void display(UI ui){
             ui.displayPlacingCard();
+        }
+
+        @Override
+        public void recoverDisconnection(GameState gameState, Player disconnectedPlayer) {
+            gameState.recoverPlacement(disconnectedPlayer);
         }
     },
 
@@ -73,12 +98,18 @@ public enum TurnState {
     CARD_DRAWING{
         public boolean controlMessage(MessageFromClient msg){
             return (msg instanceof DrawCardMessage ||
-                    msg instanceof QuitGameMessage);
+                    msg instanceof QuitGameMessage ||
+                    msg instanceof DisconnectionMessage);
         }
 
         @Override
         public void display(UI ui){
             ui.displayCardDrawing();
+        }
+
+        @Override
+        public void recoverDisconnection(GameState gameState, Player disconnectedPlayer) {
+            gameState.recoveryDrawing(disconnectedPlayer);
         }
     },
 
@@ -86,7 +117,8 @@ public enum TurnState {
     END_GAME{
         //TODO change instanceof type
         public boolean controlMessage(MessageFromClient msg){
-            return (msg instanceof QuitGameMessage);
+            return (msg instanceof QuitGameMessage ||
+                    msg instanceof DisconnectionMessage);
         }
 
         @Override
@@ -137,5 +169,9 @@ public enum TurnState {
 
     public boolean controlMessage(MessageFromClient message){return false;}
 
-    public void display( UI ui){}
+    public void display(UI ui){}
+    public void recoverDisconnection(GameState gameState, Player disconnectedPlayer){}
+    public boolean isStartingState(){
+        return this.equals(GAME_INITIALIZATION) || this.equals(OBJECTIVE_SELECTION) || this.equals(STARTER_CARD_SELECTION);
+    }
 }

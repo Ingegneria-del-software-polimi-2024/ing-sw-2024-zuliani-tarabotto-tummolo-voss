@@ -1,5 +1,6 @@
 package Server;
 import Server.Web.Game.ServerAPI_GO;
+import Server.Web.Lobby.HeartBeatSettings;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import model.Exceptions.CantPlaceCardException;
 import SharedWebInterfaces.SharedInterfaces.ServerControllerInterface;
@@ -45,6 +46,7 @@ public class ModelController implements ServerControllerInterface {
         this.gameId = gameId;
         this.send = send;
         this.readyPlayers = 0;
+        this.room = room;
     }
 
     /**
@@ -54,7 +56,7 @@ public class ModelController implements ServerControllerInterface {
     @Override
     public void initializeGameState(){
 
-        gameState = new GameState(playersNicknames, gameId, new ModelListener(send));
+        gameState = new GameState(playersNicknames, gameId, new ModelListener(send), this);
         initialPlayer = gameState.getTurnPlayer().getNickname();
         gameState.setTurnState(TurnState.GAME_INITIALIZATION);
     }
@@ -114,19 +116,19 @@ public class ModelController implements ServerControllerInterface {
      */
     @Override
     public void chooseSecretObjective(String cardId, String player) {
+        cont++;
         if(!playersNicknames.contains(player))
             return;
 
         gameState.setPlayerSecretObjective(cardId, player);
 
-        if(cont == playersNicknames.size() - 1){
+        if(cont == playersNicknames.size()){
 
             //Now the first round will be played
             gameState.playingTurn();
             gameState.setTurnState(TurnState.PLACING_CARD_SELECTION);
             return;
         }
-        cont++;
     }
 
 
@@ -234,12 +236,47 @@ public class ModelController implements ServerControllerInterface {
         gameState.setTurnState(TurnState.END_GAME);
     }
 
+    /**
+     * set a player in an active state
+     * @param playerName the name of the player to be set active
+     */
+    public void setPlayerActive(String playerName){
+        gameState.setPlayerActive(playersNicknames.indexOf(playerName));
+    }
 
+    /**
+     * set a player in an inactive state
+     * @param playerName the name of the player to be set active
+     */
+    public void setPlayerInactive(String playerName){
+        gameState.setPlayerInactive(playersNicknames.indexOf(playerName));
+        //control if all the players except one are disconnected
+        int iterations = 0;
+        do {
+            int disconnectedPlayersNumber = 0;
+            for (int i = 0; i < playersNicknames.size(); i++) {
+                if (!gameState.getPlayer(i).isActive()) {
+                    disconnectedPlayersNumber++;
+                    //DEBUG
+                    System.out.println(disconnectedPlayersNumber);
+                }
+            }
+            if(disconnectedPlayersNumber < playersNicknames.size() - 1)
+                return;
+            iterations++;
+            try {
+                Thread.sleep(HeartBeatSettings.timerB4ClosingGame);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }while(iterations < HeartBeatSettings.iterationsNumber);
 
-    public void HandleDisconnection() {
+        endGame();
+    }
+
+    public void handleDisconnection() {
         System.out.println("DISCONNECTION DETECTED");
         room.handleADetectedDisconnection();
-
     }
 
     public void quitGame(String playerID){

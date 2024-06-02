@@ -18,7 +18,9 @@ public class ServerAPI_GO {
      */
     public void notifyChanges(MessageFromServer message, String player) throws MsgNotDeliveredException {
         try {
-            players.get(player).notifyChanges(message);
+            ClientHandlerInterface c = players.get(player);
+            if(c != null)
+                c.notifyChanges(message);
         } catch (RemoteException e) {
             throw new MsgNotDeliveredException(message);
         }
@@ -30,9 +32,11 @@ public class ServerAPI_GO {
      */
     public void broadcastNotifyChanges(MessageFromServer message) throws MsgNotDeliveredException {
         try {
-            for(String p : players.keySet()){
-                System.out.println("broadcasting "+message.getClass()+ "to "+p);
-                players.get(p).notifyChanges(message);
+            for(String p : players.keySet()) {
+                System.out.println("broadcasting " + message.getClass() + "to " + p);
+                ClientHandlerInterface c = players.get(p);
+                if(c != null)
+                    c.notifyChanges(message);
             }
         } catch (RemoteException e) {
             //throw new RuntimeException(e);
@@ -55,5 +59,8 @@ public class ServerAPI_GO {
      */
     public ServerAPI_GO() {
         players = new HashMap<>();
+    }
+    public void disconnectPlayer(String nickName){
+        players.put(nickName, null);
     }
 }
