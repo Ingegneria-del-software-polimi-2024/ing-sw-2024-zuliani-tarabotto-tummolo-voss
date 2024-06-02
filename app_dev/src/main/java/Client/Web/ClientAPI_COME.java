@@ -20,7 +20,6 @@ public class ClientAPI_COME implements Runnable{
      */
     public void notifyChanges(MessageFromServer message){
 
-        System.out.println("Arrived a new message "+message.getClass());        //TODO remove
         toDoQueue.enqueueMessage(message);
     }
     /**

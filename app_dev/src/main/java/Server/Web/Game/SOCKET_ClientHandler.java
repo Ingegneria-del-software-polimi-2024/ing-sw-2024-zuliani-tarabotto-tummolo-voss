@@ -93,10 +93,12 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
             MessageToLobby incoming;
             do{
                 incoming = (MessageToLobby) in.readObject();
-                if(incoming instanceof NewConnectionMessage)
+                if(incoming instanceof NewConnectionMessage) {
                     ((NewConnectionMessage) incoming).setHandler(this);
+                    read = true;
+                }
                 deliverToLobby(incoming);
-            }while(incoming instanceof NewConnectionMessage);
+            }while(!read);
 
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException();
@@ -106,6 +108,7 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
             Message message = null;
             do {
                 message = (Message) in.readObject();
+                //TODO replace if else with overloading
                 if(message instanceof MessageToLobby)
                     deliverToLobby((MessageToLobby)message);
                 else if(message instanceof MessageFromClient)
@@ -164,7 +167,7 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
 
     /**
      * This method tries to send the message MAX_RETRY times before signaling the exception to the caller
-     * @param msg
+     * @param msg the message to send
      */
     private void snd(MessageFromServer msg) throws RemoteException {
         int retryCount = 0;

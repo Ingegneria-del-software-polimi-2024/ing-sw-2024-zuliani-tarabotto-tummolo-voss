@@ -87,6 +87,7 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
         } catch (MsgNotDeliveredException e) {
             throw new RuntimeException(e);
         }
+
         //TODO sistema exception handling
     }
 
