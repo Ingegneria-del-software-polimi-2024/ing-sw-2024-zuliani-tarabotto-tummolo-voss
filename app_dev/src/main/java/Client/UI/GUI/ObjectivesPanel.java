@@ -15,13 +15,14 @@ public class ObjectivesPanel extends JPanel {
     private ObjCardLabel secret2;
     private ObjectivesPanel panel;
     private JPanel subPanel;
+    private int panelHeight;
 
-    public ObjectivesPanel(GUI gui){
+    public ObjectivesPanel(GUI gui, int panelHeight){
         this.gui = gui;
         setBackground(new Color(50, 84, 70));
 
         //this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-
+        this.panelHeight = panelHeight;
         common1 = new ObjCardLabel();
         common2 = new ObjCardLabel();
         secret1 = new ObjCardLabel();
@@ -42,6 +43,10 @@ public class ObjectivesPanel extends JPanel {
         subPanel.setLayout(new BoxLayout(subPanel, BoxLayout.Y_AXIS));
         subPanel.add(secretPanel1, 0 );
         subPanel.add(secretPanel2, 1);
+
+        System.out.println(subPanel.getHeight());
+        System.out.println(subPanel.getPreferredSize().getHeight());
+        this.setBorder(BorderFactory.createEmptyBorder((panelHeight - (int)subPanel.getPreferredSize().getHeight())/2, 0, 0, 0));
         this.add(subPanel);
     }
 
@@ -58,6 +63,7 @@ public class ObjectivesPanel extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 panel.remove(subPanel);
                 panel.add(secret1);
+                panel.setBorder(BorderFactory.createEmptyBorder((panelHeight - (int)common1.getPreferredSize().getHeight())/2, 0, 0, 0));
                 panel.revalidate();
                 panel.repaint();
             }
@@ -68,6 +74,7 @@ public class ObjectivesPanel extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 panel.remove(subPanel);
                 panel.add(secret2);
+                panel.setBorder(BorderFactory.createEmptyBorder((panelHeight - (int)common1.getPreferredSize().getHeight())/2, 0, 0, 0));
                 panel.revalidate();
                 panel.repaint();
             }

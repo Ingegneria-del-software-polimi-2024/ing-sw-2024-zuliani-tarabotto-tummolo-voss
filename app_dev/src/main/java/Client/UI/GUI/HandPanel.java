@@ -22,7 +22,7 @@ public class HandPanel extends JPanel {
         layout.setHgap(20); // Set horizontal gap
         //setLayout(layout);
         //setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-        setBackground(new Color(243, 238, 205));
+        setBackground(new Color(50, 84, 70));
 
         this.setBorder(BorderFactory.createEmptyBorder((panelHeight - (int)c1.getPreferredSize().getHeight()) / 2, 0, 0, 0));
         c1.addMouseListener(new FlipCardListener());
@@ -57,13 +57,13 @@ public class HandPanel extends JPanel {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         int borderWidth = 4;
-        g2d.setColor(new Color(164, 153, 59));
+        g2d.setColor(new Color(171, 144, 76));
         g2d.setStroke(new BasicStroke(borderWidth));
         g2d.drawRect(borderWidth/2, borderWidth/2, getWidth() - borderWidth, getHeight() - borderWidth);
 
         int innerBorder = borderWidth/2;
 
-        g2d.setColor(new Color(45, 33, 24));
+        g2d.setColor(new Color(171, 144, 76));
         g2d.setStroke(new BasicStroke(innerBorder));
         g2d.drawRect((borderWidth*2), (borderWidth*2), getWidth() - 2*(borderWidth*2), getHeight() - 2*(borderWidth*2));
 

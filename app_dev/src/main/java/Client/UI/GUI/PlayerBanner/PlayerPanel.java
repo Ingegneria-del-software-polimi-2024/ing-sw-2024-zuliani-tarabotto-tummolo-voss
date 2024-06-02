@@ -101,8 +101,7 @@ public class PlayerPanel extends JPanel {
         int borderWidth = 2;
         g2d.setColor(new Color(171, 144, 76));
         g2d.setStroke(new BasicStroke(borderWidth));
-        g2d.drawRect(borderWidth / 2, borderWidth / 2, getWidth() - borderWidth, getHeight() - borderWidth);
-
+        g2d.drawRect(borderWidth/2, borderWidth/2, getWidth() - borderWidth, getHeight() - borderWidth);
 
         // Draw points in a circle at the top left corner
         g2d.setColor(new Color(102, 22, 188));

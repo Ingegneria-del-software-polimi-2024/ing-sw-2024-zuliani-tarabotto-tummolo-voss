@@ -65,7 +65,7 @@ public class GUI  implements UI {
         frame.add(bottomPanel, BorderLayout.SOUTH);
 
         this.eastPanel = new JPanel();
-        eastPanel.setLayout(new FlowLayout(FlowLayout.LEADING));
+        eastPanel.setLayout(new BoxLayout(eastPanel, BoxLayout.Y_AXIS));
         eastPanel.setOpaque(false);
         frame.add(eastPanel, BorderLayout.EAST);
     }
@@ -227,11 +227,17 @@ public class GUI  implements UI {
     }
 
     private void createPlayerBanner(){
+        int i = 0;
         for(String p : view.getPlayers()){
             PlayerPanel player = new PlayerPanel( p, (int ) (screenWidth * 0.18), (int)(screenHeight * 0.13), this);
             player.setPreferredSize(new Dimension((int ) (screenWidth * 0.18), (int)(screenHeight * 0.13)));
+            player.setMaximumSize(new Dimension((int ) (screenWidth * 0.18), (int)(screenHeight * 0.13)));
             banners.put(p, player);
-            eastPanel.add(player);
+            //JPanel panel = new JPanel();
+            //panel.setMaximumSize(new Dimension());
+            //panel.add(player);
+            eastPanel.add(player, i);
+            i++;
             //topPanel.add(player);
         }
     }
@@ -245,7 +251,7 @@ public class GUI  implements UI {
 
 
     public void createObjectivesPanel(){
-        this.objPanel = new ObjectivesPanel(this);
+        this.objPanel = new ObjectivesPanel(this, (int)bottomPanel.getPreferredSize().getHeight());
         objPanel.setPreferredSize(new Dimension((int)(screenWidth * 0.33), (int)(screenHeight * 0.25)));
         bottomPanel.add(objPanel);
         //frame.add(objPanel, BorderLayout.EAST);
@@ -307,7 +313,7 @@ public class GUI  implements UI {
     }
 
     private BufferedImage makeRoundedCorner(BufferedImage image) {
-        int cornerRadius = 70;
+        int cornerRadius = 100;
         int w = image.getWidth();
         int h = image.getHeight();
         BufferedImage output = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
