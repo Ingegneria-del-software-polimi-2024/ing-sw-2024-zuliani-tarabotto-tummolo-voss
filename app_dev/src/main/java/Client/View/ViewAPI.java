@@ -27,6 +27,7 @@ public class ViewAPI implements ViewAPI_Interface {
 
     private UI ui;
     private ViewModel viewModel;
+    private Thread t;
 
     public ViewAPI() {
         this.ui = new TUI(this);
@@ -35,8 +36,16 @@ public class ViewAPI implements ViewAPI_Interface {
     //TODO: clientAPI_GO deve essere passato come parametro
 
     public void startUI(){
-        Thread t = new Thread(ui);
+        t = new Thread(ui);
         t.start();
+    }
+
+    public void stopUI(){
+        try {
+            t.join();
+        }catch (InterruptedException e){
+
+        }
     }
 
     public void setClientAPIGo(ClientAPI_GO clientAPI_GO){

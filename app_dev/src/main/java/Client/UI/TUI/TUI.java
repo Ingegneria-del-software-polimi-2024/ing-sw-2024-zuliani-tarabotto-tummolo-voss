@@ -36,6 +36,8 @@ public class TUI implements UI {
     private Runnable rePrint;
     boolean enterPressed = false;
     private final Object lockForControllingCommands;
+    private boolean uiAlreadyStarted = false;
+    private boolean runningThread;
 
     public TUI(ViewAPI view){
 
@@ -163,7 +165,7 @@ public class TUI implements UI {
             System.out.print(ansi().fg(color).a("~> Insert the name of the game you want to join or a new name if you want to create it, write -r to refresh the available games: \n").reset());
         }else
             System.out.print(ansi().fg(color).a("~> There are no available games, please create a new game by typing its name or write -r to refresh the available games: \n").reset());
-        sc.reset();
+        //sc.reset();
         game = sc.nextLine();
         if(game.equals("-r")) {
             view.requestAvailableGames();
@@ -197,8 +199,8 @@ public class TUI implements UI {
 
     public void returnToLobby(){
         clear();
+        view.stopUI();
         view.welcome();
-
         view.requestAvailableGames();
         //TODO fix the bug, problem related to scanner
     }
@@ -209,8 +211,14 @@ public class TUI implements UI {
         clear();
         loginPrinter.print();
 
+       /* if(!uiAlreadyStarted){
+            view.startUI();
+            uiAlreadyStarted = true;
+        }*/
+
         view.startUI();
 
+        enterPressed = false;
         // Continuously check if Enter is pressed until it's pressed
         while (!enterPressed) {
             System.out.print(ansi().fg(color).a("~> Press Enter to continue...\n").reset());
@@ -254,7 +262,7 @@ public class TUI implements UI {
         rePrint = () -> {
             clear();
             handPrinter.printStarterCard(view.getStarterCard());
-            System.out.print(ansi().fg(color).a("~> This is your StarterCard, choose a face side: (true/false)\n").reset());
+            System.out.print(ansi().fg(color).a("~> This is your StarterCard, choose a face side: (front/back)\n").reset());
         };
         rePrint.run();
 
@@ -285,7 +293,7 @@ public class TUI implements UI {
             System.out.print(ansi().fg(color).a("~> this are the two commonObjectives:\n").reset());
             objectivesPrinter.printCommonObjectives(view.getCommonObjectives().get(0),view.getCommonObjectives().get(1));
 
-            System.out.print(ansi().fg(color).a("~> choose your secretObjective: (0/1)\n").reset());
+            System.out.print(ansi().fg(color).a("~> choose your secretObjective: (1/2)\n").reset());
             //we use the same function also to print the two objectives the player has to choose from
             objectivesPrinter.printCommonObjectives(view.getChooseSecretObjectives().get(0), view.getChooseSecretObjectives().get(1));
         };
@@ -293,11 +301,11 @@ public class TUI implements UI {
 
         synchronized (lock){
             Integer secretObj = parseInt();
-            while(!secretObj.equals(0)  && !secretObj.equals(1)){
-                System.out.println("~> Please insert 0/1\n");
+            while(!secretObj.equals(1)  && !secretObj.equals(2)){
+                System.out.println("~> Please insert 1/2\n");
                 secretObj = parseInt();
             }
-            view.setSecretObjective(view.getChooseSecretObjectives().get(secretObj));
+            view.setSecretObjective(view.getChooseSecretObjectives().get(secretObj - 1));
             inputPresent = false;
             lock.notifyAll();
         }
@@ -349,7 +357,7 @@ public class TUI implements UI {
                 clear();
                 dispositionPrinter.print(view.getDisposition(), view.getAvailablePlaces());
                 ultimatePrint(view);
-                System.out.print(ansi().fg(color).a("~> Select a face side for the card: (true/false)\n").reset());
+                System.out.print(ansi().fg(color).a("~> Select a face side for the card: (front/back)\n").reset());
             };
             rePrint.run();
 
@@ -448,7 +456,7 @@ public class TUI implements UI {
         entryList.sort((e1, e2) -> e2.getValue().compareTo(e1.getValue()));
 
         System.out.println(ansi().fg(226).a(
-                " ███████╗██╗  ██╗███████╗    ███████╗███╗   ██╗██████╗\n" +
+                "████████╗██╗  ██╗███████╗    ███████╗███╗   ██╗██████╗\n" +
                 "╚══██╔══╝██║  ██║██╔════╝    ██╔════╝████╗  ██║██╔══██╗\n" +
                 "   ██║   ███████║█████╗      █████╗  ██╔██╗ ██║██║  ██║\n" +
                 "   ██║   ██╔══██║██╔══╝      ██╔══╝  ██║╚██╗██║██║  ██║\n" +
@@ -503,7 +511,8 @@ public class TUI implements UI {
 
     @Override
     public void run(){
-        while (true) {
+        runningThread = true;
+        while (runningThread) {
             synchronized (lock) {
                 while (inputPresent) {
                     try {
@@ -517,6 +526,7 @@ public class TUI implements UI {
 
                 if (input.equals("--quit")) {
                     clear();
+                    runningThread = false;
                     commandMap.get(input).execute();
                 }else if(input.startsWith("--") && !input.equals("")) {
                     clear();
@@ -576,12 +586,14 @@ public class TUI implements UI {
                 }
             }
 
-            if(input.equals("false") || input.equals("true")){
-                value = Boolean.parseBoolean(input);
+            if(input.equals("back")) {
+                value = false;
                 validInput = true;
-
+            }else if(input.equals("front")) {
+                value = true;
+                validInput = true;
             }else{
-                System.out.println("input type mismatch, please insert a boolean(true/false)\n");
+                System.out.println("input type mismatch, please insert (front/back)\n");
             }
             inputPresent = false;
             lock.notifyAll();

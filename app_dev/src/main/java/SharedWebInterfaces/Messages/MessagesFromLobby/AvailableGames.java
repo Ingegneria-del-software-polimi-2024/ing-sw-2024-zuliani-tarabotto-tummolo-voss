@@ -17,7 +17,7 @@ public class AvailableGames implements MessageFromServer {
     }
 
     public String toString(){
-        String ret = "Giochi disponibili:";
+        String ret = "Available Games:";
         if(availableGames == null)
             return ret;
         for(String s : availableGames){
