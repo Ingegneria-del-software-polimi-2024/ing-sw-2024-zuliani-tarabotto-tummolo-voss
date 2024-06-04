@@ -15,4 +15,18 @@ public class FlipCardListener extends MouseAdapter {
         CardLabel label = (CardLabel) e.getSource();
         label.flipCard();
     }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        CardLabel label = (CardLabel) e.getSource();
+        label.highLight();
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        CardLabel label = (CardLabel) e.getSource();
+        label.unHighLight();
+    }
+
+
 }

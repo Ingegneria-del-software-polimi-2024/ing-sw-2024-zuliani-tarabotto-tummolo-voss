@@ -10,6 +10,7 @@ import model.placementArea.Coordinates;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -66,6 +67,7 @@ public class GUI  implements UI {
 
         this.eastPanel = new JPanel();
         eastPanel.setLayout(new BoxLayout(eastPanel, BoxLayout.Y_AXIS));
+        eastPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         eastPanel.setOpaque(false);
         frame.add(eastPanel, BorderLayout.EAST);
     }
@@ -82,18 +84,17 @@ public class GUI  implements UI {
         sc.next();
         view.readyToPlay();
 
-
     }
 
     @Override
     public void displayStarterCardSelection() {
-        view.getStarterCard().setFaceSide(true);
-        view.playStarterCard();
+        handPanel.addStarterCard();
+
     }
 
     @Override
     public void displayObjectiveSelection() {
-        handPanel.updateHand();
+        handPanel.addCards();
         objPanel.updateObjectivesPanel();
         objPanel.chooseObjectives();
 
@@ -233,12 +234,8 @@ public class GUI  implements UI {
             player.setPreferredSize(new Dimension((int ) (screenWidth * 0.18), (int)(screenHeight * 0.13)));
             player.setMaximumSize(new Dimension((int ) (screenWidth * 0.18), (int)(screenHeight * 0.13)));
             banners.put(p, player);
-            //JPanel panel = new JPanel();
-            //panel.setMaximumSize(new Dimension());
-            //panel.add(player);
             eastPanel.add(player, i);
             i++;
-            //topPanel.add(player);
         }
     }
 
