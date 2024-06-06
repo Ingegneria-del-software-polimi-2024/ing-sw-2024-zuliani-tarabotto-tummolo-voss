@@ -26,6 +26,7 @@ public class BoardClickedListener extends MouseAdapter {
             if(xRel / (board.getCardLength()/2) == 0 && yRel / (board.getCardHeight()/2) == 0){
                 gui.getView().playStarterCard();
                 gui.setStarterSelected();
+                gui.updateHand();
                 System.out.println("cliccata");
             }
         }else{

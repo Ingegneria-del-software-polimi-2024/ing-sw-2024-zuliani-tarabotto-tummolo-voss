@@ -12,6 +12,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -46,9 +48,13 @@ public class GUI  implements UI {
     private String currentDisposition;
     private BoardClickedListener boardClickedListener;
     private BoardMotionListener boardMotionListener;
+    private static String title;
+    private static JPanel glassPane;
+    private JLabel titleLabel;
 
     public GUI(ViewAPI view){
         this.view = view;
+        title = "";
 
         SwingUtilities.invokeLater(() -> {
             frame = new JFrame("CODEX NATURALIS");
@@ -60,6 +66,34 @@ public class GUI  implements UI {
             frame.setSize(screenWidth, screenHeight);
             frame.setLayout(new BorderLayout());
             frame.setLocationRelativeTo(null);
+
+            titleLabel = new JLabel("", SwingConstants.CENTER);
+            titleLabel.setFont(new Font("Serif", Font.BOLD, 48));
+            titleLabel.setForeground(Color.BLACK);
+            titleLabel.setBounds(0, frame.getHeight() / 2 - 48, frame.getWidth(), 96);
+
+            // Create a glass pane for the title
+            glassPane = new JPanel() {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    if (!title.isEmpty()) {
+                        Graphics2D g2d = (Graphics2D) g;
+                        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                        g2d.setFont(new Font("Serif", Font.BOLD, 70));
+                        FontMetrics fm = g2d.getFontMetrics();
+                        int stringWidth = fm.stringWidth(title);
+                        int stringHeight = fm.getAscent();
+                        int x = (getWidth() - stringWidth) / 2;
+                        int y = (getHeight() - stringHeight) / 2 + fm.getAscent();
+                        g2d.setColor(Color.YELLOW);
+                        g2d.drawString(title, x, y);
+                    }
+                }
+            };
+            glassPane.setOpaque(false);
+            frame.setGlassPane(glassPane);
+            glassPane.setVisible(false);
 
         });
         loadImages();
@@ -84,6 +118,7 @@ public class GUI  implements UI {
         centerPanel.setOpaque(false);
         frame.add(centerPanel, BorderLayout.CENTER);
 
+
     }
 
     @Override
@@ -104,13 +139,15 @@ public class GUI  implements UI {
 
     @Override
     public void displayStarterCardSelection() {
+        showTitle("Place Starter Card");
         handPanel.addStarterCard();
     }
 
     @Override
     public void displayObjectiveSelection() {
+        showTitle("Choose Secret Objective");
         bannersPanel.updateBanners();
-        handPanel.addCards();
+        updateHand();
         objPanel.updateObjectivesPanel();
         objPanel.chooseObjectives();
     }
@@ -121,6 +158,7 @@ public class GUI  implements UI {
         handPanel.updateHand();
         deckPanel.disableListeners();
         if(view.getMyTurn()){
+            showTitle("Play a Card");
             currentDisposition = view.getPlayerId();
             handPanel.enableListeners();
         }
@@ -131,6 +169,7 @@ public class GUI  implements UI {
     public void displayCardDrawing() {
         bannersPanel.updateBanners();
         if(view.getMyTurn()){
+            showTitle("Draw a Card");
             handPanel.disableListeners();
             //
             //board.setDisplayAvailable();
@@ -457,10 +496,34 @@ public class GUI  implements UI {
         }
     }
 
+    public void updateHand(){
+        handPanel.updateHand();
+    }
+
 
     public void setCurrentDisposition(String player){
         this.currentDisposition = player;
     }
 
     public String getCurrentDisposition(){return currentDisposition;}
+
+
+
+
+    public static void showTitle(String newTitle) {
+        title = newTitle;
+        glassPane.setVisible(true);
+        glassPane.repaint();
+
+        // Hide the title after a delay
+        Timer timer = new Timer(3000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                glassPane.setVisible(false);
+                title = ""; // Clear the title
+            }
+        });
+        timer.setRepeats(false);
+        timer.start();
+    }
 }

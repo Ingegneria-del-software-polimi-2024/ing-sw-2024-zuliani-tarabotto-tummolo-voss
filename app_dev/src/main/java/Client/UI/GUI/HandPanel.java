@@ -47,9 +47,6 @@ public class HandPanel extends JPanel {
         c2.updateCard(starter, gui.getFronts().get(starter.getId()), gui.getBacks().get(starter.getId()) );
     }
 
-    public void addCards(){
-        updateHand();
-    }
 
     @Override
     public Dimension getPreferredSize(){
