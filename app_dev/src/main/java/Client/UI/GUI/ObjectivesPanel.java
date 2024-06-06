@@ -51,7 +51,6 @@ public class ObjectivesPanel extends JPanel {
     }
 
     public void chooseObjectives(){
-        ObjectivesListener highlightListener = new ObjectivesListener();
 
         ObjectiveCard s1 = gui.getView().getChooseSecretObjectives().get(0);
         ObjectiveCard s2 = gui.getView().getChooseSecretObjectives().get(1);

@@ -392,6 +392,9 @@ public class GUI  implements UI {
         horizontalScrollBar.setUnitIncrement(5); // Adjust unit increment for smoother scrolling
         horizontalScrollBar.setBlockIncrement(1); // Adjust block increment for smoother scrolling
 
+        scroll.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
+        scroll.getHorizontalScrollBar().setPreferredSize(new Dimension(0, 0));
+
 
 
         centerPanel.add(scroll, BorderLayout.CENTER);
