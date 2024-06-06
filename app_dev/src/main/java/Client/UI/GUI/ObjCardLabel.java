@@ -13,6 +13,8 @@ public class ObjCardLabel extends JLabel {
     private BufferedImage back;
     private final int cardLength = 140;
     private final float heightLengthRatio =   (float) 2 /3;
+    private boolean select = false;
+    private final int borderWidth = 4;
 
     public ObjCardLabel(){
         setOpaque(false);
@@ -39,8 +41,22 @@ public class ObjCardLabel extends JLabel {
 
 
         g2d.drawImage(front, 0, 0 , getWidth(), getHeight() , this);
+
+        if(select){
+            g2d.setColor(Color.green);
+            g2d.setStroke(new BasicStroke(borderWidth));
+            g2d.drawRoundRect(borderWidth/2 - 1, borderWidth/2 - 1, getWidth() - borderWidth + 1, getHeight() - borderWidth + 1, 13, 13);
+        }
     }
 
     public ObjectiveCard getCard(){return c;}
+
+    public void highLight(){
+        this.select = true;
+    }
+
+    public void unHighLight(){
+        this.select = false;
+    }
 
 }

@@ -16,6 +16,8 @@ public class ObjectivesPanel extends JPanel {
     private ObjectivesPanel panel;
     private JPanel subPanel;
     private int panelHeight;
+    private Graphics2D g2d;
+    private boolean choose = false;
 
     public ObjectivesPanel(GUI gui, int panelHeight){
         this.gui = gui;
@@ -44,13 +46,13 @@ public class ObjectivesPanel extends JPanel {
         subPanel.add(secretPanel1, 0 );
         subPanel.add(secretPanel2, 1);
 
-        System.out.println(subPanel.getHeight());
-        System.out.println(subPanel.getPreferredSize().getHeight());
         this.setBorder(BorderFactory.createEmptyBorder((panelHeight - (int)subPanel.getPreferredSize().getHeight())/2, 0, 0, 0));
         this.add(subPanel);
     }
 
     public void chooseObjectives(){
+        ObjectivesListener highlightListener = new ObjectivesListener();
+
         ObjectiveCard s1 = gui.getView().getChooseSecretObjectives().get(0);
         ObjectiveCard s2 = gui.getView().getChooseSecretObjectives().get(1);
 
@@ -58,6 +60,8 @@ public class ObjectivesPanel extends JPanel {
         secret2.updateCard(s2, gui.getFronts().get(s2.getId()), gui.getBacks().get(s2.getId()));
 
         panel = this;
+        choose = true;
+
         secret1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -66,7 +70,21 @@ public class ObjectivesPanel extends JPanel {
                 panel.setBorder(BorderFactory.createEmptyBorder((panelHeight - (int)common1.getPreferredSize().getHeight())/2, 0, 0, 0));
                 panel.revalidate();
                 gui.getView().setSecretObjective(secret1.getCard());
-                //panel.repaint();
+                choose = false;
+                secret1.unHighLight();
+                secret1.removeMouseListener(this);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                ObjCardLabel label = (ObjCardLabel) e.getSource();
+                label.highLight();
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                ObjCardLabel label = (ObjCardLabel) e.getSource();
+                label.unHighLight();
             }
         });
 
@@ -78,9 +96,24 @@ public class ObjectivesPanel extends JPanel {
                 panel.setBorder(BorderFactory.createEmptyBorder((panelHeight - (int)common1.getPreferredSize().getHeight())/2, 0, 0, 0));
                 panel.revalidate();
                 gui.getView().setSecretObjective(secret2.getCard());
-                //panel.repaint();
+                choose = false;
+                secret2.unHighLight();
+                secret2.removeMouseListener(this);
+            }
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                ObjCardLabel label = (ObjCardLabel) e.getSource();
+                label.highLight();
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                ObjCardLabel label = (ObjCardLabel) e.getSource();
+                label.unHighLight();
             }
         });
+
+
     }
 
     public void updateObjectivesPanel(){
@@ -97,11 +130,17 @@ public class ObjectivesPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
+        g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-
         int borderWidth = 4;
+
+        if(choose){
+            g2d.setColor(Color.RED);
+            g2d.setStroke(new BasicStroke(borderWidth));
+            g2d.drawRect(subPanel.getX(), subPanel.getY(), subPanel.getWidth(), subPanel.getHeight());
+        }
+
         g2d.setColor(new Color(171, 144, 76));
         g2d.setStroke(new BasicStroke(borderWidth));
         g2d.drawRect(borderWidth/2, borderWidth/2, getWidth() - borderWidth, getHeight() - borderWidth);
