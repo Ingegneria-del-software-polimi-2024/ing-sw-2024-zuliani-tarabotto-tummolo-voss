@@ -109,6 +109,14 @@ public class PlayerPanel extends JPanel {
         g2d.setColor(new Color(255, 248, 164));
         g2d.drawString(String.valueOf(points), imagePos  + 5, imagePos + 10 );
 
+        if(gui.getCurrentDisposition().equals(player)){
+            int border = 3;
+            g2d.setColor(Color.RED);
+            g2d.setStroke(new BasicStroke(borderWidth));
+            g2d.drawRect(borderWidth/2, borderWidth/2, getWidth() - borderWidth, getHeight() - borderWidth);
+
+        }
+
    }
 
    public void updatePoints(int points){
@@ -140,5 +148,7 @@ public class PlayerPanel extends JPanel {
 
        infoPanel.updateResources(res);
    }
+
+   public String getPlayer(){return  player;}
 }
 

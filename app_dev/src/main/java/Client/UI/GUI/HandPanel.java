@@ -2,9 +2,11 @@ package Client.UI.GUI;
 
 import Client.UI.GUI.EventListeners.FlipCardListener;
 import Client.UI.GUI.EventListeners.PlaceCardListener;
+import Client.UI.GUI.EventListeners.PlaceStarterListener;
 import model.cards.PlayableCards.PlayableCard;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentListener;
 import java.util.List;
 
 public class HandPanel extends JPanel {
@@ -12,6 +14,9 @@ public class HandPanel extends JPanel {
     private CardLabel c2;
     private CardLabel c3;
     private GUI gui;
+    private PlaceStarterListener placeStarterListener;
+    private PlaceCardListener placeCardListener;
+    private FlipCardListener flipCardListener;
 
     public HandPanel(GUI gui, int panelHeight){
         this.gui = gui;
@@ -21,18 +26,24 @@ public class HandPanel extends JPanel {
         c1 = new CardLabel();
         c2 = new CardLabel();
         c3 = new CardLabel();
-        c1.addMouseListener(new FlipCardListener());
-        c2.addMouseListener(new FlipCardListener());
-        c3.addMouseListener(new FlipCardListener());
         this.add(c1);
         this.add(c2);
         this.add(c3);
         this.setBorder(BorderFactory.createEmptyBorder((panelHeight - (int)c1.getPreferredSize().getHeight()) / 2, 0, 0, 0));
+
+        //we create the listeners and we add the flipListener to each cardLabel
+        placeCardListener = new PlaceCardListener(gui);
+        placeStarterListener = new PlaceStarterListener(gui);
+        flipCardListener = new FlipCardListener();
+
+        c1.addMouseListener(flipCardListener);
+        c2.addMouseListener(flipCardListener);
+        c3.addMouseListener(flipCardListener);
     }
 
     public void addStarterCard(){
         PlayableCard starter = gui.getView().getStarterCard();
-        c2.addMouseListener(new PlaceCardListener(gui));
+        c2.addMouseListener(placeStarterListener);
         c2.updateCard(starter, gui.getFronts().get(starter.getId()), gui.getBacks().get(starter.getId()) );
     }
 
@@ -45,13 +56,19 @@ public class HandPanel extends JPanel {
         return new Dimension((int)(gui.getScreenWidth() * 0.33), (int)(gui.getScreenHeight() * 0.25));
     }
     public void updateHand(){
+        c2.removeMouseListener(placeStarterListener);
         List<PlayableCard> hand = gui.getView().getHand();
         hand.get(0).setFaceSide(true);
         hand.get(1).setFaceSide(true);
-        hand.get(2).setFaceSide(true);
         c1.updateCard(hand.get(0), gui.getFronts().get(hand.get(0).getId()), gui.getBacks().get(hand.get(0).getId()) );
         c2.updateCard(hand.get(1), gui.getFronts().get(hand.get(1).getId()), gui.getBacks().get(hand.get(1).getId()) );
-        c3.updateCard(hand.get(2), gui.getFronts().get(hand.get(2).getId()), gui.getBacks().get(hand.get(2).getId()) );
+
+        if(hand.size() == 3) {
+            hand.get(2).setFaceSide(true);
+            c3.updateCard(hand.get(2), gui.getFronts().get(hand.get(2).getId()), gui.getBacks().get(hand.get(2).getId()));
+        }else{
+            c3.updateCard(null, gui.getFronts().get(null), gui.getBacks().get(null));
+        }
     }
 
 
@@ -73,6 +90,18 @@ public class HandPanel extends JPanel {
         g2d.setStroke(new BasicStroke(innerBorder));
         g2d.drawRect((borderWidth*2), (borderWidth*2), getWidth() - 2*(borderWidth*2), getHeight() - 2*(borderWidth*2));
 
+    }
+
+
+    public void enableListeners(){
+        c1.addMouseListener(placeCardListener);
+        c2.addMouseListener(placeCardListener);
+        c3.addMouseListener(placeCardListener);
+    }
+    public void disableListeners(){
+        c1.removeMouseListener(placeCardListener);
+        c2.removeMouseListener(placeCardListener);
+        c3.removeMouseListener(placeCardListener);
     }
 
 }

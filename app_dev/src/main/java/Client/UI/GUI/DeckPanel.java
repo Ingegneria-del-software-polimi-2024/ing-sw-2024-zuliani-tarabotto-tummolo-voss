@@ -15,6 +15,7 @@ public class DeckPanel extends JPanel {
     private CardLabel gold2;
     private CardLabel resource1;
     private CardLabel resource2;
+    private DrawCardListener drawCardListener;
 
     public DeckPanel(GUI gui){
         this.gui = gui;
@@ -28,20 +29,27 @@ public class DeckPanel extends JPanel {
         resourceDeck = new CardLabel();
         resource1 = new CardLabel();
         resource2 = new CardLabel();
+
+        //gold deck
         this.add(goldDeck);
         goldDeck.setCardSource(1);
-        this.add(resourceDeck);
-        resourceDeck.setCardSource(4);
+        //open gold 1
         this.add(gold1);
         gold1.setCardSource(2);
-        this.add(resource1);
-        resource1.setCardSource(5);
+        //open gold 2
         this.add(gold2);
         gold2.setCardSource(3);
+        //resources deck
+        this.add(resourceDeck);
+        resourceDeck.setCardSource(4);
+        //open resources 1
+        this.add(resource1);
+        resource1.setCardSource(5);
+        //open resources 2
         this.add(resource2);
         resource2.setCardSource(6);
 
-        goldDeck.addMouseListener(new DrawCardListener(gui));
+        drawCardListener = new DrawCardListener(gui);
 
     }
 
@@ -86,5 +94,23 @@ public class DeckPanel extends JPanel {
         g2d.setStroke(new BasicStroke(innerBorder));
         g2d.drawRect((borderWidth*2), (borderWidth*2), getWidth() - 2*(borderWidth*2), getHeight() - 2*(borderWidth*2));
 
+    }
+
+    public void enableListeners(){
+        goldDeck.addMouseListener(drawCardListener);
+        gold1.addMouseListener(drawCardListener);
+        gold2.addMouseListener(drawCardListener);
+        resourceDeck.addMouseListener(drawCardListener);
+        resource1.addMouseListener(drawCardListener);
+        resource2.addMouseListener(drawCardListener);
+    }
+
+    public void disableListeners(){
+        goldDeck.removeMouseListener(drawCardListener);
+        gold1.removeMouseListener(drawCardListener);
+        gold2.removeMouseListener(drawCardListener);
+        resourceDeck.removeMouseListener(drawCardListener);
+        resource1.removeMouseListener(drawCardListener);
+        resource2.removeMouseListener(drawCardListener);
     }
 }

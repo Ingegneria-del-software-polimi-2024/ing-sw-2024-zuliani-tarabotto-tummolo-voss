@@ -29,6 +29,7 @@ public class CardLabel extends JLabel {
     }
 
     public void flipCard(){
+        if(c == null) return;
         c.setFaceSide(!c.getFaceSide());
     }
 
@@ -37,6 +38,10 @@ public class CardLabel extends JLabel {
     }
 
     public int getCardSource(){return cardSource;}
+
+    public PlayableCard getCard(){
+        return c;
+    }
 
     @Override
     public Dimension getPreferredSize() {

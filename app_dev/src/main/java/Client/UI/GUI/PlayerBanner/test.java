@@ -56,11 +56,9 @@ public class test extends JPanel {
             Dimension size = new Dimension(16, 16);
             JLabel iconLabel = new JLabel();
             iconLabel.setPreferredSize(size);
-            iconLabel.setPreferredSize(size);
-            iconLabel.setMinimumSize(size);
+            //iconLabel.setMinimumSize(size);
             iconLabel.setMaximumSize(size);
-            //iconLabel.setBackground(Color.CYAN);
-            //iconLabel.setOpaque(false);
+
             JLabel numberLabel = new JLabel("0");
             numberLabel.setForeground(new Color(255, 248, 164));
             numberLabel.setOpaque(false);

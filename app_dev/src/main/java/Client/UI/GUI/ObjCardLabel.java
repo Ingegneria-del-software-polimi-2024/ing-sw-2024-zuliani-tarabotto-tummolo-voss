@@ -41,4 +41,6 @@ public class ObjCardLabel extends JLabel {
         g2d.drawImage(front, 0, 0 , getWidth(), getHeight() , this);
     }
 
+    public ObjectiveCard getCard(){return c;}
+
 }

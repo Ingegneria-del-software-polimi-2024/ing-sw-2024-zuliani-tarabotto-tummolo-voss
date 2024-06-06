@@ -65,7 +65,8 @@ public class ObjectivesPanel extends JPanel {
                 panel.add(secret1);
                 panel.setBorder(BorderFactory.createEmptyBorder((panelHeight - (int)common1.getPreferredSize().getHeight())/2, 0, 0, 0));
                 panel.revalidate();
-                panel.repaint();
+                gui.getView().setSecretObjective(secret1.getCard());
+                //panel.repaint();
             }
         });
 
@@ -76,7 +77,8 @@ public class ObjectivesPanel extends JPanel {
                 panel.add(secret2);
                 panel.setBorder(BorderFactory.createEmptyBorder((panelHeight - (int)common1.getPreferredSize().getHeight())/2, 0, 0, 0));
                 panel.revalidate();
-                panel.repaint();
+                gui.getView().setSecretObjective(secret2.getCard());
+                //panel.repaint();
             }
         });
     }
@@ -89,10 +91,6 @@ public class ObjectivesPanel extends JPanel {
         common2.updateCard(c2, gui.getFronts().get(c2.getId()), gui.getBacks().get(c2.getId()));
     }
 
-    public void addSecretObj(){
-        ObjectiveCard secretObj = gui.getView().getSecretObjective();
-        secret1.updateCard(secretObj, gui.getFronts().get(secretObj.getId()), gui.getFronts().get(secretObj.getId()));
-    }
 
 
 

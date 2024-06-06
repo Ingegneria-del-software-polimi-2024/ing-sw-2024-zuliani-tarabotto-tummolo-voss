@@ -1,6 +1,9 @@
 package Client.UI.GUI;
 
 
+import Client.UI.GUI.EventListeners.BoardListener;
+import Client.UI.GUI.EventListeners.SwitchBoardListener;
+import Client.UI.GUI.EventListeners.TestListener;
 import Client.UI.GUI.PlayerBanner.PlayerPanel;
 import Client.UI.UI;
 import Client.View.ViewAPI;
@@ -9,9 +12,10 @@ import model.cards.PlayableCards.PlayableCard;
 import model.placementArea.Coordinates;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,7 +30,6 @@ public class GUI  implements UI {
     private ViewAPI view;
     private int screenWidth;
     private int screenHeight;
-    private HashMap<String, PlayerPanel> banners;
     Scanner sc = new Scanner(System.in);
     private HashMap<Integer, BufferedImage> fronts;
     private HashMap<Integer, BufferedImage> backs;
@@ -34,14 +37,20 @@ public class GUI  implements UI {
     private HandPanel handPanel;
     private DeckPanel deckPanel;
     private ObjectivesPanel objPanel;
+    private BannersPanel bannersPanel;
     private JPanel eastPanel;
     private JPanel bottomPanel;
+    private JPanel centerPanel;
     private JPanel topPanel;
     final int FPS = 40;
+    public boolean starterSelected = false;
+    public boolean cardSelected = false;
+    private PlacementArea board;
+    private PlayableCard playCard;
+    private String currentDisposition;
 
     public GUI(ViewAPI view){
         this.view = view;
-        this.banners = new HashMap<>();
 
         SwingUtilities.invokeLater(() -> {
             frame = new JFrame("CODEX NATURALIS");
@@ -59,6 +68,7 @@ public class GUI  implements UI {
     }
 
     private void createBorderPanels(){
+        this.currentDisposition = view.getPlayerId();
 
         this.bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         bottomPanel.setOpaque(false);
@@ -70,17 +80,25 @@ public class GUI  implements UI {
         eastPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         eastPanel.setOpaque(false);
         frame.add(eastPanel, BorderLayout.EAST);
+
+        this.centerPanel = new JPanel(new BorderLayout());
+        centerPanel.setBorder(new EmptyBorder(10,10,5,5));
+        centerPanel.setOpaque(false);
+        frame.add(centerPanel, BorderLayout.CENTER);
+
     }
 
     @Override
     public void displayInitialization() {
         createBorderPanels();
-        createPlayerBanner();
+        createBannersPanel();
         createHandPanel();
         createDecksPanel();
         createObjectivesPanel();
+        createBoardPanel();
         deckPanel.updateDecks();
         frame.setVisible(true);
+        System.out.println("press something to start: ");
         sc.next();
         view.readyToPlay();
 
@@ -89,25 +107,37 @@ public class GUI  implements UI {
     @Override
     public void displayStarterCardSelection() {
         handPanel.addStarterCard();
-
     }
 
     @Override
     public void displayObjectiveSelection() {
+        bannersPanel.updateBanners();
         handPanel.addCards();
         objPanel.updateObjectivesPanel();
         objPanel.chooseObjectives();
-
-
     }
 
     @Override
     public void displayPlacingCard() {
+        deckPanel.updateDecks();
+        handPanel.updateHand();
+        deckPanel.disableListeners();
+        if(view.getMyTurn()){
+            currentDisposition = view.getPlayerId();
+            handPanel.enableListeners();
+        }
 
     }
 
     @Override
     public void displayCardDrawing() {
+        bannersPanel.updateBanners();
+        if(view.getMyTurn()){
+            handPanel.disableListeners();
+            board.setDisplayAvailable();
+            handPanel.updateHand();
+            deckPanel.enableListeners();
+        }
 
     }
 
@@ -227,23 +257,15 @@ public class GUI  implements UI {
         return(1024<=port && port <=49151);
     }
 
-    private void createPlayerBanner(){
-        int i = 0;
-        for(String p : view.getPlayers()){
-            PlayerPanel player = new PlayerPanel( p, (int ) (screenWidth * 0.18), (int)(screenHeight * 0.13), this);
-            player.setPreferredSize(new Dimension((int ) (screenWidth * 0.18), (int)(screenHeight * 0.13)));
-            player.setMaximumSize(new Dimension((int ) (screenWidth * 0.18), (int)(screenHeight * 0.13)));
-            banners.put(p, player);
-            eastPanel.add(player, i);
-            i++;
-        }
+    private void createBannersPanel(){
+        bannersPanel = new BannersPanel(this);
+        eastPanel.add(bannersPanel);
     }
 
 
     public void createHandPanel(){
         this.handPanel = new HandPanel(this, (int)bottomPanel.getPreferredSize().getHeight());
         bottomPanel.add(handPanel);
-        //frame.add(bottomPanel, BorderLayout.SOUTH);
     }
 
 
@@ -259,11 +281,6 @@ public class GUI  implements UI {
         bottomPanel.add(deckPanel);
     }
 
-    private void updateBannerResources( ){
-        for(String p : view.getPlayers()){
-            banners.get(p).updateResources();
-        }
-    }
 
     ////////////////////////////////// GETTER METHODS ////////////////////////////////////////////////////////////////
 
@@ -359,4 +376,61 @@ public class GUI  implements UI {
         return screenHeight;
     }
 
+    private void createBoardPanel(){
+        board = new PlacementArea(this);
+        board.setLayout(new BoxLayout(board,BoxLayout.Y_AXIS));
+
+        JScrollPane scroll = new JScrollPane(board);
+        scroll.setBackground(new Color(50, 84, 70));
+
+        JScrollBar verticalScrollBar = scroll.getVerticalScrollBar();
+        verticalScrollBar.setUnitIncrement(5); // Adjust unit increment for smoother scrolling
+        verticalScrollBar.setBlockIncrement(1); // Adjust block increment for smoother scrolling
+
+
+        JScrollBar horizontalScrollBar = scroll.getHorizontalScrollBar();
+        horizontalScrollBar.setUnitIncrement(5); // Adjust unit increment for smoother scrolling
+        horizontalScrollBar.setBlockIncrement(1); // Adjust block increment for smoother scrolling
+
+
+
+        centerPanel.add(scroll, BorderLayout.CENTER);
+        frame.setVisible(true);
+        SwingUtilities.invokeLater(() -> {
+                    Dimension viewportSize = scroll.getViewport().getExtentSize();
+                    Dimension panelSize = board.getPreferredSize();
+                    System.out.println(panelSize.height + ", "+ panelSize.width);
+                    System.out.println(viewportSize.width + ", "+ viewportSize.height);
+
+                    // Calculate the top-left position to center the panel
+                    int x = (panelSize.width - viewportSize.width) / 2;
+                    int y = (panelSize.height - viewportSize.height) / 2;
+
+                    // Adjust if the panel size is smaller than the viewport
+                    x = Math.max(0, x);
+                    y = Math.max(0, y);
+
+                    // Set the view position to center the panel
+                    scroll.getViewport().setViewPosition(new Point(x, y));
+        });
+
+        board.addMouseListener(new BoardListener(this, board));
+        board.addMouseMotionListener(new TestListener(this, board));
+    }
+
+    public void setSelectedCard(PlayableCard c){
+        board.setDisplayAvailable();
+        this.cardSelected = true;
+        this.playCard = c;
+    }
+    public PlayableCard getPlayCard(){return  playCard;}
+
+    public void setStarterSelected(){ starterSelected = !starterSelected;}
+
+
+    public void setCurrentDisposition(String player){
+        this.currentDisposition = player;
+    }
+
+    public String getCurrentDisposition(){return currentDisposition;}
 }

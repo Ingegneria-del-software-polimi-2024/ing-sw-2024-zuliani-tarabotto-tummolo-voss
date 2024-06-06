@@ -5,12 +5,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/playableArea/working/Board.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/playableArea/working/DraggableCards/Piece.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/playableArea/working/DraggableCards/ResourceCard.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/playableArea/working/GamePanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/playableArea/working/Mouse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/playableArea/working/omain.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/BannersPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/BoardListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/PlaceStarterListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/SwitchBoardListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/TestListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/PlacementArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/CardLabel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/CardLabel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/DeckPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/DeckPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/FlipCardListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/FlipCardListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/PlaceCardListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/PlaceCardListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/HandPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/HandPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/ObjCardLabel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/ObjCardLabel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/ObjectivesPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/ObjectivesPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/PlayerBanner/PlayerPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/PlayerBanner/PlayerPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/PlayerBanner/test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/PlayerBanner/test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/CardLabel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/CardLabel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/DeckPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/DeckPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/EventListeners/FlipCardListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/EventListeners/FlipCardListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/EventListeners/PlaceCardListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/EventListeners/PlaceCardListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/HandPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/HandPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/ObjectivesPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/ObjectivesPanel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/ObjectivesPanel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/ObjectivesPanel$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/ObjectivesPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/ObjectivesPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/PlayerBanner/PlayerPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/PlayerBanner/PlayerPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/PlayerBanner/test.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/PlayerBanner/test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/objCardLabel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/objCardLabel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/controller/ControllerTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/artifacts/rmi_client_start_jar/ing-sw-2024-zuliani-tarabotto-tummolo-voss.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../out/artifacts/rmi_client_start_jar/ing-sw-2024-zuliani-tarabotto-tummolo-voss.jar" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,36 +74,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Model.executor": "Run",
-    "Application.PlacementAreaTest.executor": "Run",
-    "Application.RunDeckCreation.executor": "Run",
-    "Application.SecondClient.executor": "Run",
-    "JUnit.ControllerTest.executor": "Run",
-    "JUnit.ControllerTest.main.executor": "Debug",
-    "JUnit.ObjectiveCardTest.executor": "Run",
-    "JUnit.StarterCardTest.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3": "junit.framework.TestCase",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "GUI__branch",
-    "kotlin-language-version-configured": "true",
-    "last_directory_selection": "/Users/andre/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java",
-    "last_opened_file_path": "/Users/gabrielvoss/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/main/java/Client/UI/GUI/playableArea",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.excludes",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Model.executor&quot;: &quot;Run&quot;,
+    &quot;Application.PlacementAreaTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.RunDeckCreation.executor&quot;: &quot;Run&quot;,
+    &quot;Application.RunGUI_Client.executor&quot;: &quot;Run&quot;,
+    &quot;Application.SecondClient.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Unnamed.executor&quot;: &quot;Run&quot;,
+    &quot;Application.omain.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ControllerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ControllerTest.main.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.LobbyTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ObjectiveCardTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.StarterCardTest.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3&quot;: &quot;junit.framework.TestCase&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;GUI__branch&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;/Users/andre/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.excludes&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java/Client/UI/GUI/playableArea" />
@@ -102,7 +131,14 @@
       <recent name="model.lobby" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.omain">
+  <component name="RunManager" selected="Application.RunGUI_Client">
+    <configuration name="RunGUI_Client" type="Application" factoryName="Application" singleton="false" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Client.RunGUI_Client" />
+      <module name="Ing_sw_proj" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="RunTUI_Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Client.RunTUI_Client" />
       <module name="Ing_sw_proj" />
@@ -152,6 +188,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="MockClient" />
       <option name="MAIN_CLASS_NAME" value="MockClient.LobbyTest" />
+      <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -174,6 +211,7 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.RunGUI_Client" />
       <item itemvalue="Application.omain" />
       <item itemvalue="Application.SecondClient" />
       <item itemvalue="Application.RunTUI_Client" />
@@ -182,10 +220,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.LobbyTest" />
         <item itemvalue="Application.omain" />
         <item itemvalue="Application.SecondClient" />
         <item itemvalue="Application.RunTUI_Client" />
-        <item itemvalue="JUnit.LobbyTest" />
         <item itemvalue="JUnit.LobbyTest.main" />
       </list>
     </recent_temporary>
@@ -193,7 +231,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-322ed176" />
+        <option value="jdk-21.0.1-openjdk-21.0.1-4caba194b151-9b16c6e2" />
       </set>
     </attachedChunks>
   </component>
