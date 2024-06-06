@@ -18,7 +18,7 @@ public class PlaceCardListener extends MouseAdapter {
 
 
     @Override
-    public void mousePressed(MouseEvent e) {
+    public void mouseClicked(MouseEvent e) {
         if (SwingUtilities.isRightMouseButton(e)) {
             CardLabel label = (CardLabel) e.getSource();
             gui.setSelectedCard(label.getCard());

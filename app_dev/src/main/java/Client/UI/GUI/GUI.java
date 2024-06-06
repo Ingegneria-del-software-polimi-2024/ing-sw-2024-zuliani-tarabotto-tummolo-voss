@@ -1,10 +1,8 @@
 package Client.UI.GUI;
 
 
-import Client.UI.GUI.EventListeners.BoardListener;
-import Client.UI.GUI.EventListeners.SwitchBoardListener;
-import Client.UI.GUI.EventListeners.TestListener;
-import Client.UI.GUI.PlayerBanner.PlayerPanel;
+import Client.UI.GUI.EventListeners.BoardClickedListener;
+import Client.UI.GUI.EventListeners.BoardMotionListener;
 import Client.UI.UI;
 import Client.View.ViewAPI;
 
@@ -14,8 +12,6 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -48,6 +44,8 @@ public class GUI  implements UI {
     private PlacementArea board;
     private PlayableCard playCard;
     private String currentDisposition;
+    private BoardClickedListener boardClickedListener;
+    private BoardMotionListener boardMotionListener;
 
     public GUI(ViewAPI view){
         this.view = view;
@@ -134,8 +132,10 @@ public class GUI  implements UI {
         bannersPanel.updateBanners();
         if(view.getMyTurn()){
             handPanel.disableListeners();
-            board.setDisplayAvailable();
+            //
+            //board.setDisplayAvailable();
             handPanel.updateHand();
+            System.out.println("yes");
             deckPanel.enableListeners();
         }
 
@@ -414,18 +414,45 @@ public class GUI  implements UI {
                     scroll.getViewport().setViewPosition(new Point(x, y));
         });
 
-        board.addMouseListener(new BoardListener(this, board));
-        board.addMouseMotionListener(new TestListener(this, board));
+        boardClickedListener = new BoardClickedListener(this, board);
+        boardMotionListener = new BoardMotionListener(this, board);
+    }
+
+    public void enableBoardListeners(){
+        board.addMouseListener(boardClickedListener);
+        board.addMouseMotionListener(boardMotionListener);
+    }
+
+    public void disableBoardListeners(){
+        board.removeMouseListener(boardClickedListener);
+        board.removeMouseMotionListener(boardMotionListener);
     }
 
     public void setSelectedCard(PlayableCard c){
-        board.setDisplayAvailable();
-        this.cardSelected = true;
-        this.playCard = c;
+        this.cardSelected = !cardSelected;
+        if(cardSelected){
+            //System.out.println("enabled");
+            this.playCard = c;
+            board.setDisplayAvailable();
+            enableBoardListeners();
+        }else{
+            disableBoardListeners();
+            //System.out.println("disabled");
+            board.setDisplayAvailable();
+        }
     }
+
+
     public PlayableCard getPlayCard(){return  playCard;}
 
-    public void setStarterSelected(){ starterSelected = !starterSelected;}
+    public void setStarterSelected(){
+        starterSelected = !starterSelected;
+        if(starterSelected){
+            board.addMouseListener(boardClickedListener);
+        }else{
+            board.removeMouseListener(boardClickedListener);
+        }
+    }
 
 
     public void setCurrentDisposition(String player){

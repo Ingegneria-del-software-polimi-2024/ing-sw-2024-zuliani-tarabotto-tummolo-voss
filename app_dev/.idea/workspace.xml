@@ -5,37 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/BannersPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/BoardListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/PlaceStarterListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/SwitchBoardListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/TestListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/PlacementArea.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/CardLabel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/CardLabel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/DeckPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/DeckPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/FlipCardListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/FlipCardListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/BoardListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/BoardClickedListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/PlaceCardListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/PlaceCardListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/PlaceStarterListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/PlaceStarterListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/TestListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/BoardMotionListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/HandPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/HandPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/ObjCardLabel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/ObjCardLabel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/ObjectivesPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/ObjectivesPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/PlayerBanner/PlayerPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/PlayerBanner/PlayerPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/PlayerBanner/test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/PlayerBanner/test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/CardLabel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/CardLabel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/DeckPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/DeckPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/EventListeners/FlipCardListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/EventListeners/FlipCardListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/EventListeners/PlaceCardListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/EventListeners/PlaceCardListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/PlacementArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/PlacementArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/EventListeners/BoardListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/EventListeners/TestListener.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/HandPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/HandPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/ObjectivesPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/ObjectivesPanel$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/ObjectivesPanel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/ObjectivesPanel$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/ObjectivesPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/ObjectivesPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/PlayerBanner/PlayerPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/PlayerBanner/PlayerPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/PlayerBanner/test.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/PlayerBanner/test.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/objCardLabel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/objCardLabel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/controller/ControllerTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/artifacts/rmi_client_start_jar/ing-sw-2024-zuliani-tarabotto-tummolo-voss.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../out/artifacts/rmi_client_start_jar/ing-sw-2024-zuliani-tarabotto-tummolo-voss.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/PlacementArea.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/PlacementArea.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

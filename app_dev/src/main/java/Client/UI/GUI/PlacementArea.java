@@ -29,7 +29,6 @@ public class PlacementArea extends JPanel {
         setPreferredSize(new Dimension(2000, 2000));
         xCenter = (int)(this.getPreferredSize().getWidth() / 2);
         yCenter = (int)(this.getPreferredSize().getHeight()/2);
-        //System.out.println(xCenter + " " + yCenter);
         board = new Board();
 
     }
@@ -97,7 +96,14 @@ public class PlacementArea extends JPanel {
     public void setDrawSelectionRectangle(boolean b){
         drawSelectionRectangle = b;
     }
+    public boolean getDrawSelectionRectangle(){
+        return drawSelectionRectangle;
+    }
 
     public Coordinates getSelectionRectangleCoordinates(){return  selectionRectangleCoordinates;}
+
+    public void enableBoardListeners(){
+
+    }
 
 }
