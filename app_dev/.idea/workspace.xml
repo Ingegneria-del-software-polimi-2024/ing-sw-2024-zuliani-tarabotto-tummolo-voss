@@ -5,29 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/LoginPanel/InputFields.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/LoginPanel/LoginPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Images/Screenshot 2024-06-07 at 13.57.54.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Images/gameLogo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/Images/Screenshot 2024-06-07 at 13.57.54.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/Images/gameLogo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/controller/ControllerTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/model/GameState/MockModelListener.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/model/cards/ObjectiveCardTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/model/cards/PlayableCards/GoldCardTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/model/cards/PlayableCards/ResourceCardTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/model/cards/PlayableCards/StarterCardTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/model/placementArea/AddCardTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/model/placementArea/CoordinatesTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/model/placementArea/PlacementAreaTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/org/example/AppTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EndGamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EndGamePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/EndGamePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/EndGamePanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/LoginPanel/InputFields.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/LoginPanel/InputFields.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/LoginPanel/LoginPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/LoginPanel/LoginPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/LoginPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/LoginPanel.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

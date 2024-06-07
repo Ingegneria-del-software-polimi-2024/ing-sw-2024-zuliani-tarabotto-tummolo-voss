@@ -6,7 +6,6 @@ import Client.UI.GUI.EventListeners.BoardMotionListener;
 import Client.UI.GUI.LoginPanel.LoginPanel;
 import Client.UI.UI;
 import Client.View.ViewAPI;
-
 import SharedWebInterfaces.WebExceptions.StartConnectionFailedException;
 import model.cards.PlayableCards.PlayableCard;
 import model.placementArea.Coordinates;
@@ -191,8 +190,6 @@ public class GUI  implements UI {
     public void displayEndGame() {
         showTitle("The End");
 
-
-
         System.out.println("fine");
         if(endGamePanel == null) endGamePanel = new EndGamePanel(this);
         frame.getContentPane().removeAll();
@@ -212,7 +209,7 @@ public class GUI  implements UI {
     @Override
     public void chooseConnection() {
         login = new LoginPanel(this);
-        login.chooseConnection();
+        login.chooseConnection();/*
         System.out.println("~> Welcome to Codex Naturalis, insert the techonolgy of connection (RMI/Socket):");
         String connectionType;
         do{
@@ -234,14 +231,17 @@ public class GUI  implements UI {
         } catch (StartConnectionFailedException e) {
             System.out.println("~> An error during the connection occurred\n   Check your internet connection and retry\n");
             chooseConnection();
-        }
+        }*/
     }
 
     @Override
     public void askNickname() {
+        /*
         System.out.println("~> Insert your nickname: ");
         String nickname = sc.nextLine();
-        view.setPlayerId(nickname);
+        view.setPlayerId(nickname);*/
+        login.chooseNickname();
+
 
     }
 

@@ -27,7 +27,7 @@ public class LoginPanel extends JPanel {
         setLayout(new BorderLayout());
 
         loginFields = new InputFields(gui);
-        loginFields.setPreferredSize(new Dimension((width - height), height));
+        loginFields.setPreferredSize(new Dimension((width - height), 0));
 
 
         // Create the right panel for the image
@@ -69,6 +69,13 @@ public class LoginPanel extends JPanel {
         String host;
         String connectionType;
         loginFields.chooseConnection();
+        loginFrame.setVisible(false);
+        loginFrame.setVisible(true);
+    }
+
+    public void chooseNickname(){
+        loginFields.chooseNickname();
+        loginFrame.setVisible(false);
         loginFrame.setVisible(true);
     }
 }
