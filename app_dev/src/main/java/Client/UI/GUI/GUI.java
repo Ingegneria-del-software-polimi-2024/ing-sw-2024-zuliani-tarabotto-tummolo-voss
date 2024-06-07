@@ -6,6 +6,7 @@ import Client.UI.GUI.EventListeners.BoardMotionListener;
 import Client.UI.UI;
 import Client.View.ViewAPI;
 
+import SharedWebInterfaces.WebExceptions.StartConnectionFailedException;
 import model.cards.PlayableCards.PlayableCard;
 import model.placementArea.Coordinates;
 import javax.imageio.ImageIO;
@@ -20,6 +21,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Scanner;
+
+import static org.fusesource.jansi.Ansi.ansi;
 
 
 public class GUI  implements UI {
@@ -223,6 +226,7 @@ public class GUI  implements UI {
                 System.out.println("~> Insert a valid ip address (xxx.xxx.xxx.xxx): ");
         }while(!validIP(host));
 
+        /*
         int port;
         System.out.println("~> Insert the host port: ");
         do{
@@ -239,7 +243,14 @@ public class GUI  implements UI {
                 System.out.println("~> Insert a valid port: ");
         }while(!validPort(localPort));
         System.out.println("ciao");
-        view.startConnection(connectionType, host, port, localPort);
+        view.startConnection(connectionType, host, port, localPort);*/
+
+        try {
+            view.startConnection(connectionType, host);
+        } catch (StartConnectionFailedException e) {
+            System.out.println("~> An error during the connection occurred\n   Check your internet connection and retry\n");
+            chooseConnection();
+        }
     }
 
     @Override
@@ -289,11 +300,47 @@ public class GUI  implements UI {
             view.joinGame(game, nPlayers);
         }
 
+
     }
 
     @Override
     public void joinedGame(String id) {
         System.out.println("~> Correctly joined the game "+id+"");
+    }
+
+    @Override
+    public void firstWelcome() {
+
+    }
+
+    @Override
+    public void nickNameAlreadyInUse() {
+
+    }
+
+    @Override
+    public void cantPlaceACard(PlayableCard card, Coordinates coord) {
+
+    }
+
+    @Override
+    public void cantDrawCard(int source) {
+
+    }
+
+    @Override
+    public void cantCreateRoom() {
+
+    }
+
+    @Override
+    public void cantJoinRoom() {
+
+    }
+
+    @Override
+    public void returnToLobby() {
+
     }
 
 
