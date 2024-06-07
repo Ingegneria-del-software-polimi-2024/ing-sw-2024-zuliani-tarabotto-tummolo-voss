@@ -39,8 +39,9 @@ public class GUI  implements UI {
     private JPanel eastPanel;
     private JPanel bottomPanel;
     private JPanel centerPanel;
+    private EndGamePanel endGamePanel;
     private JPanel topPanel;
-    final int FPS = 40;
+    final int FPS = 30;
     public boolean starterSelected = false;
     public boolean cardSelected = false;
     private PlacementArea board;
@@ -66,6 +67,8 @@ public class GUI  implements UI {
             frame.setSize(screenWidth, screenHeight);
             frame.setLayout(new BorderLayout());
             frame.setLocationRelativeTo(null);
+
+
 
             titleLabel = new JLabel("", SwingConstants.CENTER);
             titleLabel.setFont(new Font("Serif", Font.BOLD, 48));
@@ -182,18 +185,25 @@ public class GUI  implements UI {
 
     @Override
     public void displayEndGame() {
+        showTitle("The End");
+
+
+
+        System.out.println("fine");
+        if(endGamePanel == null) endGamePanel = new EndGamePanel(this);
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(endGamePanel, BorderLayout.CENTER);
+        frame.revalidate();
+        frame.repaint();
 
     }
+
 
     @Override
     public void printDisposition(HashMap<Coordinates, PlayableCard> disposition) {
 
     }
 
-    @Override
-    public void displayCalculateObjectives() {
-
-    }
 
     @Override
     public void chooseConnection() {
@@ -516,11 +526,12 @@ public class GUI  implements UI {
         glassPane.repaint();
 
         // Hide the title after a delay
-        Timer timer = new Timer(3000, new ActionListener() {
+        Timer timer = new Timer(2000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 glassPane.setVisible(false);
                 title = ""; // Clear the title
+                System.out.println("title cleared: " + title);
             }
         });
         timer.setRepeats(false);

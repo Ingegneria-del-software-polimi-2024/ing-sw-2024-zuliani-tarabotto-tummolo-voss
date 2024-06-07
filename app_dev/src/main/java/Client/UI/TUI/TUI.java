@@ -528,10 +528,7 @@ public class TUI implements UI{
         dispositionPrinter.print(disp);
     }
 
-    @Override
-    public void displayCalculateObjectives() {
-        //TODO Implement
-    }
+
 
 
     public void clear(){
