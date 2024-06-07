@@ -30,15 +30,20 @@ public class ServerAPI_COME {
     //controller called
     public void performNextMethod(){}
 
+    /**
+     * loops that dequeues messages from the queue of incoming messages
+     */
     public void loop(){
         MessageFromClient message;
          while (true) {
              message = toDoQueue.getNextMessage();
              //if you find a message in the waiting list
              if (message != null) {
-                 //if(controller.checkMessage(message))
-                 //if that message has sense execute it
-                 message.execute(controller);
+                 //TODO check if there is a msg sender if yes ->  insert here the method for the heartbeat heartbeatFunc(msg.getSender) called from modelcontroller-> put in controller heartbeat function
+                 if (controller.checkMessage(message))
+                     //if that message has sense execute it
+                     message.execute(controller);
+
                  //else
                  //if that message doesn't have sense
                  //    toDoQueue.enqueueMessage(message);
@@ -50,11 +55,15 @@ public class ServerAPI_COME {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    /**
+     * class constructor
+     * @param controller
+     */
+    //TODO complete description
     public ServerAPI_COME(ModelController controller) {
         toDoQueue = new ServerMessageQueue();
         players = new HashMap<String, ClientHandlerInterface>();
         this.controller = controller;
-        //TODO how to initialize the controller?
     }
 
 

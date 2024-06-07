@@ -16,6 +16,8 @@ import java.util.List;
 
 public interface ViewAPI_Interface extends GeneralAPI_Interface {
 
+    void startHeartbeatThread();
+
     void readyToPlay();
     void setState(TurnState state);
     void setGoldDeck(List<PlayableCard> deck);
@@ -39,7 +41,7 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
     void updateElements(String player, HashMap<Element, Integer> elements);
     void updateCardSource(List<PlayableCard> deck, int cardSource);
     void updateOpenCards(List<PlayableCard> decK, int card);
-    void setFinalPoints( HashMap<String, Integer> finalPoints);
+    void setFinalPoints( HashMap<String, Integer> finalPoints, ArrayList<String> winners);
     void setPawnColor(String pawnColor);
     void setAvailablePlaces(List<Coordinates> availablePlaces);
     void setCanBePlaced(boolean[] canBePlaced);
@@ -52,4 +54,16 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
     void setAvailableGames(ArrayList<String> listOfGames);
     void displayAvailableGames();
     void displayAvailableGames(ArrayList<String> availableGames);
+    void nickNameAlreadyInUse();
+    void cantPlaceACard(PlayableCard card, Coordinates coord);
+    void cantDrawCard(int source);
+    void cantJoinRoom();
+    void cantCreateRoom();
+
+    /**
+     * brings the player back to the lobby
+     */
+    void returnToLobby();
+
+
 }

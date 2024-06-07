@@ -28,6 +28,7 @@ public class WelcomeMessage implements MessageFromServer {
 
     @Override
     public void execute(ViewAPI_Interface view) {
+        view.startHeartbeatThread();
         view.setAvailableGames(listOfGames);
         view.askNickname();
     }

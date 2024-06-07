@@ -1,6 +1,8 @@
 package model.placementArea;
 
 import junit.framework.TestCase;
+import model.Exceptions.CantPlaceCardException;
+import model.Exceptions.KickOutOfGameException;
 import model.GameState.GameState;
 import model.cards.Card;
 import model.cards.ObjectiveCard;
@@ -31,7 +33,11 @@ public class PlacementAreaTest extends TestCase {
 
         PlayableCard cardToBePlaced = (PlayableCard) getCard(deckList, ID);
         cardToBePlaced.setFaceSide(false);
-        area.addCard(cardToBePlaced);
+        try {
+            area.addCard(cardToBePlaced);
+        }catch (KickOutOfGameException e){
+            throw new RuntimeException(e);
+        }
         System.out.println("starter card placed");
 
         putCards(cardList, coord, face, area, deckList);
@@ -70,8 +76,11 @@ public class PlacementAreaTest extends TestCase {
             PlayableCard x = (PlayableCard) getCard(deckList, cards.get(i));
             System.out.println("putting card n. "+cards.get(i));
             x.setFaceSide(face);
-            area.addCard(coord, x);
-
+            try {
+                area.addCard(coord, x);
+            }catch (CantPlaceCardException e){
+                throw new RuntimeException(e);
+            }
             //System.out.println("points: "+ gameState.getTurnPlayer().getPoints());
             System.out.println("inserted card "+i);
             System.out.println("artifacts:");

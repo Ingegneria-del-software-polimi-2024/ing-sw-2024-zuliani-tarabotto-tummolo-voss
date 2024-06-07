@@ -6,6 +6,7 @@ import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.*;
 import SharedWebInterfaces.Messages.MessagesToLobby.JoinGameMessage;
 import SharedWebInterfaces.Messages.MessagesToLobby.NewConnectionMessage;
 import SharedWebInterfaces.Messages.MessagesToLobby.RequestAvailableGames;
+import SharedWebInterfaces.Messages.MessagesToLobby.HeartbeatMessage;
 import model.GameState.TurnState;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
@@ -14,6 +15,7 @@ import model.enums.Element;
 import model.placementArea.Coordinates;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -39,6 +41,7 @@ public class ViewModel {
     private List<ObjectiveCard> commonObjectives;
     private List<ObjectiveCard> chooseSecretObjectives;
 
+
     //logistical support
     private TurnState state;
     private List<String> players;
@@ -61,6 +64,11 @@ public class ViewModel {
     private HashMap< String, HashMap< Coordinates, PlayableCard> > dispositions;
     //the points of all players are store here
     private HashMap< String , Integer> points;
+
+    /**
+     * the list of the winners of the game
+     */
+    private ArrayList<String> winners;
 
     //interfaces to communicate with
     private ClientAPI_GO clientAPIGo;
@@ -89,6 +97,7 @@ public class ViewModel {
 
         this.commonObjectives = new ArrayList<>();
         this.chooseSecretObjectives = new ArrayList<>();
+        this.winners = new ArrayList<String>();
 
         this.decks = new HashMap<Integer,List<PlayableCard>>();
         this.ui = ui;
@@ -104,6 +113,13 @@ public class ViewModel {
     }
     public void displayAvailableGames(){
         ui.displayAvailableGames(listOfGames);
+    }
+
+
+
+    //HEARTBEAT
+    public void HeartbeatToServer(){
+        clientAPIGo.sendToLobby( new HeartbeatMessage(playerId));
     }
     public void requestAvailableGames(){
         clientAPIGo.sendToLobby(new RequestAvailableGames(playerId));
@@ -208,9 +224,6 @@ public class ViewModel {
         chooseSecretObjective(String.valueOf(secretObjective.getId()));
     }
 
-
-    //TODO: rendere più chiara la scelta di secretObjective, confirmSecretObjective potrebbe essere eliminato
-
     public void confirmSecretObjective(ObjectiveCard secretObjective){
         this.secretObjective = secretObjective;
     }
@@ -218,7 +231,6 @@ public class ViewModel {
 
     //the player's points are updated
     public void setPoints(String player, int points) {
-        //
         this.points.put(player, points);
     }
 
@@ -236,7 +248,6 @@ public class ViewModel {
         availableElements.put(player, elements);
     }
 
-    //TODO: togliere sta cagata
     public void updateCardSource(List<PlayableCard> deck, int cardSource) {
         decks.put(cardSource, deck);
     }
@@ -248,15 +259,14 @@ public class ViewModel {
         decks.put(cardSource, decK);
         decks.get(cardSource-1).remove(0);
     }
-    public void setFinalPoints(HashMap<String, Integer> finalPoints) {
-        for(String player : points.keySet()){
-            points.put(player, finalPoints.get(player));
-        }
+    public void setFinalPoints(HashMap<String, Integer> finalPoints, ArrayList<String> winnersList) {
+        points.replaceAll((p, v) -> finalPoints.get(p));
+        winners = winnersList;
     }
 
     //we use this function to end the game whenever we want
-    public void endGame(){
-        clientAPIGo.sendToServer(new EndGameMessage());
+    public void quitGame(){
+        clientAPIGo.sendToServer(new QuitGameMessage(playerId));
     }
 
     public void setPawnColor(String pawnColor) {
@@ -378,7 +388,7 @@ public class ViewModel {
     public List<String> getPlayers(){
         return players;
     }
-
+    public List<String> getWinners(){return Collections.unmodifiableList(winners);}
     public HashMap<Integer, List<PlayableCard>> getDecks() {
         return decks;
     }

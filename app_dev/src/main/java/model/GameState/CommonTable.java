@@ -114,10 +114,7 @@ public class CommonTable {
      * @return Boolean
      */
     public boolean checkEmptyDecks() {
-        if(goldDeck.getSize() == 0 && resourceDeck.getSize() == 0 && openGold.isEmpty() && openResources.isEmpty()){
-            return true;
-        }
-        return false;
+        return goldDeck.getSize() == 0 && resourceDeck.getSize() == 0 && openGold.isEmpty() && openResources.isEmpty();
     }
 
     /**
@@ -128,7 +125,7 @@ public class CommonTable {
     public void drawCardGoldDeck(Player turnPlayer) throws EmptyCardSourceException {
         if(goldDeck.getSize() > 0){
             turnPlayer.drawCard( goldDeck.extract());
-        } else {throw new EmptyCardSourceException("gold deck is empty");}
+        } else {throw new EmptyCardSourceException(1);}
     }
 
     /**
@@ -140,7 +137,7 @@ public class CommonTable {
         //takes away the first card of the deck and calls the following method
         if(resourceDeck.getSize() > 0){
             turnPlayer.drawCard( resourceDeck.extract());
-        }else {throw new EmptyCardSourceException("resource deck is empty");}
+        }else {throw new EmptyCardSourceException(4);}
     }
 
     /**
@@ -155,7 +152,8 @@ public class CommonTable {
             //replaces the card taken with the first of the goldDeck
             openGold.remove(index);
         }else {
-            throw new EmptyCardSourceException("OpenGold_"+ index + "is empty");
+            int idx = index==0? 2 : 3;
+            throw new EmptyCardSourceException(idx);
         }
         if(goldDeck.getSize() > 0) openGold.add(index, goldDeck.extract());
         else openGold.add(index, null);
@@ -173,7 +171,8 @@ public class CommonTable {
             //replaces the card taken with the first of the goldDeck
             openResources.remove(index);
         }else {
-            throw new EmptyCardSourceException("OpenResources_"+ index + "is empty");
+            int idx = index==0? 5 : 6;
+            throw new EmptyCardSourceException(idx);
         }
         if(resourceDeck.getSize() > 0) openResources.add(index,  resourceDeck.extract());
         else openResources.add(index, null);
@@ -231,7 +230,7 @@ public class CommonTable {
         initializePlayersHands(players);
     }
 
-    public static  void deterministicShuffle(PlayableDeck list, int[] permutation) {
+    public  void deterministicShuffle(PlayableDeck list, int[] permutation) {
         // Fisher-Yates shuffle algorithm with a fixed permutation
         ArrayList<PlayableCard> copy = new ArrayList<>(list.getCards());
         for (int i = 0; i < list.getCards().size(); i++) {
@@ -243,8 +242,7 @@ public class CommonTable {
         list.getCards().clear();
         list.getCards().addAll(copy);
     }
-
-    public static  void deterministicShuffle(ObjectiveDeck list, int[] permutation) {
+    public  void deterministicShuffle(ObjectiveDeck list, int[] permutation) {
         // Fisher-Yates shuffle algorithm with a fixed permutation
         ArrayList<ObjectiveCard> copy = new ArrayList<>(list.getCards());
         for (int i = 0; i < list.getCards().size(); i++) {
@@ -257,4 +255,7 @@ public class CommonTable {
         list.getCards().addAll(copy);
     }
 
+    private ObjectiveCard getOCard(int i){
+        return objectiveDeck.getCard(i);
+    }
 }

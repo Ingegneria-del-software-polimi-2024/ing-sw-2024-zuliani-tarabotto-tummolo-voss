@@ -6,17 +6,19 @@ import Client.UI.TUI.Commands.EndGameCommand;
 import Client.UI.TUI.Commands.HelpCommand;
 import Client.UI.UI;
 import Client.View.ViewAPI;
-import SharedWebInterfaces.Messages.MessagesToLobby.JoinGameMessage;
-import SharedWebInterfaces.Messages.MessagesToLobby.RequestAvailableGames;
+import SharedWebInterfaces.WebExceptions.StartConnectionFailedException;
 import model.cards.PlayableCards.PlayableCard;
 import model.enums.Artifact;
 import model.enums.Element;
 import model.placementArea.Coordinates;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static org.fusesource.jansi.Ansi.ansi;
 
 
-public class TUI implements UI{
+public class TUI implements UI {
 
     private ViewAPI view;
     private DispositionPrinter dispositionPrinter;
@@ -34,6 +36,9 @@ public class TUI implements UI{
     private Runnable rePrint;
     boolean enterPressed = false;
     private String nickname;
+    private final Object lockForControllingCommands;
+    private boolean uiAlreadyStarted = false;
+    private boolean runningThread;
 
     public TUI(ViewAPI view){
 
@@ -45,19 +50,22 @@ public class TUI implements UI{
         objectivesPrinter = new ObjectivesPrinter();
         drawCardPrinter = new DrawCardPrinter(cb);
         lock = new Object();
+        lockForControllingCommands = new Object();
 
         this.commandMap = new HashMap<>();
         commandMap.put("--help", new HelpCommand());
         commandMap.put("--disp", new DispositionCommand(view));
-        commandMap.put("--end", new EndGameCommand(view));
+        commandMap.put("--quit", new EndGameCommand(view));
 
         sc = new Scanner(System.in);
     }
 ///////////////////////////////////////<Lobby>//////////////////////////////////////////////////////////////////////////
-    public void chooseConnection(){
-        //TODO: ERASE SCREEN
+    public void firstWelcome(){
         loginPrinter.print();
-        System.out.print(ansi().fg(color).a("~> Welcome to Codex Naturalis, insert the techonolgy of connection (RMI/Socket): \n").reset());
+        System.out.println("~> Welcome to Codex Naturalis");//TODO print the instructions
+    }
+    public void chooseConnection(){
+        System.out.print(ansi().fg(color).a("~> Insert the techonolgy of connection (RMI/Socket): \n").reset());
         String connectionType;
         do{
             connectionType = sc.nextLine();
@@ -73,29 +81,42 @@ public class TUI implements UI{
                 System.out.print(ansi().fg(color).a("~> Insert a valid ip address (xxx.xxx.xxx.xxx): \n").reset());
         }while(!validIP(host));
 
-        int port;
-        System.out.print(ansi().fg(color).a("~> Insert the host port: \n").reset());
-        do{
-            port = Integer.parseInt(sc.nextLine());
-            if (!validPort(port))
-                System.out.print(ansi().fg(color).a("~> Insert a valid port: \n").reset());
-        }while(!validPort(port));
+//        int port;
+//        System.out.print(ansi().fg(color).a("~> Insert the host port: \n").reset());
+//        do{
+//            port = Integer.parseInt(sc.nextLine());
+//            if (!validPort(port))
+//                System.out.print(ansi().fg(color).a("~> Insert a valid port: \n").reset());
+//        }while(!validPort(port));
 
-        int localPort;
-        System.out.print(ansi().fg(color).a("~> Insert the local port: \n").reset());
-        do{
-            localPort = Integer.parseInt(sc.nextLine());
-            if (!validPort(localPort))
-                System.out.print(ansi().fg(color).a("~> Insert a valid port: \n").reset());
-        }while(!validPort(localPort));
+//        int localPort;
+//        System.out.print(ansi().fg(color).a("~> Insert the local port: \n").reset());
+//        do{
+//            localPort = Integer.parseInt(sc.nextLine());
+//            if (!validPort(localPort))
+//                System.out.print(ansi().fg(color).a("~> Insert a valid port: \n").reset());
+//        }while(!validPort(localPort));
 
-        view.startConnection(connectionType, host, port, localPort);
+        try {
+            view.startConnection(connectionType, host);
+        } catch (StartConnectionFailedException e) {
+            System.out.print(ansi().fg(color).a("~> An error during the connection occurred\n   Check your internet connection and retry\n").reset());
+            chooseConnection();
+        }
     }
 
     private boolean validIP(String ip){
-        //todo control if the ip is valid
-        return true;
+        if(ip.equals("localHost"))
+            return true;
+        String desiredFormat = "^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\." +
+                "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\." +
+                "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\." +
+                "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$";
+        Pattern pattern = Pattern.compile(desiredFormat);
+        Matcher matcher = pattern.matcher(ip);
+        return matcher.matches();
     }
+
     private boolean validPort(int port){
         return(1024<=port && port <=49151);
     }
@@ -106,9 +127,37 @@ public class TUI implements UI{
         view.setPlayerId(nickname);
 
     }
+    public void nickNameAlreadyInUse(){
+        System.out.print(ansi().fg(color).a("~> This nickname is already in use, please change nickname\n").reset());
+        askNickname();
+    }
+
+    @Override
+    public void cantPlaceACard(PlayableCard card, Coordinates coord) {
+        System.out.print(ansi().fg(color).a("~> Can't place the card in the position ("+coord.getX()+";"+coord.getY()+")"+"\n   Choose a different card\n").reset());
+        displayPlacingCard(false);
+    }
+
+    @Override
+    public void cantDrawCard(int source) {
+        System.out.print(ansi().fg(color).a("~> Can't draw the card from the selected source\n").reset());
+        displayCardDrawing(false);
+    }
+
+    @Override
+    public void cantCreateRoom() {
+        System.out.print(ansi().fg(color).a("~> Can't create the room, the players must be between 2 and 4\n").reset());
+        view.displayAvailableGames();
+    }
+
+    @Override
+    public void cantJoinRoom() {
+        System.out.print(ansi().fg(color).a("~> Can't join the room, too many players are present\n").reset());
+        view.displayAvailableGames();
+    }
+
     public void displayAvailableGames(ArrayList<String> listOfGames){
         String game;
-
 
         if(listOfGames != null && !listOfGames.isEmpty()){
             System.out.print(ansi().fg(color).a("~> Available games:\n").reset());
@@ -117,26 +166,26 @@ public class TUI implements UI{
             System.out.print(ansi().fg(color).a("~> Insert the name of the game you want to join or a new name if you want to create it, write -r to refresh the available games: \n").reset());
         }else
             System.out.print(ansi().fg(color).a("~> There are no available games, please create a new game by typing its name or write -r to refresh the available games: \n").reset());
-
+        //sc.reset();
         game = sc.nextLine();
         if(game.equals("-r")) {
             view.requestAvailableGames();
-            //            try {
-//                view.requestAvailableGames();
-//            }catch (RemoteException e) {
-//                throw new RuntimeException(e);
-//            }
         }else{
             int nPlayers = 0;
             if(listOfGames == null || !listOfGames.contains(game)) {
-                System.out.print(ansi().fg(color).a("~> You want to create a new game!\n~> Insert the number of players: ").reset());
                 String players;
                 boolean flag = false;
+                System.out.print(ansi().fg(color).a("~> You want to create a new game!\n~> Insert the number of players: ").reset());
                 do {
                     players = sc.nextLine();
                     try {
                         nPlayers = Math.abs(Integer.parseInt(players));
+                        flag = false;
                     } catch (Exception e) {
+                        flag = true;
+                    }
+                    if(flag||nPlayers<2 || nPlayers>4){
+                        System.out.print(ansi().fg(color).a("~> The game must contain at least 2 players and maximum 4 players\n~> Insert the number of players: ").reset());
                         flag = true;
                     }
                 } while (flag);
@@ -146,7 +195,15 @@ public class TUI implements UI{
 
     }
     public void joinedGame(String id){
-        System.out.print(ansi().fg(color).a("~> Correctly joined the game "+id+"\n").reset());
+        System.out.print(ansi().fg(color).a("~> Correctly joined the game "+id+"\n   waiting for other players...\n").reset());
+    }
+
+    public void returnToLobby(){
+        clear();
+        view.stopUI();
+        view.welcome();
+        view.requestAvailableGames();
+        //TODO fix the bug, problem related to scanner
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -154,8 +211,15 @@ public class TUI implements UI{
     public void displayInitialization() {
         clear();
         loginPrinter.print();
+
+       /* if(!uiAlreadyStarted){
+            view.startUI();
+            uiAlreadyStarted = true;
+        }*/
+
         view.startUI();
 
+        enterPressed = false;
         // Continuously check if Enter is pressed until it's pressed
         while (!enterPressed) {
             System.out.print(ansi().fg(color).a("~> Press Enter to continue...\n").reset());
@@ -165,6 +229,7 @@ public class TUI implements UI{
                     try {
                        lock.wait();
                     } catch (InterruptedException e) {
+                        //TODO ERROR management
                     }
                 }
 
@@ -198,7 +263,7 @@ public class TUI implements UI{
         rePrint = () -> {
             clear();
             handPrinter.printStarterCard(view.getStarterCard());
-            System.out.print(ansi().fg(color).a("~> This is your StarterCard, choose a face side: (true/false)\n").reset());
+            System.out.print(ansi().fg(color).a("~> This is your StarterCard, choose a face side: (front/back)\n").reset());
         };
         rePrint.run();
 
@@ -229,7 +294,7 @@ public class TUI implements UI{
             System.out.print(ansi().fg(color).a("~> this are the two commonObjectives:\n").reset());
             objectivesPrinter.printCommonObjectives(view.getCommonObjectives().get(0),view.getCommonObjectives().get(1));
 
-            System.out.print(ansi().fg(color).a("~> choose your secretObjective: (0/1)\n").reset());
+            System.out.print(ansi().fg(color).a("~> choose your secretObjective: (1/2)\n").reset());
             //we use the same function also to print the two objectives the player has to choose from
             objectivesPrinter.printCommonObjectives(view.getChooseSecretObjectives().get(0), view.getChooseSecretObjectives().get(1));
         };
@@ -237,11 +302,11 @@ public class TUI implements UI{
 
         synchronized (lock){
             Integer secretObj = parseInt();
-            while(!secretObj.equals(0)  && !secretObj.equals(1)){
-                System.out.println("~> Please insert 0/1\n");
+            while(!secretObj.equals(1)  && !secretObj.equals(2)){
+                System.out.println("~> Please insert 1/2\n");
                 secretObj = parseInt();
             }
-            view.setSecretObjective(view.getChooseSecretObjectives().get(secretObj));
+            view.setSecretObjective(view.getChooseSecretObjectives().get(secretObj - 1));
             inputPresent = false;
             lock.notifyAll();
         }
@@ -257,18 +322,21 @@ public class TUI implements UI{
 
     }
 
-    @Override
-    public void displayPlacingCard() {
+    public void displayPlacingCard(){
+        displayPlacingCard(true);
+    }
+    private void displayPlacingCard(boolean clear) {
         int index;
         int x = 0;
         int y = 0;
         boolean faceSide;
-        //if it's myturn then i need to play a card, else i just wait
+        //if it's my turn then i need to play a card, else i just wait
         if(view.getMyTurn()) {
 
             // we choose which card we want to place
             rePrint = () -> {
-                clear();
+                if(clear)
+                    clear();
                 dispositionPrinter.print(view.getDisposition(), view.getAvailablePlaces());
                 ultimatePrint(view);
                 System.out.print(ansi().fg(color).a("~> Choose a card to place from your hand (1/2/3): \n").reset());
@@ -290,7 +358,7 @@ public class TUI implements UI{
                 clear();
                 dispositionPrinter.print(view.getDisposition(), view.getAvailablePlaces());
                 ultimatePrint(view);
-                System.out.print(ansi().fg(color).a("~> Select a face side for the card: (true/false)\n").reset());
+                System.out.print(ansi().fg(color).a("~> Select a face side for the card: (front/back)\n").reset());
             };
             rePrint.run();
 
@@ -313,7 +381,6 @@ public class TUI implements UI{
                 System.out.print(ansi().fg(color).a("~> Choose one of the available coordinates to place the card: (x/y)\n").reset());
             };
             rePrint.run();
-
 
             while (!view.checkAvailable(x, y)){
                 synchronized (lock) {
@@ -344,13 +411,16 @@ public class TUI implements UI{
 
     }
 
-    @Override
-    public void displayCardDrawing() {
+    public void displayCardDrawing(){
+        displayCardDrawing(true);
+    }
+    private void displayCardDrawing(boolean clear) {
 
         if(view.getMyTurn()){
 
             rePrint= () -> {
-                clear();
+                if(clear)
+                    clear();
                 drawCardPrinter.print(view.getGoldDeck().get(0), view.getResourceDeck().get(0), view.getOpenGold(), view.getOpenResource());
                 System.out.print(ansi().fg(color).a("~> Draw a card: (1/2/3/4/5/6)\n").reset());
             };
@@ -381,13 +451,13 @@ public class TUI implements UI{
 
     @Override
     public void displayEndGame() {
-        //clear();
+        clear();
         List<Map.Entry<String, Integer>> entryList = new ArrayList<>(view.getPoints().entrySet());
         // Step 2: Sort the list with a comparator that compares the values in descending order
         entryList.sort((e1, e2) -> e2.getValue().compareTo(e1.getValue()));
 
         System.out.println(ansi().fg(226).a(
-                " ███████╗██╗  ██╗███████╗    ███████╗███╗   ██╗██████╗\n" +
+                "████████╗██╗  ██╗███████╗    ███████╗███╗   ██╗██████╗\n" +
                 "╚══██╔══╝██║  ██║██╔════╝    ██╔════╝████╗  ██║██╔══██╗\n" +
                 "   ██║   ███████║█████╗      █████╗  ██╔██╗ ██║██║  ██║\n" +
                 "   ██║   ██╔══██║██╔══╝      ██╔══╝  ██║╚██╗██║██║  ██║\n" +
@@ -395,15 +465,19 @@ public class TUI implements UI{
                 "   ╚═╝   ╚═╝  ╚═╝╚══════╝    ╚══════╝╚═╝  ╚═══╝╚═════╝\n"  +
                 "                                                      ").reset());
 
-
-        System.out.print(ansi().fg(226).a("~> " + entryList.get(0).getKey().toUpperCase() + " is the winner !!!\n").reset());
-
+        List<String> winners = view.getWinners();
+        if(winners.size() == 1)
+            System.out.print(ansi().fg(226).a("~> " + winners.get(0).toUpperCase() + " is the winner !!!\n").reset());
+        else {
+            System.out.print(ansi().fg(226).a("~> The winners are:\n").reset());
+            for (String win : view.getWinners()) {
+                System.out.print(ansi().fg(226).a("                   " + win.toUpperCase() + " !!!\n").reset());
+            }
+        }
         for (Map.Entry<String, Integer> stringIntegerEntry : entryList) {
             System.out.println("-> " + stringIntegerEntry.getKey() + ": " + stringIntegerEntry.getValue() + " points");
         }
     }
-
-
 
     private List<String> getInfoField(){
         List<String> infoField = new ArrayList<>();
@@ -438,24 +512,29 @@ public class TUI implements UI{
 
     @Override
     public void run(){
-        while(true) {
-
+        runningThread = true;
+        while (runningThread) {
             synchronized (lock) {
                 while (inputPresent) {
                     try {
                         lock.wait();
-                    } catch (InterruptedException e) {}
+                    } catch (InterruptedException e) {
+                    }
                 }
 
                 //System.out.println("command thread");
                 input = sc.nextLine();
 
-                if (input.startsWith("--") && !input.equals("")) {
+                if (input.equals("--quit")) {
+                    clear();
+                    runningThread = false;
+                    commandMap.get(input).execute();
+                }else if(input.startsWith("--") && !input.equals("")) {
                     clear();
                     commandMap.get(input).execute();
                     //System.out.println("command");
                     System.out.println("type q to go back to the game");
-                    while(!sc.nextLine().equals("q")){
+                    while (!sc.nextLine().equals("q")) {
                         System.out.println("type q to go back to the game");
                     }
                     rePrint.run();
@@ -465,6 +544,7 @@ public class TUI implements UI{
                 }
             }
         }
+
     }
 
 
@@ -507,12 +587,14 @@ public class TUI implements UI{
                 }
             }
 
-            if(input.equals("false") || input.equals("true")){
-                value = Boolean.parseBoolean(input);
+            if(input.equals("back")) {
+                value = false;
                 validInput = true;
-
+            }else if(input.equals("front")) {
+                value = true;
+                validInput = true;
             }else{
-                System.out.println("input type mismatch, please insert a boolean(true/false)\n");
+                System.out.println("input type mismatch, please insert (front/back)\n");
             }
             inputPresent = false;
             lock.notifyAll();

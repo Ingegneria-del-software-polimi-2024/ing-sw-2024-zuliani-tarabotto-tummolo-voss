@@ -3,7 +3,13 @@ package Server;
 
 import Server.Web.Game.ServerAPI_GO;
 import SharedWebInterfaces.Messages.MessagesFromServer.*;
+import SharedWebInterfaces.Messages.MessagesFromServer.Errors.CantPlaceCardMessage;
+import SharedWebInterfaces.Messages.MessagesFromServer.Errors.EmptyDeckMessage;
+import SharedWebInterfaces.Messages.MessagesFromServer.Errors.KickOutOfGameMessage;
 import SharedWebInterfaces.WebExceptions.MsgNotDeliveredException;
+import model.Exceptions.CantPlaceCardException;
+import model.Exceptions.EmptyCardSourceException;
+import model.Exceptions.KickOutOfGameException;
 import model.GameState.TurnState;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
@@ -17,7 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ModelListener {
+public class ModelListener {//TODO Handle correctly the exceptions
 
     private ServerAPI_GO serverAPI;
 
@@ -25,15 +31,16 @@ public class ModelListener {
         this.serverAPI = serverAPI;
     }
 
+
     //////////////////////// GAME SETUP NOTIFICATIONS ///////////////////////////////////////////////////
 
     /**
      * notification about current state of GameState
-     * @param state
+     * @param state the state to be set
      */
     public void notifyChanges(TurnState state){
         try{
-            System.out.println("notification send");
+            System.out.println("state notification send");
             serverAPI.broadcastNotifyChanges( new StateMessage( state ));
         } catch(MsgNotDeliveredException msg) {
             throw new RuntimeException(msg);
@@ -205,6 +212,14 @@ public class ModelListener {
             throw new RuntimeException(msg);
         }
     }
+
+    /**
+     * after the player decided where to draw the next card from, the involved card source gets updated based on cardSource
+     * method used when picking a card from an "open card" deck
+     * @param deck
+     * @param cardSource
+     * @param index
+     */
     public void notifyChanges(List<PlayableCard> deck, int cardSource, int index) {
         try{
             serverAPI.broadcastNotifyChanges( new DrawOpenCardMessage(deck, cardSource, index));
@@ -215,15 +230,55 @@ public class ModelListener {
 
     /**
      * at the end of the game each player is notified with the final points of every player,
-     * the view is responsible of displaying the winner
-     * @param finalPoints
+     * the view is responsible for displaying the winner
+     * @param finalPoints an hashmap containing the players' names and their points
      */
-    public void notifyChanges(HashMap<String, Integer> finalPoints){
+    public void notifyChanges(HashMap<String, Integer> finalPoints, ArrayList<String> winners){
 
         try{
-            serverAPI.broadcastNotifyChanges(new EndGameMessage(finalPoints));
+            serverAPI.broadcastNotifyChanges(new EndGameMessage(finalPoints, winners));
         }catch (MsgNotDeliveredException msg){
             throw new RuntimeException(msg);
+        }
+    }
+    ////////////////////////////// ERROR NOTIFICATIONS ///////////////////////////////////////////////////////////////
+
+    /**
+     * notify a player when can't play a card
+     * @param player the player's nickname
+     * @param e the raised exception
+     */
+    public void notifyChanges(String player, CantPlaceCardException e) {
+        try {
+            serverAPI.notifyChanges(new CantPlaceCardMessage(player, e.getCard(), e.getCoord()), player);
+        }catch (MsgNotDeliveredException msg){
+            throw new RuntimeException(msg);
+        }
+    }
+
+    /**
+     * notify a player when he is kicked out of the game or exits it
+     * @param player the player's nickname
+     * @param e the raised exception
+     */
+    public void notifyChanges(String player, KickOutOfGameException e){
+        try {
+            serverAPI.notifyChanges(new KickOutOfGameMessage(player), player);
+        }catch(MsgNotDeliveredException msg){
+            throw new RuntimeException(msg);
+        }
+    }
+
+    /**
+     * notify a player when can't draw from a deck
+     * @param player the player's nickname
+     * @param e the raised exception
+     */
+    public void notifyChanges(String player, EmptyCardSourceException e){
+        try {
+            serverAPI.notifyChanges(new EmptyDeckMessage(e.getIndx()), player);
+        }catch (MsgNotDeliveredException msg){
+            throw new RuntimeException(e);
         }
     }
 }

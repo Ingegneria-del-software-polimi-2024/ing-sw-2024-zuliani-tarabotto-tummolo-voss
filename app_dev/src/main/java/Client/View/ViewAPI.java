@@ -2,11 +2,7 @@ package Client.View;
 
 import Client.UI.TUI.TUI;
 import Client.UI.UI;
-import Client.Web.ClientAPI_COME;
-import Client.Web.ClientAPI_GO;
-import Client.Web.RMI_ServerHandler;
-import Client.Web.SOCKET_ServerHandler;
-import SharedWebInterfaces.Messages.MessagesToLobby.JoinGameMessage;
+import Client.Web.*;
 import SharedWebInterfaces.SharedInterfaces.ServerHandlerInterface;
 import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
 import SharedWebInterfaces.WebExceptions.StartConnectionFailedException;
@@ -16,11 +12,11 @@ import model.cards.PlayableCards.PlayableCard;
 import model.enums.Artifact;
 import model.enums.Element;
 import model.placementArea.Coordinates;
+import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * ViewAPI Class contains:
@@ -32,6 +28,7 @@ public class ViewAPI implements ViewAPI_Interface {
     //private UI ui;
     private ViewModel viewModel;
     private UI ui;
+    private Thread t;
 
     /*public ViewAPI() {
         this.viewModel = new ViewModel(ui);
@@ -43,13 +40,28 @@ public class ViewAPI implements ViewAPI_Interface {
         this.viewModel = new ViewModel(ui);
     }
     public void startUI(){
-        Thread t = new Thread(ui);
+        t = new Thread(ui);
         t.start();
+    }
+
+    public void stopUI(){
+        try {
+            t.join();
+        }catch (InterruptedException e){
+
+        }
     }
 
     public void setClientAPIGo(ClientAPI_GO clientAPI_GO){
         viewModel.setClientAPIGo(clientAPI_GO);
     }
+
+
+
+    public void HeartbeatToServer(){
+        viewModel.HeartbeatToServer();
+    }
+    //all this methods create a new MessageFromClient object containing an execute() method with t
 
     /////////// from CLIENT to SERVER  ACTIONS ////////////////////////////////////////////////////////////////////////////////////
     //all this methods create a new MessageFromClient object containing an execute() method with the call to a specific method of ModelController
@@ -68,35 +80,71 @@ public class ViewAPI implements ViewAPI_Interface {
     @Override
     public void readyToPlay(){viewModel.readyToPlay();}
 
+
+
+    ////////////////////////////////heartbeat////////////////
+
+    public void startHeartbeatThread() {
+        Thread heartbeatThread = new Thread(() -> {
+            while (true) {
+                try {
+                    this.HeartbeatToServer();
+//                    System.out.println("l");
+                    Thread.sleep(3000); // Send heartbeat every 1 second
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    break;
+                }
+            }
+        });
+
+        heartbeatThread.setDaemon(true);
+        heartbeatThread.start();
+    }
+
 //////////////////////////////////////////Lobby/////////////////////////////////////////////////////////////////////////
-    public void startConnection(String in, String host, int port, int localPort){
+
+    /**
+     * starts the connection with the server
+     * @param in the string defining the connection technology, either "RMI" or "Socket"
+     * @param host the ip of the server
+     */
+    public void startConnection(String in, String host) throws StartConnectionFailedException {
         ClientAPI_COME clientAPICome = new ClientAPI_COME(this);
         Thread readMessagesLoop = new Thread(clientAPICome);
         readMessagesLoop.start();
-        try {
-            ServerHandlerInterface serverHandler;
-            if (in.equalsIgnoreCase("RMI")) {
-                serverHandler = new RMI_ServerHandler(host, port, clientAPICome, localPort);
-            } else {
-                serverHandler = new SOCKET_ServerHandler(host, port, clientAPICome);
-                Thread listeningThread = new Thread((SOCKET_ServerHandler)serverHandler);
-                listeningThread.start();
-            }
-            ClientAPI_GO clientAPIGo = new ClientAPI_GO(serverHandler);
-            this.setClientAPIGo(clientAPIGo);
-        }catch (StartConnectionFailedException e){
-            System.out.println("An error occurred");
-            e.printStackTrace();
-            throw new RuntimeException("Couldn't instaurate the connection due to a net error");
-        }
+        ClientAPI_GO clientAPIGo = getClientAPIGo(in, host, clientAPICome);
+        this.setClientAPIGo(clientAPIGo);
+    }
 
+    /**
+     *
+     * @param in the string defining the connection technology, either "RMI" or "Socket"
+     * @param host the ip of the server
+     * @param clientAPICome the interface to which messages will be forwarded
+     * @return a new clientAPI_GO object connected with the server
+     * @throws StartConnectionFailedException when the connection couldn't be created
+     */
+    private ClientAPI_GO getClientAPIGo(String in, String host, ClientAPI_COME clientAPICome) throws StartConnectionFailedException {
+        ServerHandlerInterface serverHandler;
+        if (in.equalsIgnoreCase("RMI")) {
+            serverHandler = new RMI_ServerHandler(host, WebSettings.serverPortRMI, clientAPICome);
+        } else if(in.equalsIgnoreCase("SOCKET")){
+            serverHandler = new SOCKET_ServerHandler(host, WebSettings.serverPortSocket, clientAPICome);
+            Thread listeningThread = new Thread((SOCKET_ServerHandler)serverHandler);
+            listeningThread.start();
+        }else
+            throw new StartConnectionFailedException();
 
+        return new ClientAPI_GO(serverHandler);
     }
 
     public void chooseConnection(){
         ui.chooseConnection();
     }
-
+    public void welcome(){
+        ui.firstWelcome();
+    }
     public void askNickname(){
         ui.askNickname();
     }
@@ -116,10 +164,11 @@ public class ViewAPI implements ViewAPI_Interface {
     public void joinGame(String game, int players){
         viewModel.joinGame(game, players);
     }
+    public void nickNameAlreadyInUse(){ui.nickNameAlreadyInUse();}
 
 //////////////////////////////////////////Lobby/////////////////////////////////////////////////////////////////////////
 
-    //    /////////// from SERVER to CLIENT ACTIONS ////////////////////////////////////////////////////////////////////////////////////
+    ///////////// from SERVER to CLIENT ACTIONS ////////////////////////////////////////////////////////////////////////////////////
     @Override
     public void setState(TurnState state) {
         viewModel.setState(state);
@@ -187,12 +236,12 @@ public class ViewAPI implements ViewAPI_Interface {
     }
 
     @Override
-    public void setFinalPoints(HashMap<String, Integer> finalPoints) {
-        viewModel.setFinalPoints(finalPoints);
+    public void setFinalPoints(HashMap<String, Integer> finalPoints, ArrayList<String> winnersList) {
+        viewModel.setFinalPoints(finalPoints, winnersList);
     }
 
-    public void endGame(){
-        viewModel.endGame();
+    public void quitGame(){
+        viewModel.quitGame();
     }
 
     @Override
@@ -237,6 +286,27 @@ public class ViewAPI implements ViewAPI_Interface {
         return viewModel.getMyTurn();
     }
 
+    public void cantPlaceACard(PlayableCard card, Coordinates coord){
+        ui.cantPlaceACard(card, coord);
+    }
+
+    @Override
+    public void cantDrawCard(int source) {
+        ui.cantDrawCard(source);
+    }
+
+    @Override
+    public void cantJoinRoom() {
+        ui.cantJoinRoom();
+    }
+
+    @Override
+    public void cantCreateRoom() {
+        ui.cantCreateRoom();
+    }
+
+    @Override
+    public void returnToLobby() {ui.returnToLobby();}
 
 //    ////////////////////////////////// GETTER METHODS //////////////////////////////////////////////////////////////////////////////
 
@@ -324,7 +394,7 @@ public class ViewAPI implements ViewAPI_Interface {
         return viewModel.getPlayers();
     }
 
-
+    public List<String> getWinners(){return  viewModel.getWinners();}
 
     ///////////////////// functions used for input controls ///////////////////////////
     public boolean checkAvailable(int x, int y){
@@ -333,6 +403,11 @@ public class ViewAPI implements ViewAPI_Interface {
         }
         return false;
     }
+
+
+
+
+
 
     public boolean checkCanDrawFrom(int cardSource) {
         switch (cardSource) {

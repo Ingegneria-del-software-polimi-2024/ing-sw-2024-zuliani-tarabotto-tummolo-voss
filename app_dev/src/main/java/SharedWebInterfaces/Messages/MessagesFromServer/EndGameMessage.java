@@ -2,14 +2,17 @@ package SharedWebInterfaces.Messages.MessagesFromServer;
 
 import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class EndGameMessage implements MessageFromServer{
 
     private HashMap<String, Integer> finalPoints;
+    private ArrayList<String> winners;
 
-    public EndGameMessage(HashMap<String, Integer> finalPoints) {
+    public EndGameMessage(HashMap<String, Integer> finalPoints, ArrayList winners) {
         this.finalPoints = finalPoints;
+        this.winners = winners;
     }
 
     /**
@@ -18,6 +21,6 @@ public class EndGameMessage implements MessageFromServer{
      */
     @Override
     public void execute(ViewAPI_Interface view) {
-        view.setFinalPoints(finalPoints);
+        view.setFinalPoints(finalPoints, winners);
     }
 }

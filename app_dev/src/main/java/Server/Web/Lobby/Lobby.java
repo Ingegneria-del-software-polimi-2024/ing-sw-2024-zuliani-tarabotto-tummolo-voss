@@ -1,6 +1,12 @@
 package Server.Web.Lobby;
 
+import Server.Web.Lobby.LobbyExceptions.CantJoinRoomExcept;
+import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_NewConnection;
+import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_RoomChoice;
+import SharedWebInterfaces.Messages.MessagesFromLobby.AlreadyExistingNameMessage;
+import SharedWebInterfaces.Messages.MessagesFromLobby.CantJoinRoomMsg;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
+import SharedWebInterfaces.Messages.MessagesToLobby.HeartbeatMessage;
 import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
 import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
 import SharedWebInterfaces.Messages.MessagesToLobby.MessageToLobby;
@@ -14,21 +20,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Lobby implements ControllerInterface {//TODO all the methods here must be sinchronized!! :)
-    private int port;
     private ArrayList<Room> rooms;
     private HashMap<String, ClientHandlerInterface> players;
     private FirstSocketManager socketManager;
     private First_RMI_Manager rmiManager;
     private LobbyMessageQueue queue;
 
-    public Lobby(int port){
+    public Lobby(int portSocket, int portRMI){
         try {
             rooms = new ArrayList<Room>();
             players = new HashMap<String, ClientHandlerInterface>();
-            socketManager = FirstSocketManager.getInstance(this, port);
+            socketManager = FirstSocketManager.getInstance(this, portSocket);
             Thread listenForNewConnection = new Thread(socketManager);
             listenForNewConnection.start();
-            rmiManager = First_RMI_Manager.getInstance(this, port + 3); //the ports must be different!!!
+            rmiManager = First_RMI_Manager.getInstance(this, portRMI);
             queue = new LobbyMessageQueue();
         }catch (RemoteException | RuntimeException e){
             throw new RuntimeException("Can't create lobby, control the connection parameters", e);
@@ -45,13 +50,18 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
         while(true){
             MessageToLobby msg = queue.getNextMessage();
             if(msg != null){
-                System.out.println("Arrived a new message:"+  msg.getClass());
+                //DEBUG
+                if(!(msg instanceof HeartbeatMessage)) {
+                    System.out.println("———————————————————————————————————————————————————————————————");
+                    System.out.println("Arrived a new message:      " + msg.getClass());
+                    System.out.println("———————————————————————————————————————————————————————————————");
+                }
                 try{
                     msg.execute(this);
                 }catch (RuntimeException e){
                     if(e.getCause() instanceof MsgNotDeliveredException)
                         throw (MsgNotDeliveredException)e.getCause();
-                    if(e.getCause() instanceof Remote)
+                    if(e.getCause() instanceof RemoteException)
                         throw new StartConnectionFailedException();
                     throw new RuntimeException("Execution couldn't happen due to an unknown error "+e.getCause().getClass(), e);
                 }
@@ -65,9 +75,26 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
      * @param handlerInterface the handler of the player
      */
     public void addConnection(String name, ClientHandlerInterface handlerInterface){
-        if (players.containsKey(name))
-            throw new RuntimeException("Name already in use");//TODO is this good? IDK
+        //if the name is already in use, we have to notify the client
+        if (players.containsKey(name)){
+            try {
+                handlerInterface.sendToClient(new AlreadyExistingNameMessage(name));
+            } catch (RemoteException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println("The name chosen was already taken");
+            return;
+        }
+        //if the name isn't taken we add the player to the lobby's players list
         players.put(name, handlerInterface);
+        System.out.println("Added a player: "+name);
+        try {
+            sendToPlayer(name, new ACK_NewConnection(name));
+        } catch (MsgNotDeliveredException e) {
+            throw new RuntimeException(e);
+        }
+
+        //TODO sistema exception handling
     }
 
     /**
@@ -77,14 +104,35 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
      * @param expectedPlayers the number of expected players, it is null if the room already exists
      */
     public void enterRoom(String playerName, String roomName, int expectedPlayers){
+        if(roomName == null||!players.containsKey(playerName))
+            return;
+
         Room room = lookFor(roomName);
-        if (room == null){
-            createRoom(roomName, playerName, expectedPlayers);
+        try {
+            if (room == null) {
+                createRoom(roomName, playerName, expectedPlayers);
 
-        }else{
-            room.joinRoom(playerName, players.get(playerName));
+            } else {
+                room.joinRoom(playerName, players.get(playerName));
 
+            }
+        }catch (CantJoinRoomExcept e){
+            try {
+                sendToPlayer(playerName, new CantJoinRoomMsg(e.isCreating()));
+            } catch (MsgNotDeliveredException ex) {
+                throw new RuntimeException(e);
+                //TODO remove this trycatch
+            }
+            return;
         }
+        //sending ACK
+        try {
+            sendToPlayer(playerName, new ACK_RoomChoice(playerName, roomName));
+        } catch (MsgNotDeliveredException e) {
+            throw new RuntimeException(e);
+            //TODO verify this is handled correctly
+        }
+        verifyStart(roomName);
     }
 
     public void verifyStart(String roomName){
@@ -120,18 +168,7 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
         return null;
     }
 
-    /**
-     *
-     * @param playerName the name of the player
-     * @return the name of the room in which the player is
-     */
-    public String isInRoom(String playerName){
-        for(Room r : rooms){
-            if(r.contains(playerName))
-                return r.getName();
-        }
-        return null;
-    }
+
 
     /**
      * adds a message to the queue of incoming messages
@@ -139,7 +176,6 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
      */
     public void enqueueMessage(MessageToLobby msg){
         queue.enqueueMessage(msg);
-        System.out.println("Enqueued the following message: "+msg.getClass());
     }
 
     /**
@@ -176,7 +212,9 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
      * @param playerName who requested the creation of the room
      * @param expectedPlayers number of players to play with
      */
-    private void createRoom(String roomName, String playerName, int expectedPlayers){
+    private void createRoom(String roomName, String playerName, int expectedPlayers) throws CantJoinRoomExcept {
+        if(expectedPlayers<2||expectedPlayers>4)
+            throw new CantJoinRoomExcept(true);
         Room room = new Room(roomName, expectedPlayers);
         rooms.add(room);
         room.joinRoom(playerName, players.get(playerName));
@@ -193,6 +231,27 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
                 return r;
             }
         return null;
+    }
+
+    /**
+     *
+     * @param playerName the name of the player
+     * @return the name of the room in which the player is
+     */
+    private Room isInRoom(String playerName){
+        for(Room r : rooms){
+            if(r.contains(playerName))
+                return r;
+        }
+        return null;
+    }
+
+    public void updateHeartBeat(String playerId) {
+        // Update the last seen timestamp for the player in the room
+        Room r = isInRoom(playerId);
+        if(r == null)
+            return;
+        r.updateHeartBeat(playerId);
     }
 
 }

@@ -21,8 +21,13 @@ public class TUI_Client implements Runnable{
         view.setUI(ui);
     }
 
+
+
+
+
     @Override
     public void run() {
+        view.welcome();
         view.chooseConnection();
     }
 }

@@ -22,51 +22,62 @@ public class RMI_ServerHandler implements ServerHandlerInterface {
     private ClientAPI_COME api;
     private ClientHandlerInterface server;
     private RMI_ManagerInterface manager;
+    private String serverHost;
 
-    private final String registryName = "Client";
-    private int localPort = 12349; //TODO insert the port
-    private final String myHost = "localHost"; //TODO insert the host
-
-
-    private final String serverHost;
-    private final int serverPort;
-
+    /**
+     * sends the message to the server
+     * @param message message to be sent
+     * @throws RemoteException if the message couldn't be delivered
+     */
     public void sendToServer(MessageFromClient message) throws RemoteException{server.sendToServer(message);}
-    public void sendToLobby(MessageToLobby message)throws RemoteException{server.deliverToLobby(message);}
-//    @Override
-//    public void addNewPlayer() throws RemoteException{}
 
+    /**
+     * sends the message to the lobby
+     * @param message message to be sent
+     * @throws RemoteException if the message couldn't be delivered
+     */
+    public void sendToLobby(MessageToLobby message)throws RemoteException{server.deliverToLobby(message);}
+
+    /**
+     * forwards the incoming message to the client API incoming interface
+     * @param message incoming message
+     * @throws RemoteException if an error in the network happens
+     */
     @Override
     public void notifyChanges(MessageFromServer message) throws RemoteException{api.notifyChanges(message);}
 
+    /**
+     * forwards the incoming message to the client API incoming interface
+     * @param msg incoming message
+     * @throws RemoteException if an error in the network happens
+     */
     @Override
     public void receiveFromLobby(MessageFromServer msg) throws RemoteException {
         if(msg instanceof WelcomeMessage){
-//            try {
-//                Registry registry1 = LocateRegistry.getRegistry(serverHost, serverPort);
-//                server = (ClientHandlerInterface) registry1.lookup(((WelcomeMessage) msg).getRegistryName());
-//            }catch (RemoteException | NotBoundException e){
-//                throw new RemoteException();
-//            }
             server = ((WelcomeMessage)msg).getServer();
         }
         api.enqueue(msg);
     }
 
-    public RMI_ServerHandler(String host, int port, ClientAPI_COME come, int localPort) throws StartConnectionFailedException {
+    /**
+     * class constructor
+     * @param host the hostname of the server
+     * @param port the server port
+     * @param come the interface for the reception of the messages
+     * @throws StartConnectionFailedException if an error in the instantiation of the connection happens
+     */
+    public RMI_ServerHandler(String host, int port, ClientAPI_COME come) throws StartConnectionFailedException {
         api = come;
         serverHost = host;
-        serverPort = port;
-        this.localPort = localPort;
         try {
-            UnicastRemoteObject.exportObject(this,  this.localPort);
+            UnicastRemoteObject.exportObject(this,  0);
 
 
             Registry registry1 = LocateRegistry.getRegistry(host, port);
-            manager = (RMI_ManagerInterface) registry1.lookup("Lobby");
+            manager = (RMI_ManagerInterface) registry1.lookup(WebSettings.serverRegistryName);
 
             manager.deliverToLobby(new NewRMI_Connection(this));
-        }catch (RemoteException |/* AlreadyBoundException |*/ NotBoundException e){
+        }catch (RemoteException | NotBoundException e){
             throw new StartConnectionFailedException();
         }
     }

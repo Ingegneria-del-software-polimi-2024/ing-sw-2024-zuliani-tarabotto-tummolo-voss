@@ -1,14 +1,16 @@
 package Server;
 import Server.Web.Game.ServerAPI_GO;
+import Server.Web.Lobby.HeartBeatSettings;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
-import model.Exceptions.EmptyCardSourceException;
+import model.Exceptions.CantPlaceCardException;
 import SharedWebInterfaces.SharedInterfaces.ServerControllerInterface;
 import model.GameState.GameState;
 import model.GameState.TurnState;
 import model.cards.PlayableCards.PlayableCard;
 import model.placementArea.Coordinates;
-
+import Server.Web.Lobby.Room;
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 /*
@@ -25,23 +27,26 @@ public class ModelController implements ServerControllerInterface {
     private ArrayList<String> playersNicknames;
     private String gameId;
     private int cont = 0;
-    private int roundCounter = 0;
     private String initialPlayer;
     private boolean lastRound = false;
     private ServerAPI_GO send;
     private int readyPlayers;
+    private Room room;
+
+
 
     /**
      * class constructor
      * @param playersNicknames nicknames of the players
      * @param gameId id of the game
      */
-    public ModelController(ArrayList<String> playersNicknames, String gameId, ServerAPI_GO send){
+    public ModelController(ArrayList<String> playersNicknames, String gameId, ServerAPI_GO send, Room room){
         System.out.println("model controller created");
         this.playersNicknames = playersNicknames;
         this.gameId = gameId;
         this.send = send;
         this.readyPlayers = 0;
+        this.room = room;
     }
 
     /**
@@ -51,7 +56,7 @@ public class ModelController implements ServerControllerInterface {
     @Override
     public void initializeGameState(){
 
-        gameState = new GameState(playersNicknames, gameId, new ModelListener(send));
+        gameState = new GameState(playersNicknames, gameId, new ModelListener(send), this);
         initialPlayer = gameState.getTurnPlayer().getNickname();
         gameState.setTurnState(TurnState.GAME_INITIALIZATION);
     }
@@ -64,8 +69,6 @@ public class ModelController implements ServerControllerInterface {
     @Override
     public void setPlayerReady(){
         readyPlayers ++;
-        System.out.println("starter selection");
-        System.out.println(readyPlayers + playersNicknames.size());
         if(readyPlayers == playersNicknames.size()){
             gameState.setTurnState(TurnState.STARTER_CARD_SELECTION);
         }
@@ -80,15 +83,16 @@ public class ModelController implements ServerControllerInterface {
      */
     @Override
     public void playStarterCard(boolean face, String player){
+        if(!playersNicknames.contains(player))
+            return;
         gameState.setStartingCardFace(face,player);
         gameState.playStarterCard(player);
-        //IF THIS FUNCTION GETS CALLED A NUMBER OF TIMES EQUALS TO THE NUMBER OF PLAYERS THEN THE STATE OF THE GAME IS CHANGED
-        if(cont == playersNicknames.size() - 1){
-            distributeSecretObjectives();
-            cont = 0;
-            return;
-        }
         cont++;
+        //IF THIS FUNCTION GETS CALLED A NUMBER OF TIMES EQUALS TO THE NUMBER OF PLAYERS THEN THE STATE OF THE GAME IS CHANGED
+        if(cont == playersNicknames.size()){
+            cont = 0;
+            distributeSecretObjectives();
+        }
     }
 
 
@@ -97,8 +101,14 @@ public class ModelController implements ServerControllerInterface {
      * the player can choose between the two secretObjective cards that he is given
      */
     private void distributeSecretObjectives(){
+        //DEBUG
+        System.out.println("obj are being distributed");
         gameState.distributeSecretOjectives();
+        gameState.nextPlayer();
         gameState.setTurnState(TurnState.OBJECTIVE_SELECTION);
+        //DEBUG
+        System.out.println("obj have been distributed");
+
     }
 
 
@@ -111,16 +121,19 @@ public class ModelController implements ServerControllerInterface {
      */
     @Override
     public void chooseSecretObjective(String cardId, String player) {
+        cont++;
+        if(!playersNicknames.contains(player))
+            return;
+        System.out.println(cont +" !!!!!!!!!!");
         gameState.setPlayerSecretObjective(cardId, player);
-
-        if(cont == playersNicknames.size() - 1){
-
+        System.out.println("MHHHH");
+        if(cont == playersNicknames.size()){
+            System.out.println("WTF");
             //Now the first round will be played
             gameState.playingTurn();
             gameState.setTurnState(TurnState.PLACING_CARD_SELECTION);
             return;
         }
-        cont++;
     }
 
 
@@ -133,13 +146,23 @@ public class ModelController implements ServerControllerInterface {
      */
     @Override
     public void playCard(int cardId, int x , int y, Boolean faceSide){
+        boolean found = false;
         for(PlayableCard c : gameState.getTurnPlayer().getPlayingHand()){
-            if(c.getId() == cardId) { gameState.setSelectedHandCard(c); }
+            if(c.getId() == cardId) {
+                gameState.setSelectedHandCard(c);
+                found = true;
+            }
         }
+        if(!found)
+            gameState.wrongCardRoutine(new CantPlaceCardException(new Coordinates(x,y)));
 
         gameState.setSelectedCardFace(faceSide);
         gameState.setSelectedCoordinates(new Coordinates(x,y));
-        gameState.playCard();
+        try{
+            gameState.playCard();
+        }catch (CantPlaceCardException e){
+            return;
+        }
         gameState.setTurnState(TurnState.CARD_DRAWING);
     }
 
@@ -147,39 +170,35 @@ public class ModelController implements ServerControllerInterface {
     /**
      * we draw a card from the specified card source
      * Also since this is the last performed action in a turn, we check if this is the last turn of the game
-     * @param cardSource
+     * @param cardSource the deck to draw from: 1 if it is goldDeck, 2 if it is openGold with index 0,
+     *                   3 if it is openGold with index 1, 4 if it is resourceDeck, 5 if it is openResource with index 0,
+     *                   6 if it is openResource with index 1
      */
     @Override
     public void drawCard(int cardSource) throws RuntimeException{
-        try{
-            switch (cardSource) {
-                case 1:
-                    gameState.drawCardGoldDeck();
-                    break;
-                case 2:
-                    gameState.drawCardOpenGold(0);
-                    break;
-                case 3:
-                    gameState.drawCardOpenGold(1);
-                    break;
-                case 4:
-                    gameState.drawCardResourcesDeck();
-                    break;
-                case 5:
-                    gameState.drawCardOpenResources(0);
-                    break;
-                case 6:
-                    gameState.drawCardOpenResources(1);
-                    break;
-            }
+        switch (cardSource) {
+            case 1:
+                gameState.drawCardGoldDeck();
+                break;
+            case 2:
+                gameState.drawCardOpenGold(0);
+                break;
+            case 3:
+                gameState.drawCardOpenGold(1);
+                break;
+            case 4:
+                gameState.drawCardResourcesDeck();
+                break;
+            case 5:
+                gameState.drawCardOpenResources(0);
+                break;
+            case 6:
+                gameState.drawCardOpenResources(1);
+                break;
+            default:
+                gameState.drawCardGoldDeck();
         }
-        catch (EmptyCardSourceException ex) {
-            System.out.println(ex.getMessage());
-            System.out.println("choose another source to draw a card from");
-            //TODO: handle the exception
-            //callDrawFunction(new Scanner(System.in).nextInt());
-            throw new RuntimeException();
-        }
+
 
         gameState.nextPlayer();
 
@@ -190,20 +209,19 @@ public class ModelController implements ServerControllerInterface {
         //TODO: optimize this control
         if(!gameState.getLastTurn() && !lastRound){
             playNewTurn();
-        }else if(gameState.getTurnPlayer().getNickname() != initialPlayer && !lastRound){
-            roundCounter++;
+        }else if(!Objects.equals(gameState.getTurnPlayer().getNickname(), initialPlayer) && !lastRound){
             playNewTurn();
         } else {
             if(!lastRound){
                 cont = 0;
                 lastRound = true;
             }
-            playNewTurn();
-            if(cont == playersNicknames.size() -1 ){
+
+            if(cont == playersNicknames.size()){
                 gameState.calculateFinalPoints();
                 gameState.setTurnState(TurnState.END_GAME);
                 return;
-            };
+            }else{playNewTurn();}
             cont ++;
         }
     }
@@ -218,9 +236,57 @@ public class ModelController implements ServerControllerInterface {
 
     public boolean checkMessage(MessageFromClient message){return gameState.checkMessage(message);}
 
-
     public void endGame(){
         gameState.calculateFinalPoints();
         gameState.setTurnState(TurnState.END_GAME);
+    }
+
+    /**
+     * set a player in an active state
+     * @param playerName the name of the player to be set active
+     */
+    public void setPlayerActive(String playerName){
+        gameState.setPlayerActive(playersNicknames.indexOf(playerName));
+    }
+
+    /**
+     * set a player in an inactive state
+     * @param playerName the name of the player to be set active
+     */
+    public void setPlayerInactive(String playerName){
+        gameState.setPlayerInactive(playersNicknames.indexOf(playerName));
+        //control if all the players except one are disconnected
+        int iterations = 0;
+        do {
+            int disconnectedPlayersNumber = 0;
+            for (int i = 0; i < playersNicknames.size(); i++) {
+                if (!gameState.getPlayer(i).isActive()) {
+                    disconnectedPlayersNumber++;
+                    //DEBUG
+                    System.out.println(disconnectedPlayersNumber);
+                }
+            }
+            if(disconnectedPlayersNumber < playersNicknames.size() - 1)
+                return;
+            iterations++;
+            try {
+                Thread.sleep(HeartBeatSettings.timerB4ClosingGame);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }while(iterations < HeartBeatSettings.iterationsNumber);
+
+        endGame();
+    }
+
+    public void handleDisconnection() {
+        System.out.println("DISCONNECTION DETECTED");
+        room.handleADetectedDisconnection();
+    }
+
+    public void quitGame(String playerID){
+        //the player must be added to the "unavailable" list, some kind of control MUST be done
+        //TODO control
+        gameState.quitGame(playerID);
     }
 }

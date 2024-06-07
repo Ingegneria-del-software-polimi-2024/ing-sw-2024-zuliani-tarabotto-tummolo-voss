@@ -2,18 +2,13 @@ package Server.Web.Game;
 
 import Server.Web.Lobby.Lobby;
 import SharedWebInterfaces.Messages.Message;
-import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_RoomChoice;
-import SharedWebInterfaces.Messages.MessagesFromLobby.AvailableGames;
 import SharedWebInterfaces.Messages.MessagesFromLobby.WelcomeMessage;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
-import SharedWebInterfaces.Messages.MessagesFromServer.EndGameMessage;
-import SharedWebInterfaces.Messages.MessagesToLobby.JoinGameMessage;
-import SharedWebInterfaces.Messages.MessagesToLobby.RequestAvailableGames;
 import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
 import SharedWebInterfaces.Messages.MessagesToLobby.MessageToLobby;
 import SharedWebInterfaces.Messages.MessagesToLobby.NewConnectionMessage;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
-
+import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.DisconnectionMessage;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -28,9 +23,19 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
 
     private final int MAX_RETRY = 3;
 
+    /**
+     * forwards the message to the interface managing incoming messages
+     * @param message the incoming message
+     * @throws RemoteException when a communication error occurs
+     */
     @Override
     public void sendToServer(MessageFromClient message) throws RemoteException {api.sendToServer(message);}
 
+    /**
+     * sends a message to the client
+     * @param message the message to be sent
+     * @throws RemoteException when a communication error occurs
+     */
     @Override
     public void notifyChanges(MessageFromServer message) throws RemoteException {
         snd(message);
@@ -82,31 +87,42 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
         try{
             snd(new WelcomeMessage(lobby.getGameNames()));
             System.out.println("sent welcomeMessage");
-            NewConnectionMessage msg = null;
+            MessageToLobby msg = null;
 
             boolean read = false;
-            while(!read) {
-                msg = (NewConnectionMessage) in.readObject();
-                read = true;
-            }
-            msg.setHandler(this);
-            deliverToLobby(msg);
+            MessageToLobby incoming;
+            do{
+                incoming = (MessageToLobby) in.readObject();
+                if(incoming instanceof NewConnectionMessage) {
+                    ((NewConnectionMessage) incoming).setHandler(this);
+                    read = true;
+                }
+                deliverToLobby(incoming);
+            }while(!read);
 
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException();
         }
         try {
 
-            Message messageToLobby = null;
+            Message message = null;
             do {
-                messageToLobby = (Message) in.readObject();
-                if(messageToLobby instanceof MessageToLobby)
-                    deliverToLobby((MessageToLobby)messageToLobby);
-                else if(messageToLobby instanceof MessageFromClient)
-                    sendToServer((MessageFromClient)messageToLobby);
+                message = (Message) in.readObject();
+                //TODO replace if else with overloading
+                if(message instanceof MessageToLobby)
+                    deliverToLobby((MessageToLobby)message);
+                else if(message instanceof MessageFromClient)
+                    sendToServer((MessageFromClient)message);
             }while(true);
         }catch (IOException | ClassNotFoundException e){
-            throw new RuntimeException();
+//            System.err.println("Connection lost: " + e.getMessage());
+
+            DisconnectionMessage disconnectionMessage = new DisconnectionMessage();
+            if(api == null)
+                return;
+            api.sendToServer(disconnectionMessage);
+            // handleDisconnection();
+            //throw new RuntimeException();//TODO HANDLE DISCONNECTION
         }
 
 
@@ -151,7 +167,7 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
 
     /**
      * This method tries to send the message MAX_RETRY times before signaling the exception to the caller
-     * @param msg
+     * @param msg the message to send
      */
     private void snd(MessageFromServer msg) throws RemoteException {
         int retryCount = 0;

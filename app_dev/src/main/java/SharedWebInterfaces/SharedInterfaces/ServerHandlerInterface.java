@@ -13,12 +13,8 @@ import java.rmi.RemoteException;
  */
 public interface ServerHandlerInterface extends Remote{
 
-    //private ClientAPI_COME api
-
     //COME
     void sendToServer(MessageFromClient message)throws RemoteException;
-
-//    public void addNewPlayer()throws RemoteException;
 
     //GO
     void notifyChanges(MessageFromServer message)throws RemoteException;

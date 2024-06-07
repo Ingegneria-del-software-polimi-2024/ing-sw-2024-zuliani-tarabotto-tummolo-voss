@@ -1,6 +1,9 @@
 package model.player;
 
 //import model.cards.ObjectiveCard;
+import SharedWebInterfaces.Messages.MessagesFromServer.Errors.KickOutOfGameMessage;
+import model.Exceptions.CantPlaceCardException;
+import model.Exceptions.KickOutOfGameException;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
 import model.cards.PlayableCards.StarterCard;
@@ -15,19 +18,21 @@ import java.util.List;
 public class Player implements Serializable {
     private String nickname;
     private List<PlayableCard> hand;
-    private ObjectiveCard secretObjective;
+    private ObjectiveCard secretObjective = null;
     private PlacementArea placementArea;
     private int points;
     private PlayableCard starterCard;
     private Pawn pawnColor;
 
-
+    private Boolean active;
+    private final Object activityMutex = new Object();
     /**
      * class constructor
      */
     public Player() {
         this.hand = new ArrayList<>();
         this.placementArea = new PlacementArea();
+        this.active = true;
     }
 
     /**
@@ -45,15 +50,15 @@ public class Player implements Serializable {
      * @param card
      * @param coordinates
      */
-    public void playCard(PlayableCard card, Coordinates coordinates){
-        takeFromHand(card);
+    public void playCard(PlayableCard card, Coordinates coordinates) throws CantPlaceCardException {
         this.points += placementArea.addCard(coordinates, card);
+        takeFromHand(card);
     }
 
     /**
      * the starterCard is placed on the PlacementsArea at the default position (0,0)
      */
-    public void playStarterCard(){
+    public void playStarterCard() throws KickOutOfGameException {
         placementArea.addCard(starterCard);
     }
     //auxiliary method for the method playCard() removes and returns
@@ -70,18 +75,35 @@ public class Player implements Serializable {
     }
 
     /**
-     * checks if the Player's secretObjective was satisfied ad least once and if so the points counter is updated
+     * checks if the Player's secretObjective was satisfied at least once and if so the points counter is updated
+     * @return 1 if the objective is satisfied at least once, else 0
      */
-    public void calculateSecretObj(){
-        points = points + secretObjective.countPoints(placementArea);
+    public int calculateSecretObj(){
+
+        int objP = 0;
+        if(secretObjective!= null)
+            objP += secretObjective.countPoints(placementArea);
+
+        points = points + objP;
+
+        if (objP>0)
+            return 1;
+        else
+            return 0;
     }
 
     /**
      * checks if the ObjectiveCard commonObjective was satisfied at least once and if so the points counter is updated
-     * @param commonObjective
+     *@param commonObjective the objective to be verified
+     * @return 1 if the objective is satisfied at least once, else 0
      */
-    public void calculateSingleCommonObj(ObjectiveCard commonObjective) {
-        points = points + commonObjective.countPoints(placementArea);
+    public int calculateSingleCommonObj(ObjectiveCard commonObjective) {
+        int objPoints = commonObjective.countPoints(placementArea);
+        points = points + objPoints;
+        if (objPoints>0)
+            return 1;
+        else
+            return 0;
     }
 
     /////////////// SETTER METHODS ///////////////////////////
@@ -90,8 +112,16 @@ public class Player implements Serializable {
     public void setStarterCard(PlayableCard starterCard) { this.starterCard = starterCard; }
     public void setSecretObjective(ObjectiveCard secretObjective) { this.secretObjective = secretObjective; }
     public void setPawnColor(Pawn pawnColor) { this.pawnColor = pawnColor; }
-
-
+    public void setActive() {
+        synchronized (activityMutex) {
+            this.active = true;
+        }
+    }
+    public void setInactive(){
+        synchronized (activityMutex){
+            this.active = false;
+        }
+    }
 
     ///////////////// GETTER METHODS ///////////////////////////////////////
     public String getNickname() { return nickname; }
@@ -101,6 +131,11 @@ public class Player implements Serializable {
     public PlacementArea getPlacementArea() { return placementArea; }
     public ObjectiveCard getSecretObjective() { return secretObjective; }
     public Pawn getPawnColor(){return pawnColor;}
+    public boolean isActive(){
+        synchronized (activityMutex){
+            return active;
+        }
+    }
 
 }
 

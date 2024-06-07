@@ -7,7 +7,7 @@ import SharedWebInterfaces.WebExceptions.StartConnectionFailedException;
 public class serverTest {
 
     public static void main(String[] args) {
-        Lobby lobby = new Lobby(1234);
+        Lobby lobby = new Lobby(1234, 1237);
         try {
             lobby.start();
         } catch (MsgNotDeliveredException e) {

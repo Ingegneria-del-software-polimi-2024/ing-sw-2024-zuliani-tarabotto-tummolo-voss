@@ -10,8 +10,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class LobbyMessageQueue {
     private ConcurrentLinkedQueue<MessageToLobby> messageQueue;
 
-    public void enqueueMessage(MessageToLobby msg){messageQueue.add(msg);
-        System.out.println("enqueued:"+msg.getClass());}
+    public void enqueueMessage(MessageToLobby msg){messageQueue.add(msg);}
     public MessageToLobby getNextMessage(){return messageQueue.poll();}
 
     public LobbyMessageQueue() {messageQueue = new ConcurrentLinkedQueue<MessageToLobby>();}

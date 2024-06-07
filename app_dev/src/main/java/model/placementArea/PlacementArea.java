@@ -1,7 +1,8 @@
 package model.placementArea;
 
 
-import model.Errors.ConditionNotSatisfiedException;
+import model.Exceptions.CantPlaceCardException;
+import model.Exceptions.KickOutOfGameException;
 import model.cards.PlayableCards.PlayableCard;
 import model.enums.Artifact;
 import model.enums.Element;
@@ -56,25 +57,26 @@ public class PlacementArea {
      * @param xy coordinates to add a card in
      * @param card the card to add
      * @return points earned when placing the card
-     * @throws IllegalArgumentException
+     * @throws CantPlaceCardException
      */
-    public int addCard(Coordinates xy, PlayableCard card) throws IllegalArgumentException{
+    public int addCard(Coordinates xy, PlayableCard card) throws CantPlaceCardException{
         int i, j, count = 0;
         Coordinates coord;
         PlayableCard cardOnTable;
         numberNearbyCards = 0;
-
-        //we should throw an exception if there is already a card in those coordinates
-        if(disposition.containsKey(xy))
-            throw new IllegalArgumentException();
-
+        //we should throw an exception if there is already a card in those coordinates or if it can't be placed
+        if(contain(disposition, xy) || !contain(availablePlaces, xy))
+            throw new CantPlaceCardException(xy, card);
         //we should throw an exception if the card can't be placed due to its restrictions
         if(!canBePlaced(card))
-            throw new ConditionNotSatisfiedException();
+            throw new CantPlaceCardException(xy, card);
 
         //update available positions and get the one we are using
-        xy = updateAvailablePlaces(xy, card);
-
+        try {
+            xy = updateAvailablePlaces(xy, card);
+        }catch (IllegalArgumentException e){
+            throw new CantPlaceCardException(xy, card);
+        }
         //add card to disposition
         disposition.put(xy, card);
 
@@ -159,12 +161,15 @@ public class PlacementArea {
      * allows the turnPlayer to place the starting card
      * @param starterCard the card to be placed
      */
-    public void addCard(PlayableCard starterCard) {
+    public void addCard(PlayableCard starterCard) throws KickOutOfGameException {
         Coordinates xy = new Coordinates(0,0);//availablePlaces.get(0); //
         Coordinates coord;
         //update available positions
-        coord = updateAvailablePlaces(xy, starterCard);
-
+        try {
+            coord = updateAvailablePlaces(xy, starterCard);
+        }catch(IllegalArgumentException e){
+            throw new KickOutOfGameException();
+        }
         //add card to disposition
         disposition.put(coord, starterCard);
         //add card to the list ordered by placement time
@@ -185,13 +190,15 @@ public class PlacementArea {
     }
 
     /**
-     * counts the occurrences of a shape objective
+     * Counts the occurrences of a shape objective. Returns zero if an error occurs during the computation
      * @param shape the shape of the objective to be verified
      * @param element the list containing the elements in order corresponding to the cards of the objective
      * @return the occurrences of the shape "shape"
-     * @throws RuntimeException when the coordinates are found in PlacementArea the first time and then can't be found the second
      */
-    public int verifyObjective(Shape shape, List<Element> element) throws RuntimeException{
+    public int verifyObjective(Shape shape, List<Element> element){
+        //if i don't have cards it's useless to count
+        if(disposition.keySet().isEmpty())
+            return 0;
         //declare and initialize
         final Coordinates ORIGIN = new Coordinates(0,0);
         Coordinates tmpCoordinates;
@@ -231,7 +238,7 @@ public class PlacementArea {
                         tmpCoordinates = coordinatesIterator.current().sum(x).areContainedIn(disposition.keySet());
                         if(tmpCoordinates!= null)
                             countedCards.add(disposition.get(tmpCoordinates));
-                        else throw new RuntimeException();
+                        else return 0;
                     }
                 }
 
@@ -353,28 +360,28 @@ public class PlacementArea {
 
 
     ///////////////// FOR TESTING PURPOSES ONLY /////////////////////////////////////////////////
-    public void printAvailablePlaces() {
-        for(Coordinates c : availablePlaces ) {
-            System.out.println("(" + c.getX() + "; " + c.getY() + ")");
-        }
-    }
-    public void printDisposition() {
-        System.out.println("––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––");
-        //printing elements
-        System.out.println("elements: mushrooms " + this.getNumberElements(Element.mushrooms));
-        System.out.println("          animals " + this.getNumberElements(Element.animals));
-        System.out.println("          insects " + this.getNumberElements(Element.insects));
-        System.out.println("          vegetals " + this.getNumberElements(Element.vegetals));
-        //printing artifacts
-        System.out.println("objects: feather " + this.getNumberArtifacts(Artifact.feather));
-        System.out.println("         ink " + this.getNumberArtifacts(Artifact.ink));
-        System.out.println("         paper " + this.getNumberArtifacts(Artifact.paper));
-        System.out.println("***\t\t***\t\t***\t\t***\t\t***\t\t***\t\t***\t\t***\t\t***");
-        for (Coordinates c : disposition.keySet()) {
-            System.out.println("Card: " + disposition.get(c).getId() + " || Coordinates: (" + c.getX() + ";" + c.getY() + ")");
-        }
-        System.out.println("––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––");
-    }
+//    public void printAvailablePlaces() {
+//        for(Coordinates c : availablePlaces ) {
+//            System.out.println("(" + c.getX() + "; " + c.getY() + ")");
+//        }
+//    }
+//    public void printDisposition() {
+//        System.out.println("––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––");
+//        //printing elements
+//        System.out.println("elements: mushrooms " + this.getNumberElements(Element.mushrooms));
+//        System.out.println("          animals " + this.getNumberElements(Element.animals));
+//        System.out.println("          insects " + this.getNumberElements(Element.insects));
+//        System.out.println("          vegetals " + this.getNumberElements(Element.vegetals));
+//        //printing artifacts
+//        System.out.println("objects: feather " + this.getNumberArtifacts(Artifact.feather));
+//        System.out.println("         ink " + this.getNumberArtifacts(Artifact.ink));
+//        System.out.println("         paper " + this.getNumberArtifacts(Artifact.paper));
+//        System.out.println("***\t\t***\t\t***\t\t***\t\t***\t\t***\t\t***\t\t***\t\t***");
+//        for (Coordinates c : disposition.keySet()) {
+//            System.out.println("Card: " + disposition.get(c).getId() + " || Coordinates: (" + c.getX() + ";" + c.getY() + ")");
+//        }
+//        System.out.println("––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––");
+//    }
 
     //TODO this MUST BE SET PROTECTED
     public HashMap<Coordinates, PlayableCard> getDisposition() { return disposition;}
@@ -382,4 +389,19 @@ public class PlacementArea {
     public HashMap<Element, Integer> getAvailableElements() {return availableElements;}
     //TODO: convert all List to ArrayList
     public List<Coordinates> getAvailablePlaces() {return availablePlaces;}
+
+    private boolean contain(HashMap<Coordinates, PlayableCard> disposition, Coordinates coord){
+        for(Coordinates x : disposition.keySet()){
+            if (x.equals(coord))
+                return true;
+        }
+        return false;
+    }
+    private boolean contain(List<Coordinates> list, Coordinates coordinates){
+        for (Coordinates x : list){
+            if(x.equals(coordinates))
+                return true;
+        }
+        return false;
+    }
 }

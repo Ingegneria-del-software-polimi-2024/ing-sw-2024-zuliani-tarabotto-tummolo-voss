@@ -21,7 +21,7 @@ public class ClientAPI_GO {
      * notifies the server handler of the message the client wants to send
      * @param message the message going towards the server
      */
-    public void sendToServer(MessageFromClient message){
+    public synchronized void sendToServer(MessageFromClient message){
         try {
             handler.sendToServer(message);
         } catch (RemoteException e) {
@@ -29,6 +29,11 @@ public class ClientAPI_GO {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * forwards to the lobby the message
+     * @param message the message to pass to the lobby
+     */
     public void sendToLobby(MessageToLobby message){
         try {
             handler.sendToLobby(message);

@@ -11,17 +11,8 @@ public class JoinGameMessage implements MessageToLobby{
 
     @Override
     public void execute(Lobby lobby) {
+        lobby.updateHeartBeat(user);
         lobby.enterRoom(user, game, nPlayers);
-
-
-        //sending ACK
-        try {
-            lobby.sendToPlayer(user, new ACK_RoomChoice(user, game));
-        } catch (MsgNotDeliveredException e) {
-            throw new RuntimeException(e);
-            //TODO verify this is handled correctly
-        }
-        lobby.verifyStart(game);
     }
 
     @Override

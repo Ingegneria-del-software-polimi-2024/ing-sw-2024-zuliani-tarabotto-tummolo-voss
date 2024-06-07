@@ -10,7 +10,6 @@ public class ReadyToPlayMessage implements  MessageFromClient {
 
     @Override
     public void execute(ModelController controller) {
-        System.out.println("giusto");
         controller.setPlayerReady();
     }
 

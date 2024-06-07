@@ -1,16 +1,16 @@
 package controller;
 
 
-import Client.UI.TUI.*;
+import model.Exceptions.CantPlaceCardException;
 import model.Exceptions.EmptyCardSourceException;
 import model.GameState.GameState;
-import model.cards.ObjectiveCard;
+import model.GameState.MockModelListener;
 import model.enums.Pawn;
+import model.objective.Shape;
 import model.placementArea.Coordinates;
+import model.placementArea.PlacementAreaIterator;
 import model.player.Player;
-import org.fusesource.jansi.AnsiConsole;
 import org.junit.jupiter.api.Test;
-import view.CliView;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -24,7 +24,6 @@ import static org.fusesource.jansi.Ansi.ansi;
 class ControllerTest {
     private GameState gameState;
     private ArrayList<String> nickNames;
-    private CliView view;
     private Scanner sc = new Scanner(new File("/Users/andre/Documents/GitHub.nosync/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/final"));
     private Player initialPlayer;
 
@@ -44,11 +43,11 @@ class ControllerTest {
         String id = "gameState_0";
         nickNames = new ArrayList<String>();
         int numPlayers = Integer.parseInt(sc.next());
-        nickNames.add(sc.next());
-        nickNames.add(sc.next());
+        for(int x= 0; x<numPlayers; x++)
+            nickNames.add(sc.next());
         //creates a GameState
         int i = 0;
-        gameState = new GameState(nickNames, id, i);
+        gameState = new GameState(nickNames, id, i, new MockModelListener());
         initialPlayer = gameState.getTurnPlayer();
         /*
         ObjectivesPrinter p1 = new ObjectivesPrinter();
@@ -116,8 +115,8 @@ class ControllerTest {
         printWinner();
         fileWriting();
 
-        String filePath1 = "/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/output";
-        String filePath2 = "/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/expectedOutput";
+        String filePath1 = "/Users/andre/Documents/GitHub.nosync/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/output";
+        String filePath2 = "/Users/andre/Documents/GitHub.nosync/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/expectedOutput";
         File f1 = new File(filePath1);
         File f2 = new File(filePath2);
 
@@ -129,35 +128,29 @@ class ControllerTest {
 
 ;
     private void callDrawFunction(int i) throws EmptyCardSourceException {
-        try{
-            switch (i) {
-                case 1:
-                    gameState.drawCardGoldDeck();
-                    break;
-                case 2:
-                    gameState.drawCardResourcesDeck();
-                    break;
-                case 3:
-                    gameState.drawCardOpenGold(0);
-                    break;
-                case 4:
-                    gameState.drawCardOpenGold(1);
-                    break;
-                case 5:
-                    gameState.drawCardOpenResources(0);
-                    break;
-                case 6:
-                    gameState.drawCardOpenResources(1);
-                    break;
-            }
+        switch (i) {
+            case 1:
+                gameState.drawCardGoldDeck();
+                break;
+            case 2:
+                gameState.drawCardResourcesDeck();
+                break;
+            case 3:
+                gameState.drawCardOpenGold(0);
+                break;
+            case 4:
+                gameState.drawCardOpenGold(1);
+                break;
+            case 5:
+                gameState.drawCardOpenResources(0);
+                break;
+            case 6:
+                gameState.drawCardOpenResources(1);
+                break;
         }
-        catch (EmptyCardSourceException ex) {
-            System.out.println(ex.getMessage());
-            System.out.println("choose another source to draw a card from");
-            callDrawFunction(new Scanner(System.in).nextInt());
-        }
-
     }
+
+
 
     private void playTurn() throws EmptyCardSourceException {
 
@@ -177,8 +170,11 @@ class ControllerTest {
         gameState.setSelectedCardFace(sc.nextBoolean());
         Coordinates c = new Coordinates(Integer.parseInt(sc.next()), Integer.parseInt(sc.next()));
         gameState.setSelectedCoordinates(c);
-
-        gameState.playCard();
+        try {
+            gameState.playCard();
+        }catch (CantPlaceCardException e) {
+            throw new RuntimeException(e);
+        }
         callDrawFunction(sc.nextInt());
         gameState.setLastTurnTrue();
         gameState.nextPlayer();
@@ -206,7 +202,7 @@ class ControllerTest {
 
 
         //we write the output file
-        String filename = "/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/output"; // Specify the file name
+        String filename = "/Users/andre/Documents/GitHub.nosync/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/output"; // Specify the file name
 
         try {
             // Create a FileWriter object
@@ -216,8 +212,13 @@ class ControllerTest {
             writer.write("winner: " +  winner.getNickname() + "\n");
             for (int i = 0; i < nickNames.size(); i++) {
                 writer.write(gameState.getPlayer(i).getNickname()+ ": " + gameState.getPlayer(i).getPoints() + " points\n");
-                for(Coordinates c : gameState.getPlayer(i).getPlacementArea().getDisposition().keySet()){
+
+                PlacementAreaIterator placementAreaIterator = new PlacementAreaIterator(gameState.getPlayer(i).getPlacementArea().getDisposition(), Shape.TOPLEFTL);
+                Coordinates c;
+                while(placementAreaIterator.hasNext()){
+                    c = placementAreaIterator.current();
                     writer.write("Card: " + gameState.getPlayer(i).getPlacementArea().getDisposition().get(c).getId() + ", (" + c.getX() + ";" + c.getY() + ")\n");
+                    placementAreaIterator.next();
                 }
             }
 

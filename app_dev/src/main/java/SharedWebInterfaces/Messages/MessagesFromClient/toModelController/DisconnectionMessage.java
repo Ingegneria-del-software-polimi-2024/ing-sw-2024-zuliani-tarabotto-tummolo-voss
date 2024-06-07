@@ -3,16 +3,18 @@ package SharedWebInterfaces.Messages.MessagesFromClient.toModelController;
 import Server.ModelController;
 import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
 
-public class EndGameMessage implements MessageFromViewToModelController{
+public class DisconnectionMessage implements MessageFromViewToModelController {
+
+
+    public DisconnectionMessage() {
+    }
+
     @Override
     public void execute(ModelController controller) {
-        controller.endGame();
+        controller.handleDisconnection();
     }
 
-    //ignore this
     @Override
     public void execute(ControllerInterface controller) {
-
     }
-
 }

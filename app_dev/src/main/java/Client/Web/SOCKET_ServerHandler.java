@@ -5,7 +5,6 @@ import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_RoomChoice;
 import SharedWebInterfaces.Messages.MessagesFromServer.InterruptConnectionMessage;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
 import SharedWebInterfaces.Messages.MessagesToLobby.MessageToLobby;
-import SharedWebInterfaces.Messages.MessagesToLobby.NewConnectionMessage;
 import SharedWebInterfaces.SharedInterfaces.ServerHandlerInterface;
 import SharedWebInterfaces.WebExceptions.StartConnectionFailedException;
 
@@ -35,20 +34,27 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
         }
     }
 
-//    public void addNewPlayer() throws RemoteException {}
-
     /**
      * receives and enqueues the message coming from the server
      * @param message the message from the server containing the updates for the view
-     * @throws RemoteException
+     * @throws RemoteException when an error in the network happens
      */
     public void notifyChanges(MessageFromServer message) throws RemoteException {api.notifyChanges(message);}
 
+    /**
+     * forwards the incoming message to the client API incoming interface
+     * @param msg incoming message
+     */
     @Override
     public void receiveFromLobby(MessageFromServer msg) {
         api.notifyChanges(msg);
     }
 
+    /**
+     * sends the message to the lobby
+     * @param msg message to be sent
+     * @throws RemoteException if the message couldn't be delivered
+     */
     @Override
     public void sendToLobby(MessageToLobby msg) throws RemoteException {
         try {
@@ -72,6 +78,14 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
             notifyChanges(incomingMessage);
         }while(!(incomingMessage instanceof InterruptConnectionMessage));
     }
+
+    /**
+     * class constructor
+     * @param add the server hostname
+     * @param port the server port
+     * @param come the interface for the reception of the messages
+     * @throws StartConnectionFailedException if an error in the instantiation of the connection happens
+     */
     public SOCKET_ServerHandler(String add, int port, ClientAPI_COME come) throws StartConnectionFailedException {
         api = come;
         try {
@@ -83,11 +97,6 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
         } catch (IOException e) {
             throw new StartConnectionFailedException();
         }
-    }
-
-    //TODO just ALWAYS remember to call this
-    public void attachAPI(ClientAPI_COME api){
-        this.api = api;
     }
 
     /**
