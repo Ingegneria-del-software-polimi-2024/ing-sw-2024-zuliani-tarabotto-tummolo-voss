@@ -3,6 +3,7 @@ package Client.UI.GUI;
 
 import Client.UI.GUI.EventListeners.BoardClickedListener;
 import Client.UI.GUI.EventListeners.BoardMotionListener;
+import Client.UI.GUI.LoginPanel.LoginPanel;
 import Client.UI.UI;
 import Client.View.ViewAPI;
 
@@ -43,6 +44,7 @@ public class GUI  implements UI {
     private JPanel bottomPanel;
     private JPanel centerPanel;
     private EndGamePanel endGamePanel;
+    private LoginPanel login;
     private JPanel topPanel;
     final int FPS = 30;
     public boolean starterSelected = false;
@@ -72,11 +74,10 @@ public class GUI  implements UI {
             frame.setLocationRelativeTo(null);
 
 
-
-            titleLabel = new JLabel("", SwingConstants.CENTER);
-            titleLabel.setFont(new Font("Serif", Font.BOLD, 48));
+            /*titleLabel = new JLabel("", SwingConstants.CENTER);
+            titleLabel.setFont(new Font("Beaufort", Font.BOLD, 48));
             titleLabel.setForeground(Color.BLACK);
-            titleLabel.setBounds(0, frame.getHeight() / 2 - 48, frame.getWidth(), 96);
+            titleLabel.setBounds(0, frame.getHeight() / 2 - 48, frame.getWidth(), 96);*/
 
             // Create a glass pane for the title
             glassPane = new JPanel() {
@@ -86,13 +87,13 @@ public class GUI  implements UI {
                     if (!title.isEmpty()) {
                         Graphics2D g2d = (Graphics2D) g;
                         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                        g2d.setFont(new Font("Serif", Font.BOLD, 70));
+                        g2d.setFont(new Font("Beaufort", Font.BOLD, 70));
                         FontMetrics fm = g2d.getFontMetrics();
                         int stringWidth = fm.stringWidth(title);
                         int stringHeight = fm.getAscent();
                         int x = (getWidth() - stringWidth) / 2;
                         int y = (getHeight() - stringHeight) / 2 + fm.getAscent();
-                        g2d.setColor(Color.YELLOW);
+                        g2d.setColor(new Color(200, 170, 110));
                         g2d.drawString(title, x, y);
                     }
                 }
@@ -210,6 +211,8 @@ public class GUI  implements UI {
 
     @Override
     public void chooseConnection() {
+        login = new LoginPanel(this);
+        login.chooseConnection();
         System.out.println("~> Welcome to Codex Naturalis, insert the techonolgy of connection (RMI/Socket):");
         String connectionType;
         do{
@@ -225,25 +228,6 @@ public class GUI  implements UI {
             if (!validIP(host))
                 System.out.println("~> Insert a valid ip address (xxx.xxx.xxx.xxx): ");
         }while(!validIP(host));
-
-        /*
-        int port;
-        System.out.println("~> Insert the host port: ");
-        do{
-            port = Integer.parseInt(sc.nextLine());
-            if (!validPort(port))
-                System.out.println("~> Insert a valid port: ");
-        }while(!validPort(port));
-
-        int localPort;
-        System.out.println("~> Insert the local port: ");
-        do{
-            localPort = Integer.parseInt(sc.nextLine());
-            if (!validPort(localPort))
-                System.out.println("~> Insert a valid port: ");
-        }while(!validPort(localPort));
-        System.out.println("ciao");
-        view.startConnection(connectionType, host, port, localPort);*/
 
         try {
             view.startConnection(connectionType, host);
