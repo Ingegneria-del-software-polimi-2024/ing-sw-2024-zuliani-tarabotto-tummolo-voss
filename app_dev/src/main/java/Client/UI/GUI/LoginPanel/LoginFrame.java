@@ -7,26 +7,27 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
-public class LoginPanel extends JPanel {
+public class LoginFrame extends JFrame {
     private GUI gui;
     private int width = 900;
     private int height = 600;
     private InputFields loginFields;
-    private JFrame loginFrame;
 
-    public LoginPanel(GUI gui ){
-        loginFrame = new JFrame("Login");
-        loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    public LoginFrame(GUI gui ){
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //loginFrame.setSize(900, 600);
-        loginFrame.setLayout(new BorderLayout());
+        setLayout(new BorderLayout());
 
         this.gui = gui;
         setSize(new Dimension(width, height));
         setLayout(new BorderLayout());
 
-        loginFields = new InputFields(gui);
+        loginFields = new InputFields(gui, this);
         loginFields.setPreferredSize(new Dimension((width - height), 0));
 
 
@@ -58,10 +59,10 @@ public class LoginPanel extends JPanel {
         this.add(loginFields, BorderLayout.WEST);
         this.add(imagePanel, BorderLayout.CENTER);
 
-        loginFrame.add(this);
-        loginFrame.pack();
-        loginFrame.setLocationRelativeTo(null);
-        loginFrame.setVisible(true);
+
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
 
     }
 
@@ -69,13 +70,17 @@ public class LoginPanel extends JPanel {
         String host;
         String connectionType;
         loginFields.chooseConnection();
-        loginFrame.setVisible(false);
-        loginFrame.setVisible(true);
+
     }
 
     public void chooseNickname(){
         loginFields.chooseNickname();
-        loginFrame.setVisible(false);
-        loginFrame.setVisible(true);
+
+    }
+
+
+    public void chooseGame(ArrayList<String> listOfGames){
+        loginFields.chooseGame(listOfGames);
+
     }
 }

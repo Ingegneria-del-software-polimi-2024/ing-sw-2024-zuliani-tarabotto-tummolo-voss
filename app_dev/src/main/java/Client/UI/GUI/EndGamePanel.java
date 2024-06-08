@@ -76,7 +76,7 @@ public class EndGamePanel extends JPanel {
         closeButton.addActionListener(e -> System.exit(0));
 
         JButton lobbyButton = new JButton("Lobby");
-        lobbyButton.addActionListener(e -> System.out.println("back to lobby"));
+        lobbyButton.addActionListener(e -> gui.quitGame());
 
         buttonPanel.add(lobbyButton);
         buttonPanel.add(closeButton);
@@ -85,25 +85,6 @@ public class EndGamePanel extends JPanel {
 
         add(middlePanel);
 
-
-/*
-        JLabel scoreLabel = new JLabel("Scores: Player 1 - 10, Player 2 - 8");
-        scoreLabel.setFont(new Font("Serif", Font.BOLD, 70));
-
-
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-
-        JButton closeButton = new JButton("Close Game");
-        closeButton.addActionListener(e -> System.exit(0));
-
-        JButton lobbyButton = new JButton("Lobby");
-        lobbyButton.addActionListener(e -> System.out.println("back to lobby"));
-
-        buttonPanel.add(lobbyButton);
-        buttonPanel.add(closeButton);
-        add(scoreLabel);
-        add(buttonPanel);
-*/
 
 
         if(winners.size() == 1)

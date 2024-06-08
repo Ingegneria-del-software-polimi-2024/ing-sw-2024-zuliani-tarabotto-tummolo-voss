@@ -3,7 +3,7 @@ package Client.UI.GUI;
 
 import Client.UI.GUI.EventListeners.BoardClickedListener;
 import Client.UI.GUI.EventListeners.BoardMotionListener;
-import Client.UI.GUI.LoginPanel.LoginPanel;
+import Client.UI.GUI.LoginPanel.LoginFrame;
 import Client.UI.UI;
 import Client.View.ViewAPI;
 import SharedWebInterfaces.WebExceptions.StartConnectionFailedException;
@@ -43,7 +43,7 @@ public class GUI  implements UI {
     private JPanel bottomPanel;
     private JPanel centerPanel;
     private EndGamePanel endGamePanel;
-    private LoginPanel login;
+    private LoginFrame login;
     private JPanel topPanel;
     final int FPS = 30;
     public boolean starterSelected = false;
@@ -60,7 +60,7 @@ public class GUI  implements UI {
     public GUI(ViewAPI view){
         this.view = view;
         title = "";
-
+/*
         SwingUtilities.invokeLater(() -> {
             frame = new JFrame("CODEX NATURALIS");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,10 +73,7 @@ public class GUI  implements UI {
             frame.setLocationRelativeTo(null);
 
 
-            /*titleLabel = new JLabel("", SwingConstants.CENTER);
-            titleLabel.setFont(new Font("Beaufort", Font.BOLD, 48));
-            titleLabel.setForeground(Color.BLACK);
-            titleLabel.setBounds(0, frame.getHeight() / 2 - 48, frame.getWidth(), 96);*/
+
 
             // Create a glass pane for the title
             glassPane = new JPanel() {
@@ -101,7 +98,8 @@ public class GUI  implements UI {
             frame.setGlassPane(glassPane);
             glassPane.setVisible(false);
 
-        });
+        });*/
+        createFrame();
         loadImages();
     }
 
@@ -127,8 +125,53 @@ public class GUI  implements UI {
 
     }
 
+    public void createFrame(){
+        System.out.println("new Frame");
+        SwingUtilities.invokeLater(() -> {
+            frame = new JFrame("CODEX NATURALIS");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+            screenWidth = (int)screenSize.getWidth();
+            screenHeight = (int)screenSize.getHeight();
+            frame.getContentPane().setBackground(new Color(218, 211, 168));
+            frame.setSize(screenWidth, screenHeight);
+            frame.setLayout(new BorderLayout());
+            frame.setLocationRelativeTo(null);
+
+
+
+
+            // Create a glass pane for the title
+            glassPane = new JPanel() {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    if (!title.isEmpty()) {
+                        Graphics2D g2d = (Graphics2D) g;
+                        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                        g2d.setFont(new Font("Beaufort", Font.BOLD, 70));
+                        FontMetrics fm = g2d.getFontMetrics();
+                        int stringWidth = fm.stringWidth(title);
+                        int stringHeight = fm.getAscent();
+                        int x = (getWidth() - stringWidth) / 2;
+                        int y = (getHeight() - stringHeight) / 2 + fm.getAscent();
+                        g2d.setColor(new Color(200, 170, 110));
+                        g2d.drawString(title, x, y);
+                    }
+                }
+            };
+            glassPane.setOpaque(false);
+            frame.setGlassPane(glassPane);
+            glassPane.setVisible(false);
+
+        });
+
+        login = new LoginFrame(this);
+    }
+
     @Override
     public void displayInitialization() {
+        login.dispose();
         createBorderPanels();
         createBannersPanel();
         createHandPanel();
@@ -138,7 +181,7 @@ public class GUI  implements UI {
         deckPanel.updateDecks();
         frame.setVisible(true);
         System.out.println("press something to start: ");
-        sc.next();
+        //sc.next();
         view.readyToPlay();
 
     }
@@ -208,7 +251,6 @@ public class GUI  implements UI {
 
     @Override
     public void chooseConnection() {
-        login = new LoginPanel(this);
         login.chooseConnection();/*
         System.out.println("~> Welcome to Codex Naturalis, insert the techonolgy of connection (RMI/Socket):");
         String connectionType;
@@ -247,10 +289,14 @@ public class GUI  implements UI {
 
     @Override
     public void displayAvailableGames(ArrayList<String> listOfGames) {
-        String game;
+        if(frame == null){
+            createFrame();
+        }
+        System.out.println(listOfGames.size());
+         login.chooseGame(listOfGames);
 
 
-        if(listOfGames != null && !listOfGames.isEmpty()){
+        /*if(listOfGames != null && !listOfGames.isEmpty()){
             System.out.println("~> Available games: ");
             for(String g : listOfGames)
                 System.out.println("   "+g+" ");
@@ -282,7 +328,7 @@ public class GUI  implements UI {
                 } while (flag);
             }
             view.joinGame(game, nPlayers);
-        }
+        }*/
 
 
     }
@@ -324,7 +370,9 @@ public class GUI  implements UI {
 
     @Override
     public void returnToLobby() {
-
+        //view.stopUI();
+        view.welcome();
+        view.requestAvailableGames();
     }
 
 
@@ -443,7 +491,10 @@ public class GUI  implements UI {
             lastTime = currentTime;
 
             if (delta >= 1) {
-                frame.repaint();
+                if(frame != null){
+
+                    frame.repaint();
+                }
                 delta--;
             }
         }
@@ -567,5 +618,12 @@ public class GUI  implements UI {
         });
         timer.setRepeats(false);
         timer.start();
+    }
+
+    public void quitGame(){
+        view.quitGame();
+        frame.dispose();
+        frame = null;
+        login = null;
     }
 }
