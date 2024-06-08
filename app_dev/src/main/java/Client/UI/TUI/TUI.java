@@ -138,6 +138,7 @@ public class TUI implements UI{
             System.out.print(ansi().fg(color).a("~> There are no available games, please create a new game by typing its name or write -r to refresh the available games: \n").reset());
 
         game = sc.nextLine();
+        //request
         if(game.equals("-r")) {
             view.requestAvailableGames();
             //            try {

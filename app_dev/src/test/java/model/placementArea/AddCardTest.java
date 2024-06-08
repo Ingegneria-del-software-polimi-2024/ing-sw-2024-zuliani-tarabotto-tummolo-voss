@@ -1,5 +1,5 @@
 package model.placementArea;
-
+import junit.framework.TestCase;
 import model.GameState.GameState;
 import model.cards.Card;
 import model.cards.ObjectiveCard;
@@ -13,12 +13,10 @@ import model.deckFactory.ObjectiveDeck;
 import model.deckFactory.PlayableDeck;
 import model.enums.Artifact;
 import model.enums.Element;
+import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.List;
-import java.util.Scanner;
 
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -231,7 +229,7 @@ runTest(e, c_e, exp_e, true, starterCard_e, true, testCoord_e, testCardID_e);
     }
             }*/
 
-class AddCardTest {
+public class AddCardTest extends TestCase {
 
     public static void initialize(PlacementArea area, ArrayList<Integer> cardList, ArrayList<Coordinates> coord, boolean face, Deck[] deckList, int starterCard, boolean faceStarterCard) {
 
@@ -324,82 +322,8 @@ class AddCardTest {
         System.out.println("numberNearbyCards: "+numberNearbyCards);
     }
 
-    public static void runTest(int[] cards, int[] coordinates, int expectedResults, boolean face, int starterCard, boolean faceStarterCard, Coordinates testCoord, int testPointCardID, int expAnimals, int expInsects, int expMushrooms, int expVegetals, int expFeather, int expInk, int expPaper, List<Coordinates> expAvailablePosition, HashMap<Coordinates, PlayableCard> expDisposition, int expNumberNearbyCards){
 
-        PlacementArea area = new PlacementArea();
-
-        GoldCardsDeckGenerator gdGenerator = new GoldCardsDeckGenerator();
-        ObjectiveCardsDeckGenerator objGenerator = new ObjectiveCardsDeckGenerator();
-        ResourceCardsDeckGenerator rcGenerator = new ResourceCardsDeckGenerator();
-        StarterCardsDeckGenerator stGenerator = new StarterCardsDeckGenerator();
-
-        ObjectiveDeck objDeck = objGenerator.generateDeck();
-        PlayableDeck resDeck = rcGenerator.generateDeck();
-        PlayableDeck gldDeck = gdGenerator.generateDeck();
-        PlayableDeck strDeck = stGenerator.generateDeck();
-
-        Deck[] deckList = {resDeck, gldDeck, strDeck, objDeck};
-
-        ArrayList<Coordinates> coord_a = new ArrayList<Coordinates>();
-        ArrayList<Integer> cardList_a = new ArrayList<Integer>();
-
-        for(int i = 0; i < cards.length; i++)
-            cardList_a.add(cards[i]);
-
-        for(Integer c : cardList_a)
-            System.out.println(c);
-
-        for(int i = 0; i < 2*cards.length; i++)
-            if(i%2 == 0)
-                coord_a.add(new Coordinates(coordinates[i], coordinates[i+1]));
-
-        for (Coordinates c : coord_a)
-            System.out.println(c.getX()+ " "+c.getY());
-
-        //addcard
-
-        initialize(area, cardList_a, coord_a, face, deckList, starterCard, faceStarterCard);
-
-        PlayableCard c = (PlayableCard) getCard(deckList, testPointCardID);
-        c.setFaceSide(face);
-
-        int cardPoint = area.addCard(testCoord, c);
-
-        int animals = area.getNumberElements(Element.animals);
-        int insects = area.getNumberElements(Element.insects);
-        int mushrooms = area.getNumberElements(Element.mushrooms);
-        int vegetals = area.getNumberElements(Element.vegetals);
-
-        int feather = area.getNumberArtifacts(Artifact.feather);
-        int ink = area.getNumberArtifacts(Artifact.ink);
-        int paper = area.getNumberArtifacts(Artifact.paper);
-
-        List<Coordinates> availablePosition = area.getAvailablePlaces();
-
-        HashMap<Coordinates, PlayableCard> disposition = area.getDisposition();
-
-        int numberNearbyCards = area.getNumberNearbyCards();
-
-        assert (expectedResults == cardPoint): "Errore";
-
-        assert (expInsects == insects): "Errore";
-        assert (expAnimals == animals): "Errore";
-        assert (expMushrooms == mushrooms): "Errore";
-        assert (expVegetals == vegetals): "Errore";
-
-        assert (expFeather == feather): "Errore";
-        assert (expInk == ink): "Errore";
-        assert (expPaper == paper): "Errore";
-
-        assert (expDisposition == disposition): "Errore";
-
-        assert (expAvailablePosition == availablePosition): "Errore";
-
-        //assert (expNumberNearbyCards == numberNearbyCards): "Errore";
-    }
-
-    //insert 999 when asking "what objective id do you want to check? " if you want to stop
-    public static void main(String[] args){
+    public void testSingoli(){
 
         GoldCardsDeckGenerator gdGenerator = new GoldCardsDeckGenerator();
         ObjectiveCardsDeckGenerator objGenerator = new ObjectiveCardsDeckGenerator();
@@ -716,4 +640,85 @@ class AddCardTest {
 
 
     }
+
+    public void runTest(int[] cards, int[] coordinates, int expectedResults, boolean face, int starterCard, boolean faceStarterCard, Coordinates testCoord, int testPointCardID, int expAnimals, int expInsects, int expMushrooms, int expVegetals, int expFeather, int expInk, int expPaper, List<Coordinates> expAvailablePosition, HashMap<Coordinates, PlayableCard> expDisposition, int expNumberNearbyCards){
+
+        PlacementArea area = new PlacementArea();
+
+        GoldCardsDeckGenerator gdGenerator = new GoldCardsDeckGenerator();
+        ObjectiveCardsDeckGenerator objGenerator = new ObjectiveCardsDeckGenerator();
+        ResourceCardsDeckGenerator rcGenerator = new ResourceCardsDeckGenerator();
+        StarterCardsDeckGenerator stGenerator = new StarterCardsDeckGenerator();
+
+        ObjectiveDeck objDeck = objGenerator.generateDeck();
+        PlayableDeck resDeck = rcGenerator.generateDeck();
+        PlayableDeck gldDeck = gdGenerator.generateDeck();
+        PlayableDeck strDeck = stGenerator.generateDeck();
+
+        Deck[] deckList = {resDeck, gldDeck, strDeck, objDeck};
+
+        ArrayList<Coordinates> coord_a = new ArrayList<Coordinates>();
+        ArrayList<Integer> cardList_a = new ArrayList<Integer>();
+
+        for(int i = 0; i < cards.length; i++)
+            cardList_a.add(cards[i]);
+
+        for(Integer c : cardList_a)
+            System.out.println(c);
+
+        for(int i = 0; i < 2*cards.length; i++)
+            if(i%2 == 0)
+                coord_a.add(new Coordinates(coordinates[i], coordinates[i+1]));
+
+        for (Coordinates c : coord_a)
+            System.out.println(c.getX()+ " "+c.getY());
+
+        //addcard
+
+        initialize(area, cardList_a, coord_a, face, deckList, starterCard, faceStarterCard);
+
+        PlayableCard c = (PlayableCard) getCard(deckList, testPointCardID);
+        c.setFaceSide(face);
+
+        int cardPoint = area.addCard(testCoord, c);
+
+        int animals = area.getNumberElements(Element.animals);
+        int insects = area.getNumberElements(Element.insects);
+        int mushrooms = area.getNumberElements(Element.mushrooms);
+        int vegetals = area.getNumberElements(Element.vegetals);
+
+        int feather = area.getNumberArtifacts(Artifact.feather);
+        int ink = area.getNumberArtifacts(Artifact.ink);
+        int paper = area.getNumberArtifacts(Artifact.paper);
+
+        List<Coordinates> availablePosition = area.getAvailablePlaces();
+
+        HashMap<Coordinates, PlayableCard> disposition = area.getDisposition();
+
+        int numberNearbyCards = area.getNumberNearbyCards();
+
+        assert (expectedResults == cardPoint): "Errore";
+
+        assert (expInsects == insects): "Errore";
+        assert (expAnimals == animals): "Errore";
+        assert (expMushrooms == mushrooms): "Errore";
+        assert (expVegetals == vegetals): "Errore";
+
+        for(Map.Entry<Coordinates, PlayableCard> position : disposition.entrySet()) {
+            assert (expDisposition.containsKey(position.getKey()) && expDisposition.get(position.getKey()).equals(position.getValue()) ) : "Errore";
+        }
+
+        assert (expFeather == feather): "Errore";
+        assert (expInk == ink): "Errore";
+        assert (expPaper == paper): "Errore";
+
+        assert (expDisposition == disposition): "Errore";
+
+        assert (expAvailablePosition.containsAll(availablePosition) && availablePosition.containsAll(expAvailablePosition)): "Errore";
+
+        assert (expAvailablePosition == availablePosition): "Errore";
+
+        assert (expNumberNearbyCards == numberNearbyCards): "Errore";
+    }
+
 }

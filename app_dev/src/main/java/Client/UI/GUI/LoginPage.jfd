@@ -1,0 +1,102 @@
+JFDML JFormDesigner: "8.2.3.0.386" Java: "17.0.10" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+				name: "loginPadel"
+				"background": new java.awt.Color( 210, 205, 137, 255 )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "RMIButton"
+					"text": "RMI"
+					"background": new java.awt.Color( 173, 160, 56, 255 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 210
+					"y": 160
+					"width": 90
+					"height": 30
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "socketButton"
+					"text": "Socket"
+					"background": new java.awt.Color( 173, 160, 56, 255 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 375
+					"y": 160
+					"width": 86
+					"height": 30
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "welcomeLabel"
+					"text": "WELCOME in CODEX NATURALIS"
+					"font": new java.awt.Font( "Ravie", 1, 18 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 135
+					"y": 35
+					"width": 400
+					"height": 50
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "enterButton"
+					"text": "ENTER"
+					"font": new java.awt.Font( "Inter", 1, 16 )
+					"background": new java.awt.Color( 173, 160, 56, 255 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 280
+					"y": 410
+					"width": 125
+					"height": 45
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "nicknameTextField"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 240
+					"y": 325
+					"width": 200
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "ConnectionLabel"
+					"text": "Choose the connection"
+					"font": new java.awt.Font( "Sigmar One", 1, 13 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 245
+					"y": 125
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "IPTextField"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 240
+					"y": 245
+					"width": 200
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "nicknameLabel"
+					"text": "Enter your nickname"
+					"font": new java.awt.Font( "Sigmar One", 0, 13 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 250
+					"y": 300
+					"width": 185
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "IPLabel"
+					"text": "Enter the server IP"
+					"font": new java.awt.Font( "Sigmar One", 0, 13 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 245
+					"y": 220
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 0
+				"y": 0
+				"height": 505
+				"width": 650
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 25, 60 )
+			"size": new java.awt.Dimension( 650, 535 )
+		} )
+	}
+}
