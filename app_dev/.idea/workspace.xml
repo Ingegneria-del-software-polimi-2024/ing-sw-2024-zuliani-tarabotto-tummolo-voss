@@ -10,13 +10,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EndGamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EndGamePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/BoardClickedListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/BoardClickedListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/BoardMotionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/BoardMotionListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/GUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/LoginPanel/InputFields.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/LoginPanel/InputFields.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/LoginPanel/LoginPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/LoginPanel/LoginFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/LoginPanel/LoginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/LoginPanel/LoginFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/PlacementArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/PlacementArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/playableArea/working/Board.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/playableArea/working/DraggableCards/Card.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/playableArea/working/DraggableCards/ResourceCard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/playableArea/working/GamePanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/playableArea/working/Mouse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/playableArea/working/omain.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/EndGamePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/EndGamePanel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$1.class" afterDir="false" />
@@ -26,8 +34,6 @@
       <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$5.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$6.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/LoginPanel$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/LoginPanel.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,6 +78,7 @@
     "Application.Model.executor": "Run",
     "Application.PlacementAreaTest.executor": "Run",
     "Application.RunDeckCreation.executor": "Run",
+    "Application.RunTUI_Client.executor": "Run",
     "Application.run gui.executor": "Run",
     "Application.run server.executor": "Run",
     "JUnit.ControllerTest.executor": "Run",
@@ -205,8 +212,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ControllerTest" />
         <item itemvalue="Application.RunTUI_Client" />
+        <item itemvalue="JUnit.ControllerTest" />
         <item itemvalue="Application.RunServer" />
         <item itemvalue="Application.SecondClient" />
       </list>

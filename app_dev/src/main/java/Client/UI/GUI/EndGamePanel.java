@@ -14,21 +14,35 @@ public class EndGamePanel extends JPanel {
 
     public EndGamePanel(GUI gui){
         this.gui = gui;
+
+        //we set the layout for the frame
+        setLayout(new BorderLayout());
+        setBackground(new Color(218, 211, 168));;
+
+        //we create the main panel with  a box layout
         JPanel middlePanel = new JPanel();
         middlePanel.setLayout(new BoxLayout(middlePanel, BoxLayout.Y_AXIS));
         middlePanel.setOpaque(false);
+        middlePanel.setOpaque(false);
+
+
+
+
+        // we create a wrapper panel with gridbaglayout to center the main panel in the middle of the screen
+        JPanel wrapperPanel = new JPanel(new GridBagLayout());
+        wrapperPanel.add(middlePanel);
+        add(wrapperPanel, BorderLayout.CENTER);
+        wrapperPanel.setOpaque(false);
 
 
         List<Map.Entry<String, Integer>> entryList = new ArrayList<>(gui.getView().getPoints().entrySet());
-        // Step 2: Sort the list with a comparator that compares the values in descending order
         entryList.sort((e1, e2) -> e2.getValue().compareTo(e1.getValue()));
         List<String> winners = gui.getView().getWinners();
 
 
-        //setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBackground(new Color(218, 211, 168));;
 
         // Create and add components to the end-game panel
+        /////////////////////////////// winner string ////////////////////////////////////////////////
         JLabel winnerLabel = new JLabel();
         if(winners.size() == 1) {
             winnerLabel.setText("The winner is: ");
@@ -37,9 +51,9 @@ public class EndGamePanel extends JPanel {
         winnerLabel.setFont(new Font("Beaufort", Font.BOLD, 70));
         winnerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         middlePanel.add(winnerLabel);
-        //add(winnerLabel);
 
-        ///////////////////////////////////////////////////////////////////////////////////
+
+        //////////////////////////////////// winner name ///////////////////////////////////////////////
         String names = "";
         for(int i = 0; i < winners.size() - 1; i++){
             names += winners.get(i) + ", ";
@@ -51,10 +65,9 @@ public class EndGamePanel extends JPanel {
         winnerNameLabel.setForeground(Color.YELLOW);
         winnerNameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         winnerNameLabel.setFont(new Font("Beaufort", Font.BOLD, 50));
-        //add(winnerNameLabel);
         middlePanel.add(winnerNameLabel);
 
-        //////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////// player's scores   /////////////////////////////////////////////
         String scores = "Scores -> ";
         for(int i = 0; i < entryList.size() - 1; i++){
             scores += entryList.get(i).getKey() + ": " + entryList.get(i).getValue() + ", ";
@@ -66,12 +79,11 @@ public class EndGamePanel extends JPanel {
         scoresLabel.setText(scores);
         scoresLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         scoresLabel.setFont(new Font("Beaufort", Font.BOLD, 30));
-        //add(scoresLabel);
         middlePanel.add(scoresLabel);
 
 
+        ///////////////////////////////////// buttons /////////////////////////////////////////
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-
         JButton closeButton = new JButton("Close Game");
         closeButton.addActionListener(e -> System.exit(0));
 
@@ -82,22 +94,7 @@ public class EndGamePanel extends JPanel {
         buttonPanel.add(closeButton);
         middlePanel.add(buttonPanel);
 
-
-        add(middlePanel);
-
-
-
-        if(winners.size() == 1)
-            System.out.print(ansi().fg(226).a("~> " + winners.get(0).toUpperCase() + " is the winner !!!\n").reset());
-        else {
-            System.out.print(ansi().fg(226).a("~> The winners are:\n").reset());
-            for (String win : winners) {
-                System.out.print(ansi().fg(226).a("                   " + win.toUpperCase() + " !!!\n").reset());
-            }
-        }
-        for (Map.Entry<String, Integer> stringIntegerEntry : entryList) {
-            System.out.println("-> " + stringIntegerEntry.getKey() + ": " + stringIntegerEntry.getValue() + " points");
-        }
+        add(wrapperPanel);
 
     }
 }

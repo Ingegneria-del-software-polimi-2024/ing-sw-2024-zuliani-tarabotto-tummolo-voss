@@ -36,7 +36,7 @@ public class BoardClickedListener extends MouseAdapter {
                     int xCardCenter = board.getXCenter() + coord.getX()*(board.getCardLength() - board.getXOverlap());
                     int yCardCenter = board.getYCenter() - coord.getY()*(board.getCardHeight() - board.getYOverlap());
 
-                    if((xCardCenter - board.getCardLength()/2 <= x && xCardCenter + board.getCardLength()/2 >= x) && (yCardCenter - board.getCardHeight()/2 <= y && yCardCenter + board.getCardHeight()/2 >= y)) {
+                    if((xCardCenter - board.getCardLength()/2 <= x && xCardCenter + board.getCardLength()/2 >= x) && (yCardCenter - board.getCardHeight()/2 <= y && yCardCenter + board.getCardHeight()/2 >= y) && gui.checkCardIsPlaceable()) {
                         gui.getView().playCard(gui.getPlayCard(), gui.getPlayCard().getFaceSide(), board.getSelectionRectangleCoordinates().getX(), board.getSelectionRectangleCoordinates().getY());
                         gui.setSelectedCard(null);
                         board.setDrawSelectionRectangle(false);

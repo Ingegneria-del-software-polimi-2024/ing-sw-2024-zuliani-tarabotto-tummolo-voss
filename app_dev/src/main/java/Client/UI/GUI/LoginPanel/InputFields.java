@@ -30,6 +30,9 @@ public class InputFields extends JPanel {
     private int numPlayers = 0;
     private List<String> listOfGames;
     private String selectedGame;
+    private JPanel mainPanel;
+    private boolean connectionSelected = false;
+    private boolean nicknameInUse = false;
 
 
 
@@ -40,10 +43,15 @@ public class InputFields extends JPanel {
         this.frame = frame;
         panel = this;
 
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBackground(Color.WHITE);
+        setLayout(new GridBagLayout());
+        //setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setOpaque(false);
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
+        mainPanel = new JPanel();
+        mainPanel.setOpaque(false);
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        add(mainPanel);
     }
 
 
@@ -52,19 +60,21 @@ public class InputFields extends JPanel {
 
     public void chooseConnection(){
         // Create the connection type buttons
-        JButton rmiButton = new JButton("RMI");
-        JButton socketButton = new JButton("Socket");
+        JToggleButton rmiButton = new JToggleButton("RMI");
+        JToggleButton socketButton = new JToggleButton("Socket");
 
         rmiButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 connectionType = "rmi";
+                connectionSelected = true;
             }
         });
         socketButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 connectionType = "socket";
+                connectionSelected = true;
             }
         });
 
@@ -74,8 +84,11 @@ public class InputFields extends JPanel {
         connectionPanel.setLayout(new FlowLayout());
         connectionPanel.add(rmiButton);
         connectionPanel.add(socketButton);
+        connectionPanel.setOpaque(false);
 
-        this.add(connectionPanel);
+        mainPanel.add(connectionPanel);
+        JButton nextButton = new JButton("next");
+        nextButton.setEnabled(false);
 
         JLabel hostLabel = new JLabel("Host IP Address:");
         JTextField hostField = new JTextField(1);
@@ -97,13 +110,13 @@ public class InputFields extends JPanel {
 
             private void updateTextFieldContent() {
                 host = hostField.getText();
+                nextButton.setEnabled(!hostField.getText().trim().isEmpty() && connectionSelected);
                 System.out.println("Updated text: " + host);
             }
 
         });
 
 
-        JButton nextButton = new JButton("next");
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -118,12 +131,16 @@ public class InputFields extends JPanel {
             }
         });
 
+        connectionPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        hostLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        hostField.setAlignmentX(Component.LEFT_ALIGNMENT);
+        nextButton.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        add(Box.createVerticalStrut(10)); // Add some space between components
-        add(hostLabel);
-        add(hostField);
-        add(Box.createVerticalStrut(10)); // Add some space between components
-        add(nextButton);
+        mainPanel.add(Box.createVerticalStrut(10)); // Add some space between components
+        mainPanel.add(hostLabel);
+        mainPanel.add(hostField);
+        mainPanel.add(Box.createVerticalStrut(10)); // Add some space between components
+        mainPanel.add(nextButton);
 
         panel.revalidate();
     }
@@ -133,11 +150,12 @@ public class InputFields extends JPanel {
 
 
     public void chooseNickname(){
-        panel.removeAll();
+        mainPanel.removeAll();
         panel.revalidate();
         panel.repaint();
 
-
+        JLabel nicknameLabel = new JLabel("Insert your nickname:");
+        mainPanel.add(nicknameLabel) ;
 
         JTextField hostField = new JTextField(1);
         hostField.getDocument().addDocumentListener(new DocumentListener() {
@@ -161,16 +179,30 @@ public class InputFields extends JPanel {
                 System.out.println("Updated text: " + host);
             }
         });
-        add(hostField);
+
+
+        // Create a JLabel to display messages
+        JLabel messageLabel = new JLabel("");
+        messageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        messageLabel.setForeground(Color.RED);
+        mainPanel.add(messageLabel);
+
+        if(nicknameInUse){
+            messageLabel.setText("Nickname is already in use.");
+            mainPanel.revalidate();
+            mainPanel.repaint();
+        }
+
+        mainPanel.add(hostField);
         JButton nextButton = new JButton("next");
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 gui.getView().setPlayerId(nickname);
-                panel.removeAll();
             }
         });
-        add(nextButton);
+
+        mainPanel.add(nextButton);
 
         panel.revalidate();
     }
@@ -182,7 +214,7 @@ public class InputFields extends JPanel {
 
 
     public void chooseGame(ArrayList<String> listOfGames){
-        panel.removeAll();
+        mainPanel.removeAll();
         panel.revalidate();
         panel.repaint();
         this.listOfGames = listOfGames;
@@ -255,18 +287,18 @@ public class InputFields extends JPanel {
             }
         });
 
-        add(lobby_JLabel);
-        add(createNewGame_JButton);
-        add(jScrollPane2);
-        add(refresh_JButton);
-        add(join_JButton);
+        mainPanel.add(lobby_JLabel);
+        mainPanel.add(createNewGame_JButton);
+        mainPanel.add(jScrollPane2);
+        mainPanel.add(refresh_JButton);
+        mainPanel.add(join_JButton);
 
         panel.revalidate();
 
     }
 
     private void createNewGame(){
-        panel.removeAll();
+        mainPanel.removeAll();
         panel.revalidate();
         panel.repaint();
 
@@ -295,7 +327,7 @@ public class InputFields extends JPanel {
             }
         });
 
-        add(hostField);
+        mainPanel.add(hostField);
 
 
         // Create the JComboBox
@@ -313,7 +345,7 @@ public class InputFields extends JPanel {
                 if(num.equals("4") ) numPlayers = 4;
             }
         });
-        add(playerComboBox);
+        mainPanel.add(playerComboBox);
 
 
         JButton nextButton = new JButton("create");
@@ -326,9 +358,14 @@ public class InputFields extends JPanel {
                 }
             }
         });
-        add(nextButton);
+        mainPanel.add(nextButton);
 
         panel.revalidate();
 
+    }
+
+
+    public void setNicknameInUse(){
+        nicknameInUse = true;
     }
 }

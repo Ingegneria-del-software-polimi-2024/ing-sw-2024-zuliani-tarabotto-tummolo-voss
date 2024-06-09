@@ -20,12 +20,11 @@ public class LoginFrame extends JFrame {
     public LoginFrame(GUI gui ){
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //loginFrame.setSize(900, 600);
         setLayout(new BorderLayout());
-
         this.gui = gui;
         setSize(new Dimension(width, height));
-        setLayout(new BorderLayout());
+        getContentPane().setBackground(new Color(218, 211, 168));
+
 
         loginFields = new InputFields(gui, this);
         loginFields.setPreferredSize(new Dimension((width - height), 0));
@@ -48,13 +47,13 @@ public class LoginFrame extends JFrame {
 
                 int imgWidth = height;
                 int imgHeight = imgWidth;
-                int x = (getWidth() - imgWidth) / 2;
-                int y = (getHeight() - imgHeight) / 2;
                 g2d.drawImage(img, 0, 0, imgWidth, imgHeight, this);
             }
         };
+
+
         imagePanel.setPreferredSize(new Dimension(height, height));
-        imagePanel.setBackground(Color.LIGHT_GRAY);
+        //imagePanel.setBackground(Color.LIGHT_GRAY);
 
         this.add(loginFields, BorderLayout.WEST);
         this.add(imagePanel, BorderLayout.CENTER);
@@ -82,5 +81,9 @@ public class LoginFrame extends JFrame {
     public void chooseGame(ArrayList<String> listOfGames){
         loginFields.chooseGame(listOfGames);
 
+    }
+
+    public void nicknameInUse(){
+        loginFields.setNicknameInUse();
     }
 }

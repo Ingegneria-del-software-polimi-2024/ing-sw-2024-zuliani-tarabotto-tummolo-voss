@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
@@ -60,47 +62,8 @@ public class GUI  implements UI {
     public GUI(ViewAPI view){
         this.view = view;
         title = "";
-/*
-        SwingUtilities.invokeLater(() -> {
-            frame = new JFrame("CODEX NATURALIS");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-            screenWidth = (int)screenSize.getWidth();
-            screenHeight = (int)screenSize.getHeight();
-            frame.getContentPane().setBackground(new Color(218, 211, 168));
-            frame.setSize(screenWidth, screenHeight);
-            frame.setLayout(new BorderLayout());
-            frame.setLocationRelativeTo(null);
-
-
-
-
-            // Create a glass pane for the title
-            glassPane = new JPanel() {
-                @Override
-                protected void paintComponent(Graphics g) {
-                    super.paintComponent(g);
-                    if (!title.isEmpty()) {
-                        Graphics2D g2d = (Graphics2D) g;
-                        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                        g2d.setFont(new Font("Beaufort", Font.BOLD, 70));
-                        FontMetrics fm = g2d.getFontMetrics();
-                        int stringWidth = fm.stringWidth(title);
-                        int stringHeight = fm.getAscent();
-                        int x = (getWidth() - stringWidth) / 2;
-                        int y = (getHeight() - stringHeight) / 2 + fm.getAscent();
-                        g2d.setColor(new Color(200, 170, 110));
-                        g2d.drawString(title, x, y);
-                    }
-                }
-            };
-            glassPane.setOpaque(false);
-            frame.setGlassPane(glassPane);
-            glassPane.setVisible(false);
-
-        });*/
-        createFrame();
         loadImages();
+        createFrame();
     }
 
     private void createBorderPanels(){
@@ -165,7 +128,6 @@ public class GUI  implements UI {
             glassPane.setVisible(false);
 
         });
-
         login = new LoginFrame(this);
     }
 
@@ -276,16 +238,6 @@ public class GUI  implements UI {
         }*/
     }
 
-    @Override
-    public void askNickname() {
-        /*
-        System.out.println("~> Insert your nickname: ");
-        String nickname = sc.nextLine();
-        view.setPlayerId(nickname);*/
-        login.chooseNickname();
-
-
-    }
 
     @Override
     public void displayAvailableGames(ArrayList<String> listOfGames) {
@@ -338,24 +290,31 @@ public class GUI  implements UI {
         System.out.println("~> Correctly joined the game "+id+"");
     }
 
+
     @Override
     public void firstWelcome() {
 
     }
 
     @Override
-    public void nickNameAlreadyInUse() {
+    public void askNickname() {
+        login.chooseNickname();
+    }
 
+    @Override
+    public void nickNameAlreadyInUse() {
+        login.nicknameInUse();
+        askNickname();
     }
 
     @Override
     public void cantPlaceACard(PlayableCard card, Coordinates coord) {
-
+        displayPlacingCard();
     }
 
     @Override
     public void cantDrawCard(int source) {
-
+        displayCardDrawing();
     }
 
     @Override
@@ -377,8 +336,15 @@ public class GUI  implements UI {
 
 
     private boolean validIP(String ip){
-        //todo control if the ip is valid
-        return true;
+        if(ip.equals("localHost"))
+            return true;
+        String desiredFormat = "^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\." +
+                "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\." +
+                "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\." +
+                "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$";
+        Pattern pattern = Pattern.compile(desiredFormat);
+        Matcher matcher = pattern.matcher(ip);
+        return matcher.matches();
     }
 
     private boolean validPort(int port){
@@ -410,102 +376,7 @@ public class GUI  implements UI {
     }
 
 
-    ////////////////////////////////// GETTER METHODS ////////////////////////////////////////////////////////////////
 
-    public HashMap<Integer, BufferedImage> getFronts(){ return fronts;}
-    public HashMap<Integer, BufferedImage> getBacks(){ return backs;}
-    public ViewAPI getView(){
-        return view;
-    }
-    public HashMap<Resources, BufferedImage> getResIcons(){return resIcons;}
-
-
-
-    /////////////////////////////////////// IMAGE LOADING METHODS /////////////////////////////
-    private void loadImages(){
-        String index;
-        fronts = new HashMap<>();
-        backs = new HashMap<>();
-        resIcons = new HashMap<>();
-        //we load the card images
-        for(int i = 1; i <= 102; i++){
-
-            if(i < 10) {index = "00" + i;}
-            else if(i < 100) {index = "0" + i;}
-            else {index = String.valueOf(i);}
-            //System.out.println(index);
-
-            String frontImagePath = "/Images/front/"+ index + ".png";
-            String backImagePath = "/Images/back/" + index + ".png";
-            try {
-                fronts.put(i, makeRoundedCorner(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(frontImagePath)))) );
-                backs.put(i, makeRoundedCorner(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(backImagePath)))) );
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        for(Resources r : Resources.values()){
-            try{
-                resIcons.put(r, ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(r.getImg()))));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
-
-    private BufferedImage makeRoundedCorner(BufferedImage image) {
-        int cornerRadius = 100;
-        int w = image.getWidth();
-        int h = image.getHeight();
-        BufferedImage output = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-
-        Graphics2D g2 = output.createGraphics();
-        // Enable antialiasing for smoother corners
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-        // Draw the rounded rectangle
-        g2.setComposite(AlphaComposite.Src);
-        g2.setColor(Color.WHITE); // The color doesn't matter, we use it to define the shape
-        g2.fillRoundRect(0, 0, w, h, cornerRadius, cornerRadius);
-
-        // Apply the mask to the image
-        g2.setComposite(AlphaComposite.SrcAtop);
-        g2.drawImage(image, 0, 0, null);
-
-        g2.dispose();
-        return output;
-    }
-
-    @Override
-    public void run() {
-        //GAMELOOP
-        double drawInterval = 1000000000 / FPS;
-        double delta = 0;
-        long lastTime = System.nanoTime();
-        long currentTime;
-
-        while (true) {
-            currentTime = System.nanoTime();
-            delta += (currentTime - lastTime) / drawInterval;
-            lastTime = currentTime;
-
-            if (delta >= 1) {
-                if(frame != null){
-
-                    frame.repaint();
-                }
-                delta--;
-            }
-        }
-    }
-
-    public int getScreenWidth(){
-        return screenWidth;
-    }
-    public int getScreenHeight(){
-        return screenHeight;
-    }
 
     private void createBoardPanel(){
         board = new PlacementArea(this);
@@ -577,8 +448,6 @@ public class GUI  implements UI {
     }
 
 
-    public PlayableCard getPlayCard(){return  playCard;}
-
     public void setStarterSelected(){
         starterSelected = !starterSelected;
         if(starterSelected){
@@ -625,5 +494,118 @@ public class GUI  implements UI {
         frame.dispose();
         frame = null;
         login = null;
+
+    }
+
+    public boolean checkCardIsPlaceable(){
+        int index = view.getHand().indexOf(playCard);
+        if(!playCard.getFaceSide()) return true;
+        else return view.getCanBePlaced()[index];
+    }
+
+    @Override
+    public void run() {
+        //GAMELOOP
+        double drawInterval = 1000000000 / FPS;
+        double delta = 0;
+        long lastTime = System.nanoTime();
+        long currentTime;
+
+        while (true) {
+            currentTime = System.nanoTime();
+            delta += (currentTime - lastTime) / drawInterval;
+            lastTime = currentTime;
+
+            if (delta >= 1) {
+                if(frame != null){
+
+                    frame.repaint();
+                }
+                delta--;
+            }
+        }
+    }
+
+
+    ////////////////////////////////// GETTER METHODS ////////////////////////////////////////////////////////////////
+
+    public HashMap<Integer, BufferedImage> getFronts(){ return fronts;}
+    public HashMap<Integer, BufferedImage> getBacks(){ return backs;}
+    public ViewAPI getView(){
+        return view;
+    }
+    public HashMap<Resources, BufferedImage> getResIcons(){return resIcons;}
+
+    public int getScreenHeight() {
+        return screenHeight;
+    }
+
+    public int getScreenWidth() {
+        return screenWidth;
+    }
+
+    public PlayableCard getPlayCard(){return  playCard;}
+
+
+
+
+
+    /////////////////////////////////////// IMAGE LOADING METHOD /////////////////////////////
+
+    //method used to load all cards images
+    private void loadImages(){
+        String index;
+        fronts = new HashMap<>();
+        backs = new HashMap<>();
+        resIcons = new HashMap<>();
+        //we load the card images
+        for(int i = 1; i <= 102; i++){
+
+            if(i < 10) {index = "00" + i;}
+            else if(i < 100) {index = "0" + i;}
+            else {index = String.valueOf(i);}
+            //System.out.println(index);
+
+            String frontImagePath = "/Images/front/"+ index + ".png";
+            String backImagePath = "/Images/back/" + index + ".png";
+            try {
+                fronts.put(i, makeRoundedCorner(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(frontImagePath)))) );
+                backs.put(i, makeRoundedCorner(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(backImagePath)))) );
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        for(Resources r : Resources.values()){
+            try{
+                resIcons.put(r, ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(r.getImg()))));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+//this method is called on each card's image to round the corners
+    private BufferedImage makeRoundedCorner(BufferedImage image) {
+        int cornerRadius = 100;
+        int w = image.getWidth();
+        int h = image.getHeight();
+        BufferedImage output = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+
+        Graphics2D g2 = output.createGraphics();
+        // Enable antialiasing for smoother corners
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        // Draw the rounded rectangle
+        g2.setComposite(AlphaComposite.Src);
+        g2.setColor(Color.WHITE); // The color doesn't matter, we use it to define the shape
+        g2.fillRoundRect(0, 0, w, h, cornerRadius, cornerRadius);
+
+        // Apply the mask to the image
+        g2.setComposite(AlphaComposite.SrcAtop);
+        g2.drawImage(image, 0, 0, null);
+
+        g2.dispose();
+        return output;
     }
 }

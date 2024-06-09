@@ -1,6 +1,5 @@
 package Client.UI.GUI;
 
-import Client.UI.GUI.playableArea.working.Board;
 import model.cards.PlayableCards.PlayableCard;
 import model.placementArea.Coordinates;
 
@@ -18,7 +17,6 @@ public class PlacementArea extends JPanel {
     private final int xOverlap = (int) (0.22*cardLength);
     private final int yOverlap = (int) (0.401 * cardHeight);
     private boolean displayAvailable = false;
-    private Board board;
     private final int borderWidth = 4;
     private boolean drawSelectionRectangle = false;
     private Coordinates selectionRectangleCoordinates;
@@ -29,7 +27,6 @@ public class PlacementArea extends JPanel {
         setPreferredSize(new Dimension(2000, 2000));
         xCenter = (int)(this.getPreferredSize().getWidth() / 2);
         yCenter = (int)(this.getPreferredSize().getHeight()/2);
-        board = new Board();
 
     }
 
