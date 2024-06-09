@@ -16,10 +16,6 @@ import java.util.List;
 
 public class InputFields extends JPanel {
 
-    private JPanel connection;
-    private JPanel ip;
-    private JPanel username;
-    private JPanel game;
     private GUI gui;
     private String host;
     private String connectionType;
@@ -33,6 +29,7 @@ public class InputFields extends JPanel {
     private JPanel mainPanel;
     private boolean connectionSelected = false;
     private boolean nicknameInUse = false;
+    private Font font = new Font("Beaufort", Font.BOLD, 70);
 
 
 
@@ -86,6 +83,14 @@ public class InputFields extends JPanel {
         connectionPanel.add(socketButton);
         connectionPanel.setOpaque(false);
 
+
+
+        // panel that notifies if the ip is not valid
+        JLabel messageLabel = new JLabel("");
+        messageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        messageLabel.setForeground(Color.RED);
+
+
         mainPanel.add(connectionPanel);
         JButton nextButton = new JButton("next");
         nextButton.setEnabled(false);
@@ -117,15 +122,22 @@ public class InputFields extends JPanel {
         });
 
 
+
+
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    gui.getView().startConnection(connectionType, host);
-                    //panel.removeAll();
-                } catch (StartConnectionFailedException er) {
-                    System.out.println("~> An error during the connection occurred\n   Check your internet connection and retry\n");
-                    gui.chooseConnection();
+                if(gui.validIP(hostField.getText())){
+
+                    try {
+                        gui.getView().startConnection(connectionType, host);
+                        //panel.removeAll();
+                    } catch (StartConnectionFailedException er) {
+                        System.out.println("~> An error during the connection occurred\n   Check your internet connection and retry\n");
+                        gui.chooseConnection();
+                    }
+                }else{
+                    messageLabel.setText("IP address not valid");
                 }
 
             }
@@ -135,9 +147,11 @@ public class InputFields extends JPanel {
         hostLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         hostField.setAlignmentX(Component.LEFT_ALIGNMENT);
         nextButton.setAlignmentX(Component.LEFT_ALIGNMENT);
+        messageLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         mainPanel.add(Box.createVerticalStrut(10)); // Add some space between components
         mainPanel.add(hostLabel);
+        mainPanel.add(messageLabel);
         mainPanel.add(hostField);
         mainPanel.add(Box.createVerticalStrut(10)); // Add some space between components
         mainPanel.add(nextButton);
@@ -157,8 +171,8 @@ public class InputFields extends JPanel {
         JLabel nicknameLabel = new JLabel("Insert your nickname:");
         mainPanel.add(nicknameLabel) ;
 
-        JTextField hostField = new JTextField(1);
-        hostField.getDocument().addDocumentListener(new DocumentListener() {
+        JTextField nicknameField = new JTextField(1);
+        nicknameField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 updateTextFieldContent();
@@ -175,7 +189,7 @@ public class InputFields extends JPanel {
             }
 
             private void updateTextFieldContent() {
-                nickname = hostField.getText();
+                nickname = nicknameField.getText();
                 System.out.println("Updated text: " + host);
             }
         });
@@ -193,7 +207,7 @@ public class InputFields extends JPanel {
             mainPanel.repaint();
         }
 
-        mainPanel.add(hostField);
+        mainPanel.add(nicknameField);
         JButton nextButton = new JButton("next");
         nextButton.addActionListener(new ActionListener() {
             @Override
@@ -203,6 +217,10 @@ public class InputFields extends JPanel {
         });
 
         mainPanel.add(nextButton);
+
+        nicknameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        nicknameField.setAlignmentX(Component.LEFT_ALIGNMENT);
+        nextButton.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         panel.revalidate();
     }
@@ -220,7 +238,6 @@ public class InputFields extends JPanel {
         this.listOfGames = listOfGames;
 
 
-        JLabel lobby_JLabel = new JLabel();
         JButton createNewGame_JButton = new JButton();
         JScrollPane jScrollPane2;
         JList<String> games_JList = new JList<>();
@@ -229,11 +246,7 @@ public class InputFields extends JPanel {
 
 
 
-        lobby_JLabel.setFont(new java.awt.Font("Poor Richard", 1, 24)); // NOI18N
-        lobby_JLabel.setText("LOBBY");
-
         createNewGame_JButton.setBackground(new java.awt.Color(82, 168, 167));
-        createNewGame_JButton.setFont(new java.awt.Font("Ravie", 0, 14)); // NOI18N
         createNewGame_JButton.setText("CREATE NEW GAME");
 
         createNewGame_JButton.addActionListener(new java.awt.event.ActionListener() {
@@ -287,15 +300,31 @@ public class InputFields extends JPanel {
             }
         });
 
-        mainPanel.add(lobby_JLabel);
+        JPanel buttonPanel = new JPanel(new FlowLayout());
+        buttonPanel.add(join_JButton);
+        buttonPanel.add(refresh_JButton);
+
+
         mainPanel.add(createNewGame_JButton);
         mainPanel.add(jScrollPane2);
-        mainPanel.add(refresh_JButton);
-        mainPanel.add(join_JButton);
+        mainPanel.add(buttonPanel);
+
+        createNewGame_JButton.setAlignmentX(Component.LEFT_ALIGNMENT);
+        jScrollPane2.setAlignmentX(Component.LEFT_ALIGNMENT);
+        buttonPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
 
         panel.revalidate();
 
     }
+
+
+
+
+
+
+
+
 
     private void createNewGame(){
         mainPanel.removeAll();

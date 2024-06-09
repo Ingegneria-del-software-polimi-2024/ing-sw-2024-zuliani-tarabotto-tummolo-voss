@@ -11,28 +11,23 @@
   <component name="ChangeListManager">
     <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EndGamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EndGamePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/BoardClickedListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/BoardClickedListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/BoardMotionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/BoardMotionListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/GUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/LoginPanel/InputFields.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/LoginPanel/InputFields.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/LoginPanel/LoginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/LoginPanel/LoginFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/PlacementArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/PlacementArea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/playableArea/working/Board.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/playableArea/working/DraggableCards/Card.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/playableArea/working/DraggableCards/ResourceCard.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/playableArea/working/GamePanel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/playableArea/working/Mouse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/playableArea/working/omain.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/EndGamePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/EndGamePanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$10.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$11.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$12.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$13.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$14.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$4.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$5.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$9.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,41 +68,41 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Model.executor": "Run",
-    "Application.PlacementAreaTest.executor": "Run",
-    "Application.RunDeckCreation.executor": "Run",
-    "Application.RunTUI_Client.executor": "Run",
-    "Application.run gui.executor": "Run",
-    "Application.run server.executor": "Run",
-    "JUnit.ControllerTest.executor": "Run",
-    "JUnit.ControllerTest.main.executor": "Debug",
-    "JUnit.ObjectiveCardTest.executor": "Run",
-    "JUnit.StarterCardTest.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3": "junit.framework.TestCase",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "GUI__branch",
-    "kotlin-language-version-configured": "true",
-    "last_directory_selection": "/Users/andre/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java",
-    "last_opened_file_path": "/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/main/resources/Images",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.excludes",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Model.executor&quot;: &quot;Run&quot;,
+    &quot;Application.PlacementAreaTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.RunDeckCreation.executor&quot;: &quot;Run&quot;,
+    &quot;Application.RunTUI_Client.executor&quot;: &quot;Run&quot;,
+    &quot;Application.run gui.executor&quot;: &quot;Run&quot;,
+    &quot;Application.run server.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ControllerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ControllerTest.main.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.ObjectiveCardTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.StarterCardTest.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3&quot;: &quot;junit.framework.TestCase&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;GUI__branch&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;/Users/andre/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/main/resources/Images&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.excludes&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/Images" />

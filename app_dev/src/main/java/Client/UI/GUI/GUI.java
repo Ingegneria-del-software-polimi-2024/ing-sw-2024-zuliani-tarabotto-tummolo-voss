@@ -335,7 +335,7 @@ public class GUI  implements UI {
     }
 
 
-    private boolean validIP(String ip){
+    public boolean validIP(String ip){
         if(ip.equals("localHost"))
             return true;
         String desiredFormat = "^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\." +
