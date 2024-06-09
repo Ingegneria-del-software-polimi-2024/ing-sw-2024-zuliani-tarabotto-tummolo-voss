@@ -9,9 +9,9 @@ new FormModel {
 				name: "panel1"
 				"background": new java.awt.Color( 210, 205, 137, 255 )
 				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-					name: "scrollPane1"
+					name: "gameScrollPane"
 					add( new FormComponent( "javax.swing.JList" ) {
-						name: "list1"
+						name: "gameList"
 						"background": new java.awt.Color( 173, 160, 56, 255 )
 					} )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
@@ -21,7 +21,7 @@ new FormModel {
 					"height": 265
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button1"
+					name: "refreshButton"
 					"text": "Refresh the Page"
 					"background": new java.awt.Color( 173, 160, 56, 255 )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
@@ -29,16 +29,16 @@ new FormModel {
 					"y": 55
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button2"
+					name: "CreateNewGamebutton"
 					"text": "CREATE NEW GAME"
 					"background": new java.awt.Color( 173, 160, 56, 255 )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 330
+					"x": 320
 					"y": 385
 					"width": 165
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label1"
+					name: "lobbtLabel"
 					"text": "LOBBY"
 					"font": new java.awt.Font( "Ravie", 0, 18 )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {

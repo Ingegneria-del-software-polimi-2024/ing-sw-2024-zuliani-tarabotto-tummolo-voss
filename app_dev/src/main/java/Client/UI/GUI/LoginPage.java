@@ -4,6 +4,8 @@
 
 package Client.UI.GUI;
 
+import Client.View.ViewAPI;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -13,7 +15,10 @@ import javax.swing.event.*;
  * @author nicol
  */
 public class LoginPage extends JFrame {
-    public LoginPage() {
+    private GUI gui;
+
+    public LoginPage(GUI gui) {
+        this.gui = gui;
         initComponents();
     }
 
@@ -146,6 +151,7 @@ public class LoginPage extends JFrame {
                 updateEnterButtonState();
             }
         };
+
         RMIButton.addActionListener(buttonListener);
         socketButton.addActionListener(buttonListener);
 
@@ -153,6 +159,10 @@ public class LoginPage extends JFrame {
         enterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                gui.chooseConnection();
+                gui.askNickname();
+                gui.nickNameAlreadyInUse();
                 Lobby lobby = new Lobby();
                 lobby.setVisible(true);
                 dispose(); // Chiudi la finestra di login
@@ -165,6 +175,22 @@ public class LoginPage extends JFrame {
         boolean isTextFieldsFilled = !nicknameTextField.getText().trim().isEmpty() && !IPTextField.getText().trim().isEmpty();
         boolean isButtonSelected = RMIButton.isSelected() || socketButton.isSelected();
         enterButton.setEnabled(isTextFieldsFilled && isButtonSelected);
+    }
+
+    public String getSelectedConnectionType() {
+        return RMIButton.isSelected() ? "RMI" : "Socket";
+    }
+
+    public String getHost() {
+        return IPTextField.getText().trim();
+    }
+
+    public String getNickname() {
+        return nicknameTextField.getText().trim();
+    }
+
+    public void resetNicknameField() {
+        nicknameTextField.setText("");
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
@@ -183,11 +209,19 @@ public class LoginPage extends JFrame {
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 
     public static void main(String[] args) {
+        // Inizializzare ViewAPI come appropriato
+        ViewAPI viewAPI = new ViewAPI(); // Questo deve essere sostituito con il codice appropriato per inizializzare ViewAPI
+
+        // Creare un'istanza di GUI con ViewAPI
+        GUI gui = new GUI(viewAPI);
+
+        // Avviare l'applicazione Swing
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new LoginPage().setVisible(true);
+                gui.loginPage.setVisible(true);
             }
         });
     }
+
 }
