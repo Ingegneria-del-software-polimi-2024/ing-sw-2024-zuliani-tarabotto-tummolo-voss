@@ -24,6 +24,8 @@ public class ServerAPI_GO {
         } catch (RemoteException e) {
             throw new MsgNotDeliveredException(message);
         }
+        //DEBUGO
+        System.out.println("Sent a message: "+message.getClass());
     }
 
     /**

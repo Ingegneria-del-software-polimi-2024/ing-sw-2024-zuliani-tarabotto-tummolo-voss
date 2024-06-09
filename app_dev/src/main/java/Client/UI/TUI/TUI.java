@@ -123,8 +123,7 @@ public class TUI implements UI {
     public void askNickname(){
         System.out.print(ansi().fg(color).a("~> Insert your nickname: \n").reset());
         String nickname = sc.nextLine();
-        view.setPlayerId(nickname);
-
+        view.setPlayerID(nickname);
     }
     public void nickNameAlreadyInUse(){
         System.out.print(ansi().fg(color).a("~> This nickname is already in use, please change nickname\n").reset());
@@ -275,6 +274,10 @@ public class TUI implements UI {
             inputPresent = false;
             lock.notifyAll();
         }
+        printStarterCard();
+    }
+
+    public void printStarterCard(){
         rePrint = () -> {
             clear();
             System.out.print(ansi().fg(color).a("~> This is your StarterCard: \n").reset());
@@ -309,16 +312,16 @@ public class TUI implements UI {
             inputPresent = false;
             lock.notifyAll();
         }
+        printSecretObjective();
+    }
 
-
+    public void printSecretObjective(){
         rePrint = () -> {
             clear();
             System.out.print(ansi().fg(color).a("~> These are your objectives\n").reset());
             objectivesPrinter.printObjectivesBoard(view.getCommonObjectives().get(0), view.getCommonObjectives().get(1), view.getSecretObjective());
         };
         rePrint.run();
-
-
     }
 
     public void displayPlacingCard(){
@@ -628,5 +631,8 @@ public class TUI implements UI {
     }
 
 
-
+    public void displayReconnection(){
+        clear();
+        System.out.print(ansi().fg(color).a("~> "+view.getPlayerId()+", you have successfully reconnected to the game").reset());
+    }
 }

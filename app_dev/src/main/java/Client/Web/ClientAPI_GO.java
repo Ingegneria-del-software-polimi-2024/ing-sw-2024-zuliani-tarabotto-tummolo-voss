@@ -14,8 +14,6 @@ public class ClientAPI_GO {
         this.handler = handler;
     }
 
-    public void addNewPlayer(){}
-
 
     /**
      * notifies the server handler of the message the client wants to send

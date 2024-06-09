@@ -40,4 +40,7 @@ public interface UI extends Runnable{
     void cantCreateRoom();
     void cantJoinRoom();
     void returnToLobby();
+    void printStarterCard();
+    void printSecretObjective();
+    void displayReconnection();
 }

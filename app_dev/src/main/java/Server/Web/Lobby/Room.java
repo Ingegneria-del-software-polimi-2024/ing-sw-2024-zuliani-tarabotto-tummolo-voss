@@ -4,6 +4,9 @@ import Server.ModelController;
 import Server.Web.Game.ServerAPI_COME;
 import Server.Web.Game.ServerAPI_GO;
 import Server.Web.Lobby.LobbyExceptions.CantJoinRoomExcept;
+import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.I_WantToReconnectMessage;
+import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_RoomChoice;
+import SharedWebInterfaces.Messages.MessagesToLobby.JoinGameMessage;
 import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
 import model.GameState.GameState;
 import model.GameState.TurnState;
@@ -35,8 +38,6 @@ public class Room {
      * @param handler the player's handler
      * @throws CantJoinRoomExcept if the room is full
      */
-
-
     public void joinRoom(String name, ClientHandlerInterface handler) throws CantJoinRoomExcept {
         if(expectedPlayers == players.size()) {
 
@@ -57,6 +58,8 @@ public class Room {
      */
     public void verifyStart(){
         if(expectedPlayers == players.size()) {
+//TODO if we want the game not to start when some player is disconnected we must add && disconnectedUsers.isEmpty(),
+//furthermore we must also add a call to this function in the function reconnect
             Thread gameStarter = new Thread(this::startGame);
             gameStarter.start();//TODO CONTROL IF THIS MAKES SENSE
         }
@@ -83,7 +86,15 @@ public class Room {
     }
 
     public void updateHeartBeat(String playerId) {
+        //DEBUGO
+        if(playerId.equals("c")) {
+            System.out.println("prev ts: "+lastSeen.get(playerId));;
+        }
         lastSeen.put(playerId, System.currentTimeMillis());
+        //DEBUGO
+        if(playerId.equals("c")) {
+            System.out.println("now ts: "+lastSeen.get(playerId));;
+        }
     }
     public void handleADetectedDisconnection() {
         //DEBUG
@@ -137,13 +148,13 @@ public class Room {
         disconnectedUsers.add(player);
         playersInterfaces.put(player, null);
         send.disconnectPlayer(player);
-        modelController.setPlayerInactive(player);
+        if(modelController!=null)
+            modelController.setPlayerInactive(player);
 
         System.out.println("Player " + player + " is disconnected.");
     }
 
     /**
-     *
      * @return the players in the room
      */
     public ArrayList<String> getPlayers() {
@@ -151,7 +162,6 @@ public class Room {
     }
 
     /**
-     *
      * @return the room's name
      */
     public String getName() {
@@ -173,6 +183,7 @@ public class Room {
             }
         }catch (RemoteException e){
             throw new RuntimeException("Can't join the room due to a comunication error");
+            //TODO handle exception
         }
         Thread thread1 = new Thread(() -> receive.loop());
         thread1.start();
@@ -194,4 +205,37 @@ public class Room {
      * @return true if the room is full else false
      */
     public boolean isFull(){return full;}
+
+    /**
+     * reconnects the disconnected player in the place he was disconnected from
+     * @param playerID the reconnecting player
+     * @param handlerInterface the handler of the player
+     */
+    public void reconnect(String playerID, ClientHandlerInterface handlerInterface){
+        playersInterfaces.put(playerID, handlerInterface);
+        send.setHandler(playerID, handlerInterface);
+        disconnectedUsers.remove(playerID);
+        try {
+            playersInterfaces.get(playerID).sendToClient(new ACK_RoomChoice(playerID, name));
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+            //TODO handle exception
+        }
+
+        if(modelController != null){
+            try {
+                playersInterfaces.get(playerID).setReceiver(receive);
+            } catch (RemoteException e) {
+                throw new RuntimeException(e);
+                //TODO is the exception necessary?
+            }
+            receive.sendToServer(new I_WantToReconnectMessage(playerID, name));
+            return;
+        }
+
+    }
+
+    public boolean isDisconnected(String name){
+        return disconnectedUsers.contains(name);
+    }
 }

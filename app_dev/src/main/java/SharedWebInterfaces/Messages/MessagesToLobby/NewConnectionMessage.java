@@ -25,7 +25,6 @@ public class NewConnectionMessage implements Serializable, MessageToLobby {//tod
 //        System.out.println(username+" has entered the room "+roomName);
 
         //sending an ACK to the player
-
     }
 
     @Override

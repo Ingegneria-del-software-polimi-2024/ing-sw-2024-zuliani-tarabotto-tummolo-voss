@@ -46,7 +46,7 @@ public class RMI_MockClient implements Runnable{
 //                    throw new RuntimeException(e);
 //                }
                 //we notify the view about the nickName of its player
-                //this.view.setPlayerId(userName);
+                //this.view.setPlayerID(userName);
 
 
 //                try {

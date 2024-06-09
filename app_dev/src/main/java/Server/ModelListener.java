@@ -6,6 +6,9 @@ import SharedWebInterfaces.Messages.MessagesFromServer.*;
 import SharedWebInterfaces.Messages.MessagesFromServer.Errors.CantPlaceCardMessage;
 import SharedWebInterfaces.Messages.MessagesFromServer.Errors.EmptyDeckMessage;
 import SharedWebInterfaces.Messages.MessagesFromServer.Errors.KickOutOfGameMessage;
+import SharedWebInterfaces.Messages.MessagesFromServer.ReconnectionsMSG.DisplayObjectiveSelection;
+import SharedWebInterfaces.Messages.MessagesFromServer.ReconnectionsMSG.DisplayStarterCardSelection;
+import SharedWebInterfaces.Messages.MessagesFromServer.ReconnectionsMSG.ReconnectionHappened;
 import SharedWebInterfaces.WebExceptions.MsgNotDeliveredException;
 import model.Exceptions.CantPlaceCardException;
 import model.Exceptions.EmptyCardSourceException;
@@ -48,6 +51,20 @@ public class ModelListener {//TODO Handle correctly the exceptions
     }
 
     /**
+     * notification about current state of GameState, can be directed to a single player
+     * @param state the state to be set
+     * @param playerID the receiver of the message
+     */
+    public void notifyChanges(TurnState state, String playerID){
+        try{
+            System.out.println("state notification send");
+            serverAPI.notifyChanges( new StateMessage( state ), playerID);
+        } catch(MsgNotDeliveredException msg) {
+            throw new RuntimeException(msg);
+        }
+    }
+
+    /**
      * notification about the new turnPlayer
      * @param turnPlayer
      */
@@ -55,6 +72,20 @@ public class ModelListener {//TODO Handle correctly the exceptions
         try{
             System.out.println("notification send");
             serverAPI.broadcastNotifyChanges( new TurnPlayerMessage(turnPlayer));
+        } catch(MsgNotDeliveredException msg) {
+            throw new RuntimeException(msg);
+        }
+    }
+
+    /**
+     * notification about the new turnPlayer
+     * @param turnPlayer the player playing at the moment
+     * @param playerID the player to send the message to
+     */
+    public void notifyChanges(String turnPlayer, String playerID){
+        try{
+            System.out.println("notification send");
+            serverAPI.notifyChanges( new TurnPlayerMessage(turnPlayer), playerID);
         } catch(MsgNotDeliveredException msg) {
             throw new RuntimeException(msg);
         }
@@ -88,6 +119,19 @@ public class ModelListener {//TODO Handle correctly the exceptions
         }
 
     }
+    public void notifyChanges(PlayableDeck goldDeck, PlayableDeck  resourceDeck, List<PlayableCard> openGold,
+                              List<PlayableCard> openResource,
+                              ArrayList<String> players, String gameId,
+                              ObjectiveCard commonObjective1, ObjectiveCard commonObjective2, String playerID){
+        try{
+            serverAPI.notifyChanges(new InitializationMessage( goldDeck.getCards(), resourceDeck.getCards(),
+                    openGold, openResource,
+                    players, gameId,
+                    commonObjective1, commonObjective2), playerID);
+        }catch (MsgNotDeliveredException e){
+            throw new RuntimeException(e);
+        }
+    }
 
 
 
@@ -98,7 +142,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
      */
     public void notifyChanges(PlayableCard starterCard, String player, Pawn pawnColor){
         try{
-            serverAPI.notifyChanges( new StarterCardMessage(starterCard, pawnColor.toString()), player );
+            serverAPI.notifyChanges( new StarterCardMessage(player, starterCard, pawnColor.toString()), player );
         }catch (MsgNotDeliveredException msg){
             throw new RuntimeException(msg);
         }
@@ -179,6 +223,26 @@ public class ModelListener {//TODO Handle correctly the exceptions
         try{
             serverAPI.broadcastNotifyChanges(new UpdateDispositionMessage(player, disposition, availablePlaces,
                     points));
+        }catch (MsgNotDeliveredException msg){
+            throw new RuntimeException(msg);
+        }
+
+    }
+
+    /**
+     * after placing the card each player is notified with his update disposition, points, elements and artifacts
+     * @param player
+     * @param disposition
+     * @param availablePlaces
+     * @param points
+     */
+    public void notifyChanges(String player, HashMap<Coordinates, PlayableCard> disposition, List<Coordinates> availablePlaces,
+                              int points, String recipient) {
+
+
+        try{
+            serverAPI.notifyChanges(new UpdateDispositionMessage(player, disposition, availablePlaces,
+                    points), recipient);
         }catch (MsgNotDeliveredException msg){
             throw new RuntimeException(msg);
         }
@@ -278,6 +342,32 @@ public class ModelListener {//TODO Handle correctly the exceptions
         try {
             serverAPI.notifyChanges(new EmptyDeckMessage(e.getIndx()), player);
         }catch (MsgNotDeliveredException msg){
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public void notifyReconnection(String playerID){
+        try {
+            serverAPI.notifyChanges(new ReconnectionHappened(playerID), playerID);
+        } catch (MsgNotDeliveredException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void displayStarterCardNotification(String playerID, PlayableCard starterCard, Pawn color){
+        try {
+            serverAPI.notifyChanges(new StarterCardMessage(playerID, starterCard, color.toString()), playerID);
+            serverAPI.notifyChanges(new DisplayStarterCardSelection(playerID), playerID);
+        } catch (MsgNotDeliveredException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void displayObjectiveNotification(String playerID){
+        try {
+            serverAPI.notifyChanges(new DisplayObjectiveSelection(playerID), playerID);
+        } catch (MsgNotDeliveredException e) {
             throw new RuntimeException(e);
         }
     }

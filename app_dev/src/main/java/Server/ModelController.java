@@ -153,9 +153,10 @@ public class ModelController implements ServerControllerInterface {
                 found = true;
             }
         }
-        if(!found)
-            gameState.wrongCardRoutine(new CantPlaceCardException(new Coordinates(x,y)));
-
+        if(!found) {
+            gameState.wrongCardRoutine(new CantPlaceCardException(new Coordinates(x, y)));
+            return;
+        }
         gameState.setSelectedCardFace(faceSide);
         gameState.setSelectedCoordinates(new Coordinates(x,y));
         try{
@@ -262,8 +263,6 @@ public class ModelController implements ServerControllerInterface {
             for (int i = 0; i < playersNicknames.size(); i++) {
                 if (!gameState.getPlayer(i).isActive()) {
                     disconnectedPlayersNumber++;
-                    //DEBUG
-                    System.out.println(disconnectedPlayersNumber);
                 }
             }
             if(disconnectedPlayersNumber < playersNicknames.size() - 1)
@@ -273,6 +272,7 @@ public class ModelController implements ServerControllerInterface {
                 Thread.sleep(HeartBeatSettings.timerB4ClosingGame);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                //TODO handle the exception
             }
         }while(iterations < HeartBeatSettings.iterationsNumber);
 
@@ -288,5 +288,11 @@ public class ModelController implements ServerControllerInterface {
         //the player must be added to the "unavailable" list, some kind of control MUST be done
         //TODO control
         gameState.quitGame(playerID);
+    }
+
+    public void reconnect(String playerID) {
+        System.out.println("RECONNECTION of player: " + playerID);
+        gameState.reconnect(playerID);
+        System.out.println("RECONNECTION COMPLETE");
     }
 }

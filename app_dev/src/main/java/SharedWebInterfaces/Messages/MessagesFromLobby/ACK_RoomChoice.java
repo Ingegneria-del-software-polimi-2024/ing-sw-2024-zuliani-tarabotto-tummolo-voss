@@ -10,6 +10,8 @@ public class ACK_RoomChoice implements MessageFromServer {
     private String user;
     public String game;
     public ACK_RoomChoice(String user, String game){
+        //DEBUGO
+        System.out.println("a new ACKROOMCHOICE msg has been created, the user is: "+user);
         this.user = user;
         this.game = game;
     }
