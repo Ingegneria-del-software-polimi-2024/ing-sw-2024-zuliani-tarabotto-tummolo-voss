@@ -39,7 +39,7 @@ public class PlayerInfo extends JPanel {
 
         add(nickPanel);
         // Create the table panel with 2 columns and 4 rows
-        tablePanel = new JPanel(new GridLayout(4, 2, cellHeight, - cellHeight)); //25, -5
+        tablePanel = new JPanel(new GridLayout(4, 2, cellHeight, - cellHeight/2)); //25, -5
         tablePanel.setOpaque(false);
 
 
