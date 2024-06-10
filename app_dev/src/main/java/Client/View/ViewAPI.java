@@ -6,13 +6,13 @@ import Client.Web.*;
 import SharedWebInterfaces.SharedInterfaces.ServerHandlerInterface;
 import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
 import SharedWebInterfaces.WebExceptions.StartConnectionFailedException;
+import SharedWebInterfaces.WebSettings;
 import model.GameState.TurnState;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
 import model.enums.Artifact;
 import model.enums.Element;
 import model.placementArea.Coordinates;
-import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,9 +46,9 @@ public class ViewAPI implements ViewAPI_Interface {
 
     public void stopUI(){
         try {
-            t.join();
-        }catch (InterruptedException e){
-
+            t.interrupt();
+        }catch (SecurityException e){
+            System.out.println("Couldn't interrupt the thread...");
         }
     }
 
@@ -166,6 +166,10 @@ public class ViewAPI implements ViewAPI_Interface {
     }
     public void nickNameAlreadyInUse(){ui.nickNameAlreadyInUse();}
 
+    public void ackNickName(String name){
+        viewModel.ackPlayerId(name);
+    }
+
 //////////////////////////////////////////Lobby/////////////////////////////////////////////////////////////////////////
 
     ///////////// from SERVER to CLIENT ACTIONS ////////////////////////////////////////////////////////////////////////////////////
@@ -277,7 +281,7 @@ public class ViewAPI implements ViewAPI_Interface {
     }
 
 
-    public void setPlayerId(String playerId){
+    public void setPlayerID(String playerId){
         viewModel.setPlayerId(playerId);
     }
 
@@ -307,6 +311,15 @@ public class ViewAPI implements ViewAPI_Interface {
 
     @Override
     public void returnToLobby() {ui.returnToLobby();}
+
+    public void displayStarterCard(){ui.printStarterCard();}
+
+    public void displaySecretObjective(){ui.printSecretObjective();};
+    public void displayReconnection(){
+        t = new Thread(ui);
+        t.start();
+        ui.displayReconnection();
+    }
 
 //    ////////////////////////////////// GETTER METHODS //////////////////////////////////////////////////////////////////////////////
 

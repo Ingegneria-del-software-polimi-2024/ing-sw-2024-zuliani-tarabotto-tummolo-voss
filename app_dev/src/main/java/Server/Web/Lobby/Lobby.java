@@ -25,11 +25,13 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
     private FirstSocketManager socketManager;
     private First_RMI_Manager rmiManager;
     private LobbyMessageQueue queue;
+    private HashMap<String, Long> lastSeenInLobby;
 
     public Lobby(int portSocket, int portRMI){
         try {
             rooms = new ArrayList<Room>();
             players = new HashMap<String, ClientHandlerInterface>();
+            lastSeenInLobby = new HashMap<String, Long>();
             socketManager = FirstSocketManager.getInstance(this, portSocket);
             Thread listenForNewConnection = new Thread(socketManager);
             listenForNewConnection.start();
@@ -75,26 +77,41 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
      * @param handlerInterface the handler of the player
      */
     public void addConnection(String name, ClientHandlerInterface handlerInterface){
-        //if the name is already in use, we have to notify the client
+        //if the name is already present we must investigate
         if (players.containsKey(name)){
-            try {
-                handlerInterface.sendToClient(new AlreadyExistingNameMessage(name));
-            } catch (RemoteException e) {
-                throw new RuntimeException(e);
+            Room room = isInRoom(name);
+            if(room != null && room.isDisconnected(name)){
+                room.reconnect(name, handlerInterface);
+                return;
+            }else if(room == null && System.currentTimeMillis()-lastSeenInLobby.get(name) > HeartBeatSettings.timeout){
+                //here we should handle disconnections happened before joining a room
+                manageNewConnection(name, handlerInterface);
+                return;
+            }else{
+                try {
+                    handlerInterface.sendToClient(new AlreadyExistingNameMessage(name));
+                } catch (RemoteException e) {
+                    throw new RuntimeException(e);
+                }
+
+                System.out.println("The name chosen was already taken");
+                return;
             }
-            System.out.println("The name chosen was already taken");
-            return;
         }
         //if the name isn't taken we add the player to the lobby's players list
-        players.put(name, handlerInterface);
+        manageNewConnection(name, handlerInterface);
         System.out.println("Added a player: "+name);
+    }
+
+    private void manageNewConnection(String name, ClientHandlerInterface handlerInterface){
+        players.put(name, handlerInterface);
         try {
             sendToPlayer(name, new ACK_NewConnection(name));
         } catch (MsgNotDeliveredException e) {
             throw new RuntimeException(e);
         }
-
         //TODO sistema exception handling
+
     }
 
     /**
@@ -106,15 +123,29 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
     public void enterRoom(String playerName, String roomName, int expectedPlayers){
         if(roomName == null||!players.containsKey(playerName))
             return;
-
+        if(roomName.isEmpty()) {
+            try {
+                sendToPlayer(playerName, new CantJoinRoomMsg(true));
+            } catch (MsgNotDeliveredException e) {
+                throw new RuntimeException(e);
+                //todo remove
+            }
+        }
         Room room = lookFor(roomName);
         try {
             if (room == null) {
                 createRoom(roomName, playerName, expectedPlayers);
 
-            } else {
+            }else if (expectedPlayers == 0) {
                 room.joinRoom(playerName, players.get(playerName));
 
+            }else{
+                try {
+                    sendToPlayer(playerName, new CantJoinRoomMsg(true));
+                } catch (MsgNotDeliveredException ex) {
+                    throw new RuntimeException(ex);
+                    //TODO remove this trycatch
+                }
             }
         }catch (CantJoinRoomExcept e){
             try {
@@ -135,11 +166,6 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
         verifyStart(roomName);
     }
 
-    public void verifyStart(String roomName){
-        Room room = lookFor(roomName);
-        if (room != null)
-            room.verifyStart();
-    }
     /**
      *
      * @return returns the names of the available rooms doesn't return the rooms which are already full
@@ -204,6 +230,12 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
         }
     }
 
+    public void closeRoom(String roomName){
+        Room room = getRoomByName(roomName);
+        if(room != null)
+            rooms.remove(room);
+    }
+
     ///////////////////////////////////////////////PRIVATE METHODS//////////////////////////////////////////////////////
 
     /**
@@ -247,11 +279,54 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
     }
 
     public void updateHeartBeat(String playerId) {
+        if(playerId == null)
+            return;
         // Update the last seen timestamp for the player in the room
         Room r = isInRoom(playerId);
-        if(r == null)
-            return;
-        r.updateHeartBeat(playerId);
+        if(r == null){
+            lastSeenInLobby.put(playerId, System.currentTimeMillis());
+        }else{
+            r.updateHeartBeat(playerId);
+        }
     }
 
+    private Room getRoomByName(String roomName){
+        for(Room room : rooms){
+            if(room.getName().equals(roomName))
+                return room;
+        }
+        return null;
+    }
+//    /**
+//     * reconnects the disconnected player in the place he was disconnected from
+//     * @param playerID the reconnecting player
+//     * @param handlerInterface the handler of the player
+//     */
+//    private void reconnect(String playerID, ClientHandlerInterface handlerInterface){
+//        players.put(playerID, handlerInterface);
+//        Room r = isInRoom(playerID);
+//        //if the player was present in a room we must bring him back there and notify the game state and the player
+//        if(r != null) {
+//            r.reconnect(playerID, handlerInterface);
+//        }else{
+//            //otherwise the player must stay in the lobby
+//            System.out.println(playerID+" reconnected to the lobby");
+//            try {
+//                sendToPlayer(playerID, new ACK_NewConnection(playerID));
+//            } catch (MsgNotDeliveredException e) {
+//                throw new RuntimeException(e);
+//                //TODO handle exception
+//            }
+//        }
+//    }
+
+    /**
+     * verifies if a room has reached the maximum number of players
+     * @param roomName the name of the room
+     */
+    private void verifyStart(String roomName){
+        Room room = lookFor(roomName);
+        if (room != null)
+            room.verifyStart();
+    }
 }

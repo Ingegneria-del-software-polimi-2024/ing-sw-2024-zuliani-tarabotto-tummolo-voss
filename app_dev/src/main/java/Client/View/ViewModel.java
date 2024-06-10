@@ -299,10 +299,13 @@ public class ViewModel {
 
 
     public void setPlayerId(String playerId){
-        this.playerId = playerId;
+//        this.playerId = playerId;
         clientAPIGo.sendToLobby(new NewConnectionMessage(playerId));
     }
 
+    public void ackPlayerId(String playerId){
+        this.playerId = playerId;
+    }
     public boolean getMyTurn() {
         if(turnPlayer.equals(playerId)) return true;
         return false;

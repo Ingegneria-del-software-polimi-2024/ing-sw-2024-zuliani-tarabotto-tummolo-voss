@@ -4,6 +4,7 @@ import Server.Web.Lobby.Lobby;
 import SharedWebInterfaces.Messages.Message;
 import SharedWebInterfaces.Messages.MessagesFromLobby.WelcomeMessage;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
+import SharedWebInterfaces.Messages.MessagesToLobby.JoinGameMessage;
 import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
 import SharedWebInterfaces.Messages.MessagesToLobby.MessageToLobby;
 import SharedWebInterfaces.Messages.MessagesToLobby.NewConnectionMessage;
@@ -87,31 +88,32 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
         try{
             snd(new WelcomeMessage(lobby.getGameNames()));
             System.out.println("sent welcomeMessage");
-            MessageToLobby msg = null;
 
-            boolean read = false;
-            MessageToLobby incoming;
-            do{
-                incoming = (MessageToLobby) in.readObject();
-                if(incoming instanceof NewConnectionMessage) {
-                    ((NewConnectionMessage) incoming).setHandler(this);
-                    read = true;
-                }
-                deliverToLobby(incoming);
-            }while(!read);
+//            boolean read = false;
+//            MessageToLobby incoming;
+//            do{
+//                incoming = (MessageToLobby) in.readObject();
+//                if(incoming instanceof NewConnectionMessage) {
+//                    ((NewConnectionMessage) incoming).setHandler(this);
+////                    read = true;
+//                }
+//                deliverToLobby(incoming);
+//            }while(!(incoming instanceof JoinGameMessage));
 
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException e) {
             throw new RuntimeException();
         }
         try {
 
             Message message = null;
-            do {
+            do{
                 message = (Message) in.readObject();
                 //TODO replace if else with overloading
-                if(message instanceof MessageToLobby)
-                    deliverToLobby((MessageToLobby)message);
-                else if(message instanceof MessageFromClient)
+                if(message instanceof MessageToLobby) {
+                    if(message instanceof NewConnectionMessage)
+                        ((NewConnectionMessage) message).setHandler(this);
+                    deliverToLobby((MessageToLobby) message);
+                }else if(message instanceof MessageFromClient)
                     sendToServer((MessageFromClient)message);
             }while(true);
         }catch (IOException | ClassNotFoundException e){
@@ -123,6 +125,7 @@ public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
             api.sendToServer(disconnectionMessage);
             // handleDisconnection();
             //throw new RuntimeException();//TODO HANDLE DISCONNECTION
+
         }
 
 

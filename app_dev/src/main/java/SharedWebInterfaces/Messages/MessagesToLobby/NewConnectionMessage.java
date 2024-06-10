@@ -19,13 +19,6 @@ public class NewConnectionMessage implements Serializable, MessageToLobby {//tod
 
     public void execute(Lobby lobby){
         lobby.addConnection(username, handler);
-        //For debug purpose only
-//        lobby.enterRoom(username, roomName, expectedPlayers);
-        //For debug purpose only
-//        System.out.println(username+" has entered the room "+roomName);
-
-        //sending an ACK to the player
-
     }
 
     @Override

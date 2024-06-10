@@ -1,4 +1,4 @@
-package Client.Web;
+package SharedWebInterfaces;
 
 public final class WebSettings {
     public final static int serverPortRMI = 1237;

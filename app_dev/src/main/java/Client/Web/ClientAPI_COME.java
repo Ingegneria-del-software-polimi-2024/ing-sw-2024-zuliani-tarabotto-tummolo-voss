@@ -19,7 +19,7 @@ public class ClientAPI_COME implements Runnable{
      * @param message the message from the server
      */
     public void notifyChanges(MessageFromServer message){
-
+        System.out.println("Enqueued a message: "+message.getClass());
         toDoQueue.enqueueMessage(message);
     }
     /**
@@ -38,7 +38,9 @@ public class ClientAPI_COME implements Runnable{
             if(message!=null && !(message instanceof InterruptConnectionMessage)) {
                 //view.controlMessage(message);//TODO implement the control
                 //IMPORTANT: I may choose to execute the InterruptConnectionMessage in order to end everything
+                System.out.println("Executing: "+message.getClass());
                 message.execute(view);
+                System.out.println("Executed: "+message.getClass());
             }
         }while(!(message instanceof InterruptConnectionMessage));
     }

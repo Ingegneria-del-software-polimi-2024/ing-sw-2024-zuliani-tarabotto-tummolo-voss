@@ -1,54 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ArtifactsWorkspaceSettings">
-    <artifacts-to-build>
-      <artifact name="Ing_sw_proj:jar" />
-    </artifacts-to-build>
-  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesToLobby/CloseARoomMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/BannersPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/BannersPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/BoardMotionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/BoardMotionListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/FlipCardListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/FlipCardListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/PlaceCardListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/PlaceCardListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/PlaceStarterListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/EventListeners/PlaceStarterListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/LoginPanel/InputFields.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/LoginPanel/InputFields.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/LoginPanel/LoginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/LoginPanel/LoginFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/PlayerBanner/PlayerPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/PlayerBanner/PlayerPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/PlayerBanner/test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/PlayerBanner/PlayerInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/TUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/TUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/View/ViewAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/View/ViewAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/Web/ClientAPI_COME.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/Web/ClientAPI_COME.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/ModelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ModelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/ModelListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ModelListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/Lobby.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/Lobby.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/Room.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromLobby/ACK_RoomChoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromLobby/ACK_RoomChoice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesToLobby/NewConnectionMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesToLobby/NewConnectionMessage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/BannersPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/BannersPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/EventListeners/BoardMotionListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/EventListeners/BoardMotionListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/EventListeners/FlipCardListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/EventListeners/FlipCardListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/EventListeners/PlaceCardListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/EventListeners/PlaceCardListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/EventListeners/PlaceStarterListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/EventListeners/PlaceStarterListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$14.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/LoginFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/LoginFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/PlayerBanner/PlayerPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/PlayerBanner/PlayerPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/PlayerBanner/test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/GameState/GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/GameState/GameState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/TurnState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/TurnState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/player/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,48 +59,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Model.executor&quot;: &quot;Run&quot;,
-    &quot;Application.PlacementAreaTest.executor&quot;: &quot;Run&quot;,
-    &quot;Application.RunDeckCreation.executor&quot;: &quot;Run&quot;,
-    &quot;Application.RunTUI_Client.executor&quot;: &quot;Run&quot;,
-    &quot;Application.run gui.executor&quot;: &quot;Run&quot;,
-    &quot;Application.run server.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ControllerTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ControllerTest.main.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.ObjectiveCardTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.StarterCardTest.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3&quot;: &quot;junit.framework.TestCase&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;GUI__branch&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_directory_selection&quot;: &quot;/Users/andre/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/main/resources/Images&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.excludes&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Model.executor": "Run",
+    "Application.PlacementAreaTest.executor": "Run",
+    "Application.RunDeckCreation.executor": "Run",
+    "JUnit.ControllerTest.executor": "Run",
+    "JUnit.ControllerTest.main.executor": "Debug",
+    "JUnit.ObjectiveCardTest.executor": "Run",
+    "JUnit.StarterCardTest.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3": "junit.framework.TestCase",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "TUI__with__disconnections",
+    "kotlin-language-version-configured": "true",
+    "last_directory_selection": "/Users/andre/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java",
+    "last_opened_file_path": "/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/resources/Images" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/resources/Images" />
-      <recent name="$PROJECT_DIR$/src/main/resources" />
       <recent name="$PROJECT_DIR$/src/main/java" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
@@ -148,7 +111,7 @@
       <recent name="model.lobby" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.run gui">
+  <component name="RunManager" selected="Application.RunTUI_Client">
     <configuration name="RunServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Server.RunServer" />
       <module name="Ing_sw_proj" />
@@ -188,20 +151,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="run gui" type="Application" factoryName="Application" singleton="false">
-      <option name="MAIN_CLASS_NAME" value="Client.RunGUI_Client" />
-      <module name="Ing_sw_proj" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="run server" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="Server.RunServer" />
-      <module name="Ing_sw_proj" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="ControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Ing_sw_proj" />
       <extension name="coverage">
@@ -218,8 +167,6 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.run server" />
-      <item itemvalue="Application.run gui" />
       <item itemvalue="Application.RunServer" />
       <item itemvalue="Application.RunTUI_Client" />
       <item itemvalue="Application.SecondClient" />
@@ -228,11 +175,19 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.RunTUI_Client" />
-        <item itemvalue="JUnit.ControllerTest" />
         <item itemvalue="Application.RunServer" />
+        <item itemvalue="JUnit.ControllerTest" />
         <item itemvalue="Application.SecondClient" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.150" />
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-IU-241.15989.150" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -318,7 +273,14 @@
       <workItem from="1717171165000" duration="11237000" />
       <workItem from="1717246424595" duration="5379000" />
       <workItem from="1717260823195" duration="2531000" />
-      <workItem from="1717333185692" duration="27266000" />
+      <workItem from="1717333185692" duration="27490000" />
+      <workItem from="1717440040136" duration="5901000" />
+      <workItem from="1717519246036" duration="5910000" />
+      <workItem from="1717576707856" duration="7330000" />
+      <workItem from="1717596813451" duration="7353000" />
+      <workItem from="1717785379936" duration="492000" />
+      <workItem from="1717924395352" duration="12283000" />
+      <workItem from="1718001323244" duration="16844000" />
     </task>
     <servers />
   </component>

@@ -145,33 +145,11 @@ public class GameState {
                 turnPlayer = players.get(currentPlayer + 1);
             }
         }while(!turnPlayer.isActive());
-        System.out.println("Now turn player is: "+turnPlayer.getNickname());
-        System.out.println(turnPlayer.isActive());
         //broadcast notification about the new turnPlayer
         modelListener.notifyChanges(turnPlayer.getNickname());
     }
 
-    /**
-     * sets the player in an active state
-     * @param index the index of the player
-     */
-    public void setPlayerActive(int index){
-        players.get(index).setActive();
-    }
 
-    /**
-     * sets the player in an inactive state
-     * @param index the index of the player
-     */
-    public void setPlayerInactive(int index){
-        //todo must control if the inactive player is turnplayer
-        Player inactivePlayer = players.get(index);
-        inactivePlayer.setInactive();
-        if (getTurnPlayer().equals(inactivePlayer) || turnState.isStartingState()){
-            turnState.recoverDisconnection(this, inactivePlayer);
-        }
-        //Todo notify if necessary all the other players
-    }
     /**
      * INTERFACE METHOD
      * based on Player input, the method sets the selected pawn color for the player
@@ -189,12 +167,17 @@ public class GameState {
         this.turnState = state;
         //NOTIFICATION: ABOUT THE CHANGED STATE OF GAMESTATE
         modelListener.notifyChanges(state);
-        if(state.equals(TurnState.OBJECTIVE_SELECTION)){
-            //DEBUG
-            System.out.println("Correctly entered control");
-            for(Player p : players){
-                if(!p.isActive())
+        //TODO this if else can be deleted by using overriding of a method
+        if(state.equals(TurnState.OBJECTIVE_SELECTION)) {
+            for (Player p : players) {
+                if (!p.isActive())
                     recoveryObjectiveChoice(p);
+            }
+        }else if(state.equals(TurnState.END_GAME)){
+            //we notify all the active players of the end of the game
+            for(Player p : players){
+                if(p.isActive())
+                    modelListener.notifyChanges(p.getNickname(), new KickOutOfGameException());
             }
         }
     }
@@ -241,8 +224,6 @@ public class GameState {
     public boolean checkMessage(MessageFromClient message){return turnState.controlMessage(message);}
 
     public void quitGame(String playerName){
-        //TODO signals playerName has quit the game
-        setPlayerInactive(players.indexOf(getPlayerByName(playerName)));
         modelListener.notifyChanges(playerName, new KickOutOfGameException());
     }
 
@@ -296,6 +277,7 @@ public class GameState {
                     p.playStarterCard();
                 }catch (KickOutOfGameException e){
                     //TODO signal the throwing out of the player
+                    setPlayerInactive(players.indexOf(getPlayerByName(player)));
                     modelListener.notifyChanges(player, e);
                 }
                 //NOTIFICATION ABOUT THE STARTER CARD
@@ -446,70 +428,6 @@ public class GameState {
         return null;
     }
 
-    ////////////////////////DISCONNECTION RECOVERY//////////////////////////////////////////////////////////////////////
-
-    /**
-     * if the turn palyer disconnects before choosing the secret objective, the firs of the two objectives is chosen and
-     * the face card is assigned for the starter card
-     * @param player the disconnected player
-     */
-    public void recoveryObjectiveChoice(Player player){
-        int indx = players.indexOf(player);
-        if(player.getSecretObjective() == null)
-            modelController.chooseSecretObjective(String.valueOf(objectiveBuffer.get(indx*2).getId()), player.getNickname());
-    }
-
-    /**
-     * if the turn palyer disconnects before choosing the starter card face, the face side is automatically played
-     * @param player the disconnected player
-     */
-    public void recoveryStarterCard(Player player){
-        modelController.playStarterCard(true, player.getNickname());
-        System.out.println("starter card placed anyway");
-    }
-
-    /**
-     * if the turn palyer disconnects and has palced a card but still has to draw, he will draw from the first available deck,
-     * if no deck is available he will then draw a card from the open deck. The order of the decks is:
-     * (1)resource deck, (2) gold deck, (3) open resources, (4) open gold
-     * @param player the disconnected player
-     */
-    public void recoveryDrawing(Player player){
-        if(!player.equals(turnPlayer))
-            return;
-        if (getResourceDeck().getSize() > 0){
-            modelController.drawCard(4);
-        }else if (getGoldDeck().getSize() > 0){
-            modelController.drawCard(1);
-        }else if (!getOpenResources().isEmpty()){
-            int i;
-            if(getOpenResources().get(0) != null)
-                i = 0;
-            else
-                i = 1;
-            modelController.drawCard(5+i);
-        }else{
-            int i;
-            if(getOpenGold().get(0) != null)
-                i = 0;
-            else
-                i = 1;
-            modelController.drawCard(2+i);
-        }
-    }
-
-    /**
-     * if the turn palyer disconnects and has not palced a card yet, the turn passes to the next player
-     * @param player the disconnected player
-     */
-    public void recoverPlacement(Player player){
-        if(!player.equals(turnPlayer))
-            return;
-        nextPlayer();
-        playingTurn();
-        setTurnState(TurnState.PLACING_CARD_SELECTION);
-    }
-
 
 
     /////////////////////// METHODS RELATED TO TESTING ONLY ////////////////////////////////////////////////////////////////
@@ -564,4 +482,148 @@ public class GameState {
 //        //function that calls every initializing method contained in commonTable
 //        commonTable.definedDeckInitialization(players);
 //    }
+
+    ////////////////////////////////////////////RECONNECTIONS//////////////////////////////////////////////////////////
+
+    /**
+     * allows a player back in the game
+     * @param playerID the name of the player to be added again
+     */
+    public void reconnect(String playerID){
+        setPlayerActive(players.indexOf(getPlayerByName(playerID)));
+        ArrayList<String> nickNames = new ArrayList<>();
+        for(Player p : players) {
+            nickNames.add(p.getNickname());
+        }
+        modelListener.notifyReconnection(playerID);
+        modelListener.notifyChanges(commonTable.getGoldDeck(), commonTable.getResourceDeck(), commonTable.getOpenGold(),
+                commonTable.getOpenResources(), nickNames, id,
+                commonTable.getCommonObjectives().get(0), commonTable.getCommonObjectives().get(1), playerID);
+
+        Player p = getPlayerByName(playerID);
+        modelListener.notifyChanges(p.getPlayingHand(), playerID);
+        //we notify the player of the disposition
+        for(Player x : players) {
+            modelListener.notifyChanges(x.getNickname(), x.getPlacementArea().getDisposition(),
+                    x.getPlacementArea().getAvailablePlaces(),
+                    x.getPoints(), p.getNickname());
+        }
+
+        //NOTIFICATION: we notify the player of the new resources he acquired
+        modelListener.notifyChanges(p.getNickname(), p.getPlacementArea().getAllArtifactsNumber(),
+                p.getPlacementArea().getAllElementsNumber());
+
+        if(turnState.isStartingState()) {
+            turnState.reconnect(this, getPlayerByName(playerID));
+        }else{
+
+            modelListener.notifyChanges(getPlayerByName(playerID).getSecretObjective(), playerID);
+            modelListener.notifyChanges(turnPlayer.getNickname(), playerID);
+            modelListener.notifyChanges(turnState, playerID);
+        }
+
+    }
+    /**
+     * sets the player in an active state
+     * @param index the index of the player
+     */
+    public void setPlayerActive(int index){
+        players.get(index).setActive();
+    }
+
+    public void inizializationReconnection(Player p){
+        //NOTIFICATION ABOUT THE STARTER CARD
+        modelListener.notifyChanges(p.getNickname(), p.getPlacementArea().getDisposition(), p.getPlacementArea().getAvailablePlaces(),
+                p.getPoints());
+    }
+
+    public void starterCardReconnection(Player player){
+        modelListener.displayStarterCardNotification(player.getNickname(), player.getStarterCard(), player.getPawnColor() );
+    }
+
+    public void objectiveCardReconnection(Player player){
+        modelListener.notifyChanges(turnPlayer.getNickname(), player.getNickname());
+        modelListener.notifyChanges(player.getSecretObjective(), player.getNickname());
+        modelListener.displayObjectiveNotification(player.getNickname());
+    }
+    ////////////////////////DISCONNECTIONS /////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * sets the player in an inactive state
+     * @param index the index of the player
+     */
+    public void setPlayerInactive(int index){
+        Player inactivePlayer = players.get(index);
+        inactivePlayer.setInactive();
+        if (getTurnPlayer().equals(inactivePlayer) || turnState.isStartingState()){
+            turnState.recoverDisconnection(this, inactivePlayer);
+        }
+    }
+
+    ////////////////////////DISCONNECTION RECOVERY//////////////////////////////////////////////////////////////////////
+
+    /**
+     * if the turn palyer disconnects before choosing the secret objective, the firs of the two objectives is chosen and
+     * the face card is assigned for the starter card
+     * @param player the disconnected player
+     */
+    public void recoveryObjectiveChoice(Player player){
+        int indx = players.indexOf(player);
+        if(player.getSecretObjective() == null) {
+            modelController.chooseSecretObjective(String.valueOf(objectiveBuffer.get(indx * 2).getId()), player.getNickname());
+        }
+    }
+
+    /**
+     * if the turn palyer disconnects before choosing the starter card face, the face side is automatically played
+     * @param player the disconnected player
+     */
+    public void recoveryStarterCard(Player player){
+        if(!player.getPlacementArea().freePositions().contains(new Coordinates(0,0)))
+            return;
+        modelController.playStarterCard(true, player.getNickname());
+        System.out.println("starter card placed anyway");
+    }
+
+    /**
+     * if the turn palyer disconnects and has palced a card but still has to draw, he will draw from the first available deck,
+     * if no deck is available he will then draw a card from the open deck. The order of the decks is:
+     * (1)resource deck, (2) gold deck, (3) open resources, (4) open gold
+     * @param player the disconnected player
+     */
+    public void recoveryDrawing(Player player){
+        if(!player.equals(turnPlayer))
+            return;
+        if (getResourceDeck().getSize() > 0){
+            modelController.drawCard(4);
+        }else if (getGoldDeck().getSize() > 0){
+            modelController.drawCard(1);
+        }else if (!getOpenResources().isEmpty()){
+            int i;
+            if(getOpenResources().get(0) != null)
+                i = 0;
+            else
+                i = 1;
+            modelController.drawCard(5+i);
+        }else{
+            int i;
+            if(getOpenGold().get(0) != null)
+                i = 0;
+            else
+                i = 1;
+            modelController.drawCard(2+i);
+        }
+    }
+
+    /**
+     * if the turn palyer disconnects and has not palced a card yet, the turn passes to the next player
+     * @param player the disconnected player
+     */
+    public void recoverPlacement(Player player){
+        if(!player.equals(turnPlayer))
+            return;
+        nextPlayer();
+        playingTurn();
+        setTurnState(TurnState.PLACING_CARD_SELECTION);
+    }
 }

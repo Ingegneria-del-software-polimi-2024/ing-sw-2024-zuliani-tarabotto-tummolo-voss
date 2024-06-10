@@ -65,5 +65,11 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
      */
     void returnToLobby();
 
+    void ackNickName(String name);
+
+    void displayStarterCard();
+    void displaySecretObjective();
+    void displayReconnection();
+    void setPlayerID(String playerID); //used for recovery from disconnections
 
 }

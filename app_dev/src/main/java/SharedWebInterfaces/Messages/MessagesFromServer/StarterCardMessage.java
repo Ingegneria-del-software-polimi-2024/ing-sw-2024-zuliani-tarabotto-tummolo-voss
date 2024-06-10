@@ -7,7 +7,9 @@ import model.enums.Pawn;
 public class StarterCardMessage implements MessageFromServer{
     private PlayableCard starterCard;
     private String pawnColor;
-    public StarterCardMessage(PlayableCard starterCard, String pawnColor){
+    private String player;
+    public StarterCardMessage(String player, PlayableCard starterCard, String pawnColor){
+        this.player = player;
         this.starterCard = starterCard;
         this.pawnColor = pawnColor;
     }
