@@ -42,9 +42,9 @@ public class ViewAPI implements ViewAPI_Interface {
 
     public void stopUI(){
         try {
-            t.join();
-        }catch (InterruptedException e){
-
+            t.interrupt();
+        }catch (SecurityException e){
+            System.out.println("Couldn't interrupt the thread...");
         }
     }
 

@@ -44,7 +44,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
     public void notifyChanges(TurnState state){
         try{
             System.out.println("state notification send");
-            serverAPI.broadcastNotifyChanges( new StateMessage( state ));
+            serverAPI.broadcastNotifyChanges( new StateMessage(state));
         } catch(MsgNotDeliveredException msg) {
             throw new RuntimeException(msg);
         }

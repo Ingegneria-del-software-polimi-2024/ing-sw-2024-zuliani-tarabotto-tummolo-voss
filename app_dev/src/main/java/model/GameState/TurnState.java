@@ -136,7 +136,6 @@ public enum TurnState {
 
 
     END_GAME{
-        //TODO change instanceof type
         public boolean controlMessage(MessageFromClient msg){
             return (msg instanceof QuitGameMessage      ||
                     msg instanceof DisconnectionMessage ||

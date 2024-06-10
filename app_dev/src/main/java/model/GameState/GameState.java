@@ -166,10 +166,17 @@ public class GameState {
         this.turnState = state;
         //NOTIFICATION: ABOUT THE CHANGED STATE OF GAMESTATE
         modelListener.notifyChanges(state);
-        if(state.equals(TurnState.OBJECTIVE_SELECTION)){
-            for(Player p : players){
-                if(!p.isActive())
+        //TODO this if else can be deleted by using overriding of a method
+        if(state.equals(TurnState.OBJECTIVE_SELECTION)) {
+            for (Player p : players) {
+                if (!p.isActive())
                     recoveryObjectiveChoice(p);
+            }
+        }else if(state.equals(TurnState.END_GAME)){
+            //we notify all the active players of the end of the game
+            for(Player p : players){
+                if(p.isActive())
+                    modelListener.notifyChanges(p.getNickname(), new KickOutOfGameException());
             }
         }
     }
@@ -216,8 +223,6 @@ public class GameState {
     public boolean checkMessage(MessageFromClient message){return turnState.controlMessage(message);}
 
     public void quitGame(String playerName){
-        //TODO signals playerName has quit the game
-        setPlayerInactive(players.indexOf(getPlayerByName(playerName)));
         modelListener.notifyChanges(playerName, new KickOutOfGameException());
     }
 
@@ -271,6 +276,7 @@ public class GameState {
                     p.playStarterCard();
                 }catch (KickOutOfGameException e){
                     //TODO signal the throwing out of the player
+                    setPlayerInactive(players.indexOf(getPlayerByName(player)));
                     modelListener.notifyChanges(player, e);
                 }
                 //NOTIFICATION ABOUT THE STARTER CARD
@@ -572,6 +578,8 @@ public class GameState {
      * @param player the disconnected player
      */
     public void recoveryStarterCard(Player player){
+        if(!player.getPlacementArea().freePositions().contains(new Coordinates(0,0)))
+            return;
         modelController.playStarterCard(true, player.getNickname());
         System.out.println("starter card placed anyway");
     }

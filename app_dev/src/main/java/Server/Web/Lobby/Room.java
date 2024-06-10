@@ -6,6 +6,7 @@ import Server.Web.Game.ServerAPI_GO;
 import Server.Web.Lobby.LobbyExceptions.CantJoinRoomExcept;
 import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.I_WantToReconnectMessage;
 import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_RoomChoice;
+import SharedWebInterfaces.Messages.MessagesToLobby.CloseARoomMessage;
 import SharedWebInterfaces.Messages.MessagesToLobby.JoinGameMessage;
 import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
 import model.GameState.GameState;
@@ -18,7 +19,6 @@ import java.rmi.RemoteException;
 public class Room {
 
     private ConcurrentHashMap<String, Long> lastSeen;
-
     private final Set<String> disconnectedUsers;
     private ModelController modelController;
     private String name;
@@ -39,8 +39,7 @@ public class Room {
      * @throws CantJoinRoomExcept if the room is full
      */
     public void joinRoom(String name, ClientHandlerInterface handler) throws CantJoinRoomExcept {
-        if(expectedPlayers == players.size()) {
-
+        if(full) {
             //handling rejoin
             if (disconnectedUsers.contains(name)) {
                 disconnectedUsers.remove(name);
@@ -51,6 +50,8 @@ public class Room {
         players.add(name);
         send.setHandler(name, handler);
         playersInterfaces.put(name, handler);
+        if(expectedPlayers == players.size())
+            full = true;
     }
 
     /**
@@ -86,15 +87,7 @@ public class Room {
     }
 
     public void updateHeartBeat(String playerId) {
-        //DEBUGO
-        if(playerId.equals("c")) {
-            System.out.println("prev ts: "+lastSeen.get(playerId));;
-        }
         lastSeen.put(playerId, System.currentTimeMillis());
-        //DEBUGO
-        if(playerId.equals("c")) {
-            System.out.println("now ts: "+lastSeen.get(playerId));;
-        }
     }
     public void handleADetectedDisconnection() {
         //DEBUG
@@ -237,5 +230,35 @@ public class Room {
 
     public boolean isDisconnected(String name){
         return disconnectedUsers.contains(name);
+    }
+
+    public void ended(){
+        //since the disconnection of the players is handled by the only thread unraveling messages to the room,
+        //as the second-from-last player leaves the room there will be still a player connected or, at least a handler
+        //interface linked to him (in order to send a message to the lobby from the server internet connection
+        //is NOT required)
+        for(String player : players){
+            if(!disconnectedUsers.contains(player)){
+                boolean sent = true;
+                ClientHandlerInterface handler = playersInterfaces.get(player);
+                try {
+                    handler.deliverToLobby(new CloseARoomMessage(name));
+                } catch (RemoteException e) {
+                    sent = false;
+                }
+                if(sent)
+                    return;
+            }
+        }
+    }
+
+    public void quitGame(String playerID){
+
+        disconnectedUsers.add(playerID);
+        playersInterfaces.put(playerID, null);
+        send.disconnectPlayer(playerID);
+        if(modelController!=null)
+            modelController.setPlayerInactive(playerID);
+
     }
 }

@@ -197,11 +197,24 @@ public class TUI implements UI {
     }
 
     public void returnToLobby(){
-        clear();
         view.stopUI();
+        displayReturnToLobby();
+        clear();
         view.welcome();
         view.requestAvailableGames();
-        //TODO fix the bug, problem related to scanner
+    }
+
+    private void displayReturnToLobby(){
+        String in = null;
+        do {
+            System.out.print(ansi().fg(color).a("~> Press enter to return to the lobby\n").reset());
+            try{
+                in = sc.nextLine();
+            }catch(NoSuchElementException | IllegalStateException | IndexOutOfBoundsException e){
+                sc = new Scanner(System.in);
+                in = "";
+            }
+        }while(!in.isEmpty());
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -524,29 +537,38 @@ public class TUI implements UI {
                     }
                 }
 
+                if(Thread.currentThread().isInterrupted()){
+                    //DEBUG
+                    System.out.println("thread interrupted");
+                    return;
+                }
+
                 //System.out.println("command thread");
                 input = sc.nextLine();
 
                 if (input.equals("--quit")) {
-                    clear();
                     runningThread = false;
                     commandMap.get(input).execute();
-                }else if(input.startsWith("--") && !input.equals("")) {
+                }else if(input.startsWith("--")){
                     clear();
-                    commandMap.get(input).execute();
-                    //System.out.println("command");
-                    System.out.println("type q to go back to the game");
-                    while (!sc.nextLine().equals("q")) {
+                    Command c = commandMap.get(input);
+                    if(c != null) {
+                        c.execute();
+                        //System.out.println("command");
                         System.out.println("type q to go back to the game");
+                        while (!sc.nextLine().equals("q")) {
+                            System.out.println("type q to go back to the game");
+                        }
+                        rePrint.run();
                     }
-                    rePrint.run();
                 } else {
                     inputPresent = true;
                     lock.notifyAll();
                 }
             }
         }
-
+        //DEBUG
+        System.out.println("Listening for --commands has ended");
     }
 
 

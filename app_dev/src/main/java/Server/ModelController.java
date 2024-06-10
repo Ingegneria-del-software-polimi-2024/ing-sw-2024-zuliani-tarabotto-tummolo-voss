@@ -24,14 +24,15 @@ import java.util.Objects;
 
 public class ModelController implements ServerControllerInterface {
     private GameState gameState;
-    private ArrayList<String> playersNicknames;
-    private String gameId;
+    private final ArrayList<String> playersNicknames;
+    private final String gameId;
     private int cont = 0;
     private String initialPlayer;
     private boolean lastRound = false;
-    private ServerAPI_GO send;
+    private final ServerAPI_GO send;
     private int readyPlayers;
-    private Room room;
+    private final Room room;
+    private boolean finished = false;
 
 
 
@@ -219,8 +220,7 @@ public class ModelController implements ServerControllerInterface {
             }
 
             if(cont == playersNicknames.size()){
-                gameState.calculateFinalPoints();
-                gameState.setTurnState(TurnState.END_GAME);
+                endGame();
                 return;
             }else{playNewTurn();}
             cont ++;
@@ -240,6 +240,7 @@ public class ModelController implements ServerControllerInterface {
     public void endGame(){
         gameState.calculateFinalPoints();
         gameState.setTurnState(TurnState.END_GAME);
+        room.ended();
     }
 
     /**
@@ -253,6 +254,7 @@ public class ModelController implements ServerControllerInterface {
     /**
      * set a player in an inactive state
      * @param playerName the name of the player to be set active
+     * @return true if the game was closed after the player left the match, false if the match continued
      */
     public void setPlayerInactive(String playerName){
         gameState.setPlayerInactive(playersNicknames.indexOf(playerName));
@@ -265,8 +267,10 @@ public class ModelController implements ServerControllerInterface {
                     disconnectedPlayersNumber++;
                 }
             }
-            if(disconnectedPlayersNumber < playersNicknames.size() - 1)
+            //in case not all the players except one are disconnected, we may continue the game
+            if(disconnectedPlayersNumber < playersNicknames.size() - 1) {
                 return;
+            }
             iterations++;
             try {
                 Thread.sleep(HeartBeatSettings.timerB4ClosingGame);
@@ -276,7 +280,9 @@ public class ModelController implements ServerControllerInterface {
             }
         }while(iterations < HeartBeatSettings.iterationsNumber);
 
+        //after some time oof checking we must close the game
         endGame();
+        finished = true;
     }
 
     public void handleDisconnection() {
@@ -285,9 +291,8 @@ public class ModelController implements ServerControllerInterface {
     }
 
     public void quitGame(String playerID){
-        //the player must be added to the "unavailable" list, some kind of control MUST be done
-        //TODO control
         gameState.quitGame(playerID);
+        room.quitGame(playerID);
     }
 
     public void reconnect(String playerID) {

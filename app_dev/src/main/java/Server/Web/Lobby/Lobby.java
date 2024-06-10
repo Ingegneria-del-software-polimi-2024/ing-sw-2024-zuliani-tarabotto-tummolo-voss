@@ -123,15 +123,29 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
     public void enterRoom(String playerName, String roomName, int expectedPlayers){
         if(roomName == null||!players.containsKey(playerName))
             return;
-
+        if(roomName.isEmpty()) {
+            try {
+                sendToPlayer(playerName, new CantJoinRoomMsg(true));
+            } catch (MsgNotDeliveredException e) {
+                throw new RuntimeException(e);
+                //todo remove
+            }
+        }
         Room room = lookFor(roomName);
         try {
             if (room == null) {
                 createRoom(roomName, playerName, expectedPlayers);
 
-            } else {
+            }else if (expectedPlayers == 0) {
                 room.joinRoom(playerName, players.get(playerName));
 
+            }else{
+                try {
+                    sendToPlayer(playerName, new CantJoinRoomMsg(true));
+                } catch (MsgNotDeliveredException ex) {
+                    throw new RuntimeException(ex);
+                    //TODO remove this trycatch
+                }
             }
         }catch (CantJoinRoomExcept e){
             try {
@@ -216,6 +230,12 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
         }
     }
 
+    public void closeRoom(String roomName){
+        Room room = getRoomByName(roomName);
+        if(room != null)
+            rooms.remove(room);
+    }
+
     ///////////////////////////////////////////////PRIVATE METHODS//////////////////////////////////////////////////////
 
     /**
@@ -270,6 +290,13 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
         }
     }
 
+    private Room getRoomByName(String roomName){
+        for(Room room : rooms){
+            if(room.getName().equals(roomName))
+                return room;
+        }
+        return null;
+    }
 //    /**
 //     * reconnects the disconnected player in the place he was disconnected from
 //     * @param playerID the reconnecting player

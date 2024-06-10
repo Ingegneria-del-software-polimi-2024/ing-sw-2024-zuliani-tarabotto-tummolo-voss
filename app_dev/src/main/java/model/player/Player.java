@@ -1,13 +1,9 @@
 package model.player;
 
-//import model.cards.ObjectiveCard;
-import SharedWebInterfaces.Messages.MessagesFromServer.Errors.KickOutOfGameMessage;
 import model.Exceptions.CantPlaceCardException;
 import model.Exceptions.KickOutOfGameException;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
-import model.cards.PlayableCards.StarterCard;
-import model.deckFactory.PlayableDeck;
 import model.enums.Pawn;
 import model.placementArea.*;
 
