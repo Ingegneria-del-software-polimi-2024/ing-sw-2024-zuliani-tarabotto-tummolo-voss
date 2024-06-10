@@ -35,8 +35,5 @@ public class BoardMotionListener extends MouseAdapter {
             }
 
         }
-
-
-
     }
 }

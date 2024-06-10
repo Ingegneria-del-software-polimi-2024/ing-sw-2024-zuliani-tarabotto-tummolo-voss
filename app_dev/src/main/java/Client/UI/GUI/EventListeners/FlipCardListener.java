@@ -13,7 +13,7 @@ public class FlipCardListener extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent e) {
         if (SwingUtilities.isLeftMouseButton(e)) {
-            System.out.println("Left click detected at (" + e.getX() + ", " + e.getY() + ")");
+            //System.out.println("Left click detected at (" + e.getX() + ", " + e.getY() + ")");
             CardLabel label = (CardLabel) e.getSource();
             label.flipCard();
         }

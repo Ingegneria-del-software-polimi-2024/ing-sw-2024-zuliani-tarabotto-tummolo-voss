@@ -83,7 +83,16 @@ public class LoginFrame extends JFrame {
 
     }
 
+
     public void nicknameInUse(){
         loginFields.setNicknameInUse();
+    }
+
+    public void cantJoinRoom(){
+        loginFields.setCantJoinRoom();
+    }
+
+    public void cantCreateRoom(){
+        loginFields.setCantCreateRoom();
     }
 }

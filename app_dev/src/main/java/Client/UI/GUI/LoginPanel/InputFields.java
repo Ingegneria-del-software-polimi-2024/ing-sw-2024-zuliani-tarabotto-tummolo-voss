@@ -30,6 +30,8 @@ public class InputFields extends JPanel {
     private boolean connectionSelected = false;
     private boolean nicknameInUse = false;
     private Font font = new Font("Beaufort", Font.BOLD, 70);
+    private boolean cantCreateRoom = false;
+    private boolean cantJoinRoom = false;
 
 
 
@@ -122,8 +124,6 @@ public class InputFields extends JPanel {
         });
 
 
-
-
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -134,6 +134,7 @@ public class InputFields extends JPanel {
                         //panel.removeAll();
                     } catch (StartConnectionFailedException er) {
                         System.out.println("~> An error during the connection occurred\n   Check your internet connection and retry\n");
+                        messageLabel.setText("An error during the connection occurred\n   Check your internet connection and retry\n");
                         gui.chooseConnection();
                     }
                 }else{
@@ -231,7 +232,7 @@ public class InputFields extends JPanel {
 
 
 
-    public void chooseGame(ArrayList<String> listOfGames){
+    public void chooseGame(List<String> listOfGames){
         mainPanel.removeAll();
         panel.revalidate();
         panel.repaint();
@@ -278,8 +279,7 @@ public class InputFields extends JPanel {
         // Add the JList to a JScrollPane
         jScrollPane2 = new JScrollPane(games_JList);
 
-        refresh_JButton.setBackground(new java.awt.Color(82, 168, 167));
-        refresh_JButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+
         refresh_JButton.setText("Refresh");
 
         refresh_JButton.addActionListener(new java.awt.event.ActionListener() {
@@ -289,8 +289,7 @@ public class InputFields extends JPanel {
             }
         });
 
-        join_JButton.setBackground(new java.awt.Color(82, 168, 167));
-        join_JButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+
         join_JButton.setText("join");
 
         join_JButton.addActionListener(new java.awt.event.ActionListener() {
@@ -300,16 +299,25 @@ public class InputFields extends JPanel {
             }
         });
 
+        JLabel errorMessageLabel = new JLabel();
+        errorMessageLabel.setForeground(Color.RED);
+        if(cantJoinRoom){
+            errorMessageLabel.setText("Room is already full");
+            cantJoinRoom = false;
+        }
+
         JPanel buttonPanel = new JPanel(new FlowLayout());
         buttonPanel.add(join_JButton);
         buttonPanel.add(refresh_JButton);
 
 
         mainPanel.add(createNewGame_JButton);
+        mainPanel.add(errorMessageLabel);
         mainPanel.add(jScrollPane2);
         mainPanel.add(buttonPanel);
 
         createNewGame_JButton.setAlignmentX(Component.LEFT_ALIGNMENT);
+        errorMessageLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         jScrollPane2.setAlignmentX(Component.LEFT_ALIGNMENT);
         buttonPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
@@ -324,17 +332,16 @@ public class InputFields extends JPanel {
 
 
 
-
-
-    private void createNewGame(){
+    public void createNewGame(){
         mainPanel.removeAll();
         panel.revalidate();
         panel.repaint();
 
 
+        JLabel nameLabel = new JLabel("Choose the name of the game:");
 
-        JTextField hostField = new JTextField(1);
-        hostField.getDocument().addDocumentListener(new DocumentListener() {
+        JTextField name = new JTextField(1);
+        name.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 updateTextFieldContent();
@@ -351,16 +358,15 @@ public class InputFields extends JPanel {
             }
 
             private void updateTextFieldContent() {
-                gameName = hostField.getText();
+                gameName = name.getText();
                 System.out.println("Updated text: " + host);
             }
         });
 
-        mainPanel.add(hostField);
 
 
         // Create the JComboBox
-        String[] playerOptions = {"2", "3", "4"};
+        String[] playerOptions = {"2", "3", "4", "5"};
         JComboBox<String> playerComboBox = new JComboBox<>(playerOptions);
         numPlayers = 2; //we set the default value for numPlayers
 
@@ -372,9 +378,9 @@ public class InputFields extends JPanel {
                 if(num.equals("2") ) numPlayers = 2;
                 if(num.equals("3") ) numPlayers = 3;
                 if(num.equals("4") ) numPlayers = 4;
+                if(num.equals("5") ) numPlayers = 5;
             }
         });
-        mainPanel.add(playerComboBox);
 
 
         JButton nextButton = new JButton("create");
@@ -384,17 +390,68 @@ public class InputFields extends JPanel {
                 if(listOfGames == null || !listOfGames.contains(gameName)){
                     System.out.println("new game created" + gameName +" " + numPlayers);
                     gui.getView().joinGame(gameName, numPlayers);
+                    waitingForPlayers();
+
                 }
             }
         });
+
+        JLabel errorMessageLabel = new JLabel();
+        errorMessageLabel.setForeground(Color.RED);
+        if(cantCreateRoom){
+            errorMessageLabel.setText("cant create room");
+            cantCreateRoom = false;
+        }
+
+        mainPanel.add(nameLabel);
+        mainPanel.add(name);
+        mainPanel.add(errorMessageLabel);
+        mainPanel.add(playerComboBox);
         mainPanel.add(nextButton);
+
+        nameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        name.setAlignmentX(Component.LEFT_ALIGNMENT);
+        errorMessageLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        playerComboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
+        nextButton.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         panel.revalidate();
 
     }
 
+    private void waitingForPlayers(){
+        mainPanel.removeAll();
+
+        JLabel waitingLabel = new JLabel("Waiting for other players to join the game ...");
+        JButton backButton = new JButton("back");
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gui.getView().quitGame();
+                chooseGame(listOfGames);
+            }
+        });
+
+        mainPanel.add(waitingLabel);
+        mainPanel.add(backButton);
+
+
+        panel.revalidate();
+        panel.repaint();
+    }
+
 
     public void setNicknameInUse(){
         nicknameInUse = true;
+    }
+
+    public void setCantCreateRoom(){
+        cantCreateRoom = true;
+        createNewGame();
+    }
+
+    public void setCantJoinRoom(){
+        cantJoinRoom = true;
+        chooseGame(listOfGames);
     }
 }

@@ -20,7 +20,7 @@ public class PlaceStarterListener extends MouseAdapter {
         if (SwingUtilities.isRightMouseButton(e)) {
             CardLabel label = (CardLabel) e.getSource();
             gui.setStarterSelected();
-            System.out.println("Right click detected at (" + e.getX() + ", " + e.getY() + ")");
+            //System.out.println("Right click detected at (" + e.getX() + ", " + e.getY() + ")");
         }
     }
 }

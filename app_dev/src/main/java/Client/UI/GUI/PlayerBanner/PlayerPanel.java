@@ -4,9 +4,7 @@ package Client.UI.GUI.PlayerBanner;
 
 
 import Client.UI.GUI.GUI;
-import Client.UI.GUI.PlayerBanner.test;
 import Client.UI.GUI.Resources;
-import Client.View.ViewAPI;
 import model.enums.Artifact;
 import model.enums.Element;
 
@@ -16,7 +14,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Objects;
 
 
@@ -24,30 +21,26 @@ import java.util.Objects;
 public class PlayerPanel extends JPanel {
     private BufferedImage playerImage;
     private int points;
-    private int resource;
     private int imageDim = (int)(getHeight() * 0.8);
     private int imagePos = (getHeight() - imageDim) / 2;
     private String player;
-    private test infoPanel;
-    //private ViewAPI view;
+    private PlayerInfo infoPanel;
     private GUI gui;
 
 
     public PlayerPanel(String player, int width, int height, GUI gui ) {
         this.gui = gui;
         this.player = player;
+
         imageDim = (int)(height * 0.8);
         imagePos = (height - imageDim) / 2;
         setLayout(new FlowLayout(FlowLayout.LEFT));
-        //setBorder(BorderFactory.createEmptyBorder((int)(height * 0.05), (int)(height * 0.05), (int)(height * 0.05), (int)(height * 0.05)));
         setBorder(BorderFactory.createEmptyBorder(0, 2*imagePos + imageDim, 0, 0));
-
-        infoPanel = new test(player, gui);
-        add(infoPanel);
         setBackground(new Color(50, 84, 70));
-
         setOpaque(true);
 
+        infoPanel = new PlayerInfo(player, gui, imageDim/6);
+        add(infoPanel);
 
 
         try {
@@ -62,15 +55,7 @@ public class PlayerPanel extends JPanel {
         repaint();
     }
 
-    public void setPoints(int points) {
-        this.points = points;
-        repaint();
-    }
 
-    public void setResources(int resources) {
-        this.resource = resources;
-        repaint();
-    }
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -119,7 +104,9 @@ public class PlayerPanel extends JPanel {
 
    }
 
-   public void updatePoints(int points){
+   public void updatePoints(){
+        //we take from the gui the points of this player
+        points = gui.getView().getPoints().get(getPlayer());
         infoPanel.updatePoints(points);
    }
 

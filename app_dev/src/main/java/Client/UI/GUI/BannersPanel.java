@@ -53,6 +53,7 @@ public class BannersPanel extends JPanel {
     public void updateBanners(){
         for(String p : banners.keySet()){
             banners.get(p).updateResources();
+            banners.get(p).updatePoints();
         }
     }
 }

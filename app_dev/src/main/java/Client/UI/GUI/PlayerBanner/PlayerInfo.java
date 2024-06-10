@@ -4,28 +4,24 @@ package Client.UI.GUI.PlayerBanner;
 
 import Client.UI.GUI.GUI;
 import Client.UI.GUI.Resources;
-import model.enums.Artifact;
-import model.enums.Element;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
         import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
 
-public class test extends JPanel {
+public class PlayerInfo extends JPanel {
 
     private int points;
     private HashMap<Resources, Integer> resources;
     private JPanel tablePanel;
     private HashMap<Resources, JPanel> resourcePanel;
     private GUI gui;
+    private int cellHeight;
 
-    public test( String name, GUI gui) {
+    public PlayerInfo(String name, GUI gui, int cellHeight) {
 
+        this.cellHeight = cellHeight;
         this.gui = gui;
         resourcePanel = new HashMap<>();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -33,7 +29,7 @@ public class test extends JPanel {
         JPanel nickPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         nickPanel.setOpaque(false);
 
-        Font customFont = new Font("Serif", Font.BOLD, 15); // Font name, style, size
+        Font customFont = new Font("Serif", Font.BOLD, cellHeight); // Font name, style, size
         JLabel nickname = new JLabel(name);
         nickname.setFont(customFont);
         nickname.setForeground(new Color(255, 248, 164));
@@ -43,7 +39,7 @@ public class test extends JPanel {
 
         add(nickPanel);
         // Create the table panel with 2 columns and 4 rows
-        tablePanel = new JPanel(new GridLayout(4, 2, 25, -5));
+        tablePanel = new JPanel(new GridLayout(4, 2, cellHeight, - cellHeight)); //25, -5
         tablePanel.setOpaque(false);
 
 
@@ -53,10 +49,10 @@ public class test extends JPanel {
 
             JPanel cellPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
             cellPanel.setOpaque(false);
-            Dimension size = new Dimension(16, 16);
+            Dimension size = new Dimension(cellHeight, cellHeight); //16,16
             JLabel iconLabel = new JLabel();
+
             iconLabel.setPreferredSize(size);
-            //iconLabel.setMinimumSize(size);
             iconLabel.setMaximumSize(size);
 
             JLabel numberLabel = new JLabel("0");

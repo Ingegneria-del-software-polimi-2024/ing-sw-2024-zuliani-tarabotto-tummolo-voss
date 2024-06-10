@@ -8,7 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class PlaceCardListener extends MouseAdapter {
-    //TODO
+
 
     private GUI gui;
 
@@ -22,7 +22,7 @@ public class PlaceCardListener extends MouseAdapter {
         if (SwingUtilities.isRightMouseButton(e)) {
             CardLabel label = (CardLabel) e.getSource();
             gui.setSelectedCard(label.getCard());
-            System.out.println("Right click detected at (" + e.getX() + ", " + e.getY() + ")");
+            //System.out.println("Right click detected at (" + e.getX() + ", " + e.getY() + ")");
         }
     }
 

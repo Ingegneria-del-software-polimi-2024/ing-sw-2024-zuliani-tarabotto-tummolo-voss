@@ -27,13 +27,12 @@ import java.util.regex.Pattern;
 import static org.fusesource.jansi.Ansi.ansi;
 
 
-public class GUI  implements UI {
+public class  GUI  implements UI {
 
     private JFrame frame;
     private ViewAPI view;
     private int screenWidth;
     private int screenHeight;
-    Scanner sc = new Scanner(System.in);
     private HashMap<Integer, BufferedImage> fronts;
     private HashMap<Integer, BufferedImage> backs;
     private HashMap<Resources, BufferedImage> resIcons;
@@ -142,8 +141,7 @@ public class GUI  implements UI {
         createBoardPanel();
         deckPanel.updateDecks();
         frame.setVisible(true);
-        System.out.println("press something to start: ");
-        //sc.next();
+
         view.readyToPlay();
 
     }
@@ -319,12 +317,12 @@ public class GUI  implements UI {
 
     @Override
     public void cantCreateRoom() {
-
+        login.cantCreateRoom();
     }
 
     @Override
     public void cantJoinRoom() {
-
+        login.cantJoinRoom();
     }
 
     @Override
@@ -552,7 +550,9 @@ public class GUI  implements UI {
 
     /////////////////////////////////////// IMAGE LOADING METHOD /////////////////////////////
 
-    //method used to load all cards images
+    /**
+     * method used to load all images
+     */
     private void loadImages(){
         String index;
         fronts = new HashMap<>();
@@ -585,7 +585,12 @@ public class GUI  implements UI {
         }
     }
 
-//this method is called on each card's image to round the corners
+
+    /**
+     * method used on each card's image to round the corners
+     * @param image
+     * @return
+     */
     private BufferedImage makeRoundedCorner(BufferedImage image) {
         int cornerRadius = 100;
         int w = image.getWidth();
@@ -593,7 +598,6 @@ public class GUI  implements UI {
         BufferedImage output = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 
         Graphics2D g2 = output.createGraphics();
-        // Enable antialiasing for smoother corners
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         // Draw the rounded rectangle
