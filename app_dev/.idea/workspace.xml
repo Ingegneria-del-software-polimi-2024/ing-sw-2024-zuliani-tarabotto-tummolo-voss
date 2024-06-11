@@ -142,7 +142,7 @@
       <recent name="model.lobby" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.run gui">
+  <component name="RunManager" selected="Application.RunTUI_Client">
     <configuration name="RunServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Server.RunServer" />
       <module name="Ing_sw_proj" />
@@ -221,8 +221,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.RunServer" />
         <item itemvalue="Application.RunTUI_Client" />
+        <item itemvalue="Application.RunServer" />
         <item itemvalue="JUnit.ControllerTest" />
         <item itemvalue="Application.SecondClient" />
       </list>
