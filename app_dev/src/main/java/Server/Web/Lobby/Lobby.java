@@ -78,6 +78,14 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
      */
     public void addConnection(String name, ClientHandlerInterface handlerInterface){
         //if the name is already present we must investigate
+        if(name.isEmpty()){
+            try {
+                handlerInterface.sendToClient(new AlreadyExistingNameMessage(name));
+            } catch (RemoteException e) {
+                throw new RuntimeException(e);
+            }
+            return;
+        }
         if (players.containsKey(name)){
             Room room = isInRoom(name);
             if(room != null && room.isDisconnected(name)){
@@ -130,6 +138,7 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
                 throw new RuntimeException(e);
                 //todo remove
             }
+            return;
         }
         Room room = lookFor(roomName);
         try {

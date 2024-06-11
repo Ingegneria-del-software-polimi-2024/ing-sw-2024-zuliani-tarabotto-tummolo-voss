@@ -47,8 +47,13 @@ public class ViewAPI implements ViewAPI_Interface {
     public void stopUI(){
         try {
             t.interrupt();
+            System.out.println("this is interrupted: "+Thread.currentThread().isInterrupted());
+            t.join();
+            System.out.println("Thread has been correctly interrupted!!");
         }catch (SecurityException e){
             System.out.println("Couldn't interrupt the thread...");
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 
