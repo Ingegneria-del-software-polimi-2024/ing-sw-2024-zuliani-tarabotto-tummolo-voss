@@ -194,11 +194,6 @@ public class  GUI  implements UI {
         showTitle("The End");
 
         System.out.println("fine");
-        if(endGamePanel == null) endGamePanel = new EndGamePanel(this);
-        frame.getContentPane().removeAll();
-        frame.getContentPane().add(endGamePanel, BorderLayout.CENTER);
-        frame.revalidate();
-        frame.repaint();
 
     }
 
@@ -239,7 +234,7 @@ public class  GUI  implements UI {
 
     @Override
     public void displayAvailableGames(ArrayList<String> listOfGames) {
-        if(frame == null){
+        if(frame == null && login == null){
             createFrame();
         }
 
@@ -327,9 +322,21 @@ public class  GUI  implements UI {
 
     @Override
     public void returnToLobby() {
-        //view.stopUI();
+        if(endGamePanel == null) endGamePanel = new EndGamePanel(this);
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(endGamePanel, BorderLayout.CENTER);
+        frame.revalidate();
+        frame.repaint();
+
+    }
+    public void goBackToLobby(){
+        frame.dispose();
+        login.dispose();
+        frame = null;
+        login = null;
         view.welcome();
         view.requestAvailableGames();
+
     }
 
     @Override
@@ -503,10 +510,10 @@ public class  GUI  implements UI {
     }
 
     public void quitGame(){
-        view.quitGame();
         frame.dispose();
         frame = null;
         login = null;
+        view.quitGame();
 
     }
 

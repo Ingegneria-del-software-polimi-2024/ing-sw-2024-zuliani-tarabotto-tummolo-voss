@@ -236,7 +236,10 @@ public class InputFields extends JPanel {
         mainPanel.removeAll();
         panel.revalidate();
         panel.repaint();
-        this.listOfGames = listOfGames;
+        if(listOfGames == null){
+            this.listOfGames = new ArrayList<>();
+        }else{this.listOfGames = listOfGames;}
+
 
 
         JButton createNewGame_JButton = new JButton();
@@ -245,7 +248,7 @@ public class InputFields extends JPanel {
         JButton refresh_JButton = new JButton();
         JButton join_JButton = new JButton();
 
-        
+
         createNewGame_JButton.setText("CREATE NEW GAME");
 
         createNewGame_JButton.addActionListener(new java.awt.event.ActionListener() {
@@ -257,8 +260,8 @@ public class InputFields extends JPanel {
 
 
         games_JList.setModel(new AbstractListModel<String>() {
-            public int getSize() { return listOfGames.size(); }
-            public String getElementAt(int i) { return listOfGames.get(i); }
+            public int getSize() { return panel.listOfGames.size(); }
+            public String getElementAt(int i) { return panel.listOfGames.get(i); }
         });
 
         // Add a ListSelectionListener to handle game selection

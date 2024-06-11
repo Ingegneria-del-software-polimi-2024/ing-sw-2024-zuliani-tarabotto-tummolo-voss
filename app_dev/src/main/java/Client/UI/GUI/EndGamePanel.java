@@ -88,7 +88,7 @@ public class EndGamePanel extends JPanel {
         closeButton.addActionListener(e -> System.exit(0));
 
         JButton lobbyButton = new JButton("Lobby");
-        lobbyButton.addActionListener(e -> gui.quitGame());
+        lobbyButton.addActionListener(e -> gui.goBackToLobby());
 
         buttonPanel.add(lobbyButton);
         buttonPanel.add(closeButton);

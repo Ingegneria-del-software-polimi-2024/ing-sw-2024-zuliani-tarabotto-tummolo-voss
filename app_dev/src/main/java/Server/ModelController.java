@@ -219,7 +219,7 @@ public class ModelController implements ServerControllerInterface {
                 lastRound = true;
             }
 
-            if(cont == playersNicknames.size()){
+            if(cont == playersNicknames.size() - 1){
                 endGame();
                 return;
             }else{playNewTurn();}
