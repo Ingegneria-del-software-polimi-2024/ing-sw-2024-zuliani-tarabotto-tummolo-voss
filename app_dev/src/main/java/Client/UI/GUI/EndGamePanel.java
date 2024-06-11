@@ -84,6 +84,7 @@ public class EndGamePanel extends JPanel {
 
         ///////////////////////////////////// buttons /////////////////////////////////////////
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        buttonPanel.setOpaque(false);
         JButton closeButton = new JButton("Close Game");
         closeButton.addActionListener(e -> System.exit(0));
 

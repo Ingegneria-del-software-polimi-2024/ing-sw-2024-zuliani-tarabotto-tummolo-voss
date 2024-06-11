@@ -170,7 +170,6 @@ public class InputFields extends JPanel {
         panel.repaint();
 
         JLabel nicknameLabel = new JLabel("Insert your nickname:");
-        mainPanel.add(nicknameLabel) ;
 
         JTextField nicknameField = new JTextField(1);
         nicknameField.getDocument().addDocumentListener(new DocumentListener() {
@@ -198,17 +197,14 @@ public class InputFields extends JPanel {
 
         // Create a JLabel to display messages
         JLabel messageLabel = new JLabel("");
-        messageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         messageLabel.setForeground(Color.RED);
-        mainPanel.add(messageLabel);
-
         if(nicknameInUse){
             messageLabel.setText("Nickname is already in use.");
             mainPanel.revalidate();
             mainPanel.repaint();
         }
 
-        mainPanel.add(nicknameField);
+
         JButton nextButton = new JButton("next");
         nextButton.addActionListener(new ActionListener() {
             @Override
@@ -217,11 +213,17 @@ public class InputFields extends JPanel {
             }
         });
 
-        mainPanel.add(nextButton);
 
         nicknameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         nicknameField.setAlignmentX(Component.LEFT_ALIGNMENT);
+        messageLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         nextButton.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+
+        mainPanel.add(nicknameLabel); //insert nickname
+        mainPanel.add(messageLabel); //error message label
+        mainPanel.add(nicknameField); // field for the nickname
+        mainPanel.add(nextButton); // next button
 
         panel.revalidate();
     }
@@ -312,10 +314,10 @@ public class InputFields extends JPanel {
         buttonPanel.add(refresh_JButton);
 
 
-        mainPanel.add(createNewGame_JButton);
-        mainPanel.add(errorMessageLabel);
-        mainPanel.add(jScrollPane2);
-        mainPanel.add(buttonPanel);
+        mainPanel.add(createNewGame_JButton); //create new game button
+        mainPanel.add(errorMessageLabel); // error message label
+        mainPanel.add(jScrollPane2); // list of available games
+        mainPanel.add(buttonPanel); // button panel with join and refresh button
 
         createNewGame_JButton.setAlignmentX(Component.LEFT_ALIGNMENT);
         errorMessageLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -326,8 +328,6 @@ public class InputFields extends JPanel {
         panel.revalidate();
 
     }
-
-
 
 
 
@@ -367,7 +367,7 @@ public class InputFields extends JPanel {
 
 
         // Create the JComboBox
-        String[] playerOptions = {"2", "3", "4", "5"};
+        String[] playerOptions = {"2", "3", "4"};
         JComboBox<String> playerComboBox = new JComboBox<>(playerOptions);
         numPlayers = 2; //we set the default value for numPlayers
 
@@ -379,10 +379,11 @@ public class InputFields extends JPanel {
                 if(num.equals("2") ) numPlayers = 2;
                 if(num.equals("3") ) numPlayers = 3;
                 if(num.equals("4") ) numPlayers = 4;
-                if(num.equals("5") ) numPlayers = 5;
             }
         });
 
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        buttonPanel.setOpaque(false);
 
         JButton nextButton = new JButton("create");
         nextButton.addActionListener(new ActionListener() {
@@ -397,6 +398,17 @@ public class InputFields extends JPanel {
             }
         });
 
+        JButton backButton = new JButton("back");
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                chooseGame(listOfGames);
+            }
+        });
+
+        buttonPanel.add(backButton);
+        buttonPanel.add(nextButton);
+
         JLabel errorMessageLabel = new JLabel();
         errorMessageLabel.setForeground(Color.RED);
         if(cantCreateRoom){
@@ -404,17 +416,19 @@ public class InputFields extends JPanel {
             cantCreateRoom = false;
         }
 
-        mainPanel.add(nameLabel);
-        mainPanel.add(name);
-        mainPanel.add(errorMessageLabel);
-        mainPanel.add(playerComboBox);
-        mainPanel.add(nextButton);
+        mainPanel.add(nameLabel); // insert name of the game label
+        mainPanel.add(name); // field for the name
+        mainPanel.add(errorMessageLabel); // error message label
+        mainPanel.add(playerComboBox); // box for the selection of the number of players
+        mainPanel.add(buttonPanel);
+        //mainPanel.add(nextButton); // next button
 
         nameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         name.setAlignmentX(Component.LEFT_ALIGNMENT);
         errorMessageLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         playerComboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
-        nextButton.setAlignmentX(Component.LEFT_ALIGNMENT);
+        //nextButton.setAlignmentX(Component.LEFT_ALIGNMENT);
+        buttonPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         panel.revalidate();
 
