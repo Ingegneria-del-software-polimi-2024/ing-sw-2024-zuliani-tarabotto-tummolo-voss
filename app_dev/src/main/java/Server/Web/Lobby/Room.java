@@ -125,7 +125,7 @@ public class Room {
                         System.out.println("the delta percieved is: "+ (currentTime - lastSeenTime)+ " milliseconds");
                         System.out.println("the player involved is: "+player);
                         disconnectPlayer(player);
-                        //TODO NOTIFY ALL PLAYERS WITH BROADCAST AND MAYE BLOCK UI
+                        //TODO NOTIFY ALL PLAYERS WITH BROADCAST AND MAYBE BLOCK UI
                     }
                 }
                 try {

@@ -33,6 +33,7 @@ public class ModelController implements ServerControllerInterface {
     private int readyPlayers;
     private final Room room;
     private boolean finished = false;
+    private boolean gameEnded = false;
 
 
 
@@ -233,6 +234,7 @@ public class ModelController implements ServerControllerInterface {
     public boolean checkMessage(MessageFromClient message){return gameState.checkMessage(message);}
 
     public void endGame(){
+        gameEnded = true;
         gameState.calculateFinalPoints();
         gameState.setTurnState(TurnState.END_GAME);
         room.ended();
@@ -276,7 +278,7 @@ public class ModelController implements ServerControllerInterface {
         }while(iterations < HeartBeatSettings.iterationsNumber);
 
         //after some time oof checking we must close the game
-        endGame();
+        if(!gameEnded) endGame();
         finished = true;
     }
 
