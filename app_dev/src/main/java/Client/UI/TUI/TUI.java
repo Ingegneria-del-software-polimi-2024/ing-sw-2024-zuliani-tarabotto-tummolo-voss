@@ -210,13 +210,16 @@ public class TUI implements UI {
         String in = null;
         do {
             System.out.print(ansi().fg(color).a("~> Press enter to return to the lobby\n").reset());
-            try{
+            sc = new Scanner(System.in);
+            if(input != null)
+                System.out.println("RN input is: "+input);
+            if(input == null || !input.isEmpty()) {
                 in = sc.nextLine();
-            }catch(NoSuchElementException | IllegalStateException | IndexOutOfBoundsException e){
-                sc = new Scanner(System.in);
-                in = "";
+            }else {
+                in = input;
             }
         }while(!in.isEmpty());
+        inputPresent = false;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -243,6 +246,8 @@ public class TUI implements UI {
                        lock.wait();
                     } catch (InterruptedException e) {
                         //TODO ERROR management
+                        System.out.println("Interrupted");
+                        return;
                     }
                 }
 
@@ -283,7 +288,11 @@ public class TUI implements UI {
 
         //we read from input the line and parse it as boolean
         synchronized (lock){
-            boolean faceSide = parseBoolean();
+            Boolean faceSide = parseBoolean();
+
+            if(faceSide == null)
+                return;
+
             view.getStarterCard().setFaceSide(faceSide);
             view.playStarterCard();
             inputPresent = false;
@@ -319,9 +328,15 @@ public class TUI implements UI {
 
         synchronized (lock){
             Integer secretObj = parseInt();
+            if(secretObj  == null)
+                return;
             while(!secretObj.equals(1)  && !secretObj.equals(2)){
                 System.out.println("~> Please insert 1/2\n");
                 secretObj = parseInt();
+                if(secretObj == null) {
+                    lock.notifyAll();
+                    return;
+                }
             }
             view.setSecretObjective(view.getChooseSecretObjectives().get(secretObj - 1));
             inputPresent = false;
@@ -343,10 +358,10 @@ public class TUI implements UI {
         displayPlacingCard(true);
     }
     private void displayPlacingCard(boolean clear) {
-        int index;
-        int x = 0;
-        int y = 0;
-        boolean faceSide;
+        Integer index;
+        Integer x = 0;
+        Integer y = 0;
+        Boolean faceSide;
         //if it's my turn then i need to play a card, else i just wait
         if(view.getMyTurn()) {
 
@@ -362,9 +377,18 @@ public class TUI implements UI {
 
             synchronized (lock){
                 index = parseInt();
+                if(index == null) {
+                    lock.notifyAll();
+                    return;
+                }
+
                 while(index != 1 && index != 2 && index != 3 ){
                     System.out.println("~> Please insert 1/2/3");
                     index = parseInt();
+                    if(index == null){
+                        lock.notifyAll();
+                        return;
+                    }
                 }
                 inputPresent = false;
                 lock.notifyAll();
@@ -381,6 +405,9 @@ public class TUI implements UI {
 
             synchronized (lock){
                 faceSide = parseBoolean();
+                if(faceSide == null){
+                    lock.notifyAll();
+                }
                 if(faceSide && !view.getCanBePlaced()[index - 1]){
                     System.out.println("~> Sorry, card " + index + "can't be placed face up due to its placement constraint");
                     faceSide = false;
@@ -402,11 +429,19 @@ public class TUI implements UI {
             while (!view.checkAvailable(x, y)){
                 synchronized (lock) {
                     x = parseInt();
+                    if(x == null){
+                        lock.notifyAll();
+                        return;
+                    }
                     inputPresent = false;
                     lock.notifyAll();
                 }
                 synchronized (lock){
                     y = parseInt();
+                    if(y == null){
+                        lock.notifyAll();
+                        return;
+                    }
                     //view.playCard(c, x, y);
                     if(!view.checkAvailable(x, y)) System.out.println("~> These coordinates are not available, please choose some valid ones");
                     else view.playCard(view.getHand().get(index - 1), faceSide, x, y);
@@ -445,10 +480,18 @@ public class TUI implements UI {
 
 
             synchronized (lock){
-                int cardSource = parseInt();
+                Integer cardSource = parseInt();
+                if(cardSource == null){
+                    lock.notifyAll();
+                    return;
+                }
                 while(!view.checkCanDrawFrom(cardSource)){
                     System.out.println("~> This card source is not available, choose a valid one\n");
                     cardSource = parseInt();
+                    if(cardSource == null){
+                        lock.notifyAll();
+                        return;
+                    }
                 }
                 view.drawCard(cardSource);
                 inputPresent = false;
@@ -536,21 +579,30 @@ public class TUI implements UI {
                     try {
                         lock.wait();
                     } catch (InterruptedException e) {
+                        System.out.println("The interruptedException was caught");
+                        return;
                     }
                 }
 
                 if(Thread.currentThread().isInterrupted()){
-                    //DEBUG
-                    System.out.println("thread interrupted");
+                    //thread safety
                     return;
                 }
 
                 //System.out.println("command thread");
-                input = sc.nextLine();
+                try{
+                    input = sc.nextLine();
+                    System.out.println("current input is: "+input);
+                }catch (Throwable e){
+                    e.printStackTrace();
+                }
 
                 if (input.equals("--quit")) {
                     runningThread = false;
                     commandMap.get(input).execute();
+                    input = null;
+                    inputPresent = true;
+                    lock.notifyAll();
                 }else if(input.startsWith("--")){
                     clear();
                     Command c = commandMap.get(input);
@@ -569,13 +621,11 @@ public class TUI implements UI {
                 }
             }
         }
-        //DEBUG
-        System.out.println("Listening for --commands has ended");
     }
 
 
 
-    private int parseInt(){
+    private Integer parseInt(){
         int value = 0;
         boolean validInput = false;
 
@@ -586,10 +636,15 @@ public class TUI implements UI {
                 try {
                     lock.wait();
                 } catch (InterruptedException e) {
+                    System.out.println("the InterruptedException was caught");
+                    return null;
                 }
             }
 
             try{
+                if(input == null) {
+                    return null;
+                }
                 value = Integer.parseInt(input);
                 validInput = true;
             } catch(NumberFormatException e){
@@ -601,7 +656,7 @@ public class TUI implements UI {
         return value;
     }
 
-    private boolean parseBoolean(){
+    private Boolean parseBoolean(){
         boolean value = false;
         boolean validInput = false;
 
@@ -610,7 +665,13 @@ public class TUI implements UI {
                 try {
                     lock.wait();
                 } catch (InterruptedException e) {
+                    System.out.println("the InterruptedException was caught");
+                    return null;
                 }
+            }
+
+            if(input == null){
+                return null;
             }
 
             if(input.equals("back")) {

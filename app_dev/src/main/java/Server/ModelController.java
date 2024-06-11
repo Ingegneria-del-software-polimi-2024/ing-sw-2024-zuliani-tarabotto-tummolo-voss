@@ -102,14 +102,9 @@ public class ModelController implements ServerControllerInterface {
      * the player can choose between the two secretObjective cards that he is given
      */
     private void distributeSecretObjectives(){
-        //DEBUG
-        System.out.println("obj are being distributed");
         gameState.distributeSecretOjectives();
         gameState.nextPlayer();
         gameState.setTurnState(TurnState.OBJECTIVE_SELECTION);
-        //DEBUG
-        System.out.println("obj have been distributed");
-
     }
 
 
