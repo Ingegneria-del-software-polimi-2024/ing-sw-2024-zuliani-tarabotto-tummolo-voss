@@ -61,6 +61,7 @@ public class GameState {
         this.objectiveBuffer = new ArrayList<>();
         //function that calls every initializing method contained in commonTable
         commonTable.initialize(players);
+        //commonTable.definedDeckInitialization(players);
 
         //NOTIFICATION: decks order, open cards, commonObjectives, nicknames, gameId and initialPlayer
         //we don't send the objective and starter deck because it would be useless

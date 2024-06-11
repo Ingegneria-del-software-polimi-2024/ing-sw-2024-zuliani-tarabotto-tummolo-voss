@@ -10,14 +10,16 @@ public class UpdateResourcesMessage implements MessageFromServer {
 
     private HashMap<Element, Integer> availableElements;
     private HashMap<Artifact, Integer> availableArtifacts;
+    private String player;
 
-    public UpdateResourcesMessage(HashMap<Element, Integer> availableElements, HashMap<Artifact, Integer> availableArtifacts){
+    public UpdateResourcesMessage(String player, HashMap<Element, Integer> availableElements, HashMap<Artifact, Integer> availableArtifacts){
         this.availableElements = availableElements;
         this.availableArtifacts = availableArtifacts;
+        this.player = player;
     }
     @Override
     public void execute(ViewAPI_Interface view) {
-        view.updateElements(availableElements);
-        view.updateArtifacts(availableArtifacts);
+        view.updateElements(player, availableElements);
+        view.updateArtifacts(player, availableArtifacts);
     }
 }

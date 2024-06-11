@@ -25,16 +25,20 @@ import java.util.List;
  */
 public class ViewAPI implements ViewAPI_Interface {
 
-    private UI ui;
+    //private UI ui;
     private ViewModel viewModel;
+    private UI ui;
     private Thread t;
 
-    public ViewAPI() {
-        this.ui = new TUI(this);
+    /*public ViewAPI() {
         this.viewModel = new ViewModel(ui);
-    }
+    }*/
     //TODO: clientAPI_GO deve essere passato come parametro
 
+    public void setUI(UI ui){
+        this.ui = ui;
+        this.viewModel = new ViewModel(ui);
+    }
     public void startUI(){
         t = new Thread(ui);
         t.start();
@@ -218,13 +222,13 @@ public class ViewAPI implements ViewAPI_Interface {
     }
 
     @Override
-    public void updateArtifacts(HashMap<Artifact, Integer> artifacts) {
-        viewModel.updateArtifacts(artifacts);
+    public void updateArtifacts(String player, HashMap<Artifact, Integer> artifacts) {
+        viewModel.updateArtifacts(player, artifacts);
     }
 
     @Override
-    public void updateElements(HashMap<Element, Integer> elements) {
-        viewModel.updateElements(elements);
+    public void updateElements(String player, HashMap<Element, Integer> elements) {
+        viewModel.updateElements(player, elements);
     }
 
     @Override
@@ -356,12 +360,12 @@ public class ViewAPI implements ViewAPI_Interface {
         return viewModel.getPlayerId();
     }
 
-    public HashMap<Artifact, Integer> getAvailableArtifacts() {
-        return viewModel.getAvailableArtifacts();
+    public HashMap<Artifact, Integer> getAvailableArtifacts(String player) {
+        return viewModel.getAvailableArtifacts(player);
     }
 
-    public HashMap<Element, Integer> getAvailableElements() {
-        return viewModel.getAvailableElements();
+    public HashMap<Element, Integer> getAvailableElements(String player) {
+        return viewModel.getAvailableElements(player);
     }
 
     public List<PlayableCard> getGoldDeck() {

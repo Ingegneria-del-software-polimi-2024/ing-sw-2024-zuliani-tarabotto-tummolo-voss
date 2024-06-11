@@ -16,9 +16,9 @@ public class InitializationMessage implements MessageFromServer{
     private ObjectiveCard commonObjective1;
     private ObjectiveCard commonObjective2;
     private List<PlayableCard> openGold;
-    private List<PlayableCard> openResouce;
+    private List<PlayableCard> openResource;
 
-    public InitializationMessage(List<PlayableCard> goldDeck, List<PlayableCard> resourceDeck, List<PlayableCard> openGold, List<PlayableCard> openResouce,
+    public InitializationMessage(List<PlayableCard> goldDeck, List<PlayableCard> resourceDeck, List<PlayableCard> openGold, List<PlayableCard> openResource,
                                  List<String> players, String gameId, ObjectiveCard commonObjective1, ObjectiveCard commonObjective2) {
 
         this.goldDeck = goldDeck;
@@ -28,7 +28,7 @@ public class InitializationMessage implements MessageFromServer{
         this.commonObjective1 = commonObjective1;
         this.commonObjective2 = commonObjective2;
         this.openGold = openGold;
-        this.openResouce = openResouce;
+        this.openResource = openResource;
 
     }
 
@@ -44,7 +44,7 @@ public class InitializationMessage implements MessageFromServer{
 //        view.setGameId(gameId); //TODO DELETE
         view.setCommonObjectives(commonObjective1, commonObjective2);
         view.setOpenGold(openGold);
-        view.setOpenResource(openResouce);
+        view.setOpenResource(openResource);
     }
 
 }

@@ -37,8 +37,8 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
 
     void setDisposition(String player, HashMap<Coordinates, PlayableCard> disposition);
     void setPoints(String player, int points);
-    void updateArtifacts(HashMap<Artifact, Integer> artifacts);
-    void updateElements(HashMap<Element, Integer> elements);
+    void updateArtifacts(String player, HashMap<Artifact, Integer> artifacts);
+    void updateElements(String player, HashMap<Element, Integer> elements);
     void updateCardSource(List<PlayableCard> deck, int cardSource);
     void updateOpenCards(List<PlayableCard> decK, int card);
     void setFinalPoints( HashMap<String, Integer> finalPoints, ArrayList<String> winners);

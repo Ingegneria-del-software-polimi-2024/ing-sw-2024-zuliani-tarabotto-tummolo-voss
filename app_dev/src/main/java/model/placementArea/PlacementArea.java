@@ -34,7 +34,7 @@ public class PlacementArea {
      *  class constructor
      */
     public PlacementArea() {
-        disposition = new HashMap<>();
+        disposition = new LinkedHashMap<>();
         availableArtifacts = new HashMap<>();
         availableElements = new HashMap<>();
         availablePlaces = new ArrayList<>();

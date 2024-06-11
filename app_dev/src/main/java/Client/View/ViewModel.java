@@ -46,8 +46,10 @@ public class ViewModel {
     private TurnState state;
     private List<String> players;
     private String gameId;
-    private HashMap<Artifact, Integer> availableArtifacts;
-    private HashMap<Element, Integer> availableElements;
+    //private HashMap<Artifact, Integer> availableArtifacts;
+    private HashMap< String, HashMap<Artifact, Integer> > availableArtifacts;
+    //private HashMap<Element, Integer> availableElements;
+    private HashMap< String, HashMap<Element, Integer> > availableElements;
     //the id of THIS player
     private String playerId;
     private String turnPlayer;
@@ -73,15 +75,25 @@ public class ViewModel {
     private UI ui;
 
     public ViewModel(UI ui) {
-        availableElements = new HashMap<>();
-        availableArtifacts = new HashMap<>();
+
+
         //we initialize both hashmap to zero
-        for(Element el : Element.values()) {
-            availableElements.put(el, 0);
-        }
-        for(Artifact ar : Artifact.values()){
-            availableArtifacts.put(ar, 0);
-        }
+        /*for(String player : players){
+            HashMap<Element, Integer> elements = new HashMap<>();
+            HashMap<Artifact, Integer> artifacts = new HashMap<>();
+
+            for(Artifact ar : Artifact.values()){
+                artifacts.put(ar, 0);
+            }
+            for(Element el : Element.values()){
+                elements.put(el, 0);
+            }
+
+            availableElements.put(player, elements);
+            availableArtifacts.put(player, artifacts);
+
+        }*/
+
 
         this.commonObjectives = new ArrayList<>();
         this.chooseSecretObjectives = new ArrayList<>();
@@ -92,9 +104,8 @@ public class ViewModel {
     }
     public void setClientAPIGo(ClientAPI_GO clientAPI_GO){
         clientAPIGo = clientAPI_GO;
-        //For debug purpose only
-//        System.out.println("helo");
     }
+
 
     /////////////////////////////////////////////////Lobby//////////////////////////////////////////////////////////////
     public void setAvailableGames(ArrayList<String> listOfGames){
@@ -162,9 +173,26 @@ public class ViewModel {
         //the two hashmaps containing information about all players
         this.dispositions = new HashMap<>();
         this.points = new HashMap<>();
+        availableElements = new HashMap<>();
+        availableArtifacts = new HashMap<>();
         for(String p : players){
             dispositions.put(p, new HashMap<>());
             points.put(p, 0);
+
+            HashMap<Element, Integer> elements = new HashMap<>();
+            HashMap<Artifact, Integer> artifacts = new HashMap<>();
+
+            for(Artifact ar : Artifact.values()){
+                artifacts.put(ar, 0);
+            }
+            for(Element el : Element.values()){
+                elements.put(el, 0);
+            }
+
+            availableElements.put(p, elements);
+            availableArtifacts.put(p, artifacts);
+
+
         }
     }
 
@@ -206,16 +234,18 @@ public class ViewModel {
         this.points.put(player, points);
     }
 
-    public void updateArtifacts(HashMap<Artifact, Integer> artifacts) {
-        for(Artifact a : artifacts.keySet()){
+    public void updateArtifacts(String player, HashMap<Artifact, Integer> artifacts) {
+        /*for(Artifact a : artifacts.keySet()){
             availableArtifacts.put(a, artifacts.get(a));
-        }
+        }*/
+        availableArtifacts.put(player, artifacts);
     }
 
-    public void updateElements(HashMap<Element, Integer> elements) {
-        for(Element e : elements.keySet()){
+    public void updateElements(String player, HashMap<Element, Integer> elements) {
+        /*for(Element e : elements.keySet()){
             availableElements.put(e, elements.get(e));
-        }
+        }*/
+        availableElements.put(player, elements);
     }
 
     public void updateCardSource(List<PlayableCard> deck, int cardSource) {
@@ -321,12 +351,12 @@ public class ViewModel {
         return playerId;
     }
 
-    public HashMap<Artifact, Integer> getAvailableArtifacts() {
-        return availableArtifacts;
+    public HashMap<Artifact, Integer> getAvailableArtifacts(String player) {
+        return availableArtifacts.get(player);
     }
 
-    public HashMap<Element, Integer> getAvailableElements() {
-        return availableElements;
+    public HashMap<Element, Integer> getAvailableElements(String player) {
+        return availableElements.get(player);
     }
 
     public List<PlayableCard> getGoldDeck() {

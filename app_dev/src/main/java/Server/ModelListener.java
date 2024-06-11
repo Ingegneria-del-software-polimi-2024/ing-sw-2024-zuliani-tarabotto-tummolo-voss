@@ -258,7 +258,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
     public void notifyChanges (String player, HashMap<Artifact, Integer> availableArtifacts,
                                HashMap<Element, Integer> availableElements){
         try{
-            serverAPI.notifyChanges(new UpdateResourcesMessage(availableElements, availableArtifacts), player);
+            serverAPI.broadcastNotifyChanges(new UpdateResourcesMessage(player, availableElements, availableArtifacts));
         }catch (MsgNotDeliveredException msg){
             throw new RuntimeException(msg);
         }
