@@ -510,7 +510,7 @@ public class GameState {
         }
 
         //NOTIFICATION: we notify the player of the new resources he acquired
-        modelListener.notifyChanges(p.getNickname(), p.getPlacementArea().getAllArtifactsNumber(),
+        modelListener.personalNotifyChanges(p.getNickname(), p.getPlacementArea().getAllArtifactsNumber(),
                 p.getPlacementArea().getAllElementsNumber());
 
         if(turnState.isStartingState()) {

@@ -124,7 +124,7 @@ public class TUI implements UI {
     public void askNickname(){
         System.out.print(ansi().fg(color).a("~> Insert your nickname: \n").reset());
         nickname = sc.nextLine();
-        view.setPlayerId(nickname);
+        view.setPlayerID(nickname);
 
     }
     public void nickNameAlreadyInUse(){

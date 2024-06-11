@@ -242,8 +242,8 @@ public class  GUI  implements UI {
         if(frame == null){
             createFrame();
         }
-        System.out.println(listOfGames.size());
-         login.chooseGame(listOfGames);
+
+        login.chooseGame(listOfGames);
 
 
         /*if(listOfGames != null && !listOfGames.isEmpty()){
@@ -330,6 +330,21 @@ public class  GUI  implements UI {
         //view.stopUI();
         view.welcome();
         view.requestAvailableGames();
+    }
+
+    @Override
+    public void printStarterCard() {
+
+    }
+
+    @Override
+    public void printSecretObjective() {
+
+    }
+
+    @Override
+    public void displayReconnection() {
+
     }
 
 

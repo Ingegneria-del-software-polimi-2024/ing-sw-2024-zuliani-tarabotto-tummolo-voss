@@ -250,7 +250,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
     }
 
     /**
-     * we update the player resources(elements, artifacts) NOT IN BROADCAST
+     * we update the player resources(elements, artifacts)
      * @param player
      * @param availableArtifacts
      * @param availableElements
@@ -259,6 +259,21 @@ public class ModelListener {//TODO Handle correctly the exceptions
                                HashMap<Element, Integer> availableElements){
         try{
             serverAPI.broadcastNotifyChanges(new UpdateResourcesMessage(player, availableElements, availableArtifacts));
+        }catch (MsgNotDeliveredException msg){
+            throw new RuntimeException(msg);
+        }
+    }
+
+    /**
+     * we update the player resources(elements, artifacts) NOT IN BROADCAST
+     * @param player
+     * @param availableArtifacts
+     * @param availableElements
+     */
+    public void personalNotifyChanges (String player, HashMap<Artifact, Integer> availableArtifacts,
+                               HashMap<Element, Integer> availableElements){
+        try{
+            serverAPI.notifyChanges(new UpdateResourcesMessage(player, availableElements, availableArtifacts), player);
         }catch (MsgNotDeliveredException msg){
             throw new RuntimeException(msg);
         }

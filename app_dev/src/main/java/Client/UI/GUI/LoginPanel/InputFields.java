@@ -213,7 +213,7 @@ public class InputFields extends JPanel {
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gui.getView().setPlayerId(nickname);
+                gui.getView().setPlayerID(nickname);
             }
         });
 
@@ -245,9 +245,7 @@ public class InputFields extends JPanel {
         JButton refresh_JButton = new JButton();
         JButton join_JButton = new JButton();
 
-
-
-        createNewGame_JButton.setBackground(new java.awt.Color(82, 168, 167));
+        
         createNewGame_JButton.setText("CREATE NEW GAME");
 
         createNewGame_JButton.addActionListener(new java.awt.event.ActionListener() {

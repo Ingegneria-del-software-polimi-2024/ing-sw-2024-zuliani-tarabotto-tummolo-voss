@@ -316,8 +316,10 @@ public class ViewAPI implements ViewAPI_Interface {
 
     public void displaySecretObjective(){ui.printSecretObjective();};
     public void displayReconnection(){
-        t = new Thread(ui);
-        t.start();
+        if(ui instanceof TUI){
+            t = new Thread(ui);
+            t.start();
+        }
         ui.displayReconnection();
     }
 
