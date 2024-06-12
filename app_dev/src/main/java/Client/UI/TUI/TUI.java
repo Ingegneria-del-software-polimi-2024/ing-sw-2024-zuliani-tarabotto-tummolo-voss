@@ -212,6 +212,7 @@ public class TUI implements UI {
             System.out.print(ansi().fg(color).a("~> Press enter to return to the lobby\n").reset());
             sc = new Scanner(System.in);
             if(input != null)
+                //debug
                 System.out.println("RN input is: "+input);
             if(input == null || !input.isEmpty()) {
                 in = sc.nextLine();

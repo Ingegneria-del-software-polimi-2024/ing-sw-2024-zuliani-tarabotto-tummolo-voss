@@ -137,7 +137,6 @@ public class GameState {
      * updates currentPlayer
      */
     public void nextPlayer() {
-        System.out.println("Previous player was: "+turnPlayer.getNickname());
         do {
             int currentPlayer = players.indexOf(turnPlayer);
             if (currentPlayer == players.size() - 1) {
@@ -191,7 +190,7 @@ public class GameState {
             //NOTIFICATION: about the two objectives the player has to choose between
             modelListener.notifyChanges(objectiveBuffer.get(objectiveBuffer.size() - 2), objectiveBuffer.get(objectiveBuffer.size() - 1), p.getNickname());
         }
-        System.out.println("distribution ended");
+        modelListener.notifyChanges(turnPlayer.getNickname());
     }
 
     public void setPlayerSecretObjective(String cardId, String player){
@@ -580,10 +579,10 @@ public class GameState {
      * @param player the disconnected player
      */
     public void recoveryStarterCard(Player player){
-        if(!player.getPlacementArea().freePositions().contains(new Coordinates(0,0)))
+        if(!areCoordinatesPresent(player.getPlacementArea().freePositions(), new Coordinates(0,0))){
             return;
+        }
         modelController.playStarterCard(true, player.getNickname());
-        System.out.println("starter card placed anyway");
     }
 
     /**
@@ -626,5 +625,12 @@ public class GameState {
         nextPlayer();
         playingTurn();
         setTurnState(TurnState.PLACING_CARD_SELECTION);
+    }
+
+    private boolean areCoordinatesPresent(List<Coordinates> list, Coordinates coordinates){
+        for(Coordinates c : list)
+            if(c.equals(coordinates))
+                return true;
+        return false;
     }
 }

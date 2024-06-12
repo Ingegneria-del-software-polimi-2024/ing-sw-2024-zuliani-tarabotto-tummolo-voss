@@ -104,7 +104,6 @@ public class ModelController implements ServerControllerInterface {
      */
     private void distributeSecretObjectives(){
         gameState.distributeSecretOjectives();
-        gameState.nextPlayer();
         gameState.setTurnState(TurnState.OBJECTIVE_SELECTION);
     }
 
@@ -121,11 +120,8 @@ public class ModelController implements ServerControllerInterface {
         cont++;
         if(!playersNicknames.contains(player))
             return;
-        System.out.println(cont +" !!!!!!!!!!");
         gameState.setPlayerSecretObjective(cardId, player);
-        System.out.println("MHHHH");
         if(cont == playersNicknames.size()){
-            System.out.println("WTF");
             //Now the first round will be played
             gameState.playingTurn();
             gameState.setTurnState(TurnState.PLACING_CARD_SELECTION);
@@ -197,7 +193,6 @@ public class ModelController implements ServerControllerInterface {
                 gameState.drawCardGoldDeck();
         }
 
-
         gameState.nextPlayer();
 
         //if it's not the last turn:
@@ -206,8 +201,10 @@ public class ModelController implements ServerControllerInterface {
         // - new turnPlayer gets notified about which cards he can place(and where) by calling playingTurn method
         //TODO: optimize this control
         if(!gameState.getLastTurn() && !lastRound){
+
             playNewTurn();
         }else if(!Objects.equals(gameState.getTurnPlayer().getNickname(), initialPlayer) && !lastRound){
+//            gameState.nextPlayer();
             playNewTurn();
         } else {
             if(!lastRound){
@@ -215,10 +212,13 @@ public class ModelController implements ServerControllerInterface {
                 lastRound = true;
             }
 
-            if(cont == playersNicknames.size() - 1){
+            if(cont == playersNicknames.size()){
                 endGame();
                 return;
-            }else{playNewTurn();}
+            }else{
+//                gameState.nextPlayer();
+                playNewTurn();
+            }
             cont ++;
         }
     }
