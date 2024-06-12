@@ -111,7 +111,7 @@ public class  GUI  implements UI {
                     if (!title.isEmpty()) {
                         Graphics2D g2d = (Graphics2D) g;
                         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                        g2d.setFont(new Font("Beaufort", Font.BOLD, 70));
+                        g2d.setFont(new Font("Serif", Font.BOLD, 70));
                         FontMetrics fm = g2d.getFontMetrics();
                         int stringWidth = fm.stringWidth(title);
                         int stringHeight = fm.getAscent();
@@ -167,9 +167,11 @@ public class  GUI  implements UI {
         handPanel.updateHand();
         deckPanel.disableListeners();
         if(view.getMyTurn()){
-            showTitle("Play a Card");
+            showTitle("Place a Card");
             currentDisposition = view.getPlayerId();
             handPanel.enableListeners();
+        }else{
+            showTitle(getView().getTurnPlayer() + "is placing a card");
         }
 
     }
@@ -183,16 +185,16 @@ public class  GUI  implements UI {
             //
             //board.setDisplayAvailable();
             handPanel.updateHand();
-            System.out.println("yes");
             deckPanel.enableListeners();
+        }else{
+            showTitle(getView().getTurnPlayer() + "is drawing a card");
         }
+
 
     }
 
     @Override
     public void displayEndGame() {
-        showTitle("The End");
-
         System.out.println("fine");
 
     }
@@ -404,6 +406,7 @@ public class  GUI  implements UI {
 
         JScrollPane scroll = new JScrollPane(board);
         scroll.setBackground(new Color(50, 84, 70));
+
 
         JScrollBar verticalScrollBar = scroll.getVerticalScrollBar();
         verticalScrollBar.setUnitIncrement(5); // Adjust unit increment for smoother scrolling

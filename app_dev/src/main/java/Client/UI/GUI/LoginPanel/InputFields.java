@@ -33,7 +33,7 @@ public class InputFields extends JPanel {
     private JPanel mainPanel;
     private boolean connectionSelected = false;
     private boolean nicknameInUse = false;
-    private Font font = new Font("Beaufort", Font.BOLD, 70);
+    private Font font = new Font("Serif", Font.BOLD, 70);
     private boolean cantCreateRoom = false;
     private boolean cantJoinRoom = false;
     private BufferedImage cranioLogo;
@@ -58,7 +58,7 @@ public class InputFields extends JPanel {
         add(mainPanel);
 
         try {
-            cranioLogo = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Images/logo.png")));
+            cranioLogo = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Images/cranioLogo.png")));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -74,7 +74,7 @@ public class InputFields extends JPanel {
         JToggleButton socketButton = new JToggleButton("Socket");
 
         JLabel welcome = new JLabel("Welcome");
-        welcome.setFont(new Font("Beaufort", Font.BOLD, 50));
+        welcome.setFont(new Font("Serif", Font.BOLD, 60));
         welcome.setForeground(new Color(53,31,23));
         rmiButton.addActionListener(new ActionListener() {
             @Override
@@ -148,6 +148,9 @@ public class InputFields extends JPanel {
                     } catch (StartConnectionFailedException er) {
                         System.out.println("~> An error during the connection occurred\n   Check your internet connection and retry\n");
                         messageLabel.setText("An error during the connection occurred\n   Check your internet connection and retry\n");
+                        mainPanel.removeAll();
+                        mainPanel.revalidate();
+                        mainPanel.repaint();
                         gui.chooseConnection();
                     }
                 }else{
@@ -494,6 +497,6 @@ public class InputFields extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        g2d.drawImage(cranioLogo, 0, 0, (int)(cranioLogo.getWidth() * 0.2), (int)(cranioLogo.getHeight() * 0.2), this);
+        g2d.drawImage(cranioLogo, 0, getHeight() - (int)(cranioLogo.getHeight() * 0.15), (int)(cranioLogo.getWidth() * 0.15), (int)(cranioLogo.getHeight() * 0.15), this);
     }
 }

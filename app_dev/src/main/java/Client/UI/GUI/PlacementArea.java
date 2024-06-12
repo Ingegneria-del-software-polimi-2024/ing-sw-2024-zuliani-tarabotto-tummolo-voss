@@ -70,10 +70,8 @@ public class PlacementArea extends JPanel {
             g2d.setStroke(new BasicStroke(borderWidth));
             g2d.drawRoundRect(xCardCenter - cardLength/2, yCardCenter - cardHeight/2 , cardLength, cardHeight, 13, 13);
         }
-        //g2d.drawImage(gui.getFronts().get(gui.getView().getStarterCard().getId()), xCenter - cardLength/2,yCenter- cardHeight/2, cardLength,(int)(cardLength*heightLengthRatio), this);
-        g2d.setColor(Color.magenta);
-        g2d.fillOval(xCenter, yCenter, 5,5);
-    }
+
+   }
 
     public int getXCenter(){return xCenter;}
     public int getYCenter(){return yCenter;}

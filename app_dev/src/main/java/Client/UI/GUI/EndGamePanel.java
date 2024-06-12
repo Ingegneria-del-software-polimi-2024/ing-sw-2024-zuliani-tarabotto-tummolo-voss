@@ -48,7 +48,7 @@ public class EndGamePanel extends JPanel {
             winnerLabel.setText("The winner is: ");
         }else{ winnerLabel.setText("The winners are: ");}
         winnerLabel.setForeground(new Color(200, 170, 110));
-        winnerLabel.setFont(new Font("Beaufort", Font.BOLD, 100));
+        winnerLabel.setFont(new Font("Serif", Font.BOLD, 100));
         winnerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         middlePanel.add(winnerLabel);
 
@@ -64,7 +64,7 @@ public class EndGamePanel extends JPanel {
         winnerNameLabel.setText(names);
         winnerNameLabel.setForeground(new Color(200, 170, 110));
         winnerNameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        winnerNameLabel.setFont(new Font("Beaufort", Font.BOLD, 50));
+        winnerNameLabel.setFont(new Font("Serif", Font.BOLD, 80));
         middlePanel.add(winnerNameLabel);
 
         ///////////////////////////////////// player's scores   /////////////////////////////////////////////
@@ -89,7 +89,6 @@ public class EndGamePanel extends JPanel {
         closeButton.addActionListener(e -> System.exit(0));
 
         JButton lobbyButton = new JButton("Lobby");
-        lobbyButton.setBackground(new Color(218, 211, 168));
         lobbyButton.addActionListener(e -> gui.goBackToLobby());
 
         buttonPanel.add(lobbyButton);
