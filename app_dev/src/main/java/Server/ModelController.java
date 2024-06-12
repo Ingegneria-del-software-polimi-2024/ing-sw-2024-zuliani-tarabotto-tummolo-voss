@@ -277,7 +277,7 @@ public class ModelController implements ServerControllerInterface {
             }
         }while(iterations < HeartBeatSettings.iterationsNumber);
 
-        //after some time oof checking we must close the game
+        //after some time of checking we must close the game
         if(!gameEnded) endGame();
         finished = true;
     }

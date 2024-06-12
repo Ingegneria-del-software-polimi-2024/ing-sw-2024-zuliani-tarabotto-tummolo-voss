@@ -17,7 +17,7 @@ public class EndGamePanel extends JPanel {
 
         //we set the layout for the frame
         setLayout(new BorderLayout());
-        setBackground(new Color(218, 211, 168));;
+        setBackground(new Color(50, 84, 70));
 
         //we create the main panel with  a box layout
         JPanel middlePanel = new JPanel();
@@ -47,8 +47,8 @@ public class EndGamePanel extends JPanel {
         if(winners.size() == 1) {
             winnerLabel.setText("The winner is: ");
         }else{ winnerLabel.setText("The winners are: ");}
-        winnerLabel.setForeground(Color.YELLOW);
-        winnerLabel.setFont(new Font("Beaufort", Font.BOLD, 70));
+        winnerLabel.setForeground(new Color(200, 170, 110));
+        winnerLabel.setFont(new Font("Beaufort", Font.BOLD, 100));
         winnerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         middlePanel.add(winnerLabel);
 
@@ -62,7 +62,7 @@ public class EndGamePanel extends JPanel {
         names += winners.get(winners.size() - 1);
         JLabel winnerNameLabel = new JLabel();
         winnerNameLabel.setText(names);
-        winnerNameLabel.setForeground(Color.YELLOW);
+        winnerNameLabel.setForeground(new Color(200, 170, 110));
         winnerNameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         winnerNameLabel.setFont(new Font("Beaufort", Font.BOLD, 50));
         middlePanel.add(winnerNameLabel);
@@ -89,6 +89,7 @@ public class EndGamePanel extends JPanel {
         closeButton.addActionListener(e -> System.exit(0));
 
         JButton lobbyButton = new JButton("Lobby");
+        lobbyButton.setBackground(new Color(218, 211, 168));
         lobbyButton.addActionListener(e -> gui.goBackToLobby());
 
         buttonPanel.add(lobbyButton);
@@ -97,5 +98,23 @@ public class EndGamePanel extends JPanel {
 
         add(wrapperPanel);
 
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        int borderWidth = 6;
+        g2d.setColor(new Color(171, 144, 76));
+        g2d.setStroke(new BasicStroke(borderWidth));
+        g2d.drawRect(borderWidth/2, borderWidth/2, getWidth() - borderWidth, getHeight() - borderWidth);
+
+        int innerBorder = borderWidth/2;
+
+        g2d.setColor(new Color(171, 144, 76));
+        g2d.setStroke(new BasicStroke(innerBorder));
+        g2d.drawRect((borderWidth*2), (borderWidth*2), getWidth() - 2*(borderWidth*2), getHeight() - 2*(borderWidth*2));
     }
 }

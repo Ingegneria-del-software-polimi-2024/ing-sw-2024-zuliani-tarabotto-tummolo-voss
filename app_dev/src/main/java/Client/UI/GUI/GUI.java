@@ -46,7 +46,7 @@ public class  GUI  implements UI {
     private EndGamePanel endGamePanel;
     private LoginFrame login;
     private JPanel topPanel;
-    final int FPS = 30;
+    final int FPS = 15;
     public boolean starterSelected = false;
     public boolean cardSelected = false;
     private PlacementArea board;

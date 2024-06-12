@@ -3,6 +3,7 @@ package Client.UI.GUI.PlayerBanner;
 
 
 
+import Client.UI.GUI.Colors;
 import Client.UI.GUI.GUI;
 import Client.UI.GUI.Resources;
 import model.enums.Artifact;
@@ -21,8 +22,8 @@ import java.util.Objects;
 public class PlayerPanel extends JPanel {
     private BufferedImage playerImage;
     private int points;
-    private int imageDim = (int)(getHeight() * 0.8);
-    private int imagePos = (getHeight() - imageDim) / 2;
+    private int imageDim;
+    private int imagePos;
     private String player;
     private PlayerInfo infoPanel;
     private GUI gui;
@@ -33,18 +34,19 @@ public class PlayerPanel extends JPanel {
         this.player = player;
 
         imageDim = (int)(height * 0.8);
+        System.out.println("imageDim"+imageDim);
         imagePos = (height - imageDim) / 2;
         setLayout(new FlowLayout(FlowLayout.LEFT));
         setBorder(BorderFactory.createEmptyBorder(0, 2*imagePos + imageDim, 0, 0));
         setBackground(new Color(50, 84, 70));
         setOpaque(true);
 
-        infoPanel = new PlayerInfo(player, gui, imageDim/6);
+        infoPanel = new PlayerInfo(player, gui, (imageDim - 1)/6);
         add(infoPanel);
 
 
         try {
-            playerImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Images/playerIcon/icon2.jpeg")));
+            playerImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(Colors.valueOf(gui.getView().getPawnColor(player)).getIcon())));
             //playerImage = createRoundedImage(img, 100);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -83,7 +85,7 @@ public class PlayerPanel extends JPanel {
 
 
         //we draw the rectangle around the banner
-        int borderWidth = 2;
+        int borderWidth = 3;
         g2d.setColor(new Color(171, 144, 76));
         g2d.setStroke(new BasicStroke(borderWidth));
         g2d.drawRect(borderWidth/2, borderWidth/2, getWidth() - borderWidth, getHeight() - borderWidth);
@@ -96,7 +98,8 @@ public class PlayerPanel extends JPanel {
 
         if(gui.getCurrentDisposition().equals(player)){
             int border = 3;
-            g2d.setColor(Color.RED);
+
+            g2d.setColor(Color.green);
             g2d.setStroke(new BasicStroke(borderWidth));
             g2d.drawRect(borderWidth/2, borderWidth/2, getWidth() - borderWidth, getHeight() - borderWidth);
 

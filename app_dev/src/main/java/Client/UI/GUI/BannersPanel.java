@@ -38,9 +38,9 @@ public class BannersPanel extends JPanel {
 
         for(String p : gui.getView().getPlayers()){
             if(!p.equals(s)){
-                PlayerPanel player = new PlayerPanel( p, (int ) (screenWidth * 0.18), (int)(screenHeight * 0.13), gui);
-                player.setPreferredSize(new Dimension((int ) (screenWidth * 0.18), (int)(screenHeight * 0.13)));
-                player.setMaximumSize(new Dimension((int ) (screenWidth * 0.18), (int)(screenHeight * 0.13)));
+                PlayerPanel player = new PlayerPanel( p, (int ) (screenWidth * 0.17), (int)(screenHeight * 0.123), gui);
+                player.setPreferredSize(new Dimension((int ) (screenWidth * 0.17), (int)(screenHeight * 0.123)));
+                player.setMaximumSize(new Dimension((int ) (screenWidth * 0.17), (int)(screenHeight * 0.123)));
                 banners.put(p, player);
                 add(player);
                 add(Box.createVerticalStrut(25)); // 20 pixels of space

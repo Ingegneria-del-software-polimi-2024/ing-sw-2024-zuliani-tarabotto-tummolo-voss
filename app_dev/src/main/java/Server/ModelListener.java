@@ -133,6 +133,18 @@ public class ModelListener {//TODO Handle correctly the exceptions
         }
     }
 
+    /**
+     * we broadcast the player pawn color
+     * @param player
+     * @param pawnColor
+     */
+    public void notifyChanges( String player, Pawn pawnColor){
+        try{
+            serverAPI.broadcastNotifyChanges(new PawnColorMessage(player, pawnColor.toString()));
+        }catch (MsgNotDeliveredException msg){
+            throw new RuntimeException(msg);
+        }
+    }
 
 
     /**

@@ -12,6 +12,7 @@ import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
 import model.enums.Artifact;
 import model.enums.Element;
+import model.enums.Pawn;
 import model.placementArea.Coordinates;
 
 import java.util.ArrayList;
@@ -46,14 +47,11 @@ public class ViewModel {
     private TurnState state;
     private List<String> players;
     private String gameId;
-    //private HashMap<Artifact, Integer> availableArtifacts;
     private HashMap< String, HashMap<Artifact, Integer> > availableArtifacts;
-    //private HashMap<Element, Integer> availableElements;
     private HashMap< String, HashMap<Element, Integer> > availableElements;
-    //the id of THIS player
+    private HashMap<String, String> pawnColors;
     private String playerId;
     private String turnPlayer;
-    private String pawnColor;
     private List<Coordinates> availablePlaces;
 
     //an array of 3 booleans indicating which of the cards in the player's hand can be placed(due to placementConstraint)
@@ -77,28 +75,12 @@ public class ViewModel {
     public ViewModel(UI ui) {
 
 
-        //we initialize both hashmap to zero
-        /*for(String player : players){
-            HashMap<Element, Integer> elements = new HashMap<>();
-            HashMap<Artifact, Integer> artifacts = new HashMap<>();
-
-            for(Artifact ar : Artifact.values()){
-                artifacts.put(ar, 0);
-            }
-            for(Element el : Element.values()){
-                elements.put(el, 0);
-            }
-
-            availableElements.put(player, elements);
-            availableArtifacts.put(player, artifacts);
-
-        }*/
-
 
         this.commonObjectives = new ArrayList<>();
         this.chooseSecretObjectives = new ArrayList<>();
         this.winners = new ArrayList<String>();
 
+        this.pawnColors = new HashMap<>();
         this.decks = new HashMap<Integer,List<PlayableCard>>();
         this.ui = ui;
     }
@@ -269,9 +251,11 @@ public class ViewModel {
         clientAPIGo.sendToServer(new QuitGameMessage(playerId));
     }
 
-    public void setPawnColor(String pawnColor) {
-        this.pawnColor = pawnColor;
+    public void setPawnColor(String player, String pawnColor) {
+        pawnColors.put(player, pawnColor);
     }
+
+    public String getPawnColor(String player){return pawnColors.get(player);}
 
     public void setCommonObjectives(ObjectiveCard commonObjective1, ObjectiveCard commonObjective2){
         commonObjectives.add(commonObjective1);

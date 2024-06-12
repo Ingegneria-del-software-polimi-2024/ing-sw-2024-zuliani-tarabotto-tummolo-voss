@@ -1,11 +1,10 @@
 package Client.UI.GUI;
 
 public enum Colors {
-    RED("/Images/playerIcon/icon2.jpeg"),
-    YELLOW("/Images/playerIcon/icon2.jpeg"),
-    BLUE("/Images/playerIcon/icon2.jpeg"),
-    GREEN("/Images/playerIcon/icon2.jpeg"),
-    BLACK("/Images/playerIcon/icon2.jpeg");
+    red("/Images/playerIcon/red.jpeg"),
+    purple("/Images/playerIcon/purple.jpeg"),
+    blue("/Images/playerIcon/blue.jpeg"),
+    green("/Images/playerIcon/green.jpeg");
 
 
     private final String icon;

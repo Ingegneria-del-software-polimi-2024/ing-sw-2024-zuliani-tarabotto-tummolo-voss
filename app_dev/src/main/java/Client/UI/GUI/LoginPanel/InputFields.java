@@ -3,6 +3,7 @@ package Client.UI.GUI.LoginPanel;
 import Client.UI.GUI.GUI;
 import SharedWebInterfaces.WebExceptions.StartConnectionFailedException;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -11,8 +12,11 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class InputFields extends JPanel {
 
@@ -32,6 +36,7 @@ public class InputFields extends JPanel {
     private Font font = new Font("Beaufort", Font.BOLD, 70);
     private boolean cantCreateRoom = false;
     private boolean cantJoinRoom = false;
+    private BufferedImage cranioLogo;
 
 
 
@@ -51,6 +56,12 @@ public class InputFields extends JPanel {
         mainPanel.setOpaque(false);
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         add(mainPanel);
+
+        try {
+            cranioLogo = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Images/logo.png")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -62,6 +73,9 @@ public class InputFields extends JPanel {
         JToggleButton rmiButton = new JToggleButton("RMI");
         JToggleButton socketButton = new JToggleButton("Socket");
 
+        JLabel welcome = new JLabel("Welcome");
+        welcome.setFont(new Font("Beaufort", Font.BOLD, 50));
+        welcome.setForeground(new Color(53,31,23));
         rmiButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -93,7 +107,6 @@ public class InputFields extends JPanel {
         messageLabel.setForeground(Color.RED);
 
 
-        mainPanel.add(connectionPanel);
         JButton nextButton = new JButton("next");
         nextButton.setEnabled(false);
 
@@ -144,12 +157,15 @@ public class InputFields extends JPanel {
             }
         });
 
+        welcome.setAlignmentX(Component.LEFT_ALIGNMENT);
         connectionPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
         hostLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         hostField.setAlignmentX(Component.LEFT_ALIGNMENT);
         nextButton.setAlignmentX(Component.LEFT_ALIGNMENT);
         messageLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
+        mainPanel.add(welcome);
+        mainPanel.add(connectionPanel);
         mainPanel.add(Box.createVerticalStrut(10)); // Add some space between components
         mainPanel.add(hostLabel);
         mainPanel.add(messageLabel);
@@ -281,6 +297,7 @@ public class InputFields extends JPanel {
 
         // Add the JList to a JScrollPane
         jScrollPane2 = new JScrollPane(games_JList);
+        jScrollPane2.setOpaque(false);
 
 
         refresh_JButton.setText("Refresh");
@@ -298,6 +315,7 @@ public class InputFields extends JPanel {
         join_JButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gui.getView().joinGame(selectedGame, 0);
+                waitingForPlayers();
                 panel.repaint();
             }
         });
@@ -468,5 +486,14 @@ public class InputFields extends JPanel {
     public void setCantJoinRoom(){
         cantJoinRoom = true;
         chooseGame(listOfGames);
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        g2d.drawImage(cranioLogo, 0, 0, (int)(cranioLogo.getWidth() * 0.2), (int)(cranioLogo.getHeight() * 0.2), this);
     }
 }

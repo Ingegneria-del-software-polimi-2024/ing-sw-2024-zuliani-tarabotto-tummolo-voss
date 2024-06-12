@@ -12,6 +12,7 @@ import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
 import model.enums.Artifact;
 import model.enums.Element;
+import model.enums.Pawn;
 import model.placementArea.Coordinates;
 
 import java.util.ArrayList;
@@ -254,7 +255,9 @@ public class ViewAPI implements ViewAPI_Interface {
     }
 
     @Override
-    public void setPawnColor(String pawnColor) {viewModel.setPawnColor(pawnColor);}
+    public void setPawnColor(String player, String pawnColor) {viewModel.setPawnColor(player, pawnColor);}
+
+    public String getPawnColor(String player){return viewModel.getPawnColor(player);}
 
     @Override
     public void setCommonObjectives(ObjectiveCard commonObjective1, ObjectiveCard commonObjective2){

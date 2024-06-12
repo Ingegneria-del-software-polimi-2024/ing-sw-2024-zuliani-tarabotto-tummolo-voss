@@ -76,6 +76,7 @@ public class GameState {
         for(Player p : players){
             modelListener.notifyChanges(p.getStarterCard(), p.getNickname(), p.getPawnColor());
             modelListener.notifyChanges(p.getPlayingHand(),p.getNickname());
+            modelListener.notifyChanges(p.getNickname(), p.getPawnColor());
         }
 
     }

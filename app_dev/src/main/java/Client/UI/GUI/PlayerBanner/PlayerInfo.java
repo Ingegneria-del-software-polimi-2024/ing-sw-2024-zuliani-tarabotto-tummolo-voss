@@ -17,11 +17,10 @@ public class PlayerInfo extends JPanel {
     private JPanel tablePanel;
     private HashMap<Resources, JPanel> resourcePanel;
     private GUI gui;
-    private int cellHeight;
 
     public PlayerInfo(String name, GUI gui, int cellHeight) {
 
-        this.cellHeight = cellHeight;
+        System.out.println("cellheight:" + cellHeight);
         this.gui = gui;
         resourcePanel = new HashMap<>();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -31,11 +30,12 @@ public class PlayerInfo extends JPanel {
 
         Font customFont = new Font("Serif", Font.BOLD, cellHeight); // Font name, style, size
         JLabel nickname = new JLabel(name);
+        nickname.setOpaque(false);
+        nickname.setSize(new Dimension(0, cellHeight));
         nickname.setFont(customFont);
         nickname.setForeground(new Color(255, 248, 164));
         //nickname.setAlignmentX(Component.LEFT_ALIGNMENT);
         nickPanel.add(nickname);
-        //nickname.setFont(nickname.getFont().deriveFont(Font.BOLD));
 
         add(nickPanel);
         // Create the table panel with 2 columns and 4 rows

@@ -21,6 +21,6 @@ public class StarterCardMessage implements MessageFromServer{
     @Override
     public void execute(ViewAPI_Interface view) {
         view.setStarterCard(starterCard);
-        view.setPawnColor(pawnColor);
+        view.setPawnColor(player, pawnColor);
     }
 }

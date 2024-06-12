@@ -40,7 +40,7 @@ public class LoginFrame extends JFrame {
 
                 BufferedImage img;
                 try {
-                    img = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Images/Screenshot 2024-06-07 at 13.57.54.png")));
+                    img = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Images/codexLogo.jpeg")));
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

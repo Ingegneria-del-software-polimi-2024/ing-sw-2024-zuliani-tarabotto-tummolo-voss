@@ -10,10 +10,9 @@ import java.util.List;
 
     public enum Pawn {
         red(),
-        yellow(),
+        purple(),
         green(),
-        blue(),
-        black();
+        blue();
 
         private static List<Pawn> shuffledList = new ArrayList<>();
         private static int currentIndex = 0;
