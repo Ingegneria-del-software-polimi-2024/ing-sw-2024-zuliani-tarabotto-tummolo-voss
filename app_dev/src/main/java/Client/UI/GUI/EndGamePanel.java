@@ -68,9 +68,9 @@ public class EndGamePanel extends JPanel {
         middlePanel.add(winnerNameLabel);
 
         ///////////////////////////////////// player's scores   /////////////////////////////////////////////
-        String scores = "Scores -> ";
+        String scores = "Scores: ";
         for(int i = 0; i < entryList.size() - 1; i++){
-            scores += entryList.get(i).getKey() + ": " + entryList.get(i).getValue() + ", ";
+            scores += entryList.get(i).getKey() + "(" + entryList.get(i).getValue() + "), ";
         }
 
         scores += entryList.get(entryList.size() - 1).getKey() + ": " + entryList.get(entryList.size() - 1).getValue() + ", ";
@@ -78,14 +78,14 @@ public class EndGamePanel extends JPanel {
         scoresLabel.setForeground(Color.BLACK);
         scoresLabel.setText(scores);
         scoresLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        scoresLabel.setFont(new Font("Beaufort", Font.BOLD, 30));
+        scoresLabel.setFont(new Font("Serif", Font.BOLD, 20));
         middlePanel.add(scoresLabel);
 
 
         ///////////////////////////////////// buttons /////////////////////////////////////////
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttonPanel.setOpaque(false);
-        JButton closeButton = new JButton("Close Game");
+        JButton closeButton = new JButton("Close");
         closeButton.addActionListener(e -> System.exit(0));
 
         JButton lobbyButton = new JButton("Lobby");

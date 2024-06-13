@@ -57,6 +57,9 @@ public class  GUI  implements UI {
     private static String title;
     private static JPanel glassPane;
     private JLabel titleLabel;
+    private JPanel titlesPanel;
+    private boolean desiredQuit = false;
+    private CardLayout cardLayout;
 
     public GUI(ViewAPI view){
         this.view = view;
@@ -67,6 +70,18 @@ public class  GUI  implements UI {
 
     private void createBorderPanels(){
         this.currentDisposition = view.getPlayerId();
+        this.topPanel = new JPanel(new FlowLayout());
+        JButton quit = new JButton("quit");
+        quit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                desiredQuit = true;
+                quitGame();
+            }
+        });
+
+        topPanel.add(quit);
+        frame.add(topPanel, BorderLayout.NORTH);
 
         this.bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         bottomPanel.setOpaque(false);
@@ -79,7 +94,11 @@ public class  GUI  implements UI {
         eastPanel.setOpaque(false);
         frame.add(eastPanel, BorderLayout.EAST);
 
-        this.centerPanel = new JPanel(new BorderLayout());
+
+
+        //this.centerPanel = new JPanel(new BorderLayout());
+        cardLayout = new CardLayout();
+        this.centerPanel = new JPanel(cardLayout);
         centerPanel.setBorder(new EmptyBorder(10,10,5,5));
         centerPanel.setOpaque(false);
         frame.add(centerPanel, BorderLayout.CENTER);
@@ -102,7 +121,7 @@ public class  GUI  implements UI {
 
 
 
-
+            /*
             // Create a glass pane for the title
             glassPane = new JPanel() {
                 @Override
@@ -124,7 +143,7 @@ public class  GUI  implements UI {
             };
             glassPane.setOpaque(false);
             frame.setGlassPane(glassPane);
-            glassPane.setVisible(false);
+            glassPane.setVisible(false);*/
 
         });
         login = new LoginFrame(this);
@@ -148,6 +167,7 @@ public class  GUI  implements UI {
 
     @Override
     public void displayStarterCardSelection() {
+
         showTitle("Place Starter Card");
         handPanel.addStarterCard();
     }
@@ -171,7 +191,7 @@ public class  GUI  implements UI {
             currentDisposition = view.getPlayerId();
             handPanel.enableListeners();
         }else{
-            showTitle(getView().getTurnPlayer() + "is placing a card");
+            showTitle(getView().getTurnPlayer() + " is placing a card");
         }
 
     }
@@ -187,7 +207,7 @@ public class  GUI  implements UI {
             handPanel.updateHand();
             deckPanel.enableListeners();
         }else{
-            showTitle(getView().getTurnPlayer() + "is drawing a card");
+            showTitle(getView().getTurnPlayer() + " is drawing a card");
         }
 
 
@@ -208,29 +228,7 @@ public class  GUI  implements UI {
 
     @Override
     public void chooseConnection() {
-        login.chooseConnection();/*
-        System.out.println("~> Welcome to Codex Naturalis, insert the techonolgy of connection (RMI/Socket):");
-        String connectionType;
-        do{
-            connectionType = sc.nextLine();
-            if(!(connectionType.equalsIgnoreCase("RMI") || connectionType.equalsIgnoreCase("SOCKET")))
-                System.out.println("~> Insert a correct value RMI or Socket:");
-        }while (!(connectionType.equalsIgnoreCase("RMI") || connectionType.equalsIgnoreCase("SOCKET")));
-
-        String host;
-        System.out.println("~> Insert the host ip address: ");
-        do{
-            host = sc.nextLine();
-            if (!validIP(host))
-                System.out.println("~> Insert a valid ip address (xxx.xxx.xxx.xxx): ");
-        }while(!validIP(host));
-
-        try {
-            view.startConnection(connectionType, host);
-        } catch (StartConnectionFailedException e) {
-            System.out.println("~> An error during the connection occurred\n   Check your internet connection and retry\n");
-            chooseConnection();
-        }*/
+        login.chooseConnection();
     }
 
 
@@ -241,42 +239,6 @@ public class  GUI  implements UI {
         }
 
         login.chooseGame(listOfGames);
-
-
-        /*if(listOfGames != null && !listOfGames.isEmpty()){
-            System.out.println("~> Available games: ");
-            for(String g : listOfGames)
-                System.out.println("   "+g+" ");
-            System.out.println("~> Insert the name of the game you want to join or a new name if you want to create it, write -r to refresh the available games: ");
-        }else
-            System.out.print("~> There are no available games, please create a new game by typing its name or write -r to refresh the available games: ");
-
-        game = sc.nextLine();
-        if(game.equals("-r")) {
-            view.requestAvailableGames();
-            //            try {
-//                view.requestAvailableGames();
-//            }catch (RemoteException e) {
-//                throw new RuntimeException(e);
-//            }
-        }else{
-            int nPlayers = 0;
-            if(listOfGames == null || !listOfGames.contains(game)) {
-                System.out.println("~> You want to create a new game! \n~> Insert the number of players: ");
-                String players;
-                boolean flag = false;
-                do {
-                    players = sc.nextLine();
-                    try {
-                        nPlayers = Math.abs(Integer.parseInt(players));
-                    } catch (Exception e) {
-                        flag = true;
-                    }
-                } while (flag);
-            }
-            view.joinGame(game, nPlayers);
-        }*/
-
 
     }
 
@@ -324,16 +286,23 @@ public class  GUI  implements UI {
 
     @Override
     public void returnToLobby() {
-        if(endGamePanel == null) endGamePanel = new EndGamePanel(this);
-        frame.getContentPane().removeAll();
-        frame.getContentPane().add(endGamePanel, BorderLayout.CENTER);
-        frame.revalidate();
-        frame.repaint();
-
+        if(desiredQuit){
+            desiredQuit = false;
+            goBackToLobby();
+        }else {
+            if (endGamePanel == null) endGamePanel = new EndGamePanel(this);
+            frame.getContentPane().removeAll();
+            frame.getContentPane().add(endGamePanel, BorderLayout.CENTER);
+            frame.revalidate();
+            frame.repaint();
+        }
     }
     public void goBackToLobby(){
-        frame.dispose();
-        login.dispose();
+        if(frame != null){
+
+            frame.dispose();
+            login.dispose();
+        }
         frame = null;
         login = null;
         view.welcome();
@@ -402,9 +371,10 @@ public class  GUI  implements UI {
 
     private void createBoardPanel(){
         board = new PlacementArea(this);
-        board.setLayout(new BoxLayout(board,BoxLayout.Y_AXIS));
+        //board.setLayout(new BoxLayout(board,BoxLayout.Y_AXIS));
 
         JScrollPane scroll = new JScrollPane(board);
+        ;
         scroll.setBackground(new Color(50, 84, 70));
 
 
@@ -421,8 +391,19 @@ public class  GUI  implements UI {
         scroll.getHorizontalScrollBar().setPreferredSize(new Dimension(0, 0));
 
 
+        ///////// titles panel ///////////////////
+        titlesPanel = new JPanel(new BorderLayout());
+        JLabel title = new JLabel("", SwingConstants.CENTER);
+        title.setForeground(new Color(200, 170, 110));
+        title.setFont(new Font("serif", Font.BOLD, 60));
+        titlesPanel.add(title, BorderLayout.CENTER);
+        titlesPanel.setBackground(new Color(50, 84, 70));
 
-        centerPanel.add(scroll, BorderLayout.CENTER);
+        //centerPanel.add(scroll, BorderLayout.CENTER);
+        centerPanel.add(scroll, "BOARD");
+        centerPanel.add(titlesPanel, "TITLES");
+        cardLayout.show(centerPanel, "BOARD");
+
         frame.setVisible(true);
         SwingUtilities.invokeLater(() -> {
                     Dimension viewportSize = scroll.getViewport().getExtentSize();
@@ -494,7 +475,26 @@ public class  GUI  implements UI {
 
 
 
-    public static void showTitle(String newTitle) {
+    public  void showTitle(String newTitle) {
+
+        JLabel label = (JLabel) titlesPanel.getComponent(0);
+        label.setText(newTitle);
+        cardLayout.show(centerPanel, "TITLES");
+
+
+        // Create a Timer that waits for 2 seconds (2000 milliseconds)
+        Timer timer = new Timer(2000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(centerPanel, "BOARD");
+            }
+        });
+        // Start the timer
+        timer.setRepeats(false); // Ensure it only runs once
+        timer.start();
+
+        //cardLayout.show(centerPanel, "BOARD");
+        /*
         title = newTitle;
         glassPane.setVisible(true);
         glassPane.repaint();
@@ -509,7 +509,7 @@ public class  GUI  implements UI {
             }
         });
         timer.setRepeats(false);
-        timer.start();
+        timer.start();*/
     }
 
     public void quitGame(){
@@ -525,6 +525,9 @@ public class  GUI  implements UI {
         if(!playCard.getFaceSide()) return true;
         else return view.getCanBePlaced()[index];
     }
+
+
+
 
     @Override
     public void run() {

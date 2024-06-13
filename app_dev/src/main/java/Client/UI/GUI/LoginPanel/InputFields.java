@@ -111,7 +111,7 @@ public class InputFields extends JPanel {
         nextButton.setEnabled(false);
 
         JLabel hostLabel = new JLabel("Host IP Address:");
-        JTextField hostField = new JTextField(1);
+        JTextField hostField = new JTextField(19);
         hostField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -147,11 +147,11 @@ public class InputFields extends JPanel {
                         //panel.removeAll();
                     } catch (StartConnectionFailedException er) {
                         System.out.println("~> An error during the connection occurred\n   Check your internet connection and retry\n");
-                        messageLabel.setText("An error during the connection occurred\n   Check your internet connection and retry\n");
-                        mainPanel.removeAll();
+                        messageLabel.setText("Error during connection");
+                        /*mainPanel.removeAll();
                         mainPanel.revalidate();
                         mainPanel.repaint();
-                        gui.chooseConnection();
+                        gui.chooseConnection();*/
                     }
                 }else{
                     messageLabel.setText("IP address not valid");
