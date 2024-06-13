@@ -165,19 +165,23 @@ public class TUI implements UI {
                 System.out.print(ansi().fg(color).a("   "+g+"\n").reset());
             System.out.print(ansi().fg(color).a("~> Insert the name of the game you want to join or a new name if you want to create it, write -r to refresh the available games: \n").reset());
         }else
-            System.out.print(ansi().fg(color).a("~> There are no available games, please create a new game by typing its name or write -r to refresh the available games: \n").reset());
+            System.out.print(ansi().fg(color).a("~> There are no available games, please create a new game by typing its name or write --r to refresh the available games: \n").reset());
         //sc.reset();
         game = sc.nextLine();
-        if(game.equals("-r")) {
+        if(game.equals("--r")) {
             view.requestAvailableGames();
         }else{
             int nPlayers = 0;
             if(listOfGames == null || !listOfGames.contains(game)) {
                 String players;
                 boolean flag = false;
-                System.out.print(ansi().fg(color).a("~> You want to create a new game!\n~> Insert the number of players: ").reset());
+                System.out.print(ansi().fg(color).a("~> You want to create a new game!\n~> Insert the number of players (insert --back to go back): ").reset());
                 do {
                     players = sc.nextLine();
+                    if(players.equals("--back")){
+                        view.requestAvailableGames();
+                        return;
+                    }
                     try {
                         nPlayers = Math.abs(Integer.parseInt(players));
                         flag = false;
@@ -199,8 +203,8 @@ public class TUI implements UI {
     }
 
     public void returnToLobby(){
-        view.stopUI();
         displayReturnToLobby();
+        view.stopUI();
         clear();
         view.welcome();
         view.requestAvailableGames();
@@ -209,17 +213,17 @@ public class TUI implements UI {
     private void displayReturnToLobby(){
         String in = null;
         do {
-            System.out.print(ansi().fg(color).a("~> Press enter to return to the lobby\n").reset());
             sc = new Scanner(System.in);
-            if(input != null)
-                //debug
-                System.out.println("RN input is: "+input);
-            if(input == null || !input.isEmpty()) {
+            System.out.print(ansi().fg(color).a("~> Press enter to return to the lobby\n").reset());
+            if(input == null){
                 in = sc.nextLine();
-            }else {
-                in = input;
+            } else{
+                synchronized (lock){
+                    in = parseString();
+                }
+
             }
-        }while(!in.isEmpty());
+        }while(in != null);
         inputPresent = false;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -691,15 +695,41 @@ public class TUI implements UI {
 
     }
 
+    private String parseString(){
+        boolean validInput = false;
 
+        String value = null;
+
+        while(!validInput){
+
+            while (!inputPresent) {
+                try {
+                    lock.wait();
+                } catch (InterruptedException e) {
+                    System.out.println("the InterruptedException was caught");
+                    return null;
+                }
+            }
+
+            try{
+                if(input == null) {
+                    return null;
+                }
+                value = input;
+                validInput = true;
+            } catch(NumberFormatException e){
+                System.out.println("input type mismatch, please insert an integer\n");
+            }
+            inputPresent = false;
+            lock.notifyAll();
+        }
+        return value;
+    }
     //we use this function to visualize the disposition of other players
     @Override
     public void printDisposition(HashMap<Coordinates, PlayableCard> disp){
         dispositionPrinter.print(disp);
     }
-
-
-
 
     public void clear(){
         System.out.print(ansi().eraseScreen().cursor(0, 0));

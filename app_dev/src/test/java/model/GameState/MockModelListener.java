@@ -158,8 +158,9 @@ public class MockModelListener extends ModelListener {
     public void notifyChanges(String player, CantPlaceCardException e) {
         System.out.println("calledNotifyChanges");
     }
-    public void notifyChanges(String player, KickOutOfGameException e){
+    public boolean notifyChanges(String player, KickOutOfGameException e){
         System.out.println("calledNotifyChanges");
+        return true;
     }
     public void notifyChanges(String player, EmptyCardSourceException e){
         System.out.println("calledNotifyChanges");
