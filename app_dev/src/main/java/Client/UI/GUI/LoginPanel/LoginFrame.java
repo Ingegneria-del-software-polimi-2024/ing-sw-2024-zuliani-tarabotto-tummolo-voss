@@ -19,6 +19,7 @@ public class LoginFrame extends JFrame {
 
     public LoginFrame(GUI gui ){
 
+        setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         this.gui = gui;
