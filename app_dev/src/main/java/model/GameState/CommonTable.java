@@ -114,7 +114,7 @@ public class CommonTable {
      * @return Boolean
      */
     public boolean checkEmptyDecks() {
-        return goldDeck.getSize() == 0 && resourceDeck.getSize() == 0 && openGold.isEmpty() && openResources.isEmpty();
+        return goldDeck.getSize() == 0 && resourceDeck.getSize() == 0 /*&& openGold.isEmpty() && openResources.isEmpty()*/;
     }
 
     /**
