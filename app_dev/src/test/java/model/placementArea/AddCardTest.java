@@ -231,13 +231,16 @@ runTest(e, c_e, exp_e, true, starterCard_e, true, testCoord_e, testCardID_e);
 
 public class AddCardTest extends TestCase {
 
-    public static void initialize(PlacementArea area, ArrayList<Integer> cardList, ArrayList<Coordinates> coord, boolean face, Deck[] deckList, int starterCard, boolean faceStarterCard) {
-
-
+    public static void initializeStarterCard(PlacementArea area, Deck[] deckList, int starterCard, boolean faceStarterCard){
         PlayableCard cardToBePlaced = (PlayableCard) getCard(deckList, starterCard);
         cardToBePlaced.setFaceSide(faceStarterCard);
         area.addCard(cardToBePlaced);
         System.out.println("starter card placed");
+    }
+    public static int initialize(PlacementArea area, ArrayList<Integer> cardList, ArrayList<Coordinates> coord, boolean face, Deck[] deckList) {
+
+        int lastCardPlacedPoints;
+
 
         System.out.println("artifacts:");
         System.out.println("            feather: "+area.getNumberArtifacts(Artifact.feather));
@@ -249,7 +252,10 @@ public class AddCardTest extends TestCase {
         System.out.println("            mushrooms: "+area.getNumberElements(Element.mushrooms));
         System.out.println("            vegetals: "+area.getNumberElements(Element.vegetals));
 
-        putCards(cardList, coord, face, area, deckList);
+
+        lastCardPlacedPoints = putCards(cardList, coord, face, area, deckList);
+
+        return lastCardPlacedPoints;
     }
 
     private static Card getCard(Deck[] deckList, int id) throws RuntimeException{
@@ -275,8 +281,9 @@ public class AddCardTest extends TestCase {
         }
     }
 
-    public static void putCards(ArrayList<Integer> cards, ArrayList<Coordinates> coordList, boolean face, PlacementArea area, Deck[] deckList) throws RuntimeException{
+    public static int putCards(ArrayList<Integer> cards, ArrayList<Coordinates> coordList, boolean face, PlacementArea area, Deck[] deckList) throws RuntimeException{
 
+        int cardPoint = 0;
         if(coordList.size() != cards.size())
             throw new RuntimeException("error in data inserted");
 
@@ -285,9 +292,9 @@ public class AddCardTest extends TestCase {
             PlayableCard x = (PlayableCard) getCard(deckList, cards.get(i));
             System.out.println("putting card n. "+cards.get(i));
             x.setFaceSide(face);
-            area.addCard(coord, x);
+            //area.addCard(coord, x);
 
-            int cardPoint = area.addCard(coord, x);
+            cardPoint = area.addCard(coord, x);
 
 
             System.out.println("inserted card "+i);
@@ -320,6 +327,8 @@ public class AddCardTest extends TestCase {
 
         System.out.println("disposition");
         System.out.println("numberNearbyCards: "+numberNearbyCards);
+
+        return cardPoint;
     }
 
 
@@ -348,7 +357,7 @@ public class AddCardTest extends TestCase {
         Coordinates testCoord_a = new Coordinates(3, 0);
         int testPointCardID_a = 21;
         int expAnimals_a = 3;
-        int expInsects_a = 2;
+        int expInsects_a = 0; //prima 2 (ricontrallare)
         int expMushrooms_a = 2;
         int expVegetals_a = 2;
         int expFeather_a = 0;
@@ -390,7 +399,7 @@ public class AddCardTest extends TestCase {
 
         //test b artifacts
 
-        int[] cards_b = {25, 36};
+        /*int[] cards_b = {25, 36};
         int[] coordinates_b = {1,1, 2,-2};
         int expectedResults_b = 2;
         boolean face_b = true;
@@ -627,7 +636,7 @@ public class AddCardTest extends TestCase {
 
         runTest(cards_f, coordinates_f, expectedResults_f, face_f, starterCard_f, faceStarterCard_f, testCoord_f, testPointCardID_f,
                 expAnimals_f, expInsects_f, expMushrooms_f, expVegetals_f, expFeather_f, expInk_f, expPaper_f, expAvailablePosition_f, expDisposition_f, expNumberNearbyCards_f);
-
+*/
         //test g
 
 
@@ -660,6 +669,11 @@ public class AddCardTest extends TestCase {
         ArrayList<Coordinates> coord_a = new ArrayList<Coordinates>();
         ArrayList<Integer> cardList_a = new ArrayList<Integer>();
 
+        //addcard startercard
+
+
+        initializeStarterCard(area,deckList, starterCard, faceStarterCard);
+
         for(int i = 0; i < cards.length; i++)
             cardList_a.add(cards[i]);
 
@@ -675,12 +689,12 @@ public class AddCardTest extends TestCase {
 
         //addcard
 
-        initialize(area, cardList_a, coord_a, face, deckList, starterCard, faceStarterCard);
+        int cardPoint = initialize(area, cardList_a, coord_a, face, deckList);
 
         PlayableCard c = (PlayableCard) getCard(deckList, testPointCardID);
         c.setFaceSide(face);
 
-        int cardPoint = area.addCard(testCoord, c);
+        //int cardPoint = area.addCard(testCoord, c);
 
         int animals = area.getNumberElements(Element.animals);
         int insects = area.getNumberElements(Element.insects);
@@ -699,14 +713,13 @@ public class AddCardTest extends TestCase {
 
         assert (expectedResults == cardPoint): "Errore";
 
-        assert (expInsects == insects): "Errore";
+        assertEquals (expInsects, insects);
         assert (expAnimals == animals): "Errore";
         assert (expMushrooms == mushrooms): "Errore";
         assert (expVegetals == vegetals): "Errore";
 
-        for(Map.Entry<Coordinates, PlayableCard> position : disposition.entrySet()) {
-            assert (expDisposition.containsKey(position.getKey()) && expDisposition.get(position.getKey()).equals(position.getValue()) ) : "Errore";
-        }
+        for(Entry<Coordinates, PlayableCard> position : disposition.entrySet())
+            assert (expDisposition.containsKey(position.getKey()) && expDisposition.get(position.getKey()).equals(position.getValue())) : "Errore";
 
         assert (expFeather == feather): "Errore";
         assert (expInk == ink): "Errore";

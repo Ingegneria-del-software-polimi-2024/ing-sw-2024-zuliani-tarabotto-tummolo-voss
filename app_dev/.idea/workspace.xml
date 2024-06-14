@@ -5,16 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/IntelliJ_IDEA_GridLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/intellij_forms_rt.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/intellij_forms_rt_src.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/GUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/Lobby.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/Lobby.jfd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/LoginPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/LoginPage.jfd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/TUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/TUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/model/placementArea/AddCardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/placementArea/AddCardTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/model/placementArea/AddCardTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/model/placementArea/AddCardTest.class" afterDir="false" />
     </list>
@@ -41,6 +32,14 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="JavaAutoRunManager">
+    <enabled-run-configurations>
+      <run-configuration type="JUnit" name="AddCardTest" />
+    </enabled-run-configurations>
+  </component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "isMigrated": true
+}]]></component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="ProjectErrors" />
   </component>
@@ -63,7 +62,8 @@
     "Application.PlacementAreaTest.executor": "Run",
     "Application.RunDeckCreation.executor": "Run",
     "Application.RunTUI_Client.executor": "Run",
-    "JUnit.AddCardTest.executor": "Debug",
+    "JUnit.AddCardTest.executor": "Run",
+    "JUnit.AddCardTest.testSingoli.executor": "Debug",
     "JUnit.ControllerTest.executor": "Run",
     "JUnit.ControllerTest.main.executor": "Debug",
     "JUnit.ObjectiveCardTest.executor": "Run",
@@ -110,7 +110,7 @@
       <recent name="model.lobby" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.AddCardTest">
+  <component name="RunManager" selected="JUnit.AddCardTest.testSingoli">
     <configuration name="AddCardTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="model.placementArea.AddCardTest" />
       <module name="Ing_sw_proj" />
@@ -137,19 +137,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RunTUI_Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Client.RunTUI_Client" />
-      <module name="Ing_sw_proj" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Client.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="AddCardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Ing_sw_proj" />
       <extension name="coverage">
@@ -161,6 +148,22 @@
       <option name="PACKAGE_NAME" value="model.placementArea" />
       <option name="MAIN_CLASS_NAME" value="model.placementArea.AddCardTest" />
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AddCardTest.testSingoli" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Ing_sw_proj" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="model.placementArea.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="model.placementArea" />
+      <option name="MAIN_CLASS_NAME" value="model.placementArea.AddCardTest" />
+      <option name="METHOD_NAME" value="testSingoli" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -183,17 +186,17 @@
     <list>
       <item itemvalue="Application.AddCardTest" />
       <item itemvalue="Application.LoginPage" />
-      <item itemvalue="Application.RunTUI_Client" />
+      <item itemvalue="JUnit.AddCardTest.testSingoli" />
       <item itemvalue="JUnit.AddCardTest" />
       <item itemvalue="JUnit.PlacementAreaTest" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.AddCardTest" />
+        <item itemvalue="JUnit.AddCardTest.testSingoli" />
         <item itemvalue="JUnit.PlacementAreaTest" />
         <item itemvalue="Application.AddCardTest" />
         <item itemvalue="Application.LoginPage" />
-        <item itemvalue="Application.RunTUI_Client" />
       </list>
     </recent_temporary>
   </component>
@@ -334,6 +337,8 @@
     </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
+        <PinnedItemInfo parentTag="model.placementArea.Coordinates" memberName="x" />
+        <PinnedItemInfo parentTag="model.placementArea.Coordinates" memberName="y" />
         <PinnedItemInfo parentTag="model.GameState.GameState" memberName="objectiveDeck" />
         <PinnedItemInfo parentTag="model.GameState.GameState" memberName="resourceDeck" />
       </pinned-members>
