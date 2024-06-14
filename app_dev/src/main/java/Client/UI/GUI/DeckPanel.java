@@ -7,6 +7,9 @@ import model.cards.PlayableCards.PlayableCard;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * JPanel that collects all the cards that can be drawn by the player
+ */
 public class DeckPanel extends JPanel {
     private GUI gui;
     private CardLabel goldDeck;
@@ -17,6 +20,11 @@ public class DeckPanel extends JPanel {
     private CardLabel resource2;
     private DrawCardListener drawCardListener;
 
+
+    /**
+     * the cards are organized using a gridLayout
+     * @param gui
+     */
     public DeckPanel(GUI gui){
         this.gui = gui;
         setBackground(new Color(50, 84, 70));
@@ -53,6 +61,9 @@ public class DeckPanel extends JPanel {
 
     }
 
+    /**
+     * all the cardLabel panels in the deckPanel are updated after a card was drawn
+     */
     public void updateDecks(){
         PlayableCard c1 = gui.getView().getGoldDeck().get(0);
         PlayableCard c2 = gui.getView().getOpenGold().get(0);
@@ -96,6 +107,10 @@ public class DeckPanel extends JPanel {
 
     }
 
+
+    /**
+     * enables each cardLabel's listener for drawing the card
+     */
     public void enableListeners(){
         goldDeck.addMouseListener(drawCardListener);
         gold1.addMouseListener(drawCardListener);
@@ -105,6 +120,9 @@ public class DeckPanel extends JPanel {
         resource2.addMouseListener(drawCardListener);
     }
 
+    /**
+     * disables each cardLabel's listener for drawing the card
+     */
     public void disableListeners(){
         goldDeck.removeMouseListener(drawCardListener);
         gold1.removeMouseListener(drawCardListener);

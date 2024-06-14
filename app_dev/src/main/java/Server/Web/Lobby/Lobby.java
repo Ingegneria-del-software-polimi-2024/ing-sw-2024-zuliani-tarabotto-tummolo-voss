@@ -175,6 +175,7 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
         verifyStart(roomName);
     }
 
+
     /**
      *
      * @return returns the names of the available rooms doesn't return the rooms which are already full

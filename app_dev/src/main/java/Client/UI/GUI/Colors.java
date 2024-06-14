@@ -1,5 +1,8 @@
 package Client.UI.GUI;
 
+/**
+ * associates pawnColor to the player's image icon
+ */
 public enum Colors {
     red("/Images/playerIcon/red.jpeg"),
     purple("/Images/playerIcon/purple.jpeg"),

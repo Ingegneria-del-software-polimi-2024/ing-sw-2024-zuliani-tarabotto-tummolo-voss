@@ -9,9 +9,12 @@ import java.awt.event.MouseEvent;
 
 public class PlaceCardListener extends MouseAdapter {
 
-
     private GUI gui;
 
+    /**
+     * during the card selection phase, the listener detects which of the three cards from the hand the player wants to play
+     * @param gui
+     */
     public PlaceCardListener(GUI gui){
         this.gui = gui;
     }
@@ -22,7 +25,6 @@ public class PlaceCardListener extends MouseAdapter {
         if (SwingUtilities.isLeftMouseButton(e)) {
             CardLabel label = (CardLabel) e.getSource();
             gui.setSelectedCard(label.getCard());
-            //System.out.println("Right click detected at (" + e.getX() + ", " + e.getY() + ")");
         }
     }
 

@@ -11,16 +11,14 @@ import model.cards.PlayableCards.PlayableCard;
 import model.placementArea.Coordinates;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,13 +37,13 @@ public class  GUI  implements UI {
     private HandPanel handPanel;
     private DeckPanel deckPanel;
     private ObjectivesPanel objPanel;
-    private BannersPanel bannersPanel;
-    private JPanel eastPanel;
-    private JPanel bottomPanel;
-    private JPanel centerPanel;
+    private BannersPanel bannersPanel; //player infos
+    private JPanel eastPanel; //bannersPanel
+    private JPanel bottomPanel; //hand, decks, objectives
+    private JPanel centerPanel; //board
+    private JPanel topPanel; //quit, rules, tutorial
     private EndGamePanel endGamePanel;
     private LoginFrame login;
-    private JPanel topPanel;
     final int FPS = 40;
     public boolean starterSelected = false;
     public boolean cardSelected = false;
@@ -55,7 +53,6 @@ public class  GUI  implements UI {
     private BoardClickedListener boardClickedListener;
     private BoardMotionListener boardMotionListener;
     private static String title;
-    private JLabel titleLabel;
     private JPanel titlesPanel;
     private boolean desiredQuit = false;
     private CardLayout cardLayout;
@@ -69,7 +66,8 @@ public class  GUI  implements UI {
 
     private void createBorderPanels(){
         this.currentDisposition = view.getPlayerId();
-        this.topPanel = new JPanel(new FlowLayout());
+        this.topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        topPanel.setOpaque(false);
         JButton quit = new JButton("quit");
         quit.addActionListener(new ActionListener() {
             @Override
@@ -136,19 +134,20 @@ public class  GUI  implements UI {
         frame.setVisible(true);
 
         view.readyToPlay();
+        showTitle("Welcome to \n Codex Naturalis");
 
     }
 
     @Override
     public void displayStarterCardSelection() {
 
-        showTitle("Place Starter Card");
+        showTitle("Place your Starter Card");
         handPanel.addStarterCard();
     }
 
     @Override
     public void displayObjectiveSelection() {
-        showTitle("Choose Secret Objective");
+        showTitle("Choose a Secret Objective");
         bannersPanel.updateBanners();
         updateHand();
         objPanel.updateObjectivesPanel();
@@ -165,7 +164,7 @@ public class  GUI  implements UI {
             currentDisposition = view.getPlayerId();
             handPanel.enableListeners();
         }else{
-            showTitle(getView().getTurnPlayer() + " is placing a card");
+            showTitle("It's " + getView().getTurnPlayer() + "'s turn");
         }
 
     }
@@ -180,10 +179,7 @@ public class  GUI  implements UI {
             //board.setDisplayAvailable();
             handPanel.updateHand();
             deckPanel.enableListeners();
-        }else{
-            showTitle(getView().getTurnPlayer() + " is drawing a card");
         }
-
 
     }
 
@@ -273,7 +269,6 @@ public class  GUI  implements UI {
     }
     public void goBackToLobby(){
         if(frame != null){
-
             frame.dispose();
             login.dispose();
         }
@@ -301,7 +296,8 @@ public class  GUI  implements UI {
 
 
     public boolean validIP(String ip){
-        if(ip.equals("localHost"))
+
+        if(ip.toLowerCase(Locale.ROOT).equals("localhost"))
             return true;
         String desiredFormat = "^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\." +
                 "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\." +

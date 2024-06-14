@@ -10,6 +10,9 @@ import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
+/**
+ * specific class that contains the JPanel structure for the nickname and resources
+ */
 public class PlayerInfo extends JPanel {
 
     private int points;
@@ -20,7 +23,7 @@ public class PlayerInfo extends JPanel {
 
     public PlayerInfo(String name, GUI gui, int cellHeight) {
 
-        System.out.println("cellheight:" + cellHeight);
+        //System.out.println("cellheight:" + cellHeight);
         this.gui = gui;
         resourcePanel = new HashMap<>();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -91,9 +94,7 @@ public class PlayerInfo extends JPanel {
 
     }
 
-    public void updatePoints(int points){
 
-    }
 
     public void updateResources(HashMap<Resources, Integer> res){
         resources = res;

@@ -21,6 +21,12 @@ public class CardLabel extends JLabel {
         setOpaque(false);
     }
 
+    /**
+     * method used to change panel's corresponding card
+     * @param c
+     * @param front
+     * @param back
+     */
     public void updateCard(PlayableCard c, BufferedImage front, BufferedImage back){
         this.c = c;
         this.back = back;
@@ -28,15 +34,26 @@ public class CardLabel extends JLabel {
         select = false;
     }
 
+    /**
+     * changes the card faceSide and consequently the displayed image
+     */
     public void flipCard(){
         if(c == null) return;
         c.setFaceSide(!c.getFaceSide());
     }
 
+    /**
+     * method used to set the card's position in the deckPanel
+     * @param cardSource
+     */
     public void setCardSource(int cardSource){
         this.cardSource = cardSource;
     }
 
+    /**
+     * method used to get the card's position in the deck Panel
+     * @return
+     */
     public int getCardSource(){return cardSource;}
 
     public PlayableCard getCard(){
@@ -66,10 +83,17 @@ public class CardLabel extends JLabel {
 
     }
 
+    /**
+     * when the card is in the handPanel and the mouse goes over it, this method is called to surround the card with
+     * a green border
+     */
     public void highLight(){
         this.select = true;
     }
 
+    /**
+     * when the mouse exits the card panel, the border is eliminated
+     */
     public void unHighLight(){
         this.select = false;
     }

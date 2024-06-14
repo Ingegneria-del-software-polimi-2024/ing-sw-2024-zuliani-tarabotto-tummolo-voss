@@ -10,6 +10,11 @@ import java.awt.event.MouseEvent;
 
 public class DrawCardListener extends MouseAdapter {
     private GUI gui;
+
+    /**
+     * the listener detects which card the player wants to draw
+     * @param gui
+     */
     public DrawCardListener(GUI gui){
         this.gui = gui;
     }

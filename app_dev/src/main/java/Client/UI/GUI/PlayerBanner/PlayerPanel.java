@@ -18,7 +18,9 @@ import java.util.HashMap;
 import java.util.Objects;
 
 
-
+/**
+ * class that contains game data about a player: icon image, points, resources, elements
+ */
 public class PlayerPanel extends JPanel {
     private BufferedImage playerImage;
     private int points;
@@ -45,18 +47,13 @@ public class PlayerPanel extends JPanel {
         add(infoPanel);
 
 
+        //loading the player image icon
         try {
             playerImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(Colors.valueOf(gui.getView().getPawnColor(player)).getIcon())));
-            //playerImage = createRoundedImage(img, 100);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
-
-    public void setPlayerImage(BufferedImage image) {
-        repaint();
-    }
-
 
 
     @Override
@@ -72,8 +69,6 @@ public class PlayerPanel extends JPanel {
 
         // Draw the player image within the rounded rectangle
         if (playerImage != null) {
-            //System.out.println("image ");
-            //g2d.setClip(new RoundRectangle2D.Double(imagePos, imagePos, imageDim + 5, imageDim + 5, 20, 20));
             g2d.drawImage(playerImage, imagePos, imagePos, imageDim, imageDim , this); // Adjust padding as needed
         }
 
@@ -107,12 +102,17 @@ public class PlayerPanel extends JPanel {
 
    }
 
+    /**
+     * updates the player's points
+     */
    public void updatePoints(){
-        //we take from the gui the points of this player
         points = gui.getView().getPoints().get(getPlayer());
-        infoPanel.updatePoints(points);
    }
 
+
+    /**
+     * updates the player's resources (Resources + Elements)
+     */
    public void updateResources(){
        HashMap<Resources, Integer> res = new HashMap<>();
        HashMap<Element, Integer> availableElements = gui.getView().getAvailableElements(player);

@@ -11,6 +11,10 @@ public class PlaceStarterListener extends MouseAdapter {
 
     private GUI gui;
 
+    /**
+     * during the starterCard selection phase, the listener detects when the starterCard is selected
+     * @param gui
+     */
     public PlaceStarterListener(GUI gui){
         this.gui = gui;
     }
@@ -20,7 +24,6 @@ public class PlaceStarterListener extends MouseAdapter {
         if (SwingUtilities.isLeftMouseButton(e)) {
             CardLabel label = (CardLabel) e.getSource();
             gui.setStarterSelected();
-            //System.out.println("Right click detected at (" + e.getX() + ", " + e.getY() + ")");
         }
     }
 }

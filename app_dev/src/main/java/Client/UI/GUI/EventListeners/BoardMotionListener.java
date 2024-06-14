@@ -11,6 +11,13 @@ public class BoardMotionListener extends MouseAdapter {
 
     private GUI gui;
     private PlacementArea board;
+
+    /**
+     * the listener is responsible for monitoring mouse position and highlighting the board in case the position
+     * coincides with one of the availablePlaces (only during player's turn)
+     * @param gui
+     * @param board
+     */
     public BoardMotionListener(GUI gui, PlacementArea board){
         this.gui = gui;
         this.board = board;

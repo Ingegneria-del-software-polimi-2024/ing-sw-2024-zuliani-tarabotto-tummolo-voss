@@ -10,6 +10,11 @@ import java.awt.event.MouseEvent;
 public class SwitchBoardListener extends MouseAdapter {
 
     private GUI gui;
+
+    /**
+     * the listener is responsible for 
+     * @param gui
+     */
     public SwitchBoardListener(GUI gui){
         this.gui = gui;
     }

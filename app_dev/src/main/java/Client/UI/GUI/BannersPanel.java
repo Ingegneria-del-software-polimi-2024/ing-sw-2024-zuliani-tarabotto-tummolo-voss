@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * panel with a boxLayout that contains the banners of the players
+ */
 public class BannersPanel extends JPanel {
 
     private GUI gui;
@@ -33,23 +36,27 @@ public class BannersPanel extends JPanel {
         pl.setMaximumSize(new Dimension((int ) (screenWidth * 0.18), (int)(screenHeight * 0.13)));
         banners.put(s, pl);
         add(pl);
-        add(Box.createVerticalStrut(25)); // 20 pixels of space
+        add(Box.createVerticalStrut(15)); // 20 pixels of space
         pl.addMouseListener(listener);
+
 
         for(String p : gui.getView().getPlayers()){
             if(!p.equals(s)){
-                PlayerPanel player = new PlayerPanel( p, (int ) (screenWidth * 0.17), (int)(screenHeight * 0.123), gui);
-                player.setPreferredSize(new Dimension((int ) (screenWidth * 0.17), (int)(screenHeight * 0.123)));
-                player.setMaximumSize(new Dimension((int ) (screenWidth * 0.17), (int)(screenHeight * 0.123)));
+                PlayerPanel player = new PlayerPanel( p, (int ) (screenWidth * 0.18), (int)(screenHeight * 0.13), gui);
+                player.setPreferredSize(new Dimension((int ) (screenWidth * 0.18), (int)(screenHeight * 0.13)));
+                player.setMaximumSize(new Dimension((int ) (screenWidth * 0.18), (int)(screenHeight * 0.13)));
                 banners.put(p, player);
                 add(player);
-                add(Box.createVerticalStrut(25)); // 20 pixels of space
+                add(Box.createVerticalStrut(15)); // 20 pixels of space
                 player.addMouseListener(listener);
             }
 
         }
     }
 
+    /**
+     * updates every player's points and resources
+     */
     public void updateBanners(){
         for(String p : banners.keySet()){
             banners.get(p).updateResources();

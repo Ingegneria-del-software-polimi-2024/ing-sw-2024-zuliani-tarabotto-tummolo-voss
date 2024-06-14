@@ -26,8 +26,6 @@ public class EndGamePanel extends JPanel {
         middlePanel.setOpaque(false);
 
 
-
-
         // we create a wrapper panel with gridbaglayout to center the main panel in the middle of the screen
         JPanel wrapperPanel = new JPanel(new GridBagLayout());
         wrapperPanel.add(middlePanel);
@@ -98,6 +96,7 @@ public class EndGamePanel extends JPanel {
         add(wrapperPanel);
 
     }
+
 
     @Override
     protected void paintComponent(Graphics g) {

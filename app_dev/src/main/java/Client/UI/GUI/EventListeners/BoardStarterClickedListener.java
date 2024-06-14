@@ -10,6 +10,12 @@ import java.awt.event.MouseEvent;
 public class BoardStarterClickedListener extends MouseAdapter {
     private GUI gui;
     private PlacementArea board;
+
+    /**
+     * during the starterCard placing phase the listener detects whether the central position of the board is clicked
+     * @param gui
+     * @param board
+     */
     public BoardStarterClickedListener(GUI gui, PlacementArea board){
         this.gui = gui;
         this.board = board;

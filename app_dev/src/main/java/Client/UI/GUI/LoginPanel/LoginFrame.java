@@ -10,11 +10,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * class that is responsible of the gui for the login
+ */
 public class LoginFrame extends JFrame {
     private GUI gui;
     private int width = 900;
     private int height = 600;
     private InputFields loginFields;
+
 
 
     public LoginFrame(GUI gui ){
@@ -31,7 +35,7 @@ public class LoginFrame extends JFrame {
         loginFields.setPreferredSize(new Dimension((width - height), 0));
 
 
-        // Create the right panel for the image
+
         JPanel imagePanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -39,6 +43,7 @@ public class LoginFrame extends JFrame {
                 Graphics2D g2d = (Graphics2D) g;
                 g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
+                // we load the CodexNaturalis logo image
                 BufferedImage img;
                 try {
                     img = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Images/codexLogo.jpeg")));
@@ -54,7 +59,6 @@ public class LoginFrame extends JFrame {
 
 
         imagePanel.setPreferredSize(new Dimension(height, height));
-        //imagePanel.setBackground(Color.LIGHT_GRAY);
 
         this.add(loginFields, BorderLayout.WEST);
         this.add(imagePanel, BorderLayout.CENTER);
@@ -67,7 +71,7 @@ public class LoginFrame extends JFrame {
     }
 
     /**
-     * a window asking to choose a connection type(RMI/SOCKET) and the ip address
+     * Interface method: a window asking to choose a connection type(RMI/SOCKET) and the ip address
      * of the host is displayed
      */
     public void chooseConnection(){
