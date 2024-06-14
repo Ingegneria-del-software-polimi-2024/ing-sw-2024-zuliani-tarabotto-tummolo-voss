@@ -243,6 +243,8 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
         Room room = getRoomByName(roomName);
         if(room != null)
             rooms.remove(room);
+
+        System.out.println("Room "+roomName+" is correctly closed");
     }
 
     ///////////////////////////////////////////////PRIVATE METHODS//////////////////////////////////////////////////////
@@ -256,7 +258,7 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
     private void createRoom(String roomName, String playerName, int expectedPlayers) throws CantJoinRoomExcept {
         if(expectedPlayers<2||expectedPlayers>4)
             throw new CantJoinRoomExcept(true);
-        Room room = new Room(roomName, expectedPlayers);
+        Room room = new Room(roomName, expectedPlayers, this);
         rooms.add(room);
         room.joinRoom(playerName, players.get(playerName));
     }

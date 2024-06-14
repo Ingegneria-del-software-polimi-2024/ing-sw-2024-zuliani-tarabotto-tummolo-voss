@@ -29,7 +29,7 @@ public class Room {
     private boolean full;
     private HashMap<String, ClientHandlerInterface> playersInterfaces;
 
-
+    private final Lobby lobby;
 
 
     /**
@@ -71,7 +71,7 @@ public class Room {
      * @param name the name of the room
      * @param expectedPlayers the number of player to wait in order to start the game
      */
-    public Room(String name, int expectedPlayers){
+    public Room(String name, int expectedPlayers, Lobby lobby){
         this.playersInterfaces = new HashMap<>();
         this.expectedPlayers = expectedPlayers;
         this.name = name;
@@ -79,6 +79,7 @@ public class Room {
         send = new ServerAPI_GO();
         full = false;
 
+        this.lobby = lobby;
 
         disconnectedUsers = Collections.synchronizedSet(new HashSet<>());
         lastSeen = new ConcurrentHashMap<>();
@@ -175,7 +176,7 @@ public class Room {
                 playersInterfaces.get(p).setReceiver(receive);
             }
         }catch (RemoteException e){
-            throw new RuntimeException("Can't join the room due to a comunication error");
+            throw new RuntimeException("Can't join the room due to a communication error");
             //TODO handle exception
         }
         Thread thread1 = new Thread(() -> receive.loop());
@@ -232,24 +233,25 @@ public class Room {
         return disconnectedUsers.contains(name);
     }
 
-    public void ended(){
+    public void ended() {
         //since the disconnection of the players is handled by the only thread unraveling messages to the room,
         //as the second-from-last player leaves the room there will be still a player connected or, at least a handler
         //interface linked to him (in order to send a message to the lobby from the server internet connection
         //is NOT required)
-        for(String player : players){
-            if(!disconnectedUsers.contains(player)){
-                boolean sent = true;
-                ClientHandlerInterface handler = playersInterfaces.get(player);
-                try {
-                    handler.deliverToLobby(new CloseARoomMessage(name));
-                } catch (RemoteException e) {
-                    sent = false;
-                }
-                if(sent)
-                    return;
-            }
-        }
+//        for (String player : players) {
+//            if (!disconnectedUsers.contains(player)) {
+//                boolean sent = true;
+//                ClientHandlerInterface handler = playersInterfaces.get(player);
+//                try {
+//                    handler.deliverToLobby(new CloseARoomMessage(name));
+//                } catch (RemoteException e) {
+//                    sent = false;
+//                }
+//                if (sent)
+//                    return;
+//            }
+//        }
+        lobby.enqueueMessage(new CloseARoomMessage(name));
     }
 
     public void quitGame(String playerID){

@@ -43,7 +43,6 @@ public class GameState {
      * @param id the unique id for gameState
      */
     public GameState(ArrayList<String> nickNames, String id, ModelListener modelListener, ModelController modelController) {
-        System.out.println("gamestate created");
         this.modelListener = modelListener;
         this.modelController = modelController;
         //creates a new players list with the nicknames taken from input
@@ -62,7 +61,7 @@ public class GameState {
         //function that calls every initializing method contained in commonTable
         commonTable.initialize(players);
         //commonTable.definedDeckInitialization(players);
-
+        System.out.println("gamestate created");
         //NOTIFICATION: decks order, open cards, commonObjectives, nicknames, gameId and initialPlayer
         //we don't send the objective and starter deck because it would be useless
         modelListener.notifyChanges(commonTable.getGoldDeck(), commonTable.getResourceDeck(), commonTable.getOpenGold(),
@@ -177,7 +176,8 @@ public class GameState {
             //we notify all the active players of the end of the game
             for(Player p : players){
                 if(p.isActive())
-                    modelListener.notifyChanges(p.getNickname(), new KickOutOfGameException());
+                    if(!modelListener.notifyChanges(p.getNickname(), new KickOutOfGameException()))
+                        modelController.handleDisconnection();
             }
         }
     }

@@ -352,11 +352,12 @@ public class ModelListener {//TODO Handle correctly the exceptions
      * @param player the player's nickname
      * @param e the raised exception
      */
-    public void notifyChanges(String player, KickOutOfGameException e){
+    public boolean notifyChanges(String player, KickOutOfGameException e){
         try {
             serverAPI.notifyChanges(new KickOutOfGameMessage(player), player);
+            return true;
         }catch(MsgNotDeliveredException msg){
-            throw new RuntimeException(msg);
+            return false;
         }
     }
 

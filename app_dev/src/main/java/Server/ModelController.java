@@ -231,7 +231,11 @@ public class ModelController implements ServerControllerInterface {
         gameState.setTurnState(TurnState.PLACING_CARD_SELECTION);
     }
 
-    public boolean checkMessage(MessageFromClient message){return gameState.checkMessage(message);}
+    public boolean checkMessage(MessageFromClient message){
+        if(gameState != null)
+            return gameState.checkMessage(message);
+        return true;
+    }
 
     public void endGame(){
         gameEnded = true;
@@ -264,7 +268,7 @@ public class ModelController implements ServerControllerInterface {
                     disconnectedPlayersNumber++;
                 }
             }
-            //in case not all the players except one are disconnected, we may continue the game
+            //in case not all the players except one are disconnected, we must continue the game
             if(disconnectedPlayersNumber < playersNicknames.size() - 1) {
                 return;
             }
@@ -278,7 +282,8 @@ public class ModelController implements ServerControllerInterface {
         }while(iterations < HeartBeatSettings.iterationsNumber);
 
         //after some time of checking we must close the game
-        if(!gameEnded) endGame();
+        if(!gameEnded)
+            endGame();
         finished = true;
     }
 
