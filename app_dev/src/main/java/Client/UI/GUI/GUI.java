@@ -46,7 +46,7 @@ public class  GUI  implements UI {
     private EndGamePanel endGamePanel;
     private LoginFrame login;
     private JPanel topPanel;
-    final int FPS = 15;
+    final int FPS = 40;
     public boolean starterSelected = false;
     public boolean cardSelected = false;
     private PlacementArea board;
@@ -55,7 +55,6 @@ public class  GUI  implements UI {
     private BoardClickedListener boardClickedListener;
     private BoardMotionListener boardMotionListener;
     private static String title;
-    private static JPanel glassPane;
     private JLabel titleLabel;
     private JPanel titlesPanel;
     private boolean desiredQuit = false;
@@ -119,31 +118,6 @@ public class  GUI  implements UI {
             frame.setLayout(new BorderLayout());
             frame.setLocationRelativeTo(null);
 
-
-
-            /*
-            // Create a glass pane for the title
-            glassPane = new JPanel() {
-                @Override
-                protected void paintComponent(Graphics g) {
-                    super.paintComponent(g);
-                    if (!title.isEmpty()) {
-                        Graphics2D g2d = (Graphics2D) g;
-                        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                        g2d.setFont(new Font("Serif", Font.BOLD, 70));
-                        FontMetrics fm = g2d.getFontMetrics();
-                        int stringWidth = fm.stringWidth(title);
-                        int stringHeight = fm.getAscent();
-                        int x = (getWidth() - stringWidth) / 2;
-                        int y = (getHeight() - stringHeight) / 2 + fm.getAscent();
-                        g2d.setColor(new Color(200, 170, 110));
-                        g2d.drawString(title, x, y);
-                    }
-                }
-            };
-            glassPane.setOpaque(false);
-            frame.setGlassPane(glassPane);
-            glassPane.setVisible(false);*/
 
         });
         login = new LoginFrame(this);
@@ -455,9 +429,9 @@ public class  GUI  implements UI {
     public void setStarterSelected(){
         starterSelected = !starterSelected;
         if(starterSelected){
-            board.addMouseListener(boardClickedListener);
+            board.enableBoardStarterListener();
         }else{
-            board.removeMouseListener(boardClickedListener);
+            board.disableBoardStarterListener();
         }
     }
 
@@ -493,23 +467,6 @@ public class  GUI  implements UI {
         timer.setRepeats(false); // Ensure it only runs once
         timer.start();
 
-        //cardLayout.show(centerPanel, "BOARD");
-        /*
-        title = newTitle;
-        glassPane.setVisible(true);
-        glassPane.repaint();
-
-        // Hide the title after a delay
-        Timer timer = new Timer(2000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                glassPane.setVisible(false);
-                title = ""; // Clear the title
-                System.out.println("title cleared: " + title);
-            }
-        });
-        timer.setRepeats(false);
-        timer.start();*/
     }
 
     public void quitGame(){
@@ -525,8 +482,6 @@ public class  GUI  implements UI {
         if(!playCard.getFaceSide()) return true;
         else return view.getCanBePlaced()[index];
     }
-
-
 
 
     @Override

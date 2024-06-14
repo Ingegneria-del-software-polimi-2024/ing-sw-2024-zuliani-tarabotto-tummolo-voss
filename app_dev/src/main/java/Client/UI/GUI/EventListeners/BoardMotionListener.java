@@ -20,8 +20,6 @@ public class BoardMotionListener extends MouseAdapter {
     public void mouseMoved(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
-        System.out.println(x + "," + y);
-
 
         for(Coordinates coord : gui.getView().getAvailablePlaces()){
             int xCardCenter = board.getXCenter() + coord.getX()*(board.getCardLength() - board.getXOverlap());

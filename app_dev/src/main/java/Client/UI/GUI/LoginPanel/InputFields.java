@@ -37,6 +37,7 @@ public class InputFields extends JPanel {
     private boolean cantCreateRoom = false;
     private boolean cantJoinRoom = false;
     private BufferedImage cranioLogo;
+    private Dimension textFieldDimension;
 
 
 
@@ -56,6 +57,7 @@ public class InputFields extends JPanel {
         mainPanel.setOpaque(false);
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         add(mainPanel);
+        textFieldDimension = new Dimension(250, 20);
 
         try {
             cranioLogo = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Images/cranioLogo.png")));
@@ -65,22 +67,36 @@ public class InputFields extends JPanel {
     }
 
 
-
-
-
     public void chooseConnection(){
-        // Create the connection type buttons
+        //rmi button
         JToggleButton rmiButton = new JToggleButton("RMI");
+
+        //socket button
         JToggleButton socketButton = new JToggleButton("Socket");
 
+        //welcome label
         JLabel welcome = new JLabel("Welcome");
         welcome.setFont(new Font("Serif", Font.BOLD, 60));
         welcome.setForeground(new Color(53,31,23));
+
+        //host label
+        JLabel hostLabel = new JLabel("Host IP Address:");
+
+        //host ip address textField
+        JTextField hostField = new JTextField();
+        hostField.setColumns(40);
+
+        //next button
+        JButton nextButton = new JButton("next");
+        nextButton.setEnabled(false);
+
+
         rmiButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 connectionType = "rmi";
                 connectionSelected = true;
+                nextButton.setEnabled(!hostField.getText().trim().isEmpty() && connectionSelected);
             }
         });
         socketButton.addActionListener(new ActionListener() {
@@ -88,6 +104,7 @@ public class InputFields extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 connectionType = "socket";
                 connectionSelected = true;
+                nextButton.setEnabled(!hostField.getText().trim().isEmpty() && connectionSelected);
             }
         });
 
@@ -107,11 +124,7 @@ public class InputFields extends JPanel {
         messageLabel.setForeground(Color.RED);
 
 
-        JButton nextButton = new JButton("next");
-        nextButton.setEnabled(false);
 
-        JLabel hostLabel = new JLabel("Host IP Address:");
-        JTextField hostField = new JTextField(19);
         hostField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -147,7 +160,7 @@ public class InputFields extends JPanel {
                         //panel.removeAll();
                     } catch (StartConnectionFailedException er) {
                         System.out.println("~> An error during the connection occurred\n   Check your internet connection and retry\n");
-                        messageLabel.setText("Error during connection");
+                        messageLabel.setText("Impossible to reach the server");
                         /*mainPanel.removeAll();
                         mainPanel.revalidate();
                         mainPanel.repaint();
@@ -178,9 +191,6 @@ public class InputFields extends JPanel {
 
         panel.revalidate();
     }
-
-
-
 
 
     public void chooseNickname(){
@@ -246,10 +256,6 @@ public class InputFields extends JPanel {
 
         panel.revalidate();
     }
-
-
-
-
 
 
 
@@ -351,9 +357,9 @@ public class InputFields extends JPanel {
     }
 
 
-
-
-
+    /**
+     * a window for creating a new game room is displayed
+     */
     public void createNewGame(){
         mainPanel.removeAll();
         panel.revalidate();
@@ -455,6 +461,9 @@ public class InputFields extends JPanel {
 
     }
 
+    /**
+     * after joining/creating a game room a waiting window is displayed
+     */
     private void waitingForPlayers(){
         mainPanel.removeAll();
 

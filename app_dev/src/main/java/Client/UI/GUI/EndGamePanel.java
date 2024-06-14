@@ -73,7 +73,7 @@ public class EndGamePanel extends JPanel {
             scores += entryList.get(i).getKey() + "(" + entryList.get(i).getValue() + "), ";
         }
 
-        scores += entryList.get(entryList.size() - 1).getKey() + ": " + entryList.get(entryList.size() - 1).getValue() + ", ";
+        scores += entryList.get(entryList.size() - 1).getKey() + "(" + entryList.get(entryList.size() - 1).getValue() + ")";
         JLabel scoresLabel = new JLabel();
         scoresLabel.setForeground(Color.BLACK);
         scoresLabel.setText(scores);

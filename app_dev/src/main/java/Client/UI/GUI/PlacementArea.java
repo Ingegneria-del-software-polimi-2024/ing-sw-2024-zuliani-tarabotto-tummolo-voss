@@ -1,5 +1,6 @@
 package Client.UI.GUI;
 
+import Client.UI.GUI.EventListeners.BoardStarterClickedListener;
 import model.cards.PlayableCards.PlayableCard;
 import model.placementArea.Coordinates;
 
@@ -20,6 +21,7 @@ public class PlacementArea extends JPanel {
     private final int borderWidth = 4;
     private boolean drawSelectionRectangle = false;
     private Coordinates selectionRectangleCoordinates;
+    private BoardStarterClickedListener starterClickedListener;
 
     public PlacementArea(GUI gui){
         this.gui = gui;
@@ -27,6 +29,7 @@ public class PlacementArea extends JPanel {
         setPreferredSize(new Dimension(2000, 2000));
         xCenter = (int)(this.getPreferredSize().getWidth() / 2);
         yCenter = (int)(this.getPreferredSize().getHeight()/2);
+        starterClickedListener = new BoardStarterClickedListener(gui, this);
 
     }
 
@@ -97,8 +100,12 @@ public class PlacementArea extends JPanel {
 
     public Coordinates getSelectionRectangleCoordinates(){return  selectionRectangleCoordinates;}
 
-    public void enableBoardListeners(){
+    public void enableBoardStarterListener(){
+        this.addMouseListener(starterClickedListener);
+    }
 
+    public void disableBoardStarterListener(){
+        this.removeMouseListener(starterClickedListener);
     }
 
 }

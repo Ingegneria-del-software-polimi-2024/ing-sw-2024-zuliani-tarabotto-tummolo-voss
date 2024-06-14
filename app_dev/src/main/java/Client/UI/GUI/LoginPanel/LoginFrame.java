@@ -66,33 +66,53 @@ public class LoginFrame extends JFrame {
 
     }
 
+    /**
+     * a window asking to choose a connection type(RMI/SOCKET) and the ip address
+     * of the host is displayed
+     */
     public void chooseConnection(){
-        String host;
-        String connectionType;
         loginFields.chooseConnection();
 
     }
 
+    /**
+     * a window asking to select a nickname is displayed
+     */
     public void chooseNickname(){
         loginFields.chooseNickname();
 
     }
 
 
+    /**
+     * a window asking to select one of the available game rooms is displayed,
+     * the player is also given the possibility to create a new game
+     * @param listOfGames
+     */
     public void chooseGame(ArrayList<String> listOfGames){
         loginFields.chooseGame(listOfGames);
 
     }
 
 
+    /**
+     * method used to handle the case in which the chosen nickname is already being used
+     */
     public void nicknameInUse(){
         loginFields.setNicknameInUse();
     }
 
+    /**
+     * method used to handle the case in which the player wants to join a room already full
+     */
     public void cantJoinRoom(){
         loginFields.setCantJoinRoom();
     }
 
+    /**
+     * method used to handle the case in which the player wants to create a new room with a
+     * number of players not supported by the game
+     */
     public void cantCreateRoom(){
         loginFields.setCantCreateRoom();
     }
