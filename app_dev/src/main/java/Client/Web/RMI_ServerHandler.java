@@ -11,6 +11,8 @@ import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
 import SharedWebInterfaces.WebExceptions.StartConnectionFailedException;
 import SharedWebInterfaces.WebSettings;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -62,22 +64,28 @@ public class RMI_ServerHandler implements ServerHandlerInterface {
     /**
      * class constructor
      * @param host the hostname of the server
-     * @param port the server port
      * @param come the interface for the reception of the messages
      * @throws StartConnectionFailedException if an error in the instantiation of the connection happens
      */
-    public RMI_ServerHandler(String host, int port, ClientAPI_COME come) throws StartConnectionFailedException {
+    public RMI_ServerHandler(String host, ClientAPI_COME come) throws StartConnectionFailedException {
         api = come;
         serverHost = host;
+    }
+
+    public void connect(int port) throws StartConnectionFailedException {
         try {
+
+            InetAddress localHost = InetAddress.getLocalHost();
+            String ip = localHost.getHostAddress();
+            System.setProperty("java.rmi.server.hostname", ip);
             UnicastRemoteObject.exportObject(this,  0);
 
 
-            Registry registry1 = LocateRegistry.getRegistry(host, port);
+            Registry registry1 = LocateRegistry.getRegistry(serverHost, port);
             manager = (RMI_ManagerInterface) registry1.lookup(WebSettings.serverRegistryName);
 
             manager.deliverToLobby(new NewRMI_Connection(this));
-        }catch (RemoteException | NotBoundException e){
+        }catch (RemoteException | NotBoundException | UnknownHostException e){
             throw new StartConnectionFailedException();
         }
     }
