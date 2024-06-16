@@ -148,7 +148,8 @@ public class TUI implements UI {
 
     @Override
     public void cantCreateRoom() {
-        System.out.print(ansi().fg(color).a("~> Can't create the room, the players must be between 2 and 4\n").reset());
+        System.out.print(ansi().fg(color).a("~> Can't create the room, control the number of players and the name of the room\n").reset());
+        System.out.println("   Players must be between 2 and 4 and the room name must not be empty nor it must be already existing, try typing a different room name\n");
         view.displayAvailableGames();
     }
 
@@ -195,7 +196,6 @@ public class TUI implements UI {
                     }
                 } while (flag);
             }
-            System.out.println(game);
             view.joinGame(game, nPlayers);
         }
 

@@ -127,7 +127,7 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
     public void enterRoom(String playerName, String roomName, int expectedPlayers){
         if(roomName == null||!players.containsKey(playerName))
             return;
-        if(roomName.isEmpty()) {
+        if(roomName.isEmpty() || roomName.trim().isEmpty()) {
             try {
                 sendToPlayer(playerName, new CantJoinRoomMsg(true));
             } catch (MsgNotDeliveredException e) {
@@ -147,6 +147,7 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
             }else{
                 try {
                     sendToPlayer(playerName, new CantJoinRoomMsg(true));
+                    return;
                 } catch (MsgNotDeliveredException ex) {
                     throw new RuntimeException(ex);
                     //TODO remove this trycatch

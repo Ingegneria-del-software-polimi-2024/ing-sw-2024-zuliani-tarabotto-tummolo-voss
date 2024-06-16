@@ -24,6 +24,7 @@ public class DispositionCommand implements Command{
         for(String p : view.getPlayers()){
             if(!p.equals(view.getPlayerId())){
                 line += p;
+                line += "\n";
             }
         }
         System.out.println(line);
