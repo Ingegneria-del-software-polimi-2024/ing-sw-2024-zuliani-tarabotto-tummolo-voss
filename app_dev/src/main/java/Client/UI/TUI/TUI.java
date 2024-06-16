@@ -130,7 +130,7 @@ public class TUI implements UI {
 
     }
     public void nickNameAlreadyInUse(){
-        System.out.print(ansi().fg(color).a("~> This nickname is already in use, please change nickname\n").reset());
+        System.out.print(ansi().fg(color).a("~> This nickname is already in use or it is empty, please change nickname\n").reset());
         askNickname();
     }
 

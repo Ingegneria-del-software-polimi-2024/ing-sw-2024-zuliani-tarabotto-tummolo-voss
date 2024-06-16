@@ -11,13 +11,14 @@
   <component name="ChangeListManager">
     <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/Commands/DispositionCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/Commands/DispositionCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/TUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/TUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/ModelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ModelController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/Lobby.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/Lobby.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/Room.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/TUI/TUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/TUI/TUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/View/ViewAPI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/View/ViewAPI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/Web/RMI_ServerHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/Web/RMI_ServerHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Server/ModelController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Server/ModelController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Server/Web/Lobby/Lobby.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Server/Web/Lobby/Lobby.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Server/Web/Lobby/Room.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Server/Web/Lobby/Room.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -227,8 +228,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.RunTUI_Client" />
         <item itemvalue="Application.RunServer" />
+        <item itemvalue="Application.RunTUI_Client" />
         <item itemvalue="JUnit.ControllerTest" />
         <item itemvalue="Application.SecondClient" />
       </list>
@@ -326,7 +327,7 @@
       <workItem from="1717785379936" duration="492000" />
       <workItem from="1717924395352" duration="12283000" />
       <workItem from="1718001323244" duration="16844000" />
-      <workItem from="1718530746765" duration="6486000" />
+      <workItem from="1718530746765" duration="11100000" />
     </task>
     <servers />
   </component>

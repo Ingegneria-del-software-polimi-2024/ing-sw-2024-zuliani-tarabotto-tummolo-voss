@@ -258,6 +258,14 @@ public class ModelController implements ServerControllerInterface {
      * @return true if the game was closed after the player left the match, false if the match continued
      */
     public void setPlayerInactive(String playerName){
+        //if it is the initial player it must be adjusted
+        if(initialPlayer.equals(playerName)){
+            for(int i = 0; i<playersNicknames.size(); i++) {
+                if(gameState.getPlayer(i).isActive())
+                    initialPlayer = playersNicknames.get(i);
+            }
+        }
+
         gameState.setPlayerInactive(playersNicknames.indexOf(playerName));
         //control if all the players except one are disconnected
         int iterations = 0;
@@ -301,6 +309,10 @@ public class ModelController implements ServerControllerInterface {
 
     public void reconnect(String playerID) {
         System.out.println("RECONNECTION of player: " + playerID);
+        //if it was the first player to play, then it must be re-set as the first player (by disconnecting it was shifted
+        //to the following)
+        if(playerID.equals(playersNicknames.get(0)))
+            initialPlayer = playerID;
         gameState.reconnect(playerID);
         System.out.println("RECONNECTION COMPLETE");
     }

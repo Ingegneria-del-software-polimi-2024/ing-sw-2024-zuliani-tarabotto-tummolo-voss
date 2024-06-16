@@ -29,6 +29,8 @@ public class Room {
     private boolean full;
     private HashMap<String, ClientHandlerInterface> playersInterfaces;
 
+    private Thread heartbeatChecker = null;
+
     private final Lobby lobby;
 
 
@@ -43,6 +45,7 @@ public class Room {
             //handling rejoin
             if (disconnectedUsers.contains(name)) {
                 disconnectedUsers.remove(name);
+                updateHeartBeat(name);
             } else {
                 throw new CantJoinRoomExcept(false); //TODO handle or change the except
             }
@@ -116,7 +119,7 @@ public class Room {
     }
 
     private void startHeartbeatChecker() {
-        new Thread(() -> {
+        heartbeatChecker = new Thread(() -> {
             while (true) {
                 long currentTime = System.currentTimeMillis();
 
@@ -135,10 +138,20 @@ public class Room {
                 try {
                     Thread.sleep(HeartBeatSettings.checkFreq); // Check every second
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    return;
                 }
             }
-        }).start();
+        });
+        heartbeatChecker.start();
+    }
+
+    public void interruptHBChecker(){
+        heartbeatChecker.interrupt();
+        try {
+            heartbeatChecker.join();
+        } catch (InterruptedException e) {
+            System.out.println("An error occurred when stopping the HBChecker of game: "+name);
+        }
     }
 
     private void disconnectPlayer(String player){
@@ -225,6 +238,7 @@ public class Room {
     public void reconnect(String playerID, ClientHandlerInterface handlerInterface){
         playersInterfaces.put(playerID, handlerInterface);
         send.setHandler(playerID, handlerInterface);
+        updateHeartBeat(playerID);
         disconnectedUsers.remove(playerID);
         try {
             playersInterfaces.get(playerID).sendToClient(new ACK_RoomChoice(playerID, name));

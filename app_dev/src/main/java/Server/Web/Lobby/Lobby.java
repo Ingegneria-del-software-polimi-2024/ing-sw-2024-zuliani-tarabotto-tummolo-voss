@@ -73,8 +73,8 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
      * @param handlerInterface the handler of the player
      */
     public void addConnection(String name, ClientHandlerInterface handlerInterface){
-        //if the name is already present we must investigate
-        if(name.isEmpty()){
+        //if the name is empty we return an error message
+        if(name.isEmpty() || name.trim().isEmpty()){
             try {
                 handlerInterface.sendToClient(new AlreadyExistingNameMessage(name));
             } catch (RemoteException e) {
@@ -82,13 +82,14 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
             }
             return;
         }
+        //if the name is already present we must investigate if it has been disconnected somehow
         if (players.containsKey(name)){
             Room room = isInRoom(name);
             if(room != null && room.isDisconnected(name)){
                 room.reconnect(name, handlerInterface);
                 return;
-            }else if(room == null && System.currentTimeMillis()-lastSeenInLobby.get(name) > HeartBeatSettings.timeout){
-                //here we should handle disconnections happened before joining a room
+            }else if(room == null &&(!lastSeenInLobby.containsKey(name) || System.currentTimeMillis()-lastSeenInLobby.get(name) > HeartBeatSettings.timeout)){
+                //here we should handle reconnection for disconnections happened before joining a room
                 manageNewConnection(name, handlerInterface);
                 return;
             }else{
@@ -238,10 +239,12 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
     }
 
     public void closeRoom(String roomName){
-        Room room = getRoomByName(roomName);
-        if(room != null)
-            rooms.remove(room);
 
+        Room room = getRoomByName(roomName);
+        if(room != null) {
+            getRoomByName(roomName).interruptHBChecker();
+            rooms.remove(room);
+        }
         System.out.println("Room "+roomName+" is correctly closed");
     }
 
