@@ -61,7 +61,7 @@ public class RMI_ClientHandler implements ClientHandlerInterface {
      */
     public RMI_ClientHandler(ServerHandlerInterface clientRemoteInterface, Lobby lobby, int serverPort) throws RemoteException{
             this.lobby = lobby;
-            UnicastRemoteObject.exportObject(this, serverPort);
+            UnicastRemoteObject.exportObject(this, 0);
 
             client = clientRemoteInterface;
 

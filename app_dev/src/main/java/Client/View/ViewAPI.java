@@ -134,7 +134,8 @@ public class ViewAPI implements ViewAPI_Interface {
     private ClientAPI_GO getClientAPIGo(String in, String host, ClientAPI_COME clientAPICome) throws StartConnectionFailedException {
         ServerHandlerInterface serverHandler;
         if (in.equalsIgnoreCase("RMI")) {
-            serverHandler = new RMI_ServerHandler(host, WebSettings.serverPortRMI, clientAPICome);
+            serverHandler = new RMI_ServerHandler(host, clientAPICome);
+            ((RMI_ServerHandler)serverHandler).connect(WebSettings.serverPortRMI);
         } else if(in.equalsIgnoreCase("SOCKET")){
             serverHandler = new SOCKET_ServerHandler(host, WebSettings.serverPortSocket, clientAPICome);
             Thread listeningThread = new Thread((SOCKET_ServerHandler)serverHandler);
