@@ -230,7 +230,7 @@ public class TUI implements UI {
 
     public void displayReturnToLobby(){
         String in = null;
-        sc = new Scanner(System.in); //NB: sc was in the do while loop ( l'ho spostato io: FRA)
+        sc = new Scanner(System.in);
         do {
             System.out.print(ansi().fg(color).a("~> Press enter to return to the lobby\n").reset());
             if(input == null){

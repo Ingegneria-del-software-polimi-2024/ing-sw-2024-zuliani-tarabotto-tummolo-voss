@@ -12,7 +12,6 @@ import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
 import model.enums.Artifact;
 import model.enums.Element;
-import model.enums.Pawn;
 import model.placementArea.Coordinates;
 
 import java.util.ArrayList;
@@ -29,7 +28,7 @@ public class ViewAPI implements ViewAPI_Interface {
     //private UI ui;
     private ViewModel viewModel;
     private UI ui;
-    private Thread t;
+    private Thread inputThread;
 
     /*public ViewAPI() {
         this.viewModel = new ViewModel(ui);
@@ -41,20 +40,16 @@ public class ViewAPI implements ViewAPI_Interface {
         this.viewModel = new ViewModel(ui);
     }
     public void startUI(){
-        t = new Thread(ui);
-        t.start();
+        inputThread = new Thread(ui);
+        inputThread.start();
     }
 
     public void stopUI(){
         try {
-            t.interrupt();
-            System.out.println("this is interrupted: "+Thread.currentThread().isInterrupted());
-            t.join();
-            System.out.println("Thread has been correctly interrupted!!");
-        }catch (SecurityException e){
+            inputThread.interrupt();
+            inputThread.join();
+        }catch (SecurityException | InterruptedException e){
             System.out.println("Couldn't interrupt the thread...");
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
         }
     }
 
@@ -330,8 +325,8 @@ public class ViewAPI implements ViewAPI_Interface {
     public void displaySecretObjective(){ui.printSecretObjective();};
     public void displayReconnection(){
         if(ui instanceof TUI){
-            t = new Thread(ui);
-            t.start();
+            inputThread = new Thread(ui);
+            inputThread.start();
         }
         ui.displayReconnection();
     }
