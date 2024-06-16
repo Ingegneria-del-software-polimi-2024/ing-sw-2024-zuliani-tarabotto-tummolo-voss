@@ -39,6 +39,8 @@ public class TUI implements UI {
     private final Object lockForControllingCommands;
     private boolean uiAlreadyStarted = false;
     private boolean runningThread;
+    private boolean inWaitingRoom = false;
+    private String game;
 
     public TUI(ViewAPI view){
 
@@ -55,7 +57,7 @@ public class TUI implements UI {
         this.commandMap = new HashMap<>();
         commandMap.put("--help", new HelpCommand());
         commandMap.put("--disp", new DispositionCommand(view));
-        commandMap.put("--quit", new EndGameCommand(view));
+        commandMap.put("--quit", new EndGameCommand(view, this));
 
         sc = new Scanner(System.in);
     }
@@ -106,7 +108,7 @@ public class TUI implements UI {
     }
 
     private boolean validIP(String ip){
-        if(ip.equals("localHost"))
+        if(ip.toLowerCase().equals("localhost"))
             return true;
         String desiredFormat = "^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\." +
                 "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\." +
@@ -157,7 +159,6 @@ public class TUI implements UI {
     }
 
     public void displayAvailableGames(ArrayList<String> listOfGames){
-        String game;
 
         if(listOfGames != null && !listOfGames.isEmpty()){
             System.out.print(ansi().fg(color).a("~> Available games:\n").reset());
@@ -194,12 +195,22 @@ public class TUI implements UI {
                     }
                 } while (flag);
             }
+            System.out.println(game);
             view.joinGame(game, nPlayers);
         }
 
     }
     public void joinedGame(String id){
-        System.out.print(ansi().fg(color).a("~> Correctly joined the game "+id+"\n   waiting for other players...\n").reset());
+        inWaitingRoom = true;
+        view.startUI();
+
+        rePrint = () -> {
+            clear();
+            loginPrinter.print();
+            System.out.print(ansi().fg(color).a("~> Correctly joined the game "+id+"\n   waiting for other players...\n").reset());
+        };
+        rePrint.run();
+
     }
 
     public void returnToLobby(){
@@ -210,10 +221,17 @@ public class TUI implements UI {
         view.requestAvailableGames();
     }
 
-    private void displayReturnToLobby(){
+    public void returnToChooseGame(){
+        inputPresent = false;
+        view.stopUI();
+        clear();
+        loginPrinter.print();
+    }
+
+    public void displayReturnToLobby(){
         String in = null;
+        sc = new Scanner(System.in); //NB: sc was in the do while loop ( l'ho spostato io: FRA)
         do {
-            sc = new Scanner(System.in);
             System.out.print(ansi().fg(color).a("~> Press enter to return to the lobby\n").reset());
             if(input == null){
                 in = sc.nextLine();
@@ -223,13 +241,14 @@ public class TUI implements UI {
                 }
 
             }
-        }while(in != null);
+        }while(in == null);
         inputPresent = false;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
     public void displayInitialization() {
+        inWaitingRoom = false;
         clear();
         loginPrinter.print();
 
@@ -238,7 +257,7 @@ public class TUI implements UI {
             uiAlreadyStarted = true;
         }*/
 
-        view.startUI();
+        //view.startUI();
 
         enterPressed = false;
         // Continuously check if Enter is pressed until it's pressed
@@ -748,4 +767,17 @@ public class TUI implements UI {
         clear();
         System.out.print(ansi().fg(color).a("~> "+view.getPlayerId()+", you have successfully reconnected to the game").reset());
     }
+
+    public void setInWaitingRoom(Boolean b){
+        inWaitingRoom = b;
+    }
+
+    public boolean getInWaitingRoom(){
+        return inWaitingRoom;
+    }
+
+    public String getGame(){
+        return  game;
+    }
+
 }

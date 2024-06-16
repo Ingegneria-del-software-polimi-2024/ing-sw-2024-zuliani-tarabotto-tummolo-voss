@@ -40,6 +40,7 @@ public class InputFields extends JPanel {
     private Dimension textFieldDimension;
 
 
+
     public InputFields(GUI gui, Frame frame){
         this.gui = gui;
         this.frame = frame;
@@ -195,6 +196,7 @@ public class InputFields extends JPanel {
         mainPanel.add(nextButton);
 
         panel.revalidate();
+        panel.repaint();
     }
 
 
@@ -224,8 +226,8 @@ public class InputFields extends JPanel {
         // if the nickname is already being used we display a message error
         if(nicknameInUse){
             messageLabel.setText("Nickname is already in use.");
-            mainPanel.revalidate();
-            mainPanel.repaint();
+            panel.revalidate();
+            panel.repaint();
         }
 
         // nickname input field listener
@@ -273,6 +275,7 @@ public class InputFields extends JPanel {
         mainPanel.add(nextButton); // next button
 
         panel.revalidate();
+        panel.repaint();
     }
 
 
@@ -342,6 +345,8 @@ public class InputFields extends JPanel {
         refresh_JButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gui.getView().requestAvailableGames();
+
+                panel.revalidate();
                 panel.repaint();
             }
         });
@@ -351,6 +356,8 @@ public class InputFields extends JPanel {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gui.getView().joinGame(selectedGame, 0);
                 waitingForPlayers();
+
+                panel.revalidate();
                 panel.repaint();
             }
         });
@@ -382,6 +389,7 @@ public class InputFields extends JPanel {
 
 
         panel.revalidate();
+        panel.repaint();
 
     }
 
@@ -459,6 +467,7 @@ public class InputFields extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if(listOfGames == null || !listOfGames.contains(gameName)){
                     System.out.println("new game created" + gameName +" " + numPlayers);
+                    selectedGame = gameName;
                     gui.getView().joinGame(gameName, numPlayers);
                     waitingForPlayers();
 
@@ -483,8 +492,9 @@ public class InputFields extends JPanel {
         //if the number of players selected is not admitted a message error is displayed
         if(cantCreateRoom){
             errorMessageLabel.setText("can't create room");
-            mainPanel.repaint();
-            //cantCreateRoom = false;
+
+            panel.revalidate();
+            panel.repaint();
         }
 
         mainPanel.add(nameLabel); // insert name of the game label
@@ -500,7 +510,9 @@ public class InputFields extends JPanel {
         playerComboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
         buttonPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
+
         panel.revalidate();
+        panel.repaint();
 
     }
 
@@ -523,8 +535,7 @@ public class InputFields extends JPanel {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gui.getView().quitGame();
-                chooseGame(listOfGames);
+                gui.getView().quitGame(selectedGame);
             }
         });
 

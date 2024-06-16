@@ -3,10 +3,7 @@ package Client.View;
 import Client.UI.UI;
 import Client.Web.ClientAPI_GO;
 import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.*;
-import SharedWebInterfaces.Messages.MessagesToLobby.JoinGameMessage;
-import SharedWebInterfaces.Messages.MessagesToLobby.NewConnectionMessage;
-import SharedWebInterfaces.Messages.MessagesToLobby.RequestAvailableGames;
-import SharedWebInterfaces.Messages.MessagesToLobby.HeartbeatMessage;
+import SharedWebInterfaces.Messages.MessagesToLobby.*;
 import model.GameState.TurnState;
 import model.cards.ObjectiveCard;
 import model.cards.PlayableCards.PlayableCard;
@@ -249,6 +246,10 @@ public class ViewModel {
     //we use this function to end the game whenever we want
     public void quitGame(){
         clientAPIGo.sendToServer(new QuitGameMessage(playerId));
+    }
+
+    public void quitGame(String roomName){
+        clientAPIGo.sendToLobby(new QuitGameBeforeStartMessage(roomName, playerId));
     }
 
     public void setPawnColor(String player, String pawnColor) {

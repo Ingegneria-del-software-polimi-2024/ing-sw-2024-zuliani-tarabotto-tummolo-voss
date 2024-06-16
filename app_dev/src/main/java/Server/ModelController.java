@@ -293,7 +293,9 @@ public class ModelController implements ServerControllerInterface {
     }
 
     public void quitGame(String playerID){
+        System.out.println("quittin method in gamestate");
         gameState.quitGame(playerID);
+        System.out.println("quitting method in room");
         room.quitGame(playerID);
     }
 

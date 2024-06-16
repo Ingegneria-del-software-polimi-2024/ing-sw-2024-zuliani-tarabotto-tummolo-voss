@@ -90,6 +90,7 @@ public class Room {
     public void updateHeartBeat(String playerId) {
         lastSeen.put(playerId, System.currentTimeMillis());
     }
+
     public void handleADetectedDisconnection() {
         //DEBUG
         System.out.println("handleADetectedDisconnection was called");
@@ -99,6 +100,7 @@ public class Room {
 
             for (String player : players) {
                 Long lastSeenTime = lastSeen.get(player);
+
                 if (lastSeenTime != null && currentTime - lastSeenTime > HeartBeatSettings.timeout) {
                     if (!disconnectedUsers.contains(player)) {
                         disconnectPlayer(player);
@@ -120,6 +122,7 @@ public class Room {
 
                 for (String player : players) {
                     Long lastSeenTime = lastSeen.get(player);
+
                     if (!disconnectedUsers.contains(player) && lastSeenTime != null && currentTime - lastSeenTime > HeartBeatSettings.timeout) {
                         //DEBUG
                         System.out.println("a disconnection was seen by the thread");
@@ -154,6 +157,20 @@ public class Room {
     public ArrayList<String> getPlayers() {
         return (ArrayList<String>) players.clone();
     }
+
+
+    /**
+     * if a player quits the game while still in the "waiting for other players phase", we simply remove
+     * him from all the room's lists, so that another player can instantly join the game
+     * @param player
+     */
+    public void removePlayerBeforeStart(String player){
+        lastSeen.keySet().remove(player);
+        players.remove(player);
+        playersInterfaces.keySet().remove(player);
+    }
+
+
 
     /**
      * @return the room's name

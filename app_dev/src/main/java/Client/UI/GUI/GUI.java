@@ -281,17 +281,22 @@ public class  GUI  implements UI {
 
     @Override
     public void printStarterCard() {
-
+        //we only use this method in tui
     }
 
     @Override
     public void printSecretObjective() {
-
+        //we only use this method in tui
     }
 
     @Override
     public void displayReconnection() {
+        //we only use this method in tui
+    }
 
+    @Override
+    public void returnToChooseGame() {
+        //we only use this method in tui
     }
 
 

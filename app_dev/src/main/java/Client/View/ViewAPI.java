@@ -254,6 +254,10 @@ public class ViewAPI implements ViewAPI_Interface {
         viewModel.quitGame();
     }
 
+    public void quitGame(String roomName){
+        viewModel.quitGame(roomName);
+    }
+
     @Override
     public void setPawnColor(String player, String pawnColor) {viewModel.setPawnColor(player, pawnColor);}
 
@@ -448,5 +452,9 @@ public class ViewAPI implements ViewAPI_Interface {
                 return viewModel.getOpenResource().size() > 1;
         }
         return false;
+    }
+
+    public void returnToChooseGame(){
+        ui.returnToChooseGame();
     }
 }

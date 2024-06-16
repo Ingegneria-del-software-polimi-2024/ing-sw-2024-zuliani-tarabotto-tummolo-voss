@@ -42,4 +42,5 @@ public interface UI extends Runnable{
     void printStarterCard();
     void printSecretObjective();
     void displayReconnection();
+    void returnToChooseGame();
 }

@@ -1,10 +1,7 @@
 package Server.Web.Lobby;
 
 import Server.Web.Lobby.LobbyExceptions.CantJoinRoomExcept;
-import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_NewConnection;
-import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_RoomChoice;
-import SharedWebInterfaces.Messages.MessagesFromLobby.AlreadyExistingNameMessage;
-import SharedWebInterfaces.Messages.MessagesFromLobby.CantJoinRoomMsg;
+import SharedWebInterfaces.Messages.MessagesFromLobby.*;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
 import SharedWebInterfaces.Messages.MessagesToLobby.HeartbeatMessage;
 import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
@@ -14,7 +11,6 @@ import SharedWebInterfaces.SharedInterfaces.ServerHandlerInterface;
 import SharedWebInterfaces.WebExceptions.MsgNotDeliveredException;
 import SharedWebInterfaces.WebExceptions.StartConnectionFailedException;
 
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -340,5 +336,21 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
         Room room = lookFor(roomName);
         if (room != null)
             room.verifyStart();
+    }
+
+    public void quitGameBeforeStart(String roomName, String player){
+        Room room = lookFor(roomName);
+        //if there was just one player in the room we destroy it
+        if(room.getPlayers().size() == 1){
+            closeRoom(roomName);
+        }else{
+            //if there was more than one player in the room we just remove the player from the room's players list
+            room.removePlayerBeforeStart(player);
+        }
+        try {
+            sendToPlayer(player, new AvailableGames(getGameNames(), true)); //true: we notify that we are coming back from the waiting room
+        } catch (MsgNotDeliveredException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

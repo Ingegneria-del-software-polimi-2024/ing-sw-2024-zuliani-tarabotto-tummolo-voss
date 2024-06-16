@@ -72,4 +72,5 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
     void displayReconnection();
     void setPlayerID(String playerID); //used for recovery from disconnections
 
+    void returnToChooseGame();
 }

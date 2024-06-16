@@ -19,9 +19,4 @@ public class QuitGameMessage implements MessageFromViewToModelController{
         controller.quitGame(playerID);
     }
 
-
-
-
-
-
 }
