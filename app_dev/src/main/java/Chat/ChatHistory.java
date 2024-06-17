@@ -3,26 +3,26 @@ package Chat;
 import Chat.MessagesFromClient.ChatMessage;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ChatHistory {
-    private HashMap<Timestamp, ChatMessage> history;
+    private final ArrayList<ChatMessage> history;
 
     public ChatHistory() {
-        this.history = new HashMap<Timestamp, ChatMessage>();
+        this.history = new ArrayList<ChatMessage>();
     }
 
     public Timestamp add(ChatMessage msg){
         Timestamp now = new Timestamp(System.currentTimeMillis());
-        history.put(now, msg);
+        msg.setTimestamp(now);
         return now;
     }
 
-    public HashMap<Timestamp, ChatMessage> getHistory(){
-        HashMap<Timestamp, ChatMessage> copy = new HashMap<Timestamp, ChatMessage>();
-        for(Timestamp key : history.keySet()){
-            ChatMessage put = history.get(key);
-            copy.put((Timestamp) key.clone(), put.clone());
+    public ArrayList<ChatMessage> getHistory(){
+        ArrayList<ChatMessage> copy = new ArrayList<ChatMessage>();
+        for(ChatMessage msg : history) {
+            copy.add(msg.clone());
         }
         return copy;
     }

@@ -4,9 +4,12 @@ import Server.ModelController;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
 
+import java.sql.Timestamp;
+
 public class ChatMessage implements MessageFromClient {
     private String sender;
     private String content;
+    private Timestamp timestamp;
 
     public ChatMessage(String sender, String content) {
         this.sender = sender;
@@ -33,5 +36,9 @@ public class ChatMessage implements MessageFromClient {
 
     public ChatMessage clone(){
         return new ChatMessage(sender, content);
+    }
+
+    public void setTimestamp(Timestamp timestamp){
+        this.timestamp = timestamp;
     }
 }
