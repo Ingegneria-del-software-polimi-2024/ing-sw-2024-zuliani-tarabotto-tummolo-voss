@@ -27,9 +27,11 @@ public class DeckPanel extends JPanel {
      */
     public DeckPanel(GUI gui){
         this.gui = gui;
+        JPanel mainPanel = new JPanel();
+        mainPanel.setOpaque(false);
         setBackground(new Color(50, 84, 70));
-        setLayout(new GridLayout(2, 3,10, 10));
-        this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        mainPanel.setLayout(new GridLayout(2, 3,10, 10));
+        setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         goldDeck = new CardLabel();
         gold1 = new CardLabel();
@@ -39,25 +41,26 @@ public class DeckPanel extends JPanel {
         resource2 = new CardLabel();
 
         //gold deck
-        this.add(goldDeck);
+        mainPanel.add(goldDeck);
         goldDeck.setCardSource(1);
         //open gold 1
-        this.add(gold1);
+        mainPanel.add(gold1);
         gold1.setCardSource(2);
         //open gold 2
-        this.add(gold2);
+        mainPanel.add(gold2);
         gold2.setCardSource(3);
         //resources deck
-        this.add(resourceDeck);
+        mainPanel.add(resourceDeck);
         resourceDeck.setCardSource(4);
         //open resources 1
-        this.add(resource1);
+        mainPanel.add(resource1);
         resource1.setCardSource(5);
         //open resources 2
-        this.add(resource2);
+        mainPanel.add(resource2);
         resource2.setCardSource(6);
 
         drawCardListener = new DrawCardListener(gui);
+        this.add(mainPanel);
 
     }
 

@@ -56,6 +56,7 @@ public class EndGamePanel extends JPanel {
         for(int i = 0; i < winners.size() - 1; i++){
             names += winners.get(i) + ", ";
         }
+        
 
         names += winners.get(winners.size() - 1);
         JLabel winnerNameLabel = new JLabel();
@@ -67,7 +68,7 @@ public class EndGamePanel extends JPanel {
 
         ///////////////////////////////////// player's scores   /////////////////////////////////////////////
         String scores = "Scores: ";
-        for(int i = 0; i < entryList.size() - 1; i++){
+        for(int i = 0; i < entryList.size(); i++){
             scores += entryList.get(i).getKey() + "(" + entryList.get(i).getValue() + "), ";
         }
 

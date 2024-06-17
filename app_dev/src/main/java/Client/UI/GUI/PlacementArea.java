@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class PlacementArea extends JPanel {
 
-    private final int cardLength = 140;
+    private final int cardLength = 100;
     private final float heightLengthRatio =   (float) 2 /3;
     private final int cardHeight = (int)(cardLength * heightLengthRatio);
     private GUI gui;

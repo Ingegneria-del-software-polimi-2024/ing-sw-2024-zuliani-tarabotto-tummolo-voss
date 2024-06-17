@@ -10,15 +10,21 @@ public class CardLabel extends JLabel {
     private PlayableCard c;
     private BufferedImage front;
     private BufferedImage back;
-    private final int cardLength = 140;
+    private int cardLength;
+    private int cardHeight;
     private final float heightLengthRatio =   (float) 2 /3;
     private int cardSource;
     private final int borderWidth = 4;
     private boolean select;
 
 
+
     public CardLabel(){
+        cardLength = 100;
+        cardHeight = (int)(cardLength * heightLengthRatio);
         setOpaque(false);
+        setMaximumSize(new Dimension(cardLength, cardHeight));
+        setMinimumSize(new Dimension(cardLength, cardHeight));
     }
 
     /**

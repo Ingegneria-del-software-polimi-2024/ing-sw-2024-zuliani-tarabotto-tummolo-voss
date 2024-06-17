@@ -11,7 +11,7 @@ public class ObjCardLabel extends JLabel {
     private ObjectiveCard c;
     private BufferedImage front;
     private BufferedImage back;
-    private final int cardLength = 140;
+    private final int cardLength = 100;
     private final float heightLengthRatio =   (float) 2 /3;
     private boolean select = false;
     private final int borderWidth = 4;

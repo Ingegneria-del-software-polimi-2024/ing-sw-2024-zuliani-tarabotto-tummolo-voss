@@ -25,16 +25,16 @@ public class BoardStarterClickedListener extends MouseAdapter {
         int x = e.getX();
         int y = e.getY();
 
-
-        int xRel = x - board.getXCenter();
-        int yRel = board.getYCenter() - y;
-        if(xRel / (board.getCardLength()/2) == 0 && yRel / (board.getCardHeight()/2) == 0){
-            gui.getView().playStarterCard();
-            gui.setStarterSelected();
-            gui.updateHand();
-            System.out.println("cliccata");
+        if(gui.getCurrentDisposition().equals(gui.getView().getPlayerId())) {
+            int xRel = x - board.getXCenter();
+            int yRel = board.getYCenter() - y;
+            if (xRel / (board.getCardLength() / 2) == 0 && yRel / (board.getCardHeight() / 2) == 0) {
+                gui.getView().playStarterCard();
+                gui.setStarterSelected();
+                gui.updateHand();
+                System.out.println("cliccata");
+            }
         }
-
     }
 
 }
