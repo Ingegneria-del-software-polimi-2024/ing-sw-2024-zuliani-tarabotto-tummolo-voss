@@ -13,6 +13,7 @@ public class ClientAPI_COME implements Runnable{
     public ClientAPI_COME(ViewAPI view){
         this.view = view;
         toDoQueue = new ClientMessageQueue();
+        chatQueue = new ClientMessageQueue();
     }
 
     /**

@@ -468,21 +468,6 @@ public class GameState {
         commonTable.definedDeckInitialization(players);
     }
 
-//    public GameState(ArrayList<String> nickNames, String id, int i) {
-//        players = new ArrayList<Player>();
-//        for(String name : nickNames) {
-//            Player p;
-//            players.add(p = new Player());
-//            p.setNickname(name);
-//        }
-//        this.turnPlayer = players.get(0);
-//        this.id = id;
-//        // initialize commonTable
-//        this.commonTable = new CommonTable();
-//        //function that calls every initializing method contained in commonTable
-//        commonTable.definedDeckInitialization(players);
-//    }
-
     ////////////////////////////////////////////RECONNECTIONS//////////////////////////////////////////////////////////
 
     /**
@@ -519,6 +504,8 @@ public class GameState {
 
             modelListener.notifyChanges(getPlayerByName(playerID).getSecretObjective(), playerID);
             modelListener.notifyChanges(turnPlayer.getNickname(), playerID);
+            if(turnPlayer == p)
+                playingTurn();
             modelListener.notifyChanges(turnState, playerID);
         }
 
