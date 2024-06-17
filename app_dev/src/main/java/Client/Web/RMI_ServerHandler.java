@@ -1,5 +1,7 @@
 package Client.Web;
 
+import Chat.MessagesFromServer.ChatHistoryMessage;
+import Chat.MessagesFromServer.ChatUpdateMessage;
 import SharedWebInterfaces.Messages.MessagesFromLobby.WelcomeMessage;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
 import SharedWebInterfaces.Messages.MessagesToLobby.MessageToLobby;
@@ -46,7 +48,13 @@ public class RMI_ServerHandler implements ServerHandlerInterface {
      * @throws RemoteException if an error in the network happens
      */
     @Override
-    public void notifyChanges(MessageFromServer message) throws RemoteException{api.notifyChanges(message);}
+    public void notifyChanges(MessageFromServer message) throws RemoteException{
+        if(message instanceof ChatHistoryMessage || message instanceof ChatUpdateMessage){
+            api.enqueueChatMessage(message);
+            return;
+        }
+        api.notifyChanges(message);
+    }
 
     /**
      * forwards the incoming message to the client API incoming interface

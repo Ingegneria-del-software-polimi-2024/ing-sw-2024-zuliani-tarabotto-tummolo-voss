@@ -1,8 +1,10 @@
 package Client.UI;
 
+import Chat.MessagesFromClient.ChatMessage;
 import model.cards.PlayableCards.PlayableCard;
 import model.placementArea.Coordinates;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -43,4 +45,10 @@ public interface UI extends Runnable{
     void printSecretObjective();
     void displayReconnection();
     void returnToChooseGame();
+
+    /**
+     * displays the text message that has arrived
+     * @param message
+     */
+    void displayNewTextMessage(ChatMessage message);
 }

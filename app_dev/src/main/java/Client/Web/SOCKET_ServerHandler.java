@@ -1,5 +1,7 @@
 package Client.Web;
 
+import Chat.MessagesFromServer.ChatHistoryMessage;
+import Chat.MessagesFromServer.ChatUpdateMessage;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_RoomChoice;
 import SharedWebInterfaces.Messages.MessagesFromServer.InterruptConnectionMessage;
@@ -39,7 +41,13 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
      * @param message the message from the server containing the updates for the view
      * @throws RemoteException when an error in the network happens
      */
-    public void notifyChanges(MessageFromServer message) throws RemoteException {api.notifyChanges(message);}
+    public void notifyChanges(MessageFromServer message) throws RemoteException {
+        if(message instanceof ChatHistoryMessage || message instanceof ChatUpdateMessage){
+            api.enqueueChatMessage(message);
+            return;
+        }
+        api.notifyChanges(message);
+    }
 
     /**
      * forwards the incoming message to the client API incoming interface

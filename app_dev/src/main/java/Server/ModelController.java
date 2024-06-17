@@ -328,7 +328,7 @@ public class ModelController implements ServerControllerInterface {
 
     public void enqChatMsg(ChatMessage message){
         Timestamp deliveryTime = chatHistory.add(message);
-        modelListener.broadcastChatMessage(new ChatUpdateMessage(message.getSender(), message.getContent(), deliveryTime));
+        modelListener.broadcastChatMessage(new ChatUpdateMessage(message));
     }
 
     public void sendChatHistory(String player){

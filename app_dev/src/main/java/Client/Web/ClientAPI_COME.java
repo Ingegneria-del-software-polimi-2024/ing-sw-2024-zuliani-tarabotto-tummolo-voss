@@ -7,6 +7,7 @@ import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
 
 public class ClientAPI_COME implements Runnable{
     private ClientMessageQueue toDoQueue;
+    private ClientMessageQueue chatQueue;
     private ViewAPI view;
 
     public ClientAPI_COME(ViewAPI view){
@@ -48,5 +49,25 @@ public class ClientAPI_COME implements Runnable{
      */
     public void enqueue(MessageFromServer msg){
         toDoQueue.enqueueMessage(msg);
+    }
+
+    /**
+     * a loop that dequeues and executes only chat messages
+     */
+    public void dequeueChatMessages(){
+        while (true){
+            MessageFromServer msg = chatQueue.getNextMessage();
+            if(msg != null){
+                msg.execute(view);
+            }
+        }
+    }
+
+    /**
+     * enqueues a chat message in the dedicated list
+     * @param msg the chat message to be enqueued
+     */
+    public void enqueueChatMessage(MessageFromServer msg) {
+        chatQueue.enqueueMessage(msg);
     }
 }

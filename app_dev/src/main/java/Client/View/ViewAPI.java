@@ -1,5 +1,6 @@
 package Client.View;
 
+import Chat.MessagesFromClient.ChatMessage;
 import Client.UI.TUI.TUI;
 import Client.UI.UI;
 import Client.Web.*;
@@ -14,6 +15,7 @@ import model.enums.Artifact;
 import model.enums.Element;
 import model.placementArea.Coordinates;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -113,7 +115,9 @@ public class ViewAPI implements ViewAPI_Interface {
     public void startConnection(String in, String host) throws StartConnectionFailedException {
         ClientAPI_COME clientAPICome = new ClientAPI_COME(this);
         Thread readMessagesLoop = new Thread(clientAPICome);
+        Thread readChatMessagesLoop = new Thread(clientAPICome::dequeueChatMessages);
         readMessagesLoop.start();
+        readChatMessagesLoop.start();
         ClientAPI_GO clientAPIGo = getClientAPIGo(in, host, clientAPICome);
         this.setClientAPIGo(clientAPIGo);
     }
@@ -453,4 +457,16 @@ public class ViewAPI implements ViewAPI_Interface {
     public void returnToChooseGame(){
         ui.returnToChooseGame();
     }
+
+    @Override
+    public void deliverTextMessage(ChatMessage message) {
+        viewModel.receiveTextMessage(message);
+    }
+
+    @Override
+    public void resetChatHistory(ArrayList<ChatMessage> history) {
+        viewModel.resetChatHistory(history);
+    }
+
+
 }

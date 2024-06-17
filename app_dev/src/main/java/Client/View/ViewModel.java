@@ -1,5 +1,6 @@
 package Client.View;
 
+import Chat.MessagesFromClient.ChatMessage;
 import Client.UI.UI;
 import Client.Web.ClientAPI_GO;
 import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.*;
@@ -12,6 +13,7 @@ import model.enums.Element;
 import model.enums.Pawn;
 import model.placementArea.Coordinates;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -65,6 +67,8 @@ public class ViewModel {
      */
     private ArrayList<String> winners;
 
+    private List<ChatMessage> chat;
+
     //interfaces to communicate with
     private ClientAPI_GO clientAPIGo;
     private UI ui;
@@ -79,6 +83,8 @@ public class ViewModel {
 
         this.pawnColors = new HashMap<>();
         this.decks = new HashMap<Integer,List<PlayableCard>>();
+
+        this.chat = Collections.synchronizedList(new ArrayList<>());
         this.ui = ui;
     }
     public void setClientAPIGo(ClientAPI_GO clientAPI_GO){
@@ -379,5 +385,23 @@ public class ViewModel {
     public List<String> getWinners(){return Collections.unmodifiableList(winners);}
     public HashMap<Integer, List<PlayableCard>> getDecks() {
         return decks;
+    }
+
+    /**
+     * handles the reception of a text message,
+     * @param message the message to be received
+     */
+    public void receiveTextMessage(ChatMessage message) {
+        chat.add(message);
+        ui.displayNewTextMessage(message);
+    }
+
+    /**
+     * substitutes the current chat history
+     * @param history the new chat history
+     */
+    public void resetChatHistory(ArrayList<ChatMessage> history) {
+        chat = Collections.synchronizedList(history);
+        //TODO will this work??
     }
 }

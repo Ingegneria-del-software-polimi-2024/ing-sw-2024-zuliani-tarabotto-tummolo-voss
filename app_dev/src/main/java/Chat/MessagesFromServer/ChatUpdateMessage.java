@@ -1,23 +1,20 @@
 package Chat.MessagesFromServer;
 
+import Chat.MessagesFromClient.ChatMessage;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
 import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
 
 import java.sql.Timestamp;
 
 public class ChatUpdateMessage implements MessageFromServer{
-    private String sender;
-    private String content;
-    private Timestamp timestamp;
+    private ChatMessage message;
 
-    public ChatUpdateMessage(String sender, String content, Timestamp timestamp) {
-        this.sender = sender;
-        this.content = content;
-        this.timestamp = timestamp;
+    public ChatUpdateMessage(ChatMessage message) {
+        this.message = message;
     }
 
     @Override
     public void execute(ViewAPI_Interface view) {
-        //TODO daimplementare
+        view.deliverTextMessage(message);
     }
 }
