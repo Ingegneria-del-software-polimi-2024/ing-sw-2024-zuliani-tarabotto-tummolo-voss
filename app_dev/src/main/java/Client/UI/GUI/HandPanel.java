@@ -23,9 +23,11 @@ public class HandPanel extends JPanel {
         FlowLayout layout = new FlowLayout(FlowLayout.CENTER);
         layout.setHgap(20); // Set horizontal gap
         setBackground(new Color(50, 84, 70));
-        c1 = new CardLabel();
-        c2 = new CardLabel();
-        c3 = new CardLabel();
+        int cardLength = (int)this.getPreferredSize().getWidth() / 4;
+        gui.setCardLength(cardLength);
+        c1 = new CardLabel(cardLength);
+        c2 = new CardLabel(cardLength);
+        c3 = new CardLabel(cardLength);
         this.add(c1);
         this.add(c2);
         this.add(c3);

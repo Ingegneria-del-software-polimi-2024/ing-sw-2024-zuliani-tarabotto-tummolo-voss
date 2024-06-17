@@ -9,21 +9,25 @@ import java.awt.*;
 
 public class PlacementArea extends JPanel {
 
-    private final int cardLength = 100;
+    private final int cardLength;
     private final float heightLengthRatio =   (float) 2 /3;
-    private final int cardHeight = (int)(cardLength * heightLengthRatio);
+    private final int cardHeight;
     private GUI gui;
     private int xCenter;
     private int yCenter;
-    private final int xOverlap = (int) (0.22*cardLength);
-    private final int yOverlap = (int) (0.401 * cardHeight);
+    private int xOverlap;
+    private int yOverlap;
     private boolean displayAvailable = false;
     private final int borderWidth = 4;
     private boolean drawSelectionRectangle = false;
     private Coordinates selectionRectangleCoordinates;
     private BoardStarterClickedListener starterClickedListener;
 
-    public PlacementArea(GUI gui){
+    public PlacementArea(GUI gui, int cardLength){
+        this.cardLength = cardLength;
+        this.cardHeight = (int)(cardLength * heightLengthRatio);
+        xOverlap = (int) (0.22 * cardLength);
+        yOverlap = (int) (0.41 * cardHeight);
         this.gui = gui;
         setBackground(new Color(50, 84, 70));
         setPreferredSize(new Dimension(2000, 2000));

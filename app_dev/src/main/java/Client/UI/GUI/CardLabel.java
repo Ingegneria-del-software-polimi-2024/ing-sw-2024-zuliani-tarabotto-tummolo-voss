@@ -19,8 +19,8 @@ public class CardLabel extends JLabel {
 
 
 
-    public CardLabel(){
-        cardLength = 100;
+    public CardLabel(int cardLength){
+        this.cardLength = cardLength;
         cardHeight = (int)(cardLength * heightLengthRatio);
         setOpaque(false);
         setMaximumSize(new Dimension(cardLength, cardHeight));

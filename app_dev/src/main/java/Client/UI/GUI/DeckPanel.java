@@ -27,18 +27,19 @@ public class DeckPanel extends JPanel {
      */
     public DeckPanel(GUI gui){
         this.gui = gui;
+        int cardLength = (int)this.getPreferredSize().getWidth() / 4;
         JPanel mainPanel = new JPanel();
         mainPanel.setOpaque(false);
         setBackground(new Color(50, 84, 70));
         mainPanel.setLayout(new GridLayout(2, 3,10, 10));
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        goldDeck = new CardLabel();
-        gold1 = new CardLabel();
-        gold2 = new CardLabel();
-        resourceDeck = new CardLabel();
-        resource1 = new CardLabel();
-        resource2 = new CardLabel();
+        goldDeck = new CardLabel(cardLength);
+        gold1 = new CardLabel(cardLength);
+        gold2 = new CardLabel(cardLength);
+        resourceDeck = new CardLabel(cardLength);
+        resource1 = new CardLabel(cardLength);
+        resource2 = new CardLabel(cardLength);
 
         //gold deck
         mainPanel.add(goldDeck);
@@ -90,6 +91,11 @@ public class DeckPanel extends JPanel {
         resource1.updateCard(c5, gui.getFronts().get(c5.getId()), gui.getBacks().get(c5.getId()));
         resource2.updateCard(c6, gui.getFronts().get(c6.getId()), gui.getBacks().get(c6.getId()));
 
+    }
+
+    @Override
+    public Dimension getPreferredSize(){
+        return new Dimension((int)(gui.getScreenWidth() * 0.33), (int)(gui.getScreenHeight() * 0.25));
     }
 
     @Override

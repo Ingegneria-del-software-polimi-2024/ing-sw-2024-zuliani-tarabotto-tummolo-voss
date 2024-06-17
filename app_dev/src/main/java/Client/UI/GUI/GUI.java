@@ -56,6 +56,7 @@ public class  GUI  implements UI {
     private JPanel titlesPanel;
     private boolean desiredQuit = false;
     private CardLayout cardLayout;
+    private int cardLength;
 
     public GUI(ViewAPI view){
         this.view = view;
@@ -345,7 +346,7 @@ public class  GUI  implements UI {
 
 
     private void createBoardPanel(){
-        board = new PlacementArea(this);
+        board = new PlacementArea(this, cardLength);
         //board.setLayout(new BoxLayout(board,BoxLayout.Y_AXIS));
 
         JScrollPane scroll = new JScrollPane(board);
@@ -482,6 +483,10 @@ public class  GUI  implements UI {
         int index = view.getHand().indexOf(playCard);
         if(!playCard.getFaceSide()) return true;
         else return view.getCanBePlaced()[index];
+    }
+
+    public void setCardLength(int cardLength){
+        this.cardLength = cardLength;
     }
 
 

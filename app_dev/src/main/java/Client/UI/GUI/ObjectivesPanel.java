@@ -24,11 +24,12 @@ public class ObjectivesPanel extends JPanel {
         setBackground(new Color(50, 84, 70));
 
         //this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        int cardLength = (int)this.getPreferredSize().getWidth() / 4;
         this.panelHeight = panelHeight;
-        common1 = new ObjCardLabel();
-        common2 = new ObjCardLabel();
-        secret1 = new ObjCardLabel();
-        secret2 = new ObjCardLabel();
+        common1 = new ObjCardLabel(cardLength);
+        common2 = new ObjCardLabel(cardLength);
+        secret1 = new ObjCardLabel(cardLength);
+        secret2 = new ObjCardLabel(cardLength);
         this.add(common1);
         this.add(common2);
        // this.add(secret1);
@@ -124,7 +125,10 @@ public class ObjectivesPanel extends JPanel {
     }
 
 
-
+    @Override
+    public Dimension getPreferredSize(){
+        return new Dimension((int)(gui.getScreenWidth() * 0.33), (int)(gui.getScreenHeight() * 0.25));
+    }
 
     @Override
     protected void paintComponent(Graphics g) {
