@@ -1,5 +1,6 @@
 package Client.View;
 
+import Chat.ChatHistory;
 import Chat.MessagesFromClient.ChatMessage;
 import Client.UI.TUI.TUI;
 import Client.UI.UI;
@@ -469,4 +470,7 @@ public class ViewAPI implements ViewAPI_Interface {
     }
 
 
+    public List<ChatMessage> getChatHistory() {
+        return viewModel.getChatHistory();
+    }
 }

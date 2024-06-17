@@ -1,5 +1,6 @@
 package Client.View;
 
+import Chat.ChatHistory;
 import Chat.MessagesFromClient.ChatMessage;
 import Client.UI.UI;
 import Client.Web.ClientAPI_GO;
@@ -403,5 +404,9 @@ public class ViewModel {
     public void resetChatHistory(ArrayList<ChatMessage> history) {
         chat = Collections.synchronizedList(history);
         //TODO will this work??
+    }
+
+    public List<ChatMessage> getChatHistory() {
+        return chat;
     }
 }

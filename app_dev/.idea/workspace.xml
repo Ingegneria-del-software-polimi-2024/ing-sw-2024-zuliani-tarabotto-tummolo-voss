@@ -10,21 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a85c2ef2-4743-4d12-8336-27ef59fd799c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/CardLabel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/CardLabel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/DeckPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/DeckPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/HandPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/HandPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/ObjCardLabel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/ObjCardLabel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/ObjectivesPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/ObjectivesPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/PlacementArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/PlacementArea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/StarterPanel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/CardLabel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/CardLabel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/DeckPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/DeckPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/HandPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/HandPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/StarterPanel$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/StarterPanel$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/StarterPanel.class" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/Commands/ChatCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/TUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/TUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/View/ViewAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/View/ViewAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/View/ViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/View/ViewModel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,11 +61,15 @@
     "Application.run server.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "GUI&&TUI",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm"
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -197,7 +190,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="" />
+      <changelist id="a85c2ef2-4743-4d12-8336-27ef59fd799c" name="Changes" comment="" />
       <created>1710346315496</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -288,6 +281,7 @@
       <workItem from="1718001323244" duration="16844000" />
       <workItem from="1718530746765" duration="12012000" />
       <workItem from="1718603148201" duration="3822000" />
+      <workItem from="1718648936384" duration="4382000" />
     </task>
     <servers />
   </component>

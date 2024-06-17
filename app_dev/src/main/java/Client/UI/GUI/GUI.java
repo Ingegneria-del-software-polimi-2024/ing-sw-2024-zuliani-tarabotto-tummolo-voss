@@ -1,6 +1,7 @@
 package Client.UI.GUI;
 
 
+import Chat.MessagesFromClient.ChatMessage;
 import Client.UI.GUI.EventListeners.BoardClickedListener;
 import Client.UI.GUI.EventListeners.BoardMotionListener;
 import Client.UI.GUI.LoginPanel.LoginFrame;
@@ -298,6 +299,11 @@ public class  GUI  implements UI {
     @Override
     public void returnToChooseGame() {
         //we only use this method in tui
+    }
+
+    @Override
+    public void displayNewTextMessage(ChatMessage message) {
+        //TODO implement
     }
 
 

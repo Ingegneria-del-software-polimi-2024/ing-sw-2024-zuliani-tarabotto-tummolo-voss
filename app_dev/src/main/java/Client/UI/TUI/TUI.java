@@ -1,5 +1,7 @@
 package Client.UI.TUI;
 
+import Chat.ChatHistory;
+import Chat.MessagesFromClient.ChatMessage;
 import Client.UI.TUI.Commands.Command;
 import Client.UI.TUI.Commands.DispositionCommand;
 import Client.UI.TUI.Commands.EndGameCommand;
@@ -227,6 +229,7 @@ public class TUI implements UI {
         clear();
         loginPrinter.print();
     }
+
 
     public void displayReturnToLobby(){
         String in = null;
@@ -780,4 +783,13 @@ public class TUI implements UI {
         return  game;
     }
 
+    ///////////////////////////////////////////chat/////////////////////////////////////////////////////////////////////
+    @Override
+    public void displayNewTextMessage(ChatMessage message) {
+        //TODO implement
+    }
+
+    public void printChat(){
+        //TODO implement
+    }
 }
