@@ -6,7 +6,20 @@
   <component name="ChangeListManager">
     <list default="true" id="1da38996-3939-49c2-a703-e1080c263294" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/placementArea/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/placementArea/Coordinates.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/model/placementArea/AddCardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/placementArea/AddCardTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/intellij/uiDesigner/core/AbstractLayout.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/intellij/uiDesigner/core/DimensionInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/intellij/uiDesigner/core/GridConstraints.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/intellij/uiDesigner/core/GridLayoutManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/intellij/uiDesigner/core/HorizontalInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/intellij/uiDesigner/core/LayoutState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/intellij/uiDesigner/core/Spacer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/intellij/uiDesigner/core/SupportCode$TextWithMnemonic.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/intellij/uiDesigner/core/SupportCode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/intellij/uiDesigner/core/Util.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/intellij/uiDesigner/core/VerticalInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/placementArea/Coordinates.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/placementArea/Coordinates.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/model/placementArea/AddCardTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/model/placementArea/AddCardTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,11 +48,12 @@
   <component name="JavaAutoRunManager">
     <enabled-run-configurations>
       <run-configuration type="JUnit" name="AddCardTest" />
+      <run-configuration type="JUnit" name="AddCardTest.testSingoli" />
     </enabled-run-configurations>
   </component>
-  <component name="KubernetesApiProvider"><![CDATA[{
-  "isMigrated": true
-}]]></component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="ProjectErrors" />
   </component>
@@ -63,12 +77,14 @@
     "Application.RunDeckCreation.executor": "Run",
     "Application.RunTUI_Client.executor": "Run",
     "JUnit.AddCardTest.executor": "Run",
-    "JUnit.AddCardTest.testSingoli.executor": "Debug",
+    "JUnit.AddCardTest.testSingoli.executor": "Coverage",
+    "JUnit.All in Ing_sw_proj.executor": "Coverage",
     "JUnit.ControllerTest.executor": "Run",
     "JUnit.ControllerTest.main.executor": "Debug",
     "JUnit.ObjectiveCardTest.executor": "Run",
     "JUnit.PlacementAreaTest.executor": "Run",
     "JUnit.StarterCardTest.executor": "Run",
+    "JUnit.placementArea in Ing_sw_proj.executor": "Coverage",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "false",
@@ -110,33 +126,7 @@
       <recent name="model.lobby" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.AddCardTest.testSingoli">
-    <configuration name="AddCardTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="model.placementArea.AddCardTest" />
-      <module name="Ing_sw_proj" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="model.placementArea.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="LoginPage" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Client.UI.GUI.LoginPage" />
-      <module name="Ing_sw_proj" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Client.UI.GUI.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.placementArea in Ing_sw_proj">
     <configuration name="AddCardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Ing_sw_proj" />
       <extension name="coverage">
@@ -168,6 +158,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="All in Ing_sw_proj" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Ing_sw_proj" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="PlacementAreaTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Ing_sw_proj" />
       <extension name="coverage">
@@ -183,20 +181,28 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="placementArea in Ing_sw_proj" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Ing_sw_proj" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/src/test/java/model/placementArea" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
-      <item itemvalue="Application.AddCardTest" />
-      <item itemvalue="Application.LoginPage" />
+      <item itemvalue="JUnit.All in Ing_sw_proj" />
+      <item itemvalue="JUnit.placementArea in Ing_sw_proj" />
       <item itemvalue="JUnit.AddCardTest.testSingoli" />
       <item itemvalue="JUnit.AddCardTest" />
       <item itemvalue="JUnit.PlacementAreaTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.AddCardTest" />
+        <item itemvalue="JUnit.placementArea in Ing_sw_proj" />
+        <item itemvalue="JUnit.All in Ing_sw_proj" />
         <item itemvalue="JUnit.AddCardTest.testSingoli" />
+        <item itemvalue="JUnit.AddCardTest" />
         <item itemvalue="JUnit.PlacementAreaTest" />
-        <item itemvalue="Application.AddCardTest" />
-        <item itemvalue="Application.LoginPage" />
       </list>
     </recent_temporary>
   </component>
@@ -280,6 +286,7 @@
       <workItem from="1716456295461" duration="4790000" />
       <workItem from="1716474486463" duration="3152000" />
       <workItem from="1716883467612" duration="23828000" />
+      <workItem from="1718638300292" duration="7320000" />
     </task>
     <servers />
   </component>
@@ -330,7 +337,7 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/model/placementArea/AddCardTest.java</url>
-          <line>23</line>
+          <line>24</line>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
@@ -349,5 +356,9 @@
       <FILTER>model.placementArea.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/app_dev$java_in_Ing_sw_proj.ic" NAME="java in Ing_sw_proj Coverage Results" MODIFIED="1716295250809" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/app_dev$AddCardTest_testSingoli.ic" NAME="AddCardTest.testSingoli Coverage Results" MODIFIED="1718653675857" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>model.placementArea.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/app_dev$All_in_Ing_sw_proj.ic" NAME="All in Ing_sw_proj Coverage Results" MODIFIED="1718653747416" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

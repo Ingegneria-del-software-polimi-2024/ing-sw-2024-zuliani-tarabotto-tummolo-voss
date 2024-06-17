@@ -1,5 +1,7 @@
 package model.placementArea;
 
+import model.cards.ObjectiveCard;
+
 import java.io.Serializable;
 import java.util.Collection;
 
@@ -113,5 +115,14 @@ public class Coordinates implements Serializable {
             if(this.equals(c))
                 return c;
         return null;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Coordinates) {
+            return x == ((Coordinates)other).x && y == ((Coordinates)other).y;
+        }
+        return false;
+
     }
 }
