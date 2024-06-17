@@ -15,7 +15,6 @@ import java.util.HashMap;
  */
 public class PlayerInfo extends JPanel {
 
-    private int points;
     private HashMap<Resources, Integer> resources;
     private JPanel tablePanel;
     private HashMap<Resources, JPanel> resourcePanel;

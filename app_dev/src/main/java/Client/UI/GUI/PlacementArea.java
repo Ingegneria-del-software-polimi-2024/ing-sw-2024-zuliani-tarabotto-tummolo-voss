@@ -60,7 +60,7 @@ public class PlacementArea extends JPanel {
             }
         }
 
-        if(gui.starterSelected){
+        if(gui.starterSelected && gui.getCurrentDisposition().equals(gui.getView().getPlayerId())){
             g2d.setColor(Color.ORANGE);
             g2d.setStroke(new BasicStroke(borderWidth));
             g2d.drawRoundRect(xCenter - cardLength/2, yCenter - cardHeight/2 , cardLength, cardHeight, 13, 13);

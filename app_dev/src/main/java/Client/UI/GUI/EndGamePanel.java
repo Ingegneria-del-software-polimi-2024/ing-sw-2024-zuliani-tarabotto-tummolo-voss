@@ -67,15 +67,15 @@ public class EndGamePanel extends JPanel {
         middlePanel.add(winnerNameLabel);
 
         ///////////////////////////////////// player's scores   /////////////////////////////////////////////
-        String scores = "Scores: ";
-        for(int i = 0; i < entryList.size(); i++){
-            scores += entryList.get(i).getKey() + "(" + entryList.get(i).getValue() + "), ";
+        StringBuilder scores = new StringBuilder("Scores: ");
+        for(int i = 0; i < entryList.size() -1; i++){
+            scores.append(entryList.get(i).getKey()).append("(").append(entryList.get(i).getValue()).append("), ");
         }
 
-        scores += entryList.get(entryList.size() - 1).getKey() + "(" + entryList.get(entryList.size() - 1).getValue() + ")";
+        scores.append(entryList.get(entryList.size() - 1).getKey()).append("(").append(entryList.get(entryList.size() - 1).getValue()).append(")");
         JLabel scoresLabel = new JLabel();
         scoresLabel.setForeground(Color.BLACK);
-        scoresLabel.setText(scores);
+        scoresLabel.setText(scores.toString());
         scoresLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         scoresLabel.setFont(new Font("Serif", Font.BOLD, 20));
         middlePanel.add(scoresLabel);
