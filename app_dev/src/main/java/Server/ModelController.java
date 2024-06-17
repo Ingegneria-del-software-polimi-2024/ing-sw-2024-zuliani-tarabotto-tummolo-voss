@@ -1,4 +1,8 @@
 package Server;
+import Chat.ChatHistory;
+import Chat.MessagesFromServer.ChatHistoryMessage;
+import Chat.MessagesFromClient.ChatMessage;
+import Chat.MessagesFromServer.ChatUpdateMessage;
 import Server.Web.Game.ServerAPI_GO;
 import Server.Web.Lobby.HeartBeatSettings;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
@@ -9,6 +13,8 @@ import model.GameState.TurnState;
 import model.cards.PlayableCards.PlayableCard;
 import model.placementArea.Coordinates;
 import Server.Web.Lobby.Room;
+
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -34,8 +40,8 @@ public class ModelController implements ServerControllerInterface {
     private final Room room;
     private boolean finished = false;
     private boolean gameEnded = false;
-
-
+    private ChatHistory chatHistory;
+    private ModelListener modelListener;
 
     /**
      * class constructor
@@ -57,10 +63,11 @@ public class ModelController implements ServerControllerInterface {
      */
     @Override
     public void initializeGameState(){
-
-        gameState = new GameState(playersNicknames, gameId, new ModelListener(send), this);
+        modelListener = new ModelListener(send);
+        gameState = new GameState(playersNicknames, gameId, modelListener, this);
         initialPlayer = gameState.getTurnPlayer().getNickname();
         gameState.setTurnState(TurnState.GAME_INITIALIZATION);
+        chatHistory = new ChatHistory();
     }
 
 
@@ -315,5 +322,16 @@ public class ModelController implements ServerControllerInterface {
             initialPlayer = playerID;
         gameState.reconnect(playerID);
         System.out.println("RECONNECTION COMPLETE");
+    }
+
+    ///////////////////////////////////////////////CHAT/////////////////////////////////////////////////////////////////
+
+    public void enqChatMsg(ChatMessage message){
+        Timestamp deliveryTime = chatHistory.add(message);
+        modelListener.broadcastChatMessage(new ChatUpdateMessage(message.getSender(), message.getContent(), deliveryTime));
+    }
+
+    public void sendChatHistory(String player){
+        modelListener.sendChatHistory(player, new ChatHistoryMessage(chatHistory.getHistory(), player));
     }
 }

@@ -1,6 +1,8 @@
 package Server;
 
 
+import Chat.MessagesFromServer.ChatHistoryMessage;
+import Chat.MessagesFromServer.ChatUpdateMessage;
 import Server.Web.Game.ServerAPI_GO;
 import SharedWebInterfaces.Messages.MessagesFromServer.*;
 import SharedWebInterfaces.Messages.MessagesFromServer.Errors.CantPlaceCardMessage;
@@ -395,6 +397,22 @@ public class ModelListener {//TODO Handle correctly the exceptions
     public void displayObjectiveNotification(String playerID){
         try {
             serverAPI.notifyChanges(new DisplayObjectiveSelection(playerID), playerID);
+        } catch (MsgNotDeliveredException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void broadcastChatMessage(ChatUpdateMessage message){
+        try {
+            serverAPI.broadcastNotifyChanges(message);
+        }catch (MsgNotDeliveredException e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void sendChatHistory(String player, ChatHistoryMessage msg){
+        try {
+            serverAPI.notifyChanges(msg, player);
         } catch (MsgNotDeliveredException e) {
             throw new RuntimeException(e);
         }
