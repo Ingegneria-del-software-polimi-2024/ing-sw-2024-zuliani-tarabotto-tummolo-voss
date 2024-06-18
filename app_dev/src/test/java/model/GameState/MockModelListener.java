@@ -1,6 +1,16 @@
 package model.GameState;
 
+import Chat.MessagesFromServer.ChatHistoryMessage;
+import Chat.MessagesFromServer.ChatUpdateMessage;
 import Server.ModelListener;
+import SharedWebInterfaces.Messages.MessagesFromServer.*;
+import SharedWebInterfaces.Messages.MessagesFromServer.Errors.CantPlaceCardMessage;
+import SharedWebInterfaces.Messages.MessagesFromServer.Errors.EmptyDeckMessage;
+import SharedWebInterfaces.Messages.MessagesFromServer.Errors.KickOutOfGameMessage;
+import SharedWebInterfaces.Messages.MessagesFromServer.ReconnectionsMSG.DisplayObjectiveSelection;
+import SharedWebInterfaces.Messages.MessagesFromServer.ReconnectionsMSG.DisplayStarterCardSelection;
+import SharedWebInterfaces.Messages.MessagesFromServer.ReconnectionsMSG.ReconnectionHappened;
+import SharedWebInterfaces.WebExceptions.MsgNotDeliveredException;
 import model.Exceptions.CantPlaceCardException;
 import model.Exceptions.EmptyCardSourceException;
 import model.Exceptions.KickOutOfGameException;
@@ -24,10 +34,21 @@ public class MockModelListener extends ModelListener {
 
     /**
      * notification about current state of GameState
-     * @param state
+     * @param state the state to be set
      */
     public void notifyChanges(TurnState state){
         System.out.println("calledNotifyChanges");
+
+    }
+
+    /**
+     * notification about current state of GameState, can be directed to a single player
+     * @param state the state to be set
+     * @param playerID the receiver of the message
+     */
+    public void notifyChanges(TurnState state, String playerID){
+        System.out.println("calledNotifyChanges");
+
     }
 
     /**
@@ -36,6 +57,17 @@ public class MockModelListener extends ModelListener {
      */
     public void notifyChanges(String turnPlayer){
         System.out.println("calledNotifyChanges");
+
+    }
+
+    /**
+     * notification about the new turnPlayer
+     * @param turnPlayer the player playing at the moment
+     * @param playerID the player to send the message to
+     */
+    public void notifyChanges(String turnPlayer, String playerID){
+        System.out.println("calledNotifyChanges");
+
     }
 
 
@@ -55,8 +87,26 @@ public class MockModelListener extends ModelListener {
                               ArrayList<String> players, String gameId,
                               ObjectiveCard commonObjective1, ObjectiveCard commonObjective2){
         System.out.println("calledNotifyChanges");
+
+
+    }
+    public void notifyChanges(PlayableDeck goldDeck, PlayableDeck  resourceDeck, List<PlayableCard> openGold,
+                              List<PlayableCard> openResource,
+                              ArrayList<String> players, String gameId,
+                              ObjectiveCard commonObjective1, ObjectiveCard commonObjective2, String playerID){
+        System.out.println("calledNotifyChanges");
+
     }
 
+    /**
+     * we broadcast the player pawn color
+     * @param player
+     * @param pawnColor
+     */
+    public void notifyChanges( String player, Pawn pawnColor){
+        System.out.println("calledNotifyChanges");
+
+    }
 
 
     /**
@@ -66,6 +116,7 @@ public class MockModelListener extends ModelListener {
      */
     public void notifyChanges(PlayableCard starterCard, String player, Pawn pawnColor){
         System.out.println("calledNotifyChanges");
+
     }
 
     /**
@@ -74,7 +125,9 @@ public class MockModelListener extends ModelListener {
      * @param player
      */
     public void notifyChanges(List<PlayableCard> hand , String player){
+
         System.out.println("calledNotifyChanges");
+
     }
 
     /**
@@ -83,7 +136,9 @@ public class MockModelListener extends ModelListener {
      * @param secretObjective2
      */
     public void notifyChanges(ObjectiveCard secretObjective1, ObjectiveCard secretObjective2, String player){
+
         System.out.println("calledNotifyChanges");
+
     }
 
 
@@ -94,6 +149,7 @@ public class MockModelListener extends ModelListener {
      */
     public void notifyChanges(ObjectiveCard secretObjective, String player){
         System.out.println("calledNotifyChanges");
+
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -108,6 +164,7 @@ public class MockModelListener extends ModelListener {
      */
     public void notifyChanges(String player, List<Coordinates> availablePlaces, boolean[] canBePlaced){
         System.out.println("calledNotifyChanges");
+
     }
 
 
@@ -120,6 +177,32 @@ public class MockModelListener extends ModelListener {
      */
     public void notifyChanges(String player, HashMap<Coordinates, PlayableCard> disposition, List<Coordinates> availablePlaces,
                               int points) {
+
+        System.out.println("calledNotifyChanges");
+
+
+    }
+
+    /**
+     * after placing the card each player is notified with his update disposition, points, elements and artifacts
+     * @param player
+     * @param disposition
+     * @param availablePlaces
+     * @param points
+     */
+    public void notifyChanges(String player, HashMap<Coordinates, PlayableCard> disposition, List<Coordinates> availablePlaces,
+                              int points, String recipient) {
+        System.out.println("calledNotifyChanges");
+    }
+
+    /**
+     * we update the player resources(elements, artifacts)
+     * @param player
+     * @param availableArtifacts
+     * @param availableElements
+     */
+    public void notifyChanges (String player, HashMap<Artifact, Integer> availableArtifacts,
+                               HashMap<Element, Integer> availableElements){
         System.out.println("calledNotifyChanges");
     }
 
@@ -129,8 +212,8 @@ public class MockModelListener extends ModelListener {
      * @param availableArtifacts
      * @param availableElements
      */
-    public void notifyChanges (String player, HashMap<Artifact, Integer> availableArtifacts,
-                               HashMap<Element, Integer> availableElements){
+    public void personalNotifyChanges (String player, HashMap<Artifact, Integer> availableArtifacts,
+                                       HashMap<Element, Integer> availableElements){
         System.out.println("calledNotifyChanges");
     }
 
@@ -142,6 +225,14 @@ public class MockModelListener extends ModelListener {
     public void notifyChanges(List<PlayableCard> deck, int cardSource) {
         System.out.println("calledNotifyChanges");
     }
+
+    /**
+     * after the player decided where to draw the next card from, the involved card source gets updated based on cardSource
+     * method used when picking a card from an "open card" deck
+     * @param deck
+     * @param cardSource
+     * @param index
+     */
     public void notifyChanges(List<PlayableCard> deck, int cardSource, int index) {
         System.out.println("calledNotifyChanges");
     }
@@ -149,21 +240,68 @@ public class MockModelListener extends ModelListener {
     /**
      * at the end of the game each player is notified with the final points of every player,
      * the view is responsible for displaying the winner
-     * @param finalPoints
+     * @param finalPoints an hashmap containing the players' names and their points
      */
-    public void notifyChanges(HashMap<String, Integer> finalPoints){
+    public void notifyChanges(HashMap<String, Integer> finalPoints, ArrayList<String> winners){
+
         System.out.println("calledNotifyChanges");
     }
     ////////////////////////////// ERROR NOTIFICATIONS ///////////////////////////////////////////////////////////////
+
+    /**
+     * notify a player when can't play a card
+     * @param player the player's nickname
+     * @param e the raised exception
+     */
     public void notifyChanges(String player, CantPlaceCardException e) {
         System.out.println("calledNotifyChanges");
+
     }
+
+    /**
+     * notify a player when he is kicked out of the game or exits it
+     * @param player the player's nickname
+     * @param e the raised exception
+     */
     public boolean notifyChanges(String player, KickOutOfGameException e){
         System.out.println("calledNotifyChanges");
         return true;
     }
+
+    /**
+     * notify a player when can't draw from a deck
+     * @param player the player's nickname
+     * @param e the raised exception
+     */
     public void notifyChanges(String player, EmptyCardSourceException e){
         System.out.println("calledNotifyChanges");
+
+    }
+
+
+    public void notifyReconnection(String playerID){
+        System.out.println("calledNotifyChanges");
+
+    }
+
+    public void displayStarterCardNotification(String playerID, PlayableCard starterCard, Pawn color){
+        System.out.println("calledNotifyChanges");
+
+    }
+
+    public void displayObjectiveNotification(String playerID){
+        System.out.println("calledNotifyChanges");
+
+    }
+
+    public void broadcastChatMessage(ChatUpdateMessage message){
+        System.out.println("calledNotifyChanges");
+
+    }
+
+    public void sendChatHistory(String player, ChatHistoryMessage msg){
+        System.out.println("calledNotifyChanges");
+
     }
 
 }

@@ -30,7 +30,7 @@ public class GameState {
     private Coordinates selectedCoordinates;
     private CommonTable commonTable;
     private TurnState turnState;
-    private final int MAX_POINTS = 1;//TODO insert 20
+    private final int MAX_POINTS = 1;//TODO insert 20 for real game, 10 for testing, 1 for rapid checking
     private ModelListener modelListener;
     private List<ObjectiveCard> objectiveBuffer;
 
