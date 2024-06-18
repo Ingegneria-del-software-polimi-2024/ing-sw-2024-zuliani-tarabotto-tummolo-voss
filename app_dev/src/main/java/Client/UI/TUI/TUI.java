@@ -214,8 +214,8 @@ public class TUI implements UI {
     }
 
     public void returnToLobby(){
+        view.stopUI(); //moved here from line 219
         displayReturnToLobby();
-        view.stopUI();
         clear();
         view.welcome();
         view.requestAvailableGames();
@@ -233,8 +233,9 @@ public class TUI implements UI {
         String in = null;
         sc = new Scanner(System.in);
         do {
-            System.out.print(ansi().fg(color).a("~> Press enter to return to the lobby\n").reset());
             if(input == null){
+                clear();
+                System.out.print(ansi().fg(color).a("~> Press enter to return to the lobby\n").reset());
                 in = sc.nextLine();
             } else{
                 synchronized (lock){
@@ -562,6 +563,7 @@ public class TUI implements UI {
         for (Map.Entry<String, Integer> stringIntegerEntry : entryList) {
             System.out.println("-> " + stringIntegerEntry.getKey() + ": " + stringIntegerEntry.getValue() + " points");
         }
+        System.out.print(ansi().fg(color).a("~> Press enter to return to the lobby\n").reset());
     }
 
     private List<String> getInfoField(){
