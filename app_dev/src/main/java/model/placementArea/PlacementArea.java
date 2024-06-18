@@ -303,6 +303,11 @@ public class PlacementArea {
         throw new IllegalArgumentException();
     }
 
+    public Coordinates testWrapper(Coordinates xy, PlayableCard card) throws IllegalArgumentException {
+        return updateAvailablePlaces(xy, card);
+    }
+
+
 
 
 
