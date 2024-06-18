@@ -236,6 +236,7 @@ public class Room {
      * @param handlerInterface the handler of the player
      */
     public void reconnect(String playerID, ClientHandlerInterface handlerInterface){
+        lobby.reconnectPlayer(playerID, handlerInterface);
         lastSeen.put(playerID, System.currentTimeMillis());
         playersInterfaces.put(playerID, handlerInterface);
         send.setHandler(playerID, handlerInterface);

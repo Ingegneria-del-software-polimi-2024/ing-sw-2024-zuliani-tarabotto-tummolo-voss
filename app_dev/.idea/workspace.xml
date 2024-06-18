@@ -11,25 +11,9 @@
   <component name="ChangeListManager">
     <list default="true" id="a85c2ef2-4743-4d12-8336-27ef59fd799c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/TUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/TUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Client/View/ViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/View/ViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/ModelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ModelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Game/RMI_ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Game/RMI_ClientHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/Lobby.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/Lobby.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/Room.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromLobby/AvailableGames.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromLobby/AvailableGames.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/TUI/Commands/DispositionCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/TUI/Commands/DispositionCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/TUI/TUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/TUI/TUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/View/ViewAPI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/View/ViewAPI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/View/ViewModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/View/ViewModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Server/ModelController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Server/ModelController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Server/Web/Lobby/Lobby.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Server/Web/Lobby/Lobby.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Server/Web/Lobby/Room.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Server/Web/Lobby/Room.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/Messages/MessagesFromLobby/AvailableGames.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/Messages/MessagesFromLobby/AvailableGames.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/Messages/MessagesFromServer/InitializationMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/Messages/MessagesFromServer/InitializationMessage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/SharedInterfaces/ViewAPI_Interface.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SharedWebInterfaces/SharedInterfaces/ViewAPI_Interface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/GameState/GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/GameState/GameState.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +103,7 @@
       <recent name="model.lobby" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.RunTUI_Client">
+  <component name="RunManager" selected="Application.run server">
     <configuration name="Provetta" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Provetta" />
       <module name="Ing_sw_proj" />
@@ -300,6 +284,7 @@
       <workItem from="1718530746765" duration="12012000" />
       <workItem from="1718603148201" duration="3822000" />
       <workItem from="1718648936384" duration="5423000" />
+      <workItem from="1718743071861" duration="2497000" />
     </task>
     <servers />
   </component>

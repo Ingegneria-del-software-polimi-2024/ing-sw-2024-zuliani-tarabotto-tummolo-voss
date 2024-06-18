@@ -249,6 +249,30 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
         System.out.println("Room "+roomName+" is correctly closed");
     }
 
+    public void quitGameBeforeStart(String roomName, String player){
+        try {
+            Room room = lookFor(roomName);
+            if(room == null){
+                sendToPlayer(player, new AvailableGames(getGameNames(), true));
+                return;
+            }
+            //if there was just one player in the room we destroy it
+            if(room.getPlayers().size() == 1){
+                closeRoom(roomName);
+            }else{
+                //if there was more than one player in the room we just remove the player from the room's players list
+                room.removePlayerBeforeStart(player);
+            }
+
+            sendToPlayer(player, new AvailableGames(getGameNames(), true)); //true: we notify that we are coming back from the waiting room
+        } catch (MsgNotDeliveredException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void reconnectPlayer(String playerID, ClientHandlerInterface handler){
+        players.put(playerID, handler);
+    }
     ///////////////////////////////////////////////PRIVATE METHODS//////////////////////////////////////////////////////
 
     /**
@@ -343,24 +367,5 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
             room.verifyStart();
     }
 
-    public void quitGameBeforeStart(String roomName, String player){
-        try {
-            Room room = lookFor(roomName);
-            if(room == null){
-                sendToPlayer(player, new AvailableGames(getGameNames(), true));
-                return;
-            }
-            //if there was just one player in the room we destroy it
-            if(room.getPlayers().size() == 1){
-                closeRoom(roomName);
-            }else{
-                //if there was more than one player in the room we just remove the player from the room's players list
-                room.removePlayerBeforeStart(player);
-            }
 
-            sendToPlayer(player, new AvailableGames(getGameNames(), true)); //true: we notify that we are coming back from the waiting room
-        } catch (MsgNotDeliveredException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
