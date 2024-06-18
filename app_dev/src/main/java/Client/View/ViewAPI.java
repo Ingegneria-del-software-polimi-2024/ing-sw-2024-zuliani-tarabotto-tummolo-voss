@@ -323,7 +323,11 @@ public class ViewAPI implements ViewAPI_Interface {
     }
 
     @Override
-    public void returnToLobby() {ui.returnToLobby();}
+    public void returnToLobby() {
+        viewModel.resetGameID();
+        viewModel.setGameAsNotStarted();
+        ui.returnToLobby();
+    }
 
     public void displayStarterCard(){ui.printStarterCard();}
 
@@ -472,5 +476,21 @@ public class ViewAPI implements ViewAPI_Interface {
 
     public List<ChatMessage> getChatHistory() {
         return viewModel.getChatHistory();
+    }
+
+    /**
+     * notifies the viewModel that the game has started
+     */
+    public void setGameAsStarted(){
+        viewModel.setGameAsStarted();
+    }
+
+    /**
+     *
+     * @return true if the game is started, else false.
+     * The game is intended as started when the part of playing takes place (not when players are in the waiting room)
+     */
+    public boolean isGameStarted(){
+        return viewModel.isGameStarted();
     }
 }

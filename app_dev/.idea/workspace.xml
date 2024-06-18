@@ -10,12 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a85c2ef2-4743-4d12-8336-27ef59fd799c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/controller/final" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/controller/final" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/controller/output" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/controller/output" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/model/GameState/MockModelListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/GameState/MockModelListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/GameState/GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/GameState/GameState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/View/ViewAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/View/ViewAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/View/ViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/View/ViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/InitializationMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/InitializationMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/SharedInterfaces/ViewAPI_Interface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/SharedInterfaces/ViewAPI_Interface.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -363,6 +361,6 @@
       <FILTER>model.placementArea.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/app_dev$_default_.ic" NAME="&lt;default&gt; Coverage Results" MODIFIED="1716745697859" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/app_dev$java_in_Ing_sw_proj.ic" NAME="java in Ing_sw_proj Coverage Results" MODIFIED="1718701603875" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/app_dev$java_in_Ing_sw_proj.ic" NAME="java in Ing_sw_proj Coverage Results" MODIFIED="1718701773834" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

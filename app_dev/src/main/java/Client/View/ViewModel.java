@@ -46,7 +46,7 @@ public class ViewModel {
     //logistical support
     private TurnState state;
     private List<String> players;
-    private String gameId;
+    private String gameId = null;
     private HashMap< String, HashMap<Artifact, Integer> > availableArtifacts;
     private HashMap< String, HashMap<Element, Integer> > availableElements;
     private HashMap<String, String> pawnColors;
@@ -68,8 +68,12 @@ public class ViewModel {
      */
     private ArrayList<String> winners;
 
+    /**
+     * The chat history: a variable containing all chat message belonging to the current game
+     */
     private List<ChatMessage> chat;
 
+    private boolean gameStarted = false;
     //interfaces to communicate with
     private ClientAPI_GO clientAPIGo;
     private UI ui;
@@ -252,11 +256,14 @@ public class ViewModel {
 
     //we use this function to end the game whenever we want
     public void quitGame(){
+        gameStarted = false;
+        chat = Collections.synchronizedList(new ArrayList<>());
         clientAPIGo.sendToServer(new QuitGameMessage(playerId));
     }
 
     public void quitGame(String roomName){
         clientAPIGo.sendToLobby(new QuitGameBeforeStartMessage(roomName, playerId));
+        gameId = null;
     }
 
     public void setPawnColor(String player, String pawnColor) {
@@ -408,5 +415,21 @@ public class ViewModel {
 
     public List<ChatMessage> getChatHistory() {
         return chat;
+    }
+
+    public void resetGameID(){
+        gameId = null;
+    }
+
+    public void setGameAsStarted(){
+        gameStarted = true;
+    }
+
+    public void setGameAsNotStarted(){
+        gameStarted = false;
+    }
+
+    public boolean isGameStarted() {
+        return gameStarted;
     }
 }

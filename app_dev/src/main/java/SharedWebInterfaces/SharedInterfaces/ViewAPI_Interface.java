@@ -84,4 +84,9 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
      */
     void resetChatHistory(ArrayList<ChatMessage> history);
 
+    /**
+     * Notifies the view that the game has started, this way commands as --disp can be called
+     */
+    void setGameAsStarted();
+
 }

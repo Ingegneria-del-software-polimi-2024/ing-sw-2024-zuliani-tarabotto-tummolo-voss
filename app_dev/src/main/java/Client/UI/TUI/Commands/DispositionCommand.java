@@ -19,6 +19,11 @@ public class DispositionCommand implements Command{
 
     @Override
     public void execute() {
+        if(!view.isGameStarted()){
+            System.out.println("Can't print the disposition before the game starts");
+            return;
+        }
+
         System.out.println("Enter the name of the player you want to check: ");
         String line = "";
         for(String p : view.getPlayers()){

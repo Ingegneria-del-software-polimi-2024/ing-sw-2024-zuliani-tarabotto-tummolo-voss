@@ -38,6 +38,7 @@ public class InitializationMessage implements MessageFromServer{
      */
     @Override
     public void execute(ViewAPI_Interface view) {
+        view.setGameAsStarted();
         view.setGoldDeck(goldDeck);
         view.setResourceDeck(resourceDeck);
         view.setPlayers(players);
