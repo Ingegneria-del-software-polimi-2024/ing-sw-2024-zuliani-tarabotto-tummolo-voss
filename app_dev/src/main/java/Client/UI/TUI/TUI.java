@@ -2,10 +2,7 @@ package Client.UI.TUI;
 
 import Chat.ChatHistory;
 import Chat.MessagesFromClient.ChatMessage;
-import Client.UI.TUI.Commands.Command;
-import Client.UI.TUI.Commands.DispositionCommand;
-import Client.UI.TUI.Commands.EndGameCommand;
-import Client.UI.TUI.Commands.HelpCommand;
+import Client.UI.TUI.Commands.*;
 import Client.UI.UI;
 import Client.View.ViewAPI;
 import SharedWebInterfaces.WebExceptions.StartConnectionFailedException;
@@ -60,13 +57,14 @@ public class TUI implements UI {
         commandMap.put("--help", new HelpCommand());
         commandMap.put("--disp", new DispositionCommand(view));
         commandMap.put("--quit", new EndGameCommand(view, this));
+        //commandMap.put("--chat", new ChatCommand(view, this)); //TODO decomment for chat
 
         sc = new Scanner(System.in);
     }
 ///////////////////////////////////////<Lobby>//////////////////////////////////////////////////////////////////////////
     public void firstWelcome(){
         loginPrinter.print();
-        System.out.println("~> Welcome to Codex Naturalis");//TODO print the instructions
+        System.out.println("~> Welcome to Codex Naturalis, follow the instructions to join a game.\n   Once in the game write --help for a guide, --quit to exit");
     }
     public void chooseConnection(){
         System.out.print(ansi().fg(color).a("~> Insert the techonolgy of connection (RMI/Socket): \n").reset());

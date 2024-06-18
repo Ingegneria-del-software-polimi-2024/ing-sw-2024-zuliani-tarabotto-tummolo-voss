@@ -10,6 +10,7 @@ public class AvailableGames implements MessageFromServer {
     private boolean backFromWaitingRoom = false;
     @Override
     public void execute(ViewAPI_Interface view) {
+        //TODO WTF we can delete the next line, it bugs everythin(!?)
         if(backFromWaitingRoom) view.returnToChooseGame(); //if we are coming back from the waitingRoom we call this method
         view.displayAvailableGames(availableGames);
     }
