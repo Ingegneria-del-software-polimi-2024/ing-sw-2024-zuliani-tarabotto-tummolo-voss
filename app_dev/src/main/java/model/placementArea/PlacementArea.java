@@ -286,7 +286,7 @@ public class PlacementArea {
             }
         }
 
-        //removig the coordinates from the availablePlaces list and returning them to be used
+        //removing the coordinates from the availablePlaces list and returning them to be used
         coord = xy.areContainedIn(availablePlaces);
 
         if (coord != null){
@@ -296,7 +296,9 @@ public class PlacementArea {
         throw new IllegalArgumentException();
     }
 
-
+    public Coordinates testWrapper(Coordinates xy, PlayableCard card) throws IllegalArgumentException {
+        return updateAvailablePlaces(xy, card);
+    }
 
 
     ///////////////// GETTER METHODS ////////////////////////////////////////////////////////////
