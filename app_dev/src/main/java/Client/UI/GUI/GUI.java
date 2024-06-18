@@ -151,7 +151,8 @@ public class  GUI  implements UI {
     public void displayObjectiveSelection() {
         showTitle("Choose a Secret Objective");
         bannersPanel.updateBanners();
-        updateHand();
+        handPanel.updateHand();
+        objPanel.addSecretObjectives();
         objPanel.updateObjectivesPanel();
         objPanel.chooseObjectives();
     }
@@ -188,7 +189,6 @@ public class  GUI  implements UI {
     @Override
     public void displayEndGame() {
         System.out.println("fine");
-
     }
 
 
@@ -283,17 +283,32 @@ public class  GUI  implements UI {
 
     @Override
     public void printStarterCard() {
-        //we only use this method in tui
+        //we use this function only in tui
+        //updateHand();
     }
 
     @Override
     public void printSecretObjective() {
-        //we only use this method in tui
+        //we use this function only in tui
+        //updateHand();
+        objPanel.printObjectives();
     }
 
     @Override
     public void displayReconnection() {
-        //we only use this method in tui
+        System.out.println("displayreconnection");
+        if(frame == null) createFrame();
+        login.dispose();
+        createBorderPanels();
+        createBannersPanel();
+        createHandPanel();
+        createDecksPanel();
+        createObjectivesPanel();
+        createBoardPanel();
+        deckPanel.updateDecks();
+        if(view.getHand() != null) handPanel.updateHand();
+        if(view.getSecretObjective() != null) objPanel.printObjectives();
+        frame.setVisible(true);
     }
 
     @Override

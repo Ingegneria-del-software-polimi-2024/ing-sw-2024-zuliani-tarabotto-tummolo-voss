@@ -183,10 +183,11 @@ public class GameState {
     }
 
     public void distributeSecretOjectives() {
-        for(int i=0; i<players.size(); i++) {
-            Player p = players.get(i);
+        for (Player p : players) {
             objectiveBuffer.add(getObjectiveDeck().extract());
             objectiveBuffer.add(getObjectiveDeck().extract());
+            System.out.println(objectiveBuffer.get(objectiveBuffer.size() - 2).getId());
+            System.out.println(objectiveBuffer.get(objectiveBuffer.size() - 1).getId());
             //NOTIFICATION: about the two objectives the player has to choose between
             modelListener.notifyChanges(objectiveBuffer.get(objectiveBuffer.size() - 2), objectiveBuffer.get(objectiveBuffer.size() - 1), p.getNickname());
         }
@@ -480,7 +481,6 @@ public class GameState {
         for(Player p : players) {
             nickNames.add(p.getNickname());
         }
-        modelListener.notifyReconnection(playerID);
         modelListener.notifyChanges(commonTable.getGoldDeck(), commonTable.getResourceDeck(), commonTable.getOpenGold(),
                 commonTable.getOpenResources(), nickNames, id,
                 commonTable.getCommonObjectives().get(0), commonTable.getCommonObjectives().get(1), playerID);
@@ -492,20 +492,27 @@ public class GameState {
             modelListener.notifyChanges(x.getNickname(), x.getPlacementArea().getDisposition(),
                     x.getPlacementArea().getAvailablePlaces(),
                     x.getPoints(), p.getNickname());
+
+            modelListener.notifyChanges(x.getNickname(), x.getPawnColor(), playerID);
+
         }
+
 
         //NOTIFICATION: we notify the player of the new resources he acquired
         modelListener.personalNotifyChanges(p.getNickname(), p.getPlacementArea().getAllArtifactsNumber(),
                 p.getPlacementArea().getAllElementsNumber());
 
-        if(turnState.isStartingState()) {
-            turnState.reconnect(this, getPlayerByName(playerID));
-        }else{
 
+        if(turnState.isStartingState()) {
+            modelListener.notifyReconnection(playerID);
+            turnState.reconnect(this, getPlayerByName(playerID));
+
+        }else{
             modelListener.notifyChanges(getPlayerByName(playerID).getSecretObjective(), playerID);
             modelListener.notifyChanges(turnPlayer.getNickname(), playerID);
             if(turnPlayer == p)
                 playingTurn();
+            modelListener.notifyReconnection(playerID);
             modelListener.notifyChanges(turnState, playerID);
         }
 

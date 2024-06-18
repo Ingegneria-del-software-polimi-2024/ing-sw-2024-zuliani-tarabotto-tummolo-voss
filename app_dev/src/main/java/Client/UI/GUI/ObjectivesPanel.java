@@ -32,9 +32,10 @@ public class ObjectivesPanel extends JPanel {
         secret2 = new ObjCardLabel(cardLength);
         this.add(common1);
         this.add(common2);
-       // this.add(secret1);
-       // this.add(secret2);
 
+    }
+
+    public void addSecretObjectives(){
         JPanel secretPanel1 = new JPanel();
         secretPanel1.setOpaque(false);
         secretPanel1.add(secret1);
@@ -113,6 +114,14 @@ public class ObjectivesPanel extends JPanel {
             }
         });
 
+
+    }
+    public void printObjectives(){
+        setBorder(BorderFactory.createEmptyBorder((panelHeight - (int)common1.getPreferredSize().getHeight())/2, 0, 0, 0));
+        ObjectiveCard secret = gui.getView().getSecretObjective();
+        secret1.updateCard(secret, gui.getFronts().get(secret.getId()), gui.getBacks().get(secret.getId()));
+        this.add(secret1);
+        updateObjectivesPanel();
 
     }
 

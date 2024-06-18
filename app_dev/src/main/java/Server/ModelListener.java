@@ -148,6 +148,16 @@ public class ModelListener {//TODO Handle correctly the exceptions
         }
     }
 
+    public void notifyChanges( String player, Pawn pawnColor, String reconnectedPlayer){
+        try{
+            serverAPI.notifyChanges(new PawnColorMessage(player, pawnColor.toString()), reconnectedPlayer);
+        }catch (MsgNotDeliveredException msg){
+            throw new RuntimeException(msg);
+        }
+    }
+
+
+
 
     /**
      * the player is notified with the starterCard that he has been given and the PAWNCOLOR

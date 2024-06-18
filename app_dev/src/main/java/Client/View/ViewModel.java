@@ -39,8 +39,8 @@ public class ViewModel {
     private final int OPEN_GOLD_INDX = 1;
     private final int RESOURCE_DECK_INDX = 2;
     private final int OPEN_RESOURCE_INDX = 3;
-    private List<ObjectiveCard> commonObjectives;
-    private List<ObjectiveCard> chooseSecretObjectives;
+    private final List<ObjectiveCard> commonObjectives;
+    private final List<ObjectiveCard> chooseSecretObjectives;
 
 
     //logistical support
@@ -204,6 +204,8 @@ public class ViewModel {
 
     //the player is given the two ObjectiveCard cards from which he can choose his secretObjective
     public void setSecretObjectives(ObjectiveCard obj1, ObjectiveCard obj2){
+        System.out.println(obj1.getId());
+        System.out.println(obj2.getId());
         chooseSecretObjectives.add(0, obj1);
         chooseSecretObjectives.add(1, obj2);
     }
@@ -273,6 +275,8 @@ public class ViewModel {
     public String getPawnColor(String player){return pawnColors.get(player);}
 
     public void setCommonObjectives(ObjectiveCard commonObjective1, ObjectiveCard commonObjective2){
+        System.out.println(commonObjective1.getId());
+        System.out.println(commonObjective2.getId());
         commonObjectives.add(commonObjective1);
         commonObjectives.add(commonObjective2);
     }
