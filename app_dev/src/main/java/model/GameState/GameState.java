@@ -137,7 +137,7 @@ public class GameState {
     /**
      * updates currentPlayer
      */
-    public void nextPlayer() {
+    public void nextPlayer(){
         do {
             int currentPlayer = players.indexOf(turnPlayer);
             if (currentPlayer == players.size() - 1) {
@@ -165,6 +165,14 @@ public class GameState {
      * @param state the state to be set
      */
     public void setTurnState(TurnState state) {
+        if(state.equals(TurnState.PLACING_CARD_SELECTION)){
+            System.out.println(turnPlayer.getNickname());
+            if(!turnPlayer.isActive()){
+                nextPlayer();
+                System.out.println(turnPlayer.getNickname());
+                playingTurn();
+            }
+        }
         this.turnState = state;
         //NOTIFICATION: ABOUT THE CHANGED STATE OF GAMESTATE
         modelListener.notifyChanges(state);
