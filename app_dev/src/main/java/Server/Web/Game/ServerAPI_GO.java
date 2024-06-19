@@ -6,9 +6,10 @@ import SharedWebInterfaces.WebExceptions.MsgNotDeliveredException;
 
 import java.rmi.RemoteException;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class ServerAPI_GO {
-    private HashMap<String, ClientHandlerInterface> players;
+    private ConcurrentHashMap<String, ClientHandlerInterface> players;
 
     /**
      * the model changes are forwarded to the player
@@ -58,9 +59,9 @@ public class ServerAPI_GO {
      * class constructor
      */
     public ServerAPI_GO() {
-        players = new HashMap<>();
+        players = new ConcurrentHashMap<>();
     }
     public void disconnectPlayer(String nickName){
-        players.put(nickName, null);
+        players.remove(nickName);
     }
 }

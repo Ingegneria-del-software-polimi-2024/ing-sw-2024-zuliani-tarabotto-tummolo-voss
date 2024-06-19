@@ -13,21 +13,21 @@ import SharedWebInterfaces.WebExceptions.StartConnectionFailedException;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Lobby implements ControllerInterface {//TODO all the methods here must be sinchronized!! :)
     private ArrayList<Room> rooms;
-    private HashMap<String, ClientHandlerInterface> players;
+    private ConcurrentHashMap<String, ClientHandlerInterface> players;
     private FirstSocketManager socketManager;
     private First_RMI_Manager rmiManager;
     private LobbyMessageQueue queue;
-    private HashMap<String, Long> lastSeenInLobby;
+    private ConcurrentHashMap<String, Long> lastSeenInLobby;
 
     public Lobby(int portSocket, int portRMI){
         try {
             rooms = new ArrayList<Room>();
-            players = new HashMap<String, ClientHandlerInterface>();
-            lastSeenInLobby = new HashMap<String, Long>();
+            players = new ConcurrentHashMap<String, ClientHandlerInterface>();
+            lastSeenInLobby = new ConcurrentHashMap<String, Long>();
             socketManager = FirstSocketManager.getInstance(this, portSocket);
             Thread listenForNewConnection = new Thread(socketManager);
             listenForNewConnection.start();
