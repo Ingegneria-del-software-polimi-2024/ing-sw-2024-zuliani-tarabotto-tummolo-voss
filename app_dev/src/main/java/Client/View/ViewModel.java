@@ -79,9 +79,6 @@ public class ViewModel {
     private UI ui;
 
     public ViewModel(UI ui) {
-
-
-
         this.commonObjectives = new ArrayList<>();
         this.chooseSecretObjectives = new ArrayList<>();
         this.winners = new ArrayList<String>();
@@ -271,8 +268,8 @@ public class ViewModel {
     public String getPawnColor(String player){return pawnColors.get(player);}
 
     public void setCommonObjectives(ObjectiveCard commonObjective1, ObjectiveCard commonObjective2){
-        commonObjectives.add(commonObjective1);
-        commonObjectives.add(commonObjective2);
+        commonObjectives.add(0, commonObjective1);
+        commonObjectives.add(1, commonObjective2);
     }
 
     public void setOpenGold(List<PlayableCard> openGold){
@@ -429,5 +426,43 @@ public class ViewModel {
 
     public boolean isGameStarted() {
         return gameStarted;
+    }
+
+    /**
+     * All the data structures are reset
+     */
+    public void reset(){
+        this.commonObjectives = new ArrayList<>();
+        this.chooseSecretObjectives = new ArrayList<>();
+        this.winners = new ArrayList<String>();
+
+        this.pawnColors = new HashMap<>();
+        this.decks = new HashMap<Integer,List<PlayableCard>>();
+
+        this.chat = Collections.synchronizedList(new ArrayList<>());
+
+        this.hand = new ArrayList<>();
+
+        this.starterCard = null;
+
+        this.secretObjective = null;
+
+        this.state = null;
+        this.players = new ArrayList<>();
+
+        this.gameId = null;
+        this.availableArtifacts = new  HashMap< String, HashMap<Artifact, Integer> >();
+        this.availableElements = new  HashMap< String, HashMap<Element, Integer> >();
+        this.turnPlayer = null;
+        this.availablePlaces = new ArrayList<>();
+
+        //the disposition of all players' are stored here
+        this.dispositions =  new HashMap< String, HashMap< Coordinates, PlayableCard> >();
+        //the points of all players are store here
+        this.points = new HashMap< String , Integer>();
+
+        this.chat = new ArrayList<>();
+
+        gameStarted = false;
     }
 }
