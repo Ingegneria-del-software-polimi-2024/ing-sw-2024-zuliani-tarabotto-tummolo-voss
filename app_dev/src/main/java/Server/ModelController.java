@@ -17,6 +17,7 @@ import Server.Web.Lobby.Room;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Set;
 
 
 /*
@@ -42,19 +43,21 @@ public class ModelController implements ServerControllerInterface {
     private boolean gameEnded = false;
     private ChatHistory chatHistory;
     private ModelListener modelListener;
+    private Set<String> disconnectedPlayers;
 
     /**
      * class constructor
      * @param playersNicknames nicknames of the players
      * @param gameId id of the game
      */
-    public ModelController(ArrayList<String> playersNicknames, String gameId, ServerAPI_GO send, Room room){
+    public ModelController(ArrayList<String> playersNicknames, String gameId, ServerAPI_GO send, Room room, Set<String> disconnected){
         System.out.println("model controller created");
         this.playersNicknames = playersNicknames;
         this.gameId = gameId;
         this.send = send;
         this.readyPlayers = 0;
         this.room = room;
+        this.disconnectedPlayers = disconnected;
     }
 
     /**
@@ -64,7 +67,7 @@ public class ModelController implements ServerControllerInterface {
     @Override
     public void initializeGameState(){
         modelListener = new ModelListener(send);
-        gameState = new GameState(playersNicknames, gameId, modelListener, this);
+        gameState = new GameState(playersNicknames, gameId, modelListener, this, disconnectedPlayers);
         initialPlayer = gameState.getTurnPlayer().getNickname();
         gameState.setTurnState(TurnState.GAME_INITIALIZATION);
         chatHistory = new ChatHistory();
@@ -308,7 +311,7 @@ public class ModelController implements ServerControllerInterface {
     }
 
     public void quitGame(String playerID){
-        System.out.println("quittin method in gamestate");
+        System.out.println("quitting method in gamestate");
         gameState.quitGame(playerID);
         System.out.println("quitting method in room");
         room.quitGame(playerID);

@@ -15,10 +15,7 @@ import model.player.Player;
 import model.deckFactory.*;
 
 import javax.sql.rowset.CachedRowSet;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class GameState {
 
@@ -42,7 +39,7 @@ public class GameState {
      * @param nickNames ArrayList of Strings
      * @param id the unique id for gameState
      */
-    public GameState(ArrayList<String> nickNames, String id, ModelListener modelListener, ModelController modelController) {
+    public GameState(ArrayList<String> nickNames, String id, ModelListener modelListener, ModelController modelController, Set<String> disconnected) {
         this.modelListener = modelListener;
         this.modelController = modelController;
         //creates a new players list with the nicknames taken from input
@@ -60,6 +57,11 @@ public class GameState {
         this.objectiveBuffer = new ArrayList<>();
         //function that calls every initializing method contained in commonTable
         commonTable.initialize(players);
+        //we must control if all the players are indeed connected
+        for(Player p : players){
+            if(disconnected.contains(p.getNickname()))
+                p.setInactive();
+        }
         //commonTable.definedDeckInitialization(players);
         System.out.println("gamestate created");
         //NOTIFICATION: decks order, open cards, commonObjectives, nicknames, gameId and initialPlayer
@@ -135,7 +137,7 @@ public class GameState {
     /**
      * updates currentPlayer
      */
-    public void nextPlayer() {
+    public void nextPlayer(){
         do {
             int currentPlayer = players.indexOf(turnPlayer);
             if (currentPlayer == players.size() - 1) {
@@ -163,6 +165,14 @@ public class GameState {
      * @param state the state to be set
      */
     public void setTurnState(TurnState state) {
+        if(state.equals(TurnState.PLACING_CARD_SELECTION)){
+            System.out.println(turnPlayer.getNickname());
+            if(!turnPlayer.isActive()){
+                nextPlayer();
+                System.out.println(turnPlayer.getNickname());
+                playingTurn();
+            }
+        }
         this.turnState = state;
         //NOTIFICATION: ABOUT THE CHANGED STATE OF GAMESTATE
         modelListener.notifyChanges(state);

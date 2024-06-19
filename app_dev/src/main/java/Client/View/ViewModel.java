@@ -105,8 +105,6 @@ public class ViewModel {
         ui.displayAvailableGames(listOfGames);
     }
 
-
-
     //HEARTBEAT
     public void HeartbeatToServer(){
         clientAPIGo.sendToLobby( new HeartbeatMessage(playerId));

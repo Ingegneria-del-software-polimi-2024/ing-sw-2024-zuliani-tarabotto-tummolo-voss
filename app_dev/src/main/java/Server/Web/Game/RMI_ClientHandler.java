@@ -50,7 +50,8 @@ public class RMI_ClientHandler implements ClientHandlerInterface {
      * @throws RemoteException when the message is not correctly delivered
      */
     @Override
-    public void sendToClient(MessageFromServer msg) throws RemoteException {snd(msg);}
+    public void sendToClient(MessageFromServer msg) throws RemoteException {snd(msg);
+        System.out.println("Sent a message: "+msg.getClass());}
 
     /**
      * class creator

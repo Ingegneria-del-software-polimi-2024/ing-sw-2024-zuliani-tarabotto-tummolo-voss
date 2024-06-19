@@ -6,6 +6,7 @@ import Server.Web.Game.ServerAPI_GO;
 import Server.Web.Lobby.LobbyExceptions.CantJoinRoomExcept;
 import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.I_WantToReconnectMessage;
 import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_RoomChoice;
+import SharedWebInterfaces.Messages.MessagesFromServer.ReconnectionsMSG.ReconnectionHappened;
 import SharedWebInterfaces.Messages.MessagesToLobby.CloseARoomMessage;
 import SharedWebInterfaces.Messages.MessagesToLobby.JoinGameMessage;
 import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
@@ -132,7 +133,6 @@ public class Room {
                         System.out.println("the delta percieved is: "+ (currentTime - lastSeenTime)+ " milliseconds");
                         System.out.println("the player involved is: "+player);
                         disconnectPlayer(player);
-                        //TODO NOTIFY ALL PLAYERS WITH BROADCAST AND MAYBE BLOCK UI
                     }
                 }
                 try {
@@ -199,7 +199,7 @@ public class Room {
         //starts a thread starting the controller execution...
         //game = new GameState(players, "3");
         //game.setTurnState(TurnState.GAME_INITIALIZATION);
-        modelController = new ModelController(players, name, send, this);
+        modelController = new ModelController(players, name, send, this, disconnectedUsers);
         receive = new ServerAPI_COME(modelController);
         try {
             for(String p : playersInterfaces.keySet()){
@@ -236,6 +236,8 @@ public class Room {
      * @param handlerInterface the handler of the player
      */
     public void reconnect(String playerID, ClientHandlerInterface handlerInterface){
+        lobby.reconnectPlayer(playerID, handlerInterface);
+        lastSeen.put(playerID, System.currentTimeMillis());
         playersInterfaces.put(playerID, handlerInterface);
         send.setHandler(playerID, handlerInterface);
         updateHeartBeat(playerID);
@@ -256,7 +258,14 @@ public class Room {
             }
             receive.sendToServer(new I_WantToReconnectMessage(playerID, name));
             return;
+        }else{
+            try {
+                playersInterfaces.get(playerID).sendToClient(new ReconnectionHappened(playerID));
+            } catch (RemoteException e) {
+                throw new RuntimeException(e);
+            }
         }
+        System.out.println("Correctly reconnected player: "+playerID);
 
     }
 

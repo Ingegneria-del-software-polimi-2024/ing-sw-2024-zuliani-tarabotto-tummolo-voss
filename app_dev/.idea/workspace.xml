@@ -11,13 +11,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a85c2ef2-4743-4d12-8336-27ef59fd799c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/GUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/TUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/TUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/UI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/View/ViewAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/View/ViewAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/UpdateResourcesMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromServer/UpdateResourcesMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/SharedInterfaces/ViewAPI_Interface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/SharedInterfaces/ViewAPI_Interface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +57,6 @@
     &quot;Application.RunTUI_Client.executor&quot;: &quot;Run&quot;,
     &quot;Application.run gui.executor&quot;: &quot;Run&quot;,
     &quot;Application.run server.executor&quot;: &quot;Run&quot;,
-    &quot;Application.run_tui.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.All in Ing_sw_proj.executor&quot;: &quot;Coverage&quot;,
     &quot;JUnit.placementArea in Ing_sw_proj.executor&quot;: &quot;Coverage&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
@@ -108,7 +101,27 @@
       <recent name="model.lobby" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.run_tui">
+  <component name="RunManager" selected="Application.run server">
+    <configuration name="Provetta" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Provetta" />
+      <module name="Ing_sw_proj" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RunTUI_Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Client.RunTUI_Client" />
+      <module name="Ing_sw_proj" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="run gui" type="Application" factoryName="Application" singleton="false">
       <option name="MAIN_CLASS_NAME" value="Client.RunGUI_Client" />
       <module name="Ing_sw_proj" />
@@ -119,21 +132,6 @@
     <configuration name="run server" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Server.RunServer" />
       <module name="Ing_sw_proj" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="run_tui" type="Application" factoryName="Application" singleton="false">
-      <option name="MAIN_CLASS_NAME" value="Client.RunTUI_Client" />
-      <module name="Ing_sw_proj" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="All in Ing_sw_proj" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Ing_sw_proj" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -170,31 +168,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="placementArea in Ing_sw_proj" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Ing_sw_proj" />
-      <option name="TEST_OBJECT" value="directory" />
-      <dir value="$PROJECT_DIR$/src/test/java/model/placementArea" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="Application.run server" />
       <item itemvalue="Application.run gui" />
-      <item itemvalue="Application.run_tui" />
+      <item itemvalue="Application.Provetta" />
+      <item itemvalue="Application.RunTUI_Client" />
       <item itemvalue="JUnit.ControllerTest.main" />
       <item itemvalue="JUnit.java in Ing_sw_proj" />
-      <item itemvalue="JUnit.All in Ing_sw_proj" />
       <item itemvalue="JUnit.controller in Ing_sw_proj" />
-      <item itemvalue="JUnit.placementArea in Ing_sw_proj" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.RunTUI_Client" />
+        <item itemvalue="Application.Provetta" />
         <item itemvalue="JUnit.java in Ing_sw_proj" />
         <item itemvalue="JUnit.ControllerTest.main" />
         <item itemvalue="JUnit.controller in Ing_sw_proj" />
-        <item itemvalue="JUnit.All in Ing_sw_proj" />
-        <item itemvalue="JUnit.placementArea in Ing_sw_proj" />
       </list>
     </recent_temporary>
   </component>
@@ -293,6 +282,7 @@
       <workItem from="1718530746765" duration="12012000" />
       <workItem from="1718603148201" duration="3822000" />
       <workItem from="1718648936384" duration="5423000" />
+      <workItem from="1718743071861" duration="4807000" />
     </task>
     <servers />
   </component>
