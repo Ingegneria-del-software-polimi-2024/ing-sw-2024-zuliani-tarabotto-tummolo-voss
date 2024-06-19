@@ -343,7 +343,7 @@ public class TUI implements UI {
             clear();
             System.out.print(ansi().fg(color).a("~> This is your hand:\n").reset());
             handPrinter.print(view.getHand());
-            System.out.print(ansi().fg(color).a("~> this are the two commonObjectives:\n").reset());
+            System.out.print(ansi().fg(color).a("~> these are the two commonObjectives:\n").reset());
             objectivesPrinter.printCommonObjectives(view.getCommonObjectives().get(0),view.getCommonObjectives().get(1));
 
             System.out.print(ansi().fg(color).a("~> choose your secretObjective: (1/2)\n").reset());
@@ -469,7 +469,7 @@ public class TUI implements UI {
                         return;
                     }
                     //view.playCard(c, x, y);
-                    if(!view.checkAvailable(x, y)) System.out.println("~> These coordinates are not available, please choose some valid ones");
+                    if(!view.checkAvailable(x, y)) System.out.println("These coordinates are not available, please choose some valid ones");
                     else view.playCard(view.getHand().get(index - 1), faceSide, x, y);
                     //System.out.println(view.getHand().get(index - 1).getFaceSide());
                     inputPresent = false;
@@ -625,7 +625,6 @@ public class TUI implements UI {
                 //System.out.println("command thread");
                 try{
                     input = sc.nextLine();
-                    System.out.println("current input is: "+input);
                 }catch (Throwable e){
                     e.printStackTrace();
                 }
@@ -681,7 +680,7 @@ public class TUI implements UI {
                 value = Integer.parseInt(input);
                 validInput = true;
             } catch(NumberFormatException e){
-                System.out.println("input type mismatch, please insert an integer\n");
+                System.out.println("Input type mismatch, please insert an integer\n");
             }
             inputPresent = false;
             lock.notifyAll();
@@ -714,7 +713,7 @@ public class TUI implements UI {
                 value = true;
                 validInput = true;
             }else{
-                System.out.println("input type mismatch, please insert (front/back)\n");
+                System.out.println("Input type mismatch, please insert (front/back)\n");
             }
             inputPresent = false;
             lock.notifyAll();
@@ -746,7 +745,7 @@ public class TUI implements UI {
                 value = input;
                 validInput = true;
             } catch(NumberFormatException e){
-                System.out.println("input type mismatch, please insert an integer\n");
+                System.out.println("Input type mismatch, please insert an integer\n");
             }
             inputPresent = false;
             lock.notifyAll();

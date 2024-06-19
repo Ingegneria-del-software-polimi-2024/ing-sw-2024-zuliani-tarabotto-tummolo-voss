@@ -121,6 +121,7 @@ public class ViewAPI implements ViewAPI_Interface {
         readChatMessagesLoop.start();
         ClientAPI_GO clientAPIGo = getClientAPIGo(in, host, clientAPICome);
         this.setClientAPIGo(clientAPIGo);
+        viewModel.reset();
     }
 
     /**
