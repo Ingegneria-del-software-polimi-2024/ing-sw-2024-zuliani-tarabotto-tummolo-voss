@@ -39,8 +39,8 @@ public class ViewModel {
     private final int OPEN_GOLD_INDX = 1;
     private final int RESOURCE_DECK_INDX = 2;
     private final int OPEN_RESOURCE_INDX = 3;
-    private final List<ObjectiveCard> commonObjectives;
-    private final List<ObjectiveCard> chooseSecretObjectives;
+    private /*final*/ List<ObjectiveCard> commonObjectives;
+    private /*final*/ List<ObjectiveCard> chooseSecretObjectives;
 
 
     //logistical support

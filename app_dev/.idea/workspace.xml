@@ -10,10 +10,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a85c2ef2-4743-4d12-8336-27ef59fd799c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/chat/ChatPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/TUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/TUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/View/ViewAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/View/ViewAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/LoginPanel/InputFields.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/LoginPanel/InputFields.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Client/View/ViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/View/ViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$10.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$11.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$12.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$13.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$14.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$15.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields$16.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/LoginPanel/InputFields.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/TUI/TUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/TUI/TUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/View/ViewAPI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/View/ViewAPI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/View/ViewModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/View/ViewModel.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

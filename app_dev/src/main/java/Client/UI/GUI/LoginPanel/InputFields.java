@@ -319,6 +319,8 @@ public class InputFields extends JPanel {
         // createNewGame button listener
         createNewGame_JButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectedGame = null;
+                join_JButton.setEnabled(false);
                 createNewGame();
             }
         });
@@ -345,6 +347,8 @@ public class InputFields extends JPanel {
         //refresh button listener
         refresh_JButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectedGame = null;
+                join_JButton.setEnabled(false);
                 gui.getView().requestAvailableGames();
 
                 panel.revalidate();
