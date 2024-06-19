@@ -250,7 +250,7 @@ public class InputFields extends JPanel {
             private void updateTextFieldContent() {
                 nickname = nicknameField.getText();
                 nextButton.setEnabled(!nickname.isEmpty());
-                System.out.println("Updated text: " + host);
+                //System.out.println("Updated text: " + host);
             }
         });
 
@@ -309,7 +309,7 @@ public class InputFields extends JPanel {
 
         // button for joining a game after having selected one
         JButton join_JButton = new JButton("Join");
-        join_JButton.setEnabled(this.listOfGames.size() != 0);
+        join_JButton.setEnabled(this.listOfGames.size() != 0 && selectedGame != null);
 
         // label for displaying error messages (room full)
         JLabel errorMessageLabel = new JLabel();
@@ -337,6 +337,7 @@ public class InputFields extends JPanel {
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
                     selectedGame = games_JList.getSelectedValue();
+                    join_JButton.setEnabled(true);
                 }
             }
         });
@@ -356,7 +357,6 @@ public class InputFields extends JPanel {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gui.getView().joinGame(selectedGame, 0);
                 waitingForPlayers();
-
                 panel.revalidate();
                 panel.repaint();
             }
