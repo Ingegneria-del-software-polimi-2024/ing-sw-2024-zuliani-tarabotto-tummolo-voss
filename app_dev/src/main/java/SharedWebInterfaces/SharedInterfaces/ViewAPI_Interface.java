@@ -89,4 +89,8 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
      */
     void setGameAsStarted();
 
+    /**
+     * when elements and resources are updated, we call this function to update the corresponding values on the ui
+     */
+    void updateResourcesInUI();
 }

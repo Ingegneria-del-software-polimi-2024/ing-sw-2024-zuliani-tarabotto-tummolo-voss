@@ -485,6 +485,11 @@ public class ViewAPI implements ViewAPI_Interface {
         viewModel.setGameAsStarted();
     }
 
+    @Override
+    public void updateResourcesInUI() {
+        ui.updateResourcesInUI();
+    }
+
     /**
      *
      * @return true if the game is started, else false.

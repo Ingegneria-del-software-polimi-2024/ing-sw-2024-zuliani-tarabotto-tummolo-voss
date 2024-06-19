@@ -306,6 +306,7 @@ public class  GUI  implements UI {
         createObjectivesPanel();
         createBoardPanel();
         deckPanel.updateDecks();
+        if(bannersPanel != null) bannersPanel.updateBanners();
         if(view.getHand() != null) handPanel.updateHand();
         if(view.getSecretObjective() != null) objPanel.printObjectives();
         frame.setVisible(true);
@@ -361,6 +362,12 @@ public class  GUI  implements UI {
         this.deckPanel = new DeckPanel(this);
         deckPanel.setPreferredSize(new Dimension((int)(screenWidth * 0.33), (int)(screenHeight * 0.25)));
         bottomPanel.add(deckPanel);
+    }
+
+    @Override
+    public void updateResourcesInUI(){
+        if(bannersPanel != null) bannersPanel.updateBanners();
+
     }
 
 

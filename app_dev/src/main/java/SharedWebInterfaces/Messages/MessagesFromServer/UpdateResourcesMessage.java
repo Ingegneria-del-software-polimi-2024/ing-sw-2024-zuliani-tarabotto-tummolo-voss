@@ -21,5 +21,6 @@ public class UpdateResourcesMessage implements MessageFromServer {
     public void execute(ViewAPI_Interface view) {
         view.updateElements(player, availableElements);
         view.updateArtifacts(player, availableArtifacts);
+        view.updateResourcesInUI();
     }
 }

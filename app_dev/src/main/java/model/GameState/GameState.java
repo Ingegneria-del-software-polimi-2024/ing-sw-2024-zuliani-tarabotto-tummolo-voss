@@ -493,14 +493,23 @@ public class GameState {
                     x.getPlacementArea().getAvailablePlaces(),
                     x.getPoints(), p.getNickname());
 
+            //notification about the pawn color
             modelListener.notifyChanges(x.getNickname(), x.getPawnColor(), playerID);
 
+            //notification about each player's resources and elements
+            //modelListener.personalNotifyChanges(p.getNickname(), p.getPlacementArea().getAllArtifactsNumber(),
+                   // p.getPlacementArea().getAllElementsNumber());
+
+            //we broadcast to every player the resources the player has acquired
+            modelListener.notifyChanges(x.getNickname(), x.getPlacementArea().getAllArtifactsNumber(),
+                    x.getPlacementArea().getAllElementsNumber());
         }
 
 
         //NOTIFICATION: we notify the player of the new resources he acquired
-        modelListener.personalNotifyChanges(p.getNickname(), p.getPlacementArea().getAllArtifactsNumber(),
-                p.getPlacementArea().getAllElementsNumber());
+       /* modelListener.personalNotifyChanges(p.getNickname(), p.getPlacementArea().getAllArtifactsNumber(),
+                p.getPlacementArea().getAllElementsNumber());*/
+
 
 
         if(turnState.isStartingState()) {

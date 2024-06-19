@@ -579,6 +579,12 @@ public class TUI implements UI {
         return infoField;
     }
 
+
+    @Override
+    public void updateResourcesInUI() {
+
+    }
+
     private String buildStat(int stat){
         if(stat < 10) return stat + " ";
         else return String.valueOf(stat);
@@ -788,6 +794,7 @@ public class TUI implements UI {
     public void displayNewTextMessage(ChatMessage message) {
         //TODO implement
     }
+
 
     public void printChat(){
         //TODO implement
