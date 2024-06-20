@@ -402,13 +402,24 @@ public class ViewModel {
     }
 
     /**
+     * used by the client to send a ChatMessage to the server
+     * @param message
+     */
+    public void sendChatMessage(ChatMessage message){
+        clientAPIGo.sendToServer( message );
+    }
+
+    /**
      * substitutes the current chat history
      * @param history the new chat history
      */
     public void resetChatHistory(ArrayList<ChatMessage> history) {
+        System.out.println(history.size());
         chat = Collections.synchronizedList(history);
+        System.out.println(chat.size());
         //TODO will this work??
     }
+
 
     public List<ChatMessage> getChatHistory() {
         return chat;
@@ -463,7 +474,7 @@ public class ViewModel {
         //the points of all players are store here
         this.points = new HashMap< String , Integer>();
 
-        this.chat = new ArrayList<>();
+        //this.chat = new ArrayList<>();
 
         gameStarted = false;
     }

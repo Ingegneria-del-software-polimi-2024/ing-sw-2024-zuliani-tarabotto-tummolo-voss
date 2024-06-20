@@ -15,7 +15,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.rmi.RemoteException;
 
-public class SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
+public class  SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
     private ServerAPI_COME api;
     private Socket clientSocket;
     private ObjectInputStream in;

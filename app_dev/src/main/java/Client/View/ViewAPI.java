@@ -469,6 +469,10 @@ public class ViewAPI implements ViewAPI_Interface {
         viewModel.receiveTextMessage(message);
     }
 
+    public void sendChatMessage(String sender, String content){
+        viewModel.sendChatMessage(new ChatMessage(sender, content));
+    }
+
     @Override
     public void resetChatHistory(ArrayList<ChatMessage> history) {
         viewModel.resetChatHistory(history);

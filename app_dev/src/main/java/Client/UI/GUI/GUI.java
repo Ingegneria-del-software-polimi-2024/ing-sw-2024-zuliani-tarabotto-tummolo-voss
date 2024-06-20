@@ -5,6 +5,7 @@ import Chat.MessagesFromClient.ChatMessage;
 import Client.UI.GUI.EventListeners.BoardClickedListener;
 import Client.UI.GUI.EventListeners.BoardMotionListener;
 import Client.UI.GUI.LoginPanel.LoginFrame;
+import Client.UI.GUI.chat.ChatPanel;
 import Client.UI.UI;
 import Client.View.ViewAPI;
 import SharedWebInterfaces.WebExceptions.StartConnectionFailedException;
@@ -35,6 +36,7 @@ public class  GUI  implements UI {
     private HashMap<Integer, BufferedImage> fronts;
     private HashMap<Integer, BufferedImage> backs;
     private HashMap<Resources, BufferedImage> resIcons;
+    private ChatPanel chatPanel;
     private HandPanel handPanel;
     private DeckPanel deckPanel;
     private ObjectivesPanel objPanel;
@@ -79,7 +81,26 @@ public class  GUI  implements UI {
             }
         });
 
+        JButton chat = new JButton("chat");
+        chat.addActionListener(new ActionListener() {
+            private boolean showingGame = true;
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CardLayout cl = (CardLayout) eastPanel.getLayout();
+                if (showingGame) {
+                    cl.show(eastPanel, "chat");
+                    chat.setText("players");
+                } else {
+                    cl.show(eastPanel, "banners");
+                    chat.setText("chat");
+                }
+                showingGame = !showingGame;
+            }
+        });
+
         topPanel.add(quit);
+        topPanel.add(chat);
         frame.add(topPanel, BorderLayout.NORTH);
 
         this.bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -87,10 +108,11 @@ public class  GUI  implements UI {
         bottomPanel.setPreferredSize(new Dimension(screenWidth, (int)(screenHeight * 0.26)));
         frame.add(bottomPanel, BorderLayout.SOUTH);
 
-        this.eastPanel = new JPanel();
-        eastPanel.setLayout(new BoxLayout(eastPanel, BoxLayout.Y_AXIS));
-        eastPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+        //we create the eastPanel with a cardLayout to show both the players' banners and the chat
+        this.eastPanel = new JPanel(new CardLayout());
         eastPanel.setOpaque(false);
+        eastPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         frame.add(eastPanel, BorderLayout.EAST);
 
 
@@ -128,6 +150,7 @@ public class  GUI  implements UI {
         login.dispose();
         createBorderPanels();
         createBannersPanel();
+        createChatPanel();
         createHandPanel();
         createDecksPanel();
         createObjectivesPanel();
@@ -301,6 +324,8 @@ public class  GUI  implements UI {
         login.dispose();
         createBorderPanels();
         createBannersPanel();
+        createChatPanel();
+        chatPanel.restoreChatHistory();
         createHandPanel();
         createDecksPanel();
         createObjectivesPanel();
@@ -319,7 +344,7 @@ public class  GUI  implements UI {
 
     @Override
     public void displayNewTextMessage(ChatMessage message) {
-        //TODO implement
+        chatPanel.updateChat(message.getSender(), message.getContent());
     }
 
 
@@ -342,7 +367,13 @@ public class  GUI  implements UI {
 
     private void createBannersPanel(){
         bannersPanel = new BannersPanel(this);
-        eastPanel.add(bannersPanel);
+        eastPanel.add(bannersPanel, "banners");
+    }
+
+    private void createChatPanel(){
+        chatPanel = new ChatPanel(this);
+        chatPanel.setMaximumSize(bannersPanel.getPreferredSize());
+        eastPanel.add(chatPanel, "chat");
     }
 
 

@@ -16,6 +16,7 @@ public class ChatHistory {
     public Timestamp add(ChatMessage msg){
         Timestamp now = new Timestamp(System.currentTimeMillis());
         msg.setTimestamp(now);
+        history.add(msg);
         return now;
     }
 

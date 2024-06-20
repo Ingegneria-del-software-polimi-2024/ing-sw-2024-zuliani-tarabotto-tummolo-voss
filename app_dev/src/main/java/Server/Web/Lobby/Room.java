@@ -196,9 +196,6 @@ public class Room {
      * starts a thread starting the controller execution...
      */
     private void startGame(){
-        //starts a thread starting the controller execution...
-        //game = new GameState(players, "3");
-        //game.setTurnState(TurnState.GAME_INITIALIZATION);
         modelController = new ModelController(players, name, send, this, disconnectedUsers);
         receive = new ServerAPI_COME(modelController);
         try {

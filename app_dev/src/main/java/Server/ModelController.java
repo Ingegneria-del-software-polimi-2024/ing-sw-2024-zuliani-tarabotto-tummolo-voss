@@ -324,6 +324,8 @@ public class ModelController implements ServerControllerInterface {
         if(playerID.equals(playersNicknames.get(0)))
             initialPlayer = playerID;
         gameState.reconnect(playerID);
+        //if a player reconnects we also automatically send him the chat history
+        modelListener.sendChatHistory(playerID, new ChatHistoryMessage(chatHistory.getHistory(), playerID));
         System.out.println("RECONNECTION COMPLETE");
     }
 
