@@ -4,6 +4,7 @@ import Chat.MessagesFromClient.ChatMessage;
 import Client.UI.GUI.GUI;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.text.*;
 import java.awt.*;
 import java.time.LocalDateTime;
@@ -28,13 +29,15 @@ public class ChatPanel extends JPanel {
         //chatArea.setEnabled(false);
         chatArea.setLineWrap(true);
         chatArea.setWrapStyleWord(true);
-        //chatArea.setBackground(new Color(218, 211, 168));
-        //chatArea.setForeground(new Color(53,31,23));
+        chatArea.setBorder(new EmptyBorder(10,10,10,10));
+        chatArea.setBackground(new Color(50, 84, 70));
+        chatArea.setForeground(new Color(255, 248, 164));
+        //chatArea.setForeground(Color.CYAN);
 
 
         chatScrollPane = new JScrollPane(chatArea);
+        chatScrollPane.setBackground(new Color(50, 84, 70));
         chatScrollPane.setMaximumSize(chatScrollPane.getPreferredSize());
-        chatScrollPane.setOpaque(false);
         chatScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         chatScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         chatScrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
@@ -44,6 +47,8 @@ public class ChatPanel extends JPanel {
 
         // Create the input panel (text field and send button)
         JPanel inputPanel = new JPanel();
+        inputPanel.setBorder(new EmptyBorder(5,5,5,5));
+        inputPanel.setBackground(new Color(171, 144, 76));
         inputPanel.setLayout(new BorderLayout());
 
 
