@@ -310,7 +310,8 @@ public class TUI implements UI {
             handPrinter.printStarterCard(view.getStarterCard());
             System.out.print(ansi().fg(color).a("~> This is your StarterCard, choose a face side: (front/back)\n").reset());
         };
-        rePrint.run();
+        if (!chatOpened)
+            rePrint.run();
 
 
         //we read from input the line and parse it as boolean
@@ -351,7 +352,8 @@ public class TUI implements UI {
             //we use the same function also to print the two objectives the player has to choose from
             objectivesPrinter.printCommonObjectives(view.getChooseSecretObjectives().get(0), view.getChooseSecretObjectives().get(1));
         };
-        rePrint.run();
+        if(!chatOpened)
+            rePrint.run();
 
         synchronized (lock){
             Integer secretObj = parseInt();
@@ -400,7 +402,8 @@ public class TUI implements UI {
                 ultimatePrint(view);
                 System.out.print(ansi().fg(color).a("~> Choose a card to place from your hand (1/2/3): \n").reset());
             };
-            rePrint.run();
+            if(!chatOpened)
+                rePrint.run();
 
             synchronized (lock){
                 index = parseInt();
