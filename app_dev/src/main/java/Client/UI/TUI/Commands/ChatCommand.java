@@ -15,7 +15,12 @@ public class ChatCommand implements Command{
 
     @Override
     public void execute() {
+        if(!view.isGameStarted()){
+            System.out.println("Can't print the chat before the game starts");
+            return;
+        }
 
+        tui.printChat();
     }
 
     @Override

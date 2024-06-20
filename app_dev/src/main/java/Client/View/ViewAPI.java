@@ -170,6 +170,7 @@ public class ViewAPI implements ViewAPI_Interface {
         viewModel.requestAvailableGames();
     }
     public void joinGame(String game, int players){
+        viewModel.reset();
         viewModel.joinGame(game, players);
     }
     public void nickNameAlreadyInUse(){ui.nickNameAlreadyInUse();}
@@ -502,5 +503,9 @@ public class ViewAPI implements ViewAPI_Interface {
      */
     public boolean isGameStarted(){
         return viewModel.isGameStarted();
+    }
+
+    public void sendChatMessage(String content){
+        viewModel.sendChatMessage(content);
     }
 }

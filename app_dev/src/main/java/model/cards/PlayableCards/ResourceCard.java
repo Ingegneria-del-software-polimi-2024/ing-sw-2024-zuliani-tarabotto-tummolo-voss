@@ -119,7 +119,6 @@ public class ResourceCard extends PlayableCard {
             printCorner(c);
         }
         System.out.println(points.getPointsPolicy());
-        System.out.println();
         //stampa il retro della carta
         System.out.println("BACK FACE");
         System.out.println("Blocked element: " + getBlockedElement());

@@ -19,7 +19,9 @@ public class ServerAPI_COME {
      * @param message is the message coming from the client
      */
      public void sendToServer(MessageFromClient message){
-        toDoQueue.enqueueMessage(message);
+         System.out.println("–––––––––––––––––––––––––––––");
+         System.out.println("ARRIVED MESSAGE: "+message.getClass());
+         toDoQueue.enqueueMessage(message);
      }
     
     public void addNewPlayer(String nickName, ClientHandlerInterface handler){

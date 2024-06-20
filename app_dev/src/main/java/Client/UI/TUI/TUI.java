@@ -39,6 +39,7 @@ public class TUI implements UI {
     private boolean uiAlreadyStarted = false;
     private boolean runningThread;
     private boolean inWaitingRoom = false;
+    private boolean chatOpened = false;
     private String game;
 
     public TUI(ViewAPI view){
@@ -57,7 +58,7 @@ public class TUI implements UI {
         commandMap.put("--help", new HelpCommand());
         commandMap.put("--disp", new DispositionCommand(view));
         commandMap.put("--quit", new EndGameCommand(view, this));
-        //commandMap.put("--chat", new ChatCommand(view, this)); //TODO decomment for chat
+        commandMap.put("--chat", new ChatCommand(view, this)); //TODO decomment for chat
 
         sc = new Scanner(System.in);
     }
@@ -617,8 +618,8 @@ public class TUI implements UI {
                     }
                 }
 
+                //thread safety
                 if(Thread.currentThread().isInterrupted()){
-                    //thread safety
                     return;
                 }
 
@@ -628,17 +629,25 @@ public class TUI implements UI {
                 }catch (Throwable e){
                     e.printStackTrace();
                 }
-
-                if (input.equals("--quit")) {
+                if(chatOpened){
+                    if(input.equals("q")){
+                        closeChat();
+                    }else{
+                        view.sendChatMessage(input);
+                    }
+                }else if(input.equals("--chat")){
+                    Command c = commandMap.get(input);
+                    c.execute();
+                }else if (input.equals("--quit")) {
                     runningThread = false;
                     commandMap.get(input).execute();
                     input = null;
                     inputPresent = true;
                     lock.notifyAll();
                 }else if(input.startsWith("--")){
-                    clear();
                     Command c = commandMap.get(input);
                     if(c != null) {
+                        clear();
                         c.execute();
                         //System.out.println("command");
                         System.out.println("type q to go back to the game");
@@ -646,8 +655,10 @@ public class TUI implements UI {
                             System.out.println("type q to go back to the game");
                         }
                         rePrint.run();
+                    }else{
+                        System.out.println("Input type mismatch, please type --help for help with commands\n");
                     }
-                } else {
+                }else {
                     inputPresent = true;
                     lock.notifyAll();
                 }
@@ -791,11 +802,26 @@ public class TUI implements UI {
     ///////////////////////////////////////////chat/////////////////////////////////////////////////////////////////////
     @Override
     public void displayNewTextMessage(ChatMessage message) {
-        //TODO implement
+        if(chatOpened)
+            printChat();
     }
 
 
     public void printChat(){
-        //TODO implement
+        chatOpened = true;
+        clear();
+        System.out.print(ansi().fg(color).a("––––––––––CHAT––––––––––\n").reset());
+        List<ChatMessage> history = view.getChatHistory();
+        for(int i = 0; i < history.size(); i++){
+            System.out.print(ansi().fg(color).a("~> "+history.get(i).getSender()+": ").reset());
+            System.out.println(history.get(i).getContent()+"\n");
+        }
+        System.out.print(ansi().fg(color).a("~> Insert your message or type q to quit:\n").reset());
+    }
+
+    private void closeChat(){
+        clear();
+        chatOpened = false;
+        rePrint.run();
     }
 }

@@ -35,6 +35,8 @@ public class DispositionCommand implements Command{
         System.out.println(line);
         String player = s.nextLine();
 
+        if(view.getDispositions().get(player) == null)
+            return;
         view.getUi().printDisposition( view.getDispositions().get(player));
         System.out.print(ansi().fg(226).a("POINTS: "). reset() + String.valueOf(view.getPoints().get(player)) + "\n");
     }

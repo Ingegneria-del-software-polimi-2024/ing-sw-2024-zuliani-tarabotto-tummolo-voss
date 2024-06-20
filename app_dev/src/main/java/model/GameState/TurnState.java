@@ -1,5 +1,6 @@
 package model.GameState;
 
+import Chat.MessagesFromClient.ChatMessage;
 import Client.UI.UI;
 import Server.ModelController;
 import Server.ModelListener;
@@ -25,7 +26,8 @@ public enum TurnState {
                     message instanceof ReadyToPlayMessage      ||
                     message instanceof QuitGameMessage         ||
                     message instanceof DisconnectionMessage    ||
-                    message instanceof I_WantToReconnectMessage);
+                    message instanceof I_WantToReconnectMessage||
+                    message instanceof ChatMessage);
         }
 
         @Override
@@ -51,7 +53,8 @@ public enum TurnState {
                     msg instanceof PlayStarterCardMessage   ||
                     msg instanceof QuitGameMessage          ||
                     msg instanceof DisconnectionMessage     ||
-                    msg instanceof I_WantToReconnectMessage);
+                    msg instanceof I_WantToReconnectMessage ||
+                    msg instanceof ChatMessage);
         }
         @Override
         public void display(UI ui){
@@ -75,7 +78,8 @@ public enum TurnState {
             return (msg instanceof ChooseSecreteObjMessage ||
                     msg instanceof QuitGameMessage         ||
                     msg instanceof DisconnectionMessage    ||
-                    msg instanceof I_WantToReconnectMessage);
+                    msg instanceof I_WantToReconnectMessage||
+                    msg instanceof ChatMessage);
         }
 
         @Override
@@ -97,10 +101,11 @@ public enum TurnState {
 
     PLACING_CARD_SELECTION{
         public boolean controlMessage(MessageFromClient msg){
-            return (msg instanceof PlayCardMessage      ||
-                    msg instanceof QuitGameMessage      ||
-                    msg instanceof DisconnectionMessage ||
-                    msg instanceof I_WantToReconnectMessage);
+            return (msg instanceof PlayCardMessage         ||
+                    msg instanceof QuitGameMessage         ||
+                    msg instanceof DisconnectionMessage    ||
+                    msg instanceof I_WantToReconnectMessage||
+                    msg instanceof ChatMessage);
         }
 
         @Override
@@ -117,10 +122,11 @@ public enum TurnState {
 
     CARD_DRAWING{
         public boolean controlMessage(MessageFromClient msg){
-            return (msg instanceof DrawCardMessage      ||
-                    msg instanceof QuitGameMessage      ||
-                    msg instanceof DisconnectionMessage ||
-                    msg instanceof I_WantToReconnectMessage);
+            return (msg instanceof DrawCardMessage         ||
+                    msg instanceof QuitGameMessage         ||
+                    msg instanceof DisconnectionMessage    ||
+                    msg instanceof I_WantToReconnectMessage||
+                    msg instanceof ChatMessage);
         }
 
         @Override
@@ -137,9 +143,10 @@ public enum TurnState {
 
     END_GAME{
         public boolean controlMessage(MessageFromClient msg){
-            return (msg instanceof QuitGameMessage      ||
-                    msg instanceof DisconnectionMessage ||
-                    msg instanceof I_WantToReconnectMessage);
+            return (msg instanceof QuitGameMessage          ||
+                    msg instanceof DisconnectionMessage     ||
+                    msg instanceof I_WantToReconnectMessage ||
+                    msg instanceof ChatMessage);
         }
 
         @Override

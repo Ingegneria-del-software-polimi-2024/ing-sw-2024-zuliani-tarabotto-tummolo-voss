@@ -478,4 +478,8 @@ public class ViewModel {
 
         gameStarted = false;
     }
+
+    public void sendChatMessage(String content){
+        clientAPIGo.sendToServer(new ChatMessage(playerId, content));
+    }
 }
