@@ -178,9 +178,10 @@ public class Room {
      * @param player
      */
     public void removePlayerBeforeStart(String player){
-        lastSeen.keySet().remove(player);
+        lastSeen.remove(player);
         players.remove(player);
-        playersInterfaces.keySet().remove(player);
+        playersInterfaces.remove(player);
+        send.disconnectPlayer(player);
     }
 
 
