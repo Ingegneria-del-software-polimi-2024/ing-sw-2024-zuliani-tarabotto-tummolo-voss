@@ -58,7 +58,8 @@ public class TUI implements UI {
         commandMap.put("--help", new HelpCommand());
         commandMap.put("--disp", new DispositionCommand(view));
         commandMap.put("--quit", new EndGameCommand(view, this));
-        commandMap.put("--chat", new ChatCommand(view, this)); //TODO decomment for chat
+        commandMap.put("--chat", new ChatCommand(view, this));
+        commandMap.put("--whoami", new WhoAmICommand(this));
 
         sc = new Scanner(System.in);
     }
@@ -826,5 +827,9 @@ public class TUI implements UI {
         clear();
         chatOpened = false;
         rePrint.run();
+    }
+
+    public void printName(){
+        System.out.print(ansi().fg(color).a("~> You are"+nickname+"\n").reset());
     }
 }
