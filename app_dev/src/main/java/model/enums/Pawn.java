@@ -19,9 +19,7 @@ import java.util.List;
 
         public static void reset() {
             shuffledList.clear();
-            for (Pawn value : Pawn.values()) {
-                shuffledList.add(value);
-            }
+            Collections.addAll(shuffledList, Pawn.values());
             Collections.shuffle(shuffledList);
             currentIndex = 0;
         }

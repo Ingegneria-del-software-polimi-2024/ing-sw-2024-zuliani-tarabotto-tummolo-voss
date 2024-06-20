@@ -44,6 +44,7 @@ public class GameState {
         this.modelController = modelController;
         //creates a new players list with the nicknames taken from input
         players = new ArrayList<Player>();
+        Pawn.reset();
         for(String name : nickNames) {
             Player p;
             players.add(p = new Player());
