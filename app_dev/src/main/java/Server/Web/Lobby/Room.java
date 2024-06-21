@@ -201,7 +201,8 @@ public class Room {
         receive = new ServerAPI_COME(modelController);
         try {
             for(String p : playersInterfaces.keySet()){
-                playersInterfaces.get(p).setReceiver(receive);
+                if(playersInterfaces.get(p)!= null)
+                    playersInterfaces.get(p).setReceiver(receive);
             }
         }catch (RemoteException e){
             throw new RuntimeException("Can't join the room due to a communication error");

@@ -9,7 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a85c2ef2-4743-4d12-8336-27ef59fd799c" name="Changes" comment="" />
+    <list default="true" id="a85c2ef2-4743-4d12-8336-27ef59fd799c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -98,7 +100,7 @@
       <recent name="model.lobby" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.run server">
+  <component name="RunManager" selected="Application.RunTUI_Client">
     <configuration name="Provetta" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Provetta" />
       <module name="Ing_sw_proj" />
@@ -287,7 +289,8 @@
       <workItem from="1718743071861" duration="5175000" />
       <workItem from="1718788159587" duration="4459000" />
       <workItem from="1718869587481" duration="1588000" />
-      <workItem from="1718878563659" duration="2347000" />
+      <workItem from="1718878563659" duration="2923000" />
+      <workItem from="1718960434613" duration="2332000" />
     </task>
     <servers />
   </component>

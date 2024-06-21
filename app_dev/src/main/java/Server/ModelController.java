@@ -6,6 +6,7 @@ import Chat.MessagesFromServer.ChatUpdateMessage;
 import Server.Web.Game.ServerAPI_GO;
 import Server.Web.Lobby.HeartBeatSettings;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
+import com.sun.tools.jdi.LockObject;
 import model.Exceptions.CantPlaceCardException;
 import SharedWebInterfaces.SharedInterfaces.ServerControllerInterface;
 import model.GameState.GameState;
@@ -269,7 +270,7 @@ public class ModelController implements ServerControllerInterface {
      */
     public void setPlayerInactive(String playerName){
         //if it is the initial player it must be adjusted
-        if(initialPlayer.equals(playerName)){
+        if(playerName.equals(initialPlayer)){
             for(int i = 0; i<playersNicknames.size(); i++) {
                 if(gameState.getPlayer(i).isActive())
                     initialPlayer = playersNicknames.get(i);
