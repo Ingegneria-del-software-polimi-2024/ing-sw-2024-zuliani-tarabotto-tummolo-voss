@@ -15,22 +15,12 @@ import java.util.List;
         blue();
 
         private static List<Pawn> shuffledList = new ArrayList<>();
-        private static int currentIndex = 0;
 
-        public static void reset() {
+        public static List<Pawn> getRandomPawns(){
             shuffledList.clear();
-            for (Pawn value : Pawn.values()) {
-                shuffledList.add(value);
-            }
+            Collections.addAll(shuffledList, Pawn.values());
             Collections.shuffle(shuffledList);
-            currentIndex = 0;
-        }
-
-        public static Pawn randomPick() {
-            if (shuffledList.isEmpty() || currentIndex >= shuffledList.size()) {
-                reset();
-            }
-            return shuffledList.get(currentIndex++);
+            return shuffledList;
         }
 
 

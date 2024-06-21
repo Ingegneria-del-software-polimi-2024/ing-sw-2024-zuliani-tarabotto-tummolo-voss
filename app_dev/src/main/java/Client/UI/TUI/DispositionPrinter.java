@@ -161,7 +161,7 @@ public class DispositionPrinter {
 
         while(j < mat.length - 1){
 
-            //itero tre volte su ogni riga
+            //itero tre volte su ogni riga della matrice
             for(int row = 0; row < 3; row++) {
 
                 ////////////////////////////////// PRIMA COLONNA ////////////////////////////////////////////////
