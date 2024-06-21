@@ -44,13 +44,16 @@ public class GameState {
         this.modelController = modelController;
         //creates a new players list with the nicknames taken from input
         players = new ArrayList<Player>();
-        Pawn.reset();
+        int i = 0;
+        List<Pawn> randomPawns = Pawn.getRandomPawns();
+
         for(String name : nickNames) {
             Player p;
             players.add(p = new Player());
             p.setNickname(name);
             ///// here we set the player's pawn color to a random one still available
-            p.setPawnColor(Pawn.randomPick());
+            p.setPawnColor(randomPawns.get(i));
+            i++;
         }
         this.turnPlayer = players.get(0);
         this.id = id;

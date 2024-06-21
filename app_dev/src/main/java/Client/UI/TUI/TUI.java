@@ -82,7 +82,7 @@ public class TUI implements UI {
         do{
             host = sc.nextLine();
             if (!validIP(host))
-                System.out.print(ansi().fg(color).a("~> Insert a valid ip address (xxx.xxx.xxx.xxx): \n").reset());
+                System.out.print(ansi().fg(color).a("~> Insert a valid ip address (xxxx.xxxx.xxxx.xxxx): \n").reset());
         }while(!validIP(host));
 
 //        int port;
@@ -654,9 +654,9 @@ public class TUI implements UI {
                         clear();
                         c.execute();
                         //System.out.println("command");
-                        System.out.println("type q to go back to the game");
+                        System.out.println("\n~> type q to go back to the game");
                         while (!sc.nextLine().equals("q")) {
-                            System.out.println("type q to go back to the game");
+                            System.out.println("~> type q to go back to the game");
                         }
                         rePrint.run();
                     }else{
