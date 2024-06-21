@@ -1,6 +1,9 @@
 package Client.UI.GUI;
 
 public enum Resources {
+    /**
+     * associates to each resource a png
+     */
     mushrooms("/Images/icons/fungi.png"),
     paper("/Images/icons/manuscript.png"),
     vegetals("/Images/icons/plant.png"),

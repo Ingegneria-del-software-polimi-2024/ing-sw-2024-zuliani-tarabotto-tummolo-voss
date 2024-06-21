@@ -18,7 +18,11 @@ public class CardLabel extends JLabel {
     private boolean select;
 
 
-
+    /**
+     * JLabel used for representing a PlayableCard.
+     * The label has the pointer to the specified PlayableCard and the corresponding pngs
+     * @param cardLength
+     */
     public CardLabel(int cardLength){
         this.cardLength = cardLength;
         cardHeight = (int)(cardLength * heightLengthRatio);
@@ -28,7 +32,7 @@ public class CardLabel extends JLabel {
     }
 
     /**
-     * method used to change panel's corresponding card
+     * method used to change the JLabel's corresponding card
      * @param c
      * @param front
      * @param back
@@ -62,6 +66,11 @@ public class CardLabel extends JLabel {
      */
     public int getCardSource(){return cardSource;}
 
+
+    /**
+     * returns the card represented by this label at this moment
+     * @return
+     */
     public PlayableCard getCard(){
         return c;
     }
@@ -98,7 +107,7 @@ public class CardLabel extends JLabel {
     }
 
     /**
-     * when the mouse exits the card panel, the border is eliminated
+     * when the mouse exits the card label, the border is eliminated
      */
     public void unHighLight(){
         this.select = false;

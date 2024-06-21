@@ -5,10 +5,12 @@ import model.PointsStrategy.SimplePoints;
 import model.cards.PlayableCards.PlayableCard;
 import model.cards.PlayableCards.StarterCard;
 import model.enums.Element;
-import org.fusesource.jansi.Ansi;
-
 import static org.fusesource.jansi.Ansi.ansi;
 
+/**
+ * Class responsible for building each card, the building method is sensible to whether the card has a covered corner or not
+ * The class has a different method for each row in the card
+ */
 public class CardBuilder {
 
     public String buildLine(int row, PlayableCard card){
@@ -36,6 +38,7 @@ public class CardBuilder {
         return line;
     }
 
+
     public String buildTop(PlayableCard card){
         String line = new String();
 
@@ -62,11 +65,8 @@ public class CardBuilder {
         return line;
     }
 
+
     public String buildSecondRow(PlayableCard card){
-        int color;
-        if(card instanceof StarterCard){
-            color = 221;//yellow
-        }else{color = card.getBlockedElement().getColor();}
 
         String line;
         //LEFT CORNER
@@ -81,7 +81,6 @@ public class CardBuilder {
         //RIGHT CORNER
         line += rightCornersBuilder(1, card);
 
-        //System.out.println(line);
         return line;
     }
 
@@ -91,7 +90,7 @@ public class CardBuilder {
             color = 221;//yellow
         }else{color = card.getBlockedElement().getColor();}
 
-        String line = new String();
+        String line = "";
         //LEFT CORNER
         if(card.getCorner(0) != null && card.getCorner(0).getIsAvailable()){
             line = String.valueOf(ansi().fg(color).a("\u255F\u2500\u2518").reset());
@@ -110,7 +109,6 @@ public class CardBuilder {
 
         }else if(card.getCorner(1) == null){line += String.valueOf(ansi().fg(color).a("  \u2551").reset());}
 
-        //System.out.println(line);
         return line;
     }
 
@@ -121,7 +119,7 @@ public class CardBuilder {
             color = 221;//yellow
         }else{color = card.getBlockedElement().getColor();}
 
-        String line = new String();
+        String line = "";
         //LEFT CORNER
         if(card.getCorner(2) != null && card.getCorner(2).getIsAvailable()){
             line = String.valueOf(ansi().fg(color).a("\u255F\u2500\u2510").reset());
@@ -144,12 +142,7 @@ public class CardBuilder {
     }
 
     public String buildFifthRow(PlayableCard card){
-        int color;
-        if(card instanceof StarterCard){
-            color = 221;//yellow
-        }else{color = card.getBlockedElement().getColor();}
-
-        String line = new String();
+        String line;
         //LEFT CORNER
         line = leftCornersBuilder(2, card);
 
@@ -160,7 +153,6 @@ public class CardBuilder {
         //RIGHT CORNER
         line += rightCornersBuilder(3, card);
 
-
         return line;
     }
 
@@ -170,7 +162,7 @@ public class CardBuilder {
             color = 221;//yellow
         }else{color = card.getBlockedElement().getColor();}
 
-        String line = new String();
+        String line = "";
         //LEFT CORNER
         if(card.getCorner(2) != null && card.getCorner(2).getIsAvailable()){
             line = String.valueOf(ansi().fg(color).a("\u255A\u2550\u2567").reset());
@@ -190,6 +182,7 @@ public class CardBuilder {
         return line;
     }
 
+    //
     private String pointsBuilder(PlayableCard card){
         String line = new String();
         if(card.getPoints() != null){
@@ -203,7 +196,7 @@ public class CardBuilder {
     }
 
     private String constraintBuilder(PlayableCard card) {
-        String line = new String();
+        String line = "";
         int i = 0;
         int counter = 0;
         if(card.getPlacementConstraint() != null){
@@ -231,7 +224,7 @@ public class CardBuilder {
             color = 221;//yellow
         }else{color = card.getBlockedElement().getColor();}
 
-        String line = new String();
+        String line = "";
         if(card.getCorner(corner) != null && card.getCorner(corner).getIsAvailable()){
             //if corner is not empty
             if(card.getCorner(corner).getElement() != null){
@@ -250,7 +243,7 @@ public class CardBuilder {
             color = 221;//yellow
         }else{color = card.getBlockedElement().getColor();}
 
-        String line = new String();
+        String line = "";
         if(card.getCorner(corner) != null && card.getCorner(corner).getIsAvailable()){
             //if corner is not empty
             if(card.getCorner(corner).getElement() != null){
@@ -268,7 +261,7 @@ public class CardBuilder {
     }
 
     private String buildStarterBackSecondRow(PlayableCard card){
-        String line = new String();
+        String line = "";
         if(card.getBlockedElements().length == 3){
             return "    " + card.getBlockedElements()[0].getStringValue() + "    ";
         }
@@ -276,7 +269,7 @@ public class CardBuilder {
     }
 
     private String buildStarterBackThirdRow(PlayableCard card){
-        String line = new String();
+        String line = "";
         if(card.getBlockedElements().length == 3){
             return "    " + card.getBlockedElements()[1].getStringValue() + "    ";
         }
@@ -284,7 +277,7 @@ public class CardBuilder {
     }
 
     private String buildStarterBackFourthRow(PlayableCard card){
-        String line = new String();
+        String line = "";
         if(card.getBlockedElements().length == 3){
             return "    " + card.getBlockedElements()[2].getStringValue() + "    ";
         }

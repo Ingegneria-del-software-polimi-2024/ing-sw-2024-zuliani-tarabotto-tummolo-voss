@@ -19,6 +19,10 @@ public class ChatPanel extends JPanel {
     private JScrollPane chatScrollPane;
     private JTextPane tPane;
 
+    /**
+     * JScrollPane containing a JTextArea where new chat messages are appended.
+     * @param gui
+     */
     public ChatPanel(GUI gui){
         this.gui = gui;
         setLayout(new BorderLayout());
@@ -32,7 +36,6 @@ public class ChatPanel extends JPanel {
         chatArea.setBorder(new EmptyBorder(10,10,10,10));
         chatArea.setBackground(new Color(50, 84, 70));
         chatArea.setForeground(new Color(255, 248, 164));
-        //chatArea.setForeground(Color.CYAN);
 
 
         chatScrollPane = new JScrollPane(chatArea);
@@ -73,15 +76,12 @@ public class ChatPanel extends JPanel {
 
     }
 
-    private static String getCurrentTimestamp() {
-        // Get the current time
-        LocalDateTime now = LocalDateTime.now();
-        // Define the format of the timestamp (hours, minutes, seconds)
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-        // Format the current time
-        return now.format(formatter);
-    }
 
+    /**
+     * appends a new message to the chat
+     * @param sender
+     * @param content
+     */
     public void updateChat(String sender, String content){
         String from;
         if(sender.equals(gui.getView().getPlayerId())){
@@ -95,6 +95,9 @@ public class ChatPanel extends JPanel {
         vertical.setValue(vertical.getMaximum());
     }
 
+    /**
+     * the functions is called when a player reconnects to a room in order to restore the past chat history
+     */
     public void restoreChatHistory() {
         List<ChatMessage> chatHistory = gui.getView().getChatHistory();
         String sender = "";
@@ -110,23 +113,7 @@ public class ChatPanel extends JPanel {
 
     }
 
-    @Override
-    public void paintComponents(Graphics g) {
-        super.paintComponents(g);
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        int borderWidth = 4;
-        g2d.setColor(new Color(53,31,23));
-        g2d.setStroke(new BasicStroke(borderWidth));
-        g2d.drawRect(borderWidth/2, borderWidth/2, getWidth() - borderWidth, getHeight() - borderWidth);
-
-        int innerBorder = borderWidth/2;
-
-        g2d.setStroke(new BasicStroke(innerBorder));
-        g2d.drawRect((borderWidth*2), (borderWidth*2), getWidth() - 2*(borderWidth*2), getHeight() - 2*(borderWidth*2));
-
-    }
 
 
 }

@@ -16,11 +16,23 @@ public class ObjCardLabel extends JLabel {
     private boolean select = false;
     private final int borderWidth = 4;
 
+
+    /**
+     * JLabel used for representing an ObjectiveCard.
+     * The label has the pointer to the specified ObjectiveCard and the corresponding pngs
+     * @param cardLength
+     */
     public ObjCardLabel(int cardLength){
         this.cardLength = cardLength;
         setOpaque(false);
     }
 
+    /**
+     * method that changes the card that the JLabel is representing
+     * @param c
+     * @param front
+     * @param back
+     */
     public void updateCard(ObjectiveCard c, BufferedImage front, BufferedImage back){
         this.c = c;
         this.back = back;
@@ -50,12 +62,23 @@ public class ObjCardLabel extends JLabel {
         }
     }
 
+    /**
+     * returns the card represented by this label at this moment
+     * @return
+     */
     public ObjectiveCard getCard(){return c;}
 
+    /**
+     * when the card is in the handPanel and the mouse goes over it, this method is called to surround the card with
+     * a green border
+     */
     public void highLight(){
         this.select = true;
     }
 
+    /**
+     * when the mouse exits the card label, the border is eliminated
+     */
     public void unHighLight(){
         this.select = false;
     }

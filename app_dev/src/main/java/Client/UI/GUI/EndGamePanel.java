@@ -12,6 +12,11 @@ public class EndGamePanel extends JPanel {
 
     private GUI gui;
 
+    /**
+     * creates a new panel that displays the winners and the final points.
+     * Two buttons let the player choose whether he wants to go back to the lobby or close the game.
+     * @param gui
+     */
     public EndGamePanel(GUI gui){
         this.gui = gui;
 
@@ -82,11 +87,15 @@ public class EndGamePanel extends JPanel {
 
 
         ///////////////////////////////////// buttons /////////////////////////////////////////
+        //Jpanel for holding the buttons
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttonPanel.setOpaque(false);
+
+        //close game button
         JButton closeButton = new JButton("Close");
         closeButton.addActionListener(e -> System.exit(0));
 
+        //go back to lobby button
         JButton lobbyButton = new JButton("Lobby");
         lobbyButton.addActionListener(e -> gui.goBackToLobby());
 

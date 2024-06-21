@@ -19,11 +19,16 @@ public class ObjectivesPanel extends JPanel {
     private Graphics2D g2d;
     private boolean choose = false;
 
+
+    /**
+     * JPanel containing three ObjCardLabel representing the two common objectives and the player's secret objective
+     * @param gui
+     * @param panelHeight
+     */
     public ObjectivesPanel(GUI gui, int panelHeight){
         this.gui = gui;
         setBackground(new Color(50, 84, 70));
 
-        //this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         int cardLength = (int)this.getPreferredSize().getWidth() / 4;
         this.panelHeight = panelHeight;
         common1 = new ObjCardLabel(cardLength);
@@ -35,6 +40,10 @@ public class ObjectivesPanel extends JPanel {
 
     }
 
+
+    /**
+     * adds the third objective label to the panel once the player has chosen his secret objective
+     */
     public void addSecretObjectives(){
         JPanel secretPanel1 = new JPanel();
         secretPanel1.setOpaque(false);
@@ -52,6 +61,10 @@ public class ObjectivesPanel extends JPanel {
         this.add(subPanel);
     }
 
+
+    /**
+     * displays the two objectives the player has two choose from
+     */
     public void chooseObjectives(){
 
         ObjectiveCard s1 = gui.getView().getChooseSecretObjectives().get(0);
@@ -116,13 +129,13 @@ public class ObjectivesPanel extends JPanel {
 
 
     }
+
     public void printObjectives(){
         setBorder(BorderFactory.createEmptyBorder((panelHeight - (int)common1.getPreferredSize().getHeight())/2, 0, 0, 0));
         ObjectiveCard secret = gui.getView().getSecretObjective();
         secret1.updateCard(secret, gui.getFronts().get(secret.getId()), gui.getBacks().get(secret.getId()));
         this.add(secret1);
         updateObjectivesPanel();
-
     }
 
     public void updateObjectivesPanel(){

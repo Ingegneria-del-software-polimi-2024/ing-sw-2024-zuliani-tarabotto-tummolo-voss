@@ -22,7 +22,7 @@ public class DeckPanel extends JPanel {
 
 
     /**
-     * the cards are organized using a gridLayout
+     * creates a new DeckPanel with a gridLayout to hold the 6 CardLabels that represent the possible card drawing sources
      * @param gui
      */
     public DeckPanel(GUI gui){

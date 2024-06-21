@@ -36,7 +36,7 @@ public class PlayerPanel extends JPanel {
         this.player = player;
 
         imageDim = (int)(height * 0.8);
-        System.out.println("imageDim"+imageDim);
+        System.out.println("imageDim" + imageDim);
         imagePos = (height - imageDim) / 2;
         setLayout(new FlowLayout(FlowLayout.LEFT));
         setBorder(BorderFactory.createEmptyBorder(0, 2*imagePos + imageDim, 0, 0));

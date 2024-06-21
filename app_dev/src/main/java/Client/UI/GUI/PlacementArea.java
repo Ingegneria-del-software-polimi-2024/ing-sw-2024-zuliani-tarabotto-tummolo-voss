@@ -13,16 +13,25 @@ public class PlacementArea extends JPanel {
     private final float heightLengthRatio =   (float) 2 /3;
     private final int cardHeight;
     private GUI gui;
-    private int xCenter;
-    private int yCenter;
+    private int xCenter;//the central x coordinate of the panel
+    private int yCenter;//the central y coordinate of the panel
     private int xOverlap;
     private int yOverlap;
-    private boolean displayAvailable = false;
     private final int borderWidth = 4;
+    private boolean displayAvailable = false;
     private boolean drawSelectionRectangle = false;
+    /**
+     * holds the Coordinate of the rectangle that must be highlighted in orange on the board
+     */
     private Coordinates selectionRectangleCoordinates;
     private BoardStarterClickedListener starterClickedListener;
 
+
+    /**
+     * JPanel used to display the player's board, each card is custom drawn using the paintComponent method.
+     * @param gui
+     * @param cardLength
+     */
     public PlacementArea(GUI gui, int cardLength){
         this.cardLength = cardLength;
         this.cardHeight = (int)(cardLength * heightLengthRatio);
@@ -43,8 +52,7 @@ public class PlacementArea extends JPanel {
 
         Graphics2D g2d = (Graphics2D) g;
 
-        //board.draw(g2d);
-
+        //draws all the cards that the player has placed
         for(Coordinates coord : gui.getView().getDispositions().get(gui.getCurrentDisposition()).keySet()){
             PlayableCard c = gui.getView().getDispositions().get(gui.getCurrentDisposition()).get(coord);
             int xCardCenter = xCenter + coord.getX()*(cardLength - xOverlap);
@@ -54,6 +62,8 @@ public class PlacementArea extends JPanel {
 
         }
 
+        //when a player has to choose in which position he wants to place the next card, grey rectangles are drawn
+        //on the board in the corresponding available places
         if(displayAvailable && gui.getCurrentDisposition().equals(gui.getView().getPlayerId()) ){
             for(Coordinates coord : gui.getView().getAvailablePlaces()){
                 int xCardCenter = xCenter + coord.getX()*(cardLength - xOverlap);
@@ -64,12 +74,14 @@ public class PlacementArea extends JPanel {
             }
         }
 
+        //after the player selects the starter card from his hand, an orange rectangle is drawn on the board in the central position
         if(gui.starterSelected && gui.getCurrentDisposition().equals(gui.getView().getPlayerId())){
             g2d.setColor(Color.ORANGE);
             g2d.setStroke(new BasicStroke(borderWidth));
             g2d.drawRoundRect(xCenter - cardLength/2, yCenter - cardHeight/2 , cardLength, cardHeight, 13, 13);
         }
 
+        //when the mouse enters one of the gray rectangles representing the available places, the rectangle is redrawn in orange
         if(drawSelectionRectangle && gui.getCurrentDisposition().equals(gui.getView().getPlayerId())){
             int xCardCenter = xCenter + selectionRectangleCoordinates.getX()*(cardLength - xOverlap);
             int yCardCenter = yCenter - selectionRectangleCoordinates.getY()*(cardHeight - yOverlap);
@@ -89,25 +101,40 @@ public class PlacementArea extends JPanel {
     public int getXOverlap(){return xOverlap;}
     public int getYOverlap(){return yOverlap;}
 
+
+    /**
+     * when a player has to place a card, displayAvailble is set to true
+     */
     public void setDisplayAvailable(){displayAvailable = !displayAvailable;}
 
+
+    /**
+     * when a player has to select a position to place the card, the rectangle at coordinates c is drawn in orange,
+     * the boolean drawSelectionRectangle must be set to true
+     * @param c
+     */
     public void drawSelectionRectangle(Coordinates c){
         selectionRectangleCoordinates = c;
         drawSelectionRectangle = true;
     }
+
     public void setDrawSelectionRectangle(boolean b){
         drawSelectionRectangle = b;
-    }
-    public boolean getDrawSelectionRectangle(){
-        return drawSelectionRectangle;
     }
 
     public Coordinates getSelectionRectangleCoordinates(){return  selectionRectangleCoordinates;}
 
+
+    /**
+     * enables the BoardStarterClickedListener
+     */
     public void enableBoardStarterListener(){
         this.addMouseListener(starterClickedListener);
     }
 
+    /**
+     * disables the BoardStarterClickedListener
+     */
     public void disableBoardStarterListener(){
         this.removeMouseListener(starterClickedListener);
     }

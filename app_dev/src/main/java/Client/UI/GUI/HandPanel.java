@@ -18,6 +18,11 @@ public class HandPanel extends JPanel {
     private PlaceCardListener placeCardListener;
     private FlipCardListener flipCardListener;
 
+    /**
+     * a panel containing three CardLabels representing the player's hand
+     * @param gui
+     * @param panelHeight
+     */
     public HandPanel(GUI gui, int panelHeight){
         this.gui = gui;
         FlowLayout layout = new FlowLayout(FlowLayout.CENTER);
@@ -43,6 +48,10 @@ public class HandPanel extends JPanel {
         c3.addMouseListener(flipCardListener);
     }
 
+    /**
+     * adds a single CardLabel to the panel representing the starter card.
+     * This method is only used in the starter card placing phase
+     */
     public void addStarterCard(){
         PlayableCard starter = gui.getView().getStarterCard();
         c2.addMouseListener(placeStarterListener);
@@ -92,11 +101,18 @@ public class HandPanel extends JPanel {
     }
 
 
+    /**
+     * enables the listeners on the CardLabels for selecting a card to place
+     */
     public void enableListeners(){
         c1.addMouseListener(placeCardListener);
         c2.addMouseListener(placeCardListener);
         c3.addMouseListener(placeCardListener);
     }
+
+    /**
+     * disables the listeners on the CardLabels for selecting a card to place
+     */
     public void disableListeners(){
         c1.removeMouseListener(placeCardListener);
         c2.removeMouseListener(placeCardListener);
