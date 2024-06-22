@@ -216,7 +216,7 @@ public class TUI implements UI {
     }
 
     public void returnToLobby(){
-        view.stopUI(); //moved here from line 219
+        view.stopUI();
         displayReturnToLobby();
         clear();
         view.welcome();
@@ -273,8 +273,6 @@ public class TUI implements UI {
                     try {
                        lock.wait();
                     } catch (InterruptedException e) {
-                        //TODO ERROR management
-                        System.out.println("Interrupted");
                         return;
                     }
                 }
@@ -590,6 +588,16 @@ public class TUI implements UI {
 
     }
 
+    @Override
+    public void returnToStart() {
+        clear();
+        System.out.print(ansi().fg(color).a("~> An error in the communication with the server occurred, press return to go back to the lobby\n").reset());
+        view.stopUI();
+        sc = new Scanner(System.in);
+        view.welcome();
+        view.chooseConnection();
+    }
+
     private String buildStat(int stat){
         if(stat < 10) return stat + " ";
         else return String.valueOf(stat);
@@ -617,7 +625,6 @@ public class TUI implements UI {
                     try {
                         lock.wait();
                     } catch (InterruptedException e) {
-                        System.out.println("The interruptedException was caught");
                         return;
                     }
                 }
@@ -683,7 +690,6 @@ public class TUI implements UI {
                 try {
                     lock.wait();
                 } catch (InterruptedException e) {
-                    System.out.println("the InterruptedException was caught");
                     return null;
                 }
             }
@@ -712,7 +718,6 @@ public class TUI implements UI {
                 try {
                     lock.wait();
                 } catch (InterruptedException e) {
-                    System.out.println("the InterruptedException was caught");
                     return null;
                 }
             }
@@ -748,7 +753,6 @@ public class TUI implements UI {
                 try {
                     lock.wait();
                 } catch (InterruptedException e) {
-                    System.out.println("the InterruptedException was caught");
                     return null;
                 }
             }

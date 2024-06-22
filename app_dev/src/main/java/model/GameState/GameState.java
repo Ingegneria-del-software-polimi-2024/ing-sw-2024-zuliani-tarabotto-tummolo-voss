@@ -291,7 +291,6 @@ public class GameState {
                 try {
                     p.playStarterCard();
                 }catch (KickOutOfGameException e){
-                    //TODO signal the throwing out of the player
                     setPlayerInactive(players.indexOf(getPlayerByName(player)));
                     modelListener.notifyChanges(player, e);
                 }
@@ -428,7 +427,7 @@ public class GameState {
 
 
     //////////////////////// GETTER METHODS FOR GAMESTATE ATTRIBUTES ///////////////////////////
-    public Player getPlayer(int index){ return players.get(index); }
+    public Player getPlayer(int index){ return players.get(index);}
     public String getId(){ return id; }
     public Player getTurnPlayer(){ return turnPlayer; }
     public boolean getLastTurn(){ return isLastTurn; }

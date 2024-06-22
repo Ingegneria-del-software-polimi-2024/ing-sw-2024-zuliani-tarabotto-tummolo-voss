@@ -211,7 +211,6 @@ public class ModelController implements ServerControllerInterface {
         // - new turnPlayer gets notified about which cards he can place(and where) by calling playingTurn method
         //TODO: optimize this control
         if(!gameState.getLastTurn() && !lastRound){
-
             playNewTurn();
         }else if(!Objects.equals(gameState.getTurnPlayer().getNickname(), initialPlayer) && !lastRound){
 //            gameState.nextPlayer();
@@ -255,7 +254,7 @@ public class ModelController implements ServerControllerInterface {
     }
 
     /**
-     * set a player in an active state
+     * Sets a player in an active state
      * @param playerName the name of the player to be set active
      */
     public void setPlayerActive(String playerName){

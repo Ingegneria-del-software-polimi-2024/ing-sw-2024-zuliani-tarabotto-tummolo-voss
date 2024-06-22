@@ -312,8 +312,6 @@ public class  GUI  implements UI {
 
     @Override
     public void printSecretObjective() {
-        //we use this function only in tui
-        //updateHand();
         objPanel.printObjectives();
     }
 
@@ -401,7 +399,11 @@ public class  GUI  implements UI {
 
     }
 
-
+    @Override
+    public void returnToStart() {
+        desiredQuit = false;
+        chooseConnection();
+    }//todo dunno if this will work
 
 
     private void createBoardPanel(){

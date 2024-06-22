@@ -120,9 +120,9 @@ public class Player implements Serializable {
     }
 
     ///////////////// GETTER METHODS ///////////////////////////////////////
-    public String getNickname() { return nickname; }
-    public int getPoints() { return points; }
-    public PlayableCard getStarterCard() { return this.starterCard; }
+    public String getNickname() {return nickname;}
+    public int getPoints() {return points;}
+    public PlayableCard getStarterCard() {return this.starterCard;}
     public List<PlayableCard> getPlayingHand(){return hand;}
     public PlacementArea getPlacementArea() { return placementArea; }
     public ObjectiveCard getSecretObjective() { return secretObjective; }

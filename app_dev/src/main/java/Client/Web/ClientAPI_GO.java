@@ -1,5 +1,7 @@
 package Client.Web;
 
+import SharedWebInterfaces.Messages.MessagesFromServer.Errors.KickOutOfGameMessage;
+import SharedWebInterfaces.Messages.MessagesFromServer.Errors.ReturnToStartMessage;
 import SharedWebInterfaces.Messages.MessagesToLobby.MessageToLobby;
 import SharedWebInterfaces.SharedInterfaces.ServerHandlerInterface;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
@@ -24,7 +26,11 @@ public class ClientAPI_GO {
             handler.sendToServer(message);
         } catch (RemoteException e) {
             //TODO handle correctly the exception, this is where indeed it is most important to handle correctly the exc.
-            throw new RuntimeException(e);
+            try {
+                handler.notifyChanges(new ReturnToStartMessage());
+            } catch (RemoteException ex) {
+                return;
+            }
         }
     }
 
@@ -37,7 +43,11 @@ public class ClientAPI_GO {
             handler.sendToLobby(message);
         } catch (RemoteException e) {
             //TODO handle correctly the exception, this is where indeed it is most important to handle correctly the exc.
-            throw new RuntimeException(e);
+            try {
+                handler.notifyChanges(new ReturnToStartMessage());
+            } catch (RemoteException ex) {
+                return;
+            }
         }
     }
 

@@ -9,7 +9,7 @@ import SharedWebInterfaces.WebExceptions.MsgNotDeliveredException;
 import java.io.IOException;
 import java.io.Serializable;
 
-public class NewConnectionMessage implements Serializable, MessageToLobby {//todo implements MessageFromClient...
+public class NewConnectionMessage implements Serializable, MessageToLobby {
 
     private String username;
     //private String roomName;
