@@ -593,10 +593,15 @@ public class TUI implements UI {
         clear();
         System.out.print(ansi().fg(color).a("~> An error in the communication with the server occurred, press return to go back to the lobby\n").reset());
         view.stopUI();
-        sc = new Scanner(System.in);
-        sc.reset();
-
-        String in = sc.nextLine();
+        synchronized(lock) {
+            sc = new Scanner(System.in);
+            sc.reset();
+            if (inputPresent) {
+                String in = input;
+            } else {
+                String in = sc.nextLine();
+            }
+        }
         input = null;
         inputPresent = false;
 
