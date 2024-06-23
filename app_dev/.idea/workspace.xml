@@ -11,7 +11,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a85c2ef2-4743-4d12-8336-27ef59fd799c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/TUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/TUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/LoginPanel/InputFields.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/LoginPanel/InputFields.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,27 +52,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.RunServer.executor&quot;: &quot;Run&quot;,
-    &quot;Application.RunTUI_Client.executor&quot;: &quot;Run&quot;,
-    &quot;Application.run gui.executor&quot;: &quot;Run&quot;,
-    &quot;Application.run server.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.All in Ing_sw_proj.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.placementArea in Ing_sw_proj.executor&quot;: &quot;Coverage&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;AndreaLastBranch&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.RunServer.executor": "Run",
+    "Application.RunTUI_Client.executor": "Run",
+    "Application.run gui.executor": "Run",
+    "Application.run server.executor": "Run",
+    "JUnit.All in Ing_sw_proj.executor": "Coverage",
+    "JUnit.placementArea in Ing_sw_proj.executor": "Coverage",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "AndreaLastBranch",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/Images" />
@@ -101,7 +102,7 @@
       <recent name="model.lobby" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.run server">
+  <component name="RunManager" selected="Application.run gui">
     <configuration name="Provetta" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Provetta" />
       <module name="Ing_sw_proj" />
@@ -343,6 +344,10 @@
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="8" />
+        </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.InterruptedException" package="java.lang" />
+          <option name="timeStamp" value="10" />
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
