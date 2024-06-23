@@ -595,8 +595,11 @@ public class TUI implements UI {
         view.stopUI();
         sc = new Scanner(System.in);
         sc.reset();
+
         String in = sc.nextLine();
         input = null;
+        inputPresent = false;
+
         view.welcome();
         view.chooseConnection();
     }
