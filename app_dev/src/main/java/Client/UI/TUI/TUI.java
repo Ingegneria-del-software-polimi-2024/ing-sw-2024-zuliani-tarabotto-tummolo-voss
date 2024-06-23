@@ -585,7 +585,7 @@ public class TUI implements UI {
 
     @Override
     public void updateResourcesInUI() {
-
+        //TODO this method is empty! ~Andre
     }
 
     @Override
@@ -594,6 +594,9 @@ public class TUI implements UI {
         System.out.print(ansi().fg(color).a("~> An error in the communication with the server occurred, press return to go back to the lobby\n").reset());
         view.stopUI();
         sc = new Scanner(System.in);
+        sc.reset();
+        String in = sc.nextLine();
+        input = null;
         view.welcome();
         view.chooseConnection();
     }

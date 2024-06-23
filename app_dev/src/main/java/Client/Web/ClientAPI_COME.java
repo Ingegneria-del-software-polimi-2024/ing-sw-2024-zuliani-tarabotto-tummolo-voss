@@ -2,6 +2,7 @@ package Client.Web;
 
 
 import Client.View.ViewAPI;
+import SharedWebInterfaces.Messages.MessagesFromServer.Errors.ReturnToStartMessage;
 import SharedWebInterfaces.Messages.MessagesFromServer.InterruptConnectionMessage;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
 
@@ -41,7 +42,7 @@ public class ClientAPI_COME implements Runnable{
                 //IMPORTANT: I may choose to execute the InterruptConnectionMessage in order to end everything
                 message.execute(view);
             }
-        }while(!(message instanceof InterruptConnectionMessage));
+        }while(!(message instanceof InterruptConnectionMessage) && !(message instanceof ReturnToStartMessage));
     }
 
     /**

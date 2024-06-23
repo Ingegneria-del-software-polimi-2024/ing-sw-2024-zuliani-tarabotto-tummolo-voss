@@ -33,6 +33,8 @@ public class ViewAPI implements ViewAPI_Interface {
     private UI ui;
     private Thread inputThread;
     private Thread heartbeatThread;
+    private Thread readMessagesLoop;
+    private Thread readChatMessagesLoop;
 
     public void setUI(UI ui){
         this.ui = ui;
@@ -50,7 +52,7 @@ public class ViewAPI implements ViewAPI_Interface {
             inputThread.interrupt();
             inputThread.join();
         }catch (SecurityException | InterruptedException e){
-            System.out.println("Couldn't interrupt the thread...");
+            return;
         }
     }
 
@@ -114,8 +116,8 @@ public class ViewAPI implements ViewAPI_Interface {
      */
     public void startConnection(String in, String host) throws StartConnectionFailedException {
         ClientAPI_COME clientAPICome = new ClientAPI_COME(this);
-        Thread readMessagesLoop = new Thread(clientAPICome);
-        Thread readChatMessagesLoop = new Thread(clientAPICome::dequeueChatMessages);
+        readMessagesLoop = new Thread(clientAPICome);
+        readChatMessagesLoop = new Thread(clientAPICome::dequeueChatMessages);
         readMessagesLoop.start();
         readChatMessagesLoop.start();
         ClientAPI_GO clientAPIGo = getClientAPIGo(in, host, clientAPICome);
@@ -494,6 +496,8 @@ public class ViewAPI implements ViewAPI_Interface {
 
     @Override
     public void returnToStart() {
+        readChatMessagesLoop.interrupt();
+        readMessagesLoop.interrupt();
         stopHeartBeat();
         viewModel.resetClientAPIGo();
         viewModel.resetGameID();
