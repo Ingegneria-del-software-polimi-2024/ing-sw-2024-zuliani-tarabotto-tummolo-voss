@@ -1,1 +1,0 @@
-# ing-sw-2024-zuliani-tarabotto-tummolo-voss
