@@ -2,8 +2,8 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <excludeFromCompile>
-      <file url="file://$PROJECT_DIR$/app_dev/src/test/java/model/GameState/GameStateTest.java" />
-      <file url="file://$PROJECT_DIR$/app_dev/src/main/java/controller/Controller.java" />
+      <file url="file://$PROJECT_DIR$/ing-sw-2024-zuliani-tarabotto-tummolo-voss/src/test/java/model/GameState/GameStateTest.java" />
+      <file url="file://$PROJECT_DIR$/ing-sw-2024-zuliani-tarabotto-tummolo-voss/src/main/java/controller/Controller.java" />
     </excludeFromCompile>
     <annotationProcessing>
       <profile name="Maven default annotation processors profile" enabled="true">
