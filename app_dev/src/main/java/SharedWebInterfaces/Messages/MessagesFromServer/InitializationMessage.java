@@ -42,7 +42,6 @@ public class InitializationMessage implements MessageFromServer{
         view.setGoldDeck(goldDeck);
         view.setResourceDeck(resourceDeck);
         view.setPlayers(players);
-//        view.setGameId(gameId); //TODO DELETE
         view.setCommonObjectives(commonObjective1, commonObjective2);
         view.setOpenGold(openGold);
         view.setOpenResource(openResource);

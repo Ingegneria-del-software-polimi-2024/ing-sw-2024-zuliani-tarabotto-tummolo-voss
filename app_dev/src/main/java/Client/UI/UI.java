@@ -53,4 +53,6 @@ public interface UI extends Runnable{
     void displayNewTextMessage(ChatMessage message);
 
     void updateResourcesInUI();
+
+    void returnToStart();
 }

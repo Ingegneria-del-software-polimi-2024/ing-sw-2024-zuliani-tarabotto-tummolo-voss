@@ -122,7 +122,7 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
             in.close();
             socket.close();
         } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            return;
         }
 
     }

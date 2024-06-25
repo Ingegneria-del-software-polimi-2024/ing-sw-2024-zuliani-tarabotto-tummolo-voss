@@ -22,5 +22,5 @@ public class LoginPrinter {
                 "                                                                                                                    ").reset());
     }
 
- //TODO: rules, command, other useful informations
+
 }

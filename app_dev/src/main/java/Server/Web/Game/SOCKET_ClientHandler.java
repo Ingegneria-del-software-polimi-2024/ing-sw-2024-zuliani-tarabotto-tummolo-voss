@@ -123,23 +123,7 @@ public class  SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
             if(api == null)
                 return;
             api.sendToServer(disconnectionMessage);
-            // handleDisconnection();
-            //throw new RuntimeException();//TODO HANDLE DISCONNECTION
-
         }
-
-
-        //TODO SISTEMA STA MERDA
-
-//        try {
-//            MessageFromClient m = null;
-//            do{
-//                m = (MessageFromClient) in.readObject();
-//                sendToServer(m);
-//            }while (true);
-//        } catch (IOException | ClassNotFoundException e) {
-//            throw new RuntimeException(e);
-//        }
     }
 
     /**

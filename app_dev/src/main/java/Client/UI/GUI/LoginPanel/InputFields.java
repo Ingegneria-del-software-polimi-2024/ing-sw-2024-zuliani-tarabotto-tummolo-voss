@@ -70,6 +70,11 @@ public class InputFields extends JPanel {
      * if the server is not reachable an error message is displayed
      */
     public void chooseConnection(){
+
+        mainPanel.removeAll();
+        panel.revalidate();
+        panel.repaint();
+
         //rmi button
         JToggleButton rmiButton = new JToggleButton("RMI");
 

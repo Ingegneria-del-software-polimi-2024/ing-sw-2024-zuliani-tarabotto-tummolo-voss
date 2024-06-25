@@ -148,6 +148,7 @@ public class  GUI  implements UI {
     @Override
     public void displayInitialization() {
         login.dispose();
+        login = null;
         createBorderPanels();
         createBannersPanel();
         createChatPanel();
@@ -285,7 +286,7 @@ public class  GUI  implements UI {
             desiredQuit = false;
             goBackToLobby();
         }else {
-            if (endGamePanel == null) endGamePanel = new EndGamePanel(this);
+            endGamePanel = new EndGamePanel(this);
             frame.getContentPane().removeAll();
             frame.getContentPane().add(endGamePanel, BorderLayout.CENTER);
             frame.revalidate();
@@ -295,10 +296,12 @@ public class  GUI  implements UI {
     public void goBackToLobby(){
         if(frame != null){
             frame.dispose();
-            login.dispose();
+            frame = null;
         }
-        frame = null;
-        login = null;
+        if(login != null){
+            login.dispose();
+            login = null;
+        }
         view.welcome();
         view.requestAvailableGames();
 
@@ -312,8 +315,6 @@ public class  GUI  implements UI {
 
     @Override
     public void printSecretObjective() {
-        //we use this function only in tui
-        //updateHand();
         objPanel.printObjectives();
     }
 
@@ -322,6 +323,7 @@ public class  GUI  implements UI {
         System.out.println("displayreconnection");
         if(frame == null) createFrame();
         login.dispose();
+        login = null;
         createBorderPanels();
         createBannersPanel();
         createChatPanel();
@@ -401,7 +403,25 @@ public class  GUI  implements UI {
 
     }
 
-
+    @Override
+    public void returnToStart() {
+        desiredQuit = false;
+        if(frame != null){
+            SwingUtilities.invokeLater(() -> {
+                try {
+                    frame.dispose();
+                    System.out.println("Frame disposed.");
+                } catch (Exception e) {
+                    System.err.println("Disposal was interrupted: " + e.getMessage());
+                }
+            });
+        }
+        System.out.println("next");
+        if(login == null){
+            login = new LoginFrame(this);
+        }
+        login.chooseConnection();
+    }
 
 
     private void createBoardPanel(){

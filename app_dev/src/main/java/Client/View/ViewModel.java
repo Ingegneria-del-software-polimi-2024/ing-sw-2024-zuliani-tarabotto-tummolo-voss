@@ -93,6 +93,10 @@ public class ViewModel {
         clientAPIGo = clientAPI_GO;
     }
 
+    public void resetClientAPIGo(){
+        clientAPIGo = null;
+    }
+
 
     /////////////////////////////////////////////////Lobby//////////////////////////////////////////////////////////////
     public void setAvailableGames(ArrayList<String> listOfGames){
@@ -104,6 +108,8 @@ public class ViewModel {
 
     //HEARTBEAT
     public void HeartbeatToServer(){
+        if(clientAPIGo == null)
+            return;
         clientAPIGo.sendToLobby( new HeartbeatMessage(playerId));
     }
     public void requestAvailableGames(){
@@ -414,10 +420,7 @@ public class ViewModel {
      * @param history the new chat history
      */
     public void resetChatHistory(ArrayList<ChatMessage> history) {
-        System.out.println(history.size());
         chat = Collections.synchronizedList(history);
-        System.out.println(chat.size());
-        //TODO will this work??
     }
 
 

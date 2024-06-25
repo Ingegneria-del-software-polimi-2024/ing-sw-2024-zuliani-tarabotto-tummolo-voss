@@ -25,7 +25,7 @@ public class FirstSocketManager implements Runnable {
     /**
      * the class is a singleton, returns the single instance of the class. See First_RMI_Manager constructor
      */
-    public static FirstSocketManager getInstance(Lobby lobby, int port){//TODO is port really necessary?????
+    public static FirstSocketManager getInstance(Lobby lobby, int port){
         if(instance == null) {
             instance = new FirstSocketManager(lobby, port);
         }

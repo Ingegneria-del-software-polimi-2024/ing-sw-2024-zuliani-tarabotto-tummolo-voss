@@ -32,11 +32,9 @@ public class ViewAPI implements ViewAPI_Interface {
     private ViewModel viewModel;
     private UI ui;
     private Thread inputThread;
-
-    /*public ViewAPI() {
-        this.viewModel = new ViewModel(ui);
-    }*/
-    //TODO: clientAPI_GO deve essere passato come parametro
+    private Thread heartbeatThread;
+    private Thread readMessagesLoop;
+    private Thread readChatMessagesLoop;
 
     public void setUI(UI ui){
         this.ui = ui;
@@ -48,15 +46,17 @@ public class ViewAPI implements ViewAPI_Interface {
     }
 
     public void stopUI(){
+        if(inputThread == null)
+            return;
         try {
             inputThread.interrupt();
             inputThread.join();
         }catch (SecurityException | InterruptedException e){
-            System.out.println("Couldn't interrupt the thread...");
+            return;
         }
     }
 
-    public void setClientAPIGo(ClientAPI_GO clientAPI_GO){
+    private void setClientAPIGo(ClientAPI_GO clientAPI_GO){
         viewModel.setClientAPIGo(clientAPI_GO);
     }
 
@@ -89,15 +89,13 @@ public class ViewAPI implements ViewAPI_Interface {
     ////////////////////////////////heartbeat////////////////
 
     public void startHeartbeatThread() {
-        Thread heartbeatThread = new Thread(() -> {
+        heartbeatThread = new Thread(() -> {
             while (true) {
                 try {
                     this.HeartbeatToServer();
-//                    System.out.println("l");
                     Thread.sleep(3000); // Send heartbeat every 1 second
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    break;
+                    return;
                 }
             }
         });
@@ -106,6 +104,9 @@ public class ViewAPI implements ViewAPI_Interface {
         heartbeatThread.start();
     }
 
+    public void stopHeartBeat(){
+        heartbeatThread.interrupt();
+    }
 //////////////////////////////////////////Lobby/////////////////////////////////////////////////////////////////////////
 
     /**
@@ -115,8 +116,8 @@ public class ViewAPI implements ViewAPI_Interface {
      */
     public void startConnection(String in, String host) throws StartConnectionFailedException {
         ClientAPI_COME clientAPICome = new ClientAPI_COME(this);
-        Thread readMessagesLoop = new Thread(clientAPICome);
-        Thread readChatMessagesLoop = new Thread(clientAPICome::dequeueChatMessages);
+        readMessagesLoop = new Thread(clientAPICome);
+        readChatMessagesLoop = new Thread(clientAPICome::dequeueChatMessages);
         readMessagesLoop.start();
         readChatMessagesLoop.start();
         ClientAPI_GO clientAPIGo = getClientAPIGo(in, host, clientAPICome);
@@ -214,9 +215,6 @@ public class ViewAPI implements ViewAPI_Interface {
     //the player chooses his secretObjective
     @Override
     public void setSecretObjective(ObjectiveCard secretObjective){viewModel.setSecretObjective(secretObjective);}
-
-
-    //TODO: rendere più chiara la scelta di secretObjective, confirmSecretObjective potrebbe essere eliminato
 
     @Override
     public void confirmSecretObjective(ObjectiveCard secretObjective){
@@ -494,6 +492,17 @@ public class ViewAPI implements ViewAPI_Interface {
     @Override
     public void updateResourcesInUI() {
         ui.updateResourcesInUI();
+    }
+
+    @Override
+    public void returnToStart() {
+        readChatMessagesLoop.interrupt();
+        readMessagesLoop.interrupt();
+        stopHeartBeat();
+        viewModel.resetClientAPIGo();
+        viewModel.resetGameID();
+        viewModel.setGameAsNotStarted();
+        ui.returnToStart();
     }
 
     /**

@@ -62,7 +62,6 @@ public class ServerAPI_COME {
      * class constructor
      * @param controller
      */
-    //TODO complete description
     public ServerAPI_COME(ModelController controller) {
         toDoQueue = new ServerMessageQueue();
         players = new HashMap<String, ClientHandlerInterface>();
