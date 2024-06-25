@@ -8,26 +8,27 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * The type Client message queue.
+ * A queue for messages directed to the client
  */
 public class ClientMessageQueue {
     private ConcurrentLinkedQueue<MessageFromServer> messageQueue;
 
     /**
-     * receives and enqueues a message incoming from the server (this is called by the server handler)
+     * Receives and enqueues a message incoming from the server (this is called by the server handler)
      *
      * @param msg the message to be enqueued
      */
     public void enqueueMessage(MessageFromServer msg){messageQueue.add(msg);}
 
     /**
-     * Get next message message from server.
+     * Gets next message from server in the queue.
      *
      * @return the first message in the queue
      */
     public MessageFromServer getNextMessage(){return messageQueue.poll();}
 
     /**
-     * executes the first message in the queue
+     * Executes the first message in the queue
      *
      * @param api the view api
      */
@@ -35,7 +36,7 @@ public class ClientMessageQueue {
         Objects.requireNonNull(messageQueue.poll(), "list is empty").execute(api);}
 
     /**
-     * class constructor
+     * Class constructor
      */
     public ClientMessageQueue() {messageQueue = new ConcurrentLinkedQueue<MessageFromServer>();}
 }
