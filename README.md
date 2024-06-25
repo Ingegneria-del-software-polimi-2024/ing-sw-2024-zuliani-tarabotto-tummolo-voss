@@ -31,7 +31,7 @@ The final version includes:
 |:---------------------------------|:------:|
 | Basic rules                      |   ✅    |
 | Complete rules                   |   ✅    |
-| Socket                           |   ✅    |
+| Socket and RMI                           |   ✅    |
 | CLI _(Command Line Interface)_   |   ✅    |
 | GUI _(Graphical User Interface)_ |   ✅    |
 
