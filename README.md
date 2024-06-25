@@ -72,15 +72,5 @@ Regardless of the operating system, you must have installed the following progra
     java -jar server.jar
     java -jar client.jar
     ```
-   Note that the client also accepts arguments at startup. In fact, it can also be started as:
-   1. For CLI version: (to do)
-   
-       ```shell
-       java -jar client.jar -cli
-       ```
-   2. For GUI version:
-   
-       ```shell
-       java -jar client.jar -gui
-       ```
+
 
