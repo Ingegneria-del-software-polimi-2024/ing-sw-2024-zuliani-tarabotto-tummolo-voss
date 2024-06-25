@@ -7,6 +7,7 @@ import Client.View.ViewAPI;
 
 /**
  * The type Gui client.
+ * A runnable that instantiates and starts a new GUI client
  */
 public class GUI_Client implements Runnable{
 

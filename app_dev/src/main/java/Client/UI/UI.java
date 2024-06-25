@@ -10,128 +10,127 @@ import java.util.HashMap;
 
 /**
  * The interface Ui.
+ * This interface allows to communicate commands to the operative visualizer, it is implemented graphically by GUI and
+ * in a text format by TUI
  */
 public interface UI extends Runnable{
     /**
-     * Display initialization.
+     * Displays the initialization of the game: open cards and other players' pawn and nicknames.
      */
-//open cards and other players' pawn and nicknames
     void displayInitialization();
 
     /**
-     * Display starter card selection.
+     * Displays the starter card selection.
      */
-//starter card for the player
     void displayStarterCardSelection();
 
     /**
-     * Display objective selection.
+     * Displays objective selection.
+     * The initial hand is shown and the commonObjectives, also the two secretObjectives are shown and the player has to make a choice
      */
-//the initial hand is shown and the commonObjectives, also the two secretObjectives are shown and
-    //the player has to make a choice
     void displayObjectiveSelection();
 
     /**
-     * Display placing card.
+     * Displays the placement of a card.
+     * The disposition of the player and his hand is shown, it's possible to visualize the other players' dispositions
      */
-//the disposition of the player and his hand is shown, it's possible to visualize the other players' dispositions
     void displayPlacingCard();
 
     /**
-     * Display card drawing.
+     * Display the card drawing.
+     * All the cards that can be drawn are visualized
      */
-//all the cards that can be drawn
+
     void displayCardDrawing();
 
     /**
-     * Display end game.
+     * Displays the end of the game and the final points.
      */
-//whatever -> probably the end
     void displayEndGame();
 
     /**
-     * Print disposition.
+     * Prints the disposition.
      *
-     * @param disposition the disposition
+     * @param disposition the disposition to be printed
      */
     void printDisposition(HashMap<Coordinates, PlayableCard> disposition);
 
     /**
-     * Choose connection.
+     * Chooses the connection between RMI or Socket.
      */
     void chooseConnection();
 
     /**
-     * Ask nickname.
+     * Asks for the nickname of the player.
      */
     void askNickname();
 
     /**
-     * Display available games.
+     * Displays the available games.
      *
      * @param listOfGames the list of games
      */
     void displayAvailableGames(ArrayList<String> listOfGames);
 
     /**
-     * Joined game.
+     * Confirms that the player has joined game.
      *
      * @param gameID the game id
      */
     void joinedGame(String gameID);
 
     /**
-     * First welcome.
+     * Welcome to the game.
      */
     void firstWelcome();
 
     /**
-     * Nick name already in use.
+     * Notifies the player that the nickname is already in use and asks for a new one.
      */
     void nickNameAlreadyInUse();
 
     /**
-     * Cant place a card.
+     * Notifies the player that the card can't be placed and asks for a new selection.
      *
-     * @param card  the card
-     * @param coord the coord
+     * @param card  the card to be  placed
+     * @param coord the coord the coordinates to place the card in
      */
     void cantPlaceACard(PlayableCard card, Coordinates coord);
 
     /**
-     * Cant draw card.
+     * Notifies the player that the card can't be drawn.
      *
-     * @param source the source
+     * @param source the source deck
      */
     void cantDrawCard(int source);
 
     /**
-     * Cant create room.
+     * Notifies the player that the room can't be created.
      */
     void cantCreateRoom();
 
     /**
-     * Cant join room.
+     * Notifies the player that the room can't be joined.
      */
     void cantJoinRoom();
 
     /**
-     * Return to lobby.
+     * Notifies the player of their return to the lobby.
      */
     void returnToLobby();
 
     /**
-     * Print starter card.
+     * Prints the starter card.
      */
     void printStarterCard();
 
     /**
-     * Print secret objective.
+     * Prints the secret objective.
      */
     void printSecretObjective();
 
     /**
-     * Display reconnection.
+     * Displays the correct happening of the reconnection.
      */
     void displayReconnection();
 
@@ -148,12 +147,12 @@ public interface UI extends Runnable{
     void displayNewTextMessage(ChatMessage message);
 
     /**
-     * Update resources in ui.
+     * Updates the resources displaued in ui.
      */
     void updateResourcesInUI();
 
     /**
-     * Return to start.
+     * Returns  to the selection of the server.
      */
     void returnToStart();
 }

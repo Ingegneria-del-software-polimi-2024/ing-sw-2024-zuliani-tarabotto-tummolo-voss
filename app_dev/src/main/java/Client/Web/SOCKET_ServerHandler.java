@@ -16,16 +16,28 @@ import java.rmi.RemoteException;
 
 /**
  * The type Socket server handler.
+ * An interface mantaining the Socket connection with the server.
  */
 public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
-
+    /**
+     * The interface managing incoming messages
+     */
     private ClientAPI_COME api;
+    /**
+     * The server
+     */
     private Socket socket;
+    /**
+     * The socket input stream
+     */
     private ObjectInputStream in;
+    /**
+     * The socket output stream
+     */
     private ObjectOutputStream out;
 
     /**
-     * sends to the server the message from client
+     * Sends to the server the message from client
      * @param message message coming from client
      * @throws RemoteException when an error in the connection occurs
      */
@@ -40,7 +52,7 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
     }
 
     /**
-     * receives and enqueues the message coming from the server
+     * Receives and enqueues the message coming from the server
      * @param message the message from the server containing the updates for the view
      * @throws RemoteException when an error in the network happens
      */
@@ -53,7 +65,7 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
     }
 
     /**
-     * forwards the incoming message to the client API incoming interface
+     * Forwards the incoming message to the client API incoming interface
      * @param msg incoming message
      */
     @Override
@@ -62,7 +74,7 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
     }
 
     /**
-     * sends the message to the lobby
+     * Sends the message to the lobby
      * @param msg message to be sent
      * @throws RemoteException if the message couldn't be delivered
      */
@@ -78,7 +90,7 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
     }
 
     /**
-     * a loop that keeps the socket in listening status
+     * A loop that keeps the socket in listening status
      * @throws IOException when an error in the communication occurs
      * @throws ClassNotFoundException when an error in the communication occurs
      */
@@ -91,7 +103,7 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
     }
 
     /**
-     * class constructor
+     * Class constructor
      *
      * @param add  the server hostname
      * @param port the server port
@@ -112,7 +124,7 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
     }
 
     /**
-     * a method run by a single thread that keeps listening to the client handler
+     * A method run by a single thread that keeps listening to the client handler
      */
     public void run() {
         try {

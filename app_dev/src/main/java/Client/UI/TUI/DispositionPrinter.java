@@ -11,7 +11,7 @@ import static org.fusesource.jansi.Ansi.*;
 
 
 /**
- * Class responsible of printing the player's disposition on the console.
+ * Class responsible for printing the player's disposition on the console.
  * The class uses two auxiliary matrices to determine the printing order of the cards.
  */
 public class DispositionPrinter {

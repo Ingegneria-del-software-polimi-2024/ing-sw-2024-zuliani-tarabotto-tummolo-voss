@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 /**
  * The type Tui client.
+ * A runnable that instantiates and starts a new TUI client
  */
 public class TUI_Client implements Runnable{
     private ViewAPI view;

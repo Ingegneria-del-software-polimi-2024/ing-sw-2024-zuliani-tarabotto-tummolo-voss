@@ -1,6 +1,5 @@
 package Client.UI.TUI;
 
-import Chat.ChatHistory;
 import Chat.MessagesFromClient.ChatMessage;
 import Client.UI.TUI.Commands.*;
 import Client.UI.UI;
@@ -19,33 +18,89 @@ import static org.fusesource.jansi.Ansi.ansi;
 
 /**
  * The type Tui.
+ * A class to interface with the functionalities of the TUI
  */
 public class TUI implements UI {
 
+    /**
+     * The view
+     */
     private ViewAPI view;
+    /**
+     * The printer of the disposition
+     */
     private DispositionPrinter dispositionPrinter;
+    /**
+     * The printer of the login
+     */
     private LoginPrinter loginPrinter;
+    /**
+     * The input scanner
+     */
     private Scanner sc;
+    /**
+     * The printer of the hand
+     */
     private HandPrinter handPrinter;
+    /**
+     * The printer of the objectives
+     */
     private ObjectivesPrinter objectivesPrinter;
+    /**
+     * The printer of the drawing card phase
+     */
     private DrawCardPrinter drawCardPrinter;
+    /**
+     * The builder of the cards
+     */
     private CardBuilder cb;
+    /**
+     * The colour to print with
+     */
     private final int color = 226;
+    /**
+     * The input string, as the player inserts values in input, they are all put in this variable
+     */
     private String input;
+    /**
+     * A boolean that takes the value of true when a new input can be read
+     */
     private volatile boolean inputPresent = false;
-    private final Object lock;
+    /**
+     * A lock regulating the access to the input
+     */
+    private final Object inputLock;
+    /**
+     * A hashmap mapping all the possiblecommands to their name
+     */
     private final HashMap<String, Command> commandMap;
+    /**
+     * A runnable containing the command printing the last object printed
+     */
     private Runnable rePrint;
     /**
-     * The Enter pressed.
+     * A boolean that is true when enter is pressed
      */
     boolean enterPressed = false;
+    /**
+     * The nickname of the player
+     */
     private String nickname;
-    private final Object lockForControllingCommands;
-    private boolean uiAlreadyStarted = false;
+    /**
+     * The thread that reads from input
+     */
     private boolean runningThread;
+    /**
+     * A boolean that is true when the player is in the waiting room, waiting to join a game
+     */
     private boolean inWaitingRoom = false;
+    /**
+     * A boolean that is true when the chat is opened
+     */
     private boolean chatOpened = false;
+    /**
+     * The name of the game
+     */
     private String game;
 
     /**
@@ -62,8 +117,7 @@ public class TUI implements UI {
         handPrinter = new HandPrinter(cb);
         objectivesPrinter = new ObjectivesPrinter();
         drawCardPrinter = new DrawCardPrinter(cb);
-        lock = new Object();
-        lockForControllingCommands = new Object();
+        inputLock = new Object();
 
         this.commandMap = new HashMap<>();
         commandMap.put("--help", new HelpCommand());
@@ -120,6 +174,11 @@ public class TUI implements UI {
         }
     }
 
+    /**
+     * Validates the IP address
+     * @param ip the string to validate
+     * @return true when the ip has a right format
+     */
     private boolean validIP(String ip){
         if(ip.toLowerCase().equals("localhost"))
             return true;
@@ -132,6 +191,11 @@ public class TUI implements UI {
         return matcher.matches();
     }
 
+    /**
+     * Validates the Port
+     * @param port the integer to validate
+     * @return true when the port has a right format
+     */
     private boolean validPort(int port){
         return(1024<=port && port <=49151);
     }
@@ -243,7 +307,7 @@ public class TUI implements UI {
 
 
     /**
-     * Display return to lobby.
+     * Displays the "return to lobby" screen asking to press enter.
      */
     public void displayReturnToLobby(){
         String in = null;
@@ -254,7 +318,7 @@ public class TUI implements UI {
                 System.out.print(ansi().fg(color).a("~> Press enter to return to the lobby\n").reset());
                 in = sc.nextLine();
             } else{
-                synchronized (lock){
+                synchronized (inputLock){
                     in = parseString();
                 }
 
@@ -270,29 +334,21 @@ public class TUI implements UI {
         clear();
         loginPrinter.print();
 
-       /* if(!uiAlreadyStarted){
-            view.startUI();
-            uiAlreadyStarted = true;
-        }*/
-
-        //view.startUI();
-
         enterPressed = false;
         // Continuously check if Enter is pressed until it's pressed
         while (!enterPressed) {
             System.out.print(ansi().fg(color).a("~> Press Enter to continue...\n").reset());
 
-            synchronized (lock) {
+            synchronized (inputLock) {
                 while (!inputPresent) {
                     try {
-                       lock.wait();
+                       inputLock.wait();
                     } catch (InterruptedException e) {
                         return;
                     }
                 }
 
                 // Wait for the player to press Enter
-                //String in = sc.nextLine();
                 String in = input;
                 // Check if the input is empty, meaning Enter was pressed
                 if (in.isEmpty()) {
@@ -303,7 +359,7 @@ public class TUI implements UI {
                     System.out.print(ansi().fg(color).a(" ~> Enter key was not pressed.\n").reset());
                 }
                 inputPresent = false;
-                lock.notifyAll();
+                inputLock.notifyAll();
             }
         }
         rePrint = () -> {
@@ -328,7 +384,7 @@ public class TUI implements UI {
 
 
         //we read from input the line and parse it as boolean
-        synchronized (lock){
+        synchronized (inputLock){
             Boolean faceSide = parseBoolean();
 
             if(faceSide == null)
@@ -337,7 +393,7 @@ public class TUI implements UI {
             view.getStarterCard().setFaceSide(faceSide);
             view.playStarterCard();
             inputPresent = false;
-            lock.notifyAll();
+            inputLock.notifyAll();
         }
         printStarterCard();
     }
@@ -368,7 +424,7 @@ public class TUI implements UI {
         if(!chatOpened)
             rePrint.run();
 
-        synchronized (lock){
+        synchronized (inputLock){
             Integer secretObj = parseInt();
             if(secretObj  == null)
                 return;
@@ -376,13 +432,13 @@ public class TUI implements UI {
                 System.out.println("~> Please insert 1/2\n");
                 secretObj = parseInt();
                 if(secretObj == null) {
-                    lock.notifyAll();
+                    inputLock.notifyAll();
                     return;
                 }
             }
             view.setSecretObjective(view.getChooseSecretObjectives().get(secretObj - 1));
             inputPresent = false;
-            lock.notifyAll();
+            inputLock.notifyAll();
         }
         printSecretObjective();
     }
@@ -418,10 +474,10 @@ public class TUI implements UI {
             if(!chatOpened)
                 rePrint.run();
 
-            synchronized (lock){
+            synchronized (inputLock){
                 index = parseInt();
                 if(index == null) {
-                    lock.notifyAll();
+                    inputLock.notifyAll();
                     return;
                 }
 
@@ -429,12 +485,12 @@ public class TUI implements UI {
                     System.out.println("~> Please insert 1/2/3");
                     index = parseInt();
                     if(index == null){
-                        lock.notifyAll();
+                        inputLock.notifyAll();
                         return;
                     }
                 }
                 inputPresent = false;
-                lock.notifyAll();
+                inputLock.notifyAll();
             }
 
             //we select the face for the card
@@ -446,17 +502,17 @@ public class TUI implements UI {
             };
             rePrint.run();
 
-            synchronized (lock){
+            synchronized (inputLock){
                 faceSide = parseBoolean();
                 if(faceSide == null){
-                    lock.notifyAll();
+                    inputLock.notifyAll();
                 }
                 if(faceSide && !view.getCanBePlaced()[index - 1]){
                     System.out.println("~> Sorry, card " + index + "can't be placed face up due to its placement constraint");
                     faceSide = false;
                 }
                 inputPresent = false;
-                lock.notifyAll();
+                inputLock.notifyAll();
             }
 
 
@@ -470,19 +526,19 @@ public class TUI implements UI {
             rePrint.run();
 
             while (!view.checkAvailable(x, y)){
-                synchronized (lock) {
+                synchronized (inputLock) {
                     x = parseInt();
                     if(x == null){
-                        lock.notifyAll();
+                        inputLock.notifyAll();
                         return;
                     }
                     inputPresent = false;
-                    lock.notifyAll();
+                    inputLock.notifyAll();
                 }
-                synchronized (lock){
+                synchronized (inputLock){
                     y = parseInt();
                     if(y == null){
-                        lock.notifyAll();
+                        inputLock.notifyAll();
                         return;
                     }
                     //view.playCard(c, x, y);
@@ -490,7 +546,7 @@ public class TUI implements UI {
                     else view.playCard(view.getHand().get(index - 1), faceSide, x, y);
                     //System.out.println(view.getHand().get(index - 1).getFaceSide());
                     inputPresent = false;
-                    lock.notifyAll();
+                    inputLock.notifyAll();
                 }
             }
 
@@ -509,6 +565,11 @@ public class TUI implements UI {
     public void displayCardDrawing(){
         displayCardDrawing(true);
     }
+
+    /**
+     * Displays the interface for drawing cards
+     * @param clear when true, the method clears the previously printed interfaces before printing its
+     */
     private void displayCardDrawing(boolean clear) {
 
         if(view.getMyTurn()){
@@ -522,23 +583,23 @@ public class TUI implements UI {
             rePrint.run();
 
 
-            synchronized (lock){
+            synchronized (inputLock){
                 Integer cardSource = parseInt();
                 if(cardSource == null){
-                    lock.notifyAll();
+                    inputLock.notifyAll();
                     return;
                 }
                 while(!view.checkCanDrawFrom(cardSource)){
                     System.out.println("~> This card source is not available, choose a valid one\n");
                     cardSource = parseInt();
                     if(cardSource == null){
-                        lock.notifyAll();
+                        inputLock.notifyAll();
                         return;
                     }
                 }
                 view.drawCard(cardSource);
                 inputPresent = false;
-                lock.notifyAll();
+                inputLock.notifyAll();
             }
         }else{
             rePrint = () -> {
@@ -607,7 +668,7 @@ public class TUI implements UI {
         clear();
         System.out.print(ansi().fg(color).a("~> An error in the communication with the server occurred, press return to go back to the lobby\n").reset());
         view.stopUI();
-        synchronized(lock) {
+        synchronized(inputLock) {
             sc = new Scanner(System.in);
             sc.reset();
             if (inputPresent) {
@@ -645,10 +706,10 @@ public class TUI implements UI {
     public void run(){
         runningThread = true;
         while (runningThread) {
-            synchronized (lock) {
+            synchronized (inputLock) {
                 while (inputPresent) {
                     try {
-                        lock.wait();
+                        inputLock.wait();
                     } catch (InterruptedException e) {
                         return;
                     }
@@ -679,7 +740,7 @@ public class TUI implements UI {
                     commandMap.get(input).execute();
                     input = null;
                     inputPresent = true;
-                    lock.notifyAll();
+                    inputLock.notifyAll();
                 }else if(input.startsWith("--")){
                     Command c = commandMap.get(input);
                     if(c != null) {
@@ -696,13 +757,17 @@ public class TUI implements UI {
                     }
                 }else {
                     inputPresent = true;
-                    lock.notifyAll();
+                    inputLock.notifyAll();
                 }
             }
         }
     }
 
 
+    /**
+     * Manages the sending of a message
+     * @param input
+     */
     private void sendMessage(String input){
         String receiver;
         String content;
@@ -715,6 +780,11 @@ public class TUI implements UI {
         }
     }
 
+    /**
+     * Extracts the name of the player following the  @ command
+     * @param line the entire line containing the message directed to a player
+     * @return the name of the player
+     */
     private String extractWordAfterAt(String line) {
         // Remove the @ character and trim leading spaces
         String trimmedLine = line.substring(1).trim();
@@ -731,7 +801,10 @@ public class TUI implements UI {
         }
     }
 
-
+    /**
+     * Parses an integer from the input
+     * @return the integer from the input
+     */
     private Integer parseInt(){
         int value = 0;
         boolean validInput = false;
@@ -741,7 +814,7 @@ public class TUI implements UI {
 
             while (!inputPresent) {
                 try {
-                    lock.wait();
+                    inputLock.wait();
                 } catch (InterruptedException e) {
                     return null;
                 }
@@ -757,11 +830,15 @@ public class TUI implements UI {
                 System.out.println("Input type mismatch, please insert an integer\n");
             }
             inputPresent = false;
-            lock.notifyAll();
+            inputLock.notifyAll();
         }
         return value;
     }
 
+    /**
+     * Parses a boolean from the input
+     * @return the boolean from the input
+     */
     private Boolean parseBoolean(){
         boolean value = false;
         boolean validInput = false;
@@ -769,7 +846,7 @@ public class TUI implements UI {
         while(!validInput){
             while (!inputPresent) {
                 try {
-                    lock.wait();
+                    inputLock.wait();
                 } catch (InterruptedException e) {
                     return null;
                 }
@@ -789,12 +866,15 @@ public class TUI implements UI {
                 System.out.println("Input type mismatch, please insert (front/back)\n");
             }
             inputPresent = false;
-            lock.notifyAll();
+            inputLock.notifyAll();
         }
         return value;
 
     }
-
+    /**
+     * Parses a string from the input
+     * @return the string from the input
+     */
     private String parseString(){
         boolean validInput = false;
 
@@ -804,7 +884,7 @@ public class TUI implements UI {
 
             while (!inputPresent) {
                 try {
-                    lock.wait();
+                    inputLock.wait();
                 } catch (InterruptedException e) {
                     return null;
                 }
@@ -820,7 +900,7 @@ public class TUI implements UI {
                 System.out.println("Input type mismatch, please insert an integer\n");
             }
             inputPresent = false;
-            lock.notifyAll();
+            inputLock.notifyAll();
         }
         return value;
     }
@@ -831,7 +911,7 @@ public class TUI implements UI {
     }
 
     /**
-     * Clear.
+     * Clears the terminal
      */
     public void clear(){
         System.out.print(ansi().eraseScreen().cursor(0, 0));
@@ -845,34 +925,34 @@ public class TUI implements UI {
         System.out.flush();
     }
 
-
+    /**
+     * Displays a string expressing the happened reconnection to a game
+     */
     public void displayReconnection(){
         clear();
         System.out.print(ansi().fg(color).a("~> "+view.getPlayerId()+", you have successfully reconnected to the game").reset());
     }
 
     /**
-     * Set in waiting room.
-     *
-     * @param b the b
+     * Setter for inWaitingRoom attribute.
+     * @param b true if the player is in the waiting room, false otherwise
      */
     public void setInWaitingRoom(Boolean b){
         inWaitingRoom = b;
     }
 
     /**
-     * Get in waiting room boolean.
-     *
-     * @return the boolean
+     * Gets inWaitingRoom.
+     * @return true if the player is in the waiting room, false otherwise
      */
     public boolean getInWaitingRoom(){
         return inWaitingRoom;
     }
 
     /**
-     * Get game string.
+     * Gets game name string.
      *
-     * @return the string
+     * @return the name of the game
      */
     public String getGame(){
         return  game;
@@ -887,7 +967,7 @@ public class TUI implements UI {
 
 
     /**
-     * Print chat.
+     * Prints the chat.
      */
     public void printChat(){
         chatOpened = true;
@@ -910,6 +990,9 @@ public class TUI implements UI {
         System.out.print(ansi().fg(color).a("~> Insert your message or type q to quit:\n").reset());
     }
 
+    /**
+     * Closes the chat.
+     */
     private void closeChat(){
         clear();
         chatOpened = false;
@@ -917,7 +1000,7 @@ public class TUI implements UI {
     }
 
     /**
-     * Print name.
+     * Prints the name of the player.
      */
     public void printName(){
         System.out.print(ansi().fg(color).a("~> You are"+nickname+"\n").reset());

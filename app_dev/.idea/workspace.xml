@@ -9,7 +9,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a85c2ef2-4743-4d12-8336-27ef59fd799c" name="Changes" comment="" />
+    <list default="true" id="a85c2ef2-4743-4d12-8336-27ef59fd799c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Chat/ChatHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Chat/ChatHistory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Chat/MessagesFromClient/ChatMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Chat/MessagesFromClient/ChatMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Chat/MessagesFromClient/RequestChatHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Chat/MessagesFromClient/RequestChatHistory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Chat/MessagesFromServer/ChatHistoryMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Chat/MessagesFromServer/ChatHistoryMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Chat/MessagesFromServer/ChatUpdateMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Chat/MessagesFromServer/ChatUpdateMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/GUI_Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/GUI_Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/TUI_Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/TUI_Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/Commands/ChatCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/Commands/ChatCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/Commands/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/Commands/Command.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/Commands/DispositionCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/Commands/DispositionCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/Commands/EndGameCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/Commands/EndGameCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/Commands/HelpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/Commands/HelpCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/Commands/WhoAmICommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/Commands/WhoAmICommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/DispositionPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/DispositionPrinter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/TUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/TUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/UI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/View/ViewAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/View/ViewAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/View/ViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/View/ViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/Web/ClientAPI_COME.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/Web/ClientAPI_COME.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/Web/ClientAPI_GO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/Web/ClientAPI_GO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/Web/ClientMessageQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/Web/ClientMessageQueue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/Web/RMI_ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/Web/RMI_ServerHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/Web/SOCKET_ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/Web/SOCKET_ServerHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/SharedInterfaces/ViewAPI_Interface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/SharedInterfaces/ViewAPI_Interface.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -292,6 +318,8 @@
       <workItem from="1718788159587" duration="4459000" />
       <workItem from="1718869587481" duration="1588000" />
       <workItem from="1718878563659" duration="2347000" />
+      <workItem from="1719341694862" duration="28000" />
+      <workItem from="1719341751407" duration="2048000" />
     </task>
     <servers />
   </component>

@@ -22,17 +22,17 @@ import java.util.List;
 public interface ViewAPI_Interface extends GeneralAPI_Interface {
 
     /**
-     * Start heartbeat thread.
+     * Starts heartbeat thread.
      */
     void startHeartbeatThread();
 
     /**
-     * Ready to play.
+     * Sets the player as ready to play.
      */
     void readyToPlay();
 
     /**
-     * Sets state.
+     * Sets a state of the game.
      *
      * @param state the state
      */
@@ -41,42 +41,42 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
     /**
      * Sets gold deck.
      *
-     * @param deck the deck
+     * @param deck the gold deck
      */
     void setGoldDeck(List<PlayableCard> deck);
 
     /**
      * Sets resource deck.
      *
-     * @param deck the deck
+     * @param deck the resource deck
      */
     void setResourceDeck(List<PlayableCard>deck);
 
     /**
-     * Sets players.
+     * Sets players when starting a game.
      *
-     * @param players the players
+     * @param players the players' list
      */
     void setPlayers(List<String> players);
 
     /**
-     * Sets game id.
+     * Sets game id when joining a room.
      *
      * @param gameId the game id
      */
     void setGameId(String gameId);
 
     /**
-     * Sets open gold.
+     * Sets open gold cards.
      *
-     * @param openGold the open gold
+     * @param openGold the open gold cards
      */
     void setOpenGold(List<PlayableCard> openGold);
 
     /**
-     * Sets open resource.
+     * Sets open resource cards.
      *
-     * @param openResource the open resource
+     * @param openResource the open resource cards
      */
     void setOpenResource(List<PlayableCard> openResource);
 
@@ -103,7 +103,7 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
     void setSecretObjectives(ObjectiveCard obj1, ObjectiveCard obj2);
 
     /**
-     * Sets secret objective.
+     * Sets secret objective chosen by the player.
      *
      * @param secretObjective the secret objective
      */
@@ -119,7 +119,7 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
     void setCommonObjectives(ObjectiveCard commonObjective1, ObjectiveCard commonObjective2);
 
     /**
-     * Sets disposition.
+     * Sets disposition belonging to a player.
      *
      * @param player      the player
      * @param disposition the disposition
@@ -128,7 +128,7 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
     void setDisposition(String player, HashMap<Coordinates, PlayableCard> disposition);
 
     /**
-     * Sets points.
+     * Sets points of a player.
      *
      * @param player the player
      * @param points the points
@@ -136,7 +136,7 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
     void setPoints(String player, int points);
 
     /**
-     * Update artifacts.
+     * Update artifacts of a player.
      *
      * @param player    the player
      * @param artifacts the artifacts
@@ -144,7 +144,7 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
     void updateArtifacts(String player, HashMap<Artifact, Integer> artifacts);
 
     /**
-     * Update elements.
+     * Update elements of a player.
      *
      * @param player   the player
      * @param elements the elements
@@ -152,26 +152,26 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
     void updateElements(String player, HashMap<Element, Integer> elements);
 
     /**
-     * Update card source.
+     * Update card source after a players draws from it.
      *
      * @param deck       the deck
-     * @param cardSource the card source
+     * @param cardSource the card source identifier
      */
     void updateCardSource(List<PlayableCard> deck, int cardSource);
 
     /**
-     * Update open cards.
+     * Update open card sources.
      *
-     * @param decK the dec k
+     * @param deck the deck
      * @param card the card
      */
-    void updateOpenCards(List<PlayableCard> decK, int card);
+    void updateOpenCards(List<PlayableCard> deck, int card);
 
     /**
-     * Sets final points.
+     * Sets final points for the players and the winners.
      *
-     * @param finalPoints the final points
-     * @param winners     the winners
+     * @param finalPoints the final points represented in a hashmap where the entries are the names of the players and their relative points
+     * @param winners     the winners in a list
      */
     void setFinalPoints( HashMap<String, Integer> finalPoints, ArrayList<String> winners);
 
@@ -184,42 +184,43 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
     void setPawnColor(String player, String pawnColor);
 
     /**
-     * Sets available places.
+     * Sets the available places to put a new card in your placing area.
      *
      * @param availablePlaces the available places
      */
     void setAvailablePlaces(List<Coordinates> availablePlaces);
 
     /**
-     * Sets can be placed.
+     * Sets can be placed, a boolean value for each card in you hand.
+     * It is true when that card can be placed "front", else it is false
      *
-     * @param canBePlaced the can be placed
+     * @param canBePlaced the can be placed value
      */
     void setCanBePlaced(boolean[] canBePlaced);
 
     /**
-     * Gets my turn.
+     * Gets my turn parameter.
      *
-     * @return the my turn
+     * @return true when it's player's turn else false
      */
     boolean getMyTurn();
 
     /**
      * Confirm secret objective.
      *
-     * @param card the card
+     * @param card the secret objective to be confirmed
      */
     public void confirmSecretObjective(ObjectiveCard card);
 
     /**
      * Sets turn player.
      *
-     * @param turnPlayer the turn player
+     * @param turnPlayer the turn player nickname
      */
     public void setTurnPlayer(String turnPlayer);
 
     /**
-     * Ask nickname.
+     * Asks player to choose a nickname.
      */
     void askNickname();
 
@@ -231,24 +232,24 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
     void setAvailableGames(ArrayList<String> listOfGames);
 
     /**
-     * Display available games.
+     * Display available games, basing on the data stored in the view model.
      */
     void displayAvailableGames();
 
     /**
-     * Display available games.
+     * Display available games passed as parameters.
      *
      * @param availableGames the available games
      */
     void displayAvailableGames(ArrayList<String> availableGames);
 
     /**
-     * Nick name already in use.
+     * Notifies the player that the nickname is already in use.
      */
     void nickNameAlreadyInUse();
 
     /**
-     * Cant place a card.
+     * Notifies the player that they can't place a card.
      *
      * @param card  the card
      * @param coord the coord
@@ -256,46 +257,46 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
     void cantPlaceACard(PlayableCard card, Coordinates coord);
 
     /**
-     * Cant draw card.
+     * Notifies the player that they can't draw card.
      *
      * @param source the source
      */
     void cantDrawCard(int source);
 
     /**
-     * Cant join room.
+     * Notifies the player that they can't join room.
      */
     void cantJoinRoom();
 
     /**
-     * Cant create room.
+     * Notifies the player that can't create room.
      */
     void cantCreateRoom();
 
     /**
-     * brings the player back to the lobby
+     * Brings the player back to the lobby
      */
     void returnToLobby();
 
     /**
-     * Ack nick name.
+     * Notifies the player that the nickname is correctly received by the server, saves it in the viewModel.
      *
-     * @param name the name
+     * @param name the nickname
      */
     void ackNickName(String name);
 
     /**
-     * Display starter card.
+     * Displays the starter card.
      */
     void displayStarterCard();
 
     /**
-     * Display secret objective.
+     * Displays the secret objective.
      */
     void displaySecretObjective();
 
     /**
-     * Display reconnection.
+     * Displays the interface for communicating a completed reconnection.
      */
     void displayReconnection();
 
@@ -307,7 +308,7 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
     void setPlayerID(String playerID); //used for recovery from disconnections
 
     /**
-     * Return to choose game.
+     * Returns to lobby when choosing a game.
      */
     void returnToChooseGame();
 
@@ -331,12 +332,12 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
     void setGameAsStarted();
 
     /**
-     * when elements and resources are updated, we call this function to update the corresponding values on the ui
+     * When elements and resources are updated, we call this function to update the corresponding values on the ui
      */
     void updateResourcesInUI();
 
     /**
-     * Return to start.
+     * Returns to the choosing of the connection technology.
      */
     void returnToStart();
 }

@@ -22,52 +22,124 @@ import java.util.List;
 
 /**
  * The type View model.
+ * A class representing the model for the client, it is a lighter version of the model present on the server, used only for
+ * graphic displaying purposes
  */
 public class ViewModel {
+    /**
+     * The list of available games present
+     */
     private ArrayList<String> listOfGames;
     //private for the player
+    /**
+     * The hand of the player
+     */
     private List<PlayableCard> hand;
+    /**
+     * The starter card of the player
+     */
     private PlayableCard starterCard;
+    /**
+     * The secret onjective of the player
+     */
     private ObjectiveCard secretObjective;
 
 
     //common on table
+    /**
+     * The decks on the table.
+     * This hashmap contains the decks from which the player can draw cards in the following order:
+     *      0- gold deck,
+     *      1- open gold cards,
+     *      2- resource deck,
+     *      3- open resource cards
+     */
     private HashMap<Integer,List<PlayableCard>> decks;
     //this hashmap contains the decks from which the player can draw cards in the following order:
     // 0- gold deck
     // 1- open gold cards
     // 2- resource deck
     // 3- open resource cards
+    /**
+     * The index of the gold deck
+     */
     private final int GOLD_DECK_INDX = 0;
+    /**
+     * The index of the open gold cards
+     */
     private final int OPEN_GOLD_INDX = 1;
+    /**
+     * The index of the resource deck
+     */
     private final int RESOURCE_DECK_INDX = 2;
+    /**
+     * The index of the open resource cards
+     */
     private final int OPEN_RESOURCE_INDX = 3;
-    private /*final*/ List<ObjectiveCard> commonObjectives;
-    private /*final*/ List<ObjectiveCard> chooseSecretObjectives;
+    /**
+     * The common objectives
+     */
+    private List<ObjectiveCard> commonObjectives;
+    /**
+     * The card that will become the secret objective
+     */
+    private  List<ObjectiveCard> chooseSecretObjectives;
 
 
     //logistical support
+    /**
+     * The turn state
+     */
     private TurnState state;
+    /**
+     * A list containing the players
+     */
     private List<String> players;
+    /**
+     * The name of the game the player is in
+     */
     private String gameId = null;
+    /**
+     * The available artifacts for the player
+     */
     private HashMap< String, HashMap<Artifact, Integer> > availableArtifacts;
+    /**
+     * The available elements for the player
+     */
     private HashMap< String, HashMap<Element, Integer> > availableElements;
+    /**
+     * The pawn colors
+     */
     private HashMap<String, String> pawnColors;
+    /**
+     * The player name
+     */
     private String playerId;
+    /**
+     * The name of the turn player
+     */
     private String turnPlayer;
+    /**
+     * The coordinates in which the turn player can place a card
+     */
     private List<Coordinates> availablePlaces;
-
-    //an array of 3 booleans indicating which of the cards in the player's hand can be placed(due to placementConstraint)
+    /**
+     * An array of 3 booleans indicating which of the cards in the player's hand can be placed(due to placementConstraint)
+     */
     private boolean[] canBePlaced;
 
 
-    //the disposition of all players' are stored here
+    /**
+     * The disposition of all players' are stored here
+     */
     private HashMap< String, HashMap< Coordinates, PlayableCard> > dispositions;
-    //the points of all players are store here
+    /**
+     * The points of all players are store here
+     */
     private HashMap< String , Integer> points;
 
     /**
-     * the list of the winners of the game
+     * The list of the winners of the game
      */
     private ArrayList<String> winners;
 
@@ -75,10 +147,19 @@ public class ViewModel {
      * The chat history: a variable containing all chat message belonging to the current game
      */
     private List<ChatMessage> chat;
-
+    /**
+     * True when the player is actually playing in a game (set true when their starter card is handled to them)
+     */
     private boolean gameStarted = false;
+
     //interfaces to communicate with
+    /**
+     * The interface to send messages to the server
+     */
     private ClientAPI_GO clientAPIGo;
+    /**
+     * The active "printer" may be GUI or TUI
+     */
     private UI ui;
 
     /**
@@ -99,7 +180,7 @@ public class ViewModel {
     }
 
     /**
-     * Set client api go.
+     * Sets client api go.
      *
      * @param clientAPI_GO the client api go
      */
@@ -108,32 +189,33 @@ public class ViewModel {
     }
 
     /**
-     * Reset client api go.
+     * Resets client api go, setting it to null.
      */
     public void resetClientAPIGo(){
         clientAPIGo = null;
     }
 
 
+
+/////////////////////////////////////////////////Lobby//////////////////////////////////////////////////////////////
     /**
-     * Set available games.
+     * Sets the available games.
      *
      * @param listOfGames the list of games
      */
-/////////////////////////////////////////////////Lobby//////////////////////////////////////////////////////////////
     public void setAvailableGames(ArrayList<String> listOfGames){
         this.listOfGames = listOfGames;
     }
 
     /**
-     * Display available games.
+     * Displays the available games.
      */
     public void displayAvailableGames(){
         ui.displayAvailableGames(listOfGames);
     }
 
     /**
-     * Heartbeat to server.
+     * Sends the heartbeat to server.
      */
 //HEARTBEAT
     public void HeartbeatToServer(){
@@ -143,27 +225,28 @@ public class ViewModel {
     }
 
     /**
-     * Request available games.
+     * Requests the available games.
      */
     public void requestAvailableGames(){
         clientAPIGo.sendToLobby(new RequestAvailableGames(playerId));
     }
 
     /**
-     * Join game.
+     * Asks the server to join the game specified.
      *
-     * @param game    the game
-     * @param players the players
+     * @param game    the game name
+     * @param players the players' number, if 0 it means that the player wants to join an already existing game, else they wants to create a game
      */
     public void joinGame(String game, int players){
         clientAPIGo.sendToLobby(new JoinGameMessage(playerId, game, players));
     }
 
-    /**
-     * Play starter card.
-     */
+
 /////////// from CLIENT to SERVER  ACTIONS ////////////////////////////////////////////////////////////////////////////////////
     //all this methods create a new MessageFromClient object containing an execute() method with the call to a specific method of ModelController
+    /**
+     * Plays the starter card notifying the server.
+     */
     public void playStarterCard(){
         clientAPIGo.sendToServer( new PlayStarterCardMessage( starterCard.getFaceSide(), playerId));
     }
@@ -173,19 +256,19 @@ public class ViewModel {
     }
 
     /**
-     * Play card.
+     * Play a card notifying the server.
      *
-     * @param c        the c
+     * @param c        the card
      * @param faceSide the face side
-     * @param x        the x
-     * @param y        the y
+     * @param x        the x of the coordinates
+     * @param y        the y of the coordinates
      */
     public void playCard(PlayableCard c, boolean faceSide, int x, int y) {
         clientAPIGo.sendToServer( new PlayCardMessage(c.getId(), x, y, faceSide));
     }
 
     /**
-     * Draw card.
+     * Draws a card notifying the server.
      *
      * @param cardSource the card source
      */
@@ -194,17 +277,18 @@ public class ViewModel {
     }
 
     /**
-     * Ready to play.
+     * Notifies the server if being ready to play.
      */
     public void readyToPlay(){clientAPIGo.sendToServer( new ReadyToPlayMessage());}
 
 
-    /**
-     * Sets state.
-     *
-     * @param state the state
-     */
+
 /////////// from SERVER to CLIENT ACTIONS ////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Sets the game state.
+     *
+     * @param state the state to be set
+     */
     public void setState(TurnState state) {
         this.state = state;
         //System.out.println(state.toString());
@@ -212,9 +296,9 @@ public class ViewModel {
     }
 
     /**
-     * Set gold deck.
+     * Sets the gold deck.
      *
-     * @param deck the deck
+     * @param deck the new gold deck
      */
     public void setGoldDeck(List<PlayableCard> deck){
         decks.put(GOLD_DECK_INDX, deck);
@@ -222,9 +306,9 @@ public class ViewModel {
 
 
     /**
-     * Set resource deck.
+     * Set the resource deck.
      *
-     * @param deck the deck
+     * @param deck the new resource deck
      */
     public void setResourceDeck(List<PlayableCard> deck){
         decks.put(RESOURCE_DECK_INDX, deck);
@@ -232,9 +316,9 @@ public class ViewModel {
 
 
     /**
-     * Set players.
+     * Sets players when initializing the game.
      *
-     * @param players the players
+     * @param players the players' names
      */
     public void setPlayers(List<String> players){
         this.players = players;
@@ -267,7 +351,7 @@ public class ViewModel {
     }
 
     /**
-     * Sets game id.
+     * Sets the game id.
      *
      * @param gameId the game id
      */
@@ -277,7 +361,7 @@ public class ViewModel {
     }
 
     /**
-     * Set starter card.
+     * Sets the starter card.
      *
      * @param starterCard the starter card
      */
@@ -289,7 +373,7 @@ public class ViewModel {
     }
 
     /**
-     * Set hand.
+     * Sets the hand.
      *
      * @param hand the hand
      */
@@ -298,7 +382,7 @@ public class ViewModel {
     }
 
     /**
-     * Set secret objectives.
+     * Sets the secret objectives.
      *
      * @param obj1 the obj 1
      * @param obj2 the obj 2
@@ -312,7 +396,7 @@ public class ViewModel {
     }
 
     /**
-     * Set secret objective.
+     * Sets the secret objective.
      *
      * @param secretObjective the secret objective
      */
@@ -323,7 +407,7 @@ public class ViewModel {
     }
 
     /**
-     * Confirm secret objective.
+     * Confirms the secret objective.
      *
      * @param secretObjective the secret objective
      */
@@ -344,33 +428,27 @@ public class ViewModel {
     }
 
     /**
-     * Update artifacts.
+     * Updates the artifacts.
      *
      * @param player    the player
      * @param artifacts the artifacts
      */
     public void updateArtifacts(String player, HashMap<Artifact, Integer> artifacts) {
-        /*for(Artifact a : artifacts.keySet()){
-            availableArtifacts.put(a, artifacts.get(a));
-        }*/
         availableArtifacts.put(player, artifacts);
     }
 
     /**
-     * Update elements.
+     * Updates the elements.
      *
      * @param player   the player
      * @param elements the elements
      */
     public void updateElements(String player, HashMap<Element, Integer> elements) {
-        /*for(Element e : elements.keySet()){
-            availableElements.put(e, elements.get(e));
-        }*/
         availableElements.put(player, elements);
     }
 
     /**
-     * Update card source.
+     * Updates a card source after a player draws from it.
      *
      * @param deck       the deck
      * @param cardSource the card source
@@ -380,7 +458,7 @@ public class ViewModel {
     }
 
     /**
-     * Update open cards.
+     * Update the open cards.
      *
      * @param decK       the dec k
      * @param cardSource the card source
@@ -396,7 +474,7 @@ public class ViewModel {
     /**
      * Sets final points.
      *
-     * @param finalPoints the final points
+     * @param finalPoints the final points in a hashmap with name of the players as entries
      * @param winnersList the winners list
      */
     public void setFinalPoints(HashMap<String, Integer> finalPoints, ArrayList<String> winnersList) {
@@ -406,8 +484,8 @@ public class ViewModel {
 
     /**
      * Quit game.
+     * We use this function to end the game whenever we want
      */
-//we use this function to end the game whenever we want
     public void quitGame(){
         gameStarted = false;
         chat = Collections.synchronizedList(new ArrayList<>());
@@ -415,7 +493,7 @@ public class ViewModel {
     }
 
     /**
-     * Quit game.
+     * Quit game when being in the waiting room.
      *
      * @param roomName the room name
      */
@@ -425,7 +503,7 @@ public class ViewModel {
     }
 
     /**
-     * Sets pawn color.
+     * Sets the pawn color for a player.
      *
      * @param player    the player
      * @param pawnColor the pawn color
@@ -438,7 +516,7 @@ public class ViewModel {
      * Get pawn color string.
      *
      * @param player the player
-     * @return the string
+     * @return the colour
      */
     public String getPawnColor(String player){return pawnColors.get(player);}
 
@@ -454,7 +532,7 @@ public class ViewModel {
     }
 
     /**
-     * Set open gold.
+     * Sets open gold card.
      *
      * @param openGold the open gold
      */
@@ -463,7 +541,7 @@ public class ViewModel {
     }
 
     /**
-     * Set open resource.
+     * Sets open resource card.
      *
      * @param openResource the open resource
      */
@@ -472,7 +550,7 @@ public class ViewModel {
     }
 
     /**
-     * Set available places.
+     * Sets available places.
      *
      * @param availablePlaces the available places
      */
@@ -481,9 +559,9 @@ public class ViewModel {
     }
 
     /**
-     * Set can be placed.
+     * Sets can be placed.
      *
-     * @param canBePlaced the can be placed
+     * @param canBePlaced the arraying containing the available places (The coordinates in which the turn player can place a card)
      */
     public void setCanBePlaced(boolean[] canBePlaced){
         this.canBePlaced = canBePlaced;
@@ -501,7 +579,7 @@ public class ViewModel {
 
 
     /**
-     * Set player id.
+     * Sends to the lobby a NewConnectionMessage, containing the player's name.
      *
      * @param playerId the player id
      */
@@ -511,7 +589,7 @@ public class ViewModel {
     }
 
     /**
-     * Ack player id.
+     * Sets the player id, used after the reception of the ack of the id from the server.
      *
      * @param playerId the player id
      */
@@ -520,9 +598,8 @@ public class ViewModel {
     }
 
     /**
-     * Gets my turn.
      *
-     * @return the my turn
+     * @return true if it is the turn of the player
      */
     public boolean getMyTurn() {
         if(turnPlayer.equals(playerId)) return true;
@@ -533,7 +610,7 @@ public class ViewModel {
     ////////////////////////////////// GETTER METHODS //////////////////////////////////////////////////////////////////////////////
 
     /**
-     * returns the disposition of THIS player
+     * Returns the disposition of THIS player
      *
      * @return hash map
      */
@@ -542,7 +619,7 @@ public class ViewModel {
     }
 
     /**
-     * Get starter card playable card.
+     * Gets the starter card.
      *
      * @return the playable card
      */
@@ -551,9 +628,9 @@ public class ViewModel {
     }
 
     /**
-     * Get hand list.
+     * Gets the hand.
      *
-     * @return the list
+     * @return the hand of the player
      */
     public List<PlayableCard> getHand(){return hand;}
 
@@ -569,7 +646,7 @@ public class ViewModel {
     /**
      * Gets choose secret objectives.
      *
-     * @return the choose secret objectives
+     * @return the secret objectives
      */
     public List<ObjectiveCard> getChooseSecretObjectives() {
         return chooseSecretObjectives;
@@ -578,32 +655,29 @@ public class ViewModel {
     /**
      * Get available places list.
      *
-     * @return the list
+     * @return the available places
      */
     public List<Coordinates> getAvailablePlaces(){
         return availablePlaces;
     }
 
     /**
-     * Get can be placed boolean [ ].
      *
-     * @return the boolean [ ]
+     * @return the boolean [ ] representing the cards in the hand that can be placed
      */
     public boolean[] getCanBePlaced() {
         return canBePlaced;
     }
 
     /**
-     * Gets points.
      *
-     * @return the points
+     * @return the points of the player
      */
     public HashMap<String, Integer> getPoints() {
         return points;
     }
 
     /**
-     * Gets player id.
      *
      * @return the player id
      */
@@ -686,9 +760,9 @@ public class ViewModel {
     }
 
     /**
-     * Get secret objective objective card.
+     * Get secret the secret objective card.
      *
-     * @return the objective card
+     * @return the secret objective
      */
     public ObjectiveCard getSecretObjective(){return secretObjective;}
 
@@ -727,7 +801,7 @@ public class ViewModel {
     }
 
     /**
-     * handles the reception of a text message,
+     * Manages the reception of a text message,
      *
      * @param message the message to be received
      */
@@ -738,7 +812,7 @@ public class ViewModel {
 
 
     /**
-     * substitutes the current chat history
+     * Substitutes the current chat history
      *
      * @param history the new chat history
      */
@@ -757,7 +831,7 @@ public class ViewModel {
     }
 
     /**
-     * Reset game id.
+     * Reset game id setting it to null.
      */
     public void resetGameID(){
         gameId = null;
@@ -778,9 +852,8 @@ public class ViewModel {
     }
 
     /**
-     * Is game started boolean.
      *
-     * @return the boolean
+     * @return true if the game is started else false
      */
     public boolean isGameStarted() {
         return gameStarted;

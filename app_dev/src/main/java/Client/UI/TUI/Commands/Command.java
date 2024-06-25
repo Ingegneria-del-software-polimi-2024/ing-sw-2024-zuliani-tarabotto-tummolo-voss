@@ -2,7 +2,7 @@ package Client.UI.TUI.Commands;
 
 
 /**
- * interface for each command implemented in the TUI
+ * A class that allows to recognize text commands and act accordingly
  */
 public interface Command {
 

@@ -5,11 +5,20 @@ import Client.View.ViewAPI;
 
 /**
  * The type End game command.
+ * Contains the command to quit the game
  */
 public class EndGameCommand implements Command{
-
+    /**
+     * The name of the command
+     */
     private final String name = "--quit";
+    /**
+     * The view API
+     */
     private ViewAPI view;
+    /**
+     * The TUI
+     */
     private TUI tui;
 
     /**

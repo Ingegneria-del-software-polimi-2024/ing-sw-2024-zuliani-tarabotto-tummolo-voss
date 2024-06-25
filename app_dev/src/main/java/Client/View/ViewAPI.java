@@ -27,17 +27,33 @@ import java.util.List;
  * - methods used by the server interface to modify the view
  */
 public class ViewAPI implements ViewAPI_Interface {
-
-    //private UI ui;
+    /**
+     * The view model
+     */
     private ViewModel viewModel;
+    /**
+     * The user interface (the operative visualizer)
+     */
     private UI ui;
+    /**
+     * The thread reading the inputs, actually only started in TUI
+     */
     private Thread inputThread;
+    /**
+     * The thread continuously sending heartbeats to the server
+     */
     private Thread heartbeatThread;
+    /**
+     * The thread continuously reading messages from the queue of the incoming messages (MessageFromServer/MessageFromLobby)
+     */
     private Thread readMessagesLoop;
+    /**
+     * The thread continuously reading chat messages from the queue of the incoming chat messages
+     */
     private Thread readChatMessagesLoop;
 
     /**
-     * Set ui.
+     * Sets the ui.
      *
      * @param ui the ui
      */
@@ -47,7 +63,8 @@ public class ViewAPI implements ViewAPI_Interface {
     }
 
     /**
-     * Start ui.
+     * Starts the ui.
+     * This method is only used by TUI
      */
     public void startUI(){
         inputThread = new Thread(ui);
@@ -55,7 +72,8 @@ public class ViewAPI implements ViewAPI_Interface {
     }
 
     /**
-     * Stop ui.
+     * Stops ui.
+     * This method is only used by TUI
      */
     public void stopUI(){
         if(inputThread == null)
@@ -68,44 +86,44 @@ public class ViewAPI implements ViewAPI_Interface {
         }
     }
 
+    /**
+     * Sets the clientAPI_GO for the viewModel
+     * @param clientAPI_GO the interface for sending messages
+     */
     private void setClientAPIGo(ClientAPI_GO clientAPI_GO){
         viewModel.setClientAPIGo(clientAPI_GO);
     }
 
 
     /**
-     * Heartbeat to server.
+     * Sends a Heartbeat to the server.
      */
     public void HeartbeatToServer(){
         viewModel.HeartbeatToServer();
     }
-    //all this methods create a new MessageFromClient object containing an execute() method with t
 
-    /**
-     * Play starter card.
-     */
+
 /////////// from CLIENT to SERVER  ACTIONS ////////////////////////////////////////////////////////////////////////////////////
     //all this methods create a new MessageFromClient object containing an execute() method with the call to a specific method of ModelController
+    /**
+     * Plays the starter card, notifying the server.
+     */
     public void playStarterCard(){
         viewModel.playStarterCard();
     }
 
-//    public void chooseSecretObjective(String chosenObjective){
-//        viewModel.chooseSecretObjective(chosenObjective);
-//    }
-
     /**
-     * Play card.
+     * Plays a card, notifying the server.
      *
-     * @param c        the c
+     * @param c        the card
      * @param faceSide the face side
-     * @param x        the x
-     * @param y        the y
+     * @param x        the x to place the card in
+     * @param y        the y to place the card in
      */
     public void playCard(PlayableCard c, boolean faceSide, int x, int y) {viewModel.playCard(c,faceSide, x,y);}
 
     /**
-     * Draw card.
+     * Draws a card, notifying the server.
      *
      * @param cardSource the card source
      */
@@ -118,6 +136,9 @@ public class ViewAPI implements ViewAPI_Interface {
 
     ////////////////////////////////heartbeat////////////////
 
+    /**
+     * Starts the thread sending the heartbeats
+     */
     public void startHeartbeatThread() {
         heartbeatThread = new Thread(() -> {
             while (true) {
@@ -135,7 +156,7 @@ public class ViewAPI implements ViewAPI_Interface {
     }
 
     /**
-     * Stop heart beat.
+     * Stop heart beat thread.
      */
     public void stopHeartBeat(){
         heartbeatThread.interrupt();
@@ -143,7 +164,7 @@ public class ViewAPI implements ViewAPI_Interface {
 //////////////////////////////////////////Lobby/////////////////////////////////////////////////////////////////////////
 
     /**
-     * starts the connection with the server
+     * Starts the connection with the server
      *
      * @param in   the string defining the connection technology, either "RMI" or "Socket"
      * @param host the ip of the server
@@ -161,7 +182,7 @@ public class ViewAPI implements ViewAPI_Interface {
     }
 
     /**
-     *
+     * Gets the ClientAPI_GO, the interface to send messages
      * @param in the string defining the connection technology, either "RMI" or "Socket"
      * @param host the ip of the server
      * @param clientAPICome the interface to which messages will be forwarded
@@ -184,18 +205,19 @@ public class ViewAPI implements ViewAPI_Interface {
     }
 
     /**
-     * Choose connection.
+     * Chooses the connection technology.
      */
     public void chooseConnection(){
         ui.chooseConnection();
     }
 
     /**
-     * Welcome.
+     * Welcomes the player in the game.
      */
     public void welcome(){
         ui.firstWelcome();
     }
+
     public void askNickname(){
         ui.askNickname();
     }
@@ -295,8 +317,8 @@ public class ViewAPI implements ViewAPI_Interface {
     public void updateCardSource(List<PlayableCard> deck, int cardSource) {
         viewModel.updateCardSource(deck, cardSource);
     }
-    public void updateOpenCards(List<PlayableCard> decK, int cardSource){
-        viewModel.updateOpenCards(decK, cardSource);
+    public void updateOpenCards(List<PlayableCard> deck, int cardSource){
+        viewModel.updateOpenCards(deck, cardSource);
     }
 
     @Override
@@ -688,7 +710,6 @@ public class ViewAPI implements ViewAPI_Interface {
     }
 
     /**
-     * Is game started boolean.
      *
      * @return true if the game is started, else false. The game is intended as started when the part of playing takes place (not when players are in the waiting room)
      */
@@ -697,19 +718,19 @@ public class ViewAPI implements ViewAPI_Interface {
     }
 
     /**
-     * Send chat message.
+     * Sends a chat message.
      *
-     * @param content the content
+     * @param content the content of the message
      */
     public void sendChatMessage(String content){
         viewModel.sendChatMessage(content);
     }
 
     /**
-     * Send private chat message.
+     * Sends a private chat message.
      *
-     * @param content  the content
-     * @param receiver the receiver
+     * @param content  the content of the message
+     * @param receiver the receiver of the message
      */
     public void sendPrivateChatMessage(String content, String receiver){
         viewModel.sendPrivateChatMessage(content, receiver);

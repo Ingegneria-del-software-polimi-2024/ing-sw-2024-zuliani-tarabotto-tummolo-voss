@@ -8,18 +8,32 @@ import java.sql.Timestamp;
 
 /**
  * The type Chat message.
+ * This class is used to represent a message belonging to the chat
  */
 public class ChatMessage implements MessageFromClient {
+    /**
+     * the sender player
+     */
     private String sender;
+    /**
+     * the content of the message
+     */
     private String content;
+    /**
+     * the receiver player
+     */
     private String receiver;
+    /**
+     * the timestamp at which the server receives the message
+     */
     private Timestamp timestamp;
 
     /**
      * Instantiates a new Chat message.
+     * Used for the messages to be broadcasted, initializes receiver to null
      *
-     * @param sender  the sender
-     * @param content the content
+     * @param sender  the sender of the message
+     * @param content the content of the message
      */
     public ChatMessage(String sender, String content) {
         this.sender = sender;
@@ -30,9 +44,9 @@ public class ChatMessage implements MessageFromClient {
     /**
      * Instantiates a new Chat message.
      *
-     * @param sender   the sender
-     * @param content  the content
-     * @param receiver the receiver
+     * @param sender   the sender of the message
+     * @param content  the content of the message
+     * @param receiver the receiver of the message
      */
     public ChatMessage(String sender, String content, String receiver) {
         this.sender = sender;
@@ -53,7 +67,7 @@ public class ChatMessage implements MessageFromClient {
     /**
      * Get sender string.
      *
-     * @return the string
+     * @return the sender of the message
      */
     public String getSender(){
         return sender;
@@ -62,7 +76,7 @@ public class ChatMessage implements MessageFromClient {
     /**
      * Get content string.
      *
-     * @return the string
+     * @return the content of the message
      */
     public String getContent(){
         return content;
@@ -80,7 +94,7 @@ public class ChatMessage implements MessageFromClient {
     /**
      * Set timestamp.
      *
-     * @param timestamp the timestamp
+     * @param timestamp the timestamp at which the server receives the message
      */
     public void setTimestamp(Timestamp timestamp){
         this.timestamp = timestamp;
@@ -89,7 +103,7 @@ public class ChatMessage implements MessageFromClient {
     /**
      * Get receiver string.
      *
-     * @return the string
+     * @return the receiver of the message, null when the message is broadcasted to all the players
      */
     public String getReceiver(){
         return receiver;

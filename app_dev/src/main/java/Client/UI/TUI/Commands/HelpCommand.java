@@ -4,10 +4,16 @@ import static org.fusesource.jansi.Ansi.ansi;
 
 /**
  * The type Help command.
+ * Contains the command to get help
  */
 public class HelpCommand implements Command{
-
+    /**
+     * The name of the command
+     */
     private final String name = "--help";
+    /**
+     * The color of printing
+     */
     private final int color = 226;
     @Override
     public void execute() {
