@@ -2,8 +2,9 @@ package SharedWebInterfaces.SharedInterfaces;
 
 /**
  * The interface Server controller interface.
+ * This interface is used to define the methods that the client can perform on the serverController through the messages sent.
  */
-public interface ServerControllerInterface extends ControllerInterface {
+public interface ServerControllerInterface extends Traslator {
     /**
      * Play card.
      *
@@ -15,12 +16,12 @@ public interface ServerControllerInterface extends ControllerInterface {
     public void playCard(int id, int x, int y, Boolean faceSide);
 
     /**
-     * Initialize game state.
+     * Initializes a new game state.
      */
     public void initializeGameState();
 
     /**
-     * Play starter card.
+     * Plays the starter card.
      *
      * @param face   the face
      * @param player the player
@@ -28,7 +29,7 @@ public interface ServerControllerInterface extends ControllerInterface {
     public void playStarterCard(boolean face, String player);
 
     /**
-     * Choose secret objective.
+     * Chooses a secret objective.
      *
      * @param cardId the card id
      * @param player the player
@@ -36,19 +37,19 @@ public interface ServerControllerInterface extends ControllerInterface {
     public void chooseSecretObjective(String cardId, String player);
 
     /**
-     * Draw card.
+     * Draws a card.
      *
-     * @param cardSource the card source
+     * @param cardSource the deck from which the card is drawn
      */
     public void drawCard(int cardSource);
 
     /**
-     * Sets player ready.
+     * Sets player as ready.
      */
     public void setPlayerReady();
 
     /**
-     * End game.
+     * Ends the game.
      */
     public void endGame();
 }

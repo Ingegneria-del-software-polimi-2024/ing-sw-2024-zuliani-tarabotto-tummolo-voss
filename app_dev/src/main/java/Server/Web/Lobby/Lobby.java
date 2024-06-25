@@ -5,7 +5,7 @@ import SharedWebInterfaces.Messages.MessagesFromLobby.*;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
 import SharedWebInterfaces.Messages.MessagesToLobby.HeartbeatMessage;
 import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
-import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
+import SharedWebInterfaces.SharedInterfaces.Traslator;
 import SharedWebInterfaces.Messages.MessagesToLobby.MessageToLobby;
 import SharedWebInterfaces.SharedInterfaces.ServerHandlerInterface;
 import SharedWebInterfaces.WebExceptions.MsgNotDeliveredException;
@@ -17,20 +17,41 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * The type Lobby.
+ * This class controls the lobby of the server, it manages the relations between the clients and the rooms
  */
-public class Lobby implements ControllerInterface {//TODO all the methods here must be sinchronized!! :)
+public class Lobby implements Traslator {//TODO all the methods here must be sinchronized!! :)
+    /**
+     * The Rooms, each room contains between 2 and 4 players all playing to the same game.
+     * A player can't be in more than one room at the same time
+     */
     private ArrayList<Room> rooms;
+    /**
+     * The Players, a player is identified by his nickname and has a personal handler to communicate with the server
+     */
     private ConcurrentHashMap<String, ClientHandlerInterface> players;
+    /**
+     * The Socket manager, it manages the incoming Socket connections from the clients
+     */
     private FirstSocketManager socketManager;
+    /**
+     * The Rmi manager, it manages the incoming RMI connections from the clients
+     */
     private First_RMI_Manager rmiManager;
+    /**
+     * The Queue, it contains the messages to be executed by the lobby
+     */
     private LobbyMessageQueue queue;
+    /**
+     * The Last seen in lobby list, it contains the last time a player was seen in the lobby
+     * If a player is not seen for a certain amount of time and is not inside any room he is considered disconnected
+     */
     private ConcurrentHashMap<String, Long> lastSeenInLobby;
 
     /**
      * Instantiates a new Lobby.
      *
-     * @param portSocket the port socket
-     * @param portRMI    the port rmi
+     * @param portSocket the port for socket connections
+     * @param portRMI    the port for rmi connections
      */
     public Lobby(int portSocket, int portRMI){
         try {
@@ -48,7 +69,7 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
     }
 
     /**
-     * dequeues messages from the toDoQueue
+     * Dequeues messages from the toDoQueue
      *
      * @throws MsgNotDeliveredException       when the message couldn't be delivered
      * @throws StartConnectionFailedException when the connection with client couldn't be started
@@ -80,7 +101,9 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
 
     /**
      * Memorizes a new couple (nickname, personal handler) to effectively use the new connection
-     *
+     * if the name is already taken it is investigated if the player has disconnected somehow,
+     * if the name is empty or the result of the investigation is that the existing player is active
+     * an error message is sent to the client
      * @param name             the player
      * @param handlerInterface the handler of the player
      */
@@ -120,6 +143,11 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
         System.out.println("Added a player: "+name);
     }
 
+    /**
+     * Manages the new connection of a player
+     * @param name the player
+     * @param handlerInterface the handler of the player
+     */
     private void manageNewConnection(String name, ClientHandlerInterface handlerInterface){
         players.put(name, handlerInterface);
         try {
@@ -132,7 +160,7 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
     }
 
     /**
-     * inserts the player in the requested room, if the room doesn't exist creates a new room and inserts the player there
+     * Inserts the player in the requested room, if the room doesn't exist creates a new room and inserts the player there
      *
      * @param playerName      the player nickname
      * @param roomName        the name of the room
@@ -205,7 +233,7 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
     }
 
     /**
-     * given the handler returns the nickname of the associated player
+     * Given the handler returns the nickname of the associated player
      *
      * @param handlerInterface the personal handler
      * @return the nickname of the player
@@ -219,7 +247,7 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
 
 
     /**
-     * adds a message to the queue of incoming messages
+     * Adds a message to the queue of incoming messages
      *
      * @param msg the incoming message to be added
      */
@@ -228,7 +256,7 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
     }
 
     /**
-     * sends a message to a player
+     * Sends a message to a player
      *
      * @param playerName the recipient nickname
      * @param msg        the message to be delivered
@@ -243,7 +271,7 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
     }
 
     /**
-     * method to instantiate a new RMI connection with a client
+     * Method to instantiate a new RMI connection with a client
      *
      * @param handlerInterface the client remote interface to communicate with
      */
@@ -309,7 +337,7 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
     ///////////////////////////////////////////////PRIVATE METHODS//////////////////////////////////////////////////////
 
     /**
-     * creates a new room inserting the player who requested the creation of the room
+     * Creates a new room inserting the player who requested the creation of the room
      * @param roomName the name of the room
      * @param playerName who requested the creation of the room
      * @param expectedPlayers number of players to play with
@@ -323,7 +351,7 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
     }
 
     /**
-     * allows to find the room with its name
+     * Allows to find the room with its name
      * @param roomName the room name
      * @return the reference to the room
      */
@@ -336,7 +364,7 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
     }
 
     /**
-     *
+     * Checks if a player is in a room
      * @param playerName the name of the player
      * @return the name of the room in which the player is
      */
@@ -349,7 +377,7 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
     }
 
     /**
-     * Update heart beat.
+     * On the arrival of a heart beat, updates the timestamp at which the player was seen.
      *
      * @param playerId the player id
      */
@@ -365,6 +393,11 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
         }
     }
 
+    /**
+     * Gets room reference by its string name.
+     * @param roomName the name of the room
+     * @return the room reference
+     */
     private Room getRoomByName(String roomName){
         for(Room room : rooms){
             if(room.getName().equals(roomName))
@@ -396,7 +429,7 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
 //    }
 
     /**
-     * verifies if a room has reached the maximum number of players
+     * Verifies if a room has reached the maximum number of players
      * @param roomName the name of the room
      */
     private void verifyStart(String roomName){

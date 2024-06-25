@@ -1,8 +1,8 @@
 package SharedWebInterfaces.Messages.MessagesFromClient;
 
-import Server.ModelController;
+import Server.ModelTranslator;
 import SharedWebInterfaces.Messages.Message;
-import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
+import SharedWebInterfaces.SharedInterfaces.Traslator;
 
 import java.io.Serializable;
 
@@ -15,13 +15,13 @@ public interface MessageFromClient extends Message, Serializable {
      *
      * @param controller the controller
      */
-    void execute(ControllerInterface controller);
+    void execute(Traslator controller);
 
     /**
      * Execute.
      *
      * @param controller the controller
      */
-    void execute(ModelController controller);
+    void execute(ModelTranslator controller);
     //TODO sistemare questa cosa
 }

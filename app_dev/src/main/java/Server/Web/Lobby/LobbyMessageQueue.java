@@ -9,6 +9,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * The type Lobby message queue.
+ * This class is used to store messages that are sent to the lobby.
  */
 public class LobbyMessageQueue {
     private ConcurrentLinkedQueue<MessageToLobby> messageQueue;
@@ -16,12 +17,12 @@ public class LobbyMessageQueue {
     /**
      * Enqueue message.
      *
-     * @param msg the msg
+     * @param msg the message
      */
     public void enqueueMessage(MessageToLobby msg){messageQueue.add(msg);}
 
     /**
-     * Get next message message to lobby.
+     * Get next message to lobby.
      *
      * @return the message to lobby
      */

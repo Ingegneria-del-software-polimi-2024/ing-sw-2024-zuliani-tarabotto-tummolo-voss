@@ -16,7 +16,6 @@ import Server.Web.Lobby.Room;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -32,22 +31,60 @@ import java.util.stream.Collectors;
  */
 
 /**
- * The type Model controller.
+ * The translator between the controller and the web structure
  */
-public class ModelController implements ServerControllerInterface {
+public class ModelTranslator implements ServerControllerInterface {
+    /**
+     * The Game state controller.
+     */
     private GameState gameState;
+    /**
+     * The Players' nicknames.
+     */
     private final ArrayList<String> playersNicknames;
+    /**
+     * The Game name, corresponds to the room name.
+     */
     private final String gameId;
+    /**
+     * counter used to check if all players have placed their starter card and secret objectives
+     */
     private int cont = 0;
+    /**
+     * The first player to play.
+     */
     private String initialPlayer;
+    /**
+     * boolean to check if the last round is being played
+     */
     private boolean lastRound = false;
+    /**
+     * The interface to send messages to the client.
+     */
     private final ServerAPI_GO send;
+    /**
+     * The number of players that are ready to play
+     */
     private int readyPlayers;
+    /**
+     * The room in which the game is played
+     */
     private final Room room;
-    private boolean finished = false;
+    /**
+     * boolean to check if the game is ended
+     */
     private boolean gameEnded = false;
+    /**
+     * The chat history of the game
+     */
     private ChatHistory chatHistory;
+    /**
+     * The model listener, used to send messages to the client
+     */
     private ModelListener modelListener;
+    /**
+     * The set of disconnected players
+     */
     private Set<String> disconnectedPlayers;
 
     /**
@@ -59,7 +96,7 @@ public class ModelController implements ServerControllerInterface {
      * @param room             the room
      * @param disconnected     the disconnected
      */
-    public ModelController(ArrayList<String> playersNicknames, String gameId, ServerAPI_GO send, Room room, Set<String> disconnected){
+    public ModelTranslator(ArrayList<String> playersNicknames, String gameId, ServerAPI_GO send, Room room, Set<String> disconnected){
         System.out.println("model controller created");
         this.playersNicknames = playersNicknames;
         this.gameId = gameId;
@@ -70,7 +107,7 @@ public class ModelController implements ServerControllerInterface {
     }
 
     /**
-     * decks and open cards are created, also each player is given his initial hand of cards
+     * Decks and open cards are created, also each player is given his initial hand of cards
      * (the view will display it only later)
      */
     @Override
@@ -84,7 +121,7 @@ public class ModelController implements ServerControllerInterface {
 
 
     /**
-     * each player once connected and inside a game sends a message(ReadyToPlayMessage) that calls this method:
+     * Each player once connected and inside a game sends a message(ReadyToPlayMessage) that calls this method:
      * after all players sent this message the game finally starts with the starterCards distribution
      */
     @Override
@@ -97,7 +134,7 @@ public class ModelController implements ServerControllerInterface {
 
 
     /**
-     * the controller places the starter card for the player with the specified face.
+     * The controller places the starter card for the player with the specified face.
      * A counter checks if all players placed their cards and then updates the State of the game
      * @param face the face of the starter card
      * @param player the nickname of the player
@@ -242,7 +279,7 @@ public class ModelController implements ServerControllerInterface {
     }
 
     /**
-     * we communicate GameState that another turn will be played
+     * We communicate GameState that another turn will be played
      */
     private void playNewTurn(){
         gameState.playingTurn();
@@ -250,10 +287,9 @@ public class ModelController implements ServerControllerInterface {
     }
 
     /**
-     * Check message boolean.
      *
-     * @param message the message
-     * @return the boolean
+     * @param message the message to be checked
+     * @return true if the message is pertinent to the current turn state, false otherwise
      */
     public boolean checkMessage(MessageFromClient message){
         if(gameState != null)
@@ -261,6 +297,9 @@ public class ModelController implements ServerControllerInterface {
         return true;
     }
 
+    /**
+     * Ends the game.
+     */
     public void endGame(){
         gameEnded = true;
         gameState.calculateFinalPoints();
@@ -278,7 +317,11 @@ public class ModelController implements ServerControllerInterface {
     }
 
     /**
-     * set a player in an inactive state
+     * Sets a player in an inactive state
+     * If all the players except one are disconnected, after waiting the time specified, the game is closed
+     * Otherwise the game continues
+     * If the player is the initial player, it must be adjusted
+     * If the game is closed, the gameEnded boolean is set to true
      *
      * @param playerName the name of the player to be set active
      * @return true if the game was closed after the player left the match, false if the match continued
@@ -318,11 +361,11 @@ public class ModelController implements ServerControllerInterface {
         //after some time of checking we must close the game
         if(!gameEnded)
             endGame();
-        finished = true;
+        gameEnded = true;
     }
 
     /**
-     * Handle disconnection.
+     * Handles disconnection of a player.
      */
     public void handleDisconnection() {
         System.out.println("DISCONNECTION DETECTED");
@@ -330,7 +373,7 @@ public class ModelController implements ServerControllerInterface {
     }
 
     /**
-     * Quit game.
+     * Allows a player to quit the game.
      *
      * @param playerID the player id
      */
@@ -342,7 +385,7 @@ public class ModelController implements ServerControllerInterface {
     }
 
     /**
-     * Reconnect.
+     * Reconnects a player to the game.
      *
      * @param playerID the player id
      */
@@ -362,7 +405,7 @@ public class ModelController implements ServerControllerInterface {
     ///////////////////////////////////////////////CHAT/////////////////////////////////////////////////////////////////
 
     /**
-     * Enq chat msg.
+     * Enqueues a chat msg.
      *
      * @param message the message
      */
@@ -378,7 +421,7 @@ public class ModelController implements ServerControllerInterface {
     }
 
     /**
-     * Send chat history.
+     * Sends the complete chat history to a player.
      *
      * @param player the player
      */

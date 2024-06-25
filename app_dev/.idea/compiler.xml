@@ -5,6 +5,7 @@
       <directory url="file://$PROJECT_DIR$/src/test" includeSubdirectories="false" />
       <file url="file://$PROJECT_DIR$/src/test/java/model/GameState/GameStateTest.java" />
       <file url="file://$PROJECT_DIR$/src/main/java/model/RunDeckCreation.java" />
+      <file url="file://$PROJECT_DIR$/src/main/java/controller/LobbyController.java" />
     </excludeFromCompile>
   </component>
 </project>

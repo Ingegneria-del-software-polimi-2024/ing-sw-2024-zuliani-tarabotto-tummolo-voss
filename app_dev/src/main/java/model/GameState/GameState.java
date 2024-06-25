@@ -1,6 +1,6 @@
 package model.GameState;
 
-import Server.ModelController;
+import Server.ModelTranslator;
 import Server.ModelListener;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import model.Exceptions.CantPlaceCardException;
@@ -14,7 +14,6 @@ import model.placementArea.Coordinates;
 import model.player.Player;
 import model.deckFactory.*;
 
-import javax.sql.rowset.CachedRowSet;
 import java.util.*;
 
 /**
@@ -34,7 +33,7 @@ public class GameState {
     private ModelListener modelListener;
     private List<ObjectiveCard> objectiveBuffer;
 
-    private ModelController modelController;
+    private ModelTranslator modelTranslator;
 
     /**
      * class constructor: creates a new Player for each name contained in nickNames,
@@ -43,12 +42,12 @@ public class GameState {
      * @param nickNames       ArrayList of Strings
      * @param id              the unique id for gameState
      * @param modelListener   the model listener
-     * @param modelController the model controller
+     * @param modelTranslator the model controller
      * @param disconnected    the disconnected
      */
-    public GameState(ArrayList<String> nickNames, String id, ModelListener modelListener, ModelController modelController, Set<String> disconnected) {
+    public GameState(ArrayList<String> nickNames, String id, ModelListener modelListener, ModelTranslator modelTranslator, Set<String> disconnected) {
         this.modelListener = modelListener;
-        this.modelController = modelController;
+        this.modelTranslator = modelTranslator;
         //creates a new players list with the nicknames taken from input
         players = new ArrayList<Player>();
         int i = 0;
@@ -201,7 +200,7 @@ public class GameState {
             for(Player p : players){
                 if(p.isActive())
                     if(!modelListener.notifyChanges(p.getNickname(), new KickOutOfGameException()))
-                        modelController.handleDisconnection();
+                        modelTranslator.handleDisconnection();
             }
         }
     }
@@ -735,7 +734,7 @@ public class GameState {
     public void recoveryObjectiveChoice(Player player){
         int indx = players.indexOf(player);
         if(player.getSecretObjective() == null) {
-            modelController.chooseSecretObjective(String.valueOf(objectiveBuffer.get(indx * 2).getId()), player.getNickname());
+            modelTranslator.chooseSecretObjective(String.valueOf(objectiveBuffer.get(indx * 2).getId()), player.getNickname());
         }
     }
 
@@ -748,7 +747,7 @@ public class GameState {
         if(!areCoordinatesPresent(player.getPlacementArea().freePositions(), new Coordinates(0,0))){
             return;
         }
-        modelController.playStarterCard(true, player.getNickname());
+        modelTranslator.playStarterCard(true, player.getNickname());
     }
 
     /**
@@ -762,23 +761,23 @@ public class GameState {
         if(!player.equals(turnPlayer))
             return;
         if (getResourceDeck().getSize() > 0){
-            modelController.drawCard(4);
+            modelTranslator.drawCard(4);
         }else if (getGoldDeck().getSize() > 0){
-            modelController.drawCard(1);
+            modelTranslator.drawCard(1);
         }else if (!getOpenResources().isEmpty()){
             int i;
             if(getOpenResources().get(0) != null)
                 i = 0;
             else
                 i = 1;
-            modelController.drawCard(5+i);
+            modelTranslator.drawCard(5+i);
         }else{
             int i;
             if(getOpenGold().get(0) != null)
                 i = 0;
             else
                 i = 1;
-            modelController.drawCard(2+i);
+            modelTranslator.drawCard(2+i);
         }
     }
 

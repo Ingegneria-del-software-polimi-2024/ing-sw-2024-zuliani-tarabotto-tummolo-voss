@@ -1,25 +1,33 @@
 package Server.Web.Game;
 
 import Chat.MessagesFromClient.ChatMessage;
-import Server.ModelController;
+import Server.ModelTranslator;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
-import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
 
 import java.util.HashMap;
 
 /**
- * The type Server api come.
+ * The type Server api come, an interface to handle the reception of messages from the clients.
+ *
  */
 public class ServerAPI_COME {
-
+    /**
+     * The queue containing the executable messages received from the clients
+     */
     private ServerMessageQueue toDoQueue;
+    /**
+     * The map containing the players and their handlers
+     */
     private HashMap<String, ClientHandlerInterface> players;
-    private ModelController controller;
+    /**
+     * The controller interface
+     */
+    private ModelTranslator controller;
     //client called
 
     /**
-     * enqueues the incoming message in the toDoQueue
+     * Enqueues the incoming message in the toDoQueue
      *
      * @param message is the message coming from the client
      */
@@ -32,7 +40,7 @@ public class ServerAPI_COME {
     /**
      * Add new player.
      *
-     * @param nickName the nick name
+     * @param nickName the nickname
      * @param handler  the handler
      */
     public void addNewPlayer(String nickName, ClientHandlerInterface handler){
@@ -42,13 +50,13 @@ public class ServerAPI_COME {
     }
 
     /**
-     * Perform next method.
+     * Performs next method.
      */
 //controller called
     public void performNextMethod(){}
 
     /**
-     * loops that dequeues messages from the queue of incoming messages
+     * Loop that dequeues messages from the queue of incoming messages
      */
     public void loop(){
         MessageFromClient message;
@@ -60,11 +68,6 @@ public class ServerAPI_COME {
                  if (controller.checkMessage(message) || message instanceof ChatMessage)
                      //if that message has sense execute it
                      message.execute(controller);
-
-                 //else
-                 //if that message doesn't have sense
-                 //    toDoQueue.enqueueMessage(message);
-                 //it would be interesting if we implemented a kind of "waiting time varible" that increases until a value when the message is destroyed
              }
          }
     }
@@ -73,11 +76,11 @@ public class ServerAPI_COME {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
-     * class constructor
+     * Class constructor
      *
      * @param controller the controller
      */
-    public ServerAPI_COME(ModelController controller) {
+    public ServerAPI_COME(ModelTranslator controller) {
         toDoQueue = new ServerMessageQueue();
         players = new HashMap<String, ClientHandlerInterface>();
         this.controller = controller;

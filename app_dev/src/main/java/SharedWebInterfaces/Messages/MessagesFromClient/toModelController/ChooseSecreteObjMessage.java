@@ -1,8 +1,7 @@
 package SharedWebInterfaces.Messages.MessagesFromClient.toModelController;
 
-import Server.ModelController;
-import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
-import SharedWebInterfaces.SharedInterfaces.ServerControllerInterface;
+import Server.ModelTranslator;
+import SharedWebInterfaces.SharedInterfaces.Traslator;
 
 /**
  * The type Choose secrete obj message.
@@ -24,13 +23,13 @@ public class ChooseSecreteObjMessage implements MessageFromViewToModelController
     }
 
     @Override
-    public void execute(ModelController controller) {
+    public void execute(ModelTranslator controller) {
             controller.chooseSecretObjective(chosenObjective, playerID);
     }
 
     //ignore this
     @Override
-    public void execute(ControllerInterface controller) {
+    public void execute(Traslator controller) {
 
     }
 

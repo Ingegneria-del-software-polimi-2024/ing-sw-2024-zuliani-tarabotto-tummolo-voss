@@ -1,7 +1,7 @@
 package SharedWebInterfaces.Messages.MessagesFromClient.toModelController;
 
-import Server.ModelController;
-import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
+import Server.ModelTranslator;
+import SharedWebInterfaces.SharedInterfaces.Traslator;
 
 /**
  * The type Disconnection message.
@@ -16,11 +16,11 @@ public class DisconnectionMessage implements MessageFromViewToModelController {
     }
 
     @Override
-    public void execute(ModelController controller) {
+    public void execute(ModelTranslator controller) {
         controller.handleDisconnection();
     }
 
     @Override
-    public void execute(ControllerInterface controller) {
+    public void execute(Traslator controller) {
     }
 }

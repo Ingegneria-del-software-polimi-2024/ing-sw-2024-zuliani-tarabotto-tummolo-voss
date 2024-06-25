@@ -2,11 +2,8 @@ package model.GameState;
 
 import Chat.MessagesFromClient.ChatMessage;
 import Client.UI.UI;
-import Server.ModelController;
-import Server.ModelListener;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.*;
-import SharedWebInterfaces.Messages.MessagesFromServer.EndGameMessage;
 import model.player.Player;
 
 /**

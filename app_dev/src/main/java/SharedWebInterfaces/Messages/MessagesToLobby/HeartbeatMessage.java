@@ -1,11 +1,7 @@
 
 package SharedWebInterfaces.Messages.MessagesToLobby;
 
-import Server.ModelController;
 import Server.Web.Lobby.Lobby;
-import SharedWebInterfaces.Messages.MessagesToLobby.MessageToLobby;
-import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
-import SharedWebInterfaces.SharedInterfaces.ServerControllerInterface;
 
 /**
  * The type Heartbeat message.

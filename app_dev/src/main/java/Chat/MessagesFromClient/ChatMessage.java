@@ -1,8 +1,8 @@
 package Chat.MessagesFromClient;
 
-import Server.ModelController;
+import Server.ModelTranslator;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
-import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
+import SharedWebInterfaces.SharedInterfaces.Traslator;
 
 import java.sql.Timestamp;
 
@@ -55,12 +55,12 @@ public class ChatMessage implements MessageFromClient {
     }
 
     @Override
-    public void execute(ControllerInterface controller) {
+    public void execute(Traslator controller) {
 
     }
 
     @Override
-    public void execute(ModelController controller) {
+    public void execute(ModelTranslator controller) {
         controller.enqChatMsg(this);
     }
 

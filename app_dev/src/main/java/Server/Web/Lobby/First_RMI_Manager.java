@@ -19,14 +19,27 @@ import java.util.ArrayList;
 
 /**
  * The type First rmi manager.
+ * This class is the first RMI manager to be created, it is responsible for the creation of the RMI connection and for
+ * the identification of potential RMI clients. It is also responsible for the creation of the RMI_ClientHandler when a
+ * new client connects to the server.
+ * It is a singleton class.
  */
 public class First_RMI_Manager implements RMI_ManagerInterface {
+    /**
+     * The Lobby interface.
+     */
     private Lobby lobby;
+    /**
+     * The port of the server.
+     */
     private int serverPort;
+    /**
+     * The instance of the class, it is a singleton.
+     */
     private static First_RMI_Manager instance;
 
     /**
-     * class constructor
+     * Class constructor
      * @param lobby the lobby-controller
      * @param serverPort the port of the server
      * @throws RemoteException when an error in setting of the connection occurs
@@ -49,12 +62,12 @@ public class First_RMI_Manager implements RMI_ManagerInterface {
     }
 
     /**
-     * the class is a singleton, returns the single instance of the class. See First_RMI_Manager constructor
+     * The class is a singleton, returns the single instance of the class. See First_RMI_Manager constructor
      *
-     * @param lobby      the lobby
+     * @param lobby      the lobby interface
      * @param serverPort the server port
-     * @return the instance
-     * @throws RemoteException the remote exception
+     * @return the first rmi manager
+     * @throws RemoteException when an error in setting of the connection occurs
      */
     public static First_RMI_Manager getInstance(Lobby lobby, int serverPort) throws RemoteException {
         if(instance == null)
@@ -63,7 +76,7 @@ public class First_RMI_Manager implements RMI_ManagerInterface {
     }
 
     /**
-     * enqueues in the message queue of the lobby a new incoming message
+     * Enqueues in the message queue of the lobby a new incoming message
      * @param msg incoming message from client
      */
     public void deliverToLobby(MessageToLobby msg){

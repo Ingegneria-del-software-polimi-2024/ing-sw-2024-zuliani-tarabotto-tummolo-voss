@@ -10,7 +10,9 @@ import Client.View.ViewAPI;
  * A runnable that instantiates and starts a new GUI client
  */
 public class GUI_Client implements Runnable{
-
+    /**
+     * The View API.
+     */
     private ViewAPI view;
 
     /**

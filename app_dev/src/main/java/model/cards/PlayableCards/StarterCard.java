@@ -36,7 +36,7 @@ public class StarterCard extends PlayableCard{
     /**
      * List of corners on the back face, used for TUI (Text User Interface).
      */
-
+    //TODO check
     /**
      * Gets the blocked elements on the front face of this starter card.
      *

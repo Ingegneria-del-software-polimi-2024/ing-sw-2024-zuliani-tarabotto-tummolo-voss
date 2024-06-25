@@ -17,18 +17,36 @@ import java.rmi.RemoteException;
 
 /**
  * The type Socket client handler.
+ * An interface mantaining the Socket connection with the client.
  */
 public class  SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
+    /**
+     * The interface managing incoming messages
+     */
     private ServerAPI_COME api;
+    /**
+     * The client socket
+     */
     private Socket clientSocket;
+    /**
+     * The socket input stream
+     */
     private ObjectInputStream in;
+    /**
+     * The socket output stream
+     */
     private ObjectOutputStream out;
+    /**
+     * The lobby interface
+     */
     private Lobby lobby;
-
+    /**
+     * The maximum number of retries for sending a message
+     */
     private final int MAX_RETRY = 3;
 
     /**
-     * forwards the message to the interface managing incoming messages
+     * Forwards the message to the interface managing incoming messages
      * @param message the incoming message
      * @throws RemoteException when a communication error occurs
      */
@@ -36,7 +54,7 @@ public class  SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
     public void sendToServer(MessageFromClient message) throws RemoteException {api.sendToServer(message);}
 
     /**
-     * sends a message to the client
+     * Sends a message to the client
      * @param message the message to be sent
      * @throws RemoteException when a communication error occurs
      */
@@ -47,7 +65,7 @@ public class  SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
 
 
     /**
-     * starts the listening loop for the gameplay
+     * Starts the listening loop for the gameplay
      * @throws IOException when an error in the communication occurs
      * @throws ClassNotFoundException when an error in the communication occurs
      */
@@ -60,7 +78,7 @@ public class  SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
     }
 
     /**
-     * safely closes the connection
+     * Safely closes the connection
      * @throws IOException when an error occurs, the connection must not be considered close in this case
      */
     private void closeConnection() throws IOException {
@@ -71,7 +89,7 @@ public class  SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
 
 
     /**
-     * class constructor
+     * Class constructor
      *
      * @param clientSocket the socket of the client
      * @param lobby        the reference to the lobby-controller
@@ -85,24 +103,12 @@ public class  SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
     }
 
     /**
-     * starts the listening loop
+     * Starts the listening loop
      */
     public void run(){
         try{
             snd(new WelcomeMessage(lobby.getGameNames()));
             System.out.println("sent welcomeMessage");
-
-//            boolean read = false;
-//            MessageToLobby incoming;
-//            do{
-//                incoming = (MessageToLobby) in.readObject();
-//                if(incoming instanceof NewConnectionMessage) {
-//                    ((NewConnectionMessage) incoming).setHandler(this);
-////                    read = true;
-//                }
-//                deliverToLobby(incoming);
-//            }while(!(incoming instanceof JoinGameMessage));
-
         } catch (IOException e) {
             throw new RuntimeException();
         }
@@ -120,8 +126,6 @@ public class  SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
                     sendToServer((MessageFromClient)message);
             }while(true);
         }catch (IOException | ClassNotFoundException e){
-//            System.err.println("Connection lost: " + e.getMessage());
-
             DisconnectionMessage disconnectionMessage = new DisconnectionMessage();
             if(api == null)
                 return;
@@ -130,7 +134,7 @@ public class  SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
     }
 
     /**
-     * sets the api deputed to the reception of incoming web messages
+     * Sets the api deputed to the reception of incoming web messages
      * @param receiver the web API "come"
      * @throws RemoteException because, implementing a remote interface this must be callable also remotely
      */
@@ -146,7 +150,7 @@ public class  SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
     public void sendToClient(MessageFromServer msg) throws RemoteException {snd(msg);}
 
     /**
-     * handles the messages for the lobby
+     * Handles the messages for the lobby
      * @param msg the message from the client
      * @throws RemoteException when the message couldn't be delivered to the lobby
      */

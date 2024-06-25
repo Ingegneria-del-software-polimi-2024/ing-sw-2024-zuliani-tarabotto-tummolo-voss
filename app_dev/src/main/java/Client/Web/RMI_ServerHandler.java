@@ -23,7 +23,7 @@ import java.rmi.server.UnicastRemoteObject;
 
 /**
  * The type Rmi server handler.
- * An interface mantaining the RMI connection with the server.
+ * An interface maintaining the RMI connection with the server.
  */
 public class RMI_ServerHandler implements ServerHandlerInterface {
 

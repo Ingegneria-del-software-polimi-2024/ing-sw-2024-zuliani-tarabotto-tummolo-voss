@@ -25,15 +25,5 @@ public class LobbyController {
         incomingMessages = new ServerMessageQueue();
         connectedPlayers = new ArrayList<ClientHandlerInterface>();
     }
-
-    /**
-     * Start listening.
-     *
-     * @param port the port
-     */
-    public void startListening(int port){
-        //Thread t = new Thread(()->new SOCKET_ClientHandler().listenForNewConnections(port));
-        //t.start();
-        //RMI_ClientHandler RMIhandler = new RMI_ClientHandler(port,)
-    }
 }
+

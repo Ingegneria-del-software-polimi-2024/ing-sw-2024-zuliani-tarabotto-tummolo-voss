@@ -1,6 +1,6 @@
 package Server.Web.Lobby;
 
-import Server.ModelController;
+import Server.ModelTranslator;
 import Server.Web.Game.ServerAPI_COME;
 import Server.Web.Game.ServerAPI_GO;
 import Server.Web.Lobby.LobbyExceptions.CantJoinRoomExcept;
@@ -8,10 +8,7 @@ import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.I_WantT
 import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_RoomChoice;
 import SharedWebInterfaces.Messages.MessagesFromServer.ReconnectionsMSG.ReconnectionHappened;
 import SharedWebInterfaces.Messages.MessagesToLobby.CloseARoomMessage;
-import SharedWebInterfaces.Messages.MessagesToLobby.JoinGameMessage;
 import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
-import model.GameState.GameState;
-import model.GameState.TurnState;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -19,27 +16,63 @@ import java.rmi.RemoteException;
 
 /**
  * The type Room.
+ * This class represents a room in the lobby, where players can join and play a game.
  */
 public class Room {
-
+    /**
+     * The Last seen hashmap, containing the couples (playerName, lastSeenTime) indicating the time when the  player
+     * was seen for the last time in the room.
+     */
     private ConcurrentHashMap<String, Long> lastSeen;
+    /**
+     * The Disconnected users set, containing the nicknames of the players that are disconnected.
+     */
     private final Set<String> disconnectedUsers;
-    private ModelController modelController;
+    /**
+     * The Model translator, the interface mediating between controller and network.
+     */
+    private ModelTranslator modelTranslator;
+    /**
+     * The Name of the room.
+     */
     private String name;
+    /**
+     * The Expected players, the number of players to wait in order to start the game.
+     */
     private int expectedPlayers;
+    /**
+     * The Players, the list of players in the room.
+     */
     private ArrayList<String> players;
+    /**
+     * The Receiver, the server API for receiving messages.
+     */
     private ServerAPI_COME receive;
+    /**
+     * The Sender, the server API for sending messages.
+     */
     private ServerAPI_GO send;
+    /**
+     * The Full, a boolean indicating if the room is full.
+     */
     private boolean full;
+    /**
+     * The Players interfaces, a hashmap containing the couples (playerName, handler) indicating the handler of the player.
+     */
     private HashMap<String, ClientHandlerInterface> playersInterfaces;
-
+    /**
+     * The Heartbeat checker, a thread checking the heartbeat of the players.
+     */
     private Thread heartbeatChecker = null;
+    /**
+     * The Lobby, the lobby to which the room belongs.
+     */
 
     private final Lobby lobby;
 
 
     /**
-     * allows a player in the room
+     * Allows a player in the room
      *
      * @param name    the player's nickname
      * @param handler the player's handler
@@ -63,7 +96,7 @@ public class Room {
     }
 
     /**
-     * verifies if a match in the room can start
+     * Verifies if a match in the room can start
      */
     public void verifyStart(){
         if(expectedPlayers == players.size()) {
@@ -75,11 +108,11 @@ public class Room {
     }
 
     /**
-     * class constructor
+     * Class constructor
      *
      * @param name            the name of the room
      * @param expectedPlayers the number of player to wait in order to start the game
-     * @param lobby           the lobby
+     * @param lobby           the lobby to which the room belongs
      */
     public Room(String name, int expectedPlayers, Lobby lobby){
         this.playersInterfaces = new HashMap<>();
@@ -98,7 +131,7 @@ public class Room {
     }
 
     /**
-     * Update heart beat.
+     * Updates heart beat by adding the current time to the last seen hashmap.
      *
      * @param playerId the player id
      */
@@ -133,6 +166,10 @@ public class Room {
 
     }
 
+    /**
+     * Start heartbeat checker, the thread checking if the difference between current time and last seen timestamp is more than the timeout.
+     * If so, the player is disconnected.
+     */
     private void startHeartbeatChecker() {
         heartbeatChecker = new Thread(() -> {
             while (true) {
@@ -160,7 +197,7 @@ public class Room {
     }
 
     /**
-     * Interrupt hb checker.
+     * Interrupt heartbeat checker.
      */
     public void interruptHBChecker(){
         heartbeatChecker.interrupt();
@@ -171,12 +208,16 @@ public class Room {
         }
     }
 
+    /**
+     * Disconnects a player.
+     * @param player the name of the player to disconnect
+     */
     private void disconnectPlayer(String player){
         disconnectedUsers.add(player);
         playersInterfaces.put(player, null);
         send.disconnectPlayer(player);
-        if(modelController!=null)
-            modelController.setPlayerInactive(player);
+        if(modelTranslator !=null)
+            modelTranslator.setPlayerInactive(player);
 
         System.out.println("Player " + player + " is disconnected.");
     }
@@ -192,10 +233,10 @@ public class Room {
 
 
     /**
-     * if a player quits the game while still in the "waiting for other players phase", we simply remove
+     * If a player quits the game while still in the "waiting for other players phase", we simply remove
      * him from all the room's lists, so that another player can instantly join the game
      *
-     * @param player the player
+     * @param player the player's name
      */
     public void removePlayerBeforeStart(String player){
         lastSeen.remove(player);
@@ -215,11 +256,11 @@ public class Room {
     }
 
     /**
-     * starts a thread starting the controller execution...
+     * starts a thread starting the game
      */
     private void startGame(){
-        modelController = new ModelController(players, name, send, this, disconnectedUsers);
-        receive = new ServerAPI_COME(modelController);
+        modelTranslator = new ModelTranslator(players, name, send, this, disconnectedUsers);
+        receive = new ServerAPI_COME(modelTranslator);
         try {
             for(String p : playersInterfaces.keySet()){
                 if(playersInterfaces.get(p)!= null)
@@ -231,7 +272,7 @@ public class Room {
         }
         Thread thread1 = new Thread(() -> receive.loop());
         thread1.start();
-        modelController.initializeGameState();
+        modelTranslator.initializeGameState();
         System.out.println("game can now start");
     }
 
@@ -239,21 +280,20 @@ public class Room {
      * verifies if a player is contained in a room
      *
      * @param player the player's nickname
-     * @return a boolean
+     * @return true if the player is in the room, false otherwise
      */
     public boolean contains(String player){
         return players.contains(player);
     }
 
     /**
-     * Is full boolean.
      *
      * @return true if the room is full else false
      */
     public boolean isFull(){return full;}
 
     /**
-     * reconnects the disconnected player in the place he was disconnected from
+     * Reconnects the disconnected player in the place he was disconnected from
      *
      * @param playerID         the reconnecting player
      * @param handlerInterface the handler of the player
@@ -272,7 +312,7 @@ public class Room {
             //TODO handle exception
         }
 
-        if(modelController != null){
+        if(modelTranslator != null){
             try {
                 playersInterfaces.get(playerID).setReceiver(receive);
             } catch (RemoteException e) {
@@ -303,7 +343,7 @@ public class Room {
     }
 
     /**
-     * Ended.
+     * Ends the game by sending CloseARoomMessage.
      */
     public void ended() {
         //since the disconnection of the players is handled by the only thread unraveling messages to the room,
@@ -327,7 +367,7 @@ public class Room {
     }
 
     /**
-     * Quit game.
+     * Allows a player to quit the game.
      *
      * @param playerID the player id
      */
@@ -336,8 +376,8 @@ public class Room {
         disconnectedUsers.add(playerID);
         playersInterfaces.put(playerID, null);
         send.disconnectPlayer(playerID);
-        if(modelController!=null)
-            modelController.setPlayerInactive(playerID);
+        if(modelTranslator !=null)
+            modelTranslator.setPlayerInactive(playerID);
 
     }
 }

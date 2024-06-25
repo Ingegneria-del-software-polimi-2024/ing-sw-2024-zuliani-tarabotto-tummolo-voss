@@ -1,8 +1,7 @@
 package SharedWebInterfaces.Messages.MessagesFromClient.toModelController;
 
-import Server.ModelController;
-import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
-import SharedWebInterfaces.SharedInterfaces.ServerControllerInterface;
+import Server.ModelTranslator;
+import SharedWebInterfaces.SharedInterfaces.Traslator;
 
 /**
  * The type Draw card message.
@@ -21,13 +20,13 @@ public class DrawCardMessage implements MessageFromViewToModelController {
     }
 
     @Override
-    public void execute(ModelController controller) {
+    public void execute(ModelTranslator controller) {
         controller.drawCard(cardSource);
     }
 
     //ignore this
     @Override
-    public void execute(ControllerInterface controller) {
+    public void execute(Traslator controller) {
 
     }
 }

@@ -7,7 +7,7 @@ import static org.fusesource.jansi.Ansi.ansi;
  */
 public enum Element {
     /**
-     * The Mushrooms.
+     * Mushroom element represented by the symbol F
      */
     mushrooms(ansi().fg(196).a("F").reset().toString(),
             196,
@@ -37,7 +37,7 @@ public enum Element {
                     "\u255A\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255D"
             }),
     /**
-     * The Vegetals.
+     * Vegetals element represented by the symbol P.
      */
     vegetals(ansi().fg(46).a("P").reset().toString(),
             46,
@@ -64,7 +64,7 @@ public enum Element {
                     "\u255A\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255D"
             }),
     /**
-     * The Animals.
+     * Animals element represented by the symbol A.
      */
     animals(ansi().fg(45).a("A").reset().toString(),
             45,
@@ -91,7 +91,7 @@ public enum Element {
                     "\u255A\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255D"
             }),
     /**
-     * The Insects.
+     * Insects element represented by the symbol I.
      */
     insects(ansi().fg(129).a("I").reset().toString(),
             129,
@@ -118,23 +118,6 @@ public enum Element {
                     "\u255A\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255D"
             });
 
-
-    //MAI USATO DA RIVEDERE (FATTO DA GABRIEL)
-
-//    public Element calculateComplementar() {
-//        switch (this){
-//            case animals:
-//                return mushrooms;
-//            case mushrooms:
-//                return vegetals;
-//            case insects:
-//                return animals;
-//            case vegetals:
-//                return insects;
-//        }
-//        return null;
-//    }
-
     private final String stringValue;
     private final int color;
     private final String[] backFaceSymbol;
@@ -153,14 +136,14 @@ public enum Element {
     /**
      * Get string value string.
      *
-     * @return the string
+     * @return the string value
      */
     public String getStringValue(){return stringValue;}
 
     /**
-     * Get color int.
+     * Get color value.
      *
-     * @return the int
+     * @return the color value
      */
     public int getColor(){return color;}
 

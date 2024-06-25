@@ -43,7 +43,7 @@ public class Corner implements Serializable {
     /**
      * class constructor that creates a Corner containing an Element el
      *
-     * @param el Element
+     * @param el the element contained
      */
     public Corner(Element el){
         artifact = null;
@@ -52,9 +52,8 @@ public class Corner implements Serializable {
     }
 
     /**
-     * returns true if the Corner does not contain neither an Element nor an Artifact
      *
-     * @return Boolean boolean
+     * @return true if the Corner does not contain neither an Element nor an Artifact
      */
     public boolean isEmpty() {
         return element == null && artifact == null;
@@ -63,7 +62,7 @@ public class Corner implements Serializable {
     /**
      * Gets id.
      *
-     * @return the id
+     * @return the id of the corner
      */
 ///////////// GETTER METHODS /////////////////////////
     public int getId() { return id; }
@@ -71,7 +70,7 @@ public class Corner implements Serializable {
     /**
      * Sets id.
      *
-     * @param index the index
+     * @param index the index of the corner
      */
     public void setId(int index) {this.id = index;}
 
@@ -92,7 +91,7 @@ public class Corner implements Serializable {
     /**
      * Get is available boolean.
      *
-     * @return the boolean
+     * @return true if the corner is available (meaning it is not covered by another card)
      */
     public boolean getIsAvailable(){
         return isAvailable;

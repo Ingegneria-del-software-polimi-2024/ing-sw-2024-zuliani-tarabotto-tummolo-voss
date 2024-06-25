@@ -25,7 +25,10 @@ public enum Pawn {
      */
     blue();
 
-        private static List<Pawn> shuffledList = new ArrayList<>();
+    /**
+     * The constant shuffledList.
+     */
+    private static List<Pawn> shuffledList = new ArrayList<>();
 
     /**
      * Get random pawns list.
@@ -43,16 +46,19 @@ public enum Pawn {
         /////////////////// ONLY USED IN Controller and ControllerTest to directly ask the player which color he wants /////////////////////////////
 
 
-       private boolean isAvailable = true;
+    /**
+     * True if the pawn is available, false otherwise.
+     */
+    private boolean isAvailable = true;
 
 
         //public boolean getIsAvailable() {return isAvailable;}
 
 
     /**
-     * Sets is available.
+     * Sets isAvailable to false.
      */
-    public void setIsAvailable() {this.isAvailable = false;}
+    public void setFalseIsAvailable() {this.isAvailable = false;}
 
         //MAI USATO
 //        public static void printAvailablePawns() {

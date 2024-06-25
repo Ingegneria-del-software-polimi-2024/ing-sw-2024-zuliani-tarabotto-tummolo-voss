@@ -14,7 +14,7 @@ import java.rmi.RemoteException;
 public interface ServerHandlerInterface extends Remote{
 
     /**
-     * Send to server.
+     * Send to server, sends a message from the client to the server.
      *
      * @param message the message
      * @throws RemoteException the remote exception
@@ -23,7 +23,7 @@ public interface ServerHandlerInterface extends Remote{
     void sendToServer(MessageFromClient message)throws RemoteException;
 
     /**
-     * Notify changes.
+     * Send to client, sends a message from the server to the client.
      *
      * @param message the message
      * @throws RemoteException the remote exception
@@ -32,18 +32,18 @@ public interface ServerHandlerInterface extends Remote{
     void notifyChanges(MessageFromServer message)throws RemoteException;
 
     /**
-     * Receive from lobby.
+     * Receives a message from lobby.
      *
-     * @param msg the msg
-     * @throws RemoteException the remote exception
+     * @param msg the message
+     * @throws RemoteException when the message is not correctly received
      */
     void receiveFromLobby(MessageFromServer msg)throws RemoteException;
 
     /**
-     * Send to lobby.
+     * Sends a message to lobby.
      *
-     * @param msg the msg
-     * @throws RemoteException the remote exception
+     * @param msg the message
+     * @throws RemoteException when the message is not correctly sent
      */
     void sendToLobby(MessageToLobby msg) throws RemoteException;
 

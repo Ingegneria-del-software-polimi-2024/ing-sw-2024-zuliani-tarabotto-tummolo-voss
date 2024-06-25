@@ -1,8 +1,8 @@
 package SharedWebInterfaces.Messages.MessagesFromClient.toModelController;
 
-import Server.ModelController;
+import Server.ModelTranslator;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
-import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
+import SharedWebInterfaces.SharedInterfaces.Traslator;
 
 /**
  * The type Want to reconnect message.
@@ -29,12 +29,12 @@ public class I_WantToReconnectMessage implements MessageFromClient {
     }
 
     @Override
-    public void execute(ControllerInterface controller) {
+    public void execute(Traslator controller) {
 
     }
 
     @Override
-    public void execute(ModelController controller) {
+    public void execute(ModelTranslator controller) {
         controller.reconnect(playerID);
     }
 }

@@ -17,8 +17,14 @@ import java.io.InputStream;
  * The type Objective card.
  */
 public class ObjectiveCard  implements Card {
+    /**
+     * The id of the card
+     */
     @JsonProperty("id")
     private char id;
+    /**
+     * The type of objective belonging to the card
+     */
     @JsonProperty("objective")
     private Objective objective;
 
@@ -78,7 +84,7 @@ public class ObjectiveCard  implements Card {
      * based on the card's pointsPolicy the number of points granted by it is returned
      *
      * @param placementArea the placement area
-     * @return int int
+     * @return the points
      */
     public int countPoints(PlacementArea placementArea){
         return objective.countObjectivePoints(placementArea);
@@ -94,12 +100,13 @@ public class ObjectiveCard  implements Card {
     }
 
 
+////////////////////// GETTER METHODS //////////////////////////////////////////////
+
     /**
      * Gets id.
      *
      * @return the id
      */
-////////////////////// GETTER METHODS //////////////////////////////////////////////
     public int getId() { return id; }
 
     /////////////////////// TESTING RELATED METHODS ONLY ///////////////////////////////

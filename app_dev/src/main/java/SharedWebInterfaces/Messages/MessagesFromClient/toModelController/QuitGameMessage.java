@@ -1,7 +1,7 @@
 package SharedWebInterfaces.Messages.MessagesFromClient.toModelController;
 
-import Server.ModelController;
-import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
+import Server.ModelTranslator;
+import SharedWebInterfaces.SharedInterfaces.Traslator;
 
 /**
  * The type Quit game message.
@@ -19,11 +19,11 @@ public class QuitGameMessage implements MessageFromViewToModelController{
     }
 
     @Override
-    public void execute(ControllerInterface controller) {
+    public void execute(Traslator controller) {
     }
 
     @Override
-    public void execute(ModelController controller) {
+    public void execute(ModelTranslator controller) {
         controller.quitGame(playerID);
     }
 

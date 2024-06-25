@@ -1,8 +1,8 @@
 package Chat.MessagesFromClient;
 
-import Server.ModelController;
+import Server.ModelTranslator;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
-import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
+import SharedWebInterfaces.SharedInterfaces.Traslator;
 
 /**
  * The type Request chat history.
@@ -11,12 +11,12 @@ import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
 public class RequestChatHistory implements MessageFromClient {
     private String sender;
     @Override
-    public void execute(ControllerInterface controller) {
+    public void execute(Traslator controller) {
 
     }
 
     @Override
-    public void execute(ModelController controller) {
+    public void execute(ModelTranslator controller) {
         controller.sendChatHistory(sender);
     }
 

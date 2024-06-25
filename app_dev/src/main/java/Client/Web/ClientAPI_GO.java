@@ -10,7 +10,7 @@ import SharedWebInterfaces.WebExceptions.StartConnectionFailedException;
 import java.rmi.RemoteException;
 
 /**
- * The type Client api go, an interface to handle the sending of messages from the server.
+ * The type Client api go, an interface to handle the sending of messages to the server.
  */
 public class ClientAPI_GO {
     /**

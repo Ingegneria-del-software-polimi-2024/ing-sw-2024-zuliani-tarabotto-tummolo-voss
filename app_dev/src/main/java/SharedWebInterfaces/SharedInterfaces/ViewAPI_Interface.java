@@ -18,6 +18,7 @@ import java.util.List;
 
 /**
  * The interface View api interface.
+ * This interface is used to define the methods that the server can perform on the view through the messages sent.
  */
 public interface ViewAPI_Interface extends GeneralAPI_Interface {
 
@@ -88,7 +89,7 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
     void setStarterCard(PlayableCard starterCard);
 
     /**
-     * Sets hand.
+     * Sets player's hand.
      *
      * @param hand the hand
      */
@@ -107,7 +108,6 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
      *
      * @param secretObjective the secret objective
      */
-// se player == client allora il secret objective del client è settato, sennò viene aggiornato quello del client corrispondente a player
     void setSecretObjective(ObjectiveCard secretObjective);
 
     /**
@@ -199,7 +199,6 @@ public interface ViewAPI_Interface extends GeneralAPI_Interface {
     void setCanBePlaced(boolean[] canBePlaced);
 
     /**
-     * Gets my turn parameter.
      *
      * @return true when it's player's turn else false
      */

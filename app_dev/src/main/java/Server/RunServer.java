@@ -6,6 +6,7 @@ import SharedWebInterfaces.WebExceptions.StartConnectionFailedException;
 
 /**
  * The type Run server.
+ * This class is the entry point of the server application.
  */
 public class RunServer {
     /**

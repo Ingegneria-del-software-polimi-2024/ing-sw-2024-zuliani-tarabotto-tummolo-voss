@@ -94,7 +94,7 @@ class ControllerTest {
             gameState.playStarterCard(player);
             //selecting pawn
             Pawn pawn = Pawn.valueOf(sc.next());
-            pawn.setIsAvailable();
+            pawn.setFalseIsAvailable();
             gameState.setPlayerPawnColor(pawn);
             gameState.nextPlayer();
         }

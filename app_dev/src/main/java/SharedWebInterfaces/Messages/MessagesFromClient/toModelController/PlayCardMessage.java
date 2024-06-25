@@ -1,9 +1,7 @@
 package SharedWebInterfaces.Messages.MessagesFromClient.toModelController;
 
-import Server.ModelController;
-import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.MessageFromViewToModelController;
-import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
-import SharedWebInterfaces.SharedInterfaces.ServerControllerInterface;
+import Server.ModelTranslator;
+import SharedWebInterfaces.SharedInterfaces.Traslator;
 
 /**
  * The type Play card message.
@@ -32,13 +30,13 @@ public class PlayCardMessage implements MessageFromViewToModelController {
 
 
     @Override
-    public void execute(ModelController controller) {
+    public void execute(ModelTranslator controller) {
         controller.playCard(card, x, y, faceSide);
     }
 
     //ignore this
     @Override
-    public void execute(ControllerInterface controller) {
+    public void execute(Traslator controller) {
 
     }
 }

@@ -10,14 +10,25 @@ import java.rmi.RemoteException;
 
 /**
  * The type First socket manager.
+ * This class is responsible for the first connection of the client to the server. It listens for new connections
+ * and creates a new handler for each client that connects.
  */
 public class FirstSocketManager implements Runnable {
+    /**
+     * The Lobby interface.
+     */
     private Lobby lobby;
+    /**
+     * The instance of the class, it is a singleton
+     */
     private static FirstSocketManager instance;
+    /**
+     * The port of the server
+     */
     private int port;
     /**
-     * class constructor
-     * @param lobby the lobby-controller
+     * Class constructor
+     * @param lobby the lobby interface
      * @param port the port of the server
      * @throws RemoteException when an error in setting of the connection occurs
      */
@@ -27,10 +38,10 @@ public class FirstSocketManager implements Runnable {
     }
 
     /**
-     * the class is a singleton, returns the single instance of the class. See First_RMI_Manager constructor
+     * The class is a singleton, returns the single instance of the class. See First_RMI_Manager constructor
      *
-     * @param lobby the lobby
-     * @param port  the port
+     * @param lobby the lobby interface
+     * @param port  the port of the server
      * @return the first socket manager
      */
     public static FirstSocketManager getInstance(Lobby lobby, int port){
@@ -40,7 +51,7 @@ public class FirstSocketManager implements Runnable {
         return instance;
     }
     /**
-     * this method starts to listen for new connections, in case a new connection is found, a new handler for that
+     * This method starts to listen for new connections, in case a new connection is found, a new handler for that
      * client is created
      */
     public void run() {

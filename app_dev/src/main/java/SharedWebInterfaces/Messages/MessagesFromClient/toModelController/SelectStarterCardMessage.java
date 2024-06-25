@@ -1,22 +1,20 @@
 package SharedWebInterfaces.Messages.MessagesFromClient.toModelController;
 
-import Server.ModelController;
-import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.MessageFromViewToModelController;
-import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
-import SharedWebInterfaces.SharedInterfaces.ServerControllerInterface;
+import Server.ModelTranslator;
+import SharedWebInterfaces.SharedInterfaces.Traslator;
 
 /**
  * The type Select starter card message.
  */
 public class SelectStarterCardMessage implements MessageFromViewToModelController {
     @Override
-    public void execute(ModelController controller) {
+    public void execute(ModelTranslator controller) {
         //good method
         System.out.println("HI");
     }
 
     @Override
-    public void execute(ControllerInterface controller) {
+    public void execute(Traslator controller) {
 
     }
 }

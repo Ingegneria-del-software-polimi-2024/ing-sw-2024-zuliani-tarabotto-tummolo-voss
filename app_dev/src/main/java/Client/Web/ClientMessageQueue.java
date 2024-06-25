@@ -11,6 +11,9 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  * A queue for messages directed to the client
  */
 public class ClientMessageQueue {
+    /**
+     * The message queue.
+     */
     private ConcurrentLinkedQueue<MessageFromServer> messageQueue;
 
     /**
