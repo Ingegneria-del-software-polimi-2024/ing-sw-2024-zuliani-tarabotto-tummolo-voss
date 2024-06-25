@@ -407,13 +407,6 @@ public class ViewModel {
         ui.displayNewTextMessage(message);
     }
 
-    /**
-     * used by the client to send a ChatMessage to the server
-     * @param message
-     */
-    public void sendChatMessage(ChatMessage message){
-        clientAPIGo.sendToServer( message );
-    }
 
     /**
      * substitutes the current chat history
@@ -484,5 +477,9 @@ public class ViewModel {
 
     public void sendChatMessage(String content){
         clientAPIGo.sendToServer(new ChatMessage(playerId, content));
+    }
+
+    public void sendPrivateChatMessage(String content, String receiver){
+        clientAPIGo.sendToServer(new ChatMessage(playerId, content, receiver));
     }
 }

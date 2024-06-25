@@ -89,9 +89,10 @@ public class ObjectiveCard  implements Card {
     public int getId() { return id; }
 
     /////////////////////// TESTING RELATED METHODS ONLY ///////////////////////////////
+    /*
     public void printCard() {
         System.out.println("Card ID: " + getId());
         objective.printObjective();
         System.out.println();
-    }
+    }*/
 }

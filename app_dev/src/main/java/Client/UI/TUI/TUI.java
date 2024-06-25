@@ -48,7 +48,7 @@ public class TUI implements UI {
         cb = new CardBuilder();
         dispositionPrinter = new DispositionPrinter(cb);
         loginPrinter = new LoginPrinter();
-        handPrinter = new HandPrinter();
+        handPrinter = new HandPrinter(cb);
         objectivesPrinter = new ObjectivesPrinter();
         drawCardPrinter = new DrawCardPrinter(cb);
         lock = new Object();
@@ -832,7 +832,11 @@ public class TUI implements UI {
         System.out.print(ansi().fg(color).a("––––––––––CHAT––––––––––\n").reset());
         List<ChatMessage> history = view.getChatHistory();
         for(int i = 0; i < history.size(); i++){
-            System.out.print(ansi().fg(color).a("~> "+history.get(i).getSender()+": ").reset());
+            if(history.get(i).getReceiver() == null){
+                System.out.print(ansi().fg(color).a("~> "+history.get(i).getSender()+": ").reset());
+            }else{
+                System.out.print(ansi().fg(color).a("~> [Private]"+history.get(i).getSender()+": ").reset());
+            }
             System.out.println(history.get(i).getContent()+"\n");
         }
         System.out.print(ansi().fg(color).a("~> Insert your message or type q to quit:\n").reset());

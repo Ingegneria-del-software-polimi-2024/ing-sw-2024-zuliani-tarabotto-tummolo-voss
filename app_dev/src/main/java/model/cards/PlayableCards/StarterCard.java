@@ -131,6 +131,7 @@ public class StarterCard extends PlayableCard{
 
 
     ///////////////////// TESTING RELATED METHODS ONLY /////////////////////////////////////
+
     @Override
     public void printCard() {
         System.out.println("Card ID: " + getId());

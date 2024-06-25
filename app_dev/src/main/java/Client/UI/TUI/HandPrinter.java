@@ -7,13 +7,29 @@ import java.util.List;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
+/**
+ * cards with methods for printing the hand panel on console
+ */
 public class HandPrinter {
-    private CardBuilder cb = new CardBuilder();//TODO inizializzare il CardBuilder in TUI e poi passarlo come parametro a tutti i printer
+    private CardBuilder cb;
+    /**
+     * List of PlayableCard containing the three cards in the player's hand
+     */
     private List<PlayableCard> hand;
     private final int color = 226;
+    /**
+     * List of Strings containing representing the player's hand
+     */
     List<String> handField;
 
+    public HandPrinter(CardBuilder cb){
+        this.cb = cb;
+    }
 
+    /**
+     * directly prints on console the three cards in the player's hand by showing both the front and the back sides
+     * @param hand List of PlayableCard containing the three cards in the player's hand
+     */
     public void print(List<PlayableCard> hand){
         this.hand = hand;
 
@@ -39,6 +55,9 @@ public class HandPrinter {
         System.out.println("\u255A\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255D");
     }
 
+    /**
+     * for each one of the six rows that compose a card face, the method calls the CardBuilder corresponding printing method
+     */
     private void printFaces(){
 
         for(int i = 0; i < 6; i++){
@@ -47,7 +66,11 @@ public class HandPrinter {
     }
 
 
-
+    /**
+     * method only used in the selection of the face side for the starter card.
+     * the method prints on console the player's StarterCard.
+     * @param card the player's StarterCard
+     */
     public void printStarterCard(PlayableCard card){
 
         System.out.println("\u2554\u2550\u2550\u2550"+ ansi().fg(color).bold().a(" STARTER CARD ").reset() + "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557");
@@ -69,13 +92,11 @@ public class HandPrinter {
     }
 
 
-
-
-
-
-
-
-    ///////////////////////////////////////////////////////// Test //////////////////////////////////////////////////////////////////
+    /**
+     * builds a List of Strings containing the player's hand cards, the List is then returned
+     * @param hand List of PlayableCard containing the three cards in the player's hand
+     * @return List of Strings containing the player's hand panel
+     */
     public List<String> getHandField(List<PlayableCard> hand){
         this.hand = hand;
         this.handField = new ArrayList<>();
@@ -104,8 +125,11 @@ public class HandPrinter {
         return handField;
     }
 
+    /**
+     * for each one of the six rows that compose a card face, the method calls the CardBuilder corresponding printing method and adds the
+     * Strings returned by the CardBuilder to the handField List of Strings
+     */
     private void getFaces(){
-
         for(int i = 0; i < 6; i++){
             handField.add("\u2551     " + cb.buildLine(i,hand.get(0)) + "      " + cb.buildLine(i,hand.get(1)) + "      " + cb.buildLine(i,hand.get(2)) + "     \u2551");
         }

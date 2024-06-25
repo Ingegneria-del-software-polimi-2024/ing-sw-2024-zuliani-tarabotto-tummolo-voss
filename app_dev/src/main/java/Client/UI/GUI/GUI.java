@@ -346,7 +346,7 @@ public class  GUI  implements UI {
 
     @Override
     public void displayNewTextMessage(ChatMessage message) {
-        chatPanel.updateChat(message.getSender(), message.getContent());
+        chatPanel.updateChat(message.getSender(), message.getContent(), message.getReceiver());
     }
 
 

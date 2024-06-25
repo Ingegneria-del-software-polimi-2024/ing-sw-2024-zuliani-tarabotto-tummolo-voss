@@ -1,12 +1,13 @@
 package Client.UI.TUI;
 
 import model.cards.PlayableCards.PlayableCard;
-import model.cards.PlayableCards.ResourceCard;
-
 import java.util.List;
-
 import static org.fusesource.jansi.Ansi.ansi;
 
+
+/**
+ * class with methods for printing the draw card panel on console
+ */
 public class DrawCardPrinter {
 
     private CardBuilder cb;
@@ -15,6 +16,14 @@ public class DrawCardPrinter {
         this.cb = cb;
 
     }
+
+    /**
+     * prints the panel containing the cards that can be drawn by the player
+     * @param gold GoldCard on top of the GoldDeck
+     * @param resource ResourceCard on top of the ResourceDeck
+     * @param openGold List containing the two openGold cards
+     * @param openResource List containing the two openResource cards
+     */
     public void print(PlayableCard gold, PlayableCard resource, List<PlayableCard> openGold, List<PlayableCard> openResource){
         int  color = 226;
         System.out.println("\u2554\u2550\u2550\u2550"+ ansi().fg(color).bold().a(" DRAWABLE CARDS ").reset() + "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557");
@@ -34,6 +43,11 @@ public class DrawCardPrinter {
         System.out.println("\u255A\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255D");
     }
 
+    /**
+     * prints on console the back face of the GoldCard on top of the GoldDeck and the two openGold cards facing up
+     * @param gold the GoldCard on top of the GoldDeck
+     * @param openGold a List of size two containing the openGold Cards
+     */
     private void printFaces1(PlayableCard gold, List<PlayableCard> openGold){
 
        if (openGold.isEmpty()){
@@ -52,6 +66,11 @@ public class DrawCardPrinter {
         }
     }
 
+    /**
+     * prints on console the back face of the GoldCard on top of the GoldDeck and the two openGold cards facing up
+     * @param resource the ResourceCard on top of the ResourceDeck
+     * @param openResource a List of size two containing the openResource Cards
+     */
     private void printFaces2(PlayableCard resource, List<PlayableCard> openResource){
         if(openResource.get(0) != null) openResource.get(0).setFaceSide(true);
         if(openResource.get(1) != null) openResource.get(1).setFaceSide(true);
@@ -71,6 +90,13 @@ public class DrawCardPrinter {
         }
     }
 
+    /**
+     * if the PlayableCard c is null, then a line of white spaces is returned, meaning that the cards in that deck are finished.
+     * if c is not null, then the buildLine method in CardBuilder is called
+     * @param i the row that has to be printed
+     * @param c the corresponding PlayableCard
+     * @return
+     */
     private String buildLine(int i, PlayableCard c){
         if(c == null) return "               ";
         else return cb.buildLine(i, c);
