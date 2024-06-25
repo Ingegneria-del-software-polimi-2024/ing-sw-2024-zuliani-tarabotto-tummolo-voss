@@ -66,7 +66,7 @@ Regardless of the operating system, you must have installed the following progra
    git clone https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss
    ```
 
-    ```
+
 2. execute the server and a client:
     ```shell
     java -jar server.jar
