@@ -114,6 +114,8 @@ public class ResourceCard extends PlayableCard {
     @Override
     public Element[] getBackFaceCorners() { return null; }
 
+
+
     /////////////////// TESTED RELATED ONLY METHODS ////////////////////////////////////
 //    public void printCorner(Corner c) {
 //        if (c.getElement() != null) System.out.println("Corner_" + c.getId() + ": " + c.getElement());

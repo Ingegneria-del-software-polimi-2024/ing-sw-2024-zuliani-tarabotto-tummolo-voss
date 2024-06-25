@@ -16,8 +16,10 @@ import Server.Web.Lobby.Room;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 /*
@@ -324,7 +326,8 @@ public class ModelController implements ServerControllerInterface {
             initialPlayer = playerID;
         gameState.reconnect(playerID);
         //if a player reconnects we also automatically send him the chat history
-        modelListener.sendChatHistory(playerID, new ChatHistoryMessage(chatHistory.getHistory(), playerID));
+        //modelListener.sendChatHistory(playerID, new ChatHistoryMessage(chatHistory.getHistory(), playerID));
+        sendChatHistory(playerID);
         System.out.println("RECONNECTION COMPLETE");
     }
 
@@ -332,10 +335,26 @@ public class ModelController implements ServerControllerInterface {
 
     public void enqChatMsg(ChatMessage message){
         Timestamp deliveryTime = chatHistory.add(message);
-        modelListener.broadcastChatMessage(new ChatUpdateMessage(message));
+        if(message.getReceiver() == null) {
+            modelListener.broadcastChatMessage(new ChatUpdateMessage(message));
+        } else {
+            modelListener.sendPrivateChatMessage(new ChatUpdateMessage(message), message.getReceiver());
+            modelListener.sendPrivateChatMessage(new ChatUpdateMessage(message), message.getSender());
+        }
+
     }
 
     public void sendChatHistory(String player){
-        modelListener.sendChatHistory(player, new ChatHistoryMessage(chatHistory.getHistory(), player));
+        ArrayList<ChatMessage> history = chatHistory.getHistory();
+
+        history = (ArrayList<ChatMessage>) history.stream()
+                .filter(m -> (m.getReceiver() == null || m.getReceiver().equals(player) || m.getSender().equals(player)))
+                .collect(Collectors.toList());
+
+        for(ChatMessage msg : history){
+            System.out.println(msg.getReceiver() + " receiver");
+            System.out.println(msg.getSender() + " sender");
+        }
+        modelListener.sendChatHistory(player, new ChatHistoryMessage(history, player));
     }
 }

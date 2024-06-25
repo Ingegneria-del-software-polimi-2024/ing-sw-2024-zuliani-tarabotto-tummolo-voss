@@ -10,7 +10,7 @@ public class ChatHistory {
     private final ArrayList<ChatMessage> history;
 
     public ChatHistory() {
-        this.history = new ArrayList<ChatMessage>();
+        this.history = new ArrayList<>();
     }
 
     public Timestamp add(ChatMessage msg){
@@ -21,8 +21,10 @@ public class ChatHistory {
     }
 
     public ArrayList<ChatMessage> getHistory(){
-        ArrayList<ChatMessage> copy = new ArrayList<ChatMessage>();
+        ArrayList<ChatMessage> copy = new ArrayList<>();
         for(ChatMessage msg : history) {
+            System.out.println(msg.getReceiver() + " receiver");
+            System.out.println(msg.getSender() + " sender");
             copy.add(msg.clone());
         }
         return copy;

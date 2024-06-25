@@ -13,24 +13,12 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-
-/**
- * Represents an ObjectiveCard which is a type of Card.
- * ObjectiveCards have a specific objective that grants points based on the placement area.
- */
 public class ObjectiveCard  implements Card {
-
-    /**
-     * The ID of the ObjectiveCard.
-     */
     @JsonProperty("id")
     private char id;
-
-    /**
-     * The objective associated with the ObjectiveCard.
-     */
     @JsonProperty("objective")
     private Objective objective;
+
 
 
     /**
@@ -101,9 +89,10 @@ public class ObjectiveCard  implements Card {
     public int getId() { return id; }
 
     /////////////////////// TESTING RELATED METHODS ONLY ///////////////////////////////
-//    public void printCard() {
-//        System.out.println("Card ID: " + getId());
-//        objective.printObjective();
-//        System.out.println();
-//    }
+    /*
+    public void printCard() {
+        System.out.println("Card ID: " + getId());
+        objective.printObjective();
+        System.out.println();
+    }*/
 }

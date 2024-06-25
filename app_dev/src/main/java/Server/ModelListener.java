@@ -420,6 +420,14 @@ public class ModelListener {//TODO Handle correctly the exceptions
         }
     }
 
+    public void sendPrivateChatMessage(ChatUpdateMessage message, String receiver){
+        try{
+            serverAPI.notifyChanges(message, receiver);
+        }catch (MsgNotDeliveredException e){
+            throw new RuntimeException(e);
+        }
+    }
+
     public void sendChatHistory(String player, ChatHistoryMessage msg){
         try {
             serverAPI.notifyChanges(msg, player);

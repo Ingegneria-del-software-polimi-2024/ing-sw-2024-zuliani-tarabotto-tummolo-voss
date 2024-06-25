@@ -9,10 +9,18 @@ import static org.fusesource.jansi.Ansi.ansi;
 
 /**
  * Class responsible for building each card, the building method is sensible to whether the card has a covered corner or not
- * The class has a different method for each row in the card
+ * The class has a different method for each row of the card
+ * The cards are 6 rows high and 15 characters wide
  */
 public class CardBuilder {
 
+    /**
+     * based on the "row" parameter, it calls a different building method which will return a line containing the specified "row"
+     * for the specified "card"
+     * @param row the row of the card that has to be built
+     * @param card the corresponding PlayableCard
+     * @return a line containing the desired row of characters
+     */
     public String buildLine(int row, PlayableCard card){
         String line = new String();
         switch (row) {
@@ -39,6 +47,11 @@ public class CardBuilder {
     }
 
 
+    /**
+     * builds the first row of the card.
+     * @param card the corresponding PlayableCard
+     * @return a line containing the desired characters
+     */
     public String buildTop(PlayableCard card){
         String line = new String();
 
@@ -66,12 +79,16 @@ public class CardBuilder {
     }
 
 
+    /**
+     * builds the second row of the card.
+     * @param card the corresponding PlayableCard
+     * @return a line containing the desired characters
+     */
     public String buildSecondRow(PlayableCard card){
 
         String line;
         //LEFT CORNER
         line = leftCornersBuilder(0, card);
-
 
         //CENTER
         if(card instanceof StarterCard && card.getFaceSide()) line += buildStarterBackSecondRow(card);
@@ -84,6 +101,12 @@ public class CardBuilder {
         return line;
     }
 
+
+    /**
+     * builds the third row of the card.
+     * @param card the corresponding PlayableCard
+     * @return a line containing the desired characters
+     */
     public String buildThirdRow(PlayableCard card) {
         int color;
         if(card instanceof StarterCard){
@@ -113,6 +136,11 @@ public class CardBuilder {
     }
 
 
+    /**
+     * builds the fourth row of the card.
+     * @param card the corresponding PlayableCard
+     * @return a line containing the desired characters
+     */
     public String buildFourthRow(PlayableCard card){
         int color;
         if(card instanceof StarterCard){
@@ -141,6 +169,12 @@ public class CardBuilder {
         return line;
     }
 
+
+    /**
+     * builds the fifth row of the card.
+     * @param card the corresponding PlayableCard
+     * @return a line containing the desired characters
+     */
     public String buildFifthRow(PlayableCard card){
         String line;
         //LEFT CORNER
@@ -156,6 +190,12 @@ public class CardBuilder {
         return line;
     }
 
+
+    /**
+     * builds the sixth row of the card.
+     * @param card the corresponding PlayableCard
+     * @return a line containing the desired characters
+     */
     public String buildBottom(PlayableCard card){
         int color;
         if(card instanceof StarterCard){
@@ -182,7 +222,12 @@ public class CardBuilder {
         return line;
     }
 
-    //
+    /**
+     * Method that returns a line containing the correct representation of the card's PointsPolicy.
+     * Method called by the buildSecondRow method only if the card is facing up and if it's not a StarterCard.
+     * @param card the corresponding PlayableCard
+     * @return a line containing the PointsPolicy representation
+     */
     private String pointsBuilder(PlayableCard card){
         String line = new String();
         if(card.getPoints() != null){
@@ -195,6 +240,12 @@ public class CardBuilder {
         return line;
     }
 
+    /**
+     * Method that returns a line containing the correct representation of the card's PlacementConstraint.
+     * Method called by the buildFifthRow method only if the card is facing up.
+     * @param card the corresponding PlayableCard
+     * @return a line containing the PlacementConstraint representation
+     */
     private String constraintBuilder(PlayableCard card) {
         String line = "";
         int i = 0;
@@ -218,6 +269,13 @@ public class CardBuilder {
         return line;
     }
 
+    /**
+     * Returns a line containing the representation of the specified card's left Corner.
+     * If the Corner is covered by another card, then the line returned will be empty
+     * @param corner the index of the specific card's Corner
+     * @param card the corresponding PlayableCard
+     * @return line containing the Corner representation
+     */
     private String leftCornersBuilder(int corner, PlayableCard card){
         int color;
         if(card instanceof StarterCard){
@@ -237,6 +295,14 @@ public class CardBuilder {
         return line;
     }
 
+
+    /**
+     * Returns a line containing the representation of the specified card's right Corner.
+     * If the Corner is covered by another card, then the line returned will be empty
+     * @param corner the index of the specific card's Corner
+     * @param card the corresponding PlayableCard
+     * @return line containing the Corner representation
+     */
     private String rightCornersBuilder(int corner, PlayableCard card){
         int color;
         if(card instanceof StarterCard){
@@ -256,10 +322,24 @@ public class CardBuilder {
         return line;
     }
 
+
+    /**
+     * calls the Element's method that returns the specified row of the element's TUI representation
+     * @param element
+     * @param row
+     * @return
+     */
     private String backFaceSymbolBuilder(Element element, int row){
         return element.getBackFaceSymbol(row);
     }
 
+
+    /**
+     * Method called when a StarterCard is displayed face down and its second row is being printed.
+     * Depending on how many and which blocked elements the StarterCard has, this method returns a different line
+     * @param card corresponding StarterCard
+     * @return
+     */
     private String buildStarterBackSecondRow(PlayableCard card){
         String line = "";
         if(card.getBlockedElements().length == 3){
@@ -268,6 +348,12 @@ public class CardBuilder {
         return "         ";
     }
 
+    /**
+     * Method called when a StarterCard is displayed face down and its third row is being printed.
+     * Depending on how many and which blocked elements the StarterCard has, this method returns a different line
+     * @param card corresponding StarterCard
+     * @return
+     */
     private String buildStarterBackThirdRow(PlayableCard card){
         String line = "";
         if(card.getBlockedElements().length == 3){
@@ -276,6 +362,12 @@ public class CardBuilder {
         return "    " + card.getBlockedElements()[0].getStringValue() + "    ";
     }
 
+    /**
+     * Method called when a StarterCard is displayed face down and its fourth row is being printed.
+     * Depending on how many and which blocked elements the StarterCard has, this method returns a different line
+     * @param card corresponding StarterCard
+     * @return
+     */
     private String buildStarterBackFourthRow(PlayableCard card){
         String line = "";
         if(card.getBlockedElements().length == 3){

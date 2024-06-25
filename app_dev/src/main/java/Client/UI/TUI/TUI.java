@@ -48,7 +48,7 @@ public class TUI implements UI {
         cb = new CardBuilder();
         dispositionPrinter = new DispositionPrinter(cb);
         loginPrinter = new LoginPrinter();
-        handPrinter = new HandPrinter();
+        handPrinter = new HandPrinter(cb);
         objectivesPrinter = new ObjectivesPrinter();
         drawCardPrinter = new DrawCardPrinter(cb);
         lock = new Object();
@@ -655,7 +655,7 @@ public class TUI implements UI {
                     if(input.equals("q")){
                         closeChat();
                     }else{
-                        view.sendChatMessage(input);
+                        sendMessage(input);
                     }
                 }else if(input.equals("--chat")){
                     Command c = commandMap.get(input);
@@ -688,6 +688,34 @@ public class TUI implements UI {
         }
     }
 
+
+    private void sendMessage(String input){
+        String receiver;
+        String content;
+        if(input.startsWith("@")){
+            receiver = extractWordAfterAt(input);
+            content = input.substring(receiver.length() + 1).trim();
+            view.sendPrivateChatMessage(content, receiver);
+        }else{
+            view.sendChatMessage(input);
+        }
+    }
+
+    private String extractWordAfterAt(String line) {
+        // Remove the @ character and trim leading spaces
+        String trimmedLine = line.substring(1).trim();
+
+        // Find the first space to isolate the word
+        int spaceIndex = trimmedLine.indexOf(' ');
+
+        if (spaceIndex == -1) {
+            // No spaces, so the entire trimmedLine is the word
+            return trimmedLine;
+        } else {
+            // Extract the word before the first space
+            return trimmedLine.substring(0, spaceIndex);
+        }
+    }
 
 
     private Integer parseInt(){
@@ -832,7 +860,16 @@ public class TUI implements UI {
         System.out.print(ansi().fg(color).a("––––––––––CHAT––––––––––\n").reset());
         List<ChatMessage> history = view.getChatHistory();
         for(int i = 0; i < history.size(); i++){
-            System.out.print(ansi().fg(color).a("~> "+history.get(i).getSender()+": ").reset());
+            String sender;
+            if(history.get(i).getSender().equals(view.getPlayerId())) sender = "You";
+            else sender = history.get(i).getSender();
+            if(history.get(i).getReceiver() == null){
+                System.out.print(ansi().fg(color).a("~> "+ sender +": ").reset());
+            }else if(history.get(i).getReceiver().equals(view.getPlayerId())){
+                System.out.print(ansi().fg(color).a("~> [Private] "+ sender +": ").reset());
+            }else {
+                System.out.print(ansi().fg(color).a("~> [To " + history.get(i).getReceiver()+ "] "+ sender +": ").reset());
+            }
             System.out.println(history.get(i).getContent()+"\n");
         }
         System.out.print(ansi().fg(color).a("~> Insert your message or type q to quit:\n").reset());

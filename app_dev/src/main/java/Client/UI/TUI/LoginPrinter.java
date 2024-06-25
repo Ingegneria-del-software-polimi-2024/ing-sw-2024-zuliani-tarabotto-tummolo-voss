@@ -1,16 +1,17 @@
 package Client.UI.TUI;
 
-
-import java.util.Scanner;
-
 import static org.fusesource.jansi.Ansi.ansi;
 
-public class LoginPrinter {
-    public void print(){
-        printTitle();
-    }
 
-    private static void printTitle(){
+/**
+ * class with method for printing the Codex Naturalis title on console
+ */
+public class LoginPrinter {
+
+    /**
+     * prints the game title
+     */
+    public void print(){
         System.out.println(ansi().fg(226).a(
 
         " ██████╗ ██████╗ ██████╗ ███████╗██╗  ██╗    ███╗   ██╗ █████╗ ████████╗██╗   ██╗██████╗  █████╗ ██╗     ██╗███████╗\n" +
