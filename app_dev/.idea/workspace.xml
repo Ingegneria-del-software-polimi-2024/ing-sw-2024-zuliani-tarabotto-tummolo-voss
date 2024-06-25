@@ -10,28 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a85c2ef2-4743-4d12-8336-27ef59fd799c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Chat/ChatHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Chat/ChatHistory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Chat/MessagesFromClient/ChatMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Chat/MessagesFromClient/ChatMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/chat/ChatPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/chat/ChatPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/CardBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/CardBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/DispositionPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/DispositionPrinter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/DrawCardPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/DrawCardPrinter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/HandPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/HandPrinter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/LoginPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/LoginPrinter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/ObjectivesPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/ObjectivesPrinter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/TUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/TUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/test.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/View/ViewAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/View/ViewAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/View/ViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/View/ViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/ModelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ModelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/ModelListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ModelListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/RunDeckCreation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/ObjectiveCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/ObjectiveCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/PlayableCards/ResourceCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/PlayableCards/ResourceCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/PlayableCards/StarterCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/PlayableCards/StarterCard.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +105,7 @@
       <recent name="model.lobby" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.run gui">
+  <component name="RunManager" selected="Application.RunTUI_Client">
     <configuration name="Provetta" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Provetta" />
       <module name="Ing_sw_proj" />
