@@ -18,7 +18,7 @@ import java.util.Map;
  * Represents a GoldCard, which is a type of PlayableCard with specific properties
  * such as blocked elements and placement constraints.
  */
-public class GoldCard extends PlayableCard{
+public class GoldCard extends PlayableCard {
 
     /**
      * The element that is blocked by this GoldCard.
@@ -44,7 +44,7 @@ public class GoldCard extends PlayableCard{
      * @return GoldCard gold card
      * @throws Exception the exception
      */
-    public  static GoldCard parse(int id)  throws Exception {
+    public static GoldCard parse(int id) throws Exception {
         int targetId = id; // ID to search for
 
         try {
@@ -82,7 +82,7 @@ public class GoldCard extends PlayableCard{
 
                 return goldenCard;
 
-            }else {
+            } else {
                 System.out.println("Object with ID " + targetId + " not found.");
             }
         } catch (
@@ -100,39 +100,53 @@ public class GoldCard extends PlayableCard{
      * @return the points counted.
      */
     @Override
-    public int countPoints (PlacementArea placementArea) {
+    public int countPoints(PlacementArea placementArea) {
         return points.count(placementArea);
     }
 
 
-
     //////////////// GETTER METHODS ////////////////////////////////
     @Override
-    public Element getBlockedElement() { return blockedElement; }
+    public Element getBlockedElement() {
+        return blockedElement;
+    }
+
     @Override
-    public Points getPoints () { return points; }
-    public Map<Element, Integer> getPlacementConstraint () { return Collections.unmodifiableMap(placementConstraint);}
+    public Points getPoints() {
+        return points;
+    }
+
+    public Map<Element, Integer> getPlacementConstraint() {
+        return Collections.unmodifiableMap(placementConstraint);
+    }
 
     /**
      * IGNORE THIS METHOD(needed for code implementation)
+     *
      * @return null
      */
     @Override
-    public Element[] getBackFaceCorners() { return null; }
+    public Element[] getBackFaceCorners() {
+        return null;
+    }
+
     /**
      * IGNORE THIS METHOD(needed for code implementation)
+     *
      * @return null
      */
     @Override
-    public Element[] getBlockedElements(){ return null; }
+    public Element[] getBlockedElements() {
+        return null;
+    }
 
 
     /**
      * Print card.
      */
 ///////////////////// FOR TESTING PURPOSES ONLY METHODS //////////////////////////////
-    @Override
-    public void printCard() {
+//    @Override
+//    public void printCard() {
 //        System.out.println("Card ID: " + getId());
 //
 //        //prints the front face of the card
@@ -144,13 +158,13 @@ public class GoldCard extends PlayableCard{
 //        //prints the back face of the card
 //        System.out.println("BACK FACE");
 //        System.out.println("Blocked element: " + getBlockedElement());
-
-    }
+//
+//    }
 //    public void printCorner(Corner c) {
 //        if (c.getElement() != null) System.out.println("Corner_" + c.getId() + ": " + c.getElement());
 //        else if (c.getArtifact() != null) System.out.println("Corner_" + c.getId() + ": " + c.getArtifact());
 //        else System.out.println("Corner_" + c.getId() + ": empty");
 //    }
 
-
+}
 
