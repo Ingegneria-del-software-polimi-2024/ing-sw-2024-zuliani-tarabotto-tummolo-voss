@@ -2,8 +2,6 @@
 
 <img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/cover.png?raw=true" width="260" align="right" />
 
-Eriantys Board Game is the final test of **"Software Engineering"** course of **"Computer Science Engineering"** held at Politecnico di Milano (2021/2022).
-
 **Teacher**: Gianpaolo Cugola
 
 
