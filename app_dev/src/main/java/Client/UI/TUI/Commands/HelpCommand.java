@@ -2,6 +2,9 @@ package Client.UI.TUI.Commands;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
+/**
+ * The type Help command.
+ */
 public class HelpCommand implements Command{
 
     private final String name = "--help";

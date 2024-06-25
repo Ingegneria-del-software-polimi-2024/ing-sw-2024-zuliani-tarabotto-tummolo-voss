@@ -4,6 +4,9 @@ import Server.ModelController;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
 
+/**
+ * The type Request chat history.
+ */
 public class RequestChatHistory implements MessageFromClient {
     private String sender;
     @Override
@@ -16,6 +19,11 @@ public class RequestChatHistory implements MessageFromClient {
         controller.sendChatHistory(sender);
     }
 
+    /**
+     * Instantiates a new Request chat history.
+     *
+     * @param sender the sender
+     */
     public RequestChatHistory(String sender) {
         this.sender = sender;
     }

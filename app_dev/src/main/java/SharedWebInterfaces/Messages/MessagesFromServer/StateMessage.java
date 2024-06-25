@@ -3,10 +3,18 @@ package SharedWebInterfaces.Messages.MessagesFromServer;
 import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
 import model.GameState.TurnState;
 
+/**
+ * The type State message.
+ */
 public class StateMessage implements MessageFromServer{
 
     private TurnState state;
 
+    /**
+     * Instantiates a new State message.
+     *
+     * @param state the state
+     */
     public StateMessage(TurnState state) {
         this.state = state;
     }

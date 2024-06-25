@@ -5,6 +5,10 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import model.enums.Artifact;
 import model.enums.Element;
 import model.placementArea.PlacementArea;
+
+/**
+ * The type Element objective.
+ */
 @JsonTypeName("ElementObjective")
 /**
  * objective based on the number of elements of the tipe @element present on the placementArea

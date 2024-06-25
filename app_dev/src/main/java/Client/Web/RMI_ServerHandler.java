@@ -21,6 +21,9 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
+/**
+ * The type Rmi server handler.
+ */
 public class RMI_ServerHandler implements ServerHandlerInterface {
 
     private ClientAPI_COME api;
@@ -71,6 +74,7 @@ public class RMI_ServerHandler implements ServerHandlerInterface {
 
     /**
      * class constructor
+     *
      * @param host the hostname of the server
      * @param come the interface for the reception of the messages
      * @throws StartConnectionFailedException if an error in the instantiation of the connection happens
@@ -80,6 +84,12 @@ public class RMI_ServerHandler implements ServerHandlerInterface {
         serverHost = host;
     }
 
+    /**
+     * Connect.
+     *
+     * @param port the port
+     * @throws StartConnectionFailedException the start connection failed exception
+     */
     public void connect(int port) throws StartConnectionFailedException {
         try {
 

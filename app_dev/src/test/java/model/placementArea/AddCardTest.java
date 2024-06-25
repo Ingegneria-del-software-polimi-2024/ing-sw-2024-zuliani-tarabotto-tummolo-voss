@@ -24,8 +24,19 @@ import java.util.Map.Entry;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Add card test.
+ */
 public class AddCardTest extends TestCase {
 
+    /**
+     * Initialize starter card.
+     *
+     * @param area            the area
+     * @param deckList        the deck list
+     * @param starterCard     the starter card
+     * @param faceStarterCard the face starter card
+     */
     public static void initializeStarterCard(PlacementArea area, Deck[] deckList, int starterCard, boolean faceStarterCard){
         PlayableCard cardToBePlaced = (PlayableCard) getCard(deckList, starterCard);
         cardToBePlaced.setFaceSide(faceStarterCard);
@@ -36,6 +47,17 @@ public class AddCardTest extends TestCase {
         }
         System.out.println("starter card placed");
     }
+
+    /**
+     * Initialize int.
+     *
+     * @param area     the area
+     * @param cardList the card list
+     * @param coord    the coord
+     * @param face     the face
+     * @param deckList the deck list
+     * @return the int
+     */
     public static int initialize(PlacementArea area, ArrayList<Integer> cardList, ArrayList<Coordinates> coord, boolean face, Deck[] deckList) {
 
         int cardsPoints;
@@ -80,6 +102,17 @@ public class AddCardTest extends TestCase {
         }
     }
 
+    /**
+     * Put cards int.
+     *
+     * @param cards     the cards
+     * @param coordList the coord list
+     * @param face      the face
+     * @param area      the area
+     * @param deckList  the deck list
+     * @return the int
+     * @throws RuntimeException the runtime exception
+     */
     public static int putCards(ArrayList<Integer> cards, ArrayList<Coordinates> coordList, boolean face, PlacementArea area, Deck[] deckList) throws RuntimeException{
 
         int cardsPoints = 0;
@@ -135,6 +168,9 @@ public class AddCardTest extends TestCase {
     }
 
 
+    /**
+     * Test singoli.
+     */
     public void testSingoli(){
 
         GoldCardsDeckGenerator gdGenerator = new GoldCardsDeckGenerator();
@@ -634,6 +670,29 @@ public class AddCardTest extends TestCase {
 
     }
 
+    /**
+     * Run test.
+     *
+     * @param cards                the cards
+     * @param coordinates          the coordinates
+     * @param expectedResults      the expected results
+     * @param face                 the face
+     * @param starterCard          the starter card
+     * @param faceStarterCard      the face starter card
+     * @param expAnimals           the exp animals
+     * @param expInsects           the exp insects
+     * @param expMushrooms         the exp mushrooms
+     * @param expVegetals          the exp vegetals
+     * @param expFeather           the exp feather
+     * @param expInk               the exp ink
+     * @param expPaper             the exp paper
+     * @param expAvailablePosition the exp available position
+     * @param expDisposition       the exp disposition
+     * @param expNumberNearbyCards the exp number nearby cards
+     * @param exceptionCoord       the exception coord
+     * @param exceptionCard        the exception card
+     * @param exceptionCode        the exception code
+     */
     public void runTest(int[] cards, int[] coordinates, int expectedResults, boolean face, int starterCard, boolean faceStarterCard, int expAnimals, int expInsects, int expMushrooms, int expVegetals, int expFeather, int expInk, int expPaper, List<Coordinates> expAvailablePosition, HashMap<Coordinates, PlayableCard> expDisposition, int expNumberNearbyCards, int exceptionCoord[], int exceptionCard, int exceptionCode){
 
         PlacementArea area = new PlacementArea();

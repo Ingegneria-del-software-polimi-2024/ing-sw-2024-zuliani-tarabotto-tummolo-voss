@@ -8,29 +8,43 @@ import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
 
 import java.util.HashMap;
 
+/**
+ * The type Server api come.
+ */
 public class ServerAPI_COME {
 
     private ServerMessageQueue toDoQueue;
     private HashMap<String, ClientHandlerInterface> players;
     private ModelController controller;
     //client called
+
     /**
      * enqueues the incoming message in the toDoQueue
+     *
      * @param message is the message coming from the client
      */
-     public void sendToServer(MessageFromClient message){
+    public void sendToServer(MessageFromClient message){
          System.out.println("–––––––––––––––––––––––––––––");
          System.out.println("ARRIVED MESSAGE: "+message.getClass());
          toDoQueue.enqueueMessage(message);
      }
-    
+
+    /**
+     * Add new player.
+     *
+     * @param nickName the nick name
+     * @param handler  the handler
+     */
     public void addNewPlayer(String nickName, ClientHandlerInterface handler){
          if(players.get(nickName) != null)
              throw new RuntimeException();
          players.put(nickName, handler);
     }
 
-    //controller called
+    /**
+     * Perform next method.
+     */
+//controller called
     public void performNextMethod(){}
 
     /**
@@ -60,7 +74,8 @@ public class ServerAPI_COME {
 
     /**
      * class constructor
-     * @param controller
+     *
+     * @param controller the controller
      */
     public ServerAPI_COME(ModelController controller) {
         toDoQueue = new ServerMessageQueue();

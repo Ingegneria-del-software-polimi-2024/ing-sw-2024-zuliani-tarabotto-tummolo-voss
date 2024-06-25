@@ -14,6 +14,9 @@ import java.io.*;
 import java.net.Socket;
 import java.rmi.RemoteException;
 
+/**
+ * The type Socket server handler.
+ */
 public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
 
     private ClientAPI_COME api;
@@ -89,7 +92,8 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
 
     /**
      * class constructor
-     * @param add the server hostname
+     *
+     * @param add  the server hostname
      * @param port the server port
      * @param come the interface for the reception of the messages
      * @throws StartConnectionFailedException if an error in the instantiation of the connection happens

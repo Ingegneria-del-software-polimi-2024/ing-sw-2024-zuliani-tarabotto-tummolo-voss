@@ -12,6 +12,7 @@ public class Coordinates implements Serializable {
 
     /**
      * constructor of the coordinate (a,b)
+     *
      * @param a x value
      * @param b y value
      */
@@ -22,7 +23,8 @@ public class Coordinates implements Serializable {
 
     /**
      * gets x value of (x,y) coordinate
-     * @return x
+     *
+     * @return x int
      */
     public int getX(){
         return x;
@@ -30,7 +32,8 @@ public class Coordinates implements Serializable {
 
     /**
      * gets y value of (x,y) coordinate
-     * @return y
+     *
+     * @return y int
      */
     public int getY(){
         return y;
@@ -38,16 +41,25 @@ public class Coordinates implements Serializable {
 
     /**
      * sums (x, y) + (a, b)=(x+a, y+b)
+     *
      * @param a the coordinate to sum
-     * @return this+a
+     * @return this +a
      */
     public Coordinates sum(Coordinates a){return new Coordinates(x+a.getX(), y+a.getY());}
+
+    /**
+     * Equals boolean.
+     *
+     * @param xy the xy
+     * @return the boolean
+     */
     public boolean equals(Coordinates xy){
         return xy.getX() == x && xy.getY() == y;
     }
 
     /**
      * selects the top-left coordinate
+     *
      * @param a the coordinate to compare with
      * @return the coordinate which has highest y value or in alternative lower x (top-left)
      */
@@ -62,6 +74,7 @@ public class Coordinates implements Serializable {
 
     /**
      * selects the top-right coordinate
+     *
      * @param a the coordinate to compare with
      * @return the coordinate which has the highest y value or in alternative higher x (top-right)
      */
@@ -76,6 +89,7 @@ public class Coordinates implements Serializable {
 
     /**
      * selects the top-right coordinate
+     *
      * @param a the coordinate to compare with
      * @return the coordinate which has the lowest y value or in alternative higher x (bottom-right)
      */
@@ -90,6 +104,7 @@ public class Coordinates implements Serializable {
 
     /**
      * selects the bottom-left coordinate
+     *
      * @param a the coordinate to compare with
      * @return the coordinate which has the lowest y value or in alternative lowe x (bottom-left)
      */
@@ -105,6 +120,7 @@ public class Coordinates implements Serializable {
 
     /**
      * returns the element present in the collection if equal to this
+     *
      * @param collection set to search in this element
      * @return element of the collection
      */

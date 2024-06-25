@@ -10,8 +10,6 @@ import model.placementArea.PlacementArea;
 import org.junit.jupiter.api.Test;
 
 
-
-
 /**
  * Test class for the {@link ObjectiveCard} class.
  */

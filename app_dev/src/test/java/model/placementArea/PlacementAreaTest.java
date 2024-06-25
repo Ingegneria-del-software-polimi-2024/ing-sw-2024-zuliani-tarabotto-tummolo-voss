@@ -22,12 +22,27 @@ import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Placement area test.
+ */
 public class PlacementAreaTest extends TestCase {
     //private static GameState gameState;
 
+    /**
+     * The Id.
+     */
     static int ID = 81;
 
-    //initializes the gamestate (please always specify one player), inserts the cards expressed from cli
+    /**
+     * Initialize.
+     *
+     * @param area     the area
+     * @param cardList the card list
+     * @param coord    the coord
+     * @param face     the face
+     * @param deckList the deck list
+     */
+//initializes the gamestate (please always specify one player), inserts the cards expressed from cli
     // in the placementArea of the palyer, the starterCard will be automatically added
     public static void initialize(PlacementArea area, ArrayList<Integer> cardList, ArrayList<Coordinates> coord, boolean face, Deck[] deckList) {
 
@@ -66,6 +81,16 @@ public class PlacementAreaTest extends TestCase {
         }
     }
 
+    /**
+     * Put cards.
+     *
+     * @param cards     the cards
+     * @param coordList the coord list
+     * @param face      the face
+     * @param area      the area
+     * @param deckList  the deck list
+     * @throws RuntimeException the runtime exception
+     */
     public static void putCards(ArrayList<Integer> cards, ArrayList<Coordinates> coordList, boolean face, PlacementArea area, Deck[] deckList) throws RuntimeException{
 
         if(coordList.size() != cards.size())
@@ -91,10 +116,22 @@ public class PlacementAreaTest extends TestCase {
         }
     }
 
+    /**
+     * Check for objectives int.
+     *
+     * @param area the area
+     * @param obj  the obj
+     * @return the int
+     */
     public static int checkForObjectives(PlacementArea area, ObjectiveCard obj){return obj.countPoints(area);}
 
 
-    //insert 999 when asking "what objective id do you want to check? " if you want to stop
+    /**
+     * Test objective counts.
+     *
+     * @throws Exception the exception
+     */
+//insert 999 when asking "what objective id do you want to check? " if you want to stop
     @Test
     public void testObjectiveCounts() throws Exception{
         //test objective 87 ascDiag Mushrooms
@@ -204,6 +241,15 @@ public class PlacementAreaTest extends TestCase {
 
     }
 
+    /**
+     * Run test.
+     *
+     * @param cards           the cards
+     * @param coordinates     the coordinates
+     * @param objectives      the objectives
+     * @param expectedResults the expected results
+     * @param face            the face
+     */
     public void runTest(int[] cards, int[] coordinates, int[] objectives, int[] expectedResults, boolean face){
 
         PlacementArea area = new PlacementArea();

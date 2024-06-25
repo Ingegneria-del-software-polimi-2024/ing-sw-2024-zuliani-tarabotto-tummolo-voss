@@ -17,6 +17,9 @@ import java.util.regex.Pattern;
 import static org.fusesource.jansi.Ansi.ansi;
 
 
+/**
+ * The type Tui.
+ */
 public class TUI implements UI {
 
     private ViewAPI view;
@@ -33,6 +36,9 @@ public class TUI implements UI {
     private final Object lock;
     private final HashMap<String, Command> commandMap;
     private Runnable rePrint;
+    /**
+     * The Enter pressed.
+     */
     boolean enterPressed = false;
     private String nickname;
     private final Object lockForControllingCommands;
@@ -42,6 +48,11 @@ public class TUI implements UI {
     private boolean chatOpened = false;
     private String game;
 
+    /**
+     * Instantiates a new Tui.
+     *
+     * @param view the view
+     */
     public TUI(ViewAPI view){
 
         this.view = view;
@@ -231,6 +242,9 @@ public class TUI implements UI {
     }
 
 
+    /**
+     * Display return to lobby.
+     */
     public void displayReturnToLobby(){
         String in = null;
         sc = new Scanner(System.in);
@@ -816,6 +830,9 @@ public class TUI implements UI {
         dispositionPrinter.print(disp);
     }
 
+    /**
+     * Clear.
+     */
     public void clear(){
         System.out.print(ansi().eraseScreen().cursor(0, 0));
 
@@ -834,14 +851,29 @@ public class TUI implements UI {
         System.out.print(ansi().fg(color).a("~> "+view.getPlayerId()+", you have successfully reconnected to the game").reset());
     }
 
+    /**
+     * Set in waiting room.
+     *
+     * @param b the b
+     */
     public void setInWaitingRoom(Boolean b){
         inWaitingRoom = b;
     }
 
+    /**
+     * Get in waiting room boolean.
+     *
+     * @return the boolean
+     */
     public boolean getInWaitingRoom(){
         return inWaitingRoom;
     }
 
+    /**
+     * Get game string.
+     *
+     * @return the string
+     */
     public String getGame(){
         return  game;
     }
@@ -854,6 +886,9 @@ public class TUI implements UI {
     }
 
 
+    /**
+     * Print chat.
+     */
     public void printChat(){
         chatOpened = true;
         clear();
@@ -881,6 +916,9 @@ public class TUI implements UI {
         rePrint.run();
     }
 
+    /**
+     * Print name.
+     */
     public void printName(){
         System.out.print(ansi().fg(color).a("~> You are"+nickname+"\n").reset());
     }

@@ -26,8 +26,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * The type Mock model listener.
+ */
 public class MockModelListener extends ModelListener {
 
+    /**
+     * Instantiates a new Mock model listener.
+     */
     public MockModelListener() {
         super(null);
     }

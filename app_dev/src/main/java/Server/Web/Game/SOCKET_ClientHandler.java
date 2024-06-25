@@ -15,6 +15,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.rmi.RemoteException;
 
+/**
+ * The type Socket client handler.
+ */
 public class  SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
     private ServerAPI_COME api;
     private Socket clientSocket;
@@ -67,11 +70,11 @@ public class  SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
     }
 
 
-
     /**
      * class constructor
+     *
      * @param clientSocket the socket of the client
-     * @param lobby the reference to the lobby-controller
+     * @param lobby        the reference to the lobby-controller
      * @throws IOException when the streams couldn't be instantiated
      */
     public SOCKET_ClientHandler(Socket clientSocket, Lobby lobby) throws IOException {

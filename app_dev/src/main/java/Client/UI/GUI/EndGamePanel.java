@@ -8,6 +8,9 @@ import java.util.Map;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
+/**
+ * The type End game panel.
+ */
 public class EndGamePanel extends JPanel {
 
     private GUI gui;
@@ -15,7 +18,8 @@ public class EndGamePanel extends JPanel {
     /**
      * a panel that displays the winners and the final points.
      * Two buttons let the player choose whether he wants to go back to the lobby or close the game.
-     * @param gui
+     *
+     * @param gui the gui
      */
     public EndGamePanel(GUI gui){
         this.gui = gui;

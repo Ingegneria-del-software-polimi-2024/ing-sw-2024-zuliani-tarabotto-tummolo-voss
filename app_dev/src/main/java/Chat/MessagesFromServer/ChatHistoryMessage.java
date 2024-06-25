@@ -6,10 +6,19 @@ import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
 
 import java.util.ArrayList;
 
+/**
+ * The type Chat history message.
+ */
 public class ChatHistoryMessage implements MessageFromServer {
     private ArrayList<ChatMessage> history;
     private String receiver;
 
+    /**
+     * Instantiates a new Chat history message.
+     *
+     * @param history  the history
+     * @param receiver the receiver
+     */
     public ChatHistoryMessage(ArrayList<ChatMessage> history, String receiver) {
         this.history = history;
         this.receiver = receiver;

@@ -3,10 +3,18 @@ package SharedWebInterfaces.Messages.MessagesFromServer;
 import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
 import model.cards.ObjectiveCard;
 
+/**
+ * The type Confirm secret objective message.
+ */
 public class ConfirmSecretObjectiveMessage implements MessageFromServer{
     private ObjectiveCard secretObjective;
 
 
+    /**
+     * Instantiates a new Confirm secret objective message.
+     *
+     * @param secretObjective the secret objective
+     */
     public ConfirmSecretObjectiveMessage(ObjectiveCard secretObjective){
         this.secretObjective = secretObjective;
 

@@ -17,6 +17,9 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.rmi.RemoteException;
 
+/**
+ * The type Room.
+ */
 public class Room {
 
     private ConcurrentHashMap<String, Long> lastSeen;
@@ -37,7 +40,8 @@ public class Room {
 
     /**
      * allows a player in the room
-     * @param name the player's nickname
+     *
+     * @param name    the player's nickname
      * @param handler the player's handler
      * @throws CantJoinRoomExcept if the room is full
      */
@@ -72,8 +76,10 @@ public class Room {
 
     /**
      * class constructor
-     * @param name the name of the room
+     *
+     * @param name            the name of the room
      * @param expectedPlayers the number of player to wait in order to start the game
+     * @param lobby           the lobby
      */
     public Room(String name, int expectedPlayers, Lobby lobby){
         this.playersInterfaces = new HashMap<>();
@@ -91,10 +97,18 @@ public class Room {
         startHeartbeatChecker();
     }
 
+    /**
+     * Update heart beat.
+     *
+     * @param playerId the player id
+     */
     public void updateHeartBeat(String playerId) {
         lastSeen.put(playerId, System.currentTimeMillis());
     }
 
+    /**
+     * Handle a detected disconnection.
+     */
     public void handleADetectedDisconnection() {
         //DEBUG
         System.out.println("handleADetectedDisconnection was called");
@@ -145,6 +159,9 @@ public class Room {
         heartbeatChecker.start();
     }
 
+    /**
+     * Interrupt hb checker.
+     */
     public void interruptHBChecker(){
         heartbeatChecker.interrupt();
         try {
@@ -165,6 +182,8 @@ public class Room {
     }
 
     /**
+     * Gets players.
+     *
      * @return the players in the room
      */
     public ArrayList<String> getPlayers() {
@@ -175,7 +194,8 @@ public class Room {
     /**
      * if a player quits the game while still in the "waiting for other players phase", we simply remove
      * him from all the room's lists, so that another player can instantly join the game
-     * @param player
+     *
+     * @param player the player
      */
     public void removePlayerBeforeStart(String player){
         lastSeen.remove(player);
@@ -185,8 +205,9 @@ public class Room {
     }
 
 
-
     /**
+     * Gets name.
+     *
      * @return the room's name
      */
     public String getName() {
@@ -216,6 +237,7 @@ public class Room {
 
     /**
      * verifies if a player is contained in a room
+     *
      * @param player the player's nickname
      * @return a boolean
      */
@@ -224,6 +246,7 @@ public class Room {
     }
 
     /**
+     * Is full boolean.
      *
      * @return true if the room is full else false
      */
@@ -231,7 +254,8 @@ public class Room {
 
     /**
      * reconnects the disconnected player in the place he was disconnected from
-     * @param playerID the reconnecting player
+     *
+     * @param playerID         the reconnecting player
      * @param handlerInterface the handler of the player
      */
     public void reconnect(String playerID, ClientHandlerInterface handlerInterface){
@@ -268,10 +292,19 @@ public class Room {
 
     }
 
+    /**
+     * Is disconnected boolean.
+     *
+     * @param name the name
+     * @return the boolean
+     */
     public boolean isDisconnected(String name){
         return disconnectedUsers.contains(name);
     }
 
+    /**
+     * Ended.
+     */
     public void ended() {
         //since the disconnection of the players is handled by the only thread unraveling messages to the room,
         //as the second-from-last player leaves the room there will be still a player connected or, at least a handler
@@ -293,6 +326,11 @@ public class Room {
         lobby.enqueueMessage(new CloseARoomMessage(name));
     }
 
+    /**
+     * Quit game.
+     *
+     * @param playerID the player id
+     */
     public void quitGame(String playerID){
 
         disconnectedUsers.add(playerID);

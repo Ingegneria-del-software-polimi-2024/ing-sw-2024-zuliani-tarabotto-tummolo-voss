@@ -4,7 +4,15 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Coordinates test.
+ */
 class CoordinatesTest {
+    /**
+     * Test coordinates.
+     *
+     * @param args the args
+     */
     @Test
     public static void testCoordinates(String[] args){
         Coordinates a = new Coordinates(0, 0);

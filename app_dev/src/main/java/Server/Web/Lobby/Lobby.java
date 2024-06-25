@@ -15,6 +15,9 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * The type Lobby.
+ */
 public class Lobby implements ControllerInterface {//TODO all the methods here must be sinchronized!! :)
     private ArrayList<Room> rooms;
     private ConcurrentHashMap<String, ClientHandlerInterface> players;
@@ -23,6 +26,12 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
     private LobbyMessageQueue queue;
     private ConcurrentHashMap<String, Long> lastSeenInLobby;
 
+    /**
+     * Instantiates a new Lobby.
+     *
+     * @param portSocket the port socket
+     * @param portRMI    the port rmi
+     */
     public Lobby(int portSocket, int portRMI){
         try {
             rooms = new ArrayList<Room>();
@@ -40,7 +49,8 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
 
     /**
      * dequeues messages from the toDoQueue
-     * @throws MsgNotDeliveredException when the message couldn't be delivered
+     *
+     * @throws MsgNotDeliveredException       when the message couldn't be delivered
      * @throws StartConnectionFailedException when the connection with client couldn't be started
      */
     public void start() throws MsgNotDeliveredException, StartConnectionFailedException {
@@ -70,7 +80,8 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
 
     /**
      * Memorizes a new couple (nickname, personal handler) to effectively use the new connection
-     * @param name the player
+     *
+     * @param name             the player
      * @param handlerInterface the handler of the player
      */
     public void addConnection(String name, ClientHandlerInterface handlerInterface){
@@ -122,8 +133,9 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
 
     /**
      * inserts the player in the requested room, if the room doesn't exist creates a new room and inserts the player there
-     * @param playerName the player nickname
-     * @param roomName the name of the room
+     *
+     * @param playerName      the player nickname
+     * @param roomName        the name of the room
      * @param expectedPlayers the number of expected players, it is null if the room already exists
      */
     public void enterRoom(String playerName, String roomName, int expectedPlayers){
@@ -176,6 +188,7 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
 
 
     /**
+     * Get game names array list.
      *
      * @return returns the names of the available rooms doesn't return the rooms which are already full
      */
@@ -193,6 +206,7 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
 
     /**
      * given the handler returns the nickname of the associated player
+     *
      * @param handlerInterface the personal handler
      * @return the nickname of the player
      */
@@ -204,9 +218,9 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
     }
 
 
-
     /**
      * adds a message to the queue of incoming messages
+     *
      * @param msg the incoming message to be added
      */
     public void enqueueMessage(MessageToLobby msg){
@@ -215,8 +229,9 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
 
     /**
      * sends a message to a player
+     *
      * @param playerName the recipient nickname
-     * @param msg the message to be delivered
+     * @param msg        the message to be delivered
      * @throws MsgNotDeliveredException if the message couldn't be delivered
      */
     public void sendToPlayer(String playerName, MessageFromServer msg) throws MsgNotDeliveredException {
@@ -229,6 +244,7 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
 
     /**
      * method to instantiate a new RMI connection with a client
+     *
      * @param handlerInterface the client remote interface to communicate with
      */
     public void newRMI_Connection(ServerHandlerInterface handlerInterface){
@@ -239,6 +255,11 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
         }
     }
 
+    /**
+     * Close room.
+     *
+     * @param roomName the room name
+     */
     public void closeRoom(String roomName){
 
         Room room = getRoomByName(roomName);
@@ -249,6 +270,12 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
         System.out.println("Room "+roomName+" is correctly closed");
     }
 
+    /**
+     * Quit game before start.
+     *
+     * @param roomName the room name
+     * @param player   the player
+     */
     public void quitGameBeforeStart(String roomName, String player){
         try {
             Room room = lookFor(roomName);
@@ -270,6 +297,12 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
         }
     }
 
+    /**
+     * Reconnect player.
+     *
+     * @param playerID the player id
+     * @param handler  the handler
+     */
     public void reconnectPlayer(String playerID, ClientHandlerInterface handler){
         players.put(playerID, handler);
     }
@@ -315,6 +348,11 @@ public class Lobby implements ControllerInterface {//TODO all the methods here m
         return null;
     }
 
+    /**
+     * Update heart beat.
+     *
+     * @param playerId the player id
+     */
     public void updateHeartBeat(String playerId) {
         if(playerId == null)
             return;

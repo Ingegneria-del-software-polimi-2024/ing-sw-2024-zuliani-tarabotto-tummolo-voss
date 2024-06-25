@@ -17,6 +17,9 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
+/**
+ * The type First rmi manager.
+ */
 public class First_RMI_Manager implements RMI_ManagerInterface {
     private Lobby lobby;
     private int serverPort;
@@ -47,6 +50,11 @@ public class First_RMI_Manager implements RMI_ManagerInterface {
 
     /**
      * the class is a singleton, returns the single instance of the class. See First_RMI_Manager constructor
+     *
+     * @param lobby      the lobby
+     * @param serverPort the server port
+     * @return the instance
+     * @throws RemoteException the remote exception
      */
     public static First_RMI_Manager getInstance(Lobby lobby, int serverPort) throws RemoteException {
         if(instance == null)

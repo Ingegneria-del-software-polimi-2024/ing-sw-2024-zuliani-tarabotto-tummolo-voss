@@ -31,6 +31,7 @@ public class PlacementAreaIterator implements Iterator<Coordinates> {
     }
 
     /**
+     * Current coordinates.
      *
      * @return the current place when iterating
      */
@@ -38,9 +39,9 @@ public class PlacementAreaIterator implements Iterator<Coordinates> {
 
     /**
      * class constructor
-     * @param disp the HashMap representing the PlacementArea
-     * @param shape the type of shape can be L or diagonal
      *
+     * @param disp  the HashMap representing the PlacementArea
+     * @param shape the type of shape can be L or diagonal
      */
     public PlacementAreaIterator(HashMap<Coordinates, PlayableCard> disp, Shape shape) {
         availableCoordinates = new ArrayList<Coordinates>(disp.keySet());

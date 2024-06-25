@@ -17,6 +17,9 @@ import model.deckFactory.*;
 import javax.sql.rowset.CachedRowSet;
 import java.util.*;
 
+/**
+ * The type Game state.
+ */
 public class GameState {
 
     private ArrayList<Player> players;
@@ -35,9 +38,13 @@ public class GameState {
 
     /**
      * class constructor: creates a new Player for each name contained in nickNames,
-     *                    creates a new CommonTable and calls the method to initialize it
-     * @param nickNames ArrayList of Strings
-     * @param id the unique id for gameState
+     * creates a new CommonTable and calls the method to initialize it
+     *
+     * @param nickNames       ArrayList of Strings
+     * @param id              the unique id for gameState
+     * @param modelListener   the model listener
+     * @param modelController the model controller
+     * @param disconnected    the disconnected
      */
     public GameState(ArrayList<String> nickNames, String id, ModelListener modelListener, ModelController modelController, Set<String> disconnected) {
         this.modelListener = modelListener;
@@ -88,6 +95,7 @@ public class GameState {
 
 
     //////////////////// GENERAL TURN CONTROL METHODS ///////////////////////////////////////
+
     /**
      * this method is called at the end of the game, it checks for each Player if they completed any Objective(both secret and commoon)
      */
@@ -158,6 +166,7 @@ public class GameState {
     /**
      * INTERFACE METHOD
      * based on Player input, the method sets the selected pawn color for the player
+     *
      * @param pawnColor Pawn selected by the Player
      */
     public void setPlayerPawnColor(Pawn pawnColor) {
@@ -166,6 +175,7 @@ public class GameState {
 
     /**
      * when the state of gameState is modified, a notification is sent in broadcast to all clients
+     *
      * @param state the state to be set
      */
     public void setTurnState(TurnState state) {
@@ -196,6 +206,9 @@ public class GameState {
         }
     }
 
+    /**
+     * Distribute secret ojectives.
+     */
     public void distributeSecretOjectives() {
         for (Player p : players) {
             objectiveBuffer.add(getObjectiveDeck().extract());
@@ -208,6 +221,12 @@ public class GameState {
         modelListener.notifyChanges(turnPlayer.getNickname());
     }
 
+    /**
+     * Set player secret objective.
+     *
+     * @param cardId the card id
+     * @param player the player
+     */
     public void setPlayerSecretObjective(String cardId, String player){
         for(Player p : players){
             if(p.getNickname().equals(player)){
@@ -236,16 +255,30 @@ public class GameState {
         modelListener.notifyChanges(turnPlayer.getNickname(), turnPlayer.getPlacementArea().getAvailablePlaces(), canBePlaced);
     }
 
+    /**
+     * Check message boolean.
+     *
+     * @param message the message
+     * @return the boolean
+     */
     public boolean checkMessage(MessageFromClient message){return turnState.controlMessage(message);}
 
+    /**
+     * Quit game.
+     *
+     * @param playerName the player name
+     */
     public void quitGame(String playerName){
         modelListener.notifyChanges(playerName, new KickOutOfGameException());
     }
 
     ////////////////// CARDS PLACEMENT RELATED METHODS //////////////////////////////////////////////////////
+
     /**
      * INTERFACE METHOD
      * calls playCard method contained in Player class
+     *
+     * @throws CantPlaceCardException the cant place card exception
      */
     public void playCard() throws CantPlaceCardException {
         try {
@@ -275,7 +308,8 @@ public class GameState {
 
     /**
      * notifies the player of not being able to place the card
-     * @param e
+     *
+     * @param e the e
      */
     public void wrongCardRoutine(CantPlaceCardException e){
         modelListener.notifyChanges(turnPlayer.getNickname(), e);
@@ -284,6 +318,8 @@ public class GameState {
     /**
      * INTERFACE METHOD
      * calls playCard method contained in Player class
+     *
+     * @param player the player
      */
     public void playStarterCard(String player) {
         for(Player p : players){
@@ -308,6 +344,7 @@ public class GameState {
 
     /**
      * based on Player input, the method sets the card that will be placed on the player's PlacementArea
+     *
      * @param card PlayableCard selected by the Player
      */
     public void setSelectedHandCard(PlayableCard card) {
@@ -316,6 +353,7 @@ public class GameState {
 
     /**
      * based on Player input, the method sets the coordinates where the this.selectedHandCard will be placed
+     *
      * @param coordinates Coordinates selected by the Player
      */
     public void setSelectedCoordinates(Coordinates coordinates) {
@@ -325,8 +363,9 @@ public class GameState {
     /**
      * INTERFACE METHOD
      * based on Player input, the method sets the faceSide that will be visible for the starting card when placed
+     *
      * @param faceSide FaceSide selected by the Player
-     * @param player the player selecting the starting card
+     * @param player   the player selecting the starting card
      */
     public void setStartingCardFace(boolean faceSide, String player) {
         for(Player p : players){
@@ -342,6 +381,7 @@ public class GameState {
     /**
      * INTERFACE METHOD
      * based on Player input, the method sets the faceSide for the card that the player has selected from his hand
+     *
      * @param faceSide FaceSide selected by the Player
      */
     public void setSelectedCardFace(boolean faceSide) {
@@ -351,6 +391,7 @@ public class GameState {
 
 
     ////////////////////////////////METHODS RELATED TO DRAWING FROM DECKS///////////////////////////////////////
+
     /**
      * INTERFACE METHOD
      * draws a card from goldDeck
@@ -384,6 +425,8 @@ public class GameState {
     /**
      * INTERFACE METHOD
      * draws a card from openGold at index 0 or 1
+     *
+     * @param index the index
      */
     public void drawCardOpenGold(int index){
         try {
@@ -399,6 +442,8 @@ public class GameState {
     /**
      * INTERFACE METHOD
      * draws a card from openResources at index 0 or 1
+     *
+     * @param index the index
      */
     public void drawCardOpenResources(int index){
         try {
@@ -415,14 +460,42 @@ public class GameState {
 //    public void nextState(){turnState.nextState();}
 //    public void nextStage(){turnState.nextStage();}
 
-    /////////////// GETTER METHODS FOR COMMONTABLE ATTRIBUTES ////////////////////////
+    /**
+     * Gets gold deck.
+     *
+     * @return the gold deck
+     */
+/////////////// GETTER METHODS FOR COMMONTABLE ATTRIBUTES ////////////////////////
     public PlayableDeck getGoldDeck() { return commonTable.getGoldDeck(); }
+
+    /**
+     * Gets resource deck.
+     *
+     * @return the resource deck
+     */
     public PlayableDeck getResourceDeck() { return commonTable.getResourceDeck(); }
 
-    //MAI USATO
+    /**
+     * Gets objective deck.
+     *
+     * @return the objective deck
+     */
+//MAI USATO
     //public PlayableDeck getStarterDeck(){return commonTable.getStarterDeck();}
     public ObjectiveDeck getObjectiveDeck() {return commonTable.getObjectiveDeck();}
+
+    /**
+     * Gets open resources.
+     *
+     * @return the open resources
+     */
     public List<PlayableCard> getOpenResources() { return commonTable.getOpenResources(); }
+
+    /**
+     * Gets open gold.
+     *
+     * @return the open gold
+     */
     public List<PlayableCard> getOpenGold() { return commonTable.getOpenGold(); }
 
 
@@ -430,15 +503,65 @@ public class GameState {
     //public CommonTable getCommonTable(){return commonTable;}
 
 
-    //////////////////////// GETTER METHODS FOR GAMESTATE ATTRIBUTES ///////////////////////////
+    /**
+     * Get player player.
+     *
+     * @param index the index
+     * @return the player
+     */
+//////////////////////// GETTER METHODS FOR GAMESTATE ATTRIBUTES ///////////////////////////
     public Player getPlayer(int index){ return players.get(index);}
+
+    /**
+     * Get id string.
+     *
+     * @return the string
+     */
     public String getId(){ return id; }
+
+    /**
+     * Get turn player player.
+     *
+     * @return the player
+     */
     public Player getTurnPlayer(){ return turnPlayer; }
+
+    /**
+     * Get last turn boolean.
+     *
+     * @return the boolean
+     */
     public boolean getLastTurn(){ return isLastTurn; }
+
+    /**
+     * Gets points.
+     *
+     * @return the points
+     */
     public int getPoints() {return turnPlayer.getPoints(); }
-    //returns turnPlayer's card at specified index in his hand
+
+    /**
+     * Gets player hand card.
+     *
+     * @param index the index
+     * @return the player hand card
+     */
+//returns turnPlayer's card at specified index in his hand
     public PlayableCard getPlayerHandCard(int index) { return turnPlayer.getPlayingHand().get(index); }
+
+    /**
+     * Gets players.
+     *
+     * @return the players
+     */
     public ArrayList<Player> getPlayers() { return players; }
+
+    /**
+     * Get player by name player.
+     *
+     * @param playerName the player name
+     * @return the player
+     */
     Player getPlayerByName(String playerName){
         for(Player p : players)
             if(p.getNickname().equals(playerName))
@@ -466,9 +589,11 @@ public class GameState {
 
     /**
      * this is a variation of the default constructor, ONLY USED FOR THE CONTROLLER TESTS
-     * @param nickNames
-     * @param id
-     * @param i
+     *
+     * @param nickNames the nick names
+     * @param id        the id
+     * @param i         the
+     * @param listener  the listener
      */
     public GameState(ArrayList<String> nickNames, String id, int i, ModelListener listener) {
         this.modelListener = listener;
@@ -490,6 +615,7 @@ public class GameState {
 
     /**
      * allows a player back in the game
+     *
      * @param playerID the name of the player to be added again
      */
     public void reconnect(String playerID){
@@ -543,24 +669,41 @@ public class GameState {
         }
 
     }
+
     /**
      * sets the player in an active state
+     *
      * @param index the index of the player
      */
     public void setPlayerActive(int index){
         players.get(index).setActive();
     }
 
+    /**
+     * Inizialization reconnection.
+     *
+     * @param p the p
+     */
     public void inizializationReconnection(Player p){
         //NOTIFICATION ABOUT THE STARTER CARD
         modelListener.notifyChanges(p.getNickname(), p.getPlacementArea().getDisposition(), p.getPlacementArea().getAvailablePlaces(),
                 p.getPoints());
     }
 
+    /**
+     * Starter card reconnection.
+     *
+     * @param player the player
+     */
     public void starterCardReconnection(Player player){
         modelListener.displayStarterCardNotification(player.getNickname(), player.getStarterCard(), player.getPawnColor() );
     }
 
+    /**
+     * Objective card reconnection.
+     *
+     * @param player the player
+     */
     public void objectiveCardReconnection(Player player){
         modelListener.notifyChanges(turnPlayer.getNickname(), player.getNickname());
         modelListener.notifyChanges(player.getSecretObjective(), player.getNickname());
@@ -570,6 +713,7 @@ public class GameState {
 
     /**
      * sets the player in an inactive state
+     *
      * @param index the index of the player
      */
     public void setPlayerInactive(int index){
@@ -585,6 +729,7 @@ public class GameState {
     /**
      * if the turn palyer disconnects before choosing the secret objective, the firs of the two objectives is chosen and
      * the face card is assigned for the starter card
+     *
      * @param player the disconnected player
      */
     public void recoveryObjectiveChoice(Player player){
@@ -596,6 +741,7 @@ public class GameState {
 
     /**
      * if the turn palyer disconnects before choosing the starter card face, the face side is automatically played
+     *
      * @param player the disconnected player
      */
     public void recoveryStarterCard(Player player){
@@ -609,6 +755,7 @@ public class GameState {
      * if the turn palyer disconnects and has palced a card but still has to draw, he will draw from the first available deck,
      * if no deck is available he will then draw a card from the open deck. The order of the decks is:
      * (1)resource deck, (2) gold deck, (3) open resources, (4) open gold
+     *
      * @param player the disconnected player
      */
     public void recoveryDrawing(Player player){
@@ -637,6 +784,7 @@ public class GameState {
 
     /**
      * if the turn palyer disconnects and has not palced a card yet, the turn passes to the next player
+     *
      * @param player the disconnected player
      */
     public void recoverPlacement(Player player){

@@ -37,12 +37,12 @@ public class GoldCard extends PlayableCard{
     private Points points;
 
 
-
     /**
      * json parsing
-     * @param id
-     * @return GoldCard
-     * @throws Exception
+     *
+     * @param id the id
+     * @return GoldCard gold card
+     * @throws Exception the exception
      */
     public  static GoldCard parse(int id)  throws Exception {
         int targetId = id; // ID to search for
@@ -127,9 +127,12 @@ public class GoldCard extends PlayableCard{
     public Element[] getBlockedElements(){ return null; }
 
 
-
-    ///////////////////// FOR TESTING PURPOSES ONLY METHODS //////////////////////////////
-    // @Override public void printCard() {
+    /**
+     * Print card.
+     */
+///////////////////// FOR TESTING PURPOSES ONLY METHODS //////////////////////////////
+    @Override
+    public void printCard() {
 //        System.out.println("Card ID: " + getId());
 //
 //        //prints the front face of the card

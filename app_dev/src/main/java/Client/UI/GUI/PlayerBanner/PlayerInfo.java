@@ -20,6 +20,13 @@ public class PlayerInfo extends JPanel {
     private HashMap<Resources, JPanel> resourcePanel;
     private GUI gui;
 
+    /**
+     * Instantiates a new Player info.
+     *
+     * @param name       the name
+     * @param gui        the gui
+     * @param cellHeight the cell height
+     */
     public PlayerInfo(String name, GUI gui, int cellHeight) {
 
         //System.out.println("cellheight:" + cellHeight);
@@ -94,7 +101,11 @@ public class PlayerInfo extends JPanel {
     }
 
 
-
+    /**
+     * Update resources.
+     *
+     * @param res the res
+     */
     public void updateResources(HashMap<Resources, Integer> res){
         resources = res;
         for(Resources r : Resources.values()) {

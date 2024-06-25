@@ -5,6 +5,9 @@ import SharedWebInterfaces.Messages.MessagesFromClient.toModelController.Message
 import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
 import SharedWebInterfaces.SharedInterfaces.ServerControllerInterface;
 
+/**
+ * The type Select starter card message.
+ */
 public class SelectStarterCardMessage implements MessageFromViewToModelController {
     @Override
     public void execute(ModelController controller) {

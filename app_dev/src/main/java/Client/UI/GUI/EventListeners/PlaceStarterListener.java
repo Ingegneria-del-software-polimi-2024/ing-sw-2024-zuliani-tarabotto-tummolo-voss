@@ -7,13 +7,17 @@ import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * The type Place starter listener.
+ */
 public class PlaceStarterListener extends MouseAdapter {
 
     private GUI gui;
 
     /**
      * during the starterCard selection phase, the listener detects when the starterCard is selected
-     * @param gui
+     *
+     * @param gui the gui
      */
     public PlaceStarterListener(GUI gui){
         this.gui = gui;

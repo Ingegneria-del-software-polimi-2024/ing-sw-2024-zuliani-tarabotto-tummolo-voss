@@ -6,11 +6,19 @@ import SharedWebInterfaces.Messages.MessagesFromServer.Errors.ReturnToStartMessa
 import SharedWebInterfaces.Messages.MessagesFromServer.InterruptConnectionMessage;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
 
+/**
+ * The type Client api come.
+ */
 public class ClientAPI_COME implements Runnable{
     private ClientMessageQueue toDoQueue;
     private ClientMessageQueue chatQueue;
     private ViewAPI view;
 
+    /**
+     * Instantiates a new Client api come.
+     *
+     * @param view the view
+     */
     public ClientAPI_COME(ViewAPI view){
         this.view = view;
         toDoQueue = new ClientMessageQueue();
@@ -19,11 +27,13 @@ public class ClientAPI_COME implements Runnable{
 
     /**
      * receives and enqueues the message specified from the Server
+     *
      * @param message the message from the server
      */
     public void notifyChanges(MessageFromServer message){
         toDoQueue.enqueueMessage(message);
     }
+
     /**
      * executes the first action in the queue
      */
@@ -47,6 +57,7 @@ public class ClientAPI_COME implements Runnable{
 
     /**
      * enqueues a message in the list of actions
+     *
      * @param msg the message
      */
     public void enqueue(MessageFromServer msg){
@@ -67,6 +78,7 @@ public class ClientAPI_COME implements Runnable{
 
     /**
      * enqueues a chat message in the dedicated list
+     *
      * @param msg the chat message to be enqueued
      */
     public void enqueueChatMessage(MessageFromServer msg) {

@@ -2,10 +2,18 @@ package SharedWebInterfaces.Messages.MessagesFromServer;
 
 import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
 
+/**
+ * The type Turn player message.
+ */
 public class TurnPlayerMessage implements MessageFromServer{
 
     private String turnPlayer;
 
+    /**
+     * Instantiates a new Turn player message.
+     *
+     * @param turnPlayer the turn player
+     */
     public TurnPlayerMessage(String turnPlayer){
         this.turnPlayer = turnPlayer;
     }

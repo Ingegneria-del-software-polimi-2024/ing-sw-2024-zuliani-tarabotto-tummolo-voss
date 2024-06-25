@@ -6,9 +6,17 @@ import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
 
 import java.sql.Timestamp;
 
+/**
+ * The type Chat update message.
+ */
 public class ChatUpdateMessage implements MessageFromServer{
     private ChatMessage message;
 
+    /**
+     * Instantiates a new Chat update message.
+     *
+     * @param message the message
+     */
     public ChatUpdateMessage(ChatMessage message) {
         this.message = message;
     }

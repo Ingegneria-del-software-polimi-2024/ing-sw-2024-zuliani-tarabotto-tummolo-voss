@@ -7,16 +7,32 @@ import java.util.List;
 /**
  * the pawn color belonging to a player
  */
-
-    public enum Pawn {
-        red(),
-        purple(),
-        green(),
-        blue();
+public enum Pawn {
+    /**
+     * Red pawn.
+     */
+    red(),
+    /**
+     * Purple pawn.
+     */
+    purple(),
+    /**
+     * Green pawn.
+     */
+    green(),
+    /**
+     * Blue pawn.
+     */
+    blue();
 
         private static List<Pawn> shuffledList = new ArrayList<>();
 
-        public static List<Pawn> getRandomPawns(){
+    /**
+     * Get random pawns list.
+     *
+     * @return the list
+     */
+    public static List<Pawn> getRandomPawns(){
             shuffledList.clear();
             Collections.addAll(shuffledList, Pawn.values());
             Collections.shuffle(shuffledList);
@@ -33,7 +49,10 @@ import java.util.List;
         //public boolean getIsAvailable() {return isAvailable;}
 
 
-        public void setIsAvailable() {this.isAvailable = false;}
+    /**
+     * Sets is available.
+     */
+    public void setIsAvailable() {this.isAvailable = false;}
 
         //MAI USATO
 //        public static void printAvailablePawns() {

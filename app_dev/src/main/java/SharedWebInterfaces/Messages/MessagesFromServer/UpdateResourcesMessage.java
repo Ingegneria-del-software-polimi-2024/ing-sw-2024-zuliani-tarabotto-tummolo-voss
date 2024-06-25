@@ -6,12 +6,22 @@ import model.enums.Element;
 
 import java.util.HashMap;
 
+/**
+ * The type Update resources message.
+ */
 public class UpdateResourcesMessage implements MessageFromServer {
 
     private HashMap<Element, Integer> availableElements;
     private HashMap<Artifact, Integer> availableArtifacts;
     private String player;
 
+    /**
+     * Instantiates a new Update resources message.
+     *
+     * @param player             the player
+     * @param availableElements  the available elements
+     * @param availableArtifacts the available artifacts
+     */
     public UpdateResourcesMessage(String player, HashMap<Element, Integer> availableElements, HashMap<Artifact, Integer> availableArtifacts){
         this.availableElements = availableElements;
         this.availableArtifacts = availableArtifacts;

@@ -31,6 +31,9 @@ import java.util.stream.Collectors;
 6 - IL GIOCO INIZIA
  */
 
+/**
+ * The type Model controller.
+ */
 public class ModelController implements ServerControllerInterface {
     private GameState gameState;
     private final ArrayList<String> playersNicknames;
@@ -49,8 +52,12 @@ public class ModelController implements ServerControllerInterface {
 
     /**
      * class constructor
+     *
      * @param playersNicknames nicknames of the players
-     * @param gameId id of the game
+     * @param gameId           id of the game
+     * @param send             the send
+     * @param room             the room
+     * @param disconnected     the disconnected
      */
     public ModelController(ArrayList<String> playersNicknames, String gameId, ServerAPI_GO send, Room room, Set<String> disconnected){
         System.out.println("model controller created");
@@ -242,6 +249,12 @@ public class ModelController implements ServerControllerInterface {
         gameState.setTurnState(TurnState.PLACING_CARD_SELECTION);
     }
 
+    /**
+     * Check message boolean.
+     *
+     * @param message the message
+     * @return the boolean
+     */
     public boolean checkMessage(MessageFromClient message){
         if(gameState != null)
             return gameState.checkMessage(message);
@@ -257,6 +270,7 @@ public class ModelController implements ServerControllerInterface {
 
     /**
      * Sets a player in an active state
+     *
      * @param playerName the name of the player to be set active
      */
     public void setPlayerActive(String playerName){
@@ -265,6 +279,7 @@ public class ModelController implements ServerControllerInterface {
 
     /**
      * set a player in an inactive state
+     *
      * @param playerName the name of the player to be set active
      * @return true if the game was closed after the player left the match, false if the match continued
      */
@@ -306,11 +321,19 @@ public class ModelController implements ServerControllerInterface {
         finished = true;
     }
 
+    /**
+     * Handle disconnection.
+     */
     public void handleDisconnection() {
         System.out.println("DISCONNECTION DETECTED");
         room.handleADetectedDisconnection();
     }
 
+    /**
+     * Quit game.
+     *
+     * @param playerID the player id
+     */
     public void quitGame(String playerID){
         System.out.println("quitting method in gamestate");
         gameState.quitGame(playerID);
@@ -318,6 +341,11 @@ public class ModelController implements ServerControllerInterface {
         room.quitGame(playerID);
     }
 
+    /**
+     * Reconnect.
+     *
+     * @param playerID the player id
+     */
     public void reconnect(String playerID) {
         System.out.println("RECONNECTION of player: " + playerID);
         //if it was the first player to play, then it must be re-set as the first player (by disconnecting it was shifted
@@ -333,6 +361,11 @@ public class ModelController implements ServerControllerInterface {
 
     ///////////////////////////////////////////////CHAT/////////////////////////////////////////////////////////////////
 
+    /**
+     * Enq chat msg.
+     *
+     * @param message the message
+     */
     public void enqChatMsg(ChatMessage message){
         Timestamp deliveryTime = chatHistory.add(message);
         if(message.getReceiver() == null) {
@@ -344,6 +377,11 @@ public class ModelController implements ServerControllerInterface {
 
     }
 
+    /**
+     * Send chat history.
+     *
+     * @param player the player
+     */
     public void sendChatHistory(String player){
         ArrayList<ChatMessage> history = chatHistory.getHistory();
 

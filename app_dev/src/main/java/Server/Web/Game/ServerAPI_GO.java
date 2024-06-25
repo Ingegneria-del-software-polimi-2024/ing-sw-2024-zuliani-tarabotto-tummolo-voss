@@ -8,13 +8,17 @@ import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * The type Server api go.
+ */
 public class ServerAPI_GO {
     private ConcurrentHashMap<String, ClientHandlerInterface> players;
 
     /**
      * the model changes are forwarded to the player
+     *
      * @param message the message containing the changes
-     * @param player the player's nickname
+     * @param player  the player's nickname
      * @throws MsgNotDeliveredException when an error in delivering the message occurs
      */
     public void notifyChanges(MessageFromServer message, String player) throws MsgNotDeliveredException {
@@ -29,7 +33,9 @@ public class ServerAPI_GO {
 
     /**
      * sends the same message to each client
+     *
      * @param message the message containing the changes
+     * @throws MsgNotDeliveredException the msg not delivered exception
      */
     public void broadcastNotifyChanges(MessageFromServer message) throws MsgNotDeliveredException {
         try {
@@ -48,7 +54,8 @@ public class ServerAPI_GO {
 
     /**
      * sets a handler for the specified player
-     * @param name the player's nickname
+     *
+     * @param name    the player's nickname
      * @param handler the player's personal handler
      */
     public void setHandler(String name, ClientHandlerInterface handler){
@@ -61,6 +68,12 @@ public class ServerAPI_GO {
     public ServerAPI_GO() {
         players = new ConcurrentHashMap<>();
     }
+
+    /**
+     * Disconnect player.
+     *
+     * @param nickName the nick name
+     */
     public void disconnectPlayer(String nickName){
         players.remove(nickName);
     }

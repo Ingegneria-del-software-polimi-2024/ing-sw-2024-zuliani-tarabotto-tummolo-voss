@@ -12,13 +12,16 @@ import model.player.Player;
 /**
  * a finite state machine that keeps track of the states occuring during the turn of a player,
  * the states are divided in:
-    * starter card selection stage
-    * colour selection stage
-    * card dealing stage
-    * normal stage (card selection, coordinates selection, drawing a card)
-    * objective calculation stage
+ * starter card selection stage
+ * colour selection stage
+ * card dealing stage
+ * normal stage (card selection, coordinates selection, drawing a card)
+ * objective calculation stage
  */
 public enum TurnState {
+    /**
+     * The Game initialization.
+     */
     GAME_INITIALIZATION{
         @Override
         public boolean controlMessage(MessageFromClient message) {
@@ -47,6 +50,9 @@ public enum TurnState {
     },
 
 
+    /**
+     * The Starter card selection.
+     */
     STARTER_CARD_SELECTION{
         public boolean controlMessage(MessageFromClient msg){
             return (msg instanceof SelectStarterCardMessage ||
@@ -73,6 +79,9 @@ public enum TurnState {
     },
 
 
+    /**
+     * The Objective selection.
+     */
     OBJECTIVE_SELECTION{
         public boolean controlMessage(MessageFromClient msg){
             return (msg instanceof ChooseSecreteObjMessage ||
@@ -99,6 +108,9 @@ public enum TurnState {
     },
 
 
+    /**
+     * The Placing card selection.
+     */
     PLACING_CARD_SELECTION{
         public boolean controlMessage(MessageFromClient msg){
             return (msg instanceof PlayCardMessage         ||
@@ -120,6 +132,9 @@ public enum TurnState {
     },
 
 
+    /**
+     * The Card drawing.
+     */
     CARD_DRAWING{
         public boolean controlMessage(MessageFromClient msg){
             return (msg instanceof DrawCardMessage         ||
@@ -141,6 +156,9 @@ public enum TurnState {
     },
 
 
+    /**
+     * The End game.
+     */
     END_GAME{
         public boolean controlMessage(MessageFromClient msg){
             return (msg instanceof QuitGameMessage          ||
@@ -195,11 +213,42 @@ public enum TurnState {
 //        throw new UnsupportedOperationException();
 //    }
 
+    /**
+     * Control message boolean.
+     *
+     * @param message the message
+     * @return the boolean
+     */
     public boolean controlMessage(MessageFromClient message){return false;}
 
+    /**
+     * Display.
+     *
+     * @param ui the ui
+     */
     public void display(UI ui){}
+
+    /**
+     * Recover disconnection.
+     *
+     * @param gameState          the game state
+     * @param disconnectedPlayer the disconnected player
+     */
     public void recoverDisconnection(GameState gameState, Player disconnectedPlayer){}
+
+    /**
+     * Reconnect.
+     *
+     * @param gameState          the game state
+     * @param reconnectingPlayer the reconnecting player
+     */
     public void reconnect(GameState gameState, Player reconnectingPlayer){}
+
+    /**
+     * Is starting state boolean.
+     *
+     * @return the boolean
+     */
     public boolean isStartingState(){
         return this.equals(GAME_INITIALIZATION) || this.equals(OBJECTIVE_SELECTION) || this.equals(STARTER_CARD_SELECTION);
     }

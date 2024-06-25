@@ -8,6 +8,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.rmi.RemoteException;
 
+/**
+ * The type First socket manager.
+ */
 public class FirstSocketManager implements Runnable {
     private Lobby lobby;
     private static FirstSocketManager instance;
@@ -22,8 +25,13 @@ public class FirstSocketManager implements Runnable {
         this.lobby = lobby;
         this.port = port;
     }
+
     /**
      * the class is a singleton, returns the single instance of the class. See First_RMI_Manager constructor
+     *
+     * @param lobby the lobby
+     * @param port  the port
+     * @return the first socket manager
      */
     public static FirstSocketManager getInstance(Lobby lobby, int port){
         if(instance == null) {

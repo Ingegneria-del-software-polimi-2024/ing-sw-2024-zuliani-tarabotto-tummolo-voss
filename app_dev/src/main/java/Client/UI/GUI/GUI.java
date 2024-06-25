@@ -27,6 +27,9 @@ import java.util.regex.Pattern;
 import static org.fusesource.jansi.Ansi.ansi;
 
 
+/**
+ * The type Gui.
+ */
 public class  GUI  implements UI {
 
     private JFrame frame;
@@ -47,8 +50,17 @@ public class  GUI  implements UI {
     private JPanel topPanel; //quit, rules, tutorial
     private EndGamePanel endGamePanel;
     private LoginFrame login;
+    /**
+     * The Fps.
+     */
     final int FPS = 40;
+    /**
+     * The Starter selected.
+     */
     public boolean starterSelected = false;
+    /**
+     * The Card selected.
+     */
     public boolean cardSelected = false;
     private PlacementArea board;
     private PlayableCard playCard;
@@ -61,6 +73,11 @@ public class  GUI  implements UI {
     private CardLayout cardLayout;
     private int cardLength;
 
+    /**
+     * Instantiates a new Gui.
+     *
+     * @param view the view
+     */
     public GUI(ViewAPI view){
         this.view = view;
         title = "";
@@ -127,6 +144,9 @@ public class  GUI  implements UI {
 
     }
 
+    /**
+     * Create frame.
+     */
     public void createFrame(){
         System.out.println("new Frame");
         SwingUtilities.invokeLater(() -> {
@@ -293,6 +313,10 @@ public class  GUI  implements UI {
             frame.repaint();
         }
     }
+
+    /**
+     * Go back to lobby.
+     */
     public void goBackToLobby(){
         if(frame != null){
             frame.dispose();
@@ -350,6 +374,12 @@ public class  GUI  implements UI {
     }
 
 
+    /**
+     * Valid ip boolean.
+     *
+     * @param ip the ip
+     * @return the boolean
+     */
     public boolean validIP(String ip){
 
         if(ip.toLowerCase(Locale.ROOT).equals("localhost"))
@@ -379,12 +409,18 @@ public class  GUI  implements UI {
     }
 
 
+    /**
+     * Create hand panel.
+     */
     public void createHandPanel(){
         this.handPanel = new HandPanel(this, (int)bottomPanel.getPreferredSize().getHeight());
         bottomPanel.add(handPanel);
     }
 
 
+    /**
+     * Create objectives panel.
+     */
     public void createObjectivesPanel(){
         this.objPanel = new ObjectivesPanel(this, (int)bottomPanel.getPreferredSize().getHeight());
         objPanel.setPreferredSize(new Dimension((int)(screenWidth * 0.33), (int)(screenHeight * 0.25)));
@@ -482,16 +518,27 @@ public class  GUI  implements UI {
         boardMotionListener = new BoardMotionListener(this, board);
     }
 
+    /**
+     * Enable board listeners.
+     */
     public void enableBoardListeners(){
         board.addMouseListener(boardClickedListener);
         board.addMouseMotionListener(boardMotionListener);
     }
 
+    /**
+     * Disable board listeners.
+     */
     public void disableBoardListeners(){
         board.removeMouseListener(boardClickedListener);
         board.removeMouseMotionListener(boardMotionListener);
     }
 
+    /**
+     * Set selected card.
+     *
+     * @param c the c
+     */
     public void setSelectedCard(PlayableCard c){
         this.cardSelected = !cardSelected;
         if(cardSelected){
@@ -507,6 +554,9 @@ public class  GUI  implements UI {
     }
 
 
+    /**
+     * Set starter selected.
+     */
     public void setStarterSelected(){
         starterSelected = !starterSelected;
         if(starterSelected){
@@ -516,20 +566,36 @@ public class  GUI  implements UI {
         }
     }
 
+    /**
+     * Update hand.
+     */
     public void updateHand(){
         handPanel.updateHand();
     }
 
 
+    /**
+     * Set current disposition.
+     *
+     * @param player the player
+     */
     public void setCurrentDisposition(String player){
         this.currentDisposition = player;
     }
 
+    /**
+     * Get current disposition string.
+     *
+     * @return the string
+     */
     public String getCurrentDisposition(){return currentDisposition;}
 
 
-
-
+    /**
+     * Show title.
+     *
+     * @param newTitle the new title
+     */
     public  void showTitle(String newTitle) {
 
         JLabel label = (JLabel) titlesPanel.getComponent(0);
@@ -550,6 +616,9 @@ public class  GUI  implements UI {
 
     }
 
+    /**
+     * Quit game.
+     */
     public void quitGame(){
         frame.dispose();
         frame = null;
@@ -558,12 +627,22 @@ public class  GUI  implements UI {
 
     }
 
+    /**
+     * Check card is placeable boolean.
+     *
+     * @return the boolean
+     */
     public boolean checkCardIsPlaceable(){
         int index = view.getHand().indexOf(playCard);
         if(!playCard.getFaceSide()) return true;
         else return view.getCanBePlaced()[index];
     }
 
+    /**
+     * Set card length.
+     *
+     * @param cardLength the card length
+     */
     public void setCardLength(int cardLength){
         this.cardLength = cardLength;
     }
@@ -595,21 +674,59 @@ public class  GUI  implements UI {
 
     ////////////////////////////////// GETTER METHODS ////////////////////////////////////////////////////////////////
 
+    /**
+     * Get fronts hash map.
+     *
+     * @return the hash map
+     */
     public HashMap<Integer, BufferedImage> getFronts(){ return fronts;}
+
+    /**
+     * Get backs hash map.
+     *
+     * @return the hash map
+     */
     public HashMap<Integer, BufferedImage> getBacks(){ return backs;}
+
+    /**
+     * Get view view api.
+     *
+     * @return the view api
+     */
     public ViewAPI getView(){
         return view;
     }
+
+    /**
+     * Get res icons hash map.
+     *
+     * @return the hash map
+     */
     public HashMap<Resources, BufferedImage> getResIcons(){return resIcons;}
 
+    /**
+     * Gets screen height.
+     *
+     * @return the screen height
+     */
     public int getScreenHeight() {
         return screenHeight;
     }
 
+    /**
+     * Gets screen width.
+     *
+     * @return the screen width
+     */
     public int getScreenWidth() {
         return screenWidth;
     }
 
+    /**
+     * Get play card playable card.
+     *
+     * @return the playable card
+     */
     public PlayableCard getPlayCard(){return  playCard;}
 
 

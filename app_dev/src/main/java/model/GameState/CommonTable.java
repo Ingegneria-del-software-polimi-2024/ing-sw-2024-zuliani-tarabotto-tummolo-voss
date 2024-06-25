@@ -11,6 +11,9 @@ import model.player.Player;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Common table.
+ */
 public class CommonTable {
 
     private PlayableDeck goldDeck;
@@ -25,7 +28,8 @@ public class CommonTable {
     /**
      * this method calls all the initialization methods related to CommonTable
      * (it is more convenient not to do this in the class constructor for testing purposes)
-     * @param players
+     *
+     * @param players the players
      */
     public void initialize(List<Player> players){
         initializeDecks();
@@ -109,9 +113,11 @@ public class CommonTable {
 
 
     /////////////////// METHODS RELATED TO DRAWING FROM DECKS //////////////////////////////////////////////////////////////////
+
     /**
      * returns true if all drawable cards on the CommonTable are finished
-     * @return Boolean
+     *
+     * @return Boolean boolean
      */
     public boolean checkEmptyDecks() {
         return goldDeck.getSize() == 0 && resourceDeck.getSize() == 0 /*&& openGold.isEmpty() && openResources.isEmpty()*/;
@@ -119,8 +125,9 @@ public class CommonTable {
 
     /**
      * the first card in the GoldDeck is extracted and given to the turnPlayer
+     *
      * @param turnPlayer the currentPlayer
-     * @throws EmptyCardSourceException
+     * @throws EmptyCardSourceException the empty card source exception
      */
     public void drawCardGoldDeck(Player turnPlayer) throws EmptyCardSourceException {
         if(goldDeck.getSize() > 0){
@@ -130,8 +137,9 @@ public class CommonTable {
 
     /**
      * the first card in the ResourceDeck is extracted and given to the turnPlayer
+     *
      * @param turnPlayer the currentPlayer
-     * @throws EmptyCardSourceException
+     * @throws EmptyCardSourceException the empty card source exception
      */
     public void drawCardResourcesDeck(Player turnPlayer) throws EmptyCardSourceException{
         //takes away the first card of the deck and calls the following method
@@ -142,8 +150,10 @@ public class CommonTable {
 
     /**
      * the card at the specified index position in openGold is extracted and given to the turnPlayer
+     *
+     * @param index      the index
      * @param turnPlayer the currentPlayer
-     * @throws EmptyCardSourceException
+     * @throws EmptyCardSourceException the empty card source exception
      */
     public void drawCardOpenGold(int index, Player turnPlayer) throws EmptyCardSourceException {
         if(openGold.get(index) != null) {
@@ -161,8 +171,10 @@ public class CommonTable {
 
     /**
      * the card at the specified index position in openResources is extracted and given to the turnPlayer
+     *
+     * @param index      the index
      * @param turnPlayer the currentPlayer
-     * @throws EmptyCardSourceException
+     * @throws EmptyCardSourceException the empty card source exception
      */
     public void drawCardOpenResources(int index, Player turnPlayer) throws EmptyCardSourceException {
         if(openResources.get(index) != null) {
@@ -179,21 +191,63 @@ public class CommonTable {
     }
 
 
-
-    ////////////////////// GETTER METHODS /////////////////////////////////////////////////////////////////////////
+    /**
+     * Gets common objectives.
+     *
+     * @return the common objectives
+     */
+////////////////////// GETTER METHODS /////////////////////////////////////////////////////////////////////////
     public List<ObjectiveCard> getCommonObjectives() {return commonObjectives;}
+
+    /**
+     * Gets gold deck.
+     *
+     * @return the gold deck
+     */
     public PlayableDeck getGoldDeck() { return goldDeck; }
+
+    /**
+     * Gets resource deck.
+     *
+     * @return the resource deck
+     */
     public PlayableDeck getResourceDeck() { return resourceDeck; }
+
+    /**
+     * Get starter deck playable deck.
+     *
+     * @return the playable deck
+     */
     public PlayableDeck getStarterDeck(){return startingDeck;}
+
+    /**
+     * Gets objective deck.
+     *
+     * @return the objective deck
+     */
     public ObjectiveDeck getObjectiveDeck() {return objectiveDeck;}
+
+    /**
+     * Gets open resources.
+     *
+     * @return the open resources
+     */
     public List<PlayableCard> getOpenResources() { return openResources; }
+
+    /**
+     * Gets open gold.
+     *
+     * @return the open gold
+     */
     public List<PlayableCard> getOpenGold() { return openGold; }
 
 
-
-
-
-    ///////////////////////FOR TESTING PURPOSES ONLY //////////////////////////////////////////////////////////////
+    /**
+     * Defined deck initialization.
+     *
+     * @param players the players
+     */
+///////////////////////FOR TESTING PURPOSES ONLY //////////////////////////////////////////////////////////////
     public void definedDeckInitialization(List<Player> players) {
         //creates and shuffles decks
         long seed = 12345;
@@ -227,6 +281,12 @@ public class CommonTable {
         initializePlayersHands(players);
     }
 
+    /**
+     * Deterministic shuffle.
+     *
+     * @param list        the list
+     * @param permutation the permutation
+     */
     public  void deterministicShuffle(PlayableDeck list, int[] permutation) {
         // Fisher-Yates shuffle algorithm with a fixed permutation
         ArrayList<PlayableCard> copy = new ArrayList<>(list.getCards());
@@ -239,6 +299,13 @@ public class CommonTable {
         list.getCards().clear();
         list.getCards().addAll(copy);
     }
+
+    /**
+     * Deterministic shuffle.
+     *
+     * @param list        the list
+     * @param permutation the permutation
+     */
     public  void deterministicShuffle(ObjectiveDeck list, int[] permutation) {
         // Fisher-Yates shuffle algorithm with a fixed permutation
         ArrayList<ObjectiveCard> copy = new ArrayList<>(list.getCards());

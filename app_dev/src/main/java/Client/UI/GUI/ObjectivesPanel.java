@@ -7,6 +7,9 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * The type Objectives panel.
+ */
 public class ObjectivesPanel extends JPanel {
     private GUI gui;
     private ObjCardLabel common1;
@@ -22,8 +25,9 @@ public class ObjectivesPanel extends JPanel {
 
     /**
      * JPanel containing three ObjCardLabel representing the two common objectives and the player's secret objective
-     * @param gui
-     * @param panelHeight
+     *
+     * @param gui         the gui
+     * @param panelHeight the panel height
      */
     public ObjectivesPanel(GUI gui, int panelHeight){
         this.gui = gui;
@@ -130,6 +134,9 @@ public class ObjectivesPanel extends JPanel {
 
     }
 
+    /**
+     * Print objectives.
+     */
     public void printObjectives(){
         setBorder(BorderFactory.createEmptyBorder((panelHeight - (int)common1.getPreferredSize().getHeight())/2, 0, 0, 0));
         ObjectiveCard secret = gui.getView().getSecretObjective();
@@ -138,6 +145,9 @@ public class ObjectivesPanel extends JPanel {
         updateObjectivesPanel();
     }
 
+    /**
+     * Update objectives panel.
+     */
     public void updateObjectivesPanel(){
         ObjectiveCard c1 = gui.getView().getCommonObjectives().get(0);
         ObjectiveCard c2 = gui.getView().getCommonObjectives().get(1);

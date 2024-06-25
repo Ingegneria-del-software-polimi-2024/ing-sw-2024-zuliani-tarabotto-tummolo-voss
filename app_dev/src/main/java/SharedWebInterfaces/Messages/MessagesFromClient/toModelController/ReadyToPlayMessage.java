@@ -5,6 +5,9 @@ import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
 import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
 import SharedWebInterfaces.SharedInterfaces.ServerControllerInterface;
 
+/**
+ * The type Ready to play message.
+ */
 public class ReadyToPlayMessage implements  MessageFromClient {
 
 

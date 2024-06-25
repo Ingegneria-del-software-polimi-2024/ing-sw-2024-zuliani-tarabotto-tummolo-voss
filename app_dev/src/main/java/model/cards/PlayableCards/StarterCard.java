@@ -67,9 +67,10 @@ public class StarterCard extends PlayableCard{
 
     /**
      * json parsing
-     * @param id
-     * @return
-     * @throws JsonProcessingException
+     *
+     * @param id the id
+     * @return starter card
+     * @throws JsonProcessingException the json processing exception
      */
     public static StarterCard parse(int id) throws JsonProcessingException {
         int targetId = id; // ID to search for

@@ -13,7 +13,8 @@ public interface Command {
 
     /**
      * returns the command's name
-     * @return
+     *
+     * @return name
      */
     String getName();
 }

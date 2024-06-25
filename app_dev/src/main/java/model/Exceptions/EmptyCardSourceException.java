@@ -12,9 +12,20 @@ package model.Exceptions;
 public class EmptyCardSourceException extends Exception{
     private final int source;
 
+    /**
+     * Instantiates a new Empty card source exception.
+     *
+     * @param indx the indx
+     */
     public EmptyCardSourceException(int indx){
         this.source = indx;
     }
+
+    /**
+     * Gets indx.
+     *
+     * @return the indx
+     */
     public int getIndx() {
         return source;
     }

@@ -46,6 +46,7 @@ public class ObjectiveDeck implements Deck {
 
     /**
      * Adds a card to the back (tail/end) of the cards list.
+     *
      * @param card .
      */
     public void addCard(ObjectiveCard card) {
@@ -63,6 +64,7 @@ public class ObjectiveDeck implements Deck {
     /**
      * Removes and returns the first card in the deck.
      * Throws an IllegalStateException if the deck is empty.
+     *
      * @return The extracted ObjectiveCard.
      */
     public ObjectiveCard extract() {
@@ -87,6 +89,7 @@ public class ObjectiveDeck implements Deck {
 
     /**
      * Returns the ObjectiveCard at the specified index in the cards list.
+     *
      * @param i The index of the card to retrieve.
      * @return The ObjectiveCard at the specified index.
      */
@@ -96,6 +99,7 @@ public class ObjectiveDeck implements Deck {
 
     /**
      * Returns the entire list of ObjectiveCards in the deck.
+     *
      * @return The list of ObjectiveCards.
      */
     public ArrayList<ObjectiveCard> getCards() {
@@ -107,6 +111,7 @@ public class ObjectiveDeck implements Deck {
     /**
      * Retrieves a card from the deck based on its ID.
      * This method is for testing purposes only.
+     *
      * @param id The ID of the card to retrieve.
      * @return The ObjectiveCard with the specified ID, or null if not found.
      */

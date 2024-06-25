@@ -7,6 +7,9 @@ import model.cards.PlayableCards.PlayableCard;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Initialization message.
+ */
 public class InitializationMessage implements MessageFromServer{
 
     private List<PlayableCard> goldDeck;
@@ -18,6 +21,18 @@ public class InitializationMessage implements MessageFromServer{
     private List<PlayableCard> openGold;
     private List<PlayableCard> openResource;
 
+    /**
+     * Instantiates a new Initialization message.
+     *
+     * @param goldDeck         the gold deck
+     * @param resourceDeck     the resource deck
+     * @param openGold         the open gold
+     * @param openResource     the open resource
+     * @param players          the players
+     * @param gameId           the game id
+     * @param commonObjective1 the common objective 1
+     * @param commonObjective2 the common objective 2
+     */
     public InitializationMessage(List<PlayableCard> goldDeck, List<PlayableCard> resourceDeck, List<PlayableCard> openGold, List<PlayableCard> openResource,
                                  List<String> players, String gameId, ObjectiveCard commonObjective1, ObjectiveCard commonObjective2) {
 

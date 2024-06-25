@@ -4,10 +4,21 @@ import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
 import model.cards.PlayableCards.PlayableCard;
 import model.enums.Pawn;
 
+/**
+ * The type Starter card message.
+ */
 public class StarterCardMessage implements MessageFromServer{
     private PlayableCard starterCard;
     private String pawnColor;
     private String player;
+
+    /**
+     * Instantiates a new Starter card message.
+     *
+     * @param player      the player
+     * @param starterCard the starter card
+     * @param pawnColor   the pawn color
+     */
     public StarterCardMessage(String player, PlayableCard starterCard, String pawnColor){
         this.player = player;
         this.starterCard = starterCard;

@@ -6,9 +6,18 @@ import model.cards.PlayableCards.PlayableCard;
 
 import java.util.List;
 
+/**
+ * The type Update hand message.
+ */
 public class UpdateHandMessage implements MessageFromServer{
 
     private List<PlayableCard> hand;
+
+    /**
+     * Instantiates a new Update hand message.
+     *
+     * @param hand the hand
+     */
     public UpdateHandMessage(List<PlayableCard> hand){
         this.hand = hand;
     }

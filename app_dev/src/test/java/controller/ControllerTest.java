@@ -21,16 +21,30 @@ import java.util.Scanner;
 import static org.fusesource.jansi.Ansi.ansi;
 
 
+/**
+ * The type Controller test.
+ */
 class ControllerTest {
     private GameState gameState;
     private ArrayList<String> nickNames;
     private Scanner sc = new Scanner(new File("C:\\Users\\nicol\\OneDrive\\Documenti\\GitHub\\ing-sw-2024-zuliani-tarabotto-tummolo-voss\\app_dev\\src\\test\\java\\controller\\final"));
     private Player initialPlayer;
 
+    /**
+     * Instantiates a new Controller test.
+     *
+     * @throws FileNotFoundException the file not found exception
+     */
     ControllerTest() throws FileNotFoundException {
     }
 
 
+    /**
+     * Main.
+     *
+     * @throws EmptyCardSourceException the empty card source exception
+     * @throws IOException              the io exception
+     */
     @Test
     public void main() throws EmptyCardSourceException, IOException {
         ControllerTest controller = new ControllerTest();
@@ -38,7 +52,10 @@ class ControllerTest {
         controller.gameLoop();
     }
 
-    //creates a new gameState and ask users for nicknames
+    /**
+     * Initialize game state.
+     */
+//creates a new gameState and ask users for nicknames
     public void initializeGameState() {
         String id = "gameState_0";
         nickNames = new ArrayList<String>();
@@ -60,6 +77,12 @@ class ControllerTest {
 
     //main method to handle game flow
 
+    /**
+     * Game loop.
+     *
+     * @throws EmptyCardSourceException the empty card source exception
+     * @throws IOException              the io exception
+     */
     public void gameLoop() throws EmptyCardSourceException, IOException {
         int cont = 0;
 
@@ -232,6 +255,14 @@ class ControllerTest {
         }
     }
 
+    /**
+     * Files compare by line long.
+     *
+     * @param path1 the path 1
+     * @param path2 the path 2
+     * @return the long
+     * @throws IOException the io exception
+     */
     public static long filesCompareByLine(Path path1, Path path2) throws IOException {
         try (BufferedReader bf1 = Files.newBufferedReader(path1);
              BufferedReader bf2 = Files.newBufferedReader(path2)) {

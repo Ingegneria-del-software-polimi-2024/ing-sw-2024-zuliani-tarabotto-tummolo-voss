@@ -5,6 +5,9 @@ import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
 
 import java.util.ArrayList;
 
+/**
+ * The type Available games.
+ */
 public class AvailableGames implements MessageFromServer {
     private ArrayList<String> availableGames;
     private boolean backFromWaitingRoom = false;
@@ -14,11 +17,22 @@ public class AvailableGames implements MessageFromServer {
         view.displayAvailableGames(availableGames);
     }
 
+    /**
+     * Instantiates a new Available games.
+     *
+     * @param availableGames the available games
+     */
     public AvailableGames(ArrayList<String> availableGames) {
         this.availableGames = availableGames;
     }
 
-    //we use this constructor only when we quit from the waitingRoom
+    /**
+     * Instantiates a new Available games.
+     *
+     * @param availableGames the available games
+     * @param b              the b
+     */
+//we use this constructor only when we quit from the waitingRoom
     public AvailableGames(ArrayList<String> availableGames, boolean b) {
         this.backFromWaitingRoom = b;
         this.availableGames = availableGames;

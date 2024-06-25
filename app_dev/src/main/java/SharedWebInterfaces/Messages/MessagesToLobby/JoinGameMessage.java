@@ -4,6 +4,9 @@ import Server.Web.Lobby.Lobby;
 import SharedWebInterfaces.Messages.MessagesFromLobby.ACK_RoomChoice;
 import SharedWebInterfaces.WebExceptions.MsgNotDeliveredException;
 
+/**
+ * The type Join game message.
+ */
 public class JoinGameMessage implements MessageToLobby{
     private String user;
     private String game;
@@ -20,6 +23,13 @@ public class JoinGameMessage implements MessageToLobby{
         return user;
     }
 
+    /**
+     * Instantiates a new Join game message.
+     *
+     * @param user     the user
+     * @param game     the game
+     * @param nPlayers the n players
+     */
     public JoinGameMessage(String user, String game, int nPlayers) {
         this.user = user;
         this.game = game;

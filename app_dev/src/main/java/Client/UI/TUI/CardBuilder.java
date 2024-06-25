@@ -17,7 +17,8 @@ public class CardBuilder {
     /**
      * based on the "row" parameter, it calls a different building method which will return a line containing the specified "row"
      * for the specified "card"
-     * @param row the row of the card that has to be built
+     *
+     * @param row  the row of the card that has to be built
      * @param card the corresponding PlayableCard
      * @return a line containing the desired row of characters
      */
@@ -49,6 +50,7 @@ public class CardBuilder {
 
     /**
      * builds the first row of the card.
+     *
      * @param card the corresponding PlayableCard
      * @return a line containing the desired characters
      */
@@ -81,6 +83,7 @@ public class CardBuilder {
 
     /**
      * builds the second row of the card.
+     *
      * @param card the corresponding PlayableCard
      * @return a line containing the desired characters
      */
@@ -104,6 +107,7 @@ public class CardBuilder {
 
     /**
      * builds the third row of the card.
+     *
      * @param card the corresponding PlayableCard
      * @return a line containing the desired characters
      */
@@ -138,6 +142,7 @@ public class CardBuilder {
 
     /**
      * builds the fourth row of the card.
+     *
      * @param card the corresponding PlayableCard
      * @return a line containing the desired characters
      */
@@ -172,6 +177,7 @@ public class CardBuilder {
 
     /**
      * builds the fifth row of the card.
+     *
      * @param card the corresponding PlayableCard
      * @return a line containing the desired characters
      */
@@ -193,6 +199,7 @@ public class CardBuilder {
 
     /**
      * builds the sixth row of the card.
+     *
      * @param card the corresponding PlayableCard
      * @return a line containing the desired characters
      */

@@ -27,8 +27,14 @@ public class ResourcePoints implements Points {
     }
 
 
+    /**
+     * The Element.
+     */
     @JsonProperty("element")
     Element element;
+    /**
+     * The Artifact.
+     */
     @JsonProperty("artifact")
     Artifact artifact;
 
@@ -41,6 +47,11 @@ public class ResourcePoints implements Points {
         return points;
     }
 
+    /**
+     * Gets artifacts.
+     *
+     * @return the artifacts
+     */
     public Artifact getArtifacts() {
         return artifact;
     }

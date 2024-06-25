@@ -18,6 +18,11 @@ public class BannersPanel extends JPanel {
     private GUI gui;
     private HashMap<String, PlayerPanel> banners;
 
+    /**
+     * Instantiates a new Banners panel.
+     *
+     * @param gui the gui
+     */
     public BannersPanel(GUI gui){
         int screenWidth = gui.getScreenWidth();
         int screenHeight = gui.getScreenHeight();

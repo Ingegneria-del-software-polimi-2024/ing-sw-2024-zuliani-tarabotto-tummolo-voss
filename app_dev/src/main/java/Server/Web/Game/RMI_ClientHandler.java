@@ -11,6 +11,9 @@ import SharedWebInterfaces.SharedInterfaces.ServerHandlerInterface;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+/**
+ * The type Rmi client handler.
+ */
 public class RMI_ClientHandler implements ClientHandlerInterface {
     private ServerAPI_COME api;
     private ServerHandlerInterface client;
@@ -55,9 +58,10 @@ public class RMI_ClientHandler implements ClientHandlerInterface {
 
     /**
      * class creator
+     *
      * @param clientRemoteInterface the remote interface of the client to which the server must comunicate
-     * @param lobby the lobby
-     * @param serverPort the port of the server, used to export the new personal handler
+     * @param lobby                 the lobby
+     * @param serverPort            the port of the server, used to export the new personal handler
      * @throws RemoteException when the handler could not be correctly exported
      */
     public RMI_ClientHandler(ServerHandlerInterface clientRemoteInterface, Lobby lobby, int serverPort) throws RemoteException{
