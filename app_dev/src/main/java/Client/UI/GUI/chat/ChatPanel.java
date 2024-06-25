@@ -15,9 +15,14 @@ import java.util.List;
 public class ChatPanel extends JPanel {
 
     private GUI gui;
+    /**
+     * contains the messages
+     */
     private JTextArea chatArea;
+    /**
+     * scrollPane containing the chatArea
+     */
     private JScrollPane chatScrollPane;
-    private JTextPane tPane;
 
     /**
      * JScrollPane containing a JTextArea where new chat messages are appended.
@@ -96,7 +101,7 @@ public class ChatPanel extends JPanel {
     }
 
     /**
-     * the functions is called when a player reconnects to a room in order to restore the past chat history
+     * restores the past chat history when a player reconnects to the room after he disconnected
      */
     public void restoreChatHistory() {
         List<ChatMessage> chatHistory = gui.getView().getChatHistory();

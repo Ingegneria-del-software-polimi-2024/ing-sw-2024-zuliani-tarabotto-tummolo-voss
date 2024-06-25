@@ -7,12 +7,24 @@ import java.awt.image.BufferedImage;
 
 
 public class CardLabel extends JLabel {
+    /**
+     * the PlayableCard represented by the CardLabel
+     */
     private PlayableCard c;
+    /**
+     * front face image of the card
+     */
     private BufferedImage front;
+    /**
+     * back face image of the card
+     */
     private BufferedImage back;
     private int cardLength;
     private int cardHeight;
     private final float heightLengthRatio =   (float) 2 /3;
+    /**
+     * attribute used for the CardLabels in the DeckPanel, it indicates which card source the card belongs to
+     */
     private int cardSource;
     private final int borderWidth = 4;
     private boolean select;

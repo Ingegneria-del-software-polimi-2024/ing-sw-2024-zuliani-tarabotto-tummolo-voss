@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * panel with a boxLayout that contains the banners of the players
+ * panel with a boxLayout that contains the players' PlayerPanel
  */
 public class BannersPanel extends JPanel {
 
@@ -55,7 +55,7 @@ public class BannersPanel extends JPanel {
     }
 
     /**
-     * updates every player's points and resources
+     * updates every player's points and resources on the PlayerPanel
      */
     public void updateBanners(){
         for(String p : banners.keySet()){

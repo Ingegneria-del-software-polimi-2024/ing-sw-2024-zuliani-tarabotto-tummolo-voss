@@ -13,7 +13,7 @@ public class EndGamePanel extends JPanel {
     private GUI gui;
 
     /**
-     * creates a new panel that displays the winners and the final points.
+     * a panel that displays the winners and the final points.
      * Two buttons let the player choose whether he wants to go back to the lobby or close the game.
      * @param gui
      */

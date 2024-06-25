@@ -13,7 +13,7 @@ public class BoardClickedListener extends MouseAdapter {
     private PlacementArea board;
 
     /**
-     * during the card placing phase the listener detects whether one of the available places
+     * detects whether one of the available places
      * on the turnPlayer's board is clicked
      * @param gui
      * @param board
@@ -22,6 +22,7 @@ public class BoardClickedListener extends MouseAdapter {
         this.gui = gui;
         this.board = board;
     }
+
     @Override
     public void mouseClicked(MouseEvent e) {
         int x = e.getX();
@@ -42,7 +43,6 @@ public class BoardClickedListener extends MouseAdapter {
         }
 
     }
-
 
 
 }

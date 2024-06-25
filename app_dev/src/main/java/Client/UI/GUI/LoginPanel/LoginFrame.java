@@ -20,7 +20,10 @@ public class LoginFrame extends JFrame {
     private InputFields loginFields;
 
 
-
+    /**
+     * JFrame containing  a two JPanels, one for the user input and one constantly displaying the game logo
+     * @param gui
+     */
     public LoginFrame(GUI gui ){
 
         setResizable(false);

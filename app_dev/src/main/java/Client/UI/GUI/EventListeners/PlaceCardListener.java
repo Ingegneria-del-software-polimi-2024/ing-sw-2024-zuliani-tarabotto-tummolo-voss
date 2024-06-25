@@ -12,7 +12,7 @@ public class PlaceCardListener extends MouseAdapter {
     private GUI gui;
 
     /**
-     * during the card selection phase, the listener detects which of the three cards from the hand the player wants to play
+     * during the card selection phase, the listener detects which one of the three cards from the hand the player wants to play
      * @param gui
      */
     public PlaceCardListener(GUI gui){

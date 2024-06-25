@@ -12,7 +12,7 @@ public class SwitchBoardListener extends MouseAdapter {
     private GUI gui;
 
     /**
-     * the listener is responsible for 
+     * when a PlayerPanel is clicked, the listener changes the disposition that must be displayed on screen
      * @param gui
      */
     public SwitchBoardListener(GUI gui){
