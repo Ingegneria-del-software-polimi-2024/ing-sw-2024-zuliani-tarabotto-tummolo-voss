@@ -1,22 +1,29 @@
 package model.deckFactory;
 import model.cards.*;
 
-// Abstract class defining common deck properties and functionalities
-public abstract class Deck {
-    public Card[] cards; // Array to store cards
+import java.io.Serializable;
+import java.util.Collections;
+import java.util.List;
 
+// Abstract class defining common deck properties and functionalities
+
+/**
+ * Interface defining common deck functionalities
+ */
+public interface Deck extends Serializable {
+    /**
+     * a new deck is created by using json parsing to build the related cards from a specific file
+     */
     public abstract void generate();
 
-    public void shuffle() {
-        // Default shuffling logic
-    }
+    /**
+     * the cards in the deck are randomly shuffled
+     */
+    public abstract void shuffle();
 
-    public void extract() {
-        // Default card extraction logic
-    }
-
-    public void addCard(Card card) {
-        // Implement logic to add the card to the cards array
-        // (e.g., check for available space, resize the array if needed)
-    }
+    /**
+     * returns the number of cards in the deck
+     */
+    public abstract int getSize();
 }
+
