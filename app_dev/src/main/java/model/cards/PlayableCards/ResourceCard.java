@@ -16,10 +16,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+/**
+ * Represents a ResourceCard which is a type of PlayableCard with specific elements and points strategies.
+ */
 public class ResourceCard extends PlayableCard {
+
+    /**
+     * The element that is blocked on the back face of the card.
+     */
     @JsonProperty("element")
     private Element blockedElement;
-    private Points points;
+    //private Points points;
 
 
 
@@ -77,7 +84,12 @@ public class ResourceCard extends PlayableCard {
     }
 
 
-
+    /**
+     * Counts the points for this resource card based on its points strategy and the given placement area.
+     *
+     * @param placementArea the placement area to calculate points from.
+     * @return the number of points granted by this card.
+     */
     @Override
     public int countPoints(PlacementArea placementArea) {
         return points.count(placementArea);
@@ -103,25 +115,25 @@ public class ResourceCard extends PlayableCard {
     public Element[] getBackFaceCorners() { return null; }
 
     /////////////////// TESTED RELATED ONLY METHODS ////////////////////////////////////
-    public void printCorner(Corner c) {
-        if (c.getElement() != null) System.out.println("Corner_" + c.getId() + ": " + c.getElement());
-        else if (c.getArtifact() != null) System.out.println("Corner_" + c.getId() + ": " + c.getArtifact());
-        else System.out.println("Corner_" + c.getId() + ": empty");
-    }
-
-    @Override
-    public void printCard() {
-        System.out.println("Card ID: " + getId());
-
-        //stampa il fronte della carta
-        System.out.println("FRONT FACE");
-        for (Corner c : getCorners()) {
-            printCorner(c);
-        }
-        System.out.println(points.getPointsPolicy());
-        //stampa il retro della carta
-        System.out.println("BACK FACE");
-        System.out.println("Blocked element: " + getBlockedElement());
-
-    }
+//    public void printCorner(Corner c) {
+//        if (c.getElement() != null) System.out.println("Corner_" + c.getId() + ": " + c.getElement());
+//        else if (c.getArtifact() != null) System.out.println("Corner_" + c.getId() + ": " + c.getArtifact());
+//        else System.out.println("Corner_" + c.getId() + ": empty");
+//    }
+//
+//    @Override
+//    public void printCard() {
+//        System.out.println("Card ID: " + getId());
+//
+//        //stampa il fronte della carta
+//        System.out.println("FRONT FACE");
+//        for (Corner c : getCorners()) {
+//            printCorner(c);
+//        }
+//        System.out.println(points.getPointsPolicy());
+//        //stampa il retro della carta
+//        System.out.println("BACK FACE");
+//        System.out.println("Blocked element: " + getBlockedElement());
+//
+//    }
 }

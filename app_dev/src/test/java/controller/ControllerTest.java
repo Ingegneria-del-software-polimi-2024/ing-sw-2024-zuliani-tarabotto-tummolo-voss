@@ -24,7 +24,7 @@ import static org.fusesource.jansi.Ansi.ansi;
 class ControllerTest {
     private GameState gameState;
     private ArrayList<String> nickNames;
-    private Scanner sc = new Scanner(new File("/Users/andre/Documents/GitHub.nosync/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/final"));
+    private Scanner sc = new Scanner(new File("C:\\Users\\nicol\\OneDrive\\Documenti\\GitHub\\ing-sw-2024-zuliani-tarabotto-tummolo-voss\\app_dev\\src\\test\\java\\controller\\final"));
     private Player initialPlayer;
 
     ControllerTest() throws FileNotFoundException {
@@ -115,8 +115,8 @@ class ControllerTest {
         printWinner();
         fileWriting();
 
-        String filePath1 = "/Users/andre/Documents/GitHub.nosync/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/output";
-        String filePath2 = "/Users/andre/Documents/GitHub.nosync/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/expectedOutput";
+        String filePath1 = "C:\\Users\\nicol\\OneDrive\\Documenti\\GitHub\\ing-sw-2024-zuliani-tarabotto-tummolo-voss\\app_dev\\src\\test\\java\\controller\\output";
+        String filePath2 = "C:\\Users\\nicol\\OneDrive\\Documenti\\GitHub\\ing-sw-2024-zuliani-tarabotto-tummolo-voss\\app_dev\\src\\test\\java\\controller\\expectedOutput";
         File f1 = new File(filePath1);
         File f2 = new File(filePath2);
 
@@ -202,7 +202,7 @@ class ControllerTest {
 
 
         //we write the output file
-        String filename = "/Users/andre/Documents/GitHub.nosync/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/output"; // Specify the file name
+        String filename = "C:\\Users\\nicol\\OneDrive\\Documenti\\GitHub\\ing-sw-2024-zuliani-tarabotto-tummolo-voss\\app_dev\\src\\test\\java\\controller\\output"; // Specify the file name
 
         try {
             // Create a FileWriter object

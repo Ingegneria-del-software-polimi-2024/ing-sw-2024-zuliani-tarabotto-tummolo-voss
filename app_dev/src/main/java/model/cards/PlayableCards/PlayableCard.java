@@ -9,14 +9,41 @@ import java.util.*;
 import model.enums.*;
 import model.placementArea.PlacementArea;
 
+/**
+ * Represents an abstract PlayableCard which defines the basic structure and behavior
+ * for all playable cards in the game. This class should be extended by specific types
+ * of playable cards.
+ */
 public abstract class PlayableCard implements Card {
+    /**
+     * The type of the card.
+     */
     private String type;
-    protected int id;
-    protected boolean faceSide;
-    protected List<Corner> corners;
-    protected Points points;
-    protected List<Corner> backCorners;//necessary for TUI
 
+    /**
+     * The unique identifier of the card.
+     */
+    protected int id;
+
+    /**
+     * Indicates if the card is face up (true) or face down (false).
+     */
+    protected boolean faceSide;
+
+    /**
+     * The list of corners on the front face of the card.
+     */
+    protected List<Corner> corners;
+
+    /**
+     * The points strategy associated with the card.
+     */
+    protected Points points;
+
+    /**
+     * The list of corners on the back face of the card, necessary for text-based user interface (TUI).
+     */
+    protected List<Corner> backCorners;
 
     /**
      * based on the card's pointsPolicy the number of points granted by it is returned
@@ -102,6 +129,6 @@ public abstract class PlayableCard implements Card {
 
 
     ////////////////////// TESTING RELATED METHODS ONLY //////////////////////
-    public abstract void printCard();
+    //public abstract void printCard();
 }
 

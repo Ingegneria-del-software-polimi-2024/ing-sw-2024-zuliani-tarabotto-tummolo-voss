@@ -15,25 +15,55 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a StarterCard which is a type of PlayableCard.
+ * StarterCards do not grant any points and have blocked elements on their back face.
+ */
 public class StarterCard extends PlayableCard{
 
+    /**
+     * Elements that are blocked on the front face of the card.
+     */
     @JsonProperty("blockedElements")
     private Element[] blockedElements;
+
+    /**
+     * Elements on the back face corners of the card.
+     */
     @JsonProperty("backFaceCorners")
     private Element[] backFaceCorners;
-    @JsonProperty("backFaceCorners")
+
+    /**
+     * List of corners on the back face, used for TUI (Text User Interface).
+     */
+
+    /**
+     * Gets the blocked elements on the front face of this starter card.
+     *
+     * @return the blocked elements.
+     */
     @Override
     public Element[] getBlockedElements() {
         return blockedElements;
     }
+
+    /**
+     * Gets the elements on the back face corners of this starter card.
+     *
+     * @return the back face corner elements.
+     */
     @Override
     public Element[] getBackFaceCorners() {
         return backFaceCorners;
     }
 
-    //we need this for TUI
     private List<Corner> backCorners = new ArrayList<>();
+
+    /**
+     * Flag to initialize the corners.
+     */
     private boolean initializeCorners = true;
+
 
     /**
      * json parsing
@@ -131,23 +161,23 @@ public class StarterCard extends PlayableCard{
 
 
     ///////////////////// TESTING RELATED METHODS ONLY /////////////////////////////////////
-    @Override
-    public void printCard() {
-        System.out.println("Card ID: " + getId());
-        //stampa il fronte della carta
-        System.out.println("FRONT FACE");
-        for (Corner c : getCorners()){System.out.println("Corner_" + getCorners().indexOf(c) + ": "+c.getElement());}
-        for (Element el : getBlockedElements()) {System.out.println("Blocked elements: " + el.toString());}
-        System.out.println();
-        //stampa il retro della carta
-        System.out.println("BACK FACE");
-        int i = 0;
-        for(Element el : getBackFaceCorners()){
-            System.out.println("Corner_" + i + ": " + el.toString());
-            i++;
-        }
-
-        System.out.println();
-    }
+//    @Override
+//    public void printCard() {
+////        System.out.println("Card ID: " + getId());
+////        //stampa il fronte della carta
+////        System.out.println("FRONT FACE");
+////        for (Corner c : getCorners()){System.out.println("Corner_" + getCorners().indexOf(c) + ": "+c.getElement());}
+////        for (Element el : getBlockedElements()) {System.out.println("Blocked elements: " + el.toString());}
+////        System.out.println();
+////        //stampa il retro della carta
+////        System.out.println("BACK FACE");
+////        int i = 0;
+////        for(Element el : getBackFaceCorners()){
+////            System.out.println("Corner_" + i + ": " + el.toString());
+////            i++;
+////        }
+////
+////        System.out.println();
+//    }
 
 }

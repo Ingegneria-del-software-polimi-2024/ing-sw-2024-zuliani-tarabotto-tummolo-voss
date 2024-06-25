@@ -14,10 +14,26 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Represents a GoldCard, which is a type of PlayableCard with specific properties
+ * such as blocked elements and placement constraints.
+ */
 public class GoldCard extends PlayableCard{
+
+    /**
+     * The element that is blocked by this GoldCard.
+     */
     @JsonProperty("element")
     private Element blockedElement;
+
+    /**
+     * The placement constraints for this GoldCard, represented as a map of elements to their respective constraints.
+     */
     private Map<Element, Integer> placementConstraint;
+
+    /**
+     * The points strategy associated with this GoldCard.
+     */
     private Points points;
 
 
@@ -77,7 +93,12 @@ public class GoldCard extends PlayableCard{
         return null;
     }
 
-
+    /**
+     * Counts the points of the GoldCard based on the given placement area.
+     *
+     * @param placementArea the placement area to count points from.
+     * @return the points counted.
+     */
     @Override
     public int countPoints (PlacementArea placementArea) {
         return points.count(placementArea);
@@ -110,24 +131,24 @@ public class GoldCard extends PlayableCard{
     ///////////////////// FOR TESTING PURPOSES ONLY METHODS //////////////////////////////
     @Override
     public void printCard() {
-        System.out.println("Card ID: " + getId());
-
-        //prints the front face of the card
-        System.out.println("FRONT FACE");
-        for (Corner c : getCorners()) {printCorner(c);}
-        System.out.println(points.getPointsPolicy());
-        System.out.println();
-
-        //prints the back face of the card
-        System.out.println("BACK FACE");
-        System.out.println("Blocked element: " + getBlockedElement());
+//        System.out.println("Card ID: " + getId());
+//
+//        //prints the front face of the card
+//        System.out.println("FRONT FACE");
+//        for (Corner c : getCorners()) {printCorner(c);}
+//        System.out.println(points.getPointsPolicy());
+//        System.out.println();
+//
+//        //prints the back face of the card
+//        System.out.println("BACK FACE");
+//        System.out.println("Blocked element: " + getBlockedElement());
 
     }
-    public void printCorner(Corner c) {
-        if (c.getElement() != null) System.out.println("Corner_" + c.getId() + ": " + c.getElement());
-        else if (c.getArtifact() != null) System.out.println("Corner_" + c.getId() + ": " + c.getArtifact());
-        else System.out.println("Corner_" + c.getId() + ": empty");
-    }
+//    public void printCorner(Corner c) {
+//        if (c.getElement() != null) System.out.println("Corner_" + c.getId() + ": " + c.getElement());
+//        else if (c.getArtifact() != null) System.out.println("Corner_" + c.getId() + ": " + c.getArtifact());
+//        else System.out.println("Corner_" + c.getId() + ": empty");
+//    }
 
 
 

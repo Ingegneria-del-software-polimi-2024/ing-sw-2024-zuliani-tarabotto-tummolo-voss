@@ -5,14 +5,32 @@ import model.enums.Element;
 
 import java.io.Serializable;
 
+/**
+ * Represents a corner in a playable card, which can contain an element or an artifact.
+ * It also has an availability status which indicates id the corner is free or not.
+ */
 
 public class Corner implements Serializable {
+    /**
+     * The ID of the corner.
+     */
     private int id;
+
+    /**
+     * The element contained in the corner.
+     */
     private Element element;
+
+    /**
+     * The artifact contained in the corner.
+     */
     private Artifact artifact;
+
+    /**
+     * Indicates whether the corner is available.
+     */
     @JsonProperty("isAvailable")
     private boolean isAvailable;
-
     /**
      * class constructor that creates a void Corner
      */

@@ -4,6 +4,10 @@ import model.deckFactory.Deck;
 
 import model.deckFactory.ObjectiveDeck;
 
+/**
+ * GoldCardsDeckGenerator is responsible for generating a deck of gold cards.
+ * It extends PlayableDeckGenerator and overrides the method to generate a deck based on type.
+ */
 public class ObjectiveCardsDeckGenerator implements DeckGenerator {
 
 

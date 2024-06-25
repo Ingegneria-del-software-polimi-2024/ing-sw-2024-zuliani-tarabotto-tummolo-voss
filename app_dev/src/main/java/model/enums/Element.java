@@ -107,20 +107,21 @@ public enum Element {
             });
 
 
+    //MAI USATO DA RIVEDERE (FATTO DA GABRIEL)
 
-    public Element calculateComplementar() {
-        switch (this){
-            case animals:
-                return mushrooms;
-            case mushrooms:
-                return vegetals;
-            case insects:
-                return animals;
-            case vegetals:
-                return insects;
-        }
-        return null;
-    }
+//    public Element calculateComplementar() {
+//        switch (this){
+//            case animals:
+//                return mushrooms;
+//            case mushrooms:
+//                return vegetals;
+//            case insects:
+//                return animals;
+//            case vegetals:
+//                return insects;
+//        }
+//        return null;
+//    }
 
     private final String stringValue;
     private final int color;

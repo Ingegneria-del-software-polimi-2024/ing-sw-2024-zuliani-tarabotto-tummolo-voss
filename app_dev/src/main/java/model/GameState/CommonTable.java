@@ -252,7 +252,7 @@ public class CommonTable {
         list.getCards().addAll(copy);
     }
 
-    private ObjectiveCard getOCard(int i){
-        return objectiveDeck.getCard(i);
-    }
+//    private ObjectiveCard getOCard(int i){
+//        return objectiveDeck.getCard(i);
+//    }
 }

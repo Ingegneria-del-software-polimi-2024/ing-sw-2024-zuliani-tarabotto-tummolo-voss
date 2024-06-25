@@ -27,7 +27,7 @@ public class GameState {
     private Coordinates selectedCoordinates;
     private CommonTable commonTable;
     private TurnState turnState;
-    private final int MAX_POINTS = 1;//TODO insert 20 for real game, 10 for testing, 1 for rapid checking
+    private final int MAX_POINTS = 10;//TODO insert 20 for real game, 10 for testing, 1 for rapid checking
     private ModelListener modelListener;
     private List<ObjectiveCard> objectiveBuffer;
 
@@ -418,12 +418,16 @@ public class GameState {
     /////////////// GETTER METHODS FOR COMMONTABLE ATTRIBUTES ////////////////////////
     public PlayableDeck getGoldDeck() { return commonTable.getGoldDeck(); }
     public PlayableDeck getResourceDeck() { return commonTable.getResourceDeck(); }
-    public PlayableDeck getStarterDeck(){return commonTable.getStarterDeck();}
+
+    //MAI USATO
+    //public PlayableDeck getStarterDeck(){return commonTable.getStarterDeck();}
     public ObjectiveDeck getObjectiveDeck() {return commonTable.getObjectiveDeck();}
     public List<PlayableCard> getOpenResources() { return commonTable.getOpenResources(); }
     public List<PlayableCard> getOpenGold() { return commonTable.getOpenGold(); }
-    public List<ObjectiveCard> getCommonObjectives(){return commonTable.getCommonObjectives();}
-    public CommonTable getCommonTable(){return commonTable;}
+
+
+   //public List<ObjectiveCard> getCommonObjectives(){return commonTable.getCommonObjectives();}
+    //public CommonTable getCommonTable(){return commonTable;}
 
 
     //////////////////////// GETTER METHODS FOR GAMESTATE ATTRIBUTES ///////////////////////////

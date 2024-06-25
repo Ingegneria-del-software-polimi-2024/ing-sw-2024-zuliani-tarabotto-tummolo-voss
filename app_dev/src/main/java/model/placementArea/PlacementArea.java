@@ -18,7 +18,7 @@ public class PlacementArea {
     private HashMap<Artifact, Integer> availableArtifacts; //how many occurrences of that artifact you have, permits to rapidly check for points
     private HashMap<Element, Integer> availableElements; // as Artifacts but with elements
     private List<Coordinates> availablePlaces; //list of available places to put a card in, enable to search more rapidly where you can place cards
-    private int numberNearbyCards;
+    private int numberNearbyCards; //number
 
     private ArrayList<PlayableCard> cardsByPlacementOrder;
 
@@ -317,9 +317,11 @@ public class PlacementArea {
      *
      * @return an array list of playable cards ordered by their placement order
      */
-    public List<PlayableCard> getCardsByPlacementOrder() {
-        return (List<PlayableCard>) cardsByPlacementOrder.clone();
-    }
+
+    //MAI USATO
+//    public List<PlayableCard> getCardsByPlacementOrder() {
+//        return (List<PlayableCard>) cardsByPlacementOrder.clone();
+//    }
 
     /**
      *
@@ -390,8 +392,10 @@ public class PlacementArea {
 
     //TODO this MUST BE SET PROTECTED
     public HashMap<Coordinates, PlayableCard> getDisposition() { return disposition;}
-    public HashMap<Artifact, Integer> getAvailableArtifacts() {return availableArtifacts;}
-    public HashMap<Element, Integer> getAvailableElements() {return availableElements;}
+
+    //MAI USATO DA RIVEDERE
+    //public HashMap<Artifact, Integer> getAvailableArtifacts() {return availableArtifacts;}
+    //public HashMap<Element, Integer> getAvailableElements() {return availableElements;}
     //TODO: convert all List to ArrayList
     public List<Coordinates> getAvailablePlaces() {return availablePlaces;}
 

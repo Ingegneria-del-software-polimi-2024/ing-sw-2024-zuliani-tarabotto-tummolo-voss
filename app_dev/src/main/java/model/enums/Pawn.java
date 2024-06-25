@@ -26,17 +26,19 @@ import java.util.List;
 
         /////////////////// ONLY USED IN Controller and ControllerTest to directly ask the player which color he wants /////////////////////////////
 
-        private boolean isAvailable = true;
+
+       private boolean isAvailable = true;
 
 
-        public boolean getIsAvailable() {return isAvailable;}
+        //public boolean getIsAvailable() {return isAvailable;}
 
 
         public void setIsAvailable() {this.isAvailable = false;}
 
-        public static void printAvailablePawns() {
-            for(Pawn pawn : Pawn.values() ){
-                if(pawn.isAvailable) System.out.println(pawn.toString());
-            }
-        }
+        //MAI USATO
+//        public static void printAvailablePawns() {
+//            for(Pawn pawn : Pawn.values() ){
+//                if(pawn.isAvailable) System.out.println(pawn.toString());
+//            }
+//        }
 }
