@@ -129,8 +129,7 @@ public class GoldCard extends PlayableCard{
 
 
     ///////////////////// FOR TESTING PURPOSES ONLY METHODS //////////////////////////////
-    @Override
-    public void printCard() {
+    // @Override public void printCard() {
 //        System.out.println("Card ID: " + getId());
 //
 //        //prints the front face of the card
@@ -152,4 +151,3 @@ public class GoldCard extends PlayableCard{
 
 
 
-}
