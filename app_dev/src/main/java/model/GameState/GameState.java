@@ -29,7 +29,7 @@ public class GameState {
     private Coordinates selectedCoordinates;
     private CommonTable commonTable;
     private TurnState turnState;
-    private final int MAX_POINTS = 20;
+    private final int MAX_POINTS = 10;
     private ModelListener modelListener;
     private List<ObjectiveCard> objectiveBuffer;
 

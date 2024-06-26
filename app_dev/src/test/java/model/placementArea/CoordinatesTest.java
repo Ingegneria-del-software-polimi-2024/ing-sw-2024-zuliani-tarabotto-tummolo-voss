@@ -1,6 +1,9 @@
 package model.placementArea;
 
+
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -8,13 +11,11 @@ import static org.junit.jupiter.api.Assertions.*;
  * The type Coordinates test.
  */
 class CoordinatesTest {
-    /**
-     * Test coordinates.
-     *
-     * @param args the args
-     */
+
+
+
     @Test
-    public static void testCoordinates(String[] args){
+    public void testCoordinates(){
         Coordinates a = new Coordinates(0, 0);
         Coordinates b = new Coordinates(1, 2);
         Coordinates c = new Coordinates(0, 0);
