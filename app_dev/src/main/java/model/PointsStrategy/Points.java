@@ -7,10 +7,10 @@ import model.placementArea.PlacementArea;
 
 import java.io.Serializable;
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 /**
  * Interface of the strategy pattern that allows to count points
  */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 public interface Points extends Serializable {
     /**
      * counts the points
@@ -20,13 +20,13 @@ public interface Points extends Serializable {
     int count(PlacementArea placementArea);
 
     /**
+     *
      * @return number of points provided per unity of satisfied elements
      */
-    int getPoints();
+    int getPoints();  //Is this still needed? these are the points that have to be multiplied by the hidden corners
 
-    /**
-     * @return The artifact associated with the points strategy.
-     */
+    String getPointsPolicy();
+
     Artifact getArtifact();
 }
 

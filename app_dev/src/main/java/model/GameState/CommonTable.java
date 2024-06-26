@@ -11,45 +11,14 @@ import model.player.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Represents the common table in the game.
- * The common table holds the decks of cards and the open cards that are available to all players.
- */
 public class CommonTable {
 
-    /**
-     * The deck of gold cards.
-     */
     private PlayableDeck goldDeck;
-
-    /**
-     * The deck of resource cards.
-     */
     private PlayableDeck resourceDeck;
-
-    /**
-     * The deck of objective cards.
-     */
     private ObjectiveDeck objectiveDeck;
-
-    /**
-     * The deck of starter cards.
-     */
     private PlayableDeck startingDeck;
-
-    /**
-     * The list of common objective cards.
-     */
     private List<ObjectiveCard> commonObjectives; //2 elements in the list
-
-    /**
-     * The list of open gold cards.
-     */
     private List<PlayableCard> openGold; //2 elements in the list
-
-    /**
-     * The list of open resource cards.
-     */
     private List<PlayableCard> openResources; //2 elements in the list
 
 
@@ -212,39 +181,12 @@ public class CommonTable {
 
 
     ////////////////////// GETTER METHODS /////////////////////////////////////////////////////////////////////////
-    /**
-     * @return the list of common objective cards
-     */
     public List<ObjectiveCard> getCommonObjectives() {return commonObjectives;}
-
-    /**
-     * @return the gold deck
-     */
     public PlayableDeck getGoldDeck() { return goldDeck; }
-
-    /**
-     * @return the resource deck
-     */
     public PlayableDeck getResourceDeck() { return resourceDeck; }
-
-    /**
-     * @return the starter deck
-     */
     public PlayableDeck getStarterDeck(){return startingDeck;}
-
-    /**
-     * @return the objective deck
-     */
     public ObjectiveDeck getObjectiveDeck() {return objectiveDeck;}
-
-    /**
-     * @return the open resource cards
-     */
     public List<PlayableCard> getOpenResources() { return openResources; }
-
-    /**
-     * @return the open gold cards
-     */
     public List<PlayableCard> getOpenGold() { return openGold; }
 
 
@@ -252,11 +194,6 @@ public class CommonTable {
 
 
     ///////////////////////FOR TESTING PURPOSES ONLY //////////////////////////////////////////////////////////////
-
-    /**
-     * this method is used to initialize the decks with a fixed permutation (used for testign purposes only)
-     * @param players
-     */
     public void definedDeckInitialization(List<Player> players) {
         //creates and shuffles decks
         long seed = 12345;
@@ -290,11 +227,6 @@ public class CommonTable {
         initializePlayersHands(players);
     }
 
-    /**
-     * this method is used to shuffle a deck with a fixed permutation (used for testing purposes only)
-     * @param list the deck to shuffle
-     * @param permutation the permutation to use
-     */
     public  void deterministicShuffle(PlayableDeck list, int[] permutation) {
         // Fisher-Yates shuffle algorithm with a fixed permutation
         ArrayList<PlayableCard> copy = new ArrayList<>(list.getCards());
@@ -307,12 +239,6 @@ public class CommonTable {
         list.getCards().clear();
         list.getCards().addAll(copy);
     }
-
-    /**
-     * this method is used to shuffle a deck with a fixed permutation (used for testing purposes only)
-     * @param list the deck to shuffle
-     * @param permutation the permutation to use
-     */
     public  void deterministicShuffle(ObjectiveDeck list, int[] permutation) {
         // Fisher-Yates shuffle algorithm with a fixed permutation
         ArrayList<ObjectiveCard> copy = new ArrayList<>(list.getCards());

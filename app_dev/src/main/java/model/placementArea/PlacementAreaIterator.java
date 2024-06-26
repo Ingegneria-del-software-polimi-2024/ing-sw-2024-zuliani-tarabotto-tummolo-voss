@@ -12,27 +12,17 @@ import java.util.stream.Collectors;
  * objective we are going to check
  */
 public class PlacementAreaIterator implements Iterator<Coordinates> {
-
-    /**
-     * The current position in the iteration over the placement area.
-     */
     private Coordinates currentPlace;
-
-    /**
-     * A list of all the available positions in the placement area that can be iterated over.
-     */
     private List<Coordinates> availableCoordinates;
-
-    /**
-     * Checks if there are still elements to iterate on.
-     * @return TRUE if there are still elements to iterate on.
-     */
     @Override
+    /**
+     * @return TRUE if there are still elements to iterate on
+     */
     public boolean hasNext() {return availableCoordinates.indexOf(currentPlace) + 1 < availableCoordinates.size();}
 
     /**
-     * Returns the next element to iterate on.
-     * @return The next element to iterate on.
+     *
+     * @return next element to iterate on
      */
     @Override
     public Coordinates next(){
@@ -41,8 +31,8 @@ public class PlacementAreaIterator implements Iterator<Coordinates> {
     }
 
     /**
-     * Returns the current place when iterating.
-     * @return The current place when iterating.
+     *
+     * @return the current place when iterating
      */
     public Coordinates current() {return currentPlace;}
 

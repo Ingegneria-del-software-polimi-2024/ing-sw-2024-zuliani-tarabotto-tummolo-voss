@@ -20,44 +20,17 @@ import java.util.Scanner;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
-/**
- * This class is used to test the controller
- */
+
 class ControllerTest {
-
-    /**
-     * The GameState instance used for testing.
-     */
     private GameState gameState;
-
-    /**
-     * The list of nicknames used for testing.
-     */
     private ArrayList<String> nickNames;
-
-    /**
-     * The Scanner instance used for reading input.
-     */
-    private Scanner sc;
-
-    /**
-     * The Player instance used for testing.
-     */
+    private Scanner sc = new Scanner(new File("C:\\Users\\nicol\\OneDrive\\Documenti\\GitHub\\ing-sw-2024-zuliani-tarabotto-tummolo-voss\\app_dev\\src\\test\\java\\controller\\final"));
     private Player initialPlayer;
 
-    /**
-     * Constructor for ControllerTest.
-     * @throws FileNotFoundException if the file cannot be found.
-     */
     ControllerTest() throws FileNotFoundException {
     }
 
 
-    /**
-     * Main test method.
-     * @throws EmptyCardSourceException if the card source is empty.
-     * @throws IOException if an I/O error occurs.
-     */
     @Test
     public void main() throws EmptyCardSourceException, IOException {
         ControllerTest controller = new ControllerTest();
@@ -65,9 +38,7 @@ class ControllerTest {
         controller.gameLoop();
     }
 
-    /**
-     * Initializes the GameState for testing.
-     */
+    //creates a new gameState and ask users for nicknames
     public void initializeGameState() {
         String id = "gameState_0";
         nickNames = new ArrayList<String>();
@@ -87,11 +58,8 @@ class ControllerTest {
     }
 
 
-    /**
-     * Main method to handle game flow.
-     * @throws EmptyCardSourceException if the card source is empty.
-     * @throws IOException if an I/O error occurs.
-     */
+    //main method to handle game flow
+
     public void gameLoop() throws EmptyCardSourceException, IOException {
         int cont = 0;
 
@@ -158,11 +126,7 @@ class ControllerTest {
     }
 
 
-    /**
-     * Calls the appropriate draw function based on the input.
-     * @param i the input determining which draw function to call.
-     * @throws EmptyCardSourceException if the card source is empty.
-     */
+;
     private void callDrawFunction(int i) throws EmptyCardSourceException {
         switch (i) {
             case 1:
@@ -187,10 +151,7 @@ class ControllerTest {
     }
 
 
-    /**
-     * Simulates a turn in the game.
-     * @throws EmptyCardSourceException if the card source is empty.
-     */
+
     private void playTurn() throws EmptyCardSourceException {
 
         //ASK PLAYER TO SELECT A CARD FROM HAND
@@ -219,10 +180,6 @@ class ControllerTest {
         gameState.nextPlayer();
     }
 
-
-    /**
-     * Writes the game results to a file.
-     */
     private void printWinner() {
         Player winner = gameState.getPlayer(0);
         for (int i = 0; i < nickNames.size(); i++) {
@@ -234,13 +191,6 @@ class ControllerTest {
         System.out.println(winner.getNickname().toUpperCase() + " YOU WIN!!!!");
     }
 
-    /**
-     * This method is used to write the game results to a file.
-     * It first determines the winner of the game by comparing the points of each player.
-     * Then, it writes the winner's nickname and the points of each player to a file.
-     * It also writes the ID and coordinates of each card in the player's placement area.
-     * If an error occurs during file writing, it prints an error message and the stack trace.
-     */
     private void  fileWriting() {
         //we find the winner
         Player winner = gameState.getPlayer(0);
@@ -281,19 +231,6 @@ class ControllerTest {
             e.printStackTrace();
         }
     }
-
-    /**
-     * This method compares two files line by line.
-     * It reads each line from both files and compares them.
-     * If it finds a line that is not equal in both files, it returns the line number.
-     * If it reaches the end of both files without finding any unequal lines, it returns -1.
-     * If it reaches the end of the first file but not the second, it returns the current line number.
-     *
-     * @param path1 the path to the first file
-     * @param path2 the path to the second file
-     * @return the line number of the first unequal line, or -1 if all lines are equal
-     * @throws IOException if an I/O error occurs while reading the files
-     */
 
     public static long filesCompareByLine(Path path1, Path path2) throws IOException {
         try (BufferedReader bf1 = Files.newBufferedReader(path1);

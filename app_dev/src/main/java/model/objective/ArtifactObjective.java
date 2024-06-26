@@ -16,20 +16,16 @@ import java.util.HashMap;
  * the  repetitions of 3 artifacts
  */
 public class ArtifactObjective  implements Objective{
-
-    /**
-     * the artifact type to count
-     */
     @JsonProperty("artifact")
     Artifact artifact;
-
-    /**
-     * if true we should count the repetitions of 3 artifacts
-     */
     @JsonProperty("tris")
     boolean tris;
 
-
+    /**
+     *
+     * @param placementArea the disposition to find objectives in
+     * @return the number of points rellated to this objective
+     */
     public int countObjectivePoints(PlacementArea placementArea){
         HashMap<Artifact, Integer> map;
         if(!tris) {
@@ -41,7 +37,6 @@ public class ArtifactObjective  implements Objective{
         }
     }
 
-
     @Override
     public void printObjective() {
         System.out.println("type: ArtifactObjective");
@@ -49,19 +44,15 @@ public class ArtifactObjective  implements Objective{
         System.out.println("tris: " + this.tris);
     }
 
-
     @Override
     public Element getElement() {
         return null;
     }
 
-
     @Override
     public Artifact getArtifact() {
         return artifact;
     }
-
-
 
     @Override
     public Shape getShape() {

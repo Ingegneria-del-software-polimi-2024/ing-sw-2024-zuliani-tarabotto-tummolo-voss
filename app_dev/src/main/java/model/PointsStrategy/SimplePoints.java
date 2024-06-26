@@ -13,6 +13,7 @@ public class SimplePoints implements Points {
     private int points;
 
     /**
+     *
      * @return number of points provided per unity of satisfied elements
      */
     @Override
@@ -30,10 +31,9 @@ public class SimplePoints implements Points {
         return this.points;
     }
 
-    /**
-     * Returns null, indicating that there is no Artifact associated with SimplePoints.
-     * @return null
-     */
+    @Override
+    public String getPointsPolicy() { return ("Points policy -> SimplePoints || points given: " + getPoints());}
+
     @Override
     public Artifact getArtifact(){
         return null;

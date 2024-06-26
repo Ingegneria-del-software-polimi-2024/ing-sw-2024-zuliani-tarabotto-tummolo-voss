@@ -14,48 +14,14 @@ import java.util.*;
  *the placement area for every player (where you put the card you are playing each turn)
  */
 public class PlacementArea {
+    private HashMap<Coordinates, PlayableCard> disposition; //the disposition on the table, used for search of patterns
+    private HashMap<Artifact, Integer> availableArtifacts; //how many occurrences of that artifact you have, permits to rapidly check for points
+    private HashMap<Element, Integer> availableElements; // as Artifacts but with elements
+    private List<Coordinates> availablePlaces; //list of available places to put a card in, enable to search more rapidly where you can place cards
+    private int numberNearbyCards; //number
 
-    /**
-     * The disposition on the table, used for search of patterns.
-     * It stores the current placement of cards on the game board.
-     * The keys are `Coordinates` objects representing the position of a card,
-     * and the values are `PlayableCard` objects representing the cards themselves.
-     */
-    private HashMap<Coordinates, PlayableCard> disposition;
-
-    /**
-     * How many occurrences of that artifact you have, permits to rapidly check for points.
-     * It stores the count of each type of `Artifact` available.
-     * The keys are `Artifact` objects, and the values are integers representing the count of each artifact.
-     */
-    private HashMap<Artifact, Integer> availableArtifacts;
-
-    /**
-     * As Artifacts but with elements.
-     * Similar to `availableArtifacts`, but for `Element` objects.
-     */
-    private HashMap<Element, Integer> availableElements;
-
-    /**
-     * List of available places to put a card in, enable to search more rapidly where you can place cards.
-     * A List of `Coordinates` objects representing the positions on the game board where a new card can be placed.
-     */
-    private List<Coordinates> availablePlaces;
-
-    /**
-     * Number of nearby cards.
-     * An integer that likely stores the number of cards near a certain position or card.
-     */
-    private int numberNearbyCards;
-
-    /**
-     * An ArrayList of `PlayableCard` objects storing the cards in the order they were placed on the game board.
-     */
     private ArrayList<PlayableCard> cardsByPlacementOrder;
 
-    /**
-     * A List of `Coordinates` objects representing the positions on the game board where a new card cannot be placed.
-     */
     private List<Coordinates> unAvailablePlaces;
 
      /**
@@ -158,11 +124,9 @@ public class PlacementArea {
     }
 
     /**
-     * This method checks if a given card can be placed based on its constraints.
-     * @param card The card to be placed.
-     * @return TRUE if the constraints limiting the card placement of the card are satisfied, else returns FALSE.
-     * If there are no constraints or the card is not facing up, the card can be placed and the method returns true.
-     * If constraints are present, it checks if the available elements satisfy the constraints. If not, it returns false.
+     *
+     * @param card the card being placed
+     * @return TRUE if the constraints limiting the card placement of the card @card are satisfied, else returns FALSE
      */
     public boolean canBePlaced(PlayableCard card) {
         Map<Element, Integer> constraints = card.getPlacementConstraint();
@@ -339,15 +303,6 @@ public class PlacementArea {
         throw new IllegalArgumentException();
     }
 
-    /**
-     * This method is a wrapper for the private method updateAvailablePlaces. It takes in a Coordinates object and a PlayableCard object,
-     * and calls the updateAvailablePlaces method with these parameters. This method is primarily used for testing purposes.
-     *
-     * @param xy The coordinates where the card is to be placed.
-     * @param card The card to be placed.
-     * @return The coordinates removed from the list of available places.
-     * @throws IllegalArgumentException If the coordinates are not contained in the availablePlaces list.
-     */
     public Coordinates testWrapper(Coordinates xy, PlayableCard card) throws IllegalArgumentException {
         return updateAvailablePlaces(xy, card);
     }
@@ -358,6 +313,15 @@ public class PlacementArea {
 
     ///////////////// GETTER METHODS ////////////////////////////////////////////////////////////
 
+    /**
+     *
+     * @return an array list of playable cards ordered by their placement order
+     */
+
+    //MAI USATO
+//    public List<PlayableCard> getCardsByPlacementOrder() {
+//        return (List<PlayableCard>) cardsByPlacementOrder.clone();
+//    }
 
     /**
      *
@@ -403,34 +367,38 @@ public class PlacementArea {
 
 
     ///////////////// FOR TESTING PURPOSES ONLY /////////////////////////////////////////////////
+//    public void printAvailablePlaces() {
+//        for(Coordinates c : availablePlaces ) {
+//            System.out.println("(" + c.getX() + "; " + c.getY() + ")");
+//        }
+//    }
+//    public void printDisposition() {
+//        System.out.println("––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––");
+//        //printing elements
+//        System.out.println("elements: mushrooms " + this.getNumberElements(Element.mushrooms));
+//        System.out.println("          animals " + this.getNumberElements(Element.animals));
+//        System.out.println("          insects " + this.getNumberElements(Element.insects));
+//        System.out.println("          vegetals " + this.getNumberElements(Element.vegetals));
+//        //printing artifacts
+//        System.out.println("objects: feather " + this.getNumberArtifacts(Artifact.feather));
+//        System.out.println("         ink " + this.getNumberArtifacts(Artifact.ink));
+//        System.out.println("         paper " + this.getNumberArtifacts(Artifact.paper));
+//        System.out.println("***\t\t***\t\t***\t\t***\t\t***\t\t***\t\t***\t\t***\t\t***");
+//        for (Coordinates c : disposition.keySet()) {
+//            System.out.println("Card: " + disposition.get(c).getId() + " || Coordinates: (" + c.getX() + ";" + c.getY() + ")");
+//        }
+//        System.out.println("––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––");
+//    }
 
-    /**
-     * This method returns the current disposition of cards on the placement area.
-     * The disposition is represented as a HashMap where the keys are the coordinates of the card's position
-     * and the values are the PlayableCard objects placed on those coordinates.
-     *
-     * @return A HashMap representing the disposition of cards on the placement area.
-     */
     //TODO this MUST BE SET PROTECTED
     public HashMap<Coordinates, PlayableCard> getDisposition() { return disposition;}
 
-    /**
-     * This method returns a list of coordinates representing the available places on the placement area
-     * where a new card can be placed.
-     *
-     * @return A List of Coordinates representing the available places on the placement area.
-     */
+    //MAI USATO DA RIVEDERE
+    //public HashMap<Artifact, Integer> getAvailableArtifacts() {return availableArtifacts;}
+    //public HashMap<Element, Integer> getAvailableElements() {return availableElements;}
     //TODO: convert all List to ArrayList
     public List<Coordinates> getAvailablePlaces() {return availablePlaces;}
 
-    /**
-     * This method checks if a given coordinate is present in the disposition HashMap.
-     * It iterates over the keys of the HashMap and returns true if it finds a match.
-     *
-     * @param disposition The HashMap representing the disposition of cards on the placement area.
-     * @param coord The Coordinates to check for in the disposition.
-     * @return True if the coord is found in the disposition, false otherwise.
-     */
     private boolean contain(HashMap<Coordinates, PlayableCard> disposition, Coordinates coord){
         for(Coordinates x : disposition.keySet()){
             if (x.equals(coord))
@@ -438,15 +406,6 @@ public class PlacementArea {
         }
         return false;
     }
-
-    /**
-     * This method checks if a given coordinate is present in a list of coordinates.
-     * It iterates over the list and returns true if it finds a match.
-     *
-     * @param list The list of Coordinates to check.
-     * @param coordinates The Coordinates to check for in the list.
-     * @return True if the coordinates are found in the list, false otherwise.
-     */
     private boolean contain(List<Coordinates> list, Coordinates coordinates){
         for (Coordinates x : list){
             if(x.equals(coordinates))
