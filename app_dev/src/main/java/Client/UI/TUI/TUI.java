@@ -131,6 +131,7 @@ public class TUI implements UI {
     }
 ///////////////////////////////////////<Lobby>//////////////////////////////////////////////////////////////////////////
     public void firstWelcome(){
+        clear();
         loginPrinter.print();
         System.out.println("~> Welcome to Codex Naturalis, follow the instructions to join a game.\n   Once in the game write --help for a guide, --quit to exit");
     }
