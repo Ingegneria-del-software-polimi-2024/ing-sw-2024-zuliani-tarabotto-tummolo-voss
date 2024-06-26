@@ -10,21 +10,21 @@ package model.Exceptions;
  * 6- Open Resources (1)
  */
 public class EmptyCardSourceException extends Exception{
+    /**
+     * The source of the exception
+     */
     private final int source;
 
     /**
-     * Instantiates a new Empty card source exception.
-     *
-     * @param indx the indx
+     * Constructs a new EmptyCardSourceException with the specified source.
+     * @param indx The source of the exception.
      */
     public EmptyCardSourceException(int indx){
         this.source = indx;
     }
 
     /**
-     * Gets indx.
-     *
-     * @return the indx
+     * @return The source of the exception.
      */
     public int getIndx() {
         return source;

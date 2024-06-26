@@ -12,23 +12,50 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Common table.
+ * Represents the common table in the game.
+ * The common table holds the decks of cards and the open cards that are available to all players.
  */
 public class CommonTable {
 
+    /**
+     * The deck of gold cards.
+     */
     private PlayableDeck goldDeck;
+
+    /**
+     * The deck of resource cards.
+     */
     private PlayableDeck resourceDeck;
+
+    /**
+     * The deck of objective cards.
+     */
     private ObjectiveDeck objectiveDeck;
+
+    /**
+     * The deck of starter cards.
+     */
     private PlayableDeck startingDeck;
+
+    /**
+     * The list of common objective cards.
+     */
     private List<ObjectiveCard> commonObjectives; //2 elements in the list
+
+    /**
+     * The list of open gold cards.
+     */
     private List<PlayableCard> openGold; //2 elements in the list
+
+    /**
+     * The list of open resource cards.
+     */
     private List<PlayableCard> openResources; //2 elements in the list
 
 
     /**
      * this method calls all the initialization methods related to CommonTable
      * (it is more convenient not to do this in the class constructor for testing purposes)
-     *
      * @param players the players
      */
     public void initialize(List<Player> players){
@@ -117,7 +144,7 @@ public class CommonTable {
     /**
      * returns true if all drawable cards on the CommonTable are finished
      *
-     * @return Boolean boolean
+     * @return Boolean
      */
     public boolean checkEmptyDecks() {
         return goldDeck.getSize() == 0 && resourceDeck.getSize() == 0 /*&& openGold.isEmpty() && openResources.isEmpty()*/;
@@ -191,63 +218,47 @@ public class CommonTable {
     }
 
 
-    /**
-     * Gets common objectives.
-     *
-     * @return the common objectives
-     */
+
 ////////////////////// GETTER METHODS /////////////////////////////////////////////////////////////////////////
+    /**
+     * @return the list of common objective cards
+     */
     public List<ObjectiveCard> getCommonObjectives() {return commonObjectives;}
 
     /**
-     * Gets gold deck.
-     *
      * @return the gold deck
      */
     public PlayableDeck getGoldDeck() { return goldDeck; }
 
     /**
-     * Gets resource deck.
-     *
      * @return the resource deck
      */
     public PlayableDeck getResourceDeck() { return resourceDeck; }
 
     /**
-     * Get starter deck playable deck.
-     *
-     * @return the playable deck
+     * @return the starter deck
      */
     public PlayableDeck getStarterDeck(){return startingDeck;}
 
     /**
-     * Gets objective deck.
-     *
      * @return the objective deck
      */
     public ObjectiveDeck getObjectiveDeck() {return objectiveDeck;}
 
     /**
-     * Gets open resources.
-     *
-     * @return the open resources
+     * @return the open resource cards
      */
     public List<PlayableCard> getOpenResources() { return openResources; }
 
     /**
-     * Gets open gold.
-     *
-     * @return the open gold
+     * @return the open gold cards
      */
     public List<PlayableCard> getOpenGold() { return openGold; }
-
-
-    /**
-     * Defined deck initialization.
-     *
-     * @param players the players
-     */
 ///////////////////////FOR TESTING PURPOSES ONLY //////////////////////////////////////////////////////////////
+    /**
+     * this method is used to initialize the decks with a fixed permutation (used for testign purposes only)
+     * @param players
+     */
     public void definedDeckInitialization(List<Player> players) {
         //creates and shuffles decks
         long seed = 12345;
@@ -268,7 +279,7 @@ public class CommonTable {
         deterministicShuffle(goldDeck, permutation1);
         deterministicShuffle(startingDeck, permutation2);
         deterministicShuffle(objectiveDeck, permutation3);
-        
+
 
         //for(PlayableCard c : goldDeck.getCards()){System.out.println(c.getId());}
         //Extract open cards
@@ -282,10 +293,9 @@ public class CommonTable {
     }
 
     /**
-     * Deterministic shuffle.
-     *
-     * @param list        the list
-     * @param permutation the permutation
+     * this method is used to shuffle a deck with a fixed permutation (used for testing purposes only)
+     * @param list the deck to shuffle
+     * @param permutation the permutation to use
      */
     public  void deterministicShuffle(PlayableDeck list, int[] permutation) {
         // Fisher-Yates shuffle algorithm with a fixed permutation
@@ -301,10 +311,9 @@ public class CommonTable {
     }
 
     /**
-     * Deterministic shuffle.
-     *
-     * @param list        the list
-     * @param permutation the permutation
+     * this method is used to shuffle a deck with a fixed permutation (used for testing purposes only)
+     * @param list the deck to shuffle
+     * @param permutation the permutation to use
      */
     public  void deterministicShuffle(ObjectiveDeck list, int[] permutation) {
         // Fisher-Yates shuffle algorithm with a fixed permutation
@@ -319,7 +328,4 @@ public class CommonTable {
         list.getCards().addAll(copy);
     }
 
-//    private ObjectiveCard getOCard(int i){
-//        return objectiveDeck.getCard(i);
-//    }
 }

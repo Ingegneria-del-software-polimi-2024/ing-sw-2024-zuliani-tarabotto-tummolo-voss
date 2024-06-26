@@ -30,13 +30,6 @@ public class DiagonalShapeObjective implements Objective{
 
 
     @Override
-    public void printObjective() {
-        System.out.println("type: DiagonalShapeObjective");
-        System.out.println(this.element.toString());
-        System.out.println(this.shape.toString());
-    }
-
-    @Override
     public Element getElement() {
         return element.get(0);
     }

@@ -1,6 +1,5 @@
 package model.placementArea;
 
-
 import model.Exceptions.CantPlaceCardException;
 import model.Exceptions.KickOutOfGameException;
 import model.cards.PlayableCards.PlayableCard;
@@ -11,29 +10,61 @@ import model.objective.Shape;
 import java.util.*;
 
 /**
- * the placement area for every player (where you put the card you are playing each turn)
+ *the placement area for every player (where you put the card you are playing each turn)
  */
 public class PlacementArea {
-    private HashMap<Coordinates, PlayableCard> disposition; //the disposition on the table, used for search of patterns
-    private HashMap<Artifact, Integer> availableArtifacts; //how many occurrences of that artifact you have, permits to rapidly check for points
-    private HashMap<Element, Integer> availableElements; // as Artifacts but with elements
-    private List<Coordinates> availablePlaces; //list of available places to put a card in, enable to search more rapidly where you can place cards
-    private int numberNearbyCards; //number
 
+    /**
+     * The disposition on the table, used for search of patterns.
+     * It stores the current placement of cards on the game board.
+     * The keys are `Coordinates` objects representing the position of a card,
+     * and the values are `PlayableCard` objects representing the cards themselves.
+     */
+    private HashMap<Coordinates, PlayableCard> disposition;
+
+    /**
+     * How many occurrences of that artifact you have, permits to rapidly check for points.
+     * It stores the count of each type of `Artifact` available.
+     * The keys are `Artifact` objects, and the values are integers representing the count of each artifact.
+     */
+    private HashMap<Artifact, Integer> availableArtifacts;
+
+    /**
+     * As Artifacts but with elements.
+     * Similar to `availableArtifacts`, but for `Element` objects.
+     */
+    private HashMap<Element, Integer> availableElements;
+
+    /**
+     * List of available places to put a card in, enable to search more rapidly where you can place cards.
+     * A List of `Coordinates` objects representing the positions on the game board where a new card can be placed.
+     */
+    private List<Coordinates> availablePlaces;
+
+    /**
+     * Number of nearby cards.
+     * An integer that likely stores the number of cards near a certain position or card.
+     */
+    private int numberNearbyCards;
+
+    /**
+     * An ArrayList of `PlayableCard` objects storing the cards in the order they were placed on the game board.
+     */
     private ArrayList<PlayableCard> cardsByPlacementOrder;
 
+    /**
+     * A List of `Coordinates` objects representing the positions on the game board where a new card cannot be placed.
+     */
     private List<Coordinates> unAvailablePlaces;
 
     /**
-     * Free positions list.
-     *
      * @return the free positions in which you can add a card
      */
     public List<Coordinates> freePositions(){return availablePlaces;} //returns the free positions
 
 
     /**
-     * class constructor
+     *  class constructor
      */
     public PlacementArea() {
         disposition = new LinkedHashMap<>();
@@ -56,11 +87,10 @@ public class PlacementArea {
     /**
      * adds a playable card to the placementArea of turnPlayer
      * returns the number of points granted by the playable card
-     *
-     * @param xy   coordinates to add a card in
+     * @param xy coordinates to add a card in
      * @param card the card to add
      * @return points earned when placing the card
-     * @throws CantPlaceCardException the cant place card exception
+     * @throws CantPlaceCardException
      */
     public int addCard(Coordinates xy, PlayableCard card) throws CantPlaceCardException{
         int i, j, count = 0;
@@ -127,10 +157,11 @@ public class PlacementArea {
     }
 
     /**
-     * Can be placed boolean.
-     *
-     * @param card the card being placed
-     * @return TRUE if the constraints limiting the card placement of the card @card are satisfied, else returns FALSE
+     * This method checks if a given card can be placed based on its constraints.
+     * @param card The card to be placed.
+     * @return TRUE if the constraints limiting the card placement of the card are satisfied, else returns FALSE.
+     * If there are no constraints or the card is not facing up, the card can be placed and the method returns true.
+     * If constraints are present, it checks if the available elements satisfy the constraints. If not, it returns false.
      */
     public boolean canBePlaced(PlayableCard card) {
         Map<Element, Integer> constraints = card.getPlacementConstraint();
@@ -147,9 +178,8 @@ public class PlacementArea {
     /**
      * performs the same control as the previous function except for the fact that it checks the
      * placement constraint even if the card is turned
-     *
-     * @param card the card
-     * @return boolean
+     * @param card
+     * @return
      */
     public boolean tuiCanBePlaced(PlayableCard card) {
         Map<Element, Integer> constraints = card.getPlacementConstraint();
@@ -164,9 +194,7 @@ public class PlacementArea {
 
     /**
      * allows the turnPlayer to place the starting card
-     *
      * @param starterCard the card to be placed
-     * @throws KickOutOfGameException the kick out of game exception
      */
     public void addCard(PlayableCard starterCard) throws KickOutOfGameException {
         Coordinates xy = new Coordinates(0,0);//availablePlaces.get(0); //
@@ -198,8 +226,7 @@ public class PlacementArea {
 
     /**
      * Counts the occurrences of a shape objective. Returns zero if an error occurs during the computation
-     *
-     * @param shape   the shape of the objective to be verified
+     * @param shape the shape of the objective to be verified
      * @param element the list containing the elements in order corresponding to the cards of the objective
      * @return the occurrences of the shape "shape"
      */
@@ -312,12 +339,13 @@ public class PlacementArea {
     }
 
     /**
-     * Test wrapper coordinates.
+     * This method is a wrapper for the private method updateAvailablePlaces. It takes in a Coordinates object and a PlayableCard object,
+     * and calls the updateAvailablePlaces method with these parameters. This method is primarily used for testing purposes.
      *
-     * @param xy   the xy
-     * @param card the card
-     * @return the coordinates
-     * @throws IllegalArgumentException the illegal argument exception
+     * @param xy The coordinates where the card is to be placed.
+     * @param card The card to be placed.
+     * @return The coordinates removed from the list of available places.
+     * @throws IllegalArgumentException If the coordinates are not contained in the availablePlaces list.
      */
     public Coordinates testWrapper(Coordinates xy, PlayableCard card) throws IllegalArgumentException {
         return updateAvailablePlaces(xy, card);
@@ -329,18 +357,8 @@ public class PlacementArea {
 
     ///////////////// GETTER METHODS ////////////////////////////////////////////////////////////
 
-    /**
-     *
-     * @return an array list of playable cards ordered by their placement order
-     */
-
-    //MAI USATO
-//    public List<PlayableCard> getCardsByPlacementOrder() {
-//        return (List<PlayableCard>) cardsByPlacementOrder.clone();
-//    }
 
     /**
-     * Get number artifacts int.
      *
      * @param artifact the type of artifact to count
      * @return the number of artifacts "artifact" in the Placement Are
@@ -348,7 +366,6 @@ public class PlacementArea {
     public int getNumberArtifacts(Artifact artifact){return availableArtifacts.get(artifact);}
 
     /**
-     * Get number elements int.
      *
      * @param element the type of element to count
      * @return the numbers of elements "element" in the Placement Area
@@ -357,7 +374,6 @@ public class PlacementArea {
 
     /**
      * returns the number of every artifact visible in the PlacementArea
-     *
      * @return a Hashmap containing the couples (artifact, numberOfThatArtifacts)
      */
     public HashMap<Artifact, Integer> getAllArtifactsNumber(){
@@ -368,7 +384,6 @@ public class PlacementArea {
 
     /**
      * returns the number of every element visible in the PlacementArea
-     *
      * @return the Hashmap containing the couples (element, numberOfThatElements)
      */
     public HashMap<Element, Integer> getAllElementsNumber(){
@@ -379,7 +394,6 @@ public class PlacementArea {
 
     /**
      * counts the number of corners covered by the newly placed card
-     *
      * @return the number of surrounding cards (whith respect to a card that has just been placed)
      */
     public int getNumberNearbyCards(){return numberNearbyCards;}
@@ -388,20 +402,34 @@ public class PlacementArea {
 
 
     ///////////////// FOR TESTING PURPOSES ONLY /////////////////////////////////////////////////
+
     /**
-     * Gets disposition.
+     * This method returns the current disposition of cards on the placement area.
+     * The disposition is represented as a HashMap where the keys are the coordinates of the card's position
+     * and the values are the PlayableCard objects placed on those coordinates.
      *
-     * @return the disposition
+     * @return A HashMap representing the disposition of cards on the placement area.
      */
+    //TODO this MUST BE SET PROTECTED
     public HashMap<Coordinates, PlayableCard> getDisposition() { return disposition;}
 
     /**
-     * Gets available places.
+     * This method returns a list of coordinates representing the available places on the placement area
+     * where a new card can be placed.
      *
-     * @return the available places
+     * @return A List of Coordinates representing the available places on the placement area.
      */
+    //TODO: convert all List to ArrayList
     public List<Coordinates> getAvailablePlaces() {return availablePlaces;}
 
+    /**
+     * This method checks if a given coordinate is present in the disposition HashMap.
+     * It iterates over the keys of the HashMap and returns true if it finds a match.
+     *
+     * @param disposition The HashMap representing the disposition of cards on the placement area.
+     * @param coord The Coordinates to check for in the disposition.
+     * @return True if the coord is found in the disposition, false otherwise.
+     */
     private boolean contain(HashMap<Coordinates, PlayableCard> disposition, Coordinates coord){
         for(Coordinates x : disposition.keySet()){
             if (x.equals(coord))
@@ -409,6 +437,15 @@ public class PlacementArea {
         }
         return false;
     }
+
+    /**
+     * This method checks if a given coordinate is present in a list of coordinates.
+     * It iterates over the list and returns true if it finds a match.
+     *
+     * @param list The list of Coordinates to check.
+     * @param coordinates The Coordinates to check for in the list.
+     * @return True if the coordinates are found in the list, false otherwise.
+     */
     private boolean contain(List<Coordinates> list, Coordinates coordinates){
         for (Coordinates x : list){
             if(x.equals(coordinates))

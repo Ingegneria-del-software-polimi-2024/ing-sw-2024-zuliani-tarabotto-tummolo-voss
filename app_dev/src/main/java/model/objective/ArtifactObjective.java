@@ -9,9 +9,6 @@ import model.placementArea.*;
 import java.util.HashMap;
 
 
-/**
- * The type Artifact objective.
- */
 @JsonTypeName("ArtifactObjective")
 /**
  * objective based on the number of artifacts present on the placementArea, if tris = 0 then artifact variable value will
@@ -19,22 +16,20 @@ import java.util.HashMap;
  * the  repetitions of 3 artifacts
  */
 public class ArtifactObjective  implements Objective{
+
     /**
-     * The Artifact.
+     * the artifact type to count
      */
     @JsonProperty("artifact")
     Artifact artifact;
+
     /**
-     * The Tris.
+     * if true we should count the repetitions of 3 artifacts
      */
     @JsonProperty("tris")
     boolean tris;
 
-    /**
-     *
-     * @param placementArea the disposition to find objectives in
-     * @return the number of points rellated to this objective
-     */
+
     public int countObjectivePoints(PlacementArea placementArea){
         HashMap<Artifact, Integer> map;
         if(!tris) {
@@ -47,21 +42,17 @@ public class ArtifactObjective  implements Objective{
     }
 
     @Override
-    public void printObjective() {
-        System.out.println("type: ArtifactObjective");
-        if (this.artifact != null) System.out.println(this.artifact.toString());
-        System.out.println("tris: " + this.tris);
-    }
-
-    @Override
     public Element getElement() {
         return null;
     }
+
 
     @Override
     public Artifact getArtifact() {
         return artifact;
     }
+
+
 
     @Override
     public Shape getShape() {

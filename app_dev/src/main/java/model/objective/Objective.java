@@ -9,45 +9,36 @@ import model.placementArea.PlacementArea;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * The interface Objective.
- */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+
 /**
  * inteface used for the objectives strategy pattern: identifies the right way to count points
  */
 public interface Objective extends Serializable {
+
     /**
      * counting points given by the objective
-     *
-     * @param placementArea the placement area
-     * @return the int
      */
     public int countObjectivePoints(PlacementArea placementArea);
 
     /**
-     * Print objective.
-     */
-    public void printObjective();
-
-    /**
-     * Gets element.
+     * This method returns the element for this objective.
      *
-     * @return the element
+     * @return The Element for this objective.
      */
     public Element getElement();
 
     /**
-     * Gets artifact.
+     * This method returns the artifact for this objective.
      *
-     * @return the artifact
+     * @return The Artifact for this objective.
      */
     public Artifact getArtifact();
 
     /**
-     * Gets shape.
+     * This method returns the shape for this objective.
      *
-     * @return the shape
+     * @return The Shape for this objective.
      */
     public Shape getShape();
 }

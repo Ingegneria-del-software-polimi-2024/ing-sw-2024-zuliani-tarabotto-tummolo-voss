@@ -4,23 +4,23 @@ import model.cards.PlayableCards.PlayableCard;
 import model.placementArea.Coordinates;
 
 /**
- * The type Cant place card exception.
+ * This exception is thrown when a card cannot be placed in the specified coordinates.
  */
 public class CantPlaceCardException extends Exception{
+
     /**
-     * The Coord.
+     * The coordinates where the card cannot be placed.
      */
     Coordinates coord;
     /**
-     * The Card.
+     * The card that cannot be placed.
      */
     PlayableCard card =  null;
 
     /**
-     * Instantiates a new Cant place card exception.
-     *
-     * @param coord the coord
-     * @param card  the card
+     * Constructs a new CantPlaceCardException with the specified coordinates and card.
+     * @param coord The coordinates where the card cannot be placed.
+     * @param card The card that cannot be placed.
      */
     public CantPlaceCardException(Coordinates coord, PlayableCard card) {
         this.coord = coord;
@@ -28,27 +28,22 @@ public class CantPlaceCardException extends Exception{
     }
 
     /**
-     * Instantiates a new Cant place card exception.
-     *
-     * @param coord the coord
+     * Constructs a new CantPlaceCardException with the specified coordinates.
+     * @param coord The coordinates where the card cannot be placed.
      */
     public CantPlaceCardException(Coordinates coord){
         this.coord = coord;
     }
 
     /**
-     * Gets coord.
-     *
-     * @return the coord
+     * @return The coordinates where the card cannot be placed.
      */
     public Coordinates getCoord() {
         return coord;
     }
 
     /**
-     * Gets card.
-     *
-     * @return the card
+     * @return The card that cannot be placed.
      */
     public PlayableCard getCard() {
         return card;

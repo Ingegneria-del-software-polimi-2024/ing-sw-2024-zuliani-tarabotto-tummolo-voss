@@ -36,30 +36,27 @@ public class LShapeObjective implements Objective{
     public int countObjectivePoints(PlacementArea placementArea) {return 3 * placementArea.verifyObjective(shape, element);}
 
     /**
-     *
-     * @return a ordered list of elements that compose the objective
+     * This method returns the second element in the list of elements for this objective.
+     * @return The second Element in the list of elements for this objective.
      */
-    /*public List<Element> getElement() {
-        return element;
-    }*/
-    //for console testing
-    @Override
-    public void printObjective() {
-        System.out.println("type: LShapeObjective");
-        System.out.println("element: " + this.element.toString());
-        System.out.println("shape: " + this.shape.toString());
-    }
-
     @Override
     public Element getElement() {
         return element.get(1);
     }
 
+    /**
+     * This method returns null as it is not applicable for this class.
+     * @return null
+     */
     @Override
     public Artifact getArtifact() {
         return null;
     }
 
+    /**
+     * This method returns the shape for this objective.
+     * @return The Shape for this objective.
+     */
     @Override
     public Shape getShape() {
         return shape;

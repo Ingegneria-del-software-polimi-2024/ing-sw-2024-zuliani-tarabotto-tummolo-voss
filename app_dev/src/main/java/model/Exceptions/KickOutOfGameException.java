@@ -1,7 +1,7 @@
 package model.Exceptions;
 
 /**
- * The type Kick out of game exception.
+ * This exception is thrown when a player is kicked out of the game.
  */
 public class KickOutOfGameException extends Exception {
 

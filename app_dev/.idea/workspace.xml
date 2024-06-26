@@ -10,7 +10,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a85c2ef2-4743-4d12-8336-27ef59fd799c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Game/ServerAPI_COME.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Game/ServerAPI_COME.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Exceptions/CantPlaceCardException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Exceptions/CantPlaceCardException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Exceptions/EmptyCardSourceException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Exceptions/EmptyCardSourceException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Exceptions/KickOutOfGameException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Exceptions/KickOutOfGameException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/CommonTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/CommonTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/TurnState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/TurnState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/PointsStrategy/CornersPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/PointsStrategy/CornersPoints.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/PointsStrategy/Points.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/PointsStrategy/Points.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/PointsStrategy/ResourcePoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/PointsStrategy/ResourcePoints.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/PointsStrategy/SimplePoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/PointsStrategy/SimplePoints.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/ArtifactObjective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/ArtifactObjective.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/DiagonalShapeObjective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/DiagonalShapeObjective.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/ElementObjective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/ElementObjective.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/LShapeObjective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/LShapeObjective.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/Objective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/Objective.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/Shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/Shape.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/placementArea/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/placementArea/Coordinates.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/placementArea/PlacementArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/placementArea/PlacementArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/placementArea/PlacementAreaIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/placementArea/PlacementAreaIterator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/player/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/GameState/GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/GameState/GameState.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,11 +78,12 @@
     "Application.run gui.executor": "Run",
     "Application.run server.executor": "Run",
     "JUnit.All in Ing_sw_proj.executor": "Coverage",
+    "JUnit.ControllerTest.executor": "Run",
     "JUnit.placementArea in Ing_sw_proj.executor": "Coverage",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "GUI&&TUI",
+    "git-widget-placeholder": "Nicola__ALL__RIGHT__BRANCH",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -104,7 +126,7 @@
       <recent name="model.lobby" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.run gui">
+  <component name="RunManager" selected="JUnit.ControllerTest">
     <configuration name="Provetta" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Provetta" />
       <module name="Ing_sw_proj" />
@@ -152,7 +174,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ControllerTest.main" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Ing_sw_proj" />
       <extension name="coverage">
         <pattern>
@@ -162,8 +184,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="controller" />
       <option name="MAIN_CLASS_NAME" value="controller.ControllerTest" />
-      <option name="METHOD_NAME" value="main" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -182,16 +203,16 @@
       <item itemvalue="Application.Provetta" />
       <item itemvalue="Application.RunTUI_Client" />
       <item itemvalue="Application.prova" />
-      <item itemvalue="JUnit.ControllerTest.main" />
+      <item itemvalue="JUnit.ControllerTest" />
       <item itemvalue="JUnit.java in Ing_sw_proj" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ControllerTest" />
         <item itemvalue="Application.RunTUI_Client" />
         <item itemvalue="Application.prova" />
         <item itemvalue="Application.Provetta" />
         <item itemvalue="JUnit.java in Ing_sw_proj" />
-        <item itemvalue="JUnit.ControllerTest.main" />
       </list>
     </recent_temporary>
   </component>
