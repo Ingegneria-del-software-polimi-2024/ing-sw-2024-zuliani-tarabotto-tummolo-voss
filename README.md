@@ -1,4 +1,15 @@
-[![header](https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/cover.png?raw=true))]
+
+<div align="center">
+
+![codex naturalis](https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/cover.png?raw=true)
+
+<h2> play codex online</h2>
+
+
+play on the terminal too.
+
+<img src="" alt="hi" style="width: 500px;" >
+</div>
 
 # Codex Naturalis Board Game - Software Engineering Project
 
