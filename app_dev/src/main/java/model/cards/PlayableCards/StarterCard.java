@@ -34,10 +34,6 @@ public class StarterCard extends PlayableCard{
     private Element[] backFaceCorners;
 
     /**
-     * List of corners on the back face, used for TUI (Text User Interface).
-     */
-    //TODO check
-    /**
      * Gets the blocked elements on the front face of this starter card.
      *
      * @return the blocked elements.
@@ -56,7 +52,9 @@ public class StarterCard extends PlayableCard{
     public Element[] getBackFaceCorners() {
         return backFaceCorners;
     }
-
+    /**
+     * List of corners on the back face, used for TUI (Text User Interface).
+     */
     private List<Corner> backCorners = new ArrayList<>();
 
     /**

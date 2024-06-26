@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * The type Lobby.
  * This class controls the lobby of the server, it manages the relations between the clients and the rooms
  */
-public class Lobby implements Traslator {//TODO all the methods here must be sinchronized!! :)
+public class Lobby implements Traslator {
     /**
      * The Rooms, each room contains between 2 and 4 players all playing to the same game.
      * A player can't be in more than one room at the same time
@@ -153,9 +153,9 @@ public class Lobby implements Traslator {//TODO all the methods here must be sin
         try {
             sendToPlayer(name, new ACK_NewConnection(name));
         } catch (MsgNotDeliveredException e) {
-            throw new RuntimeException(e);
+            System.out.println("Can't send the ackNewConnection message to the player"+name);
+            return;
         }
-        //TODO sistema exception handling
 
     }
 
@@ -173,8 +173,7 @@ public class Lobby implements Traslator {//TODO all the methods here must be sin
             try {
                 sendToPlayer(playerName, new CantJoinRoomMsg(true));
             } catch (MsgNotDeliveredException e) {
-                throw new RuntimeException(e);
-                //todo remove
+                return;
             }
             return;
         }
@@ -191,16 +190,16 @@ public class Lobby implements Traslator {//TODO all the methods here must be sin
                     sendToPlayer(playerName, new CantJoinRoomMsg(true));
                     return;
                 } catch (MsgNotDeliveredException ex) {
-                    throw new RuntimeException(ex);
-                    //TODO remove this trycatch
+                    System.out.println("An error in sending a message to the player "+playerName + " occurred");
+                    return;
                 }
             }
         }catch (CantJoinRoomExcept e){
             try {
                 sendToPlayer(playerName, new CantJoinRoomMsg(e.isCreating()));
             } catch (MsgNotDeliveredException ex) {
-                throw new RuntimeException(e);
-                //TODO remove this trycatch
+                System.out.println("An error in sending a message to the player "+playerName + " occurred");
+                return;
             }
             return;
         }
@@ -208,8 +207,8 @@ public class Lobby implements Traslator {//TODO all the methods here must be sin
         try {
             sendToPlayer(playerName, new ACK_RoomChoice(playerName, roomName));
         } catch (MsgNotDeliveredException e) {
-            throw new RuntimeException(e);
-            //TODO verify this is handled correctly
+            System.out.println("An error in sending a message to the player "+playerName + " occurred");
+            return;
         }
         verifyStart(roomName);
     }
@@ -405,28 +404,6 @@ public class Lobby implements Traslator {//TODO all the methods here must be sin
         }
         return null;
     }
-//    /**
-//     * reconnects the disconnected player in the place he was disconnected from
-//     * @param playerID the reconnecting player
-//     * @param handlerInterface the handler of the player
-//     */
-//    private void reconnect(String playerID, ClientHandlerInterface handlerInterface){
-//        players.put(playerID, handlerInterface);
-//        Room r = isInRoom(playerID);
-//        //if the player was present in a room we must bring him back there and notify the game state and the player
-//        if(r != null) {
-//            r.reconnect(playerID, handlerInterface);
-//        }else{
-//            //otherwise the player must stay in the lobby
-//            System.out.println(playerID+" reconnected to the lobby");
-//            try {
-//                sendToPlayer(playerID, new ACK_NewConnection(playerID));
-//            } catch (MsgNotDeliveredException e) {
-//                throw new RuntimeException(e);
-//                //TODO handle exception
-//            }
-//        }
-//    }
 
     /**
      * Verifies if a room has reached the maximum number of players

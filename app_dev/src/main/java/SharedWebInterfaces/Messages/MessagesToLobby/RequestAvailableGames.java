@@ -20,8 +20,7 @@ public class RequestAvailableGames implements MessageToLobby{
         try {
             lobby.sendToPlayer(user, new AvailableGames(lobby.getGameNames()));
         } catch (MsgNotDeliveredException e) {
-            throw new RuntimeException();
-            //TODO verify if handled correctly
+            return;
         }
     }
 

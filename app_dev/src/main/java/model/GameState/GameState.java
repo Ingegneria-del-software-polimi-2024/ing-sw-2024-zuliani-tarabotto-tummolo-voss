@@ -178,24 +178,29 @@ public class GameState {
      * @param state the state to be set
      */
     public void setTurnState(TurnState state) {
+        //if the next turn to be played involves the placement of a card, we must control if the next player is active
         if(state.equals(TurnState.PLACING_CARD_SELECTION)){
-            System.out.println(turnPlayer.getNickname());
             if(!turnPlayer.isActive()){
                 nextPlayer();
-                System.out.println(turnPlayer.getNickname());
                 playingTurn();
             }
         }
+
+
         this.turnState = state;
         //NOTIFICATION: ABOUT THE CHANGED STATE OF GAMESTATE
         modelListener.notifyChanges(state);
-        //TODO this if else can be deleted by using overriding of a method
+
+        //we must recover the selection of the objectives of players previously disconnected
         if(state.equals(TurnState.OBJECTIVE_SELECTION)) {
             for (Player p : players) {
                 if (!p.isActive())
                     recoveryObjectiveChoice(p);
             }
-        }else if(state.equals(TurnState.END_GAME)){
+        }
+
+        //If the state is the end of the game then we notify all the active players
+        else if(state.equals(TurnState.END_GAME)){
             //we notify all the active players of the end of the game
             for(Player p : players){
                 if(p.isActive())
@@ -203,6 +208,7 @@ public class GameState {
                         modelTranslator.handleDisconnection();
             }
         }
+
     }
 
     /**

@@ -255,11 +255,9 @@ public class ModelTranslator implements ServerControllerInterface {
         // - turnPlayer is updated
         // - the state is changed to PLACING_CARD_SELECTION
         // - new turnPlayer gets notified about which cards he can place(and where) by calling playingTurn method
-        //TODO: optimize this control
         if(!gameState.getLastTurn() && !lastRound){
             playNewTurn();
         }else if(!Objects.equals(gameState.getTurnPlayer().getNickname(), initialPlayer) && !lastRound){
-//            gameState.nextPlayer();
             playNewTurn();
         } else {
             if(!lastRound){
@@ -271,7 +269,6 @@ public class ModelTranslator implements ServerControllerInterface {
                 endGame();
                 return;
             }else{
-//                gameState.nextPlayer();
                 playNewTurn();
             }
             cont ++;
@@ -353,8 +350,7 @@ public class ModelTranslator implements ServerControllerInterface {
             try {
                 Thread.sleep(HeartBeatSettings.timerB4ClosingGame);
             } catch (InterruptedException e) {
-                e.printStackTrace();
-                //TODO handle the exception
+                System.out.println("Thread waiting for closing the game "+ gameId + " interrupted");
             }
         }while(iterations < HeartBeatSettings.iterationsNumber);
 

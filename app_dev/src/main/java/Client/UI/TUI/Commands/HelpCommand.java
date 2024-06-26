@@ -22,6 +22,7 @@ public class HelpCommand implements Command{
         System.out.println("  --quit    - Quit the game and go back to the lobby");
         System.out.println("  --disp    - Switch the displayed disposition the check another player's board");
         System.out.println("  --chat    - Open the chat");
+        System.out.println("  --exit    - Exit the app");
 
 
         System.out.println("\n");

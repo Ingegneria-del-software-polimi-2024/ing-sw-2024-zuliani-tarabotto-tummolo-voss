@@ -125,6 +125,7 @@ public class TUI implements UI {
         commandMap.put("--quit", new EndGameCommand(view, this));
         commandMap.put("--chat", new ChatCommand(view, this));
         commandMap.put("--whoami", new WhoAmICommand(this));
+        commandMap.put("--exit", new ExitAppCommand());
 
         sc = new Scanner(System.in);
     }
@@ -149,23 +150,6 @@ public class TUI implements UI {
             if (!validIP(host))
                 System.out.print(ansi().fg(color).a("~> Insert a valid ip address (xxxx.xxxx.xxxx.xxxx): \n").reset());
         }while(!validIP(host));
-
-//        int port;
-//        System.out.print(ansi().fg(color).a("~> Insert the host port: \n").reset());
-//        do{
-//            port = Integer.parseInt(sc.nextLine());
-//            if (!validPort(port))
-//                System.out.print(ansi().fg(color).a("~> Insert a valid port: \n").reset());
-//        }while(!validPort(port));
-
-//        int localPort;
-//        System.out.print(ansi().fg(color).a("~> Insert the local port: \n").reset());
-//        do{
-//            localPort = Integer.parseInt(sc.nextLine());
-//            if (!validPort(localPort))
-//                System.out.print(ansi().fg(color).a("~> Insert a valid port: \n").reset());
-//        }while(!validPort(localPort));
-
         try {
             view.startConnection(connectionType, host);
         } catch (StartConnectionFailedException e) {
@@ -661,7 +645,8 @@ public class TUI implements UI {
 
     @Override
     public void updateResourcesInUI() {
-        //TODO this method is empty! ~Andre
+        //IGNORE THIS
+        //This method is only used in GUI (Graphic interface)
     }
 
     @Override
@@ -747,7 +732,6 @@ public class TUI implements UI {
                     if(c != null) {
                         clear();
                         c.execute();
-                        //System.out.println("command");
                         System.out.println("\n~> type q to go back to the game");
                         while (!sc.nextLine().equals("q")) {
                             System.out.println("~> type q to go back to the game");

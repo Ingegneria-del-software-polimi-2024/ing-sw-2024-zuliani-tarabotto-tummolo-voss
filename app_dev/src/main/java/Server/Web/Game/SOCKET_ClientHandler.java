@@ -65,19 +65,6 @@ public class  SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
 
 
     /**
-     * Starts the listening loop for the gameplay
-     * @throws IOException when an error in the communication occurs
-     * @throws ClassNotFoundException when an error in the communication occurs
-     */
-    private void listenForCommands() throws IOException, ClassNotFoundException {
-        //TODO change in a conditional while and NOT while(true)
-        while (true){
-            MessageFromClient msg = (MessageFromClient) in.readObject();
-            api.sendToServer(msg);
-        }
-    }
-
-    /**
      * Safely closes the connection
      * @throws IOException when an error occurs, the connection must not be considered close in this case
      */
@@ -117,7 +104,6 @@ public class  SOCKET_ClientHandler implements ClientHandlerInterface, Runnable{
             Message message = null;
             do{
                 message = (Message) in.readObject();
-                //TODO replace if else with overloading
                 if(message instanceof MessageToLobby) {
                     if(message instanceof NewConnectionMessage)
                         ((NewConnectionMessage) message).setHandler(this);
