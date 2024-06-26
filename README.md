@@ -1,7 +1,8 @@
 
 <div align="center">
 
-![codex naturalis](https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/cover.png?raw=true)
+![codex naturalis](https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/cover.png?raw=true) { .text-center .max-w-md }
+
 
 <h2> play codex online</h2>
 
