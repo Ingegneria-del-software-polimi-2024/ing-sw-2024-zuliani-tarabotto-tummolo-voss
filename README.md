@@ -13,8 +13,8 @@ todo: gif
 
 ## 🗺️ map 
 - [<code>🌐 Team</code>](#-team)
-- [<code>⚙️ Project Specification </code>](#-project-specification)
-- [<code>🚦️ Implemented Functionalities</code>](#-implemented-functionalities)
+- [<code>⚙️ Project Specification </code>](#%EF%B8%8F-project-specification)
+- [<code>🚦️ Implemented Functionalities</code>](#%EF%B8%8F-implemented-functionalities)
 - [<code>📦 Installation</code>](#-installation)
 - [<code>📝 Usage</code>](#-usage)
 
