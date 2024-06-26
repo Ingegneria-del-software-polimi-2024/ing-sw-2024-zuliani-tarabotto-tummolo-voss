@@ -436,7 +436,6 @@ public class  GUI  implements UI {
     @Override
     public void updateResourcesInUI(){
         if(bannersPanel != null) bannersPanel.updateBanners();
-
     }
 
     @Override

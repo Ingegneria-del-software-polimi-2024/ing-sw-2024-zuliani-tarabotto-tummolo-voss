@@ -350,6 +350,7 @@ public class TUI implements UI {
 
                 // Wait for the player to press Enter
                 String in = input;
+                if(input == null) return;
                 // Check if the input is empty, meaning Enter was pressed
                 if (in.isEmpty()) {
                     enterPressed = true;
@@ -988,6 +989,7 @@ public class TUI implements UI {
             System.out.println(history.get(i).getContent()+"\n");
         }
         System.out.print(ansi().fg(color).a("~> Insert your message or type q to quit:\n").reset());
+        System.out.print(ansi().fg(color).a("~> Type @<player name> before your message to send a private message:\n").reset());
     }
 
     /**
