@@ -23,7 +23,7 @@ public class ServerAPI_COME {
     /**
      * The controller interface
      */
-    private ModelTranslator controller;
+    private ModelTranslator translator;
     //client called
 
     /**
@@ -64,8 +64,8 @@ public class ServerAPI_COME {
              message = toDoQueue.getNextMessage();
              //if you find a message in the waiting list
              if (message != null) {
-                 if (controller.checkMessage(message) || message instanceof ChatMessage)
-                     message.execute(controller);
+                 if (translator.checkMessage(message) || message instanceof ChatMessage)
+                     message.execute(translator);
              }
          }
     }
@@ -76,12 +76,12 @@ public class ServerAPI_COME {
     /**
      * Class constructor
      *
-     * @param controller the controller
+     * @param translator the controller
      */
-    public ServerAPI_COME(ModelTranslator controller) {
+    public ServerAPI_COME(ModelTranslator translator) {
         toDoQueue = new ServerMessageQueue();
         players = new HashMap<String, ClientHandlerInterface>();
-        this.controller = controller;
+        this.translator = translator;
     }
 
 
