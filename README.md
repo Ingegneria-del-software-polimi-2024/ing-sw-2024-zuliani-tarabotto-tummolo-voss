@@ -21,8 +21,6 @@ todo: gif
 
 # Codex Naturalis Board Game - Software Engineering Project
 
-<img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/cover.png?raw=true" width="260" align="right" />
-
 **Teacher**: Gianpaolo Cugola
 
 ## 🌐 Team
@@ -112,10 +110,11 @@ Regardless of the operating system, you must have installed the following progra
 
 
 
-
-  
   </td>
   </tr>
   </table>
 </div>
+
+### LOGIN
+<img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/GUI_gameBoard.png?raw=true" width="260" align="right" />
 
