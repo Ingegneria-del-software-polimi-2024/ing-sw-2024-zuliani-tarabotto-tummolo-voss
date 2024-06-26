@@ -2,7 +2,7 @@
 <div align="center">
 
 ![codex naturalis](https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/cover.png?raw=true) { .text-center .max-w-md }
-
+<img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/cover.png?raw=true" alt="drawing" width="200"/>
 
 <h2> play codex online</h2>
 
