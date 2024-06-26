@@ -13,8 +13,8 @@ todo: gif
 
 ## 🗺️ map 
 - [<code>🌐 Team</code>](#-team)
-- [<code>⚙️ Project specification </code>](#-project-specification)
-- [<code>🚦️ Implemented functionalities</code>](#-implemented-functionalities)
+- [<code>⚙️ Project Specification </code>](#-project-specification)
+- [<code>🚦️ Implemented Functionalities</code>](#-implemented-functionalities)
 - [<code>📦 Installation</code>](#-installation)
 - [<code>📝 Usage</code>](#-usage)
 
@@ -30,7 +30,7 @@ todo: gif
 * [Nicola Tummolo](https://github.com/NTum07)
 * [Gabriel Voss](https://github.com/voss01)
 
-## ⚙️ Project specification
+## ⚙️ Project Specification
 The project consists of a Java version of the board game *Codex Naturalis*, made by Cranio Creations. You can find the real game [here](https://www.craniocreations.it/prodotto/codex-naturalis).
 
 Project requirements: [link](https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/requirements.pdf?raw=true).
@@ -42,7 +42,7 @@ The final version includes:
 * Source code of the implementation.
 * Source code of unity tests.
 
-## 🚦️ Implemented functionalities
+## 🚦️ Implemented Functionalities
 
 ### Main functionalities
 | Functionality                    | Status |
