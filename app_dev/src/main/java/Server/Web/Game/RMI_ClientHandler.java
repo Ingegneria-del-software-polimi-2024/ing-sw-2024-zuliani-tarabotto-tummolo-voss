@@ -11,16 +11,33 @@ import SharedWebInterfaces.SharedInterfaces.ServerHandlerInterface;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+/**
+ * The type Rmi client handler.
+ * This class is the implementation of the remote interface ClientHandlerInterface.
+ * An interface maintaining the RMI connection with the client.
+ */
 public class RMI_ClientHandler implements ClientHandlerInterface {
+    /**
+     * The ServerAPI_COME.
+     */
     private ServerAPI_COME api;
+    /**
+     * The Client.
+     */
     private ServerHandlerInterface client;
+    /**
+     * The Lobby.
+     */
     private Lobby lobby;
+    /**
+     * The maximum number of retries for the message sending
+     */
     private final int MAX_RETRY = 3;
 
     //Go
 
     /**
-     * receives and enqueues the message coming from the client
+     * Receives and enqueues the message coming from the client
      * @param message the message coming from the client
      * @throws RemoteException when the message is not correctly delivered
      */
@@ -28,14 +45,14 @@ public class RMI_ClientHandler implements ClientHandlerInterface {
         api.sendToServer(message);}
 
     /**
-     * notifies the client of the changes happened in the model
+     * Notifies the client of the changes happened in the model
      * @param message the changes contained in the model
      * @throws RemoteException when an error occurs in the communication
      */
     public void notifyChanges(MessageFromServer message) throws RemoteException{client.notifyChanges(message);}
 
     /**
-     * sets the api deputed to the reception of incoming web messages
+     * Sets the api deputed to the reception of incoming web messages
      * @param receiver the web API "come"
      * @throws RemoteException because, implementing a remote interface this must be callable also remotely
      */
@@ -54,10 +71,11 @@ public class RMI_ClientHandler implements ClientHandlerInterface {
         System.out.println("Sent a message: "+msg.getClass());}
 
     /**
-     * class creator
+     * Class creator
+     *
      * @param clientRemoteInterface the remote interface of the client to which the server must comunicate
-     * @param lobby the lobby
-     * @param serverPort the port of the server, used to export the new personal handler
+     * @param lobby                 the lobby
+     * @param serverPort            the port of the server, used to export the new personal handler
      * @throws RemoteException when the handler could not be correctly exported
      */
     public RMI_ClientHandler(ServerHandlerInterface clientRemoteInterface, Lobby lobby, int serverPort) throws RemoteException{
@@ -70,7 +88,7 @@ public class RMI_ClientHandler implements ClientHandlerInterface {
     }
 
     /**
-     * handles the messages for the lobby
+     * Handles the messages for the lobby
      * @param msg the message from the client
      * @throws RemoteException when the message couldn't be delivered to the lobby
      */
@@ -82,7 +100,7 @@ public class RMI_ClientHandler implements ClientHandlerInterface {
 
     /**
      * This method tries to send the message MAX_RETRY times before signaling the exception to the caller
-     * @param msg
+     * @param msg the message to be sent
      */
     private void snd(MessageFromServer msg) throws RemoteException{
         int count = 0;

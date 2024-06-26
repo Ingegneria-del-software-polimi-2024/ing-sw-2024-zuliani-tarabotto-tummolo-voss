@@ -22,7 +22,8 @@ public class LoginFrame extends JFrame {
 
     /**
      * JFrame containing  a two JPanels, one for the user input and one constantly displaying the game logo
-     * @param gui
+     *
+     * @param gui the gui
      */
     public LoginFrame(GUI gui ){
 
@@ -94,7 +95,8 @@ public class LoginFrame extends JFrame {
     /**
      * a window asking to select one of the available game rooms is displayed,
      * the player is also given the possibility to create a new game
-     * @param listOfGames
+     *
+     * @param listOfGames the list of games
      */
     public void chooseGame(ArrayList<String> listOfGames){
         loginFields.chooseGame(listOfGames);

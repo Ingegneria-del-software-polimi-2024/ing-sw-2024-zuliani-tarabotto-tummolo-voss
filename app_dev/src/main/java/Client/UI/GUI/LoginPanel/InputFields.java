@@ -18,6 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The type Input fields.
+ */
 public class InputFields extends JPanel {
 
     private GUI gui;
@@ -40,7 +43,12 @@ public class InputFields extends JPanel {
     private Dimension textFieldDimension;
 
 
-
+    /**
+     * Instantiates a new Input fields.
+     *
+     * @param gui   the gui
+     * @param frame the frame
+     */
     public InputFields(GUI gui, Frame frame){
         this.gui = gui;
         this.frame = frame;
@@ -287,7 +295,8 @@ public class InputFields extends JPanel {
     /**
      * the player is asked to select a game to join,
      * the player can also create a new game with a number of players between 2 and 4
-     * @param listOfGames
+     *
+     * @param listOfGames the list of games
      */
     public void chooseGame(List<String> listOfGames){
         mainPanel.removeAll();

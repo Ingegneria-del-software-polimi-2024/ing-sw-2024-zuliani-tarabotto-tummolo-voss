@@ -11,12 +11,18 @@ import model.placementArea.*;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * The type L shape objective.
+ */
 @JsonTypeName("LShapeObjective")
 /**
  * objective in L shape composed of three cards identified by their relative coordinates
  * referred to the card standing alone
  */
 public class LShapeObjective implements Objective{
+    /**
+     * The Element.
+     */
     @JsonProperty("elements")
     public List<Element> element;
 

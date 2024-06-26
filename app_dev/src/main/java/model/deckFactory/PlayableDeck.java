@@ -5,6 +5,7 @@ import model.cards.PlayableCards.PlayableCard;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 /**
  * A base class representing a playable deck of cards.
  * This abstract class provides methods to manipulate and access a collection of PlayableCard objects.

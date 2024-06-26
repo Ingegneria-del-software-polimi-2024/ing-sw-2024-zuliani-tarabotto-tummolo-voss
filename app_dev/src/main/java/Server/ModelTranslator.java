@@ -16,7 +16,6 @@ import Server.Web.Lobby.Room;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -31,28 +30,73 @@ import java.util.stream.Collectors;
 6 - IL GIOCO INIZIA
  */
 
-public class ModelController implements ServerControllerInterface {
+/**
+ * The translator between the controller and the web structure
+ */
+public class ModelTranslator implements ServerControllerInterface {
+    /**
+     * The Game state controller.
+     */
     private GameState gameState;
+    /**
+     * The Players' nicknames.
+     */
     private final ArrayList<String> playersNicknames;
+    /**
+     * The Game name, corresponds to the room name.
+     */
     private final String gameId;
+    /**
+     * counter used to check if all players have placed their starter card and secret objectives
+     */
     private int cont = 0;
+    /**
+     * The first player to play.
+     */
     private String initialPlayer;
+    /**
+     * boolean to check if the last round is being played
+     */
     private boolean lastRound = false;
+    /**
+     * The interface to send messages to the client.
+     */
     private final ServerAPI_GO send;
+    /**
+     * The number of players that are ready to play
+     */
     private int readyPlayers;
+    /**
+     * The room in which the game is played
+     */
     private final Room room;
-    private boolean finished = false;
+    /**
+     * boolean to check if the game is ended
+     */
     private boolean gameEnded = false;
+    /**
+     * The chat history of the game
+     */
     private ChatHistory chatHistory;
+    /**
+     * The model listener, used to send messages to the client
+     */
     private ModelListener modelListener;
+    /**
+     * The set of disconnected players
+     */
     private Set<String> disconnectedPlayers;
 
     /**
      * class constructor
+     *
      * @param playersNicknames nicknames of the players
-     * @param gameId id of the game
+     * @param gameId           id of the game
+     * @param send             the send
+     * @param room             the room
+     * @param disconnected     the disconnected
      */
-    public ModelController(ArrayList<String> playersNicknames, String gameId, ServerAPI_GO send, Room room, Set<String> disconnected){
+    public ModelTranslator(ArrayList<String> playersNicknames, String gameId, ServerAPI_GO send, Room room, Set<String> disconnected){
         System.out.println("model controller created");
         this.playersNicknames = playersNicknames;
         this.gameId = gameId;
@@ -63,7 +107,7 @@ public class ModelController implements ServerControllerInterface {
     }
 
     /**
-     * decks and open cards are created, also each player is given his initial hand of cards
+     * Decks and open cards are created, also each player is given his initial hand of cards
      * (the view will display it only later)
      */
     @Override
@@ -77,7 +121,7 @@ public class ModelController implements ServerControllerInterface {
 
 
     /**
-     * each player once connected and inside a game sends a message(ReadyToPlayMessage) that calls this method:
+     * Each player once connected and inside a game sends a message(ReadyToPlayMessage) that calls this method:
      * after all players sent this message the game finally starts with the starterCards distribution
      */
     @Override
@@ -90,7 +134,7 @@ public class ModelController implements ServerControllerInterface {
 
 
     /**
-     * the controller places the starter card for the player with the specified face.
+     * The controller places the starter card for the player with the specified face.
      * A counter checks if all players placed their cards and then updates the State of the game
      * @param face the face of the starter card
      * @param player the nickname of the player
@@ -211,11 +255,9 @@ public class ModelController implements ServerControllerInterface {
         // - turnPlayer is updated
         // - the state is changed to PLACING_CARD_SELECTION
         // - new turnPlayer gets notified about which cards he can place(and where) by calling playingTurn method
-        //TODO: optimize this control
         if(!gameState.getLastTurn() && !lastRound){
             playNewTurn();
         }else if(!Objects.equals(gameState.getTurnPlayer().getNickname(), initialPlayer) && !lastRound){
-//            gameState.nextPlayer();
             playNewTurn();
         } else {
             if(!lastRound){
@@ -227,7 +269,6 @@ public class ModelController implements ServerControllerInterface {
                 endGame();
                 return;
             }else{
-//                gameState.nextPlayer();
                 playNewTurn();
             }
             cont ++;
@@ -235,19 +276,27 @@ public class ModelController implements ServerControllerInterface {
     }
 
     /**
-     * we communicate GameState that another turn will be played
+     * We communicate GameState that another turn will be played
      */
     private void playNewTurn(){
         gameState.playingTurn();
         gameState.setTurnState(TurnState.PLACING_CARD_SELECTION);
     }
 
+    /**
+     *
+     * @param message the message to be checked
+     * @return true if the message is pertinent to the current turn state, false otherwise
+     */
     public boolean checkMessage(MessageFromClient message){
         if(gameState != null)
             return gameState.checkMessage(message);
         return true;
     }
 
+    /**
+     * Ends the game.
+     */
     public void endGame(){
         gameEnded = true;
         gameState.calculateFinalPoints();
@@ -257,6 +306,7 @@ public class ModelController implements ServerControllerInterface {
 
     /**
      * Sets a player in an active state
+     *
      * @param playerName the name of the player to be set active
      */
     public void setPlayerActive(String playerName){
@@ -264,7 +314,12 @@ public class ModelController implements ServerControllerInterface {
     }
 
     /**
-     * set a player in an inactive state
+     * Sets a player in an inactive state
+     * If all the players except one are disconnected, after waiting the time specified, the game is closed
+     * Otherwise the game continues
+     * If the player is the initial player, it must be adjusted
+     * If the game is closed, the gameEnded boolean is set to true
+     *
      * @param playerName the name of the player to be set active
      * @return true if the game was closed after the player left the match, false if the match continued
      */
@@ -295,22 +350,29 @@ public class ModelController implements ServerControllerInterface {
             try {
                 Thread.sleep(HeartBeatSettings.timerB4ClosingGame);
             } catch (InterruptedException e) {
-                e.printStackTrace();
-                //TODO handle the exception
+                System.out.println("Thread waiting for closing the game "+ gameId + " interrupted");
             }
         }while(iterations < HeartBeatSettings.iterationsNumber);
 
         //after some time of checking we must close the game
         if(!gameEnded)
             endGame();
-        finished = true;
+        gameEnded = true;
     }
 
+    /**
+     * Handles disconnection of a player.
+     */
     public void handleDisconnection() {
         System.out.println("DISCONNECTION DETECTED");
         room.handleADetectedDisconnection();
     }
 
+    /**
+     * Allows a player to quit the game.
+     *
+     * @param playerID the player id
+     */
     public void quitGame(String playerID){
         System.out.println("quitting method in gamestate");
         gameState.quitGame(playerID);
@@ -318,6 +380,11 @@ public class ModelController implements ServerControllerInterface {
         room.quitGame(playerID);
     }
 
+    /**
+     * Reconnects a player to the game.
+     *
+     * @param playerID the player id
+     */
     public void reconnect(String playerID) {
         System.out.println("RECONNECTION of player: " + playerID);
         //if it was the first player to play, then it must be re-set as the first player (by disconnecting it was shifted
@@ -333,6 +400,11 @@ public class ModelController implements ServerControllerInterface {
 
     ///////////////////////////////////////////////CHAT/////////////////////////////////////////////////////////////////
 
+    /**
+     * Enqueues a chat msg.
+     *
+     * @param message the message
+     */
     public void enqChatMsg(ChatMessage message){
         Timestamp deliveryTime = chatHistory.add(message);
         if(message.getReceiver() == null) {
@@ -344,6 +416,11 @@ public class ModelController implements ServerControllerInterface {
 
     }
 
+    /**
+     * Sends the complete chat history to a player.
+     *
+     * @param player the player
+     */
     public void sendChatHistory(String player){
         ArrayList<ChatMessage> history = chatHistory.getHistory();
 

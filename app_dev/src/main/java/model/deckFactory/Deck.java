@@ -23,6 +23,8 @@ public interface Deck extends Serializable {
 
     /**
      * returns the number of cards in the deck
+     *
+     * @return the size
      */
     public abstract int getSize();
 }

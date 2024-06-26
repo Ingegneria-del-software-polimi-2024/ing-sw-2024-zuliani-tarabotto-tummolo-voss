@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * The type Obj card label.
+ */
 public class ObjCardLabel extends JLabel {
 
     private ObjectiveCard c;
@@ -20,7 +23,8 @@ public class ObjCardLabel extends JLabel {
     /**
      * JLabel used for representing an ObjectiveCard.
      * The label has the pointer to the specified ObjectiveCard and the corresponding pngs
-     * @param cardLength
+     *
+     * @param cardLength the card length
      */
     public ObjCardLabel(int cardLength){
         this.cardLength = cardLength;
@@ -29,9 +33,10 @@ public class ObjCardLabel extends JLabel {
 
     /**
      * method that changes the card that the JLabel is representing
-     * @param c
-     * @param front
-     * @param back
+     *
+     * @param c     the c
+     * @param front the front
+     * @param back  the back
      */
     public void updateCard(ObjectiveCard c, BufferedImage front, BufferedImage back){
         this.c = c;
@@ -64,7 +69,8 @@ public class ObjCardLabel extends JLabel {
 
     /**
      * returns the card represented by this label at this moment
-     * @return
+     *
+     * @return objective card
      */
     public ObjectiveCard getCard(){return c;}
 

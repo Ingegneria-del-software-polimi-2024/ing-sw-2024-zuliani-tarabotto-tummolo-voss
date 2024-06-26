@@ -7,16 +7,35 @@ import java.util.List;
 /**
  * the pawn color belonging to a player
  */
+public enum Pawn {
+    /**
+     * Red pawn.
+     */
+    red(),
+    /**
+     * Purple pawn.
+     */
+    purple(),
+    /**
+     * Green pawn.
+     */
+    green(),
+    /**
+     * Blue pawn.
+     */
+    blue();
 
-    public enum Pawn {
-        red(),
-        purple(),
-        green(),
-        blue();
+    /**
+     * The constant shuffledList.
+     */
+    private static List<Pawn> shuffledList = new ArrayList<>();
 
-        private static List<Pawn> shuffledList = new ArrayList<>();
-
-        public static List<Pawn> getRandomPawns(){
+    /**
+     * Get random pawns list.
+     *
+     * @return the list
+     */
+    public static List<Pawn> getRandomPawns(){
             shuffledList.clear();
             Collections.addAll(shuffledList, Pawn.values());
             Collections.shuffle(shuffledList);
@@ -27,13 +46,19 @@ import java.util.List;
         /////////////////// ONLY USED IN Controller and ControllerTest to directly ask the player which color he wants /////////////////////////////
 
 
-       private boolean isAvailable = true;
+    /**
+     * True if the pawn is available, false otherwise.
+     */
+    private boolean isAvailable = true;
 
 
         //public boolean getIsAvailable() {return isAvailable;}
 
 
-        public void setIsAvailable() {this.isAvailable = false;}
+    /**
+     * Sets isAvailable to false.
+     */
+    public void setFalseIsAvailable() {this.isAvailable = false;}
 
         //MAI USATO
 //        public static void printAvailablePawns() {

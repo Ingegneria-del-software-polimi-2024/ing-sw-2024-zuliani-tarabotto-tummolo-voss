@@ -7,6 +7,9 @@ import model.placementArea.Coordinates;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The type Placement area.
+ */
 public class PlacementArea extends JPanel {
 
     private final int cardLength;
@@ -29,8 +32,9 @@ public class PlacementArea extends JPanel {
 
     /**
      * JPanel used to display the player's board, each card is custom drawn using the paintComponent method.
-     * @param gui
-     * @param cardLength
+     *
+     * @param gui        the gui
+     * @param cardLength the card length
      */
     public PlacementArea(GUI gui, int cardLength){
         this.cardLength = cardLength;
@@ -92,13 +96,46 @@ public class PlacementArea extends JPanel {
 
    }
 
+    /**
+     * Get x center int.
+     *
+     * @return the int
+     */
     public int getXCenter(){return xCenter;}
+
+    /**
+     * Get y center int.
+     *
+     * @return the int
+     */
     public int getYCenter(){return yCenter;}
 
+    /**
+     * Get card length int.
+     *
+     * @return the int
+     */
     public int getCardLength(){return cardLength;}
+
+    /**
+     * Get card height int.
+     *
+     * @return the int
+     */
     public int getCardHeight(){return cardHeight;}
 
+    /**
+     * Get x overlap int.
+     *
+     * @return the int
+     */
     public int getXOverlap(){return xOverlap;}
+
+    /**
+     * Get y overlap int.
+     *
+     * @return the int
+     */
     public int getYOverlap(){return yOverlap;}
 
 
@@ -111,17 +148,28 @@ public class PlacementArea extends JPanel {
     /**
      * when a player has to select a position to place the card, the rectangle at coordinates c is drawn in orange,
      * the boolean drawSelectionRectangle must be set to true
-     * @param c
+     *
+     * @param c the c
      */
     public void drawSelectionRectangle(Coordinates c){
         selectionRectangleCoordinates = c;
         drawSelectionRectangle = true;
     }
 
+    /**
+     * Set draw selection rectangle.
+     *
+     * @param b the b
+     */
     public void setDrawSelectionRectangle(boolean b){
         drawSelectionRectangle = b;
     }
 
+    /**
+     * Get selection rectangle coordinates coordinates.
+     *
+     * @return the coordinates
+     */
     public Coordinates getSelectionRectangleCoordinates(){return  selectionRectangleCoordinates;}
 
 

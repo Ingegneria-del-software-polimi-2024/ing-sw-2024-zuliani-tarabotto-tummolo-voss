@@ -7,6 +7,9 @@ import model.placementArea.Coordinates;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * The type Board motion listener.
+ */
 public class BoardMotionListener extends MouseAdapter {
 
     private GUI gui;
@@ -15,8 +18,9 @@ public class BoardMotionListener extends MouseAdapter {
     /**
      * the listener is responsible for monitoring mouse position and highlighting the board in case the position
      * coincides with one of the availablePlaces (only during player's turn)
-     * @param gui
-     * @param board
+     *
+     * @param gui   the gui
+     * @param board the board
      */
     public BoardMotionListener(GUI gui, PlacementArea board){
         this.gui = gui;

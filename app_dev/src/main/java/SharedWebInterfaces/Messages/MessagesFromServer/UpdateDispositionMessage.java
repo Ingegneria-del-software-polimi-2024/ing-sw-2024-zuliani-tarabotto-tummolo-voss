@@ -9,13 +9,36 @@ import model.placementArea.Coordinates;
 import java.util.HashMap;
 import java.util.List;
 
-//TODO must consider the possibility to notify also the other players of the change in the disposition
+/**
+ * The type Update disposition message.
+ * This message is used to notify the clients of the new disposition of a player.
+ */
 public class UpdateDispositionMessage implements MessageFromServer{
+    /**
+     * The player of which the disposition changes.
+     */
     private String player;
+    /**
+     * The new disposition of the player.
+     */
     private HashMap<Coordinates, PlayableCard> disposition;
+    /**
+     * The points of the player.
+     */
     private int points;
+    /**
+     * The available places where a card can be placed.
+     */
     private List<Coordinates> availablePlaces;
 
+    /**
+     * Instantiates a new Update disposition message.
+     *
+     * @param player          the player
+     * @param disposition     the disposition
+     * @param availablePlaces the available places
+     * @param points          the points
+     */
     public UpdateDispositionMessage(String player, HashMap<Coordinates, PlayableCard> disposition,
                                     List<Coordinates> availablePlaces,
                                     int points) {

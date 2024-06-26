@@ -14,7 +14,8 @@ public class ObjectiveCardsDeckGenerator implements DeckGenerator {
     /**
      * creates a new ObjectiveDeck
      * and calls the generate() method which initializes the cards via json parsing
-     * @return
+     *
+     * @return objective deck
      */
     public ObjectiveDeck generateDeck() {
         ObjectiveDeck deck = new ObjectiveDeck();

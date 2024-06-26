@@ -22,6 +22,7 @@ public class ObjectivesPrinter {
 
     /**
      * depending on the ObjectiveCard c, the method retrieves the corresponding objective line from the Element or Artifact Enumeration
+     *
      * @param c the reference to the ObjectiveCard
      * @param i the row of the ObjectiveCard to be printed
      * @return a String containing the i line of the ObjectiveCard c
@@ -39,9 +40,10 @@ public class ObjectivesPrinter {
 
     /**
      * directly prints on the console the Objectives panel.
+     *
      * @param c1 the first common objective
      * @param c2 the second common objective
-     * @param s the player's secret objective
+     * @param s  the player's secret objective
      */
     public void printObjectivesBoard(ObjectiveCard c1, ObjectiveCard c2, ObjectiveCard s){
 
@@ -62,6 +64,7 @@ public class ObjectivesPrinter {
 
     /**
      * method that can be used for printing both the commonObjectives and the two objectives the player has to choose from
+     *
      * @param c1 first ObjectiveCard
      * @param c2 second ObjectiveCard
      */
@@ -84,9 +87,10 @@ public class ObjectivesPrinter {
 
     /**
      * returns a List of Strings representing the Objectives panel
+     *
      * @param c1 first common objective
      * @param c2 second common objective
-     * @param s secret objective
+     * @param s  secret objective
      * @return List of Strings "objField"
      */
     public List<String> getObjField(ObjectiveCard c1, ObjectiveCard c2, ObjectiveCard s){

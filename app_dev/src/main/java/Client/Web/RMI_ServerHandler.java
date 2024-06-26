@@ -21,29 +21,45 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
+/**
+ * The type Rmi server handler.
+ * An interface maintaining the RMI connection with the server.
+ */
 public class RMI_ServerHandler implements ServerHandlerInterface {
 
+    /**
+     * The interface managing incoming messages
+     */
     private ClientAPI_COME api;
+    /**
+     * The server
+     */
     private ClientHandlerInterface server;
+    /**
+     * The server RMI manager
+     */
     private RMI_ManagerInterface manager;
+    /**
+     * The ip of the server
+     */
     private String serverHost;
 
     /**
-     * sends the message to the server
+     * Sends the message to the server
      * @param message message to be sent
      * @throws RemoteException if the message couldn't be delivered
      */
     public void sendToServer(MessageFromClient message) throws RemoteException{server.sendToServer(message);}
 
     /**
-     * sends the message to the lobby
+     * Sends the message to the lobby
      * @param message message to be sent
      * @throws RemoteException if the message couldn't be delivered
      */
     public void sendToLobby(MessageToLobby message)throws RemoteException{server.deliverToLobby(message);}
 
     /**
-     * forwards the incoming message to the client API incoming interface
+     * Forwards the incoming message to the client API incoming interface
      * @param message incoming message
      * @throws RemoteException if an error in the network happens
      */
@@ -57,7 +73,7 @@ public class RMI_ServerHandler implements ServerHandlerInterface {
     }
 
     /**
-     * forwards the incoming message to the client API incoming interface
+     * Forwards the incoming message to the client API incoming interface
      * @param msg incoming message
      * @throws RemoteException if an error in the network happens
      */
@@ -70,7 +86,8 @@ public class RMI_ServerHandler implements ServerHandlerInterface {
     }
 
     /**
-     * class constructor
+     * Class constructor
+     *
      * @param host the hostname of the server
      * @param come the interface for the reception of the messages
      * @throws StartConnectionFailedException if an error in the instantiation of the connection happens
@@ -80,6 +97,12 @@ public class RMI_ServerHandler implements ServerHandlerInterface {
         serverHost = host;
     }
 
+    /**
+     * Connects with the server.
+     *
+     * @param port the port
+     * @throws StartConnectionFailedException if an error in the instantiation of the connection happens
+     */
     public void connect(int port) throws StartConnectionFailedException {
         try {
 
