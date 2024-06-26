@@ -32,13 +32,12 @@ todo: gif
 * [Gabriel Voss](https://github.com/voss01)
 
 ## ⚙️ Project Specification
-$${\color{#FFD700}Description \space \color{#56565E} and Requirements}$$
 
 The project consists of a Java version of the board game *Codex Naturalis*, made by Cranio Creations. You can find the real game [here](https://www.craniocreations.it/prodotto/codex-naturalis).
 
 Project requirements: [link](https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/requirements.pdf?raw=true).
 
-$${\color{#FFD700}Final \space \color{#56565E} version: }$$
+The final version includes:
 * High level UML diagram.
 * UML diagram generated from the code by automated tools.
 * Working game implementation, which has to be rules compliant.
