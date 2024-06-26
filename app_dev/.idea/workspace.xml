@@ -11,8 +11,49 @@
   <component name="ChangeListManager">
     <list default="true" id="a85c2ef2-4743-4d12-8336-27ef59fd799c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/PlayableCards/GoldCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/PlayableCards/GoldCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/enums/Artifact.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/enums/Artifact.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Exceptions/CantPlaceCardException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Exceptions/CantPlaceCardException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Exceptions/ConditionNotSatisfiedException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Exceptions/EmptyCardSourceException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Exceptions/EmptyCardSourceException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Exceptions/KickOutOfGameException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Exceptions/KickOutOfGameException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/CommonTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/CommonTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/TurnState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/TurnState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/PointsStrategy/CornersPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/PointsStrategy/CornersPoints.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/PointsStrategy/Points.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/PointsStrategy/Points.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/PointsStrategy/ResourcePoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/PointsStrategy/ResourcePoints.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/PointsStrategy/SimplePoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/PointsStrategy/SimplePoints.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/ArtifactObjective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/ArtifactObjective.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/DiagonalShapeObjective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/DiagonalShapeObjective.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/ElementObjective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/ElementObjective.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/LShapeObjective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/LShapeObjective.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/Objective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/Objective.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/Shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/Shape.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/placementArea/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/placementArea/Coordinates.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/placementArea/PlacementArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/placementArea/PlacementArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/placementArea/PlacementAreaIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/placementArea/PlacementAreaIterator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/player/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/controller/ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/controller/ControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/GameState/GameStateTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/GameState/MockModelListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/GameState/MockModelListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/cards/PlayableCards/ResourceCardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/cards/PlayableCards/ResourceCardTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/placementArea/AddCardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/placementArea/AddCardTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/placementArea/PlacementAreaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/placementArea/PlacementAreaTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/TUI/TUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/TUI/TUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/Corner.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/Corner.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/GoldCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/GoldCard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/PlayableCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/PlayableCard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/ResourceCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/ResourceCard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/StarterCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/StarterCard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/deckFactory/Generators/ObjectiveCardsDeckGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/deckFactory/Generators/ObjectiveCardsDeckGenerator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/deckFactory/Generators/PlayableDeckGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/deckFactory/Generators/PlayableDeckGenerator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/deckFactory/Generators/ResourceCardsDeckGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/deckFactory/Generators/ResourceCardsDeckGenerator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/deckFactory/Generators/StarterCardsDeckGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/deckFactory/Generators/StarterCardsDeckGenerator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/deckFactory/GoldenDeck.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/deckFactory/GoldenDeck.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/deckFactory/ObjectiveDeck.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/deckFactory/ObjectiveDeck.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/deckFactory/PlayableDeck.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/deckFactory/PlayableDeck.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/deckFactory/ResourcesDeck.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/deckFactory/ResourcesDeck.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/deckFactory/StarterDeck.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/deckFactory/StarterDeck.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/enums/Artifact.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/enums/Artifact.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,6 +238,13 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -296,6 +344,8 @@
       <workItem from="1718788159587" duration="4459000" />
       <workItem from="1718869587481" duration="1588000" />
       <workItem from="1718878563659" duration="2347000" />
+      <workItem from="1719336325092" duration="1069000" />
+      <workItem from="1719391639948" duration="16482000" />
     </task>
     <servers />
   </component>

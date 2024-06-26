@@ -7,7 +7,15 @@ import java.util.Collection;
  * the class coordinates facilitates the use of a cartesian plane as model for the Placement Area of the players
  */
 public class Coordinates implements Serializable {
+
+    /**
+     * The x field represents the x-coordinate in a 2D space.
+     */
     private final int x;
+
+    /**
+     * The y field represents the y-coordinate in a 2D space.
+     */
     private final int y;
 
     /**
@@ -42,6 +50,12 @@ public class Coordinates implements Serializable {
      * @return this+a
      */
     public Coordinates sum(Coordinates a){return new Coordinates(x+a.getX(), y+a.getY());}
+
+    /**
+     * This method checks if the provided coordinates are equal to the current coordinates.
+     * @param xy The coordinates to compare with.
+     * @return True if the x and y values of the provided coordinates are equal to the x and y values of the current coordinates, false otherwise.
+     */
     public boolean equals(Coordinates xy){
         return xy.getX() == x && xy.getY() == y;
     }

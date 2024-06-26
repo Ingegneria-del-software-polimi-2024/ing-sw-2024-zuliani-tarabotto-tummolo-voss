@@ -10,6 +10,10 @@ import model.placementArea.PlacementArea;
  * objective based on the number of elements of the tipe @element present on the placementArea
  */
 public class ElementObjective implements Objective{
+
+    /**
+     * The element type for this objective.
+     */
     @JsonProperty("element")
     private Element element;
 
@@ -19,22 +23,40 @@ public class ElementObjective implements Objective{
      */
     public int countObjectivePoints(PlacementArea placementArea){return 2*(placementArea.getNumberElements(element)/3);}
 
+    /**
+     * This method prints the type of the objective and the element type.
+     */
     @Override
     public void printObjective() {
         System.out.println("type: ElementObjective");
         System.out.println(this.element.toString());
     }
 
+    /**
+     * This method returns the element type for this objective.
+     *
+     * @return The element type for this objective.
+     */
     @Override
     public Element getElement() {
         return element;
     }
 
+    /**
+     * This method returns null as it is not applicable for this class.
+     *
+     * @return null
+     */
     @Override
     public Artifact getArtifact() {
         return null;
     }
 
+    /**
+     * This method returns null as it is not applicable for this class.
+     *
+     * @return null
+     */
     @Override
     public Shape getShape() {
         return null;

@@ -22,13 +22,28 @@ import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * This class is used to test the functionality of the PlacementArea class.
+ * It extends the TestCase class from the JUnit framework.
+ */
 public class PlacementAreaTest extends TestCase {
     //private static GameState gameState;
 
+    /**
+     * A static integer ID used for testing.
+     */
     static int ID = 81;
 
-    //initializes the gamestate (please always specify one player), inserts the cards expressed from cli
-    // in the placementArea of the palyer, the starterCard will be automatically added
+    /**
+     * This method initializes the game state, inserts the cards expressed from CLI
+     * in the placement area of the player. The starter card will be automatically added.
+     *
+     * @param area The PlacementArea where the cards will be placed.
+     * @param cardList The list of cards to be placed.
+     * @param coord The coordinates where the cards will be placed.
+     * @param face The face orientation of the cards.
+     * @param deckList The list of decks from which the cards will be drawn.
+     */
     public static void initialize(PlacementArea area, ArrayList<Integer> cardList, ArrayList<Coordinates> coord, boolean face, Deck[] deckList) {
 
         PlayableCard cardToBePlaced = (PlayableCard) getCard(deckList, ID);
@@ -43,6 +58,14 @@ public class PlacementAreaTest extends TestCase {
         putCards(cardList, coord, face, area, deckList);
     }
 
+    /**
+     * This method retrieves a card from a deck.
+     *
+     * @param deckList The list of decks from which the card will be drawn.
+     * @param id The ID of the card to be retrieved.
+     * @return The card retrieved from the deck.
+     * @throws RuntimeException if the deck or card cannot be found.
+     */
     private static Card getCard(Deck[] deckList, int id) throws RuntimeException{
         if(87<=id && id<=102) {
             ObjectiveDeck deck = (ObjectiveDeck) deckList[3];
@@ -66,6 +89,16 @@ public class PlacementAreaTest extends TestCase {
         }
     }
 
+    /**
+     * This method places cards in the placement area.
+     *
+     * @param cards The list of cards to be placed.
+     * @param coordList The coordinates where the cards will be placed.
+     * @param face The face orientation of the cards.
+     * @param area The PlacementArea where the cards will be placed.
+     * @param deckList The list of decks from which the cards will be drawn.
+     * @throws RuntimeException if the size of the coordinate list does not match the size of the card list.
+     */
     public static void putCards(ArrayList<Integer> cards, ArrayList<Coordinates> coordList, boolean face, PlacementArea area, Deck[] deckList) throws RuntimeException{
 
         if(coordList.size() != cards.size())
@@ -91,10 +124,21 @@ public class PlacementAreaTest extends TestCase {
         }
     }
 
+    /**
+     * This method checks for objectives in a given area.
+     *
+     * @param area The PlacementArea where the objectives are to be checked.
+     * @param obj The ObjectiveCard that contains the objectives to be checked.
+     * @return The number of points counted from the objectives.
+     */
     public static int checkForObjectives(PlacementArea area, ObjectiveCard obj){return obj.countPoints(area);}
 
-
-    //insert 999 when asking "what objective id do you want to check? " if you want to stop
+    /**
+     * This method tests the counts of various objectives.
+     * It sets up various scenarios and checks if the count of points matches the expected results.
+     *
+     * @throws Exception If an error occurs during the test.
+     */
     @Test
     public void testObjectiveCounts() throws Exception{
         //test objective 87 ascDiag Mushrooms
@@ -204,6 +248,16 @@ public class PlacementAreaTest extends TestCase {
 
     }
 
+    /**
+     * This method runs a test for a given set of cards, coordinates, objectives, and expected results.
+     * It initializes a PlacementArea, places the cards at the given coordinates, and checks if the count of points from the objectives matches the expected results.
+     *
+     * @param cards An array of card IDs to be placed in the PlacementArea.
+     * @param coordinates An array of coordinates where the cards are to be placed.
+     * @param objectives An array of objective IDs to be checked.
+     * @param expectedResults An array of expected results for each objective.
+     * @param face A boolean value indicating whether the cards are face up or face down.
+     */
     public void runTest(int[] cards, int[] coordinates, int[] objectives, int[] expectedResults, boolean face){
 
         PlacementArea area = new PlacementArea();

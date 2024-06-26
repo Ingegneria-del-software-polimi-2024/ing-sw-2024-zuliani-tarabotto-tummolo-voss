@@ -104,6 +104,4 @@ public class ResourceCardTest extends TestCase {
         // Then the blocked element should be retrieved correctly
         assertNotNull(blockedElement);
     }
-
-    // Ignore the printCard method for testing purposes (it's for console output)
 }

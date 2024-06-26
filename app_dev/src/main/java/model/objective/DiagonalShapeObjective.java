@@ -25,13 +25,16 @@ public class DiagonalShapeObjective implements Objective{
     @Override
     public int countObjectivePoints(PlacementArea placementArea) {return 2 * placementArea.verifyObjective(shape, element);}
 
-
+    /**
+     * @return the element type to count
+     */
     @Override
     public void printObjective() {
         System.out.println("type: DiagonalShapeObjective");
         System.out.println(this.element.toString());
         System.out.println(this.shape.toString());
     }
+
 
     @Override
     public Element getElement() {

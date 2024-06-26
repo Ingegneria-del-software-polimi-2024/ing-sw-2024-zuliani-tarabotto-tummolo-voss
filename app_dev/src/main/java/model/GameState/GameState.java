@@ -17,20 +17,69 @@ import model.deckFactory.*;
 import javax.sql.rowset.CachedRowSet;
 import java.util.*;
 
+/**
+ * this class contains all the information about the current state of the game
+ */
 public class GameState {
 
+    /**
+     * the list of players in the game
+     */
     private ArrayList<Player> players;
+
+    /**
+     * the unique id of the game
+     */
     private String id;
+
+    /**
+     * the player whose turn it is
+     */
     private Player turnPlayer;
+
+    /**
+     * true if the game is in the last turn
+     */
     private boolean isLastTurn = false;
+
+    /**
+     * the card selected by the player from his hand
+     */
     private PlayableCard selectedHandCard;
+
+    /**
+     * the coordinates where the selectedHandCard will be placed
+     */
     private Coordinates selectedCoordinates;
+
+    /**
+     * the common table containing all the shared decks and cards
+     */
     private CommonTable commonTable;
+
+    /**
+     * the current state of the game
+     */
     private TurnState turnState;
+
+    /**
+     * the maximum number of points a player can reach
+     */
     private final int MAX_POINTS = 10;//TODO insert 20 for real game, 10 for testing, 1 for rapid checking
+
+    /**
+     * the listener that will notify the changes in the game state
+     */
     private ModelListener modelListener;
+
+    /**
+     * the buffer containing the two objectives the player has to choose between
+     */
     private List<ObjectiveCard> objectiveBuffer;
 
+    /**
+     * the controller that will handle the game
+     */
     private ModelController modelController;
 
     /**
@@ -196,6 +245,7 @@ public class GameState {
         }
     }
 
+
     public void distributeSecretOjectives() {
         for (Player p : players) {
             objectiveBuffer.add(getObjectiveDeck().extract());
@@ -208,6 +258,12 @@ public class GameState {
         modelListener.notifyChanges(turnPlayer.getNickname());
     }
 
+    /**
+     * INTERFACE METHOD
+     * based on Player input, the method sets the secret objective for the player
+     * @param cardId the id of the selected secret objective
+     * @param player the player selecting the secret objective
+     */
     public void setPlayerSecretObjective(String cardId, String player){
         for(Player p : players){
             if(p.getNickname().equals(player)){
@@ -236,7 +292,9 @@ public class GameState {
         modelListener.notifyChanges(turnPlayer.getNickname(), turnPlayer.getPlacementArea().getAvailablePlaces(), canBePlaced);
     }
 
+
     public boolean checkMessage(MessageFromClient message){return turnState.controlMessage(message);}
+
 
     public void quitGame(String playerName){
         modelListener.notifyChanges(playerName, new KickOutOfGameException());
@@ -416,29 +474,94 @@ public class GameState {
 //    public void nextStage(){turnState.nextStage();}
 
     /////////////// GETTER METHODS FOR COMMONTABLE ATTRIBUTES ////////////////////////
+
+    /**
+     * This method returns the gold deck from the common table.
+     * @return PlayableDeck object representing the gold deck.
+     */
     public PlayableDeck getGoldDeck() { return commonTable.getGoldDeck(); }
+
+    /**
+     * This method returns the resource deck from the common table.
+     * @return PlayableDeck object representing the resource deck.
+     */
     public PlayableDeck getResourceDeck() { return commonTable.getResourceDeck(); }
 
-    //MAI USATO
-    //public PlayableDeck getStarterDeck(){return commonTable.getStarterDeck();}
+    /**
+     * This method returns the objective deck from the common table.
+     * @return ObjectiveDeck object representing the objective deck.
+     */
     public ObjectiveDeck getObjectiveDeck() {return commonTable.getObjectiveDeck();}
+
+    /**
+     * This method returns a list of PlayableCard objects representing the open resources from the common table.
+     * @return List of PlayableCard objects representing the open resources.
+     */
     public List<PlayableCard> getOpenResources() { return commonTable.getOpenResources(); }
+
+    /**
+     * This method returns a list of PlayableCard objects representing the open gold from the common table.
+     * @return List of PlayableCard objects representing the open gold.
+     */
     public List<PlayableCard> getOpenGold() { return commonTable.getOpenGold(); }
 
 
-   //public List<ObjectiveCard> getCommonObjectives(){return commonTable.getCommonObjectives();}
-    //public CommonTable getCommonTable(){return commonTable;}
+
 
 
     //////////////////////// GETTER METHODS FOR GAMESTATE ATTRIBUTES ///////////////////////////
+    /**
+     * returns the player at the specified index
+     * @param index the index of the player
+     * @return the player at the specified index
+     */
     public Player getPlayer(int index){ return players.get(index);}
+
+    /**
+     * This method returns the unique id of the game.
+     * @return String representing the unique id of the game.
+     */
     public String getId(){ return id; }
+
+    /**
+     * This method returns the Player object whose turn it is.
+     * @return Player object whose turn it is.
+     */
     public Player getTurnPlayer(){ return turnPlayer; }
+
+    /**
+     * This method checks if the game is in the last turn.
+     * @return boolean value indicating if the game is in the last turn.
+     */
     public boolean getLastTurn(){ return isLastTurn; }
+
+    /**
+     * This method returns the points of the player whose turn it is.
+     * @return Integer representing the points of the player whose turn it is.
+     */
     public int getPoints() {return turnPlayer.getPoints(); }
-    //returns turnPlayer's card at specified index in his hand
+
+    /**
+     * This method returns a PlayableCard object from the hand of the current player (turnPlayer) at the specified index.
+     * @param index The index of the card in the player's hand.
+     * @return PlayableCard object at the specified index in the player's hand.
+     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index >= size()).
+     */
     public PlayableCard getPlayerHandCard(int index) { return turnPlayer.getPlayingHand().get(index); }
+
+
+    /**
+     * This method returns an ArrayList of Player objects currently in the game.
+     * @return ArrayList of Player objects.
+     */
     public ArrayList<Player> getPlayers() { return players; }
+
+    /**
+     * This method returns a Player object whose nickname matches the provided playerName.
+     * If no match is found, it returns null.
+     * @param playerName The name of the player to be retrieved.
+     * @return Player object if a match is found, null otherwise.
+     */
     Player getPlayerByName(String playerName){
         for(Player p : players)
             if(p.getNickname().equals(playerName))
@@ -543,6 +666,7 @@ public class GameState {
         }
 
     }
+
     /**
      * sets the player in an active state
      * @param index the index of the player
@@ -551,16 +675,33 @@ public class GameState {
         players.get(index).setActive();
     }
 
+    /**
+     * This method is used to notify changes when a player reconnects during the initialization phase.
+     * It sends notifications about the player's nickname, their card disposition, available places, and points.
+     * @param p The player who is reconnecting.
+     */
     public void inizializationReconnection(Player p){
         //NOTIFICATION ABOUT THE STARTER CARD
         modelListener.notifyChanges(p.getNickname(), p.getPlacementArea().getDisposition(), p.getPlacementArea().getAvailablePlaces(),
                 p.getPoints());
     }
 
+    /**
+     * This method is used to display a notification about the starter card when a player reconnects.
+     * It sends notifications about the player's nickname, their starter card, and their pawn color.
+     *
+     * @param player The player who is reconnecting.
+     */
     public void starterCardReconnection(Player player){
         modelListener.displayStarterCardNotification(player.getNickname(), player.getStarterCard(), player.getPawnColor() );
     }
 
+    /**
+     * This method is used to display a notification about the objective card when a player reconnects.
+     * It sends notifications about the turn player's nickname, the reconnecting player's nickname, and their secret objective.
+     *
+     * @param player The player who is reconnecting.
+     */
     public void objectiveCardReconnection(Player player){
         modelListener.notifyChanges(turnPlayer.getNickname(), player.getNickname());
         modelListener.notifyChanges(player.getSecretObjective(), player.getNickname());
@@ -583,7 +724,7 @@ public class GameState {
     ////////////////////////DISCONNECTION RECOVERY//////////////////////////////////////////////////////////////////////
 
     /**
-     * if the turn palyer disconnects before choosing the secret objective, the firs of the two objectives is chosen and
+     * if the turn player disconnects before choosing the secret objective, the firs of the two objectives is chosen and
      * the face card is assigned for the starter card
      * @param player the disconnected player
      */
@@ -647,6 +788,12 @@ public class GameState {
         setTurnState(TurnState.PLACING_CARD_SELECTION);
     }
 
+    /**
+     * This method checks if a specific Coordinates object is present in a given list of Coordinates objects.
+     * @param list The list of Coordinates objects to be checked.
+     * @param coordinates The Coordinates object to be searched for in the list.
+     * @return true if the Coordinates object is found in the list, false otherwise.
+     */
     private boolean areCoordinatesPresent(List<Coordinates> list, Coordinates coordinates){
         for(Coordinates c : list)
             if(c.equals(coordinates))
