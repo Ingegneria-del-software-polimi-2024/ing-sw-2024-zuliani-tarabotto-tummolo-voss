@@ -10,21 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a85c2ef2-4743-4d12-8336-27ef59fd799c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/GUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/Commands/ExitAppCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/TUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/TUI/TUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/Web/ClientAPI_COME.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/Web/ClientAPI_COME.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/ModelTranslator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ModelTranslator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Game/SOCKET_ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Game/SOCKET_ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Game/ServerAPI_COME.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Game/ServerAPI_COME.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/Lobby.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/Lobby.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Lobby/Room.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromClient/MessageFromClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesFromClient/MessageFromClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesToLobby/RequestAvailableGames.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SharedWebInterfaces/Messages/MessagesToLobby/RequestAvailableGames.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/TurnState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/TurnState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/PlayableCards/StarterCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/PlayableCards/StarterCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/placementArea/PlacementArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/placementArea/PlacementArea.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +72,7 @@
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.uml",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -314,7 +301,7 @@
       <workItem from="1719348947881" duration="1229000" />
       <workItem from="1719350219152" duration="4656000" />
       <workItem from="1719386199017" duration="3487000" />
-      <workItem from="1719390581134" duration="3521000" />
+      <workItem from="1719390581134" duration="7106000" />
     </task>
     <servers />
   </component>
