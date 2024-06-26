@@ -5,9 +5,17 @@ import SharedWebInterfaces.SharedInterfaces.Traslator;
 
 /**
  * The type Play starter card message.
+ * This message is sent from the view to the model controller to play the starter card.
+ * It contains the face of the card and the player id because the card is univocally assigned to the player.
  */
 public class PlayStarterCardMessage implements MessageFromViewToModelController {
+    /**
+     * The Starter card face.
+     */
     private boolean starterCardFace;
+    /**
+     * The Player id.
+     */
     private String playerId;
 
     /**

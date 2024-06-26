@@ -11,12 +11,24 @@ import java.util.List;
 
 /**
  * The type Update disposition message.
+ * This message is used to notify the clients of the new disposition of a player.
  */
-//TODO must consider the possibility to notify also the other players of the change in the disposition
 public class UpdateDispositionMessage implements MessageFromServer{
+    /**
+     * The player of which the disposition changes.
+     */
     private String player;
+    /**
+     * The new disposition of the player.
+     */
     private HashMap<Coordinates, PlayableCard> disposition;
+    /**
+     * The points of the player.
+     */
     private int points;
+    /**
+     * The available places where a card can be placed.
+     */
     private List<Coordinates> availablePlaces;
 
     /**

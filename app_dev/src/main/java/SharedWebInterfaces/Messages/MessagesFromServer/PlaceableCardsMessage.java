@@ -8,10 +8,18 @@ import java.util.List;
 
 /**
  * The type Placeable cards message.
+ * This message is used to notify the client of the available places where a card can be placed and of the
+ * cards of their hand that can be placed face side.
  */
 public class PlaceableCardsMessage implements MessageFromServer{
 
+    /**
+     * The Available places of the player's disposition.
+     */
     private List<Coordinates> availablePlaces;
+    /**
+     * The boolean array that indicates if a card in the player's hand can be placed face side.
+     */
     private boolean[] canBePlaced;
 
     /**

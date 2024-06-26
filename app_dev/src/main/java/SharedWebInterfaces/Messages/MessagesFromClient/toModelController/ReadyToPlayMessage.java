@@ -6,6 +6,7 @@ import SharedWebInterfaces.SharedInterfaces.Traslator;
 
 /**
  * The type Ready to play message.
+ * This message is sent by the client when the player is ready to play.
  */
 public class ReadyToPlayMessage implements  MessageFromClient {
 

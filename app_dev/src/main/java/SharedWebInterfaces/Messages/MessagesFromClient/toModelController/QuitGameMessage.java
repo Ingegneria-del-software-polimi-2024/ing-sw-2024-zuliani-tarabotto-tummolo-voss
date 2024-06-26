@@ -5,8 +5,12 @@ import SharedWebInterfaces.SharedInterfaces.Traslator;
 
 /**
  * The type Quit game message.
+ * This message is sent from the view to the model controller to quit the game in every moment after the game starts.
  */
 public class QuitGameMessage implements MessageFromViewToModelController{
+    /**
+     * The Player id.
+     */
     private final String playerID;
 
     /**

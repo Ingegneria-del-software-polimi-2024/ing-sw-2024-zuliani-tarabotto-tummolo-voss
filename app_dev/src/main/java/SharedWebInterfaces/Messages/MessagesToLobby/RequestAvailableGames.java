@@ -6,8 +6,12 @@ import SharedWebInterfaces.WebExceptions.MsgNotDeliveredException;
 
 /**
  * The type Request available games.
+ * This message is sent by the client to the lobby to request the list of available games.
  */
 public class RequestAvailableGames implements MessageToLobby{
+    /**
+     * The User's nickname.
+     */
     private String user;
     @Override
     public void execute(Lobby lobby) {

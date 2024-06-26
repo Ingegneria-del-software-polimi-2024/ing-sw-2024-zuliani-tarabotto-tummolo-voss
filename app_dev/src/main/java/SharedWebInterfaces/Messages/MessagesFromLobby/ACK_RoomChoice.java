@@ -7,12 +7,16 @@ import java.io.Serializable;
 
 /**
  * The type Ack room choice.
+ * This class is used to acknowledge the user's room choice.
  */
 public class ACK_RoomChoice implements MessageFromServer {
 
+    /**
+     * The User's nickname.
+     */
     private String user;
     /**
-     * The Game.
+     * The Game name.
      */
     public String game;
 

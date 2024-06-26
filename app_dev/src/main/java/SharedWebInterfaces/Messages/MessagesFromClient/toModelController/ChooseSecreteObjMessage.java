@@ -5,10 +5,17 @@ import SharedWebInterfaces.SharedInterfaces.Traslator;
 
 /**
  * The type Choose secrete obj message.
+ * This message is used to communicate the choosing of the secret objective of a player
  */
 public class ChooseSecreteObjMessage implements MessageFromViewToModelController {
 
+    /**
+     * The Chosen objective's id.
+     */
     private String chosenObjective;
+    /**
+     * The player's id.
+     */
     private String playerID;
 
     /**

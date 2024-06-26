@@ -4,10 +4,16 @@ import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
 
 /**
  * The type Pawn color message.
+ * This message is used to set the color of the pawn of a player.
  */
 public class PawnColorMessage implements MessageFromServer {
-
+    /**
+     * The Player's name.
+     */
     private String player;
+    /**
+     * The Pawn color.
+     */
     private String pawnColor;
 
     /**

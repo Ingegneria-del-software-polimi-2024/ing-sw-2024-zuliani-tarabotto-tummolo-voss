@@ -8,11 +8,21 @@ import java.util.HashMap;
 
 /**
  * The type Update resources message.
+ * This message is used to notify the clients of the new resources of a player.
+ * It is used after a player has placed a card from the hand.
  */
 public class UpdateResourcesMessage implements MessageFromServer {
-
+    /**
+     * The Available elements of the player.
+     */
     private HashMap<Element, Integer> availableElements;
+    /**
+     * The Available artifacts of the player.
+     */
     private HashMap<Artifact, Integer> availableArtifacts;
+    /**
+     * The player of which the resources change.
+     */
     private String player;
 
     /**

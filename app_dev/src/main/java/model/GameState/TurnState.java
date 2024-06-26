@@ -52,8 +52,7 @@ public enum TurnState {
      */
     STARTER_CARD_SELECTION{
         public boolean controlMessage(MessageFromClient msg){
-            return (msg instanceof SelectStarterCardMessage ||
-                    msg instanceof PlayStarterCardMessage   ||
+            return (msg instanceof PlayStarterCardMessage   ||
                     msg instanceof QuitGameMessage          ||
                     msg instanceof DisconnectionMessage     ||
                     msg instanceof I_WantToReconnectMessage ||

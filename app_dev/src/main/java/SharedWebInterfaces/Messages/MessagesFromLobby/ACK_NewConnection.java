@@ -5,8 +5,12 @@ import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
 
 /**
  * The type Ack new connection.
+ * This class is used to display in the UI the available games to the user and to acknowledge the user's nickname.
  */
 public class ACK_NewConnection implements MessageFromServer {
+    /**
+     * The User's nickname.
+     */
     private String user;
     @Override
     public void execute(ViewAPI_Interface view) {
@@ -24,7 +28,7 @@ public class ACK_NewConnection implements MessageFromServer {
     }
 
     /**
-     * Gets user.
+     * Gets user's nickname.
      *
      * @return the user
      */

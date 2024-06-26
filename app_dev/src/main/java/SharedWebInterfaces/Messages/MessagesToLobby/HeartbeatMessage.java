@@ -5,8 +5,12 @@ import Server.Web.Lobby.Lobby;
 
 /**
  * The type Heartbeat message.
+ * This message is sent by the client to the server to indicate that the client is still connected.
  */
 public class HeartbeatMessage implements MessageToLobby {
+    /**
+     * The Player's id.
+     */
     private String playerId;
 
     /**

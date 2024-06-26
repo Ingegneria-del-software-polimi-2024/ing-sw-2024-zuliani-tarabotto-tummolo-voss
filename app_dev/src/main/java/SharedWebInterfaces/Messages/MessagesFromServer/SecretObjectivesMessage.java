@@ -5,9 +5,16 @@ import model.cards.ObjectiveCard;
 
 /**
  * The type Secret objectives message.
+ * This message is used to notify the client of the secret objectives from which the player can choose.
  */
 public class SecretObjectivesMessage implements MessageFromServer{
+    /**
+     * The Objective card number 1.
+     */
     private ObjectiveCard obj1;
+    /**
+     * The Objective card number 2.
+     */
     private ObjectiveCard obj2;
 
     /**

@@ -6,6 +6,7 @@ import model.enums.Pawn;
 
 /**
  * The type Starter card message.
+ * This message is used to notify the client of the starter card and the color of their pawn color.
  */
 public class StarterCardMessage implements MessageFromServer{
     private PlayableCard starterCard;

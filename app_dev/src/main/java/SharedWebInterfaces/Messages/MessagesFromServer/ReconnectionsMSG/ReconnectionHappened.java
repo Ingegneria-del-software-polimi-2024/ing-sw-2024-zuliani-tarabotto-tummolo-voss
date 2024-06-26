@@ -5,6 +5,7 @@ import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
 
 /**
  * The type Reconnection happened.
+ * This message is sent to the client when it correctly reconnects to the game.
  */
 public class ReconnectionHappened implements MessageFromServer {
     /**

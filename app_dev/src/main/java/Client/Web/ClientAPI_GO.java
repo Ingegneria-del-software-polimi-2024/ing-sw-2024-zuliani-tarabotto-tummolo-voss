@@ -37,7 +37,6 @@ public class ClientAPI_GO {
         try {
             handler.sendToServer(message);
         } catch (RemoteException e) {
-            //TODO handle correctly the exception, this is where indeed it is most important to handle correctly the exc.
             try {
                 handler.notifyChanges(new ReturnToStartMessage());
             } catch (RemoteException ex) {
@@ -55,7 +54,6 @@ public class ClientAPI_GO {
         try {
             handler.sendToLobby(message);
         } catch (RemoteException e) {
-            //TODO handle correctly the exception, this is where indeed it is most important to handle correctly the exc.
             try {
                 handler.notifyChanges(new ReturnToStartMessage());
             } catch (RemoteException ex) {

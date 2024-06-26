@@ -11,13 +11,19 @@ import java.io.Serializable;
 
 /**
  * The type New connection message.
+ * This message is sent by the client to the lobby when a new connection is established.
+ * It contains the desired username of the client.
  */
 public class NewConnectionMessage implements Serializable, MessageToLobby {
-
+    /**
+     * The desired username.
+     */
     private String username;
-    //private String roomName;
-    //private int expectedPlayers;
-
+    /**
+     * The handler of the client in the server side.
+     * When the message is sent by the client it is caught by the client's handler before sending and a self reference is added.
+     * This allows the client to be able to send messages to its handler on the server.
+     */
     private ClientHandlerInterface handler;
 
     public void execute(Lobby lobby){
@@ -30,7 +36,7 @@ public class NewConnectionMessage implements Serializable, MessageToLobby {
     }
 
     /**
-     * Instantiates a new New connection message.
+     * Instantiates a new connection message.
      *
      * @param username the username
      */

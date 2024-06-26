@@ -5,8 +5,12 @@ import SharedWebInterfaces.SharedInterfaces.ViewAPI_Interface;
 
 /**
  * The type Already existing name message.
+ * This message is sent from the server to the client when the client tries to select a nickname that is already in use.
  */
 public class AlreadyExistingNameMessage implements MessageFromServer {
+    /**
+     * The non-valid Name.
+     */
     private String name;
 
     /**
@@ -24,7 +28,7 @@ public class AlreadyExistingNameMessage implements MessageFromServer {
     }
 
     /**
-     * Get unavailable name string.
+     * Get the unavailable name.
      *
      * @return the string
      */

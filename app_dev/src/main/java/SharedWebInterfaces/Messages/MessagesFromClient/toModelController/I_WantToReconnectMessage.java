@@ -6,6 +6,7 @@ import SharedWebInterfaces.SharedInterfaces.Traslator;
 
 /**
  * The type Want to reconnect message.
+ * This message is sent by the client when he wants to reconnect to a room after exiting or being disconnected.
  */
 public class I_WantToReconnectMessage implements MessageFromClient {
     /**
@@ -18,7 +19,7 @@ public class I_WantToReconnectMessage implements MessageFromClient {
     String roomName;
 
     /**
-     * Instantiates a new Want to reconnect message.
+     * Instantiates a new I Want to reconnect message.
      *
      * @param playerID the player id
      * @param roomName the room name

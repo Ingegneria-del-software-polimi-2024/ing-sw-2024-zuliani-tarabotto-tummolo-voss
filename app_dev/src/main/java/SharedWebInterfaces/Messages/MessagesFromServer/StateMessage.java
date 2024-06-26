@@ -5,9 +5,12 @@ import model.GameState.TurnState;
 
 /**
  * The type State message.
+ * This message is used to notify the client of the new game state.
  */
 public class StateMessage implements MessageFromServer{
-
+    /**
+     * The new game State.
+     */
     private TurnState state;
 
     /**

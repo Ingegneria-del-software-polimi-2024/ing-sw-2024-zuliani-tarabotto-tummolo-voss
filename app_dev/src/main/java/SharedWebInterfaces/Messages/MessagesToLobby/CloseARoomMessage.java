@@ -5,9 +5,13 @@ import SharedWebInterfaces.Messages.Message;
 
 /**
  * The type Close a room message.
+ * This message is used to close a room in the lobby. It is self sent by the room to the lobby when all the players
+ * leave the room or when a game ends.
  */
 public class CloseARoomMessage implements MessageToLobby {
-
+    /**
+     * The Room name.
+     */
     private String roomName;
 
     /**

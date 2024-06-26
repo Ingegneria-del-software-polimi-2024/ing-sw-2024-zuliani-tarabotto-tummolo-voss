@@ -5,9 +5,13 @@ import SharedWebInterfaces.SharedInterfaces.Traslator;
 
 /**
  * The type Draw card message.
+ * This message is sent from the view to the model controller to draw a card from the deck
  */
 public class DrawCardMessage implements MessageFromViewToModelController {
 
+    /**
+     * The Card source to draw from.
+     */
     private int cardSource;
 
     /**

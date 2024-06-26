@@ -5,8 +5,12 @@ import model.cards.ObjectiveCard;
 
 /**
  * The type Confirm secret objective message.
+ * This message is sent to the client to confirm the secret objective chosen.
  */
 public class ConfirmSecretObjectiveMessage implements MessageFromServer{
+    /**
+     * The Secret objective chosen.
+     */
     private ObjectiveCard secretObjective;
 
 
