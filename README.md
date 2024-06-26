@@ -30,7 +30,7 @@ todo: gif
 * [Nicola Tummolo](https://github.com/NTum07)
 * [Gabriel Voss](https://github.com/voss01)
 
-## Project specification
+## ⚙️ Project specification
 The project consists of a Java version of the board game *Codex Naturalis*, made by Cranio Creations. You can find the real game [here](https://www.craniocreations.it/prodotto/codex-naturalis).
 
 Project requirements: [link](https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/requirements.pdf?raw=true).
@@ -42,7 +42,7 @@ The final version includes:
 * Source code of the implementation.
 * Source code of unity tests.
 
-## Implemented functionalities
+## 🚦️ Implemented functionalities
 
 ### Main functionalities
 | Functionality                    | Status |
@@ -69,7 +69,7 @@ The final version includes:
 | Model      | 87% (29/29) | 87% (183/208) | 87% (597/721) |
 | Controller | 87% (5/5)   | 87% (44/45)   | 87% (223/257) |
 
-## Installation
+## 📦 Installation
 
 ### Requirements
 
@@ -90,7 +90,7 @@ Regardless of the operating system, you must have installed the following progra
     java -jar server.jar
     java -jar client.jar
     ```
-## Usage
+## 📝 Usage
 <div class="table-devenvironment">
   <table style="font-size: 11px">
   <tr>
