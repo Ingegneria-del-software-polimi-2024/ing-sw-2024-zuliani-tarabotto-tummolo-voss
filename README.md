@@ -1,3 +1,5 @@
+[![header](./cover.png)]([https://aar.one](https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/cover.png?raw=true))
+
 # Codex Naturalis Board Game - Software Engineering Project
 
 <img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/cover.png?raw=true" width="260" align="right" />
