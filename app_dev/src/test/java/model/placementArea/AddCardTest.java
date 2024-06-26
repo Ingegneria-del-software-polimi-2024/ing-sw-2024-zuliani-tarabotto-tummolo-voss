@@ -25,17 +25,16 @@ import java.util.Map.Entry;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * The type Add card test.
+ * This class is used to test the addition of cards to a placement area.
  */
 public class AddCardTest extends TestCase {
 
     /**
-     * Initialize starter card.
-     *
-     * @param area            the area
-     * @param deckList        the deck list
-     * @param starterCard     the starter card
-     * @param faceStarterCard the face starter card
+     * This method is used to initialize a starter card in the placement area.
+     * @param area The placement area where the card will be placed.
+     * @param deckList The list of decks from which the card will be retrieved.
+     * @param starterCard The ID of the starter card.
+     * @param faceStarterCard The face side of the starter card.
      */
     public static void initializeStarterCard(PlacementArea area, Deck[] deckList, int starterCard, boolean faceStarterCard){
         PlayableCard cardToBePlaced = (PlayableCard) getCard(deckList, starterCard);
@@ -49,14 +48,13 @@ public class AddCardTest extends TestCase {
     }
 
     /**
-     * Initialize int.
-     *
-     * @param area     the area
-     * @param cardList the card list
-     * @param coord    the coord
-     * @param face     the face
-     * @param deckList the deck list
-     * @return the int
+     * This method is used to initialize the placement area with a list of cards.
+     * @param area The placement area where the cards will be placed.
+     * @param cardList The list of card IDs to be placed.
+     * @param coord The list of coordinates where the cards will be placed.
+     * @param face The face side of the cards.
+     * @param deckList The list of decks from which the cards will be retrieved.
+     * @return The total points of the placed cards.
      */
     public static int initialize(PlacementArea area, ArrayList<Integer> cardList, ArrayList<Coordinates> coord, boolean face, Deck[] deckList) {
 
@@ -79,6 +77,14 @@ public class AddCardTest extends TestCase {
         return cardsPoints;
     }
 
+    /**
+     * Retrieves a card from the appropriate deck based on the card's ID.
+     *
+     * @param deckList The list of decks from which the card will be retrieved.
+     * @param id The ID of the card to be retrieved.
+     * @return The card retrieved from the deck.
+     * @throws RuntimeException if the deck cannot be found or if the card cannot be retrieved from the deck.
+     */
     private static Card getCard(Deck[] deckList, int id) throws RuntimeException{
         if(87<=id && id<=102) {
             ObjectiveDeck deck = (ObjectiveDeck) deckList[3];
@@ -103,15 +109,15 @@ public class AddCardTest extends TestCase {
     }
 
     /**
-     * Put cards int.
+     * Places the cards in the placement area.
      *
-     * @param cards     the cards
-     * @param coordList the coord list
-     * @param face      the face
-     * @param area      the area
-     * @param deckList  the deck list
-     * @return the int
-     * @throws RuntimeException the runtime exception
+     * @param cards The list of card IDs to be placed.
+     * @param coordList The list of coordinates where the cards will be placed.
+     * @param face The face side of the cards.
+     * @param area The placement area where the cards will be placed.
+     * @param deckList The list of decks from which the cards will be retrieved.
+     * @return The total points of the placed cards.
+     * @throws RuntimeException if the number of cards does not match the number of coordinates or if a card cannot be placed in the area.
      */
     public static int putCards(ArrayList<Integer> cards, ArrayList<Coordinates> coordList, boolean face, PlacementArea area, Deck[] deckList) throws RuntimeException{
 
@@ -167,9 +173,13 @@ public class AddCardTest extends TestCase {
         return cardsPoints;
     }
 
-
     /**
-     * Test singoli.
+     * This method is used to test the placement of cards in the area.
+     *
+     * It creates instances of various deck generators and generates the decks.
+     * It then defines the parameters for two test cases (a and b) and runs these tests.
+     * Each test case includes the cards to be placed, their coordinates, expected results, face side of the cards, starter card details, expected number of each element and artifact, expected available positions, expected disposition of cards, expected number of nearby cards, and details of any expected exceptions.
+     * The tests are run using the `runTest` method.
      */
     public void testSingoli(){
 
@@ -670,28 +680,29 @@ public class AddCardTest extends TestCase {
 
     }
 
+
     /**
-     * Run test.
+     * Runs a test for the placement of cards in the area.
      *
-     * @param cards                the cards
-     * @param coordinates          the coordinates
-     * @param expectedResults      the expected results
-     * @param face                 the face
-     * @param starterCard          the starter card
-     * @param faceStarterCard      the face starter card
-     * @param expAnimals           the exp animals
-     * @param expInsects           the exp insects
-     * @param expMushrooms         the exp mushrooms
-     * @param expVegetals          the exp vegetals
-     * @param expFeather           the exp feather
-     * @param expInk               the exp ink
-     * @param expPaper             the exp paper
-     * @param expAvailablePosition the exp available position
-     * @param expDisposition       the exp disposition
-     * @param expNumberNearbyCards the exp number nearby cards
-     * @param exceptionCoord       the exception coord
-     * @param exceptionCard        the exception card
-     * @param exceptionCode        the exception code
+     * @param cards An array of card IDs to be placed.
+     * @param coordinates An array of coordinates where the cards will be placed.
+     * @param expectedResults The expected result of the test.
+     * @param face The face side of the cards.
+     * @param starterCard The ID of the starter card.
+     * @param faceStarterCard The face side of the starter card.
+     * @param expAnimals The expected number of animal elements.
+     * @param expInsects The expected number of insect elements.
+     * @param expMushrooms The expected number of mushroom elements.
+     * @param expVegetals The expected number of vegetal elements.
+     * @param expFeather The expected number of feather artifacts.
+     * @param expInk The expected number of ink artifacts.
+     * @param expPaper The expected number of paper artifacts.
+     * @param expAvailablePosition The expected list of available positions after the cards are placed.
+     * @param expDisposition The expected disposition of the cards in the area.
+     * @param expNumberNearbyCards The expected number of nearby cards.
+     * @param exceptionCoord The coordinates where an exception is expected to occur.
+     * @param exceptionCard The card ID where an exception is expected to occur.
+     * @param exceptionCode The expected exception code.
      */
     public void runTest(int[] cards, int[] coordinates, int expectedResults, boolean face, int starterCard, boolean faceStarterCard, int expAnimals, int expInsects, int expMushrooms, int expVegetals, int expFeather, int expInk, int expPaper, List<Coordinates> expAvailablePosition, HashMap<Coordinates, PlayableCard> expDisposition, int expNumberNearbyCards, int exceptionCoord[], int exceptionCard, int exceptionCode){
 

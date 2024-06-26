@@ -135,3 +135,4 @@ public class StarterCardTest extends TestCase {
         assertEquals(starterCard.getBackFaceCorners()[index], corner.getElement()); // Check the element matches
     }
 }
+
