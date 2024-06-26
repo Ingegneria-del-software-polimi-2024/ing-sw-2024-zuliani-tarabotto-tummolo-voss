@@ -6,10 +6,17 @@
 <h2> play codex online</h2>
 
 
-play on the terminal too.
-
-<img src="" alt="hi" style="width: 500px;" >
+play on the terminal or in gui.
+todo: gif
+<img src="" alt="da cambiare" style="width: 500px;" >
 </div>
+
+## 🗺️ map 
+- [<code>🌐 Team</code>](#-team)
+- [<code>⚙️ Project specification </code>](#-project-specification)
+- [<code>🚦️ Implemented functionalities</code>](#-implemented-functionalities)
+- [<code>📦 Installation</code>](#-installation)
+- [<code>📝 Usage</code>](#-usage)
 
 # Codex Naturalis Board Game - Software Engineering Project
 
@@ -17,8 +24,7 @@ play on the terminal too.
 
 **Teacher**: Gianpaolo Cugola
 
-
-## The Team
+## 🌐 Team
 * [Andrea Tarabotto](https://github.com/andrea-809)
 * [Francesco Zuliani](https://github.com/francescomartino2002)
 * [Nicola Tummolo](https://github.com/NTum07)
@@ -63,7 +69,7 @@ The final version includes:
 | Model      | 87% (29/29) | 87% (183/208) | 87% (597/721) |
 | Controller | 87% (5/5)   | 87% (44/45)   | 87% (223/257) |
 
-## Usage
+## Installation
 
 ### Requirements
 
@@ -84,7 +90,7 @@ Regardless of the operating system, you must have installed the following progra
     java -jar server.jar
     java -jar client.jar
     ```
-
+## Usage
 <div class="table-devenvironment">
   <table style="font-size: 11px">
   <tr>
