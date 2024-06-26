@@ -7,27 +7,12 @@ import java.util.Scanner;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
-/**
- * The type Disposition command.
- * Contains the command to visualize the disposition
- */
 public class DispositionCommand implements Command{
-    /**
-     * The name of the command
-     */
     private final String name = "--disp";
-    /**
-     * The view API
-     */
     private ViewAPI view;
     private Scanner s = new Scanner(System.in);
     private final int color = 226;
 
-    /**
-     * Instantiates a new Disposition command.
-     *
-     * @param view the view
-     */
     public DispositionCommand(ViewAPI view) {
         this.view = view;
     }

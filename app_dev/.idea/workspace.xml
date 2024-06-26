@@ -10,7 +10,50 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a85c2ef2-4743-4d12-8336-27ef59fd799c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Web/Game/ServerAPI_COME.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Web/Game/ServerAPI_COME.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Exceptions/CantPlaceCardException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Exceptions/CantPlaceCardException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Exceptions/ConditionNotSatisfiedException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Exceptions/EmptyCardSourceException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Exceptions/EmptyCardSourceException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Exceptions/KickOutOfGameException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Exceptions/KickOutOfGameException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/CommonTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/CommonTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/TurnState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/TurnState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/PointsStrategy/CornersPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/PointsStrategy/CornersPoints.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/PointsStrategy/Points.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/PointsStrategy/Points.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/PointsStrategy/ResourcePoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/PointsStrategy/ResourcePoints.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/PointsStrategy/SimplePoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/PointsStrategy/SimplePoints.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/ArtifactObjective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/ArtifactObjective.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/DiagonalShapeObjective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/DiagonalShapeObjective.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/ElementObjective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/ElementObjective.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/LShapeObjective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/LShapeObjective.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/Objective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/Objective.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/Shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/Shape.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/placementArea/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/placementArea/Coordinates.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/placementArea/PlacementArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/placementArea/PlacementArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/placementArea/PlacementAreaIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/placementArea/PlacementAreaIterator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/player/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/controller/ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/controller/ControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/GameState/GameStateTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/GameState/MockModelListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/GameState/MockModelListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/cards/PlayableCards/ResourceCardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/cards/PlayableCards/ResourceCardTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/placementArea/AddCardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/placementArea/AddCardTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/placementArea/PlacementAreaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/placementArea/PlacementAreaTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/TUI/TUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/TUI/TUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/Corner.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/Corner.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/GoldCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/GoldCard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/PlayableCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/PlayableCard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/ResourceCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/ResourceCard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/StarterCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/cards/PlayableCards/StarterCard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/deckFactory/Generators/ObjectiveCardsDeckGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/deckFactory/Generators/ObjectiveCardsDeckGenerator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/deckFactory/Generators/PlayableDeckGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/deckFactory/Generators/PlayableDeckGenerator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/deckFactory/Generators/ResourceCardsDeckGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/deckFactory/Generators/ResourceCardsDeckGenerator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/deckFactory/Generators/StarterCardsDeckGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/deckFactory/Generators/StarterCardsDeckGenerator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/deckFactory/GoldenDeck.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/deckFactory/GoldenDeck.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/deckFactory/ObjectiveDeck.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/deckFactory/ObjectiveDeck.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/deckFactory/PlayableDeck.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/deckFactory/PlayableDeck.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/deckFactory/ResourcesDeck.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/deckFactory/ResourcesDeck.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/deckFactory/StarterDeck.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/deckFactory/StarterDeck.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/enums/Artifact.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/enums/Artifact.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,31 +93,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.RunServer.executor": "Run",
-    "Application.RunTUI_Client.executor": "Run",
-    "Application.run gui.executor": "Run",
-    "Application.run server.executor": "Run",
-    "JUnit.All in Ing_sw_proj.executor": "Coverage",
-    "JUnit.placementArea in Ing_sw_proj.executor": "Coverage",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "GUI&&TUI",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.settings.ide.settings.uml",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.RunServer.executor&quot;: &quot;Run&quot;,
+    &quot;Application.RunTUI_Client.executor&quot;: &quot;Run&quot;,
+    &quot;Application.run gui.executor&quot;: &quot;Run&quot;,
+    &quot;Application.run server.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.All in Ing_sw_proj.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.placementArea in Ing_sw_proj.executor&quot;: &quot;Coverage&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;GUI&amp;&amp;TUI&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/Images" />
@@ -104,7 +147,7 @@
       <recent name="model.lobby" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.run gui">
+  <component name="RunManager" selected="Application.RunTUI_Client">
     <configuration name="Provetta" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Provetta" />
       <module name="Ing_sw_proj" />
@@ -194,6 +237,13 @@
         <item itemvalue="JUnit.ControllerTest.main" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -294,13 +344,8 @@
       <workItem from="1718788159587" duration="4459000" />
       <workItem from="1718869587481" duration="1588000" />
       <workItem from="1718878563659" duration="2347000" />
-      <workItem from="1719341694862" duration="28000" />
-      <workItem from="1719341751407" duration="2258000" />
-      <workItem from="1719348662426" duration="249000" />
-      <workItem from="1719348947881" duration="1229000" />
-      <workItem from="1719350219152" duration="4656000" />
-      <workItem from="1719386199017" duration="3487000" />
-      <workItem from="1719390581134" duration="10314000" />
+      <workItem from="1719336325092" duration="1069000" />
+      <workItem from="1719391639948" duration="16482000" />
     </task>
     <servers />
   </component>
@@ -360,35 +405,31 @@
       </pinned-members>
     </pin-to-top-manager>
   </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
-  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/app_dev$model.ic" NAME="model Coverage Results" MODIFIED="1716745757627" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>model.*</FILTER>
-    </SUITE>
     <SUITE FILE_PATH="coverage/app_dev$placementArea_in_Ing_sw_proj.ic" NAME="placementArea in Ing_sw_proj Coverage Results" MODIFIED="1718672188159" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/app_dev$All_in_Ing_sw_proj.ic" NAME="All in Ing_sw_proj Coverage Results" MODIFIED="1718653747416" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/app_dev$All_in_Ing_sw_proj__1_.ic" NAME="All in Ing_sw_proj (1) Coverage Results" MODIFIED="1719303822777" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/app_dev$ControllerTest.ic" NAME="ControllerTest Coverage Results" MODIFIED="1716900290704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>controller.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/app_dev$All_in_Ing_sw_proj__3_.ic" NAME="All in Ing_sw_proj (3) Coverage Results" MODIFIED="1719162559917" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/app_dev$GameStateTest.ic" NAME="GameStateTest Coverage Results" MODIFIED="1716836235265" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>model.GameState.*</FILTER>
+    <SUITE FILE_PATH="coverage/app_dev$PlacementAreaTest.ic" NAME="PlacementAreaTest Coverage Results" MODIFIED="1712502932674" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>model.placementArea.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/app_dev$AddCardTest.ic" NAME="AddCardTest Coverage Results" MODIFIED="1718671719728" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>model.placementArea.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/app_dev$ControllerTest.ic" NAME="ControllerTest Coverage Results" MODIFIED="1716900290704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>controller.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/app_dev$All_in_Ing_sw_proj__1_.ic" NAME="All in Ing_sw_proj (1) Coverage Results" MODIFIED="1719303822777" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/app_dev$All_in_Ing_sw_proj__3_.ic" NAME="All in Ing_sw_proj (3) Coverage Results" MODIFIED="1719162559917" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/app_dev$All_in_Ing_sw_proj.ic" NAME="All in Ing_sw_proj Coverage Results" MODIFIED="1719302441253" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/app_dev$_default_.ic" NAME="&lt;default&gt; Coverage Results" MODIFIED="1716745697859" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/app_dev$GameStateTest.ic" NAME="GameStateTest Coverage Results" MODIFIED="1716836235265" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>model.GameState.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/app_dev$All_in_Ing_sw_proj__2_.ic" NAME="All in Ing_sw_proj (2) Coverage Results" MODIFIED="1719309032651" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/app_dev$java_in_Ing_sw_proj.ic" NAME="java in Ing_sw_proj Coverage Results" MODIFIED="1718701773834" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/app_dev$model.ic" NAME="model Coverage Results" MODIFIED="1716745757627" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>model.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/app_dev$AddCardTest_testSingoli.ic" NAME="AddCardTest.testSingoli Coverage Results" MODIFIED="1718653675857" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>model.placementArea.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/app_dev$All_in_Ing_sw_proj__2_.ic" NAME="All in Ing_sw_proj (2) Coverage Results" MODIFIED="1719309032651" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/app_dev$PlacementAreaTest.ic" NAME="PlacementAreaTest Coverage Results" MODIFIED="1712502932674" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>model.placementArea.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/app_dev$_default_.ic" NAME="&lt;default&gt; Coverage Results" MODIFIED="1716745697859" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/app_dev$java_in_Ing_sw_proj.ic" NAME="java in Ing_sw_proj Coverage Results" MODIFIED="1718701773834" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

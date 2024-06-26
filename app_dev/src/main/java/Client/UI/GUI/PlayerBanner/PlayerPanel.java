@@ -31,14 +31,6 @@ public class PlayerPanel extends JPanel {
     private GUI gui;
 
 
-    /**
-     * Instantiates a new Player panel.
-     *
-     * @param player the player
-     * @param width  the width
-     * @param height the height
-     * @param gui    the gui
-     */
     public PlayerPanel(String player, int width, int height, GUI gui ) {
         this.gui = gui;
         this.player = player;
@@ -113,7 +105,7 @@ public class PlayerPanel extends JPanel {
     /**
      * updates the player's points
      */
-    public void updatePoints(){
+   public void updatePoints(){
         points = gui.getView().getPoints().get(getPlayer());
    }
 
@@ -121,7 +113,7 @@ public class PlayerPanel extends JPanel {
     /**
      * updates the player's resources (Resources + Elements)
      */
-    public void updateResources(){
+   public void updateResources(){
        HashMap<Resources, Integer> res = new HashMap<>();
        HashMap<Element, Integer> availableElements = gui.getView().getAvailableElements(player);
        HashMap<Artifact, Integer> availableArtifacts = gui.getView().getAvailableArtifacts(player);
@@ -147,11 +139,6 @@ public class PlayerPanel extends JPanel {
        infoPanel.updateResources(res);
    }
 
-    /**
-     * Get player string.
-     *
-     * @return the string
-     */
-    public String getPlayer(){return  player;}
+   public String getPlayer(){return  player;}
 }
 

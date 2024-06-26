@@ -22,18 +22,12 @@ public class HandPrinter {
      */
     List<String> handField;
 
-    /**
-     * Instantiates a new Hand printer.
-     *
-     * @param cb the cb
-     */
     public HandPrinter(CardBuilder cb){
         this.cb = cb;
     }
 
     /**
      * directly prints on console the three cards in the player's hand by showing both the front and the back sides
-     *
      * @param hand List of PlayableCard containing the three cards in the player's hand
      */
     public void print(List<PlayableCard> hand){
@@ -75,7 +69,6 @@ public class HandPrinter {
     /**
      * method only used in the selection of the face side for the starter card.
      * the method prints on console the player's StarterCard.
-     *
      * @param card the player's StarterCard
      */
     public void printStarterCard(PlayableCard card){
@@ -101,7 +94,6 @@ public class HandPrinter {
 
     /**
      * builds a List of Strings containing the player's hand cards, the List is then returned
-     *
      * @param hand List of PlayableCard containing the three cards in the player's hand
      * @return List of Strings containing the player's hand panel
      */

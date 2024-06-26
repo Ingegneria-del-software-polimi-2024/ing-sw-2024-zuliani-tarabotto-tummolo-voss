@@ -8,16 +8,12 @@ import model.cards.ObjectiveCard;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-/**
- * The type Draw card listener.
- */
 public class DrawCardListener extends MouseAdapter {
     private GUI gui;
 
     /**
      * the listener detects which card the player wants to draw
-     *
-     * @param gui the gui
+     * @param gui
      */
     public DrawCardListener(GUI gui){
         this.gui = gui;

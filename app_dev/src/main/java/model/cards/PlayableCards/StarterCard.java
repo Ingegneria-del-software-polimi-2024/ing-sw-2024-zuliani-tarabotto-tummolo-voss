@@ -34,6 +34,10 @@ public class StarterCard extends PlayableCard{
     private Element[] backFaceCorners;
 
     /**
+     * List of corners on the back face, used for TUI (Text User Interface).
+     */
+
+    /**
      * Gets the blocked elements on the front face of this starter card.
      *
      * @return the blocked elements.
@@ -52,9 +56,7 @@ public class StarterCard extends PlayableCard{
     public Element[] getBackFaceCorners() {
         return backFaceCorners;
     }
-    /**
-     * List of corners on the back face, used for TUI (Text User Interface).
-     */
+
     private List<Corner> backCorners = new ArrayList<>();
 
     /**
@@ -65,10 +67,9 @@ public class StarterCard extends PlayableCard{
 
     /**
      * json parsing
-     *
-     * @param id the id
-     * @return starter card
-     * @throws JsonProcessingException the json processing exception
+     * @param id
+     * @return
+     * @throws JsonProcessingException
      */
     public static StarterCard parse(int id) throws JsonProcessingException {
         int targetId = id; // ID to search for

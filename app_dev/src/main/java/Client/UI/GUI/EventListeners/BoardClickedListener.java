@@ -7,9 +7,6 @@ import model.placementArea.Coordinates;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-/**
- * The type Board clicked listener.
- */
 public class BoardClickedListener extends MouseAdapter {
 
     private GUI gui;
@@ -18,9 +15,8 @@ public class BoardClickedListener extends MouseAdapter {
     /**
      * detects whether one of the available places
      * on the turnPlayer's board is clicked
-     *
-     * @param gui   the gui
-     * @param board the board
+     * @param gui
+     * @param board
      */
     public BoardClickedListener(GUI gui, PlacementArea board){
         this.gui = gui;

@@ -29,12 +29,12 @@ public class ResourceCard extends PlayableCard {
     //private Points points;
 
 
+
     /**
      * json parsing
-     *
-     * @param id the id
-     * @return resource card
-     * @throws JsonProcessingException the json processing exception
+     * @param id
+     * @return
+     * @throws JsonProcessingException
      */
     public static ResourceCard parse(int id) throws JsonProcessingException {
         int targetId = id; // ID to search for

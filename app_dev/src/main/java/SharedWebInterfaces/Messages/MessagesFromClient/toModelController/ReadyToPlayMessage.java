@@ -1,24 +1,21 @@
 package SharedWebInterfaces.Messages.MessagesFromClient.toModelController;
 
-import Server.ModelTranslator;
+import Server.ModelController;
 import SharedWebInterfaces.Messages.MessagesFromClient.MessageFromClient;
-import SharedWebInterfaces.SharedInterfaces.Traslator;
+import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
+import SharedWebInterfaces.SharedInterfaces.ServerControllerInterface;
 
-/**
- * The type Ready to play message.
- * This message is sent by the client when the player is ready to play.
- */
 public class ReadyToPlayMessage implements  MessageFromClient {
 
 
     @Override
-    public void execute(ModelTranslator controller) {
+    public void execute(ModelController controller) {
         controller.setPlayerReady();
     }
 
 
     @Override
-    public void execute(Traslator controller) {
+    public void execute(ControllerInterface controller) {
         System.out.println("sbagliato");
     }
 }

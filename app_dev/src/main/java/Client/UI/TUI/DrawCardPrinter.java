@@ -12,11 +12,6 @@ public class DrawCardPrinter {
 
     private CardBuilder cb;
 
-    /**
-     * Instantiates a new Draw card printer.
-     *
-     * @param cb the cb
-     */
     public DrawCardPrinter(CardBuilder cb){
         this.cb = cb;
 
@@ -24,10 +19,9 @@ public class DrawCardPrinter {
 
     /**
      * prints the panel containing the cards that can be drawn by the player
-     *
-     * @param gold         GoldCard on top of the GoldDeck
-     * @param resource     ResourceCard on top of the ResourceDeck
-     * @param openGold     List containing the two openGold cards
+     * @param gold GoldCard on top of the GoldDeck
+     * @param resource ResourceCard on top of the ResourceDeck
+     * @param openGold List containing the two openGold cards
      * @param openResource List containing the two openResource cards
      */
     public void print(PlayableCard gold, PlayableCard resource, List<PlayableCard> openGold, List<PlayableCard> openResource){

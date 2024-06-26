@@ -13,28 +13,19 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * The type Objective card.
- */
 public class ObjectiveCard  implements Card {
-    /**
-     * The id of the card
-     */
     @JsonProperty("id")
     private char id;
-    /**
-     * The type of objective belonging to the card
-     */
     @JsonProperty("objective")
     private Objective objective;
 
 
+
     /**
      * json parsing
-     *
-     * @param id the id
-     * @return objective card
-     * @throws JsonProcessingException the json processing exception
+     * @param id
+     * @return
+     * @throws JsonProcessingException
      */
     public static ObjectiveCard parse(int id) throws JsonProcessingException {
 
@@ -82,31 +73,19 @@ public class ObjectiveCard  implements Card {
 
     /**
      * based on the card's pointsPolicy the number of points granted by it is returned
-     *
-     * @param placementArea the placement area
-     * @return the points
+     * @param placementArea
+     * @return int
      */
     public int countPoints(PlacementArea placementArea){
         return objective.countObjectivePoints(placementArea);
     }
 
-    /**
-     * Get objective objective.
-     *
-     * @return the objective
-     */
     public Objective getObjective(){
         return objective;
     }
 
 
-////////////////////// GETTER METHODS //////////////////////////////////////////////
-
-    /**
-     * Gets id.
-     *
-     * @return the id
-     */
+    ////////////////////// GETTER METHODS //////////////////////////////////////////////
     public int getId() { return id; }
 
     /////////////////////// TESTING RELATED METHODS ONLY ///////////////////////////////

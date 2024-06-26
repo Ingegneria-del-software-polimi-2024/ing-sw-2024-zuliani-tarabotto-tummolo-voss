@@ -12,9 +12,6 @@ import java.util.List;
  * referred to the one on the right
  */
 public class DiagonalShapeObjective implements Objective{
-    /**
-     * The Element.
-     */
     @JsonProperty("elements")
     protected List<Element> element;
     @JsonProperty("shape")

@@ -28,22 +28,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * The type Model listener.
- * This class is responsible for sending notifications to the players about the changes in the game state
- */
 public class ModelListener {//TODO Handle correctly the exceptions
 
-    /**
-     * The API used to send messages to the clients
-     */
     private ServerAPI_GO serverAPI;
 
-    /**
-     * Instantiates a new Model listener.
-     *
-     * @param serverAPI the server api
-     */
     public ModelListener(ServerAPI_GO serverAPI){
         this.serverAPI = serverAPI;
     }
@@ -53,7 +41,6 @@ public class ModelListener {//TODO Handle correctly the exceptions
 
     /**
      * notification about current state of GameState
-     *
      * @param state the state to be set
      */
     public void notifyChanges(TurnState state){
@@ -67,8 +54,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
 
     /**
      * notification about current state of GameState, can be directed to a single player
-     *
-     * @param state    the state to be set
+     * @param state the state to be set
      * @param playerID the receiver of the message
      */
     public void notifyChanges(TurnState state, String playerID){
@@ -82,8 +68,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
 
     /**
      * notification about the new turnPlayer
-     *
-     * @param turnPlayer the turn player
+     * @param turnPlayer
      */
     public void notifyChanges(String turnPlayer){
         try{
@@ -96,9 +81,8 @@ public class ModelListener {//TODO Handle correctly the exceptions
 
     /**
      * notification about the new turnPlayer
-     *
      * @param turnPlayer the player playing at the moment
-     * @param playerID   the player to send the message to
+     * @param playerID the player to send the message to
      */
     public void notifyChanges(String turnPlayer, String playerID){
         try{
@@ -112,15 +96,14 @@ public class ModelListener {//TODO Handle correctly the exceptions
 
     /**
      * notification with data about the order of the cards in decks
-     *
-     * @param goldDeck         the gold deck
-     * @param resourceDeck     the resource deck
-     * @param openGold         the open gold
-     * @param openResource     the open resource
-     * @param players          the players
-     * @param gameId           the game id
-     * @param commonObjective1 the common objective 1
-     * @param commonObjective2 the common objective 2
+     * @param goldDeck
+     * @param resourceDeck
+     * @param openGold
+     * @param openResource
+     * @param players
+     * @param gameId
+     * @param commonObjective1
+     * @param commonObjective2
      */
     public void notifyChanges(PlayableDeck goldDeck, PlayableDeck  resourceDeck, List<PlayableCard> openGold,
                               List<PlayableCard> openResource,
@@ -138,20 +121,6 @@ public class ModelListener {//TODO Handle correctly the exceptions
         }
 
     }
-
-    /**
-     * Notification with data about the order of the cards in decks sent to a single player, used when a player reconnects
-     *
-     * @param goldDeck         the gold deck
-     * @param resourceDeck     the resource deck
-     * @param openGold         the open gold
-     * @param openResource     the open resource
-     * @param players          the players
-     * @param gameId           the game id
-     * @param commonObjective1 the common objective 1
-     * @param commonObjective2 the common objective 2
-     * @param playerID         the receiver player id
-     */
     public void notifyChanges(PlayableDeck goldDeck, PlayableDeck  resourceDeck, List<PlayableCard> openGold,
                               List<PlayableCard> openResource,
                               ArrayList<String> players, String gameId,
@@ -167,10 +136,9 @@ public class ModelListener {//TODO Handle correctly the exceptions
     }
 
     /**
-     * broadcast of the player pawn color
-     *
-     * @param player    the player
-     * @param pawnColor the pawn color
+     * we broadcast the player pawn color
+     * @param player
+     * @param pawnColor
      */
     public void notifyChanges( String player, Pawn pawnColor){
         try{
@@ -180,13 +148,6 @@ public class ModelListener {//TODO Handle correctly the exceptions
         }
     }
 
-    /**
-     * Sends the player pawn color to a specific player, used when a player reconnects
-     *
-     * @param player            the player
-     * @param pawnColor         the pawn color
-     * @param reconnectedPlayer the reconnected player (the one that needs to be notified)
-     */
     public void notifyChanges( String player, Pawn pawnColor, String reconnectedPlayer){
         try{
             serverAPI.notifyChanges(new PawnColorMessage(player, pawnColor.toString()), reconnectedPlayer);
@@ -196,12 +157,12 @@ public class ModelListener {//TODO Handle correctly the exceptions
     }
 
 
+
+
     /**
-     * The player is notified with the starterCard that he has been given and the PAWNCOLOR
-     *
-     * @param starterCard the starter card
-     * @param player      the player
-     * @param pawnColor   the pawn color
+     * the player is notified with the starterCard that he has been given and the PAWNCOLOR
+     * @param starterCard
+     * @param player
      */
     public void notifyChanges(PlayableCard starterCard, String player, Pawn pawnColor){
         try{
@@ -213,9 +174,8 @@ public class ModelListener {//TODO Handle correctly the exceptions
 
     /**
      * the player is notified with his hand of cards
-     *
-     * @param hand   the hand
-     * @param player the player
+     * @param hand
+     * @param player
      */
     public void notifyChanges(List<PlayableCard> hand , String player){
 
@@ -228,10 +188,8 @@ public class ModelListener {//TODO Handle correctly the exceptions
 
     /**
      * notification about the two secretObjectives for each player
-     *
-     * @param secretObjective1 the secret objective 1
-     * @param secretObjective2 the secret objective 2
-     * @param player           the player
+     * @param secretObjective1
+     * @param secretObjective2
      */
     public void notifyChanges(ObjectiveCard secretObjective1, ObjectiveCard secretObjective2, String player){
 
@@ -245,9 +203,8 @@ public class ModelListener {//TODO Handle correctly the exceptions
 
     /**
      * after each player chooses his secretObjective, a notification is sent
-     *
-     * @param secretObjective the secret objective
-     * @param player          the player
+     * @param secretObjective
+     * @param player
      */
     public void notifyChanges(ObjectiveCard secretObjective, String player){
         try{
@@ -263,10 +220,9 @@ public class ModelListener {//TODO Handle correctly the exceptions
     /**
      * At the beginning of the turn of turnPlayer, the model notifies the player about which cards
      * of his hand can be placed(due to placementConstraint) and also where the cards can be placed
-     *
-     * @param player          the player
-     * @param availablePlaces the available places
-     * @param canBePlaced     true if the card can be placed face side, false otherwise
+     * @param availablePlaces
+     * @param player
+     * @param canBePlaced
      */
     public void notifyChanges(String player, List<Coordinates> availablePlaces, boolean[] canBePlaced){
         try{
@@ -279,11 +235,10 @@ public class ModelListener {//TODO Handle correctly the exceptions
 
     /**
      * after placing the card each player is notified with his update disposition, points, elements and artifacts
-     *
-     * @param player          the player
-     * @param disposition     the disposition
-     * @param availablePlaces the available places
-     * @param points          the points
+     * @param player
+     * @param disposition
+     * @param availablePlaces
+     * @param points
      */
     public void notifyChanges(String player, HashMap<Coordinates, PlayableCard> disposition, List<Coordinates> availablePlaces,
                               int points) {
@@ -299,16 +254,16 @@ public class ModelListener {//TODO Handle correctly the exceptions
     }
 
     /**
-     * after placing the card the reconnected player is notified with his update disposition, points, elements and artifacts, used when a player reconnects
-     *
-     * @param player          the player
-     * @param disposition     the disposition
-     * @param availablePlaces the available places
-     * @param points          the points
-     * @param recipient       the recipient
+     * after placing the card each player is notified with his update disposition, points, elements and artifacts
+     * @param player
+     * @param disposition
+     * @param availablePlaces
+     * @param points
      */
     public void notifyChanges(String player, HashMap<Coordinates, PlayableCard> disposition, List<Coordinates> availablePlaces,
                               int points, String recipient) {
+
+
         try{
             serverAPI.notifyChanges(new UpdateDispositionMessage(player, disposition, availablePlaces,
                     points), recipient);
@@ -320,10 +275,9 @@ public class ModelListener {//TODO Handle correctly the exceptions
 
     /**
      * we update the player resources(elements, artifacts)
-     *
-     * @param player             the player
-     * @param availableArtifacts the available artifacts
-     * @param availableElements  the available elements
+     * @param player
+     * @param availableArtifacts
+     * @param availableElements
      */
     public void notifyChanges (String player, HashMap<Artifact, Integer> availableArtifacts,
                                HashMap<Element, Integer> availableElements){
@@ -335,11 +289,10 @@ public class ModelListener {//TODO Handle correctly the exceptions
     }
 
     /**
-     * we update the player resources(elements, artifacts) NOT IN BROADCAST, used when a player reconnects
-     *
-     * @param player             the player
-     * @param availableArtifacts the available artifacts
-     * @param availableElements  the available elements
+     * we update the player resources(elements, artifacts) NOT IN BROADCAST
+     * @param player
+     * @param availableArtifacts
+     * @param availableElements
      */
     public void personalNotifyChanges (String player, HashMap<Artifact, Integer> availableArtifacts,
                                HashMap<Element, Integer> availableElements){
@@ -351,10 +304,9 @@ public class ModelListener {//TODO Handle correctly the exceptions
     }
 
     /**
-     * After the player decided where to draw the next card from, the involved card source gets updated based on cardSource
-     *
-     * @param deck       the deck from which the card is drawn
-     * @param cardSource the card source
+     * after the player decided where to draw the next card from, the involved card source gets updated based on cardSource
+     * @param deck
+     * @param cardSource
      */
     public void notifyChanges(List<PlayableCard> deck, int cardSource) {
         try{
@@ -367,10 +319,9 @@ public class ModelListener {//TODO Handle correctly the exceptions
     /**
      * after the player decided where to draw the next card from, the involved card source gets updated based on cardSource
      * method used when picking a card from an "open card" deck
-     *
-     * @param deck       the deck
-     * @param cardSource the card source
-     * @param index      the index
+     * @param deck
+     * @param cardSource
+     * @param index
      */
     public void notifyChanges(List<PlayableCard> deck, int cardSource, int index) {
         try{
@@ -383,9 +334,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
     /**
      * at the end of the game each player is notified with the final points of every player,
      * the view is responsible for displaying the winner
-     *
-     * @param finalPoints a hashmap containing the players' names and their points
-     * @param winners     the winners
+     * @param finalPoints an hashmap containing the players' names and their points
      */
     public void notifyChanges(HashMap<String, Integer> finalPoints, ArrayList<String> winners){
 
@@ -399,9 +348,8 @@ public class ModelListener {//TODO Handle correctly the exceptions
 
     /**
      * notify a player when can't play a card
-     *
      * @param player the player's nickname
-     * @param e      the raised exception by the controller
+     * @param e the raised exception
      */
     public void notifyChanges(String player, CantPlaceCardException e) {
         try {
@@ -412,11 +360,9 @@ public class ModelListener {//TODO Handle correctly the exceptions
     }
 
     /**
-     * notifies a player when he is kicked out of the game or exits it
-     *
+     * notify a player when he is kicked out of the game or exits it
      * @param player the player's nickname
-     * @param e      the raised exception
-     * @return true if the message is correctly delivered, else false
+     * @param e the raised exception
      */
     public boolean notifyChanges(String player, KickOutOfGameException e){
         try {
@@ -429,9 +375,8 @@ public class ModelListener {//TODO Handle correctly the exceptions
 
     /**
      * notify a player when can't draw from a deck
-     *
      * @param player the player's nickname
-     * @param e      the raised exception
+     * @param e the raised exception
      */
     public void notifyChanges(String player, EmptyCardSourceException e){
         try {
@@ -442,11 +387,6 @@ public class ModelListener {//TODO Handle correctly the exceptions
     }
 
 
-    /**
-     * Notifies when the reconnection of a player correctly happens.
-     *
-     * @param playerID the player id
-     */
     public void notifyReconnection(String playerID){
         try {
             serverAPI.notifyChanges(new ReconnectionHappened(playerID), playerID);
@@ -455,13 +395,6 @@ public class ModelListener {//TODO Handle correctly the exceptions
         }
     }
 
-    /**
-     * Notify of the choosing of the starter card to the player.
-     *
-     * @param playerID    the player id
-     * @param starterCard the starter card
-     * @param color       the color of the pawn for the player
-     */
     public void displayStarterCardNotification(String playerID, PlayableCard starterCard, Pawn color){
         try {
             serverAPI.notifyChanges(new StarterCardMessage(playerID, starterCard, color.toString()), playerID);
@@ -471,11 +404,6 @@ public class ModelListener {//TODO Handle correctly the exceptions
         }
     }
 
-    /**
-     * Displays the choosing objective notification.
-     *
-     * @param playerID the player id
-     */
     public void displayObjectiveNotification(String playerID){
         try {
             serverAPI.notifyChanges(new DisplayObjectiveSelection(playerID), playerID);
@@ -484,11 +412,6 @@ public class ModelListener {//TODO Handle correctly the exceptions
         }
     }
 
-    /**
-     * Broadcast chat message.
-     *
-     * @param message the message
-     */
     public void broadcastChatMessage(ChatUpdateMessage message){
         try {
             serverAPI.broadcastNotifyChanges(message);
@@ -497,12 +420,6 @@ public class ModelListener {//TODO Handle correctly the exceptions
         }
     }
 
-    /**
-     * Send private chat message.
-     *
-     * @param message  the message
-     * @param receiver the receiver
-     */
     public void sendPrivateChatMessage(ChatUpdateMessage message, String receiver){
         try{
             serverAPI.notifyChanges(message, receiver);
@@ -511,12 +428,6 @@ public class ModelListener {//TODO Handle correctly the exceptions
         }
     }
 
-    /**
-     * Send chat history.
-     *
-     * @param player the player
-     * @param msg    the msg
-     */
     public void sendChatHistory(String player, ChatHistoryMessage msg){
         try {
             serverAPI.notifyChanges(msg, player);

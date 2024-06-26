@@ -6,9 +6,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 
-/**
- * The type Card label.
- */
 public class CardLabel extends JLabel {
     /**
      * the PlayableCard represented by the CardLabel
@@ -36,8 +33,7 @@ public class CardLabel extends JLabel {
     /**
      * JLabel used for representing a PlayableCard.
      * The label has the pointer to the specified PlayableCard and the corresponding pngs
-     *
-     * @param cardLength the card length
+     * @param cardLength
      */
     public CardLabel(int cardLength){
         this.cardLength = cardLength;
@@ -49,10 +45,9 @@ public class CardLabel extends JLabel {
 
     /**
      * method used to change the JLabel's corresponding card
-     *
-     * @param c     the c
-     * @param front the front
-     * @param back  the back
+     * @param c
+     * @param front
+     * @param back
      */
     public void updateCard(PlayableCard c, BufferedImage front, BufferedImage back){
         this.c = c;
@@ -71,8 +66,7 @@ public class CardLabel extends JLabel {
 
     /**
      * method used to set the card's position in the deckPanel
-     *
-     * @param cardSource the card source
+     * @param cardSource
      */
     public void setCardSource(int cardSource){
         this.cardSource = cardSource;
@@ -80,16 +74,14 @@ public class CardLabel extends JLabel {
 
     /**
      * method used to get the card's position in the deck Panel
-     *
-     * @return int
+     * @return
      */
     public int getCardSource(){return cardSource;}
 
 
     /**
      * returns the card represented by this label at this moment
-     *
-     * @return playable card
+     * @return
      */
     public PlayableCard getCard(){
         return c;

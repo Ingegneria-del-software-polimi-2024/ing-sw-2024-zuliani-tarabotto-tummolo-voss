@@ -14,30 +14,15 @@ import java.io.*;
 import java.net.Socket;
 import java.rmi.RemoteException;
 
-/**
- * The type Socket server handler.
- * An interface mantaining the Socket connection with the server.
- */
 public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
-    /**
-     * The interface managing incoming messages
-     */
+
     private ClientAPI_COME api;
-    /**
-     * The server
-     */
     private Socket socket;
-    /**
-     * The socket input stream
-     */
     private ObjectInputStream in;
-    /**
-     * The socket output stream
-     */
     private ObjectOutputStream out;
 
     /**
-     * Sends to the server the message from client
+     * sends to the server the message from client
      * @param message message coming from client
      * @throws RemoteException when an error in the connection occurs
      */
@@ -52,7 +37,7 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
     }
 
     /**
-     * Receives and enqueues the message coming from the server
+     * receives and enqueues the message coming from the server
      * @param message the message from the server containing the updates for the view
      * @throws RemoteException when an error in the network happens
      */
@@ -65,7 +50,7 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
     }
 
     /**
-     * Forwards the incoming message to the client API incoming interface
+     * forwards the incoming message to the client API incoming interface
      * @param msg incoming message
      */
     @Override
@@ -74,7 +59,7 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
     }
 
     /**
-     * Sends the message to the lobby
+     * sends the message to the lobby
      * @param msg message to be sent
      * @throws RemoteException if the message couldn't be delivered
      */
@@ -90,7 +75,7 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
     }
 
     /**
-     * A loop that keeps the socket in listening status
+     * a loop that keeps the socket in listening status
      * @throws IOException when an error in the communication occurs
      * @throws ClassNotFoundException when an error in the communication occurs
      */
@@ -103,9 +88,8 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
     }
 
     /**
-     * Class constructor
-     *
-     * @param add  the server hostname
+     * class constructor
+     * @param add the server hostname
      * @param port the server port
      * @param come the interface for the reception of the messages
      * @throws StartConnectionFailedException if an error in the instantiation of the connection happens
@@ -124,7 +108,7 @@ public class SOCKET_ServerHandler implements ServerHandlerInterface, Runnable {
     }
 
     /**
-     * A method run by a single thread that keeps listening to the client handler
+     * a method run by a single thread that keeps listening to the client handler
      */
     public void run() {
         try {

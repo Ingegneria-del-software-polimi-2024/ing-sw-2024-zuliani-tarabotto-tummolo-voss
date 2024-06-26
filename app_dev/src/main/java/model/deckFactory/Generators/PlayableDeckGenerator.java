@@ -13,10 +13,9 @@ public abstract class PlayableDeckGenerator implements DeckGenerator {
     /**
      * calls the type specific generateDeckBasedOnType method
      * and the Deck.generate() method which initializes the cards via the json parsing
-     *
      * @return deck PlayableDeck
      */
-    public PlayableDeck generateDeck(){
+        public PlayableDeck generateDeck(){
             PlayableDeck deck = generateDeckBasedOnType();
             deck.generate();
             return deck;
@@ -24,8 +23,6 @@ public abstract class PlayableDeckGenerator implements DeckGenerator {
 
     /**
      * creates new empty Deck of the expected type
-     *
-     * @return the playable deck
      */
     public abstract PlayableDeck generateDeckBasedOnType();
 

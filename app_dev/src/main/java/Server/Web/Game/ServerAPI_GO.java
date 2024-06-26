@@ -8,20 +8,13 @@ import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * The type Server api go, an interface to handle the sending of messages to the clients.
- */
 public class ServerAPI_GO {
-    /**
-     * The players and their handlers.
-     */
     private ConcurrentHashMap<String, ClientHandlerInterface> players;
 
     /**
-     * The model changes are forwarded to the player
-     *
+     * the model changes are forwarded to the player
      * @param message the message containing the changes
-     * @param player  the player's nickname
+     * @param player the player's nickname
      * @throws MsgNotDeliveredException when an error in delivering the message occurs
      */
     public void notifyChanges(MessageFromServer message, String player) throws MsgNotDeliveredException {
@@ -35,10 +28,8 @@ public class ServerAPI_GO {
     }
 
     /**
-     * Sends the same message to each client
-     *
+     * sends the same message to each client
      * @param message the message containing the changes
-     * @throws MsgNotDeliveredException the msg not delivered exception
      */
     public void broadcastNotifyChanges(MessageFromServer message) throws MsgNotDeliveredException {
         try {
@@ -56,9 +47,8 @@ public class ServerAPI_GO {
     }
 
     /**
-     * Sets a handler for the specified player
-     *
-     * @param name    the player's nickname
+     * sets a handler for the specified player
+     * @param name the player's nickname
      * @param handler the player's personal handler
      */
     public void setHandler(String name, ClientHandlerInterface handler){
@@ -66,17 +56,11 @@ public class ServerAPI_GO {
     }
 
     /**
-     * Class constructor
+     * class constructor
      */
     public ServerAPI_GO() {
         players = new ConcurrentHashMap<>();
     }
-
-    /**
-     * Disconnect player.
-     *
-     * @param nickName the nickname
-     */
     public void disconnectPlayer(String nickName){
         players.remove(nickName);
     }

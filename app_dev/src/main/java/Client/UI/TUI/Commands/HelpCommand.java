@@ -2,18 +2,9 @@ package Client.UI.TUI.Commands;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
-/**
- * The type Help command.
- * Contains the command to get help
- */
 public class HelpCommand implements Command{
-    /**
-     * The name of the command
-     */
+
     private final String name = "--help";
-    /**
-     * The color of printing
-     */
     private final int color = 226;
     @Override
     public void execute() {
@@ -22,7 +13,6 @@ public class HelpCommand implements Command{
         System.out.println("  --quit    - Quit the game and go back to the lobby");
         System.out.println("  --disp    - Switch the displayed disposition the check another player's board");
         System.out.println("  --chat    - Open the chat");
-        System.out.println("  --exit    - Exit the app");
 
 
         System.out.println("\n");

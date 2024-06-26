@@ -9,9 +9,6 @@ import java.awt.*;
 import java.awt.event.ComponentListener;
 import java.util.List;
 
-/**
- * The type Hand panel.
- */
 public class HandPanel extends JPanel {
     private CardLabel c1;
     private CardLabel c2;
@@ -23,9 +20,8 @@ public class HandPanel extends JPanel {
 
     /**
      * a panel containing three CardLabels representing the player's hand
-     *
-     * @param gui         the gui
-     * @param panelHeight the panel height
+     * @param gui
+     * @param panelHeight
      */
     public HandPanel(GUI gui, int panelHeight){
         this.gui = gui;
@@ -67,10 +63,6 @@ public class HandPanel extends JPanel {
     public Dimension getPreferredSize(){
         return new Dimension((int)(gui.getScreenWidth() * 0.33), (int)(gui.getScreenHeight() * 0.25));
     }
-
-    /**
-     * Update hand.
-     */
     public void updateHand(){
         c2.removeMouseListener(placeStarterListener);
         List<PlayableCard> hand = gui.getView().getHand();

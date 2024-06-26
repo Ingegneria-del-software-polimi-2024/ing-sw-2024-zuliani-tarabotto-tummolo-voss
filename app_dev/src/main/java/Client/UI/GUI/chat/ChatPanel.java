@@ -17,9 +17,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * The type Chat panel.
- */
 public class ChatPanel extends JPanel {
 
     private GUI gui;
@@ -36,10 +33,12 @@ public class ChatPanel extends JPanel {
     private JPanel multipleChatPanel;
 
 
+
+
+
     /**
      * JScrollPane containing a JTextArea where new chat messages are appended.
-     *
-     * @param gui the gui
+     * @param gui
      */
     public ChatPanel(GUI gui){
         this.gui = gui;
@@ -126,10 +125,8 @@ public class ChatPanel extends JPanel {
 
     /**
      * appends a new message to the chat
-     *
-     * @param sender   the sender
-     * @param content  the content
-     * @param receiver the receiver
+     * @param sender
+     * @param content
      */
     public void updateChat(String sender, String content, String receiver){
         String from;

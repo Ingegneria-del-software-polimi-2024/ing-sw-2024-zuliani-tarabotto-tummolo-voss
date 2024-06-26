@@ -5,7 +5,7 @@ import SharedWebInterfaces.Messages.MessagesFromLobby.*;
 import SharedWebInterfaces.Messages.MessagesFromServer.MessageFromServer;
 import SharedWebInterfaces.Messages.MessagesToLobby.HeartbeatMessage;
 import SharedWebInterfaces.SharedInterfaces.ClientHandlerInterface;
-import SharedWebInterfaces.SharedInterfaces.Traslator;
+import SharedWebInterfaces.SharedInterfaces.ControllerInterface;
 import SharedWebInterfaces.Messages.MessagesToLobby.MessageToLobby;
 import SharedWebInterfaces.SharedInterfaces.ServerHandlerInterface;
 import SharedWebInterfaces.WebExceptions.MsgNotDeliveredException;
@@ -15,44 +15,14 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * The type Lobby.
- * This class controls the lobby of the server, it manages the relations between the clients and the rooms
- */
-public class Lobby implements Traslator {
-    /**
-     * The Rooms, each room contains between 2 and 4 players all playing to the same game.
-     * A player can't be in more than one room at the same time
-     */
+public class Lobby implements ControllerInterface {//TODO all the methods here must be sinchronized!! :)
     private ArrayList<Room> rooms;
-    /**
-     * The Players, a player is identified by his nickname and has a personal handler to communicate with the server
-     */
     private ConcurrentHashMap<String, ClientHandlerInterface> players;
-    /**
-     * The Socket manager, it manages the incoming Socket connections from the clients
-     */
     private FirstSocketManager socketManager;
-    /**
-     * The Rmi manager, it manages the incoming RMI connections from the clients
-     */
     private First_RMI_Manager rmiManager;
-    /**
-     * The Queue, it contains the messages to be executed by the lobby
-     */
     private LobbyMessageQueue queue;
-    /**
-     * The Last seen in lobby list, it contains the last time a player was seen in the lobby
-     * If a player is not seen for a certain amount of time and is not inside any room he is considered disconnected
-     */
     private ConcurrentHashMap<String, Long> lastSeenInLobby;
 
-    /**
-     * Instantiates a new Lobby.
-     *
-     * @param portSocket the port for socket connections
-     * @param portRMI    the port for rmi connections
-     */
     public Lobby(int portSocket, int portRMI){
         try {
             rooms = new ArrayList<Room>();
@@ -69,9 +39,8 @@ public class Lobby implements Traslator {
     }
 
     /**
-     * Dequeues messages from the toDoQueue
-     *
-     * @throws MsgNotDeliveredException       when the message couldn't be delivered
+     * dequeues messages from the toDoQueue
+     * @throws MsgNotDeliveredException when the message couldn't be delivered
      * @throws StartConnectionFailedException when the connection with client couldn't be started
      */
     public void start() throws MsgNotDeliveredException, StartConnectionFailedException {
@@ -101,10 +70,7 @@ public class Lobby implements Traslator {
 
     /**
      * Memorizes a new couple (nickname, personal handler) to effectively use the new connection
-     * if the name is already taken it is investigated if the player has disconnected somehow,
-     * if the name is empty or the result of the investigation is that the existing player is active
-     * an error message is sent to the client
-     * @param name             the player
+     * @param name the player
      * @param handlerInterface the handler of the player
      */
     public void addConnection(String name, ClientHandlerInterface handlerInterface){
@@ -143,27 +109,21 @@ public class Lobby implements Traslator {
         System.out.println("Added a player: "+name);
     }
 
-    /**
-     * Manages the new connection of a player
-     * @param name the player
-     * @param handlerInterface the handler of the player
-     */
     private void manageNewConnection(String name, ClientHandlerInterface handlerInterface){
         players.put(name, handlerInterface);
         try {
             sendToPlayer(name, new ACK_NewConnection(name));
         } catch (MsgNotDeliveredException e) {
-            System.out.println("Can't send the ackNewConnection message to the player"+name);
-            return;
+            throw new RuntimeException(e);
         }
+        //TODO sistema exception handling
 
     }
 
     /**
-     * Inserts the player in the requested room, if the room doesn't exist creates a new room and inserts the player there
-     *
-     * @param playerName      the player nickname
-     * @param roomName        the name of the room
+     * inserts the player in the requested room, if the room doesn't exist creates a new room and inserts the player there
+     * @param playerName the player nickname
+     * @param roomName the name of the room
      * @param expectedPlayers the number of expected players, it is null if the room already exists
      */
     public void enterRoom(String playerName, String roomName, int expectedPlayers){
@@ -173,7 +133,8 @@ public class Lobby implements Traslator {
             try {
                 sendToPlayer(playerName, new CantJoinRoomMsg(true));
             } catch (MsgNotDeliveredException e) {
-                return;
+                throw new RuntimeException(e);
+                //todo remove
             }
             return;
         }
@@ -190,16 +151,16 @@ public class Lobby implements Traslator {
                     sendToPlayer(playerName, new CantJoinRoomMsg(true));
                     return;
                 } catch (MsgNotDeliveredException ex) {
-                    System.out.println("An error in sending a message to the player "+playerName + " occurred");
-                    return;
+                    throw new RuntimeException(ex);
+                    //TODO remove this trycatch
                 }
             }
         }catch (CantJoinRoomExcept e){
             try {
                 sendToPlayer(playerName, new CantJoinRoomMsg(e.isCreating()));
             } catch (MsgNotDeliveredException ex) {
-                System.out.println("An error in sending a message to the player "+playerName + " occurred");
-                return;
+                throw new RuntimeException(e);
+                //TODO remove this trycatch
             }
             return;
         }
@@ -207,15 +168,14 @@ public class Lobby implements Traslator {
         try {
             sendToPlayer(playerName, new ACK_RoomChoice(playerName, roomName));
         } catch (MsgNotDeliveredException e) {
-            System.out.println("An error in sending a message to the player "+playerName + " occurred");
-            return;
+            throw new RuntimeException(e);
+            //TODO verify this is handled correctly
         }
         verifyStart(roomName);
     }
 
 
     /**
-     * Get game names array list.
      *
      * @return returns the names of the available rooms doesn't return the rooms which are already full
      */
@@ -232,8 +192,7 @@ public class Lobby implements Traslator {
     }
 
     /**
-     * Given the handler returns the nickname of the associated player
-     *
+     * given the handler returns the nickname of the associated player
      * @param handlerInterface the personal handler
      * @return the nickname of the player
      */
@@ -245,9 +204,9 @@ public class Lobby implements Traslator {
     }
 
 
+
     /**
-     * Adds a message to the queue of incoming messages
-     *
+     * adds a message to the queue of incoming messages
      * @param msg the incoming message to be added
      */
     public void enqueueMessage(MessageToLobby msg){
@@ -255,10 +214,9 @@ public class Lobby implements Traslator {
     }
 
     /**
-     * Sends a message to a player
-     *
+     * sends a message to a player
      * @param playerName the recipient nickname
-     * @param msg        the message to be delivered
+     * @param msg the message to be delivered
      * @throws MsgNotDeliveredException if the message couldn't be delivered
      */
     public void sendToPlayer(String playerName, MessageFromServer msg) throws MsgNotDeliveredException {
@@ -270,8 +228,7 @@ public class Lobby implements Traslator {
     }
 
     /**
-     * Method to instantiate a new RMI connection with a client
-     *
+     * method to instantiate a new RMI connection with a client
      * @param handlerInterface the client remote interface to communicate with
      */
     public void newRMI_Connection(ServerHandlerInterface handlerInterface){
@@ -282,11 +239,6 @@ public class Lobby implements Traslator {
         }
     }
 
-    /**
-     * Close room.
-     *
-     * @param roomName the room name
-     */
     public void closeRoom(String roomName){
 
         Room room = getRoomByName(roomName);
@@ -297,12 +249,6 @@ public class Lobby implements Traslator {
         System.out.println("Room "+roomName+" is correctly closed");
     }
 
-    /**
-     * Quit game before start.
-     *
-     * @param roomName the room name
-     * @param player   the player
-     */
     public void quitGameBeforeStart(String roomName, String player){
         try {
             Room room = lookFor(roomName);
@@ -324,19 +270,13 @@ public class Lobby implements Traslator {
         }
     }
 
-    /**
-     * Reconnect player.
-     *
-     * @param playerID the player id
-     * @param handler  the handler
-     */
     public void reconnectPlayer(String playerID, ClientHandlerInterface handler){
         players.put(playerID, handler);
     }
     ///////////////////////////////////////////////PRIVATE METHODS//////////////////////////////////////////////////////
 
     /**
-     * Creates a new room inserting the player who requested the creation of the room
+     * creates a new room inserting the player who requested the creation of the room
      * @param roomName the name of the room
      * @param playerName who requested the creation of the room
      * @param expectedPlayers number of players to play with
@@ -350,7 +290,7 @@ public class Lobby implements Traslator {
     }
 
     /**
-     * Allows to find the room with its name
+     * allows to find the room with its name
      * @param roomName the room name
      * @return the reference to the room
      */
@@ -363,7 +303,7 @@ public class Lobby implements Traslator {
     }
 
     /**
-     * Checks if a player is in a room
+     *
      * @param playerName the name of the player
      * @return the name of the room in which the player is
      */
@@ -375,11 +315,6 @@ public class Lobby implements Traslator {
         return null;
     }
 
-    /**
-     * On the arrival of a heart beat, updates the timestamp at which the player was seen.
-     *
-     * @param playerId the player id
-     */
     public void updateHeartBeat(String playerId) {
         if(playerId == null)
             return;
@@ -392,11 +327,6 @@ public class Lobby implements Traslator {
         }
     }
 
-    /**
-     * Gets room reference by its string name.
-     * @param roomName the name of the room
-     * @return the room reference
-     */
     private Room getRoomByName(String roomName){
         for(Room room : rooms){
             if(room.getName().equals(roomName))
@@ -404,9 +334,31 @@ public class Lobby implements Traslator {
         }
         return null;
     }
+//    /**
+//     * reconnects the disconnected player in the place he was disconnected from
+//     * @param playerID the reconnecting player
+//     * @param handlerInterface the handler of the player
+//     */
+//    private void reconnect(String playerID, ClientHandlerInterface handlerInterface){
+//        players.put(playerID, handlerInterface);
+//        Room r = isInRoom(playerID);
+//        //if the player was present in a room we must bring him back there and notify the game state and the player
+//        if(r != null) {
+//            r.reconnect(playerID, handlerInterface);
+//        }else{
+//            //otherwise the player must stay in the lobby
+//            System.out.println(playerID+" reconnected to the lobby");
+//            try {
+//                sendToPlayer(playerID, new ACK_NewConnection(playerID));
+//            } catch (MsgNotDeliveredException e) {
+//                throw new RuntimeException(e);
+//                //TODO handle exception
+//            }
+//        }
+//    }
 
     /**
-     * Verifies if a room has reached the maximum number of players
+     * verifies if a room has reached the maximum number of players
      * @param roomName the name of the room
      */
     private void verifyStart(String roomName){

@@ -47,29 +47,18 @@ public abstract class PlayableCard implements Card {
 
     /**
      * based on the card's pointsPolicy the number of points granted by it is returned
-     *
      * @param placementArea PlacementArea
-     * @return int int
+     * @return int
      */
     public abstract int countPoints(PlacementArea placementArea);
 
 
-    /**
-     * Sets face side.
-     *
-     * @param faceSide the face side
-     */
-//////////////// SETTER METHODS //////////////////////
+    //////////////// SETTER METHODS //////////////////////
     public void setFaceSide(boolean faceSide) {this.faceSide = faceSide;}
 
 
-    /**
-     * Gets corner.
-     *
-     * @param index the index
-     * @return the corner
-     */
-//////////////// GETTER METHODS ///////////////////////////
+
+    //////////////// GETTER METHODS ///////////////////////////
     public Corner getCorner(int index) {
         //returns a void corner if the card is facedown
         //NECESSARY FOR TUI PRINTING
@@ -91,73 +80,33 @@ public abstract class PlayableCard implements Card {
         return null;
     }
 
-    /**
-     * Gets placement constraint.
-     *
-     * @return the placement constraint
-     */
     public Map<Element, Integer> getPlacementConstraint () {return null;}
-
-    /**
-     * Gets type.
-     *
-     * @return the type
-     */
     public String getType() { return type; }
-
-    /**
-     * Gets id.
-     *
-     * @return the id
-     */
     public int getId() { return id; }
 
     /**
      * For GoldCard and ResourceCard returns the Element on the back of the card.
      * Returns null for StarterCard
-     *
-     * @return the blocked element
      */
     public abstract Element getBlockedElement ();
 
     /**
      * For StarterCard returns the array of blocked elements present on the front face of the card
      * Returns null for GoldCard and for ResourceCard
-     *
-     * @return the element [ ]
      */
     public abstract Element[] getBlockedElements();
 
     /**
      * Only needed for StarterCard, ignore for GoldCard and for ResourceCard
-     *
-     * @return the element [ ]
      */
     public abstract Element[] getBackFaceCorners();
-
-    /**
-     * Gets corners.
-     *
-     * @return the corners
-     */
     public List<Corner> getCorners() {
         return Collections.unmodifiableList(corners);
     }
-
-    /**
-     * Gets face side.
-     *
-     * @return the face side
-     */
     public boolean getFaceSide() {
         return faceSide;
     }
 
-    /**
-     * Get points points.
-     *
-     * @return the points
-     */
     public Points getPoints(){
         return points;
     }

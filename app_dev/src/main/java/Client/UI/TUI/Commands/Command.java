@@ -2,7 +2,7 @@ package Client.UI.TUI.Commands;
 
 
 /**
- * A class that allows to recognize text commands and act accordingly
+ * interface for each command implemented in the TUI
  */
 public interface Command {
 
@@ -13,8 +13,7 @@ public interface Command {
 
     /**
      * returns the command's name
-     *
-     * @return name
+     * @return
      */
     String getName();
 }

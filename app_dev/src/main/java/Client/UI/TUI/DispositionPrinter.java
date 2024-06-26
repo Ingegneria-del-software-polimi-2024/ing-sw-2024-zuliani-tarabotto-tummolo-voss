@@ -11,7 +11,7 @@ import static org.fusesource.jansi.Ansi.*;
 
 
 /**
- * Class responsible for printing the player's disposition on the console.
+ * Class responsible of printing the player's disposition on the console.
  * The class uses two auxiliary matrices to determine the printing order of the cards.
  */
 public class DispositionPrinter {
@@ -31,42 +31,17 @@ public class DispositionPrinter {
      * contains the player's disposition
      */
     private HashMap<Coordinates, PlayableCard> disposition;
-    /**
-     * The X max.
-     */
     int xMax=0;
-    /**
-     * The Y max.
-     */
     int yMax=0;
-    /**
-     * The X dim.
-     */
     int xDim = 0;
-    /**
-     * The Y dim.
-     */
     int yDim = 0;
-    /**
-     * The Mat x center.
-     */
     int matXCenter = 0;
-    /**
-     * The Mat y center.
-     */
     int matYCenter = 0;
-    /**
-     * The Min col.
-     */
     int minCol = 0;
-    /**
-     * The Max col.
-     */
     int maxCol = 0;
 
     /**
      * CardBuilder passed as a parameter
-     *
      * @param cb CardBuilder used by the class to build the cards
      */
     public DispositionPrinter(CardBuilder cb) {
@@ -74,9 +49,9 @@ public class DispositionPrinter {
     }
 
 
+
     /**
      * prints the player's disposition without the indication of availablePlaces
-     *
      * @param disposition HashMap containing the coordinates of each card on the player's board and their PlayableCard references
      */
     public void print(HashMap<Coordinates, PlayableCard> disposition){
@@ -88,8 +63,7 @@ public class DispositionPrinter {
 
     /**
      * prints the player's disposition with the coordinates of the availablePlaces
-     *
-     * @param disposition     HashMap containing the coordinates of each card on the player's board and their PlayableCard references
+     * @param disposition HashMap containing the coordinates of each card on the player's board and their PlayableCard references
      * @param availablePlaces a List of Coordinates containing all the coordinates where a player can place his next card
      */
     public void print(HashMap<Coordinates, PlayableCard> disposition, List<Coordinates> availablePlaces){
@@ -102,7 +76,6 @@ public class DispositionPrinter {
 
     /**
      * adds to the auxiliary matrix the symbols that signal the presence of an available place
-     *
      * @param availablePlaces a List of Coordinates containing all the coordinates where a player can place his next card
      */
     public void addAvailablePlaces(List<Coordinates> availablePlaces){
