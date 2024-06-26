@@ -15,8 +15,9 @@ todo: gif
 - [<code>🌐 Team</code>](#-team)
 - [<code>⚙️ Project Specification </code>](#%EF%B8%8F-project-specification)
 - [<code>🚦️ Implemented Functionalities</code>](#%EF%B8%8F-implemented-functionalities)
+- [<code>📝 Test Cases</code>](#%EF%B8%8F-test-cases)
 - [<code>📦 Installation</code>](#-installation)
-- [<code>📝 Usage</code>](#-usage)
+- [<code>🕹 Usage</code>](#-usage)
 
 # Codex Naturalis Board Game - Software Engineering Project
 
@@ -63,7 +64,7 @@ The final version includes:
 
 ⛔ Not implemented &nbsp;&nbsp;&nbsp;&nbsp; ✅ Implemented
 
-## Test cases (to do)
+## 📝 Test cases (to do)
 | Package    | Class, %     | Method, %     | Line, %       |
 |:-----------|:-------------|:--------------|:--------------|
 | Model      | 87% (29/29) | 87% (183/208) | 87% (597/721) |
@@ -90,7 +91,7 @@ Regardless of the operating system, you must have installed the following progra
     java -jar server.jar
     java -jar client.jar
     ```
-## 📝 Usage
+## 🕹 Usage
 <div class="table-devenvironment">
   <table style="font-size: 11px">
   <tr>
