@@ -388,35 +388,11 @@ public class PlacementArea {
 
 
     ///////////////// FOR TESTING PURPOSES ONLY /////////////////////////////////////////////////
-//    public void printAvailablePlaces() {
-//        for(Coordinates c : availablePlaces ) {
-//            System.out.println("(" + c.getX() + "; " + c.getY() + ")");
-//        }
-//    }
-//    public void printDisposition() {
-//        System.out.println("––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––");
-//        //printing elements
-//        System.out.println("elements: mushrooms " + this.getNumberElements(Element.mushrooms));
-//        System.out.println("          animals " + this.getNumberElements(Element.animals));
-//        System.out.println("          insects " + this.getNumberElements(Element.insects));
-//        System.out.println("          vegetals " + this.getNumberElements(Element.vegetals));
-//        //printing artifacts
-//        System.out.println("objects: feather " + this.getNumberArtifacts(Artifact.feather));
-//        System.out.println("         ink " + this.getNumberArtifacts(Artifact.ink));
-//        System.out.println("         paper " + this.getNumberArtifacts(Artifact.paper));
-//        System.out.println("***\t\t***\t\t***\t\t***\t\t***\t\t***\t\t***\t\t***\t\t***");
-//        for (Coordinates c : disposition.keySet()) {
-//            System.out.println("Card: " + disposition.get(c).getId() + " || Coordinates: (" + c.getX() + ";" + c.getY() + ")");
-//        }
-//        System.out.println("––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––");
-//    }
-
     /**
      * Gets disposition.
      *
      * @return the disposition
      */
-//TODO this MUST BE SET PROTECTED
     public HashMap<Coordinates, PlayableCard> getDisposition() { return disposition;}
 
     /**
@@ -424,10 +400,6 @@ public class PlacementArea {
      *
      * @return the available places
      */
-//MAI USATO DA RIVEDERE
-    //public HashMap<Artifact, Integer> getAvailableArtifacts() {return availableArtifacts;}
-    //public HashMap<Element, Integer> getAvailableElements() {return availableElements;}
-    //TODO: convert all List to ArrayList
     public List<Coordinates> getAvailablePlaces() {return availablePlaces;}
 
     private boolean contain(HashMap<Coordinates, PlayableCard> disposition, Coordinates coord){

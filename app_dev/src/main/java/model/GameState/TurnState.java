@@ -248,4 +248,5 @@ public enum TurnState {
     public boolean isStartingState(){
         return this.equals(GAME_INITIALIZATION) || this.equals(OBJECTIVE_SELECTION) || this.equals(STARTER_CARD_SELECTION);
     }
+
 }

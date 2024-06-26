@@ -58,8 +58,6 @@ public class ClientAPI_COME implements Runnable{
         do{
             message = toDoQueue.getNextMessage();
             if(message!=null && !(message instanceof InterruptConnectionMessage)) {
-                //view.controlMessage(message);//TODO implement the control
-                //IMPORTANT: I may choose to execute the InterruptConnectionMessage in order to end everything
                 message.execute(view);
             }
         }while(!(message instanceof InterruptConnectionMessage) && !(message instanceof ReturnToStartMessage));

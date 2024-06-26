@@ -660,7 +660,8 @@ public class TUI implements UI {
 
     @Override
     public void updateResourcesInUI() {
-        //TODO this method is empty! ~Andre
+        //IGNORE THIS
+        //This method is only used in GUI (Graphic interface)
     }
 
     @Override

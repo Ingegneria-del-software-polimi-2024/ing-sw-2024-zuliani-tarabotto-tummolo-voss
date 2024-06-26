@@ -85,7 +85,7 @@ public class Room {
                 disconnectedUsers.remove(name);
                 updateHeartBeat(name);
             } else {
-                throw new CantJoinRoomExcept(false); //TODO handle or change the except
+                throw new CantJoinRoomExcept(false);
             }
         }
         players.add(name);
@@ -100,10 +100,9 @@ public class Room {
      */
     public void verifyStart(){
         if(expectedPlayers == players.size()) {
-//TODO if we want the game not to start when some player is disconnected we must add && disconnectedUsers.isEmpty(),
-//furthermore we must also add a call to this function in the function reconnect
+            //furthermore we must also add a call to this function in the function reconnect
             Thread gameStarter = new Thread(this::startGame);
-            gameStarter.start();//TODO CONTROL IF THIS MAKES SENSE
+            gameStarter.start();
         }
     }
 
@@ -157,7 +156,6 @@ public class Room {
                         disconnectPlayer(player);
                         disconnection = true;
                         System.out.println("Correctly disconnected player "+player);
-                        //TODO NOTIFY ALL PLAYERS WITH BROADCAST AND MAYBE BLOCK UI
                     }
                 }
             }
@@ -267,8 +265,8 @@ public class Room {
                     playersInterfaces.get(p).setReceiver(receive);
             }
         }catch (RemoteException e){
-            throw new RuntimeException("Can't join the room due to a communication error");
-            //TODO handle exception
+            System.out.println("Can't join the room due to a communication error");
+            return;
         }
         Thread thread1 = new Thread(() -> receive.loop());
         thread1.start();
@@ -308,16 +306,14 @@ public class Room {
         try {
             playersInterfaces.get(playerID).sendToClient(new ACK_RoomChoice(playerID, name));
         } catch (RemoteException e) {
-            throw new RuntimeException(e);
-            //TODO handle exception
+            return;
         }
 
         if(modelTranslator != null){
             try {
                 playersInterfaces.get(playerID).setReceiver(receive);
             } catch (RemoteException e) {
-                throw new RuntimeException(e);
-                //TODO is the exception necessary?
+                return;
             }
             receive.sendToServer(new I_WantToReconnectMessage(playerID, name));
             return;

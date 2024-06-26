@@ -25,5 +25,4 @@ public interface MessageFromClient extends Message, Serializable {
      * @param controller the controller
      */
     void execute(ModelTranslator controller);
-    //TODO sistemare questa cosa
 }

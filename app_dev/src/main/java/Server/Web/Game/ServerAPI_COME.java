@@ -64,9 +64,7 @@ public class ServerAPI_COME {
              message = toDoQueue.getNextMessage();
              //if you find a message in the waiting list
              if (message != null) {
-                 //TODO check if there is a msg sender if yes ->  insert here the method for the heartbeat heartbeatFunc(msg.getSender) called from modelcontroller-> put in controller heartbeat function
                  if (controller.checkMessage(message) || message instanceof ChatMessage)
-                     //if that message has sense execute it
                      message.execute(controller);
              }
          }

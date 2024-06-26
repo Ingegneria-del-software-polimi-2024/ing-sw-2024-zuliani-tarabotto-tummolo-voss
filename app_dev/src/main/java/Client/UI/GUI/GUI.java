@@ -8,7 +8,6 @@ import Client.UI.GUI.LoginPanel.LoginFrame;
 import Client.UI.GUI.chat.ChatPanel;
 import Client.UI.UI;
 import Client.View.ViewAPI;
-import SharedWebInterfaces.WebExceptions.StartConnectionFailedException;
 import model.cards.PlayableCards.PlayableCard;
 import model.placementArea.Coordinates;
 import javax.imageio.ImageIO;
