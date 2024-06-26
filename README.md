@@ -64,7 +64,7 @@ The final version includes:
 
 ⛔ Not implemented &nbsp;&nbsp;&nbsp;&nbsp; ✅ Implemented
 
-## 📝 Test cases (to do)
+## 📝 Test cases
 | Package    | Class, %     | Method, %     | Line, %       |
 |:-----------|:-------------|:--------------|:--------------|
 | Model      | 87% (29/29) | 87% (183/208) | 87% (597/721) |
