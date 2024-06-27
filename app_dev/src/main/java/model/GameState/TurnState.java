@@ -16,10 +16,17 @@ import model.player.Player;
  * objective calculation stage
  */
 public enum TurnState {
+
     /**
-     * The Game initialization.
+     * Represents the game initialization state.
      */
     GAME_INITIALIZATION{
+
+        /**
+         * Controls the message from the client.
+         * @param message The message from the client.
+         * @return true if the message is a ChooseSecreteObjMessage, ReadyToPlayMessage, QuitGameMessage, DisconnectionMessage, I_WantToReconnectMessage, or ChatMessage.
+         */
         @Override
         public boolean controlMessage(MessageFromClient message) {
             return (message instanceof ChooseSecreteObjMessage ||
@@ -30,16 +37,30 @@ public enum TurnState {
                     message instanceof ChatMessage);
         }
 
+        /**
+         * Displays the UI.
+         * @param ui The user interface to display.
+         */
         @Override
         public void display(UI ui){
             ui.displayInitialization();
         }
 
+        /**
+         * Recovers the disconnection.
+         * @param gameState The current game state.
+         * @param disconnectedPlayer The player who got disconnected.
+         */
         @Override
         public void recoverDisconnection(GameState gameState, Player disconnectedPlayer) {
             gameState.recoveryStarterCard(disconnectedPlayer);
         }
 
+        /**
+         * Handles the reconnection of a player.
+         * @param gameState The current game state.
+         * @param reconnectingPlayer The player who is reconnecting.
+         */
         @Override
         public void reconnect(GameState gameState, Player reconnectingPlayer) {
             gameState.inizializationReconnection(reconnectingPlayer);
@@ -48,9 +69,15 @@ public enum TurnState {
 
 
     /**
-     * The Starter card selection.
+     * Represents the starter card selection state.
      */
     STARTER_CARD_SELECTION{
+
+        /**
+         * Controls the message from the client.
+         * @param msg The message from the client.
+         * @return true if the message is a SelectStarterCardMessage, PlayStarterCardMessage, QuitGameMessage, DisconnectionMessage, I_WantToReconnectMessage, or ChatMessage.
+         */
         public boolean controlMessage(MessageFromClient msg){
             return (msg instanceof PlayStarterCardMessage   ||
                     msg instanceof QuitGameMessage          ||
@@ -58,16 +85,31 @@ public enum TurnState {
                     msg instanceof I_WantToReconnectMessage ||
                     msg instanceof ChatMessage);
         }
+
+        /**
+         * Displays the UI.
+         * @param ui The user interface to display.
+         */
         @Override
         public void display(UI ui){
             ui.displayStarterCardSelection();
         }
 
+        /**
+         * Recovers the disconnection.
+         * @param gameState The current game state.
+         * @param disconnectedPlayer The player who got disconnected.
+         */
         @Override
         public void recoverDisconnection(GameState gameState, Player disconnectedPlayer) {
             gameState.recoveryStarterCard(disconnectedPlayer);
         }
 
+        /**
+         * Handles the reconnection of a player.
+         * @param gameState The current game state.
+         * @param reconnectingPlayer The player who is reconnecting.
+         */
         @Override
         public void reconnect(GameState gameState, Player reconnectingPlayer) {
             gameState.starterCardReconnection(reconnectingPlayer);
@@ -76,9 +118,15 @@ public enum TurnState {
 
 
     /**
-     * The Objective selection.
+     * Represents the objective selection state.
      */
     OBJECTIVE_SELECTION{
+
+        /**
+         * Controls the message from the client.
+         * @param msg The message from the client.
+         * @return true if the message is a ChooseSecreteObjMessage, QuitGameMessage, DisconnectionMessage, I_WantToReconnectMessage, or ChatMessage.
+         */
         public boolean controlMessage(MessageFromClient msg){
             return (msg instanceof ChooseSecreteObjMessage ||
                     msg instanceof QuitGameMessage         ||
@@ -87,16 +135,30 @@ public enum TurnState {
                     msg instanceof ChatMessage);
         }
 
+        /**
+         * Displays the UI.
+         * @param ui The user interface to display.
+         */
         @Override
         public void display(UI ui){
             ui.displayObjectiveSelection();
         }
 
+        /**
+         * Recovers the disconnection.
+         * @param gameState The current game state.
+         * @param disconnectedPlayer The player who got disconnected.
+         */
         @Override
         public void recoverDisconnection(GameState gameState, Player disconnectedPlayer) {
             gameState.recoveryObjectiveChoice(disconnectedPlayer);
         }
 
+        /**
+         * Handles the reconnection of a player.
+         * @param gameState The current game state.
+         * @param reconnectingPlayer The player who is reconnecting.
+         */
         public void reconnect(GameState gameState, Player reconnectingPlayer){
             gameState.objectiveCardReconnection(reconnectingPlayer);
         }
@@ -105,9 +167,15 @@ public enum TurnState {
 
 
     /**
-     * The Placing card selection.
+     * Represents the placing card selection state.
      */
     PLACING_CARD_SELECTION{
+
+        /**
+         * Controls the message from the client.
+         * @param msg The message from the client.
+         * @return true if the message is a PlayCardMessage, QuitGameMessage, DisconnectionMessage, I_WantToReconnectMessage, or ChatMessage.
+         */
         public boolean controlMessage(MessageFromClient msg){
             return (msg instanceof PlayCardMessage         ||
                     msg instanceof QuitGameMessage         ||
@@ -116,11 +184,20 @@ public enum TurnState {
                     msg instanceof ChatMessage);
         }
 
+        /**
+         * Displays the UI.
+         * @param ui The user interface to display.
+         */
         @Override
         public void display(UI ui){
             ui.displayPlacingCard();
         }
 
+        /**
+         * Recovers the disconnection.
+         * @param gameState The current game state.
+         * @param disconnectedPlayer The player who got disconnected.
+         */
         @Override
         public void recoverDisconnection(GameState gameState, Player disconnectedPlayer) {
             gameState.recoverPlacement(disconnectedPlayer);
@@ -129,9 +206,15 @@ public enum TurnState {
 
 
     /**
-     * The Card drawing.
+     * Represents the card drawing state.
      */
     CARD_DRAWING{
+
+        /**
+         * Controls the message from the client.
+         * @param msg The message from the client.
+         * @return true if the message is a DrawCardMessage, QuitGameMessage, DisconnectionMessage, I_WantToReconnectMessage, or ChatMessage.
+         */
         public boolean controlMessage(MessageFromClient msg){
             return (msg instanceof DrawCardMessage         ||
                     msg instanceof QuitGameMessage         ||
@@ -140,11 +223,20 @@ public enum TurnState {
                     msg instanceof ChatMessage);
         }
 
+        /**
+         * Displays the UI.
+         * @param ui The user interface to display.
+         */
         @Override
         public void display(UI ui){
             ui.displayCardDrawing();
         }
 
+        /**
+         * Recovers the disconnection.
+         * @param gameState The current game state.
+         * @param disconnectedPlayer The player who got disconnected.
+         */
         @Override
         public void recoverDisconnection(GameState gameState, Player disconnectedPlayer) {
             gameState.recoveryDrawing(disconnectedPlayer);
@@ -153,9 +245,15 @@ public enum TurnState {
 
 
     /**
-     * The End game.
+     * Represents the end game state.
      */
     END_GAME{
+
+        /**
+         * Controls the message from the client.
+         * @param msg The message from the client.
+         * @return true if the message is a QuitGameMessage, DisconnectionMessage, I_WantToReconnectMessage, or ChatMessage.
+         */
         public boolean controlMessage(MessageFromClient msg){
             return (msg instanceof QuitGameMessage          ||
                     msg instanceof DisconnectionMessage     ||
@@ -163,87 +261,46 @@ public enum TurnState {
                     msg instanceof ChatMessage);
         }
 
+        /**
+         * Displays the UI.
+         * @param ui The user interface to display.
+         */
         @Override
         public void display( UI ui){
             ui.displayEndGame();
         }
     };
 
-
-
-//    /**
-//     * @throws UnsupportedOperationException when the next state is in a different stage
-//     */
-//    public void nextState() throws UnsupportedOperationException{
-//        switch(this){
-//            case STARTER_CARD_SELECTION:
-//                return;
-//            case OBJECTIVE_SELECTION:
-//                return;
-//            case PLACING_CARD_SELECTION:
-//                return;
-//            case CARD_DRAWING:
-//                return;
-//            case END_GAME:
-//                return;
-//        }
-//        throw new UnsupportedOperationException();
-//    }
-//
-//    /**
-//     * @throws UnsupportedOperationException when trying to change stage not being in the final state of the present stage
-//     */
-//    public void nextStage() throws UnsupportedOperationException{
-//        switch(this){
-//            case STARTER_CARD_SELECTION:
-//                return;
-//            case OBJECTIVE_SELECTION:
-//                return;
-//            case PLACING_CARD_SELECTION:
-//                return;
-//            case CARD_DRAWING:
-//                return;
-//            case END_GAME:
-//                return;
-//        }
-//        throw new UnsupportedOperationException();
-//    }
-
     /**
-     * Control message boolean.
-     *
-     * @param message the message
-     * @return the boolean
+     * Controls the message from the client.
+     * @param message The message from the client.
+     * @return false by default, should be overridden in each state.
      */
     public boolean controlMessage(MessageFromClient message){return false;}
 
     /**
-     * Display.
-     *
-     * @param ui the ui
+     * Displays the UI.
+     * @param ui The user interface to display.
      */
     public void display(UI ui){}
 
     /**
-     * Recover disconnection.
-     *
-     * @param gameState          the game state
-     * @param disconnectedPlayer the disconnected player
+     * Recovers the disconnection.
+     * @param gameState The current game state.
+     * @param disconnectedPlayer The player who got disconnected.
      */
     public void recoverDisconnection(GameState gameState, Player disconnectedPlayer){}
 
     /**
-     * Reconnect.
-     *
-     * @param gameState          the game state
-     * @param reconnectingPlayer the reconnecting player
+     * Handles the reconnection of a player.
+     * @param gameState The current game state.
+     * @param reconnectingPlayer The player who is reconnecting.
      */
     public void reconnect(GameState gameState, Player reconnectingPlayer){}
 
     /**
-     * Is starting state boolean.
-     *
-     * @return the boolean
+     * Checks if the current state is a starting state.
+     * @return true if the current state is either GAME_INITIALIZATION, OBJECTIVE_SELECTION, or STARTER_CARD_SELECTION.
      */
     public boolean isStartingState(){
         return this.equals(GAME_INITIALIZATION) || this.equals(OBJECTIVE_SELECTION) || this.equals(STARTER_CARD_SELECTION);

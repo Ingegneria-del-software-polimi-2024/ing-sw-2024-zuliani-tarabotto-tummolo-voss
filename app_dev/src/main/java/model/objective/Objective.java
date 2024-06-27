@@ -10,12 +10,9 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * The interface Objective.
- */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
-/**
  * inteface used for the objectives strategy pattern: identifies the right way to count points
  */
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 public interface Objective extends Serializable {
     /**
      * counting points given by the objective
@@ -24,11 +21,6 @@ public interface Objective extends Serializable {
      * @return the int
      */
     public int countObjectivePoints(PlacementArea placementArea);
-
-    /**
-     * Print objective.
-     */
-    public void printObjective();
 
     /**
      * Gets element.

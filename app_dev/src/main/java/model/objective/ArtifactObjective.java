@@ -9,21 +9,22 @@ import model.placementArea.*;
 import java.util.HashMap;
 
 
-/**
- * The type Artifact objective.
- */
-@JsonTypeName("ArtifactObjective")
+
+
 /**
  * objective based on the number of artifacts present on the placementArea, if tris = 0 then artifact variable value will
  * contain  the artifact type to count, else artifact should be null (and should be ignored), we should count
  * the  repetitions of 3 artifacts
  */
+@JsonTypeName("ArtifactObjective")
 public class ArtifactObjective  implements Objective{
+
     /**
      * The Artifact.
      */
     @JsonProperty("artifact")
     Artifact artifact;
+
     /**
      * The Tris.
      */
@@ -31,9 +32,12 @@ public class ArtifactObjective  implements Objective{
     boolean tris;
 
     /**
+     * This method counts the objective points based on the placementArea.
+     * If tris is false, it returns twice the number of artifacts of the specified type.
+     * If tris is true, it returns three times the minimum count of any artifact.
      *
      * @param placementArea the disposition to find objectives in
-     * @return the number of points rellated to this objective
+     * @return the number of points related to this objective
      */
     public int countObjectivePoints(PlacementArea placementArea){
         HashMap<Artifact, Integer> map;
@@ -46,23 +50,33 @@ public class ArtifactObjective  implements Objective{
         }
     }
 
-    @Override
-    public void printObjective() {
-        System.out.println("type: ArtifactObjective");
-        if (this.artifact != null) System.out.println(this.artifact.toString());
-        System.out.println("tris: " + this.tris);
-    }
-
+    /**
+     * This method returns the element of the objective.
+     * In this class, it always returns null.
+     *
+     * @return the element
+     */
     @Override
     public Element getElement() {
         return null;
     }
 
+    /**
+     * This method returns the artifact of the objective.
+     *
+     * @return the artifact
+     */
     @Override
     public Artifact getArtifact() {
         return artifact;
     }
 
+    /**
+     * This method returns the shape of the objective.
+     * In this class, it always returns null.
+     *
+     * @return the shape
+     */
     @Override
     public Shape getShape() {
         return null;

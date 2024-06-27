@@ -49,6 +49,4 @@ public class ObjectiveCardTest extends TestCase {
         // Then the method should return null
         assertNull(objectiveCard);
     }
-
-
 }

@@ -22,29 +22,51 @@ import static org.fusesource.jansi.Ansi.ansi;
 
 
 /**
- * The type Controller test.
+ * This class is used to test the controller of the game.
+ * It simulates a game flow and checks if the game state changes as expected.
  */
 class ControllerTest {
+
+    /**
+     * This class is used to test the controller of the game.
+     * It simulates a game flow and checks if the game state changes as expected.
+     */
     private GameState gameState;
+
+    /**
+     * The list of nicknames of the players.
+     */
     private ArrayList<String> nickNames;
+
+    /**
+     * The path to the file used for testing.
+     */
     private String path = "C:\\Users\\nicol\\OneDrive\\Documenti\\GitHub\\ing-sw-2024-zuliani-tarabotto-tummolo-voss\\app_dev\\src\\test\\java\\controller\\";
+
+    /**
+     * The scanner used to read the test file.
+     */
     private Scanner sc = new Scanner(new File(path+"final"));
+
+    /**
+     * The player who starts the game.
+     */
     private Player initialPlayer;
 
     /**
-     * Instantiates a new Controller test.
+     * Constructs a new ControllerTest.
      *
-     * @throws FileNotFoundException the file not found exception
+     * @throws FileNotFoundException if the test file is not found.
      */
     ControllerTest() throws FileNotFoundException {
     }
 
 
     /**
-     * Main.
+     * The main method for the test.
      *
-     * @throws EmptyCardSourceException the empty card source exception
-     * @throws IOException              the io exception
+     * @throws EmptyCardSourceException if the card source is empty.
+     * @throws IOException if an I/O error occurs.
      */
     @Test
     public void main() throws EmptyCardSourceException, IOException {
@@ -54,9 +76,8 @@ class ControllerTest {
     }
 
     /**
-     * Initialize game state.
+     * Initialize the game state.
      */
-//creates a new gameState and ask users for nicknames
     public void initializeGameState() {
         String id = "gameState_0";
         nickNames = new ArrayList<String>();
@@ -67,22 +88,16 @@ class ControllerTest {
         int i = 0;
         gameState = new GameState(nickNames, id, i, new MockModelListener());
         initialPlayer = gameState.getTurnPlayer();
-        /*
-        ObjectivesPrinter p1 = new ObjectivesPrinter();
-        for(ObjectiveCard c : gameState.getObjectiveDeck().getCards()){
-            p1.print(c);
-        }*/
-
     }
 
 
-    //main method to handle game flow
-
     /**
-     * Game loop.
+     * This method is the main game loop. It handles the game flow, including player login,
+     * objective selection, game rounds, and final scoring. It also writes the game results to a file
+     * and compares the output with the expected output.
      *
-     * @throws EmptyCardSourceException the empty card source exception
-     * @throws IOException              the io exception
+     * @throws EmptyCardSourceException if the card source is empty.
+     * @throws IOException if an I/O error occurs.
      */
     public void gameLoop() throws EmptyCardSourceException, IOException {
         int cont = 0;
@@ -150,7 +165,12 @@ class ControllerTest {
     }
 
 
-;
+    /**
+     * This method calls the appropriate draw function based on the input parameter.
+     *
+     * @param i the index representing the draw function to call.
+     * @throws EmptyCardSourceException if the card source is empty.
+     */
     private void callDrawFunction(int i) throws EmptyCardSourceException {
         switch (i) {
             case 1:
@@ -174,8 +194,12 @@ class ControllerTest {
         }
     }
 
-
-
+    /**
+     * This method handles a single turn in the game. It includes card selection, card placement,
+     * and drawing a new card.
+     *
+     * @throws EmptyCardSourceException if the card source is empty.
+     */
     private void playTurn() throws EmptyCardSourceException {
 
         //ASK PLAYER TO SELECT A CARD FROM HAND
@@ -204,6 +228,9 @@ class ControllerTest {
         gameState.nextPlayer();
     }
 
+    /**
+     * This method prints the winner of the game.
+     */
     private void printWinner() {
         Player winner = gameState.getPlayer(0);
         for (int i = 0; i < nickNames.size(); i++) {
@@ -215,6 +242,9 @@ class ControllerTest {
         System.out.println(winner.getNickname().toUpperCase() + " YOU WIN!!!!");
     }
 
+    /**
+     * This method writes the game results to a file.
+     */
     private void  fileWriting() {
         //we find the winner
         Player winner = gameState.getPlayer(0);
@@ -257,12 +287,13 @@ class ControllerTest {
     }
 
     /**
-     * Files compare by line long.
+     * This method compares two files line by line. It returns the line number of the first difference,
+     * or -1 if the files are identical.
      *
-     * @param path1 the path 1
-     * @param path2 the path 2
-     * @return the long
-     * @throws IOException the io exception
+     * @param path1 the path to the first file.
+     * @param path2 the path to the second file.
+     * @return the line number of the first difference, or -1 if the files are identical.
+     * @throws IOException if an I/O error occurs.
      */
     public static long filesCompareByLine(Path path1, Path path2) throws IOException {
         try (BufferedReader bf1 = Files.newBufferedReader(path1);

@@ -11,14 +11,13 @@ import model.placementArea.*;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * The type L shape objective.
- */
-@JsonTypeName("LShapeObjective")
+
+
 /**
  * objective in L shape composed of three cards identified by their relative coordinates
  * referred to the card standing alone
  */
+@JsonTypeName("LShapeObjective")
 public class LShapeObjective implements Objective{
     /**
      * The Element.
@@ -26,40 +25,47 @@ public class LShapeObjective implements Objective{
     @JsonProperty("elements")
     public List<Element> element;
 
+    /**
+     * The Shape of the objective.
+     */
     @JsonProperty("shape")
     private Shape shape;
 
     /**
+     * This method counts the objective points based on the placementArea.
+     * It returns thrice the result of verifying the objective with the given shape and elements.
+     *
      * @param placementArea the disposition to find objectives in
-     * @return the number of points rellated to this objective
+     * @return the number of points related to this objective
      */
     public int countObjectivePoints(PlacementArea placementArea) {return 3 * placementArea.verifyObjective(shape, element);}
 
     /**
+     * This method returns the second element of the objective.
      *
-     * @return a ordered list of elements that compose the objective
+     * @return the second element
      */
-    /*public List<Element> getElement() {
-        return element;
-    }*/
-    //for console testing
-    @Override
-    public void printObjective() {
-        System.out.println("type: LShapeObjective");
-        System.out.println("element: " + this.element.toString());
-        System.out.println("shape: " + this.shape.toString());
-    }
-
     @Override
     public Element getElement() {
         return element.get(1);
     }
 
+    /**
+     * This method returns the artifact of the objective.
+     * In this class, it always returns null.
+     *
+     * @return null
+     */
     @Override
     public Artifact getArtifact() {
         return null;
     }
 
+    /**
+     * This method returns the shape of the objective.
+     *
+     * @return the shape
+     */
     @Override
     public Shape getShape() {
         return shape;
