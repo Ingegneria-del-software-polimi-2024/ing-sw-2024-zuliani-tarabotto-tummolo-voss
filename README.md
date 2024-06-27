@@ -87,12 +87,39 @@ Regardless of the operating system, you must have installed the following progra
    ```
 
 
-2. execute the server and a client(GUI/TUI):
+2. execute the server and a client(GUI/TUI) from deliverables/:
     ```shell
     java -jar server.jar
     java -jar TUI.jar
     java -jar GUI.jar
     ```
+> Remember that after executing TUI jar you have to put the terminal in full screen.
+The same thing is recommended for the GUI version.
+
+
+## Network
+
+on the terminal:
+```shell
+   hostname
+```
+which returns yourhostname.local
+
+Then go on zero tier and find your own assigned ip
+Now you can edit the hosts file:
+```shell
+/etc
+sudo nano hosts
+```
+after the line localhost add  `zerotierip` `yourhostname.local` like:
+```shell
+::1             localhost
+
+172.28.173.117 iMac-di-Gabriel.local
+```
+
+Now you can use zero tier to play online from different networks
+
 ## 🕹 Usage
 <div class="table-devenvironment">
   <table style="font-size: 11px">
@@ -170,7 +197,7 @@ Regardless of the operating system, you must have installed the following progra
 
   </td>
   <td valign="top" width="50%"> 
-<img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/room.jpg?raw=true" width="260" align="right" />
+<img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/logintui.jpg?raw=true" width="260" align="right" />
 
 
 
@@ -182,3 +209,55 @@ Regardless of the operating system, you must have installed the following progra
 
 
 > the user can from this section choose the name of the team and how many people should be there. 
+
+## jar creation
+<div class="table-devenvironment">
+  <table style="font-size: 11px">
+  <tr>
+  <td valign="top" width="50%">
+<img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/h1.png?raw=true" width="260" align="right" />
+
+  </td>
+  <td valign="top" width="50%"> 
+<img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/h2.png?raw=true" width="260" align="right" />
+
+
+
+
+  </td>
+  </tr>
+  <tr>
+  <td valign="top" width="50%">
+<img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/h3.png?raw=true" width="260" align="right" />
+
+  </td>
+  <td valign="top" width="50%"> 
+<img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/h4.png?raw=true" width="260" align="right" />
+
+
+
+
+  </td>
+  </tr>
+  </table>
+</div>
+
+## jar creation
+To create a jar package remember to in `/targhet/classes/META-INF/MANIFEST.MF`
+
+For TUI and GUI jar:
+```shell
+Manifest-Version: 1.0
+Main-Class: Client.RunGUI_Client
+```
+
+For SERVER jar
+```shell
+Manifest-Version: 1.0
+Main-Class: Server.RunServer
+```
+
+For custom tests you can change the path for the inputs and outputs at line `44` in the file `/src/test/java/controller/ControllerTest.java`
+
+
+
