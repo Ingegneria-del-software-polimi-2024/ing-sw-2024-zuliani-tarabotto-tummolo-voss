@@ -25,6 +25,6 @@ public final class HeartBeatSettings {
      * The constant indicating the time waited for each iteration before closing the game.
      * This value must be multiplied by the iterationsNumber to get the total time waited before closing the game.
      */
-    public static final long timerB4ClosingGame = 0; //TODO set 6000
+    public static final long timerB4ClosingGame = 6000; //TODO set 6000
 
 }

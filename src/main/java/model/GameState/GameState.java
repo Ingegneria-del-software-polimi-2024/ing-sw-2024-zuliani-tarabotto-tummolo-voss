@@ -64,7 +64,7 @@ public class GameState {
     /**
      * the maximum number of points a player can reach
      */
-    private final int MAX_POINTS = 10;
+    private final int MAX_POINTS = 20;//TODO change max points
 
     /**
      * the listener that will notify the changes in the game state

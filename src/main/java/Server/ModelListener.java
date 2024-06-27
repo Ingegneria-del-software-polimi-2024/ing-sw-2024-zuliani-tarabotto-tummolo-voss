@@ -32,7 +32,7 @@ import java.util.List;
  * The type Model listener.
  * This class is responsible for sending notifications to the players about the changes in the game state
  */
-public class ModelListener {//TODO Handle correctly the exceptions
+public class ModelListener {//TODO .
 
     /**
      * The API used to send messages to the clients
