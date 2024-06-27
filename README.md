@@ -145,7 +145,7 @@ Regardless of the operating system, you must have installed the following progra
   <table style="font-size: 11px">
   <tr>
   <td valign="top" width="50%">
-<img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/game_creation.png?raw=true" width="260" align="right" />
+<img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/lobby.png?raw=true" width="260" align="right" />
   
   </td>
   <td valign="top" width="50%"> 
@@ -166,7 +166,7 @@ Regardless of the operating system, you must have installed the following progra
   <table style="font-size: 11px">
   <tr>
   <td valign="top" width="50%">
-<img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/GUI_gameBoard.png?raw=true" width="260" align="right" />
+<img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/game_creation.png?raw=true" width="260" align="right" />
   
   </td>
   <td valign="top" width="50%"> 
@@ -179,6 +179,6 @@ Regardless of the operating system, you must have installed the following progra
   </tr>
   </table>
 </div>
-<img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/game_creation.png?raw=true" width="260" align="center" />
+
 
 > the user can from this section choose the name of the team and how many people should be there. 
