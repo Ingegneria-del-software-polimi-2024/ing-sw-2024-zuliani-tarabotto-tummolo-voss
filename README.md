@@ -11,18 +11,20 @@
 </div>
 
 ## 🗺️ map 
-- [<code>🌐 Team</code>](#-team)
+- [<code>👥 Team</code>](#-team)
 - [<code>⚙️ Project Specification </code>](#%EF%B8%8F-project-specification)
 - [<code>🚦️ Implemented Functionalities</code>](#%EF%B8%8F-implemented-functionalities)
 - [<code>📝 Test Cases</code>](#-test-cases)
 - [<code>📦 Installation</code>](#-installation)
+- [<code>🌐 Network</code>](#-network)
 - [<code>🕹 Usage</code>](#-usage)
+- [<code>🔧 Jar creation</code>](#%EF%B8%8F-jar-creation)
 
 # Codex Naturalis Board Game - Software Engineering Project
 
 **Teacher**: Gianpaolo Cugola
 
-## 🌐 Team
+## 👥 Team
 * [Andrea Tarabotto](https://github.com/andrea-809)
 * [Francesco Zuliani](https://github.com/francescomartino2002)
 * [Nicola Tummolo](https://github.com/NTum07)
@@ -97,7 +99,7 @@ Regardless of the operating system, you must have installed the following progra
 The same thing is recommended for the GUI version.
 
 
-## Network
+## 🌐 Network
 
 on the terminal:
 ```shell
@@ -242,7 +244,7 @@ Now you can use zero tier to play online from different networks
   </table>
 </div>
 
-## jar creation
+## 🔧 Jar creation
 To create a jar package remember to in `/targhet/classes/META-INF/MANIFEST.MF`
 
 For TUI and GUI jar:
