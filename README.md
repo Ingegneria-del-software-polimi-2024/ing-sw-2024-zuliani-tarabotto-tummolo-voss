@@ -71,7 +71,7 @@ The final version includes:
 
 <p align="center">⚠️ disclaimer </p>
 
-> We have also tested the controller by excluding the lines that are not essential for its purpose. 
+> We have also tested the controller by excluding the lines that are not essential for its purpose. These lines interface with the network structure and communicate with the TUI. As a result, we achieve around 80% coverage, even for the controller.
 ## 📦 Installation
 
 ### Requirements
@@ -120,10 +120,15 @@ Regardless of the operating system, you must have installed the following progra
 
 ### LOGIN
 <img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/Welcome.png?raw=true" width="260" align="center" />
-> The user can chiise a username, if it already exists and it's playing the user will be notified by a message.
+
+> The user can choose a username, if it already exists and it's playing the user will be notified by a message.
+
 ### LOBBY
 <img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/lobby.png?raw=true" width="260" align="center" />
-> In the lobby players can choose weather to join or create a team
+
+> In the lobby players can choose weather to join or create a team.
+
 ### ROOM CREATION
 <img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/game_creation.png?raw=true" width="260" align="center" />
+
 > the user can from this section choose the name of the team and how many people should be there. 
