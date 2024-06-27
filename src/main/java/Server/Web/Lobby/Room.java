@@ -156,6 +156,8 @@ public class Room {
                         disconnectPlayer(player);
                         disconnection = true;
                         System.out.println("Correctly disconnected player "+player);
+                    }else {
+                        return;
                     }
                 }
             }
