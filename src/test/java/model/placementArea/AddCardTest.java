@@ -304,8 +304,6 @@ public class AddCardTest extends TestCase {
         boolean face_c = true;
         int starterCard_c = 81;
         boolean faceStarterCard_c = true;
-        Coordinates testCoord_c = new Coordinates(2, -2); // Replace with desired coordinates
-        int testPointCardID_c = 72;
         int expAnimals_c = 1;
         int expInsects_c = 4;
         int expMushrooms_c = 0;
@@ -358,8 +356,6 @@ public class AddCardTest extends TestCase {
         boolean face_d = true;
         int starterCard_d = 81;
         boolean faceStarterCard_d = true;
-        Coordinates testCoord_d = new Coordinates(-1, 1); // Replace with desired coordinates
-        int testPointCardID_d = 74;
         int expAnimals_d = 1;
         int expInsects_d = 4;
         int expMushrooms_d = 0;
@@ -420,8 +416,6 @@ public class AddCardTest extends TestCase {
         boolean face_e = true;
         int starterCard_e = 81;
         boolean faceStarterCard_e = true;
-        Coordinates testCoord_e = new Coordinates(2, -2); // Replace with desired coordinates
-        int testPointCardID_e = 72;
         int expAnimals_e = 1;
         int expInsects_e = 4;
         int expMushrooms_e = 0;
@@ -482,8 +476,6 @@ public class AddCardTest extends TestCase {
         boolean face_f = true;
         int starterCard_f = 81;
         boolean faceStarterCard_f = true;
-        Coordinates testCoord_f = new Coordinates(2, -2); // Replace with desired coordinates
-        int testPointCardID_f = 72;
         int expAnimals_f = 1;
         int expInsects_f = 2;
         int expMushrooms_f = 0;
@@ -533,8 +525,6 @@ public class AddCardTest extends TestCase {
         boolean face_g = true;
         int starterCard_g = 81;
         boolean faceStarterCard_g = true;
-        Coordinates testCoord_g = new Coordinates(2, -2); // Replace with desired coordinates
-        int testPointCardID_g = 72;
         int expAnimals_g = 1;
         int expInsects_g = 2;
         int expMushrooms_g = 0;
@@ -584,8 +574,6 @@ public class AddCardTest extends TestCase {
         boolean face_h = true;
         int starterCard_h = 81;
         boolean faceStarterCard_h = true;
-        Coordinates testCoord_h = new Coordinates(2, -2); // Replace with desired coordinates
-        int testPointCardID_h = 72;
         int expAnimals_h = 1;
         int expInsects_h = 2;
         int expMushrooms_h = 0;
@@ -635,8 +623,6 @@ public class AddCardTest extends TestCase {
         boolean face_i = true;
         int starterCard_i = 81;
         boolean faceStarterCard_i = true;
-        Coordinates testCoord_i = new Coordinates(2, -2); // Replace with desired coordinates
-        int testPointCardID_i = 72;
         int expAnimals_i = 1;
         int expInsects_i = 2;
         int expMushrooms_i = 0;
@@ -771,19 +757,10 @@ public class AddCardTest extends TestCase {
 
                 default:
                     System.out.println("Unknown exception card: " + exceptionCard);
-                    // Logica di default per gestire i casi non previsti
                     break;
             }
         }
 
-        int animals = area.getNumberElements(Element.animals);
-        int insects = area.getNumberElements(Element.insects);
-        int mushrooms = area.getNumberElements(Element.mushrooms);
-        int vegetals = area.getNumberElements(Element.vegetals);
-
-        int feather = area.getNumberArtifacts(Artifact.feather);
-        int ink = area.getNumberArtifacts(Artifact.ink);
-        int paper = area.getNumberArtifacts(Artifact.paper);
 
         List<Coordinates> availablePosition = area.getAvailablePlaces();
 
@@ -823,7 +800,7 @@ public class AddCardTest extends TestCase {
         for(Coordinates expPos : expAvailablePosition) {
             found = 0;
 
-            // Secondo ciclo for per cercare l'elemento nella lista AvailablePosition
+
             for (Coordinates pos : availablePosition) {
                 if (expPos.equals(pos)) {
                     found = 1;
@@ -831,11 +808,6 @@ public class AddCardTest extends TestCase {
                 }
             }
 
-            // Se un elemento non è stato trovato, impostiamo la variabile a false
-            //if (!found) {
-            //     assert false;
-            //     break;
-            //
 
         }
 
