@@ -18,7 +18,7 @@
 - [<code>📦 Installation</code>](#-installation)
 - [<code>🌐 Network</code>](#-network)
 - [<code>🕹 Usage</code>](#-usage)
-- [<code>🔧 Jar creation</code>](#%EF%B8%8F-jar-creation)
+- [<code>🔧 Jar creation</code>](#-jar-creation)
 
 # Codex Naturalis Board Game - Software Engineering Project
 
