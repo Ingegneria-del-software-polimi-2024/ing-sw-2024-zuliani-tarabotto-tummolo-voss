@@ -66,8 +66,12 @@ The final version includes:
 ## 📝 Test Cases
 | Package    | Class, %     | Method, %     | Line, %       |
 |:-----------|:-------------|:--------------|:--------------|
-| Model      | 87% (29/29) | 87% (183/208) | 87% (597/721) |
-| Controller | 87% (5/5)   | 87% (44/45)   | 87% (223/257) |
+| Model      | 96% (48/50) | 67% (196/292) | 76% (780/1024) |
+| Controller | 100% (9/9)   | 59% (44/45)   | 66% (223/257) |
+
+# <p align="center">⚙️ disclaimer </p>
+
+> we have also tested the controller by excluding thee lines who are useless for the pourpuse of the controller. Those lines arre used to interface with the network structure and to comunicate with the tui. In this case we get around 80% of coverage even for the Controller
 
 ## 📦 Installation
 
