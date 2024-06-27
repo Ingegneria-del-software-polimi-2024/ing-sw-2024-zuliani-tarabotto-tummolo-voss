@@ -6,9 +6,7 @@
 <h2> play codex online</h2>
 
 
-play on the terminal or in gui.
-todo: gif
-<img src="" alt="da cambiare" style="width: 500px;" >
+
 </div>
 
 ## 🗺️ map 
