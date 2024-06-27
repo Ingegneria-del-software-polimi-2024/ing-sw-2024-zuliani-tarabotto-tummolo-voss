@@ -123,7 +123,7 @@ Regardless of the operating system, you must have installed the following progra
   <table style="font-size: 11px">
   <tr>
   <td valign="top" width="50%">
-<img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/GUI_gameBoard.png?raw=true" width="260" align="right" />
+<img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/login.png?raw=true" width="260" align="right" />
   
   </td>
   <td valign="top" width="50%"> 
@@ -143,11 +143,45 @@ Regardless of the operating system, you must have installed the following progra
 > The user can choose a username, if it already exists and it's playing the user will be notified by a message.
 
 ### LOBBY
+<div class="table-devenvironment">
+  <table style="font-size: 11px">
+  <tr>
+  <td valign="top" width="50%">
+<img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/GUI_gameBoard.png?raw=true" width="260" align="right" />
+  
+  </td>
+  <td valign="top" width="50%"> 
+<img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/TUI_gameBoard.png?raw=true" width="260" align="right" />
+  
+
+
+
+  </td>
+  </tr>
+  </table>
+</div>
 <img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/lobby.png?raw=true" width="260" align="center" />
 
 > In the lobby players can choose weather to join or create a team.
 
 ### ROOM CREATION
+<div class="table-devenvironment">
+  <table style="font-size: 11px">
+  <tr>
+  <td valign="top" width="50%">
+<img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/GUI_gameBoard.png?raw=true" width="260" align="right" />
+  
+  </td>
+  <td valign="top" width="50%"> 
+<img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/TUI_gameBoard.png?raw=true" width="260" align="right" />
+  
+
+
+
+  </td>
+  </tr>
+  </table>
+</div>
 <img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/game_creation.png?raw=true" width="260" align="center" />
 
 > the user can from this section choose the name of the team and how many people should be there. 
