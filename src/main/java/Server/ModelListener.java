@@ -32,7 +32,7 @@ import java.util.List;
  * The type Model listener.
  * This class is responsible for sending notifications to the players about the changes in the game state
  */
-public class ModelListener {//TODO Handle correctly the exceptions
+public class ModelListener {
 
     /**
      * The API used to send messages to the clients
@@ -61,7 +61,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
             System.out.println("state notification send");
             serverAPI.broadcastNotifyChanges( new StateMessage(state));
         } catch(MsgNotDeliveredException msg) {
-            throw new RuntimeException(msg);
+            System.out.println("Message not delivered!");
         }
     }
 
@@ -76,7 +76,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
             System.out.println("state notification send");
             serverAPI.notifyChanges( new StateMessage( state ), playerID);
         } catch(MsgNotDeliveredException msg) {
-            throw new RuntimeException(msg);
+            System.out.println("Message not delivered!");
         }
     }
 
@@ -90,7 +90,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
             System.out.println("notification send");
             serverAPI.broadcastNotifyChanges( new TurnPlayerMessage(turnPlayer));
         } catch(MsgNotDeliveredException msg) {
-            throw new RuntimeException(msg);
+            System.out.println("Message not delivered!");
         }
     }
 
@@ -105,7 +105,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
             System.out.println("notification send");
             serverAPI.notifyChanges( new TurnPlayerMessage(turnPlayer), playerID);
         } catch(MsgNotDeliveredException msg) {
-            throw new RuntimeException(msg);
+            System.out.println("Message not delivered!");
         }
     }
 
@@ -134,7 +134,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
                      players, gameId,
                     commonObjective1, commonObjective2));
         }catch (MsgNotDeliveredException msg){
-            throw new RuntimeException(msg);
+            System.out.println("Message not delivered!");
         }
 
     }
@@ -162,7 +162,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
                     players, gameId,
                     commonObjective1, commonObjective2), playerID);
         }catch (MsgNotDeliveredException e){
-            throw new RuntimeException(e);
+            System.out.println("Message not delivered!");
         }
     }
 
@@ -176,7 +176,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
         try{
             serverAPI.broadcastNotifyChanges(new PawnColorMessage(player, pawnColor.toString()));
         }catch (MsgNotDeliveredException msg){
-            throw new RuntimeException(msg);
+            System.out.println("Message not delivered!");
         }
     }
 
@@ -191,7 +191,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
         try{
             serverAPI.notifyChanges(new PawnColorMessage(player, pawnColor.toString()), reconnectedPlayer);
         }catch (MsgNotDeliveredException msg){
-            throw new RuntimeException(msg);
+            System.out.println("Message not delivered!");
         }
     }
 
@@ -207,7 +207,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
         try{
             serverAPI.notifyChanges( new StarterCardMessage(player, starterCard, pawnColor.toString()), player );
         }catch (MsgNotDeliveredException msg){
-            throw new RuntimeException(msg);
+            System.out.println("Message not delivered!");
         }
     }
 
@@ -222,7 +222,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
         try{
             serverAPI.notifyChanges( new UpdateHandMessage(hand), player);
         }catch (MsgNotDeliveredException msg){
-            throw new RuntimeException(msg);
+            System.out.println("Message not delivered!");
         }
     }
 
@@ -238,7 +238,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
         try{
             serverAPI.notifyChanges( new SecretObjectivesMessage(secretObjective1, secretObjective2), player);
         }catch (MsgNotDeliveredException msg){
-            throw new RuntimeException(msg);
+            System.out.println("Message not delivered!");
         }
     }
 
@@ -253,7 +253,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
         try{
             serverAPI.notifyChanges( new ConfirmSecretObjectiveMessage(secretObjective), player);
         }catch (MsgNotDeliveredException msg){
-            throw new RuntimeException(msg);
+            System.out.println("Message not delivered!");
         }
     }
 
@@ -272,7 +272,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
         try{
             serverAPI.notifyChanges( new PlaceableCardsMessage(availablePlaces, canBePlaced), player);
         }catch (MsgNotDeliveredException msg){
-            throw new RuntimeException(msg);
+            System.out.println("Message not delivered!");
         }
     }
 
@@ -293,7 +293,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
             serverAPI.broadcastNotifyChanges(new UpdateDispositionMessage(player, disposition, availablePlaces,
                     points));
         }catch (MsgNotDeliveredException msg){
-            throw new RuntimeException(msg);
+            System.out.println("Message not delivered!");
         }
 
     }
@@ -313,7 +313,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
             serverAPI.notifyChanges(new UpdateDispositionMessage(player, disposition, availablePlaces,
                     points), recipient);
         }catch (MsgNotDeliveredException msg){
-            throw new RuntimeException(msg);
+            System.out.println("Message not delivered!");
         }
 
     }
@@ -330,7 +330,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
         try{
             serverAPI.broadcastNotifyChanges(new UpdateResourcesMessage(player, availableElements, availableArtifacts));
         }catch (MsgNotDeliveredException msg){
-            throw new RuntimeException(msg);
+            System.out.println("Message not delivered!");
         }
     }
 
@@ -346,7 +346,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
         try{
             serverAPI.notifyChanges(new UpdateResourcesMessage(player, availableElements, availableArtifacts), player);
         }catch (MsgNotDeliveredException msg){
-            throw new RuntimeException(msg);
+            System.out.println("Message not delivered!");
         }
     }
 
@@ -360,7 +360,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
         try{
             serverAPI.broadcastNotifyChanges( new DrawDeckCardMessage(deck, cardSource));
         }catch (MsgNotDeliveredException msg){
-            throw new RuntimeException(msg);
+            System.out.println("Message not delivered!");
         }
     }
 
@@ -376,7 +376,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
         try{
             serverAPI.broadcastNotifyChanges( new DrawOpenCardMessage(deck, cardSource, index));
         }catch (MsgNotDeliveredException msg){
-            throw new RuntimeException(msg);
+            System.out.println("Message not delivered!");
         }
     }
 
@@ -392,7 +392,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
         try{
             serverAPI.broadcastNotifyChanges(new EndGameMessage(finalPoints, winners));
         }catch (MsgNotDeliveredException msg){
-            throw new RuntimeException(msg);
+            System.out.println("Message not delivered!");
         }
     }
     ////////////////////////////// ERROR NOTIFICATIONS ///////////////////////////////////////////////////////////////
@@ -407,7 +407,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
         try {
             serverAPI.notifyChanges(new CantPlaceCardMessage(player, e.getCard(), e.getCoord()), player);
         }catch (MsgNotDeliveredException msg){
-            throw new RuntimeException(msg);
+            System.out.println("Message not delivered!");
         }
     }
 
@@ -437,7 +437,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
         try {
             serverAPI.notifyChanges(new EmptyDeckMessage(e.getIndx()), player);
         }catch (MsgNotDeliveredException msg){
-            throw new RuntimeException(e);
+            System.out.println("Message not delivered!");
         }
     }
 
@@ -451,7 +451,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
         try {
             serverAPI.notifyChanges(new ReconnectionHappened(playerID), playerID);
         } catch (MsgNotDeliveredException e) {
-            throw new RuntimeException(e);
+            System.out.println("Message not delivered!");
         }
     }
 
@@ -467,7 +467,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
             serverAPI.notifyChanges(new StarterCardMessage(playerID, starterCard, color.toString()), playerID);
             serverAPI.notifyChanges(new DisplayStarterCardSelection(playerID), playerID);
         } catch (MsgNotDeliveredException e) {
-            throw new RuntimeException(e);
+            System.out.println("Message not delivered!");
         }
     }
 
@@ -480,7 +480,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
         try {
             serverAPI.notifyChanges(new DisplayObjectiveSelection(playerID), playerID);
         } catch (MsgNotDeliveredException e) {
-            throw new RuntimeException(e);
+            System.out.println("Message not delivered!");
         }
     }
 
@@ -493,7 +493,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
         try {
             serverAPI.broadcastNotifyChanges(message);
         }catch (MsgNotDeliveredException e){
-            throw new RuntimeException(e);
+            System.out.println("Message not delivered!");
         }
     }
 
@@ -507,7 +507,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
         try{
             serverAPI.notifyChanges(message, receiver);
         }catch (MsgNotDeliveredException e){
-            throw new RuntimeException(e);
+            System.out.println("Message not delivered!");
         }
     }
 
@@ -521,7 +521,7 @@ public class ModelListener {//TODO Handle correctly the exceptions
         try {
             serverAPI.notifyChanges(msg, player);
         } catch (MsgNotDeliveredException e) {
-            throw new RuntimeException(e);
+            System.out.println("Message not delivered!");
         }
     }
 }
