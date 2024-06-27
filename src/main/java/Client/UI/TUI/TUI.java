@@ -492,6 +492,7 @@ public class TUI implements UI {
                 faceSide = parseBoolean();
                 if(faceSide == null){
                     inputLock.notifyAll();
+                    return;
                 }
                 if(faceSide && !view.getCanBePlaced()[index - 1]){
                     System.out.println("~> Sorry, card " + index + "can't be placed face up due to its placement constraint");
