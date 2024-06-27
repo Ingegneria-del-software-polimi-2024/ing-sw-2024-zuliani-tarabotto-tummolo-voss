@@ -69,7 +69,7 @@ The final version includes:
 | Model      | 96% (48/50) | 67% (196/292) | 76% (780/1024) |
 | Controller | 100% (9/9)   | 59% (44/45)   | 66% (223/257) |
 
-####### <p align="center">⚠️ disclaimer </p>
+<p align="center">⚠️ disclaimer </p>
 
 > We have also tested the controller by excluding the lines that are not essential for its purpose. These lines interface with the network structure and communicate with the TUI. As a result, we achieve around 80% coverage, even for the controller.
 ## 📦 Installation
