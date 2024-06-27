@@ -3,7 +3,7 @@
 
 <img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/cover.png?raw=true" alt="drawing" width="200"/>
 
-<h2>  $${\color{#AC3097}Play \space \color{#355E3B}codex \space \color{##0096FF}online}$$ </h2>
+<h2>  $${\color{#AC3097}Play \space \color{#355E3B}codex \space \color{#0096FF}online}$$ </h2>
 
 
 
