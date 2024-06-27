@@ -18,6 +18,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -73,12 +74,12 @@ public class  GUI  implements UI {
     private int cardLength;
     private int currentPictureIndex = 0;
     private JLabel pictureLabel;
-    private final String[] picturePaths = {
-            "/Users/gabrielvoss/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/main/resources/Images/front/002.png",
-            "/Users/gabrielvoss/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/main/resources/Images/front/003.png",
-            "/Users/gabrielvoss/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/main/resources/Images/front/004.png",
-            "/Users/gabrielvoss/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/main/resources/Images/front/005.png",
-            "/Users/gabrielvoss/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/main/resources/Images/front/005.png"
+    private final String[] picturePathsHelp = {
+            "/Users/gabrielvoss/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/main/resources/help/h1.png",
+            "/Users/gabrielvoss/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/main/resources/help/h2.png",
+            "/Users/gabrielvoss/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/main/resources/help/h3.png",
+            "/Users/gabrielvoss/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/main/resources/help/h4.png",
+            "/Users/gabrielvoss/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/main/resources/help/h5.png"
     };
 
     /**
@@ -217,57 +218,29 @@ public class  GUI  implements UI {
     }
 
 
-    private void showRulesPopup(JFrame frame) {
-        // Create the rules dialog
-        JDialog rulesDialog = new JDialog(frame, "Rules", true);
-        rulesDialog.setSize(600, 400);
-        rulesDialog.setLayout(new BorderLayout());
-
-        // Initialize the picture label
-        pictureLabel = new JLabel();
-        pictureLabel.setHorizontalAlignment(JLabel.CENTER);
-        updatePicture();
-
-        // Create a button to navigate through pictures
-        JButton nextButton = new JButton("next");
-        nextButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                currentPictureIndex = (currentPictureIndex + 1) % picturePaths.length;
-                updatePicture();
-            }
-        });
-
-        // Add components to the dialog
-        rulesDialog.add(pictureLabel, BorderLayout.CENTER);
-        rulesDialog.add(nextButton, BorderLayout.SOUTH);
-
-        // Set dialog properties
-        rulesDialog.setResizable(false);
-        rulesDialog.setLocationRelativeTo(frame);
-        rulesDialog.setVisible(true);
-    }
 
 
 
     private void showUiPopup() {
+        int w = 1200;
+        int h = 800;
         // Create the rules dialog
         JDialog rulesDialog = new JDialog(frame, "How to use", true);
-        rulesDialog.setSize(600, 400);
+        rulesDialog.setSize(w, h);
         rulesDialog.setLayout(new BorderLayout());
 
         // Initialize the picture label
         pictureLabel = new JLabel();
         pictureLabel.setHorizontalAlignment(JLabel.CENTER);
-        updatePicture();
+        updatePicture(picturePathsHelp, w, h);
 
         // Create a button to navigate through pictures
-        JButton nextButton = new JButton("next tip");
+        JButton nextButton = new JButton("Next tip");
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                currentPictureIndex = (currentPictureIndex + 1) % picturePaths.length;
-                updatePicture();
+                currentPictureIndex = (currentPictureIndex + 1) % picturePathsHelp.length;
+                updatePicture(picturePathsHelp, w, h);
             }
         });
 
@@ -281,9 +254,84 @@ public class  GUI  implements UI {
         rulesDialog.setVisible(true);
     }
 
-    private void updatePicture() {
-        ImageIcon icon = new ImageIcon(picturePaths[currentPictureIndex]);
-        pictureLabel.setIcon(icon);
+
+//TODO add pictures of rules
+    private void showRulesPopup(JFrame frame) {
+        int w = 1200;
+        int h = 800;
+        // Create the rules dialog
+        JDialog rulesDialog = new JDialog(frame, "Rules", true);
+        rulesDialog.setSize(w, h);
+        rulesDialog.setLayout(new BorderLayout());
+
+        // Initialize the picture label
+        pictureLabel = new JLabel();
+        pictureLabel.setHorizontalAlignment(JLabel.CENTER);
+        updatePicture(picturePathsHelp, w, h);
+
+        // Create a button to navigate through pictures
+        JButton nextButton = new JButton("Next");
+        nextButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                currentPictureIndex = (currentPictureIndex + 1) % picturePathsHelp.length;
+                updatePicture(picturePathsHelp, w, h);
+            }
+        });
+
+        // Add components to the dialog
+        rulesDialog.add(pictureLabel, BorderLayout.CENTER);
+        rulesDialog.add(nextButton, BorderLayout.SOUTH);
+
+        // Set dialog properties
+        rulesDialog.setResizable(false);
+        rulesDialog.setLocationRelativeTo(frame);
+        rulesDialog.setVisible(true);
+    }
+
+    private void updatePicture(String[] picturePaths, int w, int h) {
+        try {
+            BufferedImage originalImage = ImageIO.read(new File(picturePaths[currentPictureIndex]));
+            Image scaledImage = getScaledImage(originalImage, w, h);
+            pictureLabel.setIcon(new ImageIcon(scaledImage));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private BufferedImage getScaledImage(BufferedImage srcImg, int maxWidth, int maxHeight) {
+        int originalWidth = srcImg.getWidth();
+        int originalHeight = srcImg.getHeight();
+        int newWidth = originalWidth;
+        int newHeight = originalHeight;
+
+        if (originalWidth > maxWidth) {
+            newWidth = maxWidth;
+            newHeight = (newWidth * originalHeight) / originalWidth;
+        }
+
+        if (newHeight > maxHeight) {
+            newHeight = maxHeight;
+            newWidth = (newHeight * originalWidth) / originalHeight;
+        }
+
+        BufferedImage resizedImg = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = resizedImg.createGraphics();
+        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2d.drawImage(srcImg, 0, 0, newWidth, newHeight, null);
+        g2d.dispose();
+
+        // Center the image in a new BufferedImage of size maxWidth x maxHeight
+        BufferedImage centeredImage = new BufferedImage(maxWidth, maxHeight, BufferedImage.TYPE_INT_ARGB);
+        g2d = centeredImage.createGraphics();
+        g2d.setColor(new Color(0, 0, 0, 0)); // Transparent background
+        g2d.fillRect(0, 0, maxWidth, maxHeight);
+        int x = (maxWidth - newWidth) / 2;
+        int y = (maxHeight - newHeight) / 2;
+        g2d.drawImage(resizedImg, x, y, null);
+        g2d.dispose();
+
+        return centeredImage;
     }
 
     /**

@@ -226,7 +226,7 @@ class ControllerTest {
 
 
         //we write the output file
-        String filename = "/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/output"; // Specify the file name
+        String filename = path+"output"; // Specify the file name
 
         try {
             // Create a FileWriter object
