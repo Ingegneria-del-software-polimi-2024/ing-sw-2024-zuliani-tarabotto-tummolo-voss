@@ -27,7 +27,7 @@ import static org.fusesource.jansi.Ansi.ansi;
 class ControllerTest {
     private GameState gameState;
     private ArrayList<String> nickNames;
-    private String path = "/Users/gabrielvoss/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/";
+    private String path = "C:\\Users\\nicol\\OneDrive\\Documenti\\GitHub\\ing-sw-2024-zuliani-tarabotto-tummolo-voss\\app_dev\\src\\test\\java\\controller\\";
     private Scanner sc = new Scanner(new File(path+"final"));
     private Player initialPlayer;
 
@@ -226,7 +226,7 @@ class ControllerTest {
 
 
         //we write the output file
-        String filename = "/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/output"; // Specify the file name
+        String filename = path + "output"; // Specify the file name
 
         try {
             // Create a FileWriter object
