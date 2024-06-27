@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/app_dev/Ing_sw_proj.iml" filepath="$PROJECT_DIR$/app_dev/Ing_sw_proj.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/ing-sw-2024-zuliani-tarabotto-tummolo-voss.iml" filepath="$PROJECT_DIR$/.idea/ing-sw-2024-zuliani-tarabotto-tummolo-voss.iml" />
     </modules>
   </component>
