@@ -275,36 +275,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.RunServer.executor": "Run",
-    "Application.RunTUI_Client.executor": "Run",
-    "Application.run gui.executor": "Run",
-    "Application.run server.executor": "Run",
-    "JUnit.All in Ing_sw_proj (1).executor": "Coverage",
-    "JUnit.All in Ing_sw_proj (2).executor": "Coverage",
-    "JUnit.All in Ing_sw_proj.executor": "Run",
-    "JUnit.ControllerTest.executor": "Run",
-    "JUnit.CoordinatesTest.executor": "Run",
-    "JUnit.java in Ing_sw_proj.executor": "Run",
-    "JUnit.placementArea in Ing_sw_proj.executor": "Coverage",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "ALL__RIGHT__BRANCH",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.settings.ide.settings.uml",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.RunServer.executor&quot;: &quot;Run&quot;,
+    &quot;Application.RunTUI_Client.executor&quot;: &quot;Run&quot;,
+    &quot;Application.run gui.executor&quot;: &quot;Run&quot;,
+    &quot;Application.run server.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.All in Ing_sw_proj (1).executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.All in Ing_sw_proj (2).executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.All in Ing_sw_proj.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ControllerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CoordinatesTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.java in Ing_sw_proj.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.placementArea in Ing_sw_proj.executor&quot;: &quot;Coverage&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;ALL__RIGHT__BRANCH&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.uml&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/Images" />
@@ -334,7 +334,7 @@
       <recent name="model.lobby" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.run gui">
+  <component name="RunManager" selected="JUnit.All in Ing_sw_proj (3)">
     <configuration name="run gui" type="Application" factoryName="Application" singleton="false">
       <option name="MAIN_CLASS_NAME" value="Client.RunGUI_Client" />
       <module name="Ing_sw_proj" />
@@ -365,7 +365,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in Ing_sw_proj" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in Ing_sw_proj (3)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Ing_sw_proj" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
@@ -373,17 +373,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in Ing_sw_proj" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Ing_sw_proj" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="controller" />
-      <option name="MAIN_CLASS_NAME" value="controller.ControllerTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -406,19 +399,19 @@
     <list>
       <item itemvalue="Application.run gui" />
       <item itemvalue="Application.run server" />
+      <item itemvalue="JUnit.All in Ing_sw_proj (3)" />
       <item itemvalue="JUnit.All in Ing_sw_proj (2)" />
       <item itemvalue="JUnit.CoordinatesTest" />
       <item itemvalue="JUnit.All in Ing_sw_proj" />
       <item itemvalue="JUnit.All in Ing_sw_proj (1)" />
-      <item itemvalue="JUnit.ControllerTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in Ing_sw_proj (3)" />
         <item itemvalue="JUnit.All in Ing_sw_proj (2)" />
         <item itemvalue="JUnit.CoordinatesTest" />
         <item itemvalue="JUnit.All in Ing_sw_proj (1)" />
         <item itemvalue="JUnit.All in Ing_sw_proj" />
-        <item itemvalue="JUnit.ControllerTest" />
       </list>
     </recent_temporary>
   </component>
