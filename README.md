@@ -106,7 +106,7 @@ Regardless of the operating system, you must have installed the following progra
   </td>
   <td valign="top" width="50%">
   
-  #### TUI
+  #### ⌨️ TUI
   
 <img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/TUI_gameBoard.png?raw=true" width="260" align="right" />
   
@@ -120,6 +120,8 @@ Regardless of the operating system, you must have installed the following progra
 
 ### LOGIN
 <img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/Welcome.png?raw=true" width="260" align="center" />
+<img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/TUI_gameBoard.png?raw=true" width="260" align="right" />
+  
 
 > The user can choose a username, if it already exists and it's playing the user will be notified by a message.
 
