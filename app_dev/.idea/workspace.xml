@@ -11,11 +11,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a85c2ef2-4743-4d12-8336-27ef59fd799c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/CommonTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/CommonTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/TurnState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/TurnState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/GameState/CommonTable.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/GameState/CommonTable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/GameState/GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/GameState/GameState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/ArtifactObjective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/ArtifactObjective.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/DiagonalShapeObjective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/DiagonalShapeObjective.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

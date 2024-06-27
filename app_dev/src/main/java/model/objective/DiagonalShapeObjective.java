@@ -17,6 +17,10 @@ public class DiagonalShapeObjective implements Objective{
      */
     @JsonProperty("elements")
     protected List<Element> element;
+
+    /**
+     * The Shape.
+     */
     @JsonProperty("shape")
     private Shape shape;
 
@@ -28,7 +32,9 @@ public class DiagonalShapeObjective implements Objective{
     @Override
     public int countObjectivePoints(PlacementArea placementArea) {return 2 * placementArea.verifyObjective(shape, element);}
 
-
+    /**
+     * Print objective.
+     */
     @Override
     public void printObjective() {
         System.out.println("type: DiagonalShapeObjective");
