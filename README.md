@@ -123,11 +123,11 @@ Regardless of the operating system, you must have installed the following progra
   <tr>
   <td valign="top" width="50%">
 <img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/Welcome.png?raw=true" width="260" align="right" />
-  
+
   </td>
   <td valign="top" width="50%"> 
-<img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/TUI_gameBoard.png?raw=true" width="260" align="right" />
-  
+<img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/lobby.jpg?raw=true" width="260" align="right" />
+
 
 
 
@@ -145,11 +145,11 @@ Regardless of the operating system, you must have installed the following progra
   <tr>
   <td valign="top" width="50%">
 <img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/lobby.png?raw=true" width="260" align="right" />
-  
+
   </td>
   <td valign="top" width="50%"> 
-<img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/TUI_gameBoard.png?raw=true" width="260" align="right" />
-  
+<img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/logintui.jpg?raw=true" width="260" align="right" />
+
 
 
 
@@ -158,7 +158,7 @@ Regardless of the operating system, you must have installed the following progra
   </table>
 </div>
 
-> In the lobby players can choose wether to join or create a team.
+> In the lobby players can choose weather to join or create a team.
 
 ### ROOM CREATION
 <div class="table-devenvironment">
@@ -166,11 +166,11 @@ Regardless of the operating system, you must have installed the following progra
   <tr>
   <td valign="top" width="50%">
 <img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/game_creation.png?raw=true" width="260" align="right" />
-  
+
   </td>
   <td valign="top" width="50%"> 
-<img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/TUI_gameBoard.png?raw=true" width="260" align="right" />
-  
+<img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/room.jpg?raw=true" width="260" align="right" />
+
 
 
 
