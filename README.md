@@ -87,10 +87,11 @@ Regardless of the operating system, you must have installed the following progra
    ```
 
 
-2. execute the server and a client:
+2. execute the server and a client(GUI/TUI):
     ```shell
     java -jar server.jar
-    java -jar client.jar
+    java -jar TUI.jar
+    java -jar GUI.jar
     ```
 ## 🕹 Usage
 <div class="table-devenvironment">
