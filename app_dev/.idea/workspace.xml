@@ -11,231 +11,17 @@
   <component name="ChangeListManager">
     <list default="true" id="a85c2ef2-4743-4d12-8336-27ef59fd799c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GameState/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/controller/ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/controller/ControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/model/placementArea/CoordinatesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/placementArea/CoordinatesTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/001.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/002.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/003.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/004.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/005.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/006.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/007.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/008.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/009.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/010.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/011.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/012.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/013.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/014.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/015.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/016.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/017.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/018.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/019.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/020.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/021.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/022.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/023.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/024.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/025.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/026.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/027.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/028.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/029.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/030.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/031.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/032.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/033.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/034.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/035.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/036.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/037.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/038.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/039.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/040.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/041.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/042.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/043.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/044.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/045.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/046.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/047.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/048.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/049.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/050.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/051.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/052.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/053.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/054.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/055.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/056.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/057.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/058.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/059.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/060.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/061.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/062.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/063.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/064.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/065.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/066.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/067.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/068.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/069.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/070.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/071.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/072.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/073.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/074.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/075.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/076.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/077.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/078.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/079.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/080.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/081.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/082.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/083.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/084.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/085.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/086.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/087.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/088.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/089.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/090.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/091.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/092.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/093.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/094.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/095.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/096.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/097.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/098.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/099.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/100.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/101.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/back/102.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/codexLogo.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/cranioLogo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/001.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/002.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/003.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/004.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/005.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/006.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/007.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/008.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/009.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/010.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/011.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/012.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/013.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/014.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/015.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/016.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/017.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/018.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/019.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/020.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/021.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/022.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/023.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/024.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/025.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/026.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/027.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/028.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/029.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/030.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/031.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/032.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/033.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/034.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/035.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/036.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/037.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/038.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/039.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/040.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/041.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/042.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/043.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/044.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/045.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/046.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/047.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/048.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/049.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/050.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/051.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/052.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/053.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/054.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/055.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/056.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/057.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/058.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/059.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/060.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/061.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/062.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/063.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/064.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/065.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/066.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/067.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/068.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/069.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/070.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/071.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/072.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/073.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/074.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/075.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/076.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/077.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/078.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/079.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/080.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/081.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/082.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/083.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/084.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/085.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/086.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/087.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/088.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/089.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/090.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/091.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/092.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/093.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/094.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/095.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/096.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/097.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/098.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/099.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/100.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/101.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/front/102.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/icons/animal.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/icons/feather.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/icons/fungi.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/icons/inkwell.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/icons/insect.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/icons/manuscript.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/icons/plant.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/playerIcon/blue.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/playerIcon/green.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/playerIcon/purple.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Images/playerIcon/red.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Server/Web/Game/ServerAPI_COME.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Server/Web/Game/ServerAPI_COME.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cardsImages/k.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/GameState/GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/GameState/GameState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/controller/ControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/controller/ControllerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/UI/GUI/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI$5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI$6.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI$7.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI$8.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI$9.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/UI/GUI/GUI.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -291,7 +77,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;ALL__RIGHT__BRANCH&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;NAVBAR&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -334,7 +120,7 @@
       <recent name="model.lobby" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in Ing_sw_proj (3)">
+  <component name="RunManager" selected="Application.run server">
     <configuration name="run gui" type="Application" factoryName="Application" singleton="false">
       <option name="MAIN_CLASS_NAME" value="Client.RunGUI_Client" />
       <module name="Ing_sw_proj" />
@@ -608,7 +394,7 @@
       <FILTER>model.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/app_dev$_default_.ic" NAME="&lt;default&gt; Coverage Results" MODIFIED="1716745697859" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/app_dev$All_in_Ing_sw_proj__3_.ic" NAME="All in Ing_sw_proj (3) Coverage Results" MODIFIED="1719162559917" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/app_dev$All_in_Ing_sw_proj__3_.ic" NAME="All in Ing_sw_proj (3) Coverage Results" MODIFIED="1719488401190" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/app_dev$All_in_Ing_sw_proj__1_.ic" NAME="All in Ing_sw_proj (1) Coverage Results" MODIFIED="1719424192039" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
