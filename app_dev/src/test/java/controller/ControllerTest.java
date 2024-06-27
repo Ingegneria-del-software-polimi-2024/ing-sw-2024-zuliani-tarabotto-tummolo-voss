@@ -27,7 +27,8 @@ import static org.fusesource.jansi.Ansi.ansi;
 class ControllerTest {
     private GameState gameState;
     private ArrayList<String> nickNames;
-    private Scanner sc = new Scanner(new File("/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/final"));
+    private String path = "/Users/gabrielvoss/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/";
+    private Scanner sc = new Scanner(new File(path+"final"));
     private Player initialPlayer;
 
     /**
@@ -138,8 +139,8 @@ class ControllerTest {
         printWinner();
         fileWriting();
 
-        String filePath1 = "/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/output";
-        String filePath2 = "/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/test/java/controller/expectedOutput";
+        String filePath1 = path+"output";
+        String filePath2 = path+"expectedOutput";
         File f1 = new File(filePath1);
         File f2 = new File(filePath2);
 

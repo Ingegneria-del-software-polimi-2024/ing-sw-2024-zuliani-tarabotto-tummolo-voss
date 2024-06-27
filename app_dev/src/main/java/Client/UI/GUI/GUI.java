@@ -71,6 +71,15 @@ public class  GUI  implements UI {
     private boolean desiredQuit = false;
     private CardLayout cardLayout;
     private int cardLength;
+    private int currentPictureIndex = 0;
+    private JLabel pictureLabel;
+    private final String[] picturePaths = {
+            "/Users/gabrielvoss/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/main/resources/Images/front/002.png",
+            "/Users/gabrielvoss/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/main/resources/Images/front/003.png",
+            "/Users/gabrielvoss/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/main/resources/Images/front/004.png",
+            "/Users/gabrielvoss/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/main/resources/Images/front/005.png",
+            "/Users/gabrielvoss/Documents/GitHub/ing-sw-2024-zuliani-tarabotto-tummolo-voss/app_dev/src/main/resources/Images/front/005.png"
+    };
 
     /**
      * Instantiates a new Gui.
@@ -85,6 +94,71 @@ public class  GUI  implements UI {
     }
 
     private void createBorderPanels(){
+
+        // Create MenuBar
+        JMenuBar menuBar = new JMenuBar();
+        JMenu menu = new JMenu("Help");
+
+        JMenuItem rulesItem = new JMenuItem("Rules");
+        JMenuItem uiItem = new JMenuItem("How to use");
+
+
+        rulesItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showRulesPopup(frame);
+            }
+        });
+        uiItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showUiPopup();
+            }
+        });
+
+        menu.add(rulesItem);
+        menu.add(uiItem);
+        menuBar.add(menu);
+
+        // Add spacing between Help menu and other items
+        menuBar.add(Box.createHorizontalGlue());
+
+
+
+        // Create Quit and Chat menu items
+        JMenuItem quitItem = new JMenuItem("Quit");
+        quitItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                desiredQuit = true;
+                quitGame();
+            }
+        });
+
+        JMenuItem chatItem = new JMenuItem("Chat");
+        chatItem.addActionListener(new ActionListener() {
+            private boolean showingGame = true;
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CardLayout cl = (CardLayout) eastPanel.getLayout();
+                if (showingGame) {
+                    cl.show(eastPanel, "chat");
+                    chatItem.setText("Players");
+                } else {
+                    cl.show(eastPanel, "banners");
+                    chatItem.setText("Chat");
+                }
+                showingGame = !showingGame;
+            }
+        });
+
+        // Add Quit and Chat items to the MenuBar
+        menuBar.add(chatItem);
+        menuBar.add(quitItem);
+
+
+        frame.setJMenuBar(menuBar);
         this.currentDisposition = view.getPlayerId();
         this.topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         topPanel.setOpaque(false);
@@ -115,9 +189,8 @@ public class  GUI  implements UI {
             }
         });
 
-        topPanel.add(quit);
-        topPanel.add(chat);
-        frame.add(topPanel, BorderLayout.NORTH);
+
+
 
         this.bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         bottomPanel.setOpaque(false);
@@ -141,6 +214,76 @@ public class  GUI  implements UI {
         frame.add(centerPanel, BorderLayout.CENTER);
 
 
+    }
+
+
+    private void showRulesPopup(JFrame frame) {
+        // Create the rules dialog
+        JDialog rulesDialog = new JDialog(frame, "Rules", true);
+        rulesDialog.setSize(600, 400);
+        rulesDialog.setLayout(new BorderLayout());
+
+        // Initialize the picture label
+        pictureLabel = new JLabel();
+        pictureLabel.setHorizontalAlignment(JLabel.CENTER);
+        updatePicture();
+
+        // Create a button to navigate through pictures
+        JButton nextButton = new JButton("next");
+        nextButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                currentPictureIndex = (currentPictureIndex + 1) % picturePaths.length;
+                updatePicture();
+            }
+        });
+
+        // Add components to the dialog
+        rulesDialog.add(pictureLabel, BorderLayout.CENTER);
+        rulesDialog.add(nextButton, BorderLayout.SOUTH);
+
+        // Set dialog properties
+        rulesDialog.setResizable(false);
+        rulesDialog.setLocationRelativeTo(frame);
+        rulesDialog.setVisible(true);
+    }
+
+
+
+    private void showUiPopup() {
+        // Create the rules dialog
+        JDialog rulesDialog = new JDialog(frame, "How to use", true);
+        rulesDialog.setSize(600, 400);
+        rulesDialog.setLayout(new BorderLayout());
+
+        // Initialize the picture label
+        pictureLabel = new JLabel();
+        pictureLabel.setHorizontalAlignment(JLabel.CENTER);
+        updatePicture();
+
+        // Create a button to navigate through pictures
+        JButton nextButton = new JButton("next tip");
+        nextButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                currentPictureIndex = (currentPictureIndex + 1) % picturePaths.length;
+                updatePicture();
+            }
+        });
+
+        // Add components to the dialog
+        rulesDialog.add(pictureLabel, BorderLayout.CENTER);
+        rulesDialog.add(nextButton, BorderLayout.SOUTH);
+
+        // Set dialog properties
+        rulesDialog.setResizable(false);
+        rulesDialog.setLocationRelativeTo(frame);
+        rulesDialog.setVisible(true);
+    }
+
+    private void updatePicture() {
+        ImageIcon icon = new ImageIcon(picturePaths[currentPictureIndex]);
+        pictureLabel.setIcon(icon);
     }
 
     /**
@@ -308,6 +451,7 @@ public class  GUI  implements UI {
             endGamePanel = new EndGamePanel(this);
             frame.getContentPane().removeAll();
             frame.getContentPane().add(endGamePanel, BorderLayout.CENTER);
+            frame.setJMenuBar(null); // Remove the JMenuBar
             frame.revalidate();
             frame.repaint();
         }
@@ -618,6 +762,9 @@ public class  GUI  implements UI {
      * Quit game.
      */
     public void quitGame(){
+        frame.setJMenuBar(null);  // Remove the menu bar
+        frame.revalidate();  // Refresh the frame to apply changes
+
         frame.dispose();
         frame = null;
         login = null;
