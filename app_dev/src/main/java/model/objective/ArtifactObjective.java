@@ -49,7 +49,7 @@ public class ArtifactObjective  implements Objective{
             return 3 * map.values().stream().reduce((a, b) -> a<b? a : b ).orElse(0);
         }
     }
-    
+
     /**
      * This method returns the element of the objective.
      * In this class, it always returns null.

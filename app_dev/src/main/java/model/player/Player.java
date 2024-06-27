@@ -11,20 +11,53 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * The type Player.
- */
 public class Player implements Serializable {
+
+    /**
+     * the nickname of the player
+     */
     private String nickname;
+
+    /**
+     * the hand of the player
+     */
     private List<PlayableCard> hand;
+
+    /**
+     * the secret objective of the player
+     */
     private ObjectiveCard secretObjective = null;
+
+    /**
+     * the placement area of the player
+     */
     private PlacementArea placementArea;
+
+    /**
+     * the points of the player
+     */
     private int points;
+
+    /**
+     * the starter card of the player
+     */
     private PlayableCard starterCard;
+
+    /**
+     * the color of the pawn of the player
+     */
     private Pawn pawnColor;
 
+    /**
+     * the activity status of the player
+     */
     private Boolean active;
+
+    /**
+     * the mutex for the activity status of the player
+     */
     private final Object activityMutex = new Object();
+
 
     /**
      * class constructor
@@ -38,8 +71,7 @@ public class Player implements Serializable {
     /**
      * adds the PlayableCard card to the hand of the Player
      * card is selected from one of the available card sources on the CommonTable(goldDeck etc..)
-     *
-     * @param card the card
+     * @param card
      */
     public void drawCard(PlayableCard card){
         hand.add(card);
@@ -48,10 +80,8 @@ public class Player implements Serializable {
     /**
      * takes the card from the hand and places it on the placementArea at the specified coordinates
      * it then updates the Player's points based on the card placed
-     *
-     * @param card        the card
-     * @param coordinates the coordinates
-     * @throws CantPlaceCardException the cant place card exception
+     * @param card
+     * @param coordinates
      */
     public void playCard(PlayableCard card, Coordinates coordinates) throws CantPlaceCardException {
         this.points += placementArea.addCard(coordinates, card);
@@ -60,14 +90,10 @@ public class Player implements Serializable {
 
     /**
      * the starterCard is placed on the PlacementsArea at the default position (0,0)
-     *
-     * @throws KickOutOfGameException the kick out of game exception
      */
     public void playStarterCard() throws KickOutOfGameException {
         placementArea.addCard(starterCard);
     }
-    //auxiliary method for the method playCard() removes and returns
-    //card from the hand
 
     /**
      * auxiliary method for the playCard() method, removes and returns PlayableCard card from the hand
@@ -81,7 +107,6 @@ public class Player implements Serializable {
 
     /**
      * checks if the Player's secretObjective was satisfied at least once and if so the points counter is updated
-     *
      * @return 1 if the objective is satisfied at least once, else 0
      */
     public int calculateSecretObj(){
@@ -100,7 +125,6 @@ public class Player implements Serializable {
 
     /**
      * checks if the ObjectiveCard commonObjective was satisfied at least once and if so the points counter is updated
-     *
      * @param commonObjective the objective to be verified
      * @return 1 if the objective is satisfied at least once, else 0
      */
@@ -113,44 +137,40 @@ public class Player implements Serializable {
             return 0;
     }
 
+    /////////////// SETTER METHODS ///////////////////////////
+
     /**
-     * Sets nickname.
-     *
-     * @param nickname the nickname
+     * sets the nickname of the player
+     * @param nickname
      */
-/////////////// SETTER METHODS ///////////////////////////
     public void setNickname(String nickname) { this.nickname = nickname; }
 
     /**
-     * Sets points.
-     *
-     * @param points the points
+     * sets the points of the player
+     * @param points
      */
     public void setPoints(int points) { this.points = points; }
 
     /**
-     * Sets starter card.
-     *
-     * @param starterCard the starter card
+     * sets the starterCard of the player
+     * @param starterCard
      */
     public void setStarterCard(PlayableCard starterCard) { this.starterCard = starterCard; }
 
     /**
-     * Sets secret objective.
-     *
-     * @param secretObjective the secret objective
+     * sets the secretObjective of the player
+     * @param secretObjective
      */
     public void setSecretObjective(ObjectiveCard secretObjective) { this.secretObjective = secretObjective; }
 
     /**
-     * Sets pawn color.
-     *
-     * @param pawnColor the pawn color
+     * sets the color of the pawn of the player
+     * @param pawnColor
      */
     public void setPawnColor(Pawn pawnColor) { this.pawnColor = pawnColor; }
 
     /**
-     * Sets active.
+     * sets the activity status of the player to active
      */
     public void setActive() {
         synchronized (activityMutex) {
@@ -159,7 +179,7 @@ public class Player implements Serializable {
     }
 
     /**
-     * Set inactive.
+     * sets the activity status of the player to inactive
      */
     public void setInactive(){
         synchronized (activityMutex){
@@ -167,60 +187,53 @@ public class Player implements Serializable {
         }
     }
 
+    ///////////////// GETTER METHODS ///////////////////////////////////////
+
     /**
-     * Gets nickname.
-     *
-     * @return the nickname
+     * returns the nickname of the player
+     * @return nickname
      */
-///////////////// GETTER METHODS ///////////////////////////////////////
     public String getNickname() {return nickname;}
 
     /**
-     * Gets points.
-     *
-     * @return the points
+     * returns the points of the player
+     * @return points
      */
     public int getPoints() {return points;}
 
     /**
-     * Gets starter card.
-     *
-     * @return the starter card
+     * returns the starterCard of the player
+     * @return starterCard
      */
     public PlayableCard getStarterCard() {return this.starterCard;}
 
     /**
-     * Get playing hand list.
-     *
-     * @return the list
+     * returns the hand of the player
+     * @return hand
      */
     public List<PlayableCard> getPlayingHand(){return hand;}
 
     /**
-     * Gets placement area.
-     *
-     * @return the placement area
+     * returns the placementArea of the player
+     * @return placementArea
      */
     public PlacementArea getPlacementArea() { return placementArea; }
 
     /**
-     * Gets secret objective.
-     *
-     * @return the secret objective
+     * returns the secretObjective of the player
+     * @return secretObjective
      */
     public ObjectiveCard getSecretObjective() { return secretObjective; }
 
     /**
-     * Get pawn color pawn.
-     *
-     * @return the pawn
+     * returns the color of the pawn of the player
+     * @return pawnColor
      */
     public Pawn getPawnColor(){return pawnColor;}
 
     /**
-     * Is active boolean.
-     *
-     * @return the boolean
+     * returns the activity status of the player
+     * @return active
      */
     public boolean isActive(){
         synchronized (activityMutex){

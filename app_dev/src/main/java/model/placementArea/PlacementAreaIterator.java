@@ -12,17 +12,27 @@ import java.util.stream.Collectors;
  * objective we are going to check
  */
 public class PlacementAreaIterator implements Iterator<Coordinates> {
-    private Coordinates currentPlace;
-    private List<Coordinates> availableCoordinates;
-    @Override
+
     /**
-     * @return TRUE if there are still elements to iterate on
+     * The current position in the iteration over the placement area.
      */
+    private Coordinates currentPlace;
+
+    /**
+     * A list of all the available positions in the placement area that can be iterated over.
+     */
+    private List<Coordinates> availableCoordinates;
+
+    /**
+     * Checks if there are still elements to iterate on.
+     * @return TRUE if there are still elements to iterate on.
+     */
+    @Override
     public boolean hasNext() {return availableCoordinates.indexOf(currentPlace) + 1 < availableCoordinates.size();}
 
     /**
-     *
-     * @return next element to iterate on
+     * Returns the next element to iterate on.
+     * @return The next element to iterate on.
      */
     @Override
     public Coordinates next(){
@@ -31,17 +41,16 @@ public class PlacementAreaIterator implements Iterator<Coordinates> {
     }
 
     /**
-     * Current coordinates.
-     *
-     * @return the current place when iterating
+     * Returns the current place when iterating.
+     * @return The current place when iterating.
      */
     public Coordinates current() {return currentPlace;}
 
     /**
      * class constructor
-     *
-     * @param disp  the HashMap representing the PlacementArea
+     * @param disp the HashMap representing the PlacementArea
      * @param shape the type of shape can be L or diagonal
+     *
      */
     public PlacementAreaIterator(HashMap<Coordinates, PlayableCard> disp, Shape shape) {
         availableCoordinates = new ArrayList<Coordinates>(disp.keySet());
