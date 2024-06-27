@@ -41,7 +41,7 @@ class ControllerTest {
     /**
      * The path to the file used for testing.
      */
-    private String path = "C:\\Users\\nicol\\OneDrive\\Documenti\\GitHub\\ing-sw-2024-zuliani-tarabotto-tummolo-voss\\app_dev\\src\\test\\java\\controller\\";
+    private String path = "/Users/francesco/dev/ing-sw-2024-zuliani-tarabotto-tummolo-voss/src/test/java/controller/";
 
     /**
      * The scanner used to read the test file.

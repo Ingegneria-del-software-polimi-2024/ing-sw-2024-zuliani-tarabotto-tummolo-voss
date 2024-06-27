@@ -64,7 +64,7 @@ public class GameState {
     /**
      * the maximum number of points a player can reach
      */
-    private final int MAX_POINTS = 20;//TODO change max points
+    private int MAX_POINTS;
 
     /**
      * the listener that will notify the changes in the game state
@@ -92,6 +92,7 @@ public class GameState {
      * @param disconnected    the disconnected
      */
     public GameState(ArrayList<String> nickNames, String id, ModelListener modelListener, ModelTranslator modelTranslator, Set<String> disconnected) {
+        this.MAX_POINTS = 20;
         this.modelListener = modelListener;
         this.modelTranslator = modelTranslator;
         //creates a new players list with the nicknames taken from input
@@ -619,6 +620,7 @@ public class GameState {
      * @param listener  the listener
      */
     public GameState(ArrayList<String> nickNames, String id, int i, ModelListener listener) {
+        this.MAX_POINTS = 10;
         this.modelListener = listener;
         players = new ArrayList<Player>();
         for(String name : nickNames) {

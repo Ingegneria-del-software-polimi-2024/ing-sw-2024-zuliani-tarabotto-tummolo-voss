@@ -33,7 +33,7 @@ class GameStateTest {
     /**
      * The mock ModelTranslator object.
      */
-    private ModelTranslator modelController;
+    private ModelTranslator modelTranslator;
 
     /**
      * This method sets up the test environment before each test method.
@@ -41,11 +41,11 @@ class GameStateTest {
     @BeforeEach
     void setUp() {
         modelListener = mock(ModelListener.class);
-        modelController = mock(ModelTranslator.class);
+        modelTranslator = mock(ModelTranslator.class);
         ArrayList<String> nicknames = new ArrayList<>();
         nicknames.add("Player1");
         nicknames.add("Player2");
-        gameState = new GameState(nicknames, "testId", modelListener, modelController, new HashSet<>());
+        gameState = new GameState(nicknames, "testId", modelListener, modelTranslator, new HashSet<>());
     }
 
     /**
@@ -147,7 +147,7 @@ class GameStateTest {
     @Test
     void testRecoveryStarterCard() {
         gameState.recoveryStarterCard(gameState.getPlayer(0));
-        verify(modelController).playStarterCard(anyBoolean(), anyString());
+        verify(modelTranslator).playStarterCard(anyBoolean(), anyString());
     }
 
     /**
@@ -156,6 +156,6 @@ class GameStateTest {
     @Test
     void testRecoveryDrawing() {
         gameState.recoveryDrawing(gameState.getPlayer(0));
-        verify(modelController).drawCard(anyInt());
+        verify(modelTranslator).drawCard(anyInt());
     }
 }
