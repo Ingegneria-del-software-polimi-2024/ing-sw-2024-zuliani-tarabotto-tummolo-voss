@@ -210,7 +210,7 @@ Now you can use zero tier to play online from different networks
 
 > the user can from this section choose the name of the team and how many people should be there. 
 
-## jar creation
+### HOW TO USE THE GUI
 <div class="table-devenvironment">
   <table style="font-size: 11px">
   <tr>
