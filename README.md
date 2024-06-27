@@ -158,7 +158,7 @@ Regardless of the operating system, you must have installed the following progra
   </table>
 </div>
 
-> In the lobby players can choose weather to join or create a team.
+> In the lobby players can choose wether to join or create a team.
 
 ### ROOM CREATION
 <div class="table-devenvironment">
