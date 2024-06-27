@@ -24,6 +24,7 @@ public class ArtifactObjective  implements Objective{
      */
     @JsonProperty("artifact")
     Artifact artifact;
+
     /**
      * The Tris.
      */
@@ -31,9 +32,12 @@ public class ArtifactObjective  implements Objective{
     boolean tris;
 
     /**
+     * This method counts the objective points based on the placementArea.
+     * If tris is false, it returns twice the number of artifacts of the specified type.
+     * If tris is true, it returns three times the minimum count of any artifact.
      *
      * @param placementArea the disposition to find objectives in
-     * @return the number of points rellated to this objective
+     * @return the number of points related to this objective
      */
     public int countObjectivePoints(PlacementArea placementArea){
         HashMap<Artifact, Integer> map;
@@ -45,19 +49,10 @@ public class ArtifactObjective  implements Objective{
             return 3 * map.values().stream().reduce((a, b) -> a<b? a : b ).orElse(0);
         }
     }
-
+    
     /**
-     * Print objective.
-     */
-    @Override
-    public void printObjective() {
-        System.out.println("type: ArtifactObjective");
-        if (this.artifact != null) System.out.println(this.artifact.toString());
-        System.out.println("tris: " + this.tris);
-    }
-
-    /**
-     * Gets element.
+     * This method returns the element of the objective.
+     * In this class, it always returns null.
      *
      * @return the element
      */
@@ -67,7 +62,7 @@ public class ArtifactObjective  implements Objective{
     }
 
     /**
-     * Gets artifact.
+     * This method returns the artifact of the objective.
      *
      * @return the artifact
      */
@@ -77,7 +72,8 @@ public class ArtifactObjective  implements Objective{
     }
 
     /**
-     * Gets shape.
+     * This method returns the shape of the objective.
+     * In this class, it always returns null.
      *
      * @return the shape
      */
