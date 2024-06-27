@@ -118,11 +118,11 @@ Regardless of the operating system, you must have installed the following progra
   </table>
 </div>
 
-<div align="center">### LOGIN</div>
+<div align="center"> ### LOGIN</div>
 <img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/Welcome.png?raw=true" width="260" align="center" />
 
-<div align="center">### LOBBY</div>
+<div align="center"> ### LOBBY</div>
 <img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/lobby.png?raw=true" width="260" align="center" />
 
-<div align="center">### ROOM CREATION</div>
+<div align="center"> ### ROOM CREATION</div>
 <img src="https://github.com/Ingegneria-del-software-polimi-2024/ing-sw-2024-zuliani-tarabotto-tummolo-voss/blob/main/screenshots/game_creation.png?raw=true" width="260" align="center" />
