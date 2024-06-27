@@ -34,7 +34,7 @@ public class CornersPoints implements Points {
     public int getPoints() {
         return points;
     }
-    
+
 
     /**
      * Returns the artifact for CornersPoints.

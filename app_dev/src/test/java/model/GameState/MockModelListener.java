@@ -27,12 +27,12 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * The type Mock model listener.
+ * A mock implementation of the ModelListener class for testing purposes.
  */
 public class MockModelListener extends ModelListener {
 
     /**
-     * Instantiates a new Mock model listener.
+     * Constructs a new MockModelListener with a null server.
      */
     public MockModelListener() {
         super(null);
@@ -96,6 +96,19 @@ public class MockModelListener extends ModelListener {
 
 
     }
+
+    /**
+     * notification with data about the order of the cards in decks
+     * @param goldDeck
+     * @param resourceDeck
+     * @param openGold
+     * @param openResource
+     * @param players
+     * @param gameId
+     * @param commonObjective1
+     * @param commonObjective2
+     * @param playerID
+     */
     public void notifyChanges(PlayableDeck goldDeck, PlayableDeck  resourceDeck, List<PlayableCard> openGold,
                               List<PlayableCard> openResource,
                               ArrayList<String> players, String gameId,
@@ -284,30 +297,56 @@ public class MockModelListener extends ModelListener {
 
     }
 
-
+    /**
+     * Notifies about a player's reconnection.
+     *
+     * @param playerID The ID of the player who reconnected.
+     */
     public void notifyReconnection(String playerID){
         System.out.println("calledNotifyChanges");
 
     }
 
+    /**
+     * Sends a notification with the starter card and the pawn color to a player.
+     *
+     * @param playerID The ID of the player to whom the notification is sent.
+     * @param starterCard The starter card of the player.
+     * @param color The color of the player's pawn.
+     */
     public void displayStarterCardNotification(String playerID, PlayableCard starterCard, Pawn color){
         System.out.println("calledNotifyChanges");
 
     }
 
+    /**
+     * Sends a notification to display the objective to a player.
+     *
+     * @param playerID The ID of the player to whom the notification is sent.
+     */
     public void displayObjectiveNotification(String playerID){
         System.out.println("calledNotifyChanges");
 
     }
 
+    /**
+     * Broadcasts a chat message to all players.
+     *
+     * @param message The chat message to be broadcasted.
+     */
     public void broadcastChatMessage(ChatUpdateMessage message){
         System.out.println("calledNotifyChanges");
 
     }
 
+    /**
+     * Sends the chat history to a player.
+     *
+     * @param player The ID of the player to whom the chat history is sent.
+     * @param msg The message containing the chat history.
+     */
     public void sendChatHistory(String player, ChatHistoryMessage msg){
         System.out.println("calledNotifyChanges");
-
     }
 
 }

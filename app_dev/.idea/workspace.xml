@@ -12,14 +12,15 @@
     <list default="true" id="a85c2ef2-4743-4d12-8336-27ef59fd799c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/PointsStrategy/CornersPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/PointsStrategy/CornersPoints.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/PointsStrategy/Points.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/PointsStrategy/Points.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/PointsStrategy/ResourcePoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/PointsStrategy/ResourcePoints.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/PointsStrategy/SimplePoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/PointsStrategy/SimplePoints.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/objective/ArtifactObjective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/objective/ArtifactObjective.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/placementArea/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/placementArea/Coordinates.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/placementArea/PlacementArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/placementArea/PlacementArea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/placementArea/PlacementAreaIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/placementArea/PlacementAreaIterator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/player/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/controller/ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/controller/ControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/GameState/CommonTableTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/GameState/CommonTableTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/GameState/GameStateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/GameState/GameStateTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/GameState/MockModelListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/GameState/MockModelListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/cards/ObjectiveCardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/cards/ObjectiveCardTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/placementArea/AddCardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/placementArea/AddCardTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/placementArea/CoordinatesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/placementArea/CoordinatesTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/placementArea/PlacementAreaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/placementArea/PlacementAreaTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -314,7 +315,7 @@
       <workItem from="1719350219152" duration="4656000" />
       <workItem from="1719386199017" duration="3487000" />
       <workItem from="1719390581134" duration="10314000" />
-      <workItem from="1719489611460" duration="4399000" />
+      <workItem from="1719489611460" duration="7188000" />
     </task>
     <servers />
   </component>

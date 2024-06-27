@@ -12,7 +12,9 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class CoordinatesTest {
 
-
+    /**
+     * Test coordinates.
+     */
 
     @Test
     public void testCoordinates(){

@@ -411,7 +411,7 @@ public class PlacementArea {
      *
      * @return A HashMap representing the disposition of cards on the placement area.
      */
-    //TODO this MUST BE SET PROTECTED
+
     public HashMap<Coordinates, PlayableCard> getDisposition() { return disposition;}
 
     /**
@@ -420,7 +420,7 @@ public class PlacementArea {
      *
      * @return A List of Coordinates representing the available places on the placement area.
      */
-    //TODO: convert all List to ArrayList
+
     public List<Coordinates> getAvailablePlaces() {return availablePlaces;}
 
     /**
