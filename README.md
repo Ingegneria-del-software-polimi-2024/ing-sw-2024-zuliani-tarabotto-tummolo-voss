@@ -72,7 +72,7 @@ The final version includes:
 
 <p align="center">⚠️ disclaimer </p>
 
-> We have also tested the controller by excluding the lines that are not essential for its purpose. These lines interface with the network structure and communicate with the TUI. As a result, we achieve around 80% coverage, even for the controller.
+> We have also tested the controller by excluding the lines that are not essential for its purpose. These lines interface with the network structure. As a result, we achieve around 80% coverage, even for the controller.
 ## 📦 Installation
 
 ### Requirements
@@ -100,7 +100,7 @@ The same thing is recommended for the GUI version.
 
 
 ## 🌐 Network
-
+Follow these steps to configure the network with zerotier:
 on the terminal:
 ```shell
    hostname
