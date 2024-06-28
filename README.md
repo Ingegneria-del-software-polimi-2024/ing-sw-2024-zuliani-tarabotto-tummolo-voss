@@ -41,7 +41,7 @@ The final version includes:
 * UML diagram generated from the code by automated tools.
 * Working game implementation, which has to be rules compliant.
 * Source code of the implementation.
-* Source code of unity tests.
+* Source code of unit tests.
 
 ## 🚦️ Implemented Functionalities
 
@@ -100,12 +100,12 @@ The same thing is recommended for the GUI version.
 
 
 ## 🌐 Network
-Follow these steps to configure the network with zerotier:
-on the terminal:
+Follow these steps to configure the network with zerotier. <br>
+write on the terminal:
 ```shell
    hostname
 ```
-which returns yourhostname.local
+which returns yourhostname.local <br>
 
 Then go on zero tier and find your own assigned ip
 Now you can edit the hosts file:
