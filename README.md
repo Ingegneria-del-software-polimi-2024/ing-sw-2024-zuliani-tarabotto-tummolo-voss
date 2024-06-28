@@ -26,7 +26,7 @@
 
 ## 👥 Team
 * [Andrea Tarabotto](https://github.com/andrea-809)
-* [Francesco Zuliani](https://github.com/francescomartino2002)
+* [Francesco Martino Zuliani](https://github.com/francescomartino2002)
 * [Nicola Tummolo](https://github.com/NTum07)
 * [Gabriel Voss](https://github.com/voss01)
 
